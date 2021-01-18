@@ -1,0 +1,44 @@
+/* make drag container visible */
+#redips-drag {
+    /* border: 2px dashed LightBlue; */
+    display: table;
+}
+
+/* table */
+div#redips-drag table {
+    background-color: #f5f5f5;
+    border-collapse: collapse;
+    /* margin: 7px; */
+}
+
+/* table cells */
+div#redips-drag td {
+    /* border: 0.5px solid black; */
+	height: 50px;
+	width: auto;
+    text-align: center;
+    /* font-size: 10pt; */
+    padding: 2px;
+}
+
+/* drag object (DIV inside table cell) */
+.redips-drag {
+    margin: auto;
+    text-align: center;
+    width: auto;
+    /* width: 87px; */
+    height: 35px;
+    line-height: 35px;
+    border: 2px solid SteelBlue;
+	background-color: white;
+	border-radius: 4px; /* Opera, Chrome */
+	-moz-border-radius: 4px; /* FF */
+}
+
+/* disable transform property (add class to the modal-dialog DIV) */
+.notransform {
+    -webkit-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
+    transform: none !important;
+}
