@@ -10,40 +10,66 @@ var config = {
 
 //NEW
 function openNav(i) {
-  document.getElementById("mySidenav").style.width = "350px";
+  closeNav();
+  closeNavType();
+  closeNavMethod();
+
+  document.getElementById("mySidenav").style.width = "370px";
   console.log("the name of the property: ", i.getAttribute("id"))
   document.getElementById('property-name').value= i.getAttribute("id")
 }
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
+
+  document.getElementById("property-div").reset();
+  $("#property-type").hide();
+  document.getElementById("properties-type").value = "string";
 }
 
 
 function openNavType(id) {
-  document.getElementById("mySidenavType").style.width = "350px";
+  closeNav();
+  closeNavType();
+  closeNavMethod();
+
+  document.getElementById("mySidenavType").style.width = "370px";
   document.getElementById("mySidenavType").style.padding = "20px";
   //console.log("the name of the property: ", i.getAttribute("id"));
   //document.getElementById('type-name').value= i.getAttribute("id")
   console.log("THE type: ", id);
 
-  // document.getElementById('typeN').value= id;
-  // document.getElementById('siteN').value= site;
-  var paragraph = "";
-  paragraph = document.getElementById('typeN');
-  var text = ""
-  text = document.createTextNode(id);
-  paragraph.appendChild(text);
+  $("#typeN").text(id);
+  $("#siteN").text(site);
 
+  $("#selected_type").text(id);
 
-  var paragraph1 = "";
-  paragraph1= document.getElementById('siteN');
-  var text1 = ""
-  text1 = document.createTextNode(site);
-  paragraph1.appendChild(text1);
+  // $("#apis-type").empty();
 
+  $("#accordion").empty()
   for(var i=0; i<scrapirAPIs.length; ++i){
-    $("#apis-type").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
+    var urlText = scrapirAPIs[i].url;
+      if(urlText.includes(site)){
+        noSpacesTitle = scrapirAPIs[i].title.split(' ').join('');
+        $("#accordion").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosen(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion"><div class="card-body" id="cardBody'+noSpacesTitle+'"> </div></div></div>')
+        
+        $("#cardBody"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+        $("#cardBody"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+        $("#cardBody"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+
+        // $("#apis-type").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
+      }
   }
+
+  // <ul id="params">
+  // <li><span>Parameters</span>
+  //   <ul >
+  //     <li>Water</li>
+  //     <li>Coffee</li>
+  //     <li><span class="caret">Tea</span>
+  //   </ul>
+  // <li>
+  // </ul>
+
 
   setTimeout(() => {
     jQuery('.selectpicker').selectpicker('refresh');
@@ -59,7 +85,11 @@ function closeNavType() {
 var methodName="", methodParent="";
 
 function openNavMethod(id) {
-  document.getElementById("mySidenavMethod").style.width = "350px";
+  closeNav();
+  closeNavType();
+  closeNavMethod();
+
+  document.getElementById("mySidenavMethod").style.width = "370px";
 
   methodName= $("#"+id).text().split('()')[0];
   methodParent= id.split('OBJ')[1];
@@ -68,9 +98,23 @@ function openNavMethod(id) {
   console.log("the value of the method's parent: ",methodParent)
   document.getElementById('meth-name').value= $("#"+id).text().split('()')[0];
 
+  // $("#apis-url-method").empty();
+  $("#accordion-method").empty();
+
   for(var i=0; i<scrapirAPIs.length; ++i){
-    $("#apis-url-method").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
+    var urlText = scrapirAPIs[i].url;
+    if(urlText.includes(site)){
+      // $("#apis-url-method").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
+      var noSpacesTitle = scrapirAPIs[i].title.split(' ').join('');
+      $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
+      
+      $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+      $("#cardBodyM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+      $("#cardBodyM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+
+    }
   }
+
 
   setTimeout(() => {
     jQuery('.selectpicker').selectpicker('refresh');
@@ -389,17 +433,36 @@ function fetchSchemaTypes(){
 
     firebase.database().ref('/apis/').once('value').then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
+        // if parameters, loop through them
+        if(childSnapshot.val().parameters){
+          var paramList=[];
+          var pr = childSnapshot.val().parameters
+          for(var i=0; i<pr.length; ++i){
+            paramList.push(pr[i].name)
+          }
+        }else{
+          var paramList = ""
+        }
+
+        // if responses, loop through them
+        if(childSnapshot.val().responses){
+          var resList=[];
+          var sr = childSnapshot.val().responses
+          for(var i=0; i<sr.length; ++i){
+            resList.push(sr[i].displayedName)
+          }
+        }else{
+          var resList = ""
+        }
+
         scrapirAPIs.push({
             title: childSnapshot.val().title,
-            url: childSnapshot.val().url
+            url: childSnapshot.val().url,
+            params: paramList,
+            res: resList
           })
-
-          console.log(childSnapshot.val().title)
-
       });
     });
-
-  
 
     $(".selectpicker").selectpicker();
 
@@ -420,7 +483,7 @@ function fetchSchemaTypes(){
           $("#type-select").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
           $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
 
-          $("#method-result-type").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
+          // $("#method-result-type").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
           
           // allSchemaTypesButActions.push(childSnapshot.val().title);
         }
@@ -428,10 +491,18 @@ function fetchSchemaTypes(){
     });
 
 
-
+    $("#apis-url").empty();
     for(var i=0; i<scrapirAPIs.length; ++i){
-      $("#apis-url").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
+      var urlText = scrapirAPIs[i].url;
+      if(urlText.includes(site)){
+        $("#apis-url").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
+      }
     }
+
+
+
+
+
     // firebase.database().ref('/apis/').once('value').then(function(snapshot) {
     //   snapshot.forEach(function(childSnapshot) {
     //     type= childSnapshot.val().title.split(' ').join('')
@@ -596,18 +667,153 @@ function getAllMethods(schemaType){
 }
 
 
+function resultTypeHasBeenChosen(select){
+
+  var ttt = select.options[select.selectedIndex].getAttribute("id");
+  console.log("resultTypeHasBeenChosen id: ", ttt);
+
+  // propList = temp.objects[ttt].properties;
+
+  // console.log("final response XX", resProplist);
+  // console.log("final properties ", propList);
+
+  // // temp.objects[getter].properties
+
+  // // APPEND the above arrays to the table2
+  // $("#table2 tbody").empty()
+
+  // for(var i=0; i<resProplist.length || i<propList.length ; ++i){
+  //   if(resProplist[i] === undefined){
+  //     var r = ''
+  //   }else{
+  //     var r = resProplist[i]
+  //   }
+
+  //   if(propList[i] === undefined){
+  //     var p = ''
+  //   }else{
+  //     var p = '<div class="redips-drag">'+propList[i]+'</div>'
+  //   }
+    
+  //   $("#table2 tbody").append('<tr><td class="redips-mark">'+r+'</td><td>'+p+'</td></tr>');
+
+  // }
+
+  // /* enable strict mode */
+  // 'use strict';
+
+  //   // create redips container
+  //   let redips = {},
+  //   counter = 0;
+
+  // // redips initialization
+  // //redips.init = function () {
+  //   // reference to the REDIPS.drag library
+  //   let rd = REDIPS.drag;
+  //   // initialization
+  //   rd.init();
+  //   // set mode option to "shift"
+  //   rd.dropMode = 'shift';
+  //   // set animation loop pause
+  //   rd.animation.pause = 20;
+  //   // enable shift.animation
+  //   rd.shift.animation = true;
+  //   // set TD for overflow elements (initially)
+  //   rd.shift.overflow = document.getElementById('overflow');
+  //   // add counter to cloned element name
+  //   // (after cloned DIV element is dropped to the table)
+  //   rd.event.clonedDropped = function () {
+  //     // increase counter
+  //     counter++;
+  //     // append to the DIV element name
+  //     rd.obj.innerHTML += counter;
+  //   };
+  // //};
+
+  // //set current table
+  // redips.setTable = function (e) {
+  //   let value = e.options[e.selectedIndex].value,
+  //     tables = document.getElementById('redips-drag').getElementsByTagName('table'),
+  //     i;
+  //   // loop goes through all fetched tables within drag container
+  //   for (i = 0; i < tables.length; i++) {
+  //     // skip mini table
+  //     if (tables[i].id === 'mini') {
+  //       continue;
+  //     }
+  //     // show selected table
+  //     else if (tables[i].id === value) {
+  //       tables[i].style.display = '';
+  //     }
+  //     // hide all other tables
+  //     else {
+  //       tables[i].style.display = 'none';
+  //     }
+  //   }
+  // };
+
+  // // set shift mode
+  // redips.shiftMode = function (radio) {
+  //   REDIPS.drag.shift.mode = radio.value;
+  // };
+
+  // // set overflow
+  // redips.overflow = function (radio) {
+  //   if (radio.value === 'user') {
+  //     REDIPS.drag.shift.overflow = document.getElementById('overflow');
+  //   }
+  //   else {
+  //     REDIPS.drag.shift.overflow = radio.value;
+  //   }
+  // };
+
+  // // enable / disable animation
+  // redips.shiftAnimation = function (chk) {
+  //   REDIPS.drag.shift.animation = chk.checked;
+  // };
+
+  // // enable / disable shift after element is deleted
+  // redips.shiftAfter = function (chk) {
+  //   REDIPS.drag.shift.after = chk.value;
+  // };
+
+  // // toggles trash_ask parameter defined at the top
+  // redips.toggleConfirm = function (chk) {
+  //   if (chk.checked === true) {
+  //     REDIPS.drag.trash.question = 'Are you sure you want to delete DIV element?';
+  //   }
+  //   else {
+  //     REDIPS.drag.trash.question = null;
+  //   }
+  // };
+
+  // // add onload event listener
+  // if (window.addEventListener) {
+  //   window.addEventListener('load', redips.init, false);
+  // }
+  // else if (window.attachEvent) {
+  //   window.attachEvent('onload', redips.init);
+  // }
+
+
+  // $("#methodMapLabel").show();
+}
+
+
 function idHasBeenChosed(){
   $("#mapLabel").show()
 }
 
-var currentURLGetter = "", propList;
+
+var currentURLGetter = "", propList, resProplist=[];
+
 
 function urlHasBeenChosen(select){
 
   $("#idLabel").show()
   
   var resFields;
-  var apiTitle = select.options[select.selectedIndex].getAttribute("id");
+  var apiTitle = select.getAttribute("id");//.options[select.selectedIndex].getAttribute("id");
   console.log("apiTitle: ", apiTitle);
 
   currentURLGetter = apiTitle
@@ -633,7 +839,7 @@ function urlHasBeenChosen(select){
         var props= allProperties;
         var currentSimScore = 0;
         var mostSimilarProp=""
-        var resProplist=[]
+        resProplist=[]
         for(var i=0; i<resFields.length; ++i){
           currentSimScore = 0;
           mostSimilarProp=""
@@ -655,7 +861,13 @@ function urlHasBeenChosen(select){
         }
 
         for(var i=0; i<reqParam.length; ++i){
-          $("#type-id").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+          if(reqParam[i].displayed && reqParam[i].displayed==true){
+            $("#type-id").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+          }else if(!reqParam[i].displayed){
+            $("#type-id").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+          }else{
+            // do nothing
+          }
         }
 
         propList = temp.objects[currentType].properties;
@@ -820,12 +1032,67 @@ function urlHasBeenChosen(select){
   
 }
 
-
+var urlAPI;
 
 function urlHasBeenChosenForMethod(select){
 
-  var urlAPI = select.options[select.selectedIndex].getAttribute("id");
+  urlAPI = select.getAttribute("id")//.options[select.selectedIndex].getAttribute("id");
   console.log("urlAPI: ", urlAPI);
+
+  firebase.database().ref('/apis/').once('value').then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.val().title==urlAPI){
+        console.log("par: ",childSnapshot.val().parameters) //choose which one you want to send as parameter to the function
+        console.log("res: ", childSnapshot.val().responses)
+        resFields = childSnapshot.val().responses;
+        reqParam  = childSnapshot.val().parameters;
+        //Show a dropdown menu from the response fields to map them to the type properties
+
+        var props= allProperties;
+        var currentSimScore = 0;
+        var mostSimilarProp=""
+        resProplist=[]
+        for(var i=0; i<resFields.length; ++i){
+          currentSimScore = 0;
+          mostSimilarProp=""
+          resProplist.push(resFields[i].displayedName);
+        }
+
+        // for(var i=0; i<reqParam.length; ++i){
+        //   $("#type-id").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+        // }
+
+        propList = temp.objects[currentType].properties;
+
+        console.log("final response ", resProplist);
+        console.log("final properties ", propList);
+
+        // temp.objects[getter].properties
+
+        // APPEND the above arrays to the table2
+        //$("#table2 tbody").empty()
+
+        for(var i=0; i<resProplist.length || i<propList.length ; ++i){
+          if(resProplist[i] === undefined){
+            var r = ''
+          }else{
+            var r = resProplist[i]
+          }
+
+          if(propList[i] === undefined){
+            var p = ''
+          }else{
+            var p = '<div class="redips-drag">'+propList[i]+'</div>'
+          }
+          
+          //$("#table2 tbody").append('<tr><td class="redips-mark">'+r+'</td><td>'+p+'</td></tr>');
+
+        }
+      
+      }
+    });
+  });
+
 
   setTimeout(() => {
     jQuery('.selectpicker').selectpicker('refresh');
@@ -871,19 +1138,19 @@ function saveTypeConfig(){
 
 function saveMethodConfig(){
 
-  var u = document.getElementById("apis-url-method");
+  var u = urlAPI;//document.getElementById("apis-url-method");
   var r = document.getElementById("method-result-type");
 
-  console.log("U: ", u.options[u.selectedIndex].text)
+  // console.log("U: ", u.options[u.selectedIndex].text)
   console.log("R: ", r.options[r.selectedIndex].text)
 
   //if a site method, 
   if(methodParent.includes('methodSite')){
-    temp.functions[methodName].query = u.options[u.selectedIndex].text;
+    temp.functions[methodName].query = u; //"TEST"//u.options[u.selectedIndex].text;
     temp.functions[methodName].result = r.options[r.selectedIndex].text;
     temp.functions[methodName].name = document.getElementById('meth-name').value;
   }else{
-    temp.objects[methodParent].methods[methodName].query = u.options[u.selectedIndex].text;
+    temp.objects[methodParent].methods[methodName].query = u; //u.options[u.selectedIndex].text;
     temp.objects[methodParent].methods[methodName].result = r.options[r.selectedIndex].text;
     temp.objects[methodParent].methods[methodName].name = document.getElementById('meth-name').value;
   }
@@ -975,7 +1242,6 @@ function typeHasBeenChosen(select){
 
   typePropertyType[currentType]=[];
 
-
   // tempObj={}
   tempObj[type]={"properties":[], "construct":{"self":{"endpoint":"", "id":""}}, "methods":[]}
 
@@ -1012,6 +1278,9 @@ function typeHasBeenChosen(select){
 
   $("#"+type+" tbody").append('<tr data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="getButtonID(this.id)">'+type+'</a></td><td id="type-td"><code class="">type</code></td><td></td></tr>')
 
+  $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px" style="display:inline;"/><div style="display: inline-block; width:150px; text-align:center;"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Property</option></select></div></td><td id="type-td"></td><td></td></tr>')
+
+  
   jQuery('.selectpicker').selectpicker('refresh');
 
   setTimeout(() => {
@@ -1024,14 +1293,14 @@ function typeHasBeenChosen(select){
     }
 
     //remove the properties from the
-    $("#property-select").empty();
-    $("#property-select").empty();
+    $("#"+type+"_property-select").empty();
+    $("#"+type+"_property-select").append("<option selected>Property</option>");
 
     console.log("ALL: ", allProperties)
 
     for(var i=0; i<allProperties.length; ++i){
       // $("#property-"+type).append("<option id="+allProperties[i]+">"+allProperties[i]+"</option>");
-      $("#property-select").append("<option value="+allProperties[i]+">"+allProperties[i]+"</option>");
+      $("#"+type+"_property-select").append("<option value="+allProperties[i]+">"+allProperties[i]+"</option>");
       // $("#property-res-select").append("<option id="+allProperties[i]+">"+allProperties[i]+"</option>");
     }
 
@@ -1041,7 +1310,7 @@ function typeHasBeenChosen(select){
 
     jQuery('.selectpicker').selectpicker('refresh');
 
-  }, 5000);
+  }, 3000);
 
 }
 
@@ -1056,11 +1325,47 @@ function saveWoOSchema(){
   console.log("temp.objects: ", Object.keys(temp.objects))
   console.log("final temp: ", temp)
 
-  $("#getters").empty();
+  //$("#getters").empty();
   //get the getters list
-  for(var i=0; i<gettersList.length; ++i){
-    $("#getters").append("<option value="+gettersList[i]+">"+gettersList[i]+"</option>");
+  //for(var i=0; i<gettersList.length; ++i){
+    //all objects
+    //all properties of type object
+    //$("#getters").append("<option value="+gettersList[i]+">"+gettersList[i]+"</option>");
+  //}
+
+  console.log("gettersList: ", gettersList)
+
+  var as = document.getElementsByTagName("A")
+  var objs= gettersList;//Object.keys(temp.objects);
+  
+  for (let j in objs) {
+    for(let a in as){
+      if(as[a].id == objs[j]){
+        console.log("PLEAE: ",as[a])
+        as[a].style.border = "3px solid #f90a69";
+      }
+    }
   }
+
+  for(let m in methodsImp){
+    for(let a in as){
+      if(as[a].innerHTML == methodsImp[m]){
+        console.log("PLEAE: ",as[a])
+        as[a].style.border = "3px solid #f90a69";
+      }
+    }
+  }
+
+
+  //Populate available objects 
+  $("#method-result-type").empty();
+  $("#method-result-type").append("<option selected>The type of the result</option>");
+
+  var definedObj = Object.keys(temp.objects);
+  for(var i=0; i<definedObj.length; ++i){
+    $("#method-result-type").append("<option id="+definedObj[i]+">"+definedObj[i]+"</option>"); 
+  }
+
 
   jQuery('.selectpicker').selectpicker('refresh');
 
@@ -1152,7 +1457,6 @@ function typeHasBeenChosen2(select){
     }
 
     //remove the properties from the
-    $("#property-select").empty();
     $("#property-select").empty();
 
     // console.log("ALL: ", allProperties)
@@ -1354,7 +1658,7 @@ var currentType="", propertyList=[], isNew=false, elem="property", isNewM=false,
 function propertyHasBeenChosen(select){
   $("#schema-"+type).empty()
   $("#property-"+type).empty()
-  // console.log("select: ",select.getAttribute("id"))
+
   var property = select.options[select.selectedIndex].getAttribute("value");
   if(select.options[select.selectedIndex].getAttribute("id")=="new"){
     isNew=true;
@@ -1369,7 +1673,7 @@ function propertyHasBeenChosen(select){
   var parent = select.getAttribute("id").split('-')[1]
 
   if(isNew){
-    $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+child+'"  onclick="openNav(this)">'+property+'</a></td></tr>')
+    $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+currentType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td></tr>')
   }else{
     for(var i=0; i<propertiesInfo.length; ++i){
       if(propertiesInfo[i]['name'] == property){
@@ -1377,7 +1681,7 @@ function propertyHasBeenChosen(select){
         descP = propertiesInfo[i]['description']
       }
     }
-    $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+child+'"  onclick="openNav(this)">'+property+'</a></td><td id="type-td"><code id="code-type" class="">'+typeP+'</code></td><td>'+descP+'</td></tr>')
+    $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+currentType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td><td id="type-td"><code id="code-type" class="">'+typeP+'</code></td><td>'+descP+'</td></tr>')
   }
 
   console.log("tempObj properties: ", tempObj[currentType].properties);
@@ -1406,7 +1710,7 @@ function propertyTypeHasBeenSelected(select){
 var currentObjType=""
 
 function typeHasBeenChosenForProperty(select){
-  var nameP = $("#property-name").val()
+  var nameP = $("#property-name").val().split('.')[1]
   var typeP = select.options[select.selectedIndex].getAttribute("id");
   currentObjType = typeP
   // $("#"+currentType+" tbody tr:#"+nameP).append('<td id="type-td"><code class="">'+typeP+'</code></td><td>'+descP+'</td>')
@@ -1447,7 +1751,7 @@ function typeHasBeenChosenForProperty(select){
 
 
 function isArray(select){
-  var nameP = $("#property-name").val()
+  var nameP = $("#property-name").val().split('.')[1]
   // var typeP = select.options[select.selectedIndex].getAttribute("id");
   
   var row = document.getElementById(nameP);
@@ -1460,7 +1764,7 @@ function methodHasBeenChosen(select){
   //add it to an array of methods to be implemented 
   $("#schema-"+type).empty()
   $("#property-"+type).empty()
-  console.log("select: ",select.getAttribute("id"))
+  // console.log("select: ",select.getAttribute("id"))
   var method = select.options[select.selectedIndex].getAttribute("id");
   if(select.options[select.selectedIndex].getAttribute("id")=="new"){
     isNewM=true;
@@ -1482,17 +1786,17 @@ function methodHasBeenChosen(select){
 
 
   if(siteIsClicked){
-    $("#site-table tbody").append('<tr id="method-site" data-tt-id="method-site" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="method-siteM" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="nav-toggle" onclick="newMethed(this)">'+method+'()</a></td><td id="type-td"><code class="">method</code></td><td></td></tr>')
+    $("#site-table tbody").append('<tr id="method-site" data-tt-id="method-site" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="method-siteM" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="nav-toggle" onclick="newMethed(this)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td></td></tr>')
   }else{
     if(isNewM){
       if(currentType==""){
         tempAct[method]= {"query":"", "result":"", "name":""};
         temp.functions = tempAct;
-        $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="nav-toggle" onclick="newMethed(this)">'+method+'()</a></td><td id="type-td"><code class="">method</code></td><td></td></tr>')
+        $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="nav-toggle" onclick="newMethed(this)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td></td></tr>')
       }else{
         tempObjAct[method]= {"query":"", "result":"", "name":""};
         tempObj[currentType].methods= tempObjAct;
-        $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="nav-toggle" onclick="newMethed(this)">'+method+'()</a></td><td id="type-td"><code class="">method</code></td></tr>')
+        $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="nav-toggle" onclick="newMethed(this)">'+method+'</a></td><td id="type-td"><code class="">method</code></td></tr>')
       }
     }else{
       for(var i=0; i<methodsInfo.length; ++i){
@@ -1504,11 +1808,11 @@ function methodHasBeenChosen(select){
         if(currentType==""){
           tempAct[method]= {"query":"", "result":"", "name":""};
           temp.functions = tempAct;
-          $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="OBJmethodSite" value="testVal" href="javascript:;" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this.id)">'+method+'()</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td><td></td></tr>')
+          $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="OBJmethodSite" value="testVal" href="javascript:;" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this.id)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td><td></td></tr>')
         }else{
           tempObjAct[method]= {"query":"", "result":"", "name":""};
           tempObj[currentType].methods = tempObjAct;
-          $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="OBJ'+currentType+'" href="javascript:;" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this.id)">'+method+'()</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td></tr>')
+          $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="OBJ'+currentType+'" href="javascript:;" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this.id)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td></tr>')
         }
       }
     }
@@ -1539,7 +1843,7 @@ function newProperty(select){
 
 function addNewProperty(){
   console.log("ENTERED")
-  nameP = $("#property-name").val()
+  nameP = $("#property-name").val().split('.')[1]
   typeP = $("#properties-type").children(":selected").attr("value")
   descP = $("#property-desc").val()
   
@@ -1806,8 +2110,12 @@ function curretGetterHasBeenSelected(select){
   // });
 
 
+  $("#apis-url-types").empty();
   for(var i=0; i<scrapirAPIs.length; ++i){
-    $("#apis-url-types").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
+    var urlText = scrapirAPIs[i].url;
+    if(urlText.includes(site)){
+      $("#apis-url-types").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
+    }
   }
 
   setTimeout(() => {

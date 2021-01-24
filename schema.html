@@ -136,15 +136,15 @@
 
 										</br>
 
-										<div id="property-list" class="col-lg-12">
-											<!-- <label class="col-form-label col-xs-1"><h5>Objects:</h5></label> -->
-
-											<select id="property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)">
+										<!-- <div id="property-list" class="col-lg-12">
+											<select id="property-select1" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)">
 													<option value="" selected>Property</option>
-												</select>
-											</div>
-
+											</select>
+										</div> 
 										</br>
+										-->
+
+										
 
 										<div id="method-list" class="col-lg-12">
 											<!-- <label class="" style="color:black"><h5>Actions:</h5></label> -->
@@ -317,7 +317,8 @@
 											
 													</div>
 
-													<a href="javascript:;" data-toggle="modal" class="btn btn-default m-r-5" style="height:35px" onclick="saveWoOSchema()">Start Implementation</a>
+												</br>
+													<a href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px" onclick="saveWoOSchema()">Start Implementation</a>
 												</div>
 												<!-- end panel-body -->
 											</div>
@@ -1530,136 +1531,102 @@
 		<!-- end scroll to top btn -->
 	
 
-		<div id="mySidenav" style="border-color: #919191" class="sidenav">
+		<div id="mySidenav" style="border-color: #919191;  " class="sidenav">
+			<div style="padding:20px;">
+
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		
-			<div id="property-div" class="form-group " style="padding:20px; ">
+			<h5 class = "panel-title">Property Configuration</h5>
+			<hr>
+
+			<form id="property-div">
 				<label class="col-form-label ">Property Title:</label></br>
 				<input id="property-name" type="text" class="form-control" style="height:30px;" placeholder="" />
-
-			</br>
-			<label class="col-form-label ">Property Type:</label>
-			<select id="properties-type" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px; " onchange="propertyTypeHasBeenSelected(this)">
-				<option value="string" selected>string</option>
-				<option value="integer">integer</option>
-				<option value="date">date</option>
-				<option value="boolean">boolean</option>
-				<option value="object">object</option>
-			</select>
-				
-			</br>
-			<div id="property-type" style="display: none;">
-				<label class="col-form-label ">Select Class:</label>
-				<select id="type-select2" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-default" onchange="typeHasBeenChosenForProperty(this)">
-					<option value="" selected>Type</option>
+				</br>
+				<label class="col-form-label ">Property Type:</label>
+				<select id="properties-type" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px; " onchange="propertyTypeHasBeenSelected(this)">
+					<option value="string" selected>string</option>
+					<option value="integer">integer</option>
+					<option value="date">date</option>
+					<option value="boolean">boolean</option>
+					<option value="object">object</option>
 				</select>
-			</div>	
-			</br>
-				
-			<label class="col-form-label " for="propIsArray"><input type="checkbox" id="propIsArray" onclick="isArray(this)"/> Is Array</label></br>
-			<!-- </br></br></br>
-			<a href="javascript:;" class="btn btn-default" style="width:100px; height:32px;" id="" onclick="addNewProperty()">Submit</a> -->
-			</div>
-
+					
+				</br>
+				<div id="property-type" style="display: none;">
+					<label class="col-form-label ">Select Class:</label>
+					<select id="type-select2" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-default" onchange="typeHasBeenChosenForProperty(this)">
+						<option value="" selected>Type</option>
+					</select>
+				</div>	
+				</br>
+					
+				<label class="col-form-label " for="propIsArray"><input type="checkbox" id="propIsArray" onclick="isArray(this)"/> Is Array</label></br>
+				<!-- </br></br></br>
+				<a href="javascript:;" class="btn btn-default" style="width:100px; height:32px;" id="" onclick="addNewProperty()">Submit</a> -->
+			</form>
+          </div>
 		</div>
 
-
-
-		<div id="mySidenavType2" style="border-color:#685656; " class="sidenav">
-
-					<!-- begin nav-pills -->
-					<ul class="nav nav-pills mb-2">
-						<li class="nav-item">
-							<a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link active">
-								<span class="d-sm-none">Pills 1</span>
-								<span class="d-sm-block d-none">Get & Map</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link">
-								<span class="d-sm-none">Pills 2</span>
-								<span class="d-sm-block d-none">Add</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#nav-pills-tab-3" data-toggle="tab" class="nav-link">
-								<span class="d-sm-none">Pills 3</span>
-								<span class="d-sm-block d-none">Remove</span>
-							</a>
-						</li>
-					</ul>
-					<!-- end nav-pills -->
-					<!-- begin tab-content -->
-					<div class="tab-content p-15 rounded bg-white mb-4">
-						<!-- begin tab-pane -->
-						<div class="tab-pane fade active show" id="nav-pills-tab-1">	
-						</div>
-						<!-- end tab-pane -->
-						<!-- begin tab-pane -->
-						<div class="tab-pane fade" id="nav-pills-tab-2">
-							<h3 class="m-t-10">Nav Pills Tab 2</h3>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-								Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor, 
-								est diam sagittis orci, a ornare nisi quam elementum tortor. 
-								Proin interdum ante porta est convallis dapibus dictum in nibh. 
-								Aenean quis massa congue metus mollis fermentum eget et tellus. 
-								Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien, 
-								nec eleifend orci eros id lectus.
-							</p>
-						</div>
-						<!-- end tab-pane -->
-						<!-- begin tab-pane -->
-						<div class="tab-pane fade" id="nav-pills-tab-3">
-							<h3 class="m-t-10">Nav Pills Tab 3</h3>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-								Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor, 
-								est diam sagittis orci, a ornare nisi quam elementum tortor. 
-								Proin interdum ante porta est convallis dapibus dictum in nibh. 
-								Aenean quis massa congue metus mollis fermentum eget et tellus. 
-								Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien, 
-								nec eleifend orci eros id lectus.
-							</p>
-						</div>
-						<!-- end tab-pane -->
-				
-					</div>
-					<!-- end tab-content -->
-		</div>
-
-
-
-		<div id="mySidenavType" style="border-color:#685656; " class="sidenav">
+		<div id="mySidenavType" style="border-color:#919191; " class="sidenav">
 
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNavType()">&times;</a>
-			</br>
 
-			<!-- <div class="panel">
-				<div class="panel-heading"> -->
-					<!-- <h4 class="panel-title">Describe your Data Model</h4>
+			<h5 class = "panel-title">Object Configuration</h5>
+			<hr>
 
-			<div class = "panel panel-default">
-				<div class = "panel-heading"> -->
-				   <h3 class = "panel-title">Object Configuration</h3>
-				   <hr>
-				<!-- </div> -->
-			<!-- <h5>Object Configuration</h2> -->
-			<h5>Map schema.org/<span id="typeN"></span> to one of <span id="siteN"></span> API endpoint.</h5>
+			<!-- <h6>Map schema.org/<span id="typeN"></span> to one of <span id="siteN"></span> API endpoint.</h6>
+			</br> -->
 
-			<div>
-				<p>1. Get the API corresponding object by choosing the right API endpoint.</p>
+			<div id="type-div">
+
+				<p>Does any of the following list items correspond to this schema.org object? Click on any of them to view their descreption.</p>
 				<!-- API Endpoint -->
 				<!-- <label class="col-form-label">API Endpoint</label> -->
-				<select id="apis-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosen(this)">
+				<!-- <select id="apis-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosen(this)">
 					<option selected>Choose API Endpoint</option>
-				</select>
-			</div>
+				</select> -->
+
+				<!-- begin #accordion -->
+				<div id="accordion" class="accordion">
+					<!-- begin card -->
+					<!-- <div class="card ">
+						<div class="card-header  pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapseOne">
+							Collapsible Group Item #1
+						</div>
+						<div id="collapseOne" class="collapse show" data-parent="#accordion">
+							<div class="card-body">
+								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							</div>
+						</div>
+					</div> -->
+					<!-- end card -->
+					<!-- begin card -->
+					<!-- <div class="card">
+						<div class="card-header pointer-cursor d-flex align-items-center collapsed" data-toggle="collapse" data-target="#collapseTwo">
+							 Collapsible Group Item #2
+						</div> 
+						<div id="collapseTwo" class="collapse" data-parent="#accordion">
+							<div class="card-body">
+								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							</div>
+						</div>
+					</div> -->
+					<!-- end card -->
+		
+				</div>
+				<!-- end #accordion -->
 			</br>
+
+			<!-- <p style="display:inline"> </p> -->
+			<p style="display:inline;">If none of the above API endpoints corresponds to the <B><span id="selected_type"></span></B> object, you can add it in 
+		    <a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+
+			</br> </br>
 
 			<!-- ID (list of responses fields)-->
 			<div id="idLabel" style="display: none;">
-				<p>2. Assign an ID to this object.</p>
+				<p>Assign an ID to this object</p>
 				<!-- <label class="col-form-label ">Id</label></br> -->
 				<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed()">
 					<option selected>Choose the ID</option>
@@ -1670,9 +1637,9 @@
 			<!-- Matching Properties -->
 			<!-- <label class="col-form-label ">Match Response Fields to Type Properties</label></br> -->
 			<div id="mapLabel" style="display: none;">
-				<p>3. Match the API endpoint's response fields to the type's properties.</p>
-				<div id="redips-drag" >
-					<table id="table1" class="table">
+				<p>Match the API endpoint's response fields to the object's properties.</p>
+				<div id="redips-drag">
+					<table id="table1" class="table table-bordered">
 						<thead>
 							<tr>
 							  <th>API Field</th>
@@ -1685,38 +1652,69 @@
 				</div> 
 			</div>
 
-			</br></br></br>
-			<a href="javascript:;" class="btn btn-primary" style="" id="" onclick="saveTypeConfig()">Save</a>
+			</br></br>
+			<a href="javascript:;" class="btn btn-primary" id="" onclick="saveTypeConfig()">Save</a>
 	
+		  </div>
+
 		</div>
 
-		<div id="mySidenavMethod" style="border-color: #919191" class="sidenav">
+		<div id="mySidenavMethod" style="border-color: #919191; " class="sidenav">
+			<div style="padding:20px;">
+
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNavMethod()">&times;</a>
-		
-			<div id="property-div" class="form-group " style="padding:20px; ">
+
+			<h5 class = "panel-title">Method Configuration</h5>
+			<hr>
+
+			<div id="property-div" >
 				<label class="col-form-label">Method Name</label></br>
 				<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
 
 				<label class="col-form-label">API Endpoint</label>
-				<select id="apis-url-method" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosenForMethod(this)">
+				<!-- <select id="apis-url-method" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosenForMethod(this)">
 					<option selected>Choose the API Endpoint</option>
-				</select>
+				</select> -->
 
-				<label class="col-form-label ">Result Type</label></br>
-				<select id="method-result-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
-					<option selected>The type of the result</option>
-				</select>
+				<!-- begin #accordion -->
+				<div id="accordion-method" class="accordion">
+				</div>
+				<!-- end #accordion -->
 
 				</br> 
 				<label class="col-form-label" for=""><input type="checkbox" id="noResult" onclick=""/> No Result</label>
+				</br>
 
-			</br></br></br>
-			<a href="javascript:;" class="btn btn-default" style="width:100px; height:32px;" id="" onclick="saveMethodConfig()">Save</a>
+				<label class="col-form-label ">Result Type</label></br>
+				<!-- <span>Make sure that you've chosen the class and its properties<span> -->
+				<select id="method-result-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+					<option selected>The type of the result</option>
+				</select>
+
+				<!-- <div id="methodMapLabel" style="display: none;">
+					<p>Match the API endpoint's response fields to the type's properties.</p>
+					<div id="redips-drag" >
+						<table id="table1" class="table table-bordered">
+							<thead>
+								<tr>
+								  <th>API Field</th>
+								  <th>Type Property</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div> 
+				</div> -->
+
+			</br></br>
+			<a href="javascript:;" class="btn btn-primary" style="" id="" onclick="saveMethodConfig()">Save</a>
 	
 		
 		</div>
-
 	</div>
+
+		</div>
 	<!-- </div> -->
 	<!-- end page container -->
 
@@ -1797,6 +1795,9 @@
 
 
 		<style>
+			/* body{
+				background-color: white;
+			} */
 
 			.bootstrap-select .dropdown-menu { max-width: 100% !important; }
 			
@@ -1812,7 +1813,7 @@
 			background-color: white;
 			overflow-x: hidden;
 			transition: 0.5s;
-			padding-top: 60px;
+			padding-top: 10px;
 			border:1px solid #ff0000;
 			}
 
