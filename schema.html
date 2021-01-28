@@ -111,7 +111,7 @@
 									<div data-height="100%" class="wrapper">
 										<!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span> -->
 
-										<h6 style="color:black"><B>Step#1</B> Choose the site</h6>
+										<h6 style="color:black"><B>Step#1</B> Choose the Website</h6>
 								
 											<div id="type-list" class="col-lg-12">
 												<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
@@ -154,6 +154,27 @@
 											</select>
 										</div>
 
+										</br>
+
+										<div id="schema-desc" class="col-lg-12" style="display:none">
+											<p style="color:black; margin-bottom:0px"><B>Schema.org Page</B></p>
+											<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset;"></a>
+											</br></br>
+
+											<p style="color:black; margin-bottom:0px"><B>Schema.org Descreption</B></p>
+											<p id="schemaDesc" style="color:black; margin-bottom:0px"></p>
+											</br>
+
+											<p style="color:black; margin-bottom:0px"><B>Example encoded as JSON-LD</B></p>
+											<!-- <div id="jsoneditor2" class="jsoneditor22"></div> -->
+
+											<pre id="json" style="max-height: 1000px; font-size: 0.9em; padding-top: 0px;"> 
+												<code  id="hereCode" class="language-json load">
+												</code>
+											</pre>
+
+										</div>
+											
 									</div>
 
 
@@ -236,7 +257,7 @@
 												<!-- begin panel-body -->
 												<div class="panel-body panel-form">
 												
-													<div id="site-objects"> </div>
+													<div id="site-objects" style="display: none;"> </div>
 												</br></br>
 
 													<div class="form-group row m-b-50">
@@ -317,8 +338,10 @@
 											
 													</div>
 
-												</br>
+													</br> <p id="impText" style="display:none">&nbsp;Click on the <span style="color:#f90a69;">highlighted nodes</span> above to configure them.</p>
+
 													<a href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px" onclick="saveWoOSchema()">Start Implementation</a>
+												
 												</div>
 												<!-- end panel-body -->
 											</div>

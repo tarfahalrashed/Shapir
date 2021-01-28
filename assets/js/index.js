@@ -14,7 +14,7 @@ function openNav(i) {
   closeNavType();
   closeNavMethod();
 
-  document.getElementById("mySidenav").style.width = "370px";
+  document.getElementById("mySidenav").style.width = "430px";
   console.log("the name of the property: ", i.getAttribute("id"))
   document.getElementById('property-name').value= i.getAttribute("id")
 }
@@ -32,7 +32,7 @@ function openNavType(id) {
   closeNavType();
   closeNavMethod();
 
-  document.getElementById("mySidenavType").style.width = "370px";
+  document.getElementById("mySidenavType").style.width = "430px";
   document.getElementById("mySidenavType").style.padding = "20px";
   //console.log("the name of the property: ", i.getAttribute("id"));
   //document.getElementById('type-name').value= i.getAttribute("id")
@@ -89,7 +89,7 @@ function openNavMethod(id) {
   closeNavType();
   closeNavMethod();
 
-  document.getElementById("mySidenavMethod").style.width = "370px";
+  document.getElementById("mySidenavMethod").style.width = "430px";
 
   methodName= $("#"+id).text().split('()')[0];
   methodParent= id.split('OBJ')[1];
@@ -426,6 +426,138 @@ function fetchSchemaTypes(){
 /////end
 
   websites=['4shared', 'abc', 'abcnews', 'about', 'aboutads', 'abril', 'academia', 'accounts', 'addthis', 'addtoany', 'adobe', 'adssettings', 'afternic', 'akamaihd', 'alibaba', 'aliexpress', 'allaboutcookies', 'amazon', 'amzn', 'android', 'answers', 'aol', 'ap', 'apache', 'apple', 'archive', 'archives', 'arxiv', 'asus', 'bandcamp', 'bbc', 'berkeley', 'biblegateway', 'biglobe', 'billboard', 'bing', 'bit', 'bitly', 'blackberry', 'bloglovin', 'bloomberg', 'booking', 'books', 'boston', 'box', 'bp', 'bp1', 'bp2', 'brandbucket', 'britannica', 'bt', 'businessinsider', 'buydomains', 'buzzfeed', 'calameo', 'cambridge', 'canva', 'cbc', 'cbslocal', 'cbsnews', 'cdc', 'change', 'channel4', 'chicagotribune', 'chinadaily', 'chron', 'cia', 'cloudflare', 'cmu', 'cnbc', 'cnet', 'cnn', 'code', 'columbia', 'consumerreports', 'cornell', 'corriere', 'cpanel', 'creativecommons', 'csmonitor', 'dailymail', 'dailymotion', 'dan', 'daum', 'de', 'debian', 'deezer', 'dell', 'depositfiles', 'detik', 'developers', 'dictionary', 'digg', 'digitaltrends', 'discovery', 'disney', 'disqus', 'docs', 'doubleclick', 'draft', 'dreniq', 'drive', 'dropbox', 'dw', 'e-monsite', 'e-recht24', 'ea', 'ebay', 'economist', 'ed', 'ehow', 'elmundo', 'elpais', 'elsevier', 'en', 'enable-javascript', 'engadget', 'eonline', 'epa', 'es', 'espn', 'etsy', 'europa', 'eventbrite', 'evernote', 'example', 'express', 'facebook', 'fandom', 'fastcompany', 'fb', 'fda', 'feedburner', 'feedproxy', 'fifa', 'files', 'finance', 'forbes', 'forms', 'fortune', 'foursquare', 'foxnews', 'fr', 'ft', 'ftc', 'get', 'ggpht', 'giphy', 'github', 'gizmodo', 'globo', 'gmail', 'gnu', 'godaddy', 'gofundme', 'goo', 'goodreads', 'google', 'googleblog', 'googleusercontent', 'gravatar', 'greenpeace', 'groups', 'gstatic', 'guardian', 'harvard', 'hatena', 'hm', 'hollywoodreporter', 'house', 'hp', 'huawei', 'huffingtonpost', 'huffpost', 'hugedomains', 'ibm', 'icann', 'id', 'ietf', 'ig', 'ign', 'ikea', 'imageshack', 'imdb', 'inc', 'independent', 'indiatimes', 'instagram', 'instructables', 'intel', 'ipv4', 'iso', 'issuu', 'istockphoto', 'it', 'iubenda', 'ja', 'jimdofree', 'khanacademy', 'kickstarter', 'last', 'latimes', 'lefigaro', 'lemonde', 'lifehacker', 'line', 'linkedin', 'list-manage', 'live', 'liveinternet', 'loc', 'lonelyplanet', 'm', 'mail', 'maps', 'marketingplatform', 'marketwatch', 'marriott', 'mashable', 'mayoclinic', 'mediafire', 'medium', 'mega', 'megaupload', 'merriam-webster', 'metro', 'microsoft', 'mirror', 'mit', 'mixcloud', 'mozilla', 'msn', 'my', 'myaccount', 'myspace', 'mysql', 'namecheap', 'narod', 'nasa', 'nationalgeographic', 'nature', 'naver', 'nba', 'nbcnews', 'netflix', 'netvibes', 'networkadvertising', 'news', 'newsweek', 'newyorker', 'nginx', 'nicovideo', 'nih', 'nikkei', 'noaa', 'nokia', 'npr', 'nvidia', 'nydailynews', 'nypost', 'nytimes', 'office', 'ok', 'opera', 'oracle', 'orange', 'oreilly', 'oup', 'over-blog-kiwi', 'ovh', 'ox', 'parallels', 'paypal', 'pbs', 'pcmag', 'pexels', 'photobucket', 'photos', 'php', 'picasa', 'picasaweb', 'pinterest', 'pixabay', 'pl', 'play', 'playstation', 'plesk', 'plos', 'plus', 'policies', 'politico', 'prestashop', 'princeton', 'privacyshield', 'prnewswire', 'psu', 'psychologytoday', 'pt', 'public-api', 'qq', 'quora', 'rakuten', 'rapidshare', 'rediff', 'repubblica', 'researchgate', 'reuters', 'reverbnation', 'ria', 'rollingstone', 'rottentomatoes', 'rt', 'ru', 'samsung', 'sapo', 'sciencedaily', 'sciencedirect', 'sciencemag', 'scientificamerican', 'scoop', 'scribd', 'search', 'secureserver', 'sedo', 'sendspace', 'sfgate', 'shop-pro', 'shopify', 'shutterstock', 'si', 'sina', 'sites', 'sky', 'skype', 'slate', 'slideshare', 'smh', 'so-net', 'softpedia', 'soratemplates', 'soundcloud', 'spiegel', 'sports', 'spotify', 'springer', 'sputniknews', 'ssl-images-amazon', 'stackoverflow', 'standard', 'stanford', 'state', 'statista', 'steampowered', 'storage', 'stuff', 'support', 'surveymonkey', 't', 'tabelog', 'target', 'teamviewer', 'techcrunch', 'techradar', 'ted', 'telegram', 'telegraph', 'terra', 'theatlantic', 'thedailybeast', 'thefreedictionary', 'theglobeandmail', 'theguardian', 'themeforest', 'thestar', 'thesun', 'thetimes', 'theverge', 'thoughtco', 'time', 'timeout', 'tinyurl', 'tools', 'translate', 'tripadvisor', 'trustpilot', 'twitch', 'twitter', 'ubuntu', 'ucoz', 'umich', 'un', 'unesco', 'uol', 'urbandictionary', 'usatoday', 'usgs', 'usnews', 'utexas', 'variety', 'vchecks', 'venturebeat', 'viagens', 'vice', 'video', 'vimeo', 'vk', 'vox', 'w3', 'wa', 'walmart', 'washington', 'washingtonpost', 'weather', 'webmd', 'weibo', 'welt', 'whatsapp', 'whitehouse', 'who', 'wikia', 'wikihow', 'wikimedia', 'wiktionary', 'wiley', 'windowsphone', 'wired', 'wordpress', 'worldbank', 'wp', 'wsj', 'www', 'xbox', 'xing', 'xinhuanet', 'yadi', 'yahoo', 'yale', 'yandex', 'yelp', 'youronlinechoices', 'youtu', 'youtube', 'ytimg', 'zeit', 'zendesk', 'ziddu'];
+
+  // websites= ['youtube.com', 'apple.com', 'www.google.com', 'support.google.com',
+  //      'www.blogger.com', 'cloudflare.com', 'play.google.com',
+  //      'microsoft.com', 'mozilla.org', 'wordpress.org', 'maps.google.com',
+  //      'en.wikipedia.org', 'linkedin.com', 'youtu.be', 'docs.google.com',
+  //      'adobe.com', 'accounts.google.com', 'vimeo.com',
+  //      'drive.google.com', 'sites.google.com', 'europa.eu',
+  //      'googleusercontent.com', 'plus.google.com', 'line.me',
+  //      'es.wikipedia.org', 'github.com', 'amazon.com', 'bbc.co.uk',
+  //      'vk.com', 'facebook.com', 'cnn.com', 'uol.com.br',
+  //      'bp.blogspot.com', 'istockphoto.com', 'gstatic.com', 'nytimes.com',
+  //      'feedburner.com', 'policies.google.com', 'imdb.com',
+  //      'slideshare.net', 'fr.wikipedia.org', 'whatsapp.com', 'paypal.com',
+  //      'issuu.com', 'pt.wikipedia.org', 'get.google.com', 'w3.org',
+  //      'mail.ru', 'mail.google.com', 'google.fr', 't.me', 'jimdofree.com',
+  //      'google.co.jp', 'hugedomains.com', 'bbc.com', 'theguardian.com',
+  //      'nih.gov', 'creativecommons.org', 'forbes.com', 'globo.com',
+  //      'dropbox.com', 'wikimedia.org', 'washingtonpost.com',
+  //      'www.yahoo.com', 'google.de', 'myspace.com', 'reuters.com',
+  //      'live.com', 'msn.com', 'google.com.br', 'news.google.com',
+  //      'medium.com', 'google.es', 'dailymotion.com', 'opera.com',
+  //      'developers.google.com', 'abril.com.br', 'books.google.com',
+  //      'translate.google.com', 'office.com', 'dailymail.co.uk',
+  //      'draft.blogger.com', 'elpais.com', 'google.it', 'rakuten.co.jp',
+  //      'de.wikipedia.org', 'ft.com', 'cpanel.com', 'twitter.com',
+  //      'fandom.com', 'tools.google.com', 'webmd.com', 'buydomains.com',
+  //      'files.wordpress.com', 'mediafire.com', 'un.org', 'google.co.uk',
+  //      'www.wikipedia.org', 'thesun.co.uk', 'wsj.com',
+  //      'huffingtonpost.com', 'rt.com', 'news.yahoo.com',
+  //      'independent.co.uk', 'goo.gl', 'telegram.me', 'bit.ly',
+  //      'booking.com', 'steampowered.com', 'latimes.com', 'hatena.ne.jp',
+  //      'telegraph.co.uk', 'wired.com', 'id.wikipedia.org',
+  //      'ipv4.google.com', 'who.int', 'indiatimes.com', 'amazon.co.jp',
+  //      'pinterest.com', 'wikia.com', 'bloomberg.com', 'ok.ru',
+  //      'android.com', 'techcrunch.com', 'fb.com', 'ebay.com',
+  //      'samsung.com', 'amazon.de', 'photos.google.com', 'google.pl',
+  //      'aliexpress.com', 'nasa.gov', 'search.google.com', 'tinyurl.com',
+  //      'aol.com', 'google.ru', 'aboutads.info', 'foxnews.com', 'time.com',
+  //      'amazon.co.uk', '4shared.com', 'businessinsider.com',
+  //      'terra.com.br', 'cnet.com', 'change.org', 'ig.com.br',
+  //      'youronlinechoices.com', 'lefigaro.fr', 'themeforest.net',
+  //      'usatoday.com', 'gravatar.com', 'picasaweb.google.com',
+  //      'networkadvertising.org', 'scribd.com', 'www.gov.uk',
+  //      'marketingplatform.google.com', 'mirror.co.uk', 'harvard.edu',
+  //      'it.wikipedia.org', 'cpanel.net', 'myaccount.google.com',
+  //      'dan.com', 'abcnews.go.com', 'archive.org', 'plesk.com', 'cdc.gov',
+  //      'namecheap.com', 'trustpilot.com', 'forms.gle', 'doubleclick.net',
+  //      'ja.wikipedia.org', 'adssettings.google.com', 'repubblica.it',
+  //      'biglobe.ne.jp', 'news.com.au', 'nicovideo.jp', 'disqus.com',
+  //      'hollywoodreporter.com', 'loc.gov', 'php.net', 'quora.com',
+  //      'washington.edu', 'gizmodo.com', 'express.co.uk', 'discord.gg',
+  //      'code.google.com', 'search.yahoo.com', 'enable-javascript.com',
+  //      'smh.com.au', 'amazon.fr', 'lemonde.fr', 'netflix.com', 'yelp.com',
+  //      'abc.net.au', 'ign.com', 'walmart.com', 'bandcamp.com',
+  //      'weibo.com', 'nypost.com', 'imageshack.us', 'digg.com',
+  //      'picasa.google.com', 'm.wikipedia.org', 'www.wix.com',
+  //      'cbsnews.com', 'e-recht24.de', 'gnu.org', 'usnews.com',
+  //      'berkeley.edu', 'nationalgeographic.com', 'mega.nz', 'espn.com',
+  //      'alibaba.com', 'ria.ru', 'rottentomatoes.com', 'guardian.co.uk',
+  //      'deezer.com', 'www.weebly.com', 'addtoany.com', 'scoop.it',
+  //      'mozilla.com', 'nginx.org', 'depositfiles.com', 'wp.com',
+  //      'spiegel.de', 'noaa.gov', 'liveinternet.ru', 'stackoverflow.com',
+  //      'oup.com', 'pl.wikipedia.org', 'addthis.com', 'amazon.es',
+  //      'afternic.com', 'skype.com', 'bp2.blogger.com', 'welt.de',
+  //      'ietf.org', 'disney.com', 'hm.com', 'dw.com', 'eventbrite.com',
+  //      '000webhost.com', 'wikihow.com', 'stanford.edu', 'rambler.ru',
+  //      'hp.com', 'bitly.com', 'twitch.tv', 'google.co.in', 'pbs.org',
+  //      'sciencemag.org', 'amzn.to', 'akamaihd.net', 'academia.edu',
+  //      'soundcloud.com', 'secureserver.net', 'photos1.blogger.com',
+  //      'target.com', 'surveymonkey.com', 'chaturbate.com', 'ibm.com',
+  //      'blackberry.com', 'whitehouse.gov', 'engadget.com', 'nbcnews.com',
+  //      'sciencedirect.com', 'buzzfeed.com', 'newyorker.com', 'naver.com',
+  //      'britannica.com', 'wiley.com', 'newsweek.com', 'ovh.net', 'wa.me',
+  //      'yahoo.co.jp', 'economist.com', 'greenpeace.org', 'mit.edu',
+  //      't.co', 'nginx.com', 'netvibes.com', 'nydailynews.com', 'cbc.ca',
+  //      'spotify.com', 'detik.com', 'huffpost.com', 'yandex.ru',
+  //      'rapidshare.com', 'pixabay.com', 'xbox.com', 'yale.edu',
+  //      'sfgate.com', 'princeton.edu', 'mashable.com', 'asus.com',
+  //      'dell.com', 'icann.org', 'ggpht.com', 'privacyshield.gov',
+  //      'ziddu.com', 'instructables.com', 'sedo.com', 'sapo.pt',
+  //      'sciencedaily.com', 'rtve.es', 'sputniknews.com',
+  //      'finance.yahoo.com', 'vox.com', 'cnil.fr', 'npr.org', 'nokia.com',
+  //      'groups.google.com', 'ox.ac.uk', 'nature.com', 'ovh.com',
+  //      'tripadvisor.com', 'cnbc.com', 'theatlantic.com', 'godaddy.com',
+  //      'kickstarter.com', 'oracle.com', 'goodreads.com',
+  //      'brandbucket.com', 'bing.com', 'vice.com', 'unesco.org',
+  //      'elmundo.es', 'sendspace.com', 'gmail.com', 'photobucket.com',
+  //      'apache.org', 'columbia.edu', 'playstation.com', 'google.nl',
+  //      'ikea.com', 'ea.com', 'cambridge.org', 'thetimes.co.uk',
+  //      'allaboutcookies.org', 'nikkei.com', 'box.com', 'ovh.co.uk',
+  //      'metro.co.uk', 'theglobeandmail.com', 'ted.com', 'list-manage.com',
+  //      'google.com.tw', 'mysql.com', 'ru.wikipedia.org', 'theverge.com',
+  //      'cornell.edu', 'about.com', 'gofundme.com', 'google.co.id',
+  //      'zendesk.com', 'www.over-blog.com', 'my.yahoo.com', 'utexas.edu',
+  //      'psychologytoday.com', 'urbandictionary.com', 'ytimg.com',
+  //      'abc.es', 'over-blog-kiwi.com', 'researchgate.net',
+  //      'instagram.com', 'yadi.sk', 'bloglovin.com', 'corriere.it',
+  //      'variety.com', 'shutterstock.com', 'google.ca', 'shopify.com',
+  //      'goo.ne.jp', 'umich.edu', 'googleblog.com', 'chicagotribune.com',
+  //      'storage.googleapis.com', 'mercurynews.com', 'cbslocal.com',
+  //      'feedproxy.google.com', 'tes.com', 'ftc.gov', 'm.me', 'pexels.com',
+  //      'espn.go.com', 'freepik.com', 'ubuntu.com', 'howstuffworks.com',
+  //      'mystrikingly.com', 'last.fm', 'rediff.com', 'com.com',
+  //      'oreilly.com', 'amazon.in', 'biblegateway.com', 'parallels.com',
+  //      'cointernet.com.co', 'gooyaabitemplates.com', 'fortune.com',
+  //      'dreniq.com', 'jstor.org', 'coursera.org', 'ap.org', 'ca.gov',
+  //      'sina.com.cn', 'cisco.com', 'alexa.com', 'weather.com', 'psu.edu',
+  //      'scientificamerican.com', 'qz.com', 'evernote.com', 'ieee.org',
+  //      'soratemplates.com', 'lonelyplanet.com', 'blog.fc2.com',
+  //      'so-net.ne.jp', 'naver.jp', 'cocolog-nifty.com', 'upenn.edu',
+  //      'marriott.com', 'mhlw.go.jp', 'dreamstime.com', 'google.com.au',
+  //      'pewresearch.org', 'si.edu', 'histats.com', 'rollingstone.com',
+  //      'livescience.com', 'popsugar.com', 'inc.com', 'home.neustar',
+  //      'eff.org', 'storage.canalblog.com', 'imageshack.com',
+  //      'softonic.com', 'viglink.com', 'axs.com', 'entrepreneur.com',
+  //      'airbnb.com', 'usgs.gov', 'redhat.com', 'pastebin.com',
+  //      'amazon.ca', 'prezi.com', 'kinja.com', 'about.me',
+  //      'arstechnica.com', 'stuff.co.nz', 'fastcompany.com', 'pcmag.com',
+  //      'springer.com', 'fifa.com', 'iso.org', 'channel4.com', 'cmu.edu',
+  //      'steamcommunity.com', 'khanacademy.org', 'salon.com',
+  //      'transandfiestas.ga', 'excite.co.jp', 'fb.me', 'boston.com',
+  //      'qq.com', 'arxiv.org', 'epa.gov', 'thoughtco.com', 'billboard.com',
+  //      'daum.net', 'irs.gov', 'lycos.com', 'calameo.com',
+  //      'businessinsider.com.au', 'www.canalblog.com', 'politico.com',
+  //      'ucoz.ru', 'www.livejournal.com', 'lifehacker.com',
+  //      'geocities.com', 'digitaltrends.com', 'ameblo.jp',
+  //      'ssl-images-amazon.com', 'calendar.google.com', 'adweek.com',
+  //      'indiegogo.com', 'standard.co.uk', 'megaupload.com', 'orange.fr',
+  //      'nba.com', 'canva.com', 'sky.com', 'mayoclinic.org',
+  //      'xinhuanet.com', 'narod.ru', 'bund.de', 'vkontakte.ru',
+  //      'bp0.blogger.com', 'plos.org', 'video.google.com',
+  //      'groups.yahoo.com']
 
   if(!once){
     firebase.initializeApp(config);
@@ -805,7 +937,7 @@ function idHasBeenChosed(){
 }
 
 
-var currentURLGetter = "", propList, resProplist=[];
+var currentURLGetter = "", propList=[], resProplist=[];
 
 
 function urlHasBeenChosen(select){
@@ -870,7 +1002,19 @@ function urlHasBeenChosen(select){
           }
         }
 
-        propList = temp.objects[currentType].properties;
+        console.log("typePropertyType[currentType]: ", typePropertyType[currentType])
+
+        propList=[]
+        for(var j=0; j<typePropertyType[currentType].length; ++j){
+          if(typePropertyType[currentType][j].type=="string" || typePropertyType[currentType][j].type=="integer" || typePropertyType[currentType][j].type=="date" || typePropertyType[currentType][j].type=="boolean"){
+            //push it
+            propList.push(typePropertyType[currentType][j].name)
+          }else{
+            //skip it
+          }
+        }
+
+        // propList = temp.objects[currentType].properties;
 
         console.log("final response ", resProplist);
         console.log("final properties ", propList);
@@ -1062,10 +1206,23 @@ function urlHasBeenChosenForMethod(select){
         //   $("#type-id").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
         // }
 
-        propList = temp.objects[currentType].properties;
+
+        console.log("typePropertyType[currentType]: ", typePropertyType[currentType])
+
+        propList=[]
+        for(var j=0; j<typePropertyType[currentType].length; ++j){
+          if(typePropertyType[currentType][j].type=="string" || typePropertyType[currentType][j].type=="integer" || typePropertyType[currentType][j].type=="date" || typePropertyType[currentType][j].type=="boolean"){
+            //push it
+            propList.push(typePropertyType[currentType][j].name)
+          }else{
+            //skip it
+          }
+        }
+
+        // propList = temp.objects[currentType].properties;
 
         console.log("final response ", resProplist);
-        console.log("final properties ", propList);
+        console.log("final properties GGG ", propList);
 
         // temp.objects[getter].properties
 
@@ -1250,7 +1407,34 @@ function typeHasBeenChosen(select){
       allSchemaTypes.push(childSnapshot.val().title.split(' ').join(''))
       if(childSnapshot.val().title.split(' ').join('') == type){
         getAllOfProperties(type);
-        //getAllMethods(type);
+ 
+        $("#schema-desc").show()
+
+        $.ajax({
+            url: childSnapshot.val().format,
+            type: 'GET',
+            dataType: "html",
+            success: function(res) {
+              // console.log("Schema.org Descreption: ",$(res).find('.description')[0].innerHTML)
+              // console.log("Schema.org Example: ", $.parseHTML($(res).find('.ds-tab-content')[3].innerHTML)[0])
+              document.getElementById("schemaURL").href = childSnapshot.val().format;
+              document.getElementById("schemaURL").innerText = childSnapshot.val().format;
+              
+              document.getElementById("schemaDesc").innerText = $(res).find('.description')[0].innerHTML;
+
+              var str = $(res).find('.ds-tab-content')[3].innerHTML
+              var mySubString = str.split('&lt;script type=\"application/ld+json\"&gt;').pop().split('&lt;/script&gt;')[0]; // returns 'two'
+              document.getElementById('hereCode').innerHTML = mySubString
+              // Refresh Prism to apply the style
+              Prism.highlightElement($('#hereCode')[0]);
+
+              console.log("mySubString: ", mySubString);
+
+              // responseMessage(JSON.parse(mySubString), status)
+            }
+        });
+ 
+
       }
     });
   });
@@ -1278,7 +1462,7 @@ function typeHasBeenChosen(select){
 
   $("#"+type+" tbody").append('<tr data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="getButtonID(this.id)">'+type+'</a></td><td id="type-td"><code class="">type</code></td><td></td></tr>')
 
-  $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px" style="display:inline;"/><div style="display: inline-block; width:150px; text-align:center;"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Property</option></select></div></td><td id="type-td"></td><td></td></tr>')
+  $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center;"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Add Property</option></select></div></td><td id="type-td"></td><td></td></tr>')
 
   
   jQuery('.selectpicker').selectpicker('refresh');
@@ -1294,7 +1478,7 @@ function typeHasBeenChosen(select){
 
     //remove the properties from the
     $("#"+type+"_property-select").empty();
-    $("#"+type+"_property-select").append("<option selected>Property</option>");
+    $("#"+type+"_property-select").append("<option selected>Add Property</option>");
 
     console.log("ALL: ", allProperties)
 
@@ -1341,7 +1525,7 @@ function saveWoOSchema(){
   for (let j in objs) {
     for(let a in as){
       if(as[a].id == objs[j]){
-        console.log("PLEAE: ",as[a])
+        // console.log("PLEAE: ",as[a])
         as[a].style.border = "3px solid #f90a69";
       }
     }
@@ -1350,13 +1534,15 @@ function saveWoOSchema(){
   for(let m in methodsImp){
     for(let a in as){
       if(as[a].innerHTML == methodsImp[m]){
-        console.log("PLEAE: ",as[a])
+        // console.log("PLEAE: ",as[a])
         as[a].style.border = "3px solid #f90a69";
       }
     }
   }
 
+  $("#impText").show();
 
+  
   //Populate available objects 
   $("#method-result-type").empty();
   $("#method-result-type").append("<option selected>The type of the result</option>");
@@ -1659,6 +1845,9 @@ function propertyHasBeenChosen(select){
   $("#schema-"+type).empty()
   $("#property-"+type).empty()
 
+  // $('select[name=selValue]').val(1);
+  // $('.selectpicker').selectpicker('refresh')
+
   var property = select.options[select.selectedIndex].getAttribute("value");
   if(select.options[select.selectedIndex].getAttribute("id")=="new"){
     isNew=true;
@@ -1672,8 +1861,17 @@ function propertyHasBeenChosen(select){
   var child = property
   var parent = select.getAttribute("id").split('-')[1]
 
+  //all <tr> elements
+  var trs = document.getElementsByTagName("TR")
+  
   if(isNew){
-    $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+currentType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td></tr>')
+    for(let t in trs){
+      if(trs[t].id == currentType){
+        $('<tr id="'+currentType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+currentType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td></tr>').insertBefore(trs[t]);
+        break;
+      }
+    }
+    // $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+currentType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td></tr>')
   }else{
     for(var i=0; i<propertiesInfo.length; ++i){
       if(propertiesInfo[i]['name'] == property){
@@ -1681,8 +1879,16 @@ function propertyHasBeenChosen(select){
         descP = propertiesInfo[i]['description']
       }
     }
-    $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+currentType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td><td id="type-td"><code id="code-type" class="">'+typeP+'</code></td><td>'+descP+'</td></tr>')
+
+    for(let t in trs){
+      if(trs[t].id == currentType){
+        $('<tr id="'+currentType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+currentType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td><td id="type-td"><code id="code-type" class="">'+typeP+'</code></td><td>'+descP+'</td></tr>').insertBefore(trs[t]);
+        break;
+      }
+    }
+    // $("#"+currentType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+currentType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td><td id="type-td"><code id="code-type" class="">'+typeP+'</code></td><td>'+descP+'</td></tr>')
   }
+
 
   console.log("tempObj properties: ", tempObj[currentType].properties);
   propList= tempObj[currentType].properties //NEED TO BE FIXED 
@@ -1692,7 +1898,10 @@ function propertyHasBeenChosen(select){
     type: typeP
   });
 
-  console.log("typePropertyType: ", typePropertyType)
+  console.log("typePropertyType: ", typePropertyType);
+
+  var firstOption = $("#"+currentType+"_property-select option:first").val();
+  $("#"+currentType+"_property-select").val(firstOption);
 }
 
 
@@ -1713,11 +1922,15 @@ function typeHasBeenChosenForProperty(select){
   var nameP = $("#property-name").val().split('.')[1]
   var typeP = select.options[select.selectedIndex].getAttribute("id");
   currentObjType = typeP
-  // $("#"+currentType+" tbody tr:#"+nameP).append('<td id="type-td"><code class="">'+typeP+'</code></td><td>'+descP+'</td>')
-  var row = document.getElementById(nameP);
+
+  var type_name = $("#property-name").val().split('.').join('_');
+  var onlyType = type_name.split('_')[0]
+  console.log("type_name: ", type_name)
+
+  var row = document.getElementById(type_name);
   row.cells.namedItem("type-td").innerHTML= '<code id="code-type" class="">'+typeP+'</code>'
   
-  gettersList.push(currentType+'.'+nameP)
+  gettersList.push(onlyType+'.'+nameP)
 
   console.log("getters list: ", getters)
 
@@ -1729,19 +1942,20 @@ function typeHasBeenChosenForProperty(select){
    // });
      
   //Find index of specific object using findIndex method. 
-  var theType = typePropertyType[currentType] 
+  var theType = typePropertyType[onlyType] 
   // => typePropertyType[currentType].name == nameP
   
-  objIndex = typePropertyType[currentType].findIndex((obj => obj.name == nameP));
+  objIndex = typePropertyType[onlyType].findIndex((obj => obj.name == nameP));
   
   //Log object to Console.
-  console.log("Before update: ", typePropertyType[currentType][objIndex])
+  console.log("Before update: ", typePropertyType[onlyType][objIndex])
   
   //Update object's name property.
-  typePropertyType[currentType][objIndex].type = typeP;
+  console.log("currentType")
+  typePropertyType[onlyType][objIndex].type = typeP;
   
   //Log object to console again.
-  console.log("After update: ", typePropertyType[currentType][objIndex])
+  console.log("After update: ", typePropertyType[onlyType][objIndex])
   console.log("types with properties AFTER: ", typePropertyType);
 
   // $("#code-type").text=typeP
@@ -1754,7 +1968,9 @@ function isArray(select){
   var nameP = $("#property-name").val().split('.')[1]
   // var typeP = select.options[select.selectedIndex].getAttribute("id");
   
-  var row = document.getElementById(nameP);
+  var type_name = $("#property-name").val().split('.').join('_');
+
+  var row = document.getElementById(type_name);
   row.cells.namedItem("type-td").innerHTML= '<code id="code-type" class="">['+currentObjType+']</code>'
   
 }
