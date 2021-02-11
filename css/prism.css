@@ -5,6 +5,8 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  * Based on https://github.com/chriskempson/tomorrow-theme
  * @author Rose Pritchard
  */
+ /* code.dark-block[class*="language-"],
+ pre.dark-block[class*="language-"] { */
 
 code[class*="language-"],
 pre[class*="language-"] {

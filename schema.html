@@ -70,16 +70,17 @@
 			<!-- </div> -->
 			<a href="index.html" class="navbar-brand">
 				<!-- <span class="brand-logo"></span> -->
-				<!-- <img src="assets/img/bg/logo.svg" width="100px"/> -->
-				<!-- <span class="brand-text"><span class="text-warning"><B>Resh</B></span><B>API</B></span> -->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="main_assets/img/bg/logoP.svg" width="70px"/>
+				<!-- <B><span class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh<span class="">api</span>r</span></B> -->
 			</a>
 			<!-- end navbar-header --><!-- begin header-nav -->
 			<ul class="navbar-nav navbar-right">
-				<li class="nav-item"><a class="nav-link" href="#home" data-click="scroll-to-target" data-scroll-target="#home">HOME</a</li>
+				<li class="nav-item"><a class="nav-link active" href="#home" data-click="scroll-to-target" data-scroll-target="#home">HOME</a></li>
 				<li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT</a></li>
-				<li class="nav-item"><a class="nav-link" href="#service" data-click="scroll-to-target">EXPLORE</a></li>
-				<li class="nav-item"><a class="nav-link active" href="#work" data-click="scroll-to-target">CREATE</a></li>
-				<li class="nav-item"><a class="nav-link" href="#team" data-click="scroll-to-target">TEAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+				<li class="nav-item"><a class="nav-link" href="schema.html" >CREATE</a></li>
+				<li class="nav-item"><a class="nav-link" href="doc.html" >EXPLORE</a></li>
+				<li class="nav-item"><a class="nav-link" href="doc.html" >DOC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+				<!-- <li class="nav-item"><a class="nav-link" href="#team" data-click="scroll-to-target">TEAM</a></li> -->
 			</ul>
 			<!-- end header-nav -->
 		</div>
@@ -88,7 +89,7 @@
 
 		
 		<!-- begin #content -->
-		<div id="content" class="content content-full-width ">
+		<div id="content" class="content content-full-width">
 			<!-- begin vertical-box -->
 			<div class="vertical-box ">
 				<!-- begin vertical-box-column -->
@@ -96,119 +97,115 @@
 					<!-- begin vertical-box -->
 					<div class="vertical-box">
 						<!-- begin wrapper -->
-						<div class="wrapper bg-orange-transparent-5 text-white">
+						<!-- <div class="wrapper bg-orange-transparent-5 text-white"> -->
 						<!-- bg-blue-darker text-white" -->
 							<!-- Left Column Top Box -->
-						</div>
+						<!-- </div> -->
 						<!-- end wrapper -->
 						<!-- begin vertical-box-row -->
 						<div class="vertical-box-row bg-orange-transparent-5 text-white">
 							<!-- begin vertical-box-cell -->
-							<div class="vertical-box-cell">
+							<div class="vertical-box-cell" >
 								<!-- begin vertical-box-inner-cell -->
-								<div class="vertical-box-inner-cell">
+								<div class="vertical-box-inner-cell"style="position: relative; overflow: hidden; width: auto; height: 100%;">
 									<!-- begin scrollbar -->
 									<div data-height="100%" class="wrapper">
-										<!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span> -->
-
-										<h6 style="color:black"><B>Step#1</B> Choose the Website</h6>
-								
-											<div id="type-list" class="col-lg-12">
-												<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
-													<option selected>Choose site</option>
-												</select>
-											</div>
-											</br></br>
-
-
-									<div id="step2" style="display: none;">
-										<h6 style=" color:black"><B>Step#2</B> Choose the object(s) and method(s) for the site.</h6>
-
-									<!-- <div data-scrollbar="true" data-height="100%" class="wrapper"> -->
-										<!-- Content Area with scrollbar. Try to scroll down. -->
-										<div id="type-list" class="col-lg-12">
-											<!-- <label class="" style="color:black"><h5>Objects:</h5></label> -->
-
-											<select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
-												<option value="" selected>Type</option>
+										<div id="type-list1" class="col-lg-12">
+											<h6 style="color:black"><B>Step#1</B> Choose the name of the website (e.g. youtube)</h6>
+											<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
+												<option selected>Choose site</option>
 											</select>
 										</div>
-
 										</br>
 
-										<!-- <div id="property-list" class="col-lg-12">
+<!-- 
+									<div id="step2" class="col-lg-12" style="display: none;">
+										<h5 style=" color:black"><B>Step#2</B> In the chosen webiste, choose the types/objects you are intersted in? (e.g. Playlist, Video, Comment)</h5>
+									</div> -->
+
+									<div id="step3" style="display: none;">
+										<div id="method-list" class="col-lg-12">
+											<h6 style=" color:black"><B>Step#2</B> Are you intertsed in performing an action on the site (e.g. Search for videos on YouTube "Search Action")?</h6>
+											<!-- yes or no, if yes, pick the type you're searching for, if no, pick the type you're interseted in retieving from the site -->
+											<div class="col-md-9">
+												<div class="custom-control custom-radio mb-1" style="display:inline">
+													<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" onchange="methodRadioChecked()">
+													<label style=" color:black" class="custom-control-label" for="customRadio1">Yes &nbsp;&nbsp;</label>
+												</div>
+												<div class="custom-control custom-radio" style="display:inline">
+													<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" onchange="methodRadioChecked()">
+													<label style=" color:black" class="custom-control-label" for="customRadio2">No</label>
+												</div>
+											</div>
+											
+
+											<div id="method-site" style="display:none">
+												<p style=" color:black; margin-bottom:5px; margin-top:15px"></p>
+												<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
+													<option value="" selected>Choose Action</option>
+												</select>
+											</div>
+											</br>
+
+											<div id="type-list" style="display:none">
+												<h6 style=" color:black"><B>Step#3</B> Choose the types of data you want to retrieve/manage (e.g. Choose VideoObject to search for videos or get a specifc video)</h6>
+												<!-- <p style=" color:black; margin-bottom:5px; margin-top:15px">Choose the types of data you want to retrieve/manage from the site (e.g. Choose VideoObject if you're searching for videos or you want to get a specifc video)</p> -->
+												<select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
+													<option value="" selected>Choose Type</option>
+												</select>
+											</div>
+	
+											</br>
+	
+											<div id="schema-desc" class="col-lg-12" style="display:none">
+												<p style="color:black; margin-bottom:0px"><B>About this schema.org type</B></p>
+												<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset;"></a>
+												</br>
+	
+												<!-- <p style="color:black; margin-bottom:0px"><B>Schema.org Descreption</B></p> -->
+												<p id="schemaDesc" style="color:black; margin-bottom:0px"></p>
+												</br>
+	
+												<div id="jsonld-schema" style="display: none;">
+													<p style="color:black; margin-bottom:0px"><B>Usage example encoded as JSON-LD</B></p>
+													<!-- <div id="jsoneditor2" class="jsoneditor22"></div> -->
+													<pre id="json" style="font-size: 0.9em; padding-top: 0px; height: 320px;"> 
+														<code  id="hereCode" class="language-json load">
+														</code>
+													</pre>
+												</div>
+											</div>
+
+											</br>
+
+											<div id="prop-list" style="display:none">
+												<h6 style=" color:black"><B>Step#4</B> Under each type in middle pane, choose the properties and methods.</h6>
+												<!-- <p style=" color:black; margin-bottom:5px; margin-top:15px">Choose the types of data you want to retrieve/manage from the site (e.g. Choose VideoObject if you're searching for videos or you want to get a specifc video)</p> -->
+												<!-- <select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
+													<option value="" selected>Choose Type</option>
+												</select> -->
+											</div>
+	
+											
+											
+										</div>
+
+									
+
+										<!-- 
+										<div id="property-list" class="col-lg-12">
 											<select id="property-select1" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)">
 													<option value="" selected>Property</option>
 											</select>
 										</div> 
 										</br>
 										-->
-
-										
-
-										<div id="method-list" class="col-lg-12">
-											<!-- <label class="" style="color:black"><h5>Actions:</h5></label> -->
-
-											<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="methodHasBeenChosen(this)">
-												<option value="" selected>Method</option>
-											</select>
-										</div>
-
-										</br>
-
-										<div id="schema-desc" class="col-lg-12" style="display:none">
-											<p style="color:black; margin-bottom:0px"><B>Schema.org Page</B></p>
-											<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset;"></a>
-											</br></br>
-
-											<p style="color:black; margin-bottom:0px"><B>Schema.org Descreption</B></p>
-											<p id="schemaDesc" style="color:black; margin-bottom:0px"></p>
-											</br>
-
-											<p style="color:black; margin-bottom:0px"><B>Example encoded as JSON-LD</B></p>
-											<!-- <div id="jsoneditor2" class="jsoneditor22"></div> -->
-
-											<pre id="json" style="max-height: 1000px; font-size: 0.9em; padding-top: 0px;"> 
-												<code  id="hereCode" class="language-json load">
-												</code>
-											</pre>
-
-										</div>
 											
 									</div>
 
 
-									<div id="step3" style="display: none;">
-										<h6 style=" color:black"><B>Step#3</B> Click on the types to add properties, methods and to describe thei Implementation.</h6>
-									</div>
-					
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
-										<p>&nbsp;</p>
+
+										
 										<!-- You got the bottom -->
 									</div>
 									<!-- end scrollbar -->
@@ -219,7 +216,9 @@
 						</div>
 						<!-- end vertical-box-row -->
 						<!-- begin wrapper -->
-						<div class="wrapper bg-orange-transparent-5 text-white">
+						<!-- <div class="wrapper bg-orange-transparent-5 text-white"> -->
+						<div class="bg-orange-transparent-5 text-white">
+
 							<!-- Left Column Bottom Box -->
 						</div>
 						<!-- end wrapper -->
@@ -1700,8 +1699,12 @@
 				</select> -->
 
 				<!-- begin #accordion -->
+				<!-- <div style="height: 100px;"> -->
+
 				<div id="accordion-method" class="accordion">
 				</div>
+
+				<!-- </div> -->
 				<!-- end #accordion -->
 
 				</br> 
