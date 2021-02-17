@@ -407,7 +407,7 @@
 			<!-- begin panel -->
 			<div class="panel panel-inverse">
 				<div class="panel-heading">
-					<h4 class="panel-title">Getting Started</h4>
+					<h4 class="panel-title">Get Started</h4>
 					<!-- <div class="panel-heading-btn">
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
@@ -417,7 +417,6 @@
 				</div>
 				<div class="panel-body">
 					Panel Content Here
-
 
 					<!-- <pre id="json" style="font-size: 0.9em; padding-top: 0px;"  class="language-html"> 
 						<code  id="hereCode" class="html language-html">
@@ -431,18 +430,17 @@
 					</pre> -->
 
 					
-					<pre class="language-html"><code class="language-html">&lt;body>
+					<pre class="language-html"><code class="language-html">&lt;head>
 	...
-	jquery?? I don't think we need it
 	&lt;script src="woo.js">&lt;/script>
 	...
-&lt;/body></code></pre>
+&lt;/head></code></pre>
 
 
 <h5>siteName.object/method(args)</h5>
 
 
-<pre style="display: inline;" class="language-javascript"><code class="language-javascript">var playlist = await dailymotion.MusicPlaylist("x706zx")</code></pre>
+<pre style="display: inline;" class="language-javascript"><code class="language-javascript">var playlist = dailymotion.MusicPlaylist("x706zx")</code></pre>
 <button style="display: inline; height:38px" type="button" class="btn btn-grey" onclick="getPlaylist()">Run</button>
 
 <div id="playlistExample" style="display:none">
@@ -477,7 +475,7 @@
 </script>
 
 
-<pre style="display: inline;" class="language-javascript"><code class="language-javascript">var playlistVideos = await playlist.video</code></pre>
+<pre style="display: inline;" class="language-javascript"><code class="language-javascript">var playlistVideos = playlist.video</code></pre>
 <button style="display: inline; height:38px" type="button" class="btn btn-grey" onclick="getVideos()">Run</button>
 
 <div id="videosExample" style="display:none">

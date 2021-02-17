@@ -110,7 +110,10 @@
 								<div class="vertical-box-inner-cell"style="position: relative; overflow: hidden; width: auto; height: 100%;">
 									<!-- begin scrollbar -->
 									<div data-height="100%" class="wrapper">
-										<div id="type-list1" class="col-lg-12">
+										<h6 style="color:black">[ADD A DESCRIPTION ABOUT WHAT WE ARE ASKING THE USER TO DO]</h6>
+										</br>
+
+										<div id="type-list1" class="col-lg-14">
 											<h6 style="color:black"><B>Step#1</B> Choose the name of the website (e.g. youtube)</h6>
 											<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
 												<option selected>Choose site</option>
@@ -118,37 +121,11 @@
 										</div>
 										</br>
 
-<!-- 
-									<div id="step2" class="col-lg-12" style="display: none;">
-										<h5 style=" color:black"><B>Step#2</B> In the chosen webiste, choose the types/objects you are intersted in? (e.g. Playlist, Video, Comment)</h5>
-									</div> -->
 
-									<div id="step3" style="display: none;">
-										<div id="method-list" class="col-lg-12">
-											<h6 style=" color:black"><B>Step#2</B> Are you intertsed in performing an action on the site (e.g. Search for videos on YouTube "Search Action")?</h6>
-											<!-- yes or no, if yes, pick the type you're searching for, if no, pick the type you're interseted in retieving from the site -->
-											<div class="col-md-9">
-												<div class="custom-control custom-radio mb-1" style="display:inline">
-													<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" onchange="methodRadioChecked()">
-													<label style=" color:black" class="custom-control-label" for="customRadio1">Yes &nbsp;&nbsp;</label>
-												</div>
-												<div class="custom-control custom-radio" style="display:inline">
-													<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" onchange="methodRadioChecked()">
-													<label style=" color:black" class="custom-control-label" for="customRadio2">No</label>
-												</div>
-											</div>
-											
+									<div id="step2" style="display: none;">
 
-											<div id="method-site" style="display:none">
-												<p style=" color:black; margin-bottom:5px; margin-top:15px"></p>
-												<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
-													<option value="" selected>Choose Action</option>
-												</select>
-											</div>
-											</br>
-
-											<div id="type-list" style="display:none">
-												<h6 style=" color:black"><B>Step#3</B> Choose the types of data you want to retrieve/manage (e.g. Choose VideoObject to search for videos or get a specifc video)</h6>
+											<div id="type-list" class="col-lg-14">
+												<h6 style=" color:black"><B>Step#2</B> Choose the types of data you want to retrieve/manage (e.g. Choose VideoObject to search for videos or get a specifc video). Types are listed in schema.org <a href="https://schema.org/docs/full.html" target="_blank">https://schema.org/docs/full.html</a></h6>
 												<!-- <p style=" color:black; margin-bottom:5px; margin-top:15px">Choose the types of data you want to retrieve/manage from the site (e.g. Choose VideoObject if you're searching for videos or you want to get a specifc video)</p> -->
 												<select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
 													<option value="" selected>Choose Type</option>
@@ -157,7 +134,7 @@
 	
 											</br>
 	
-											<div id="schema-desc" class="col-lg-12" style="display:none">
+											<div id="schema-desc" class="col-lg-14" style="display:none">
 												<p style="color:black; margin-bottom:0px"><B>About this schema.org type</B></p>
 												<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset;"></a>
 												</br>
@@ -178,33 +155,26 @@
 
 											</br>
 
-											<div id="prop-list" style="display:none">
-												<h6 style=" color:black"><B>Step#4</B> Under each type in middle pane, choose the properties and methods.</h6>
-												<!-- <p style=" color:black; margin-bottom:5px; margin-top:15px">Choose the types of data you want to retrieve/manage from the site (e.g. Choose VideoObject if you're searching for videos or you want to get a specifc video)</p> -->
-												<!-- <select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
-													<option value="" selected>Choose Type</option>
-												</select> -->
+											<div id="prop-list" style="display:none" class="col-lg-14">
+												<h6 style=" color:black"><B>Step#3</B> Under each type in middle pane, choose the properties and methods.</h6>
 											</div>
 	
-											
-											
+
+											<div id="step3" style="display: none;">
+												<div id="method-list" class="col-lg-14">
+													<h6 style=" color:black"><B>Step#4 [Optional]</B> Are you intertsed in performing an action on the site (e.g. Search for videos on YouTube "Search Action")?</h6>
+												
+													<div id="method-site" >
+														<p style=" color:black; margin-bottom:5px; margin-top:15px"></p>
+														<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
+															<option value="" selected>Choose Action</option>
+														</select>
+													</div>
+													</br>
+												</div>
+											</div>
+
 										</div>
-
-									
-
-										<!-- 
-										<div id="property-list" class="col-lg-12">
-											<select id="property-select1" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)">
-													<option value="" selected>Property</option>
-											</select>
-										</div> 
-										</br>
-										-->
-											
-									</div>
-
-
-
 										
 										<!-- You got the bottom -->
 									</div>
@@ -240,7 +210,7 @@
 									<div data-scrollbar="true" data-height="100%" class="wrapper ">
 			
 										<!-- begin panel -->
-										<div class="panel ">
+										<div class="panel" style="height:auto; min-height: 880px;">
 											<div class="panel-heading">
 												<h4 class="panel-title">Describe your Data Model</h4>
 												<div class="panel-heading-btn">
@@ -271,76 +241,23 @@
 														</div>
 													</div>
 
-													<!-- <div class="row" style="padding-right: 0px;">
-														<div class="col-xl-12"> -->
 														<div class="form-group row m-b-50">
 
 															<div id="tableDiv" class="table" style="margin-bottom:-15px">
-																<!-- <table id="types-table" class="table table-borderless">
-																	<thead>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table> -->
 															</div>
 
-															<!-- <div class="menu">
-																<div id="property-div" class="form-group " style="padding:20px; display:none">
-																	<label class="col-form-label ">Property Title:</label></br>
-																	<input id="property-name" type="text" class="form-control" style="height:30px;" placeholder="" />
-	
-																	<label class="col-form-label ">Property Description:</label>
-																	<input id="property-desc" type="text" class="form-control" style="height:30px;" placeholder="" />
-	
-																	<label class="col-form-label ">Property Type:</label>
-																	<select id="properties-type" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px; " onchange="propertyTypeHasBeenSelected(this)">
-																		<option value="string" selected>string</option>
-																		<option value="integer">integer</option>
-																		<option value="date">date</option>
-																		<option value="boolean">boolean</option>
-																		<option value="object">object</option>
-																	</select>
-																	
-																	<div id="property-type" class="col-lg-12" style="display: none;">
-																		<label class="col-form-label ">Select Class:</label>
-																		<select id="type-select2" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-default" onchange="typeHasBeenChosenForProperty(this)">
-																			<option value="" selected>Type</option>
-																		</select>
-																	</div>
-	
-																	</br></br></br>
-																	<a href="javascript:;" class="btn btn-default style="width:100px; height:32px;" id="" onclick="addNewProperty()">Submit</a>
-																</div>
-	
-																<div id="method-div" class="form-group " style="padding:20px; display:none">
-																	<label class="col-form-label ">Method Title:</label></br>
-																	<input id="method-name" type="text" class="form-control" style="height:30px;" placeholder="" />
-	
-																	<label class="col-form-label ">Method Description:</label>
-																	<input id="method-desc" type="text" class="form-control" style="height:30px;" placeholder="" />	
-	
-																	<label class="col-form-label ">Method Input:</label>
-																	<input id="method-params" type="text" class="form-control" style="height:30px;" placeholder="" />
-	
-																	<label class="col-form-label ">Method Output:</label>
-																	<select id="properties" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px; " onchange="">
-																		<option selected>choose properties</option>
-																	</select>
-																	</br></br></br>
-																	<a href="javascript:;" class="btn btn-default style="width:100px; height:32px;" id="" onclick="addNewMethod()">Submit</a>
-																</div>
-	
-	
-															</div> -->
-														
-														<!-- </div> -->
-											
 													</div>
 
-													</br> <p id="impText" style="display:none">&nbsp;Click on the <span style="color:#f90a69;">highlighted nodes</span> above to configure them.</p>
+													<!-- <div id="doneDiv" style="display:none">
+														</br> <p id="" >&nbsp;Click on this button when you're done describing your data model. </p>
+														<a id="doneBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px;" onclick="doneButton()">Done</a>
+													</div> -->
 
-													<a href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px" onclick="saveWoOSchema()">Start Implementation</a>
-												
+													<div id="connectDiv" style="display:none">
+														</br> <p>&nbsp;When you're done, click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the site's API.</p>
+														<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px;" onclick="saveWoOSchema()">Connect to API</a>
+													</div>
+
 												</div>
 												<!-- end panel-body -->
 											</div>
@@ -351,9 +268,9 @@
 								
 
 										<!-- begin panel GETTERS-->
-										<div class="panel" style="display: none;">
+										<div class="panel" style="">
 											<div class="panel-heading">
-												<h4 class="panel-title">Describe the Implementation of the Getters</h4>
+												<h4 class="panel-title">How to use this?</h4>
 												<div class="panel-heading-btn">
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> -->
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
@@ -364,8 +281,58 @@
 											<div class="panel-body">
 												<!-- <p>Panel Content Here</p>  -->
 												<!-- begin panel-body -->
-												<div class="panel-body panel-form">
-													<form class="form-horizontal">
+
+
+										<!-- begin nav-tabs -->
+										<ul class="nav nav-tabs">
+											<li class="nav-item">
+												<a href="#default-tab-1" data-toggle="tab" class="nav-link active">
+													<span class="d-sm-none">Tab 1</span>
+													<span class="d-sm-block d-none">Javascript</span>
+												</a>
+											</li>
+											<li class="nav-item">
+												<a href="#default-tab-2" data-toggle="tab" class="nav-link">
+													<span class="d-sm-none">Tab 2</span>
+													<span class="d-sm-block d-none">Mavo</span>
+												</a>
+											</li>
+											
+										</ul>
+										<!-- end nav-tabs -->
+										<!-- begin tab-content -->
+										<div class="tab-content">
+											<!-- begin tab-pane -->
+											<div class="tab-pane fade active show" id="default-tab-1">
+												<h3 class="m-t-10">Javascript</h3>
+												<div id="mapLabel" style="display: none;">
+													<p>Match the API endpoint's response fields to the object's properties.</p>
+													<div id="redips-drag">
+														<table id="table1" class="table table-bordered">
+															<thead>
+																<tr>
+																<th>API Field</th>
+																<th>Type Property</th>
+																</tr>
+															</thead>
+															<tbody>
+															</tbody>
+														</table>
+													</div> 
+												</div>
+											</div>
+											<!-- end tab-pane -->
+											<!-- begin tab-pane -->
+											<div class="tab-pane fade" id="default-tab-2">
+												<h3 class="m-t-10">Mavo</h3>
+											</div>
+											<!-- end tab-pane -->
+											
+										</div>
+										<!-- end tab-content -->
+
+												<!-- <div class="panel-body panel-form"> -->
+													<!-- <form class="form-horizontal">
 	
 														<div class="form-group row m-b-50">
 															<label class="col-form-label col-xs-1"><h5>Types</h5></label>
@@ -376,101 +343,8 @@
 															</div>
 														</div>
 
-														<div id="">
-
-															<div id="duplicetorT0" class="panel panel-info" data-sortable-id="ui-widget-12" style="display: none;">
-																<div class="panel-heading">
-																	<h4 id="panel-title0" class="panel-title"></h4>
-																	<div class="panel-heading-btn">
-																		<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i>
-																		</a>
-																	</div>
-																	</div>
-																		<div class="panel-body">
-
-																			<div class="form-group row m-b-50">
-																				<label class="col-form-label col-xs-2"><h5>Id</h5></label>
-																				<div class="col-xs-4">
-																					<input type="text" class="form-control" placeholder=""/>
-																				</div>
-																			</div>
-
-																			<div class="form-group row m-b-50">
-																				<label class="col-form-label col-xs-2"><h5>API Endpoint</h5></label>
-																				<div class="col-xs-4">
-																					<select id="apis-url-types" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="urlHasBeenChosen(this)">
-																						<option selected>Choose the API Endpoint</option>
-																					</select>
-																				</div>
-																			</div>
-
-																
-																	
-										
-
-
-																			<a href="javascript:;" data-toggle="modal" class="btn btn-success m-r-5" style="height:35px" onclick="matchFeildsToProperties()">Match</a>
-																			<a href="#modal-without-animation" data-toggle="modal" class="btn btn-default m-r-5" style="height:35px">Submit</a>
-
-																			<!-- 
-																				(1) run the query
-																				(2) get the response fields 
-																				(3) do the matching of fields to properties 
-																			-->
-
-																			<!-- <div class="form-group row m-b-50">
-																				<label class="col-form-label col-xs-2"><h5>Parameters</h5></label>
-																				<div class="col-xs-4">
-																					<select id="method-api-params" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" multiple onchange="urlHasBeenChosen(this)">
-																						<option selected>Look for the API URL</option>
-																					</select>
-																				</div>
-																			</div> -->
-
-
-																		</div>
-															</div>
-
-															<div id="" class="panel panel-info" data-sortable-id="ui-widget-12" style="display: none;">
-																<div class="panel-heading">
-																	<h4 id="" class="panel-title"></h4>
-																	<div class="panel-heading-btn">
-																		<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i>
-																		</a>
-																	</div>
-																</div>
-																<div class="panel-body">
-																	<div class="form-group row m-b-50">
-																		<label class="col-form-label"><h5>Method Name</h5></label>
-																	</div>
-				
-																	<div class="form-group row m-b-50">
-																		<label class="col-form-label col-xs-1"><h5>API Endpoint</h5></label>
-																		<div class="col-xs-4">
-																			<select id="method-api-endpoint" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="urlHasBeenChosen(this)">
-																				<option selected>Look for the API URL</option>
-																			</select>
-																		</div>
-																	</div>
-
-																			
-																	<div class="form-group row m-b-50">
-																		<label class="col-form-label col-xs-1"><h5>Parameters</h5></label>
-																		<div class="col-xs-4">
-																			<select id="method-api-params" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" multiple onchange="urlHasBeenChosen(this)">
-																				<option selected>Look for the API URL</option>
-																			</select>
-																		</div>
-																	</div>
-
-																	<a href="#modal-without-animation" data-toggle="modal" class="btn btn-default m-r-5" style="height:35px">Submit</a>
-
-																</div>
-															</div>
-
-														</div>
-													</form> 
-												</div>
+													</form>  -->
+												<!-- </div> -->
 
 											</div>
 											<!-- end panel-body -->
@@ -1597,86 +1471,194 @@
 			<h5 class = "panel-title">Object Configuration</h5>
 			<hr>
 
+			
 			<!-- <h6>Map schema.org/<span id="typeN"></span> to one of <span id="siteN"></span> API endpoint.</h6>
 			</br> -->
 
 			<div id="type-div">
 
-				<p>Does any of the following list items correspond to this schema.org object? Click on any of them to view their descreption.</p>
-				<!-- API Endpoint -->
-				<!-- <label class="col-form-label">API Endpoint</label> -->
-				<!-- <select id="apis-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosen(this)">
-					<option selected>Choose API Endpoint</option>
-				</select> -->
-
-				<!-- begin #accordion -->
-				<div id="accordion" class="accordion">
-					<!-- begin card -->
-					<!-- <div class="card ">
-						<div class="card-header  pointer-cursor d-flex align-items-center" data-toggle="collapse" data-target="#collapseOne">
-							Collapsible Group Item #1
-						</div>
-						<div id="collapseOne" class="collapse show" data-parent="#accordion">
-							<div class="card-body">
-								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					<!-- begin nav-pills -->
+					<ul class="nav nav-pills mb-2">
+						<li class="nav-item">
+							<a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link active">
+								<span class="d-sm-none">Pills 1</span>
+								<span class="d-sm-block d-none">Get*</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link">
+								<!-- <span class="d-sm-none">Pills 2</span> -->
+								<span class="d-sm-block d-none">Update</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#nav-pills-tab-3" data-toggle="tab" class="nav-link">
+								<!-- <span class="d-sm-none">Pills 3</span> -->
+								<span class="d-sm-block d-none">Create</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#nav-pills-tab-4" data-toggle="tab" class="nav-link">
+								<!-- <span class="d-sm-none">Pills 4</span> -->
+								<span class="d-sm-block d-none">Remove</span>
+							</a>
+						</li>
+						<!-- <li class="nav-item">
+							<a href="#nav-pills-tab-5" data-toggle="tab" class="nav-link">
+								<span class="d-sm-block d-none">Search</span>
+							</a>
+						</li> -->
+						<!-- <li class="nav-item">
+							<a href="#nav-pills-tab-4" data-toggle="tab" class="nav-link">
+								<span class="d-sm-none">Pills 4</span>
+								<span class="d-sm-block d-none">Pills Tab 4</span>
+							</a>
+						</li> -->
+					</ul>
+					<!-- end nav-pills -->
+					<!-- begin tab-content -->
+					<div class="tab-content p-15 rounded bg-white mb-4">
+						<!-- begin tab-pane -->
+						<div class="tab-pane fade active show" id="nav-pills-tab-1">
+							<h4 class="m-t-10">Getting a specific object</h4>
+							<p>Does any of the following list items correspond to this schema.org object? Click on any of them to view their descreption.</p>
+							
+							<!-- API Endpoint -->
+							<!-- <label class="col-form-label">API Endpoint</label> -->
+							<!-- <select id="apis-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosen(this)">
+								<option selected>Choose API Endpoint</option>
+							</select> -->
+			
+							<div style="overflow: scroll; height:260px" class="box">
+								<!-- begin #accordion -->
+								<div id="accordion" class="accordion">
+								</div>
+								<!-- end #accordion -->
 							</div>
-						</div>
-					</div> -->
-					<!-- end card -->
-					<!-- begin card -->
-					<!-- <div class="card">
-						<div class="card-header pointer-cursor d-flex align-items-center collapsed" data-toggle="collapse" data-target="#collapseTwo">
-							 Collapsible Group Item #2
-						</div> 
-						<div id="collapseTwo" class="collapse" data-parent="#accordion">
-							<div class="card-body">
-								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							</br>
+			
+							<!-- <p style="display:inline"> </p> -->
+							<p style="display:inline;">If none of the above API endpoints corresponds to the <B><span id="selected_type"></span></B> object, you can add it in 
+							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+				
+							</br> </br>
+				
+							<!-- ID (list of responses fields)-->
+							<div id="idLabel" style="display: none;">
+								<p>Assign an ID to this object</p>
+								<!-- <label class="col-form-label ">Id</label></br> -->
+								<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed()">
+									<option selected>Choose the ID</option>
+								</select>
 							</div>
+							</br>
+				
+							<!-- Matching Properties -->
+							<!-- <label class="col-form-label ">Match Response Fields to Type Properties</label></br> -->
+							<div id="mapLabel11" style="display: none;">
+								<p>Match the API endpoint's response fields to the object's properties.</p>
+								<div id="redips-drag">
+									<table id="table111" class="table table-bordered">
+										<thead>
+											<tr>
+											<th>API Field</th>
+											<th>Type Property</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div> 
+							</div>
+				
+							</br></br>
+							<a href="javascript:;" class="btn btn-primary" id="" onclick="saveTypeConfig()">Save</a>
+					
 						</div>
-					</div> -->
-					<!-- end card -->
-		
-				</div>
-				<!-- end #accordion -->
-			</br>
+						<!-- end tab-pane -->
+						<!-- begin tab-pane -->
+						<div class="tab-pane fade" id="nav-pills-tab-2">
+							<h4 class="m-t-10">Updating a specific object</h4>
+							<div style="overflow: scroll; height:260px" class="box">
+								<div id="accordion-update" class="accordion">
+								</div>
+							</div>
 
-			<!-- <p style="display:inline"> </p> -->
-			<p style="display:inline;">If none of the above API endpoints corresponds to the <B><span id="selected_type"></span></B> object, you can add it in 
-		    <a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+						</div>
+						<!-- end tab-pane -->
+						<!-- begin tab-pane -->
+						<div class="tab-pane fade" id="nav-pills-tab-3">
+							<h4 class="m-t-10">Creating a new object</h4>
+							<div style="overflow: scroll; height:260px" class="box">
+								<!-- begin #accordion -->
+								<div id="accordion-add" class="accordion">
+								</div>
+								<!-- end #accordion -->
+							</div>
+							</br>
+			
+							<!-- <p style="display:inline"> </p> -->
+							<p style="display:inline;">If none of the above API endpoints corresponds to the <B><span id="selected_type"></span></B> object, you can add it in 
+							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+				
+							</br> </br>
+				
+							<!-- ID (list of responses fields)-->
+							<div id="idLabel-add" style="display: none;">
+								<p>Assign an ID to this object</p>
+								<!-- <label class="col-form-label ">Id</label></br> -->
+								<select id="type-id-add" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
+									<option selected>Choose the ID</option>
+								</select>
+							</div>
+							</br></br>
 
-			</br> </br>
+						<a href="javascript:;" class="btn btn-primary" id="" onclick="saveAddConfig()">Save</a>
 
-			<!-- ID (list of responses fields)-->
-			<div id="idLabel" style="display: none;">
-				<p>Assign an ID to this object</p>
-				<!-- <label class="col-form-label ">Id</label></br> -->
-				<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed()">
-					<option selected>Choose the ID</option>
-				</select>
-			</div>
-			</br>
+						</div>
+						<!-- end tab-pane -->
+						<!-- begin tab-pane -->
+						<div class="tab-pane fade" id="nav-pills-tab-4">
+							<h4 class="m-t-10">Removing a specific object</h4>
+							
+							<div style="overflow: scroll; height:260px" class="box">
+								<!-- begin #accordion -->
+								<div id="accordion-remove" class="accordion">
+								</div>
+								<!-- end #accordion -->
+							</div>
+							</br>
+			
+							<!-- <p style="display:inline"> </p> -->
+							<p style="display:inline;">If none of the above API endpoints corresponds to the <B><span id="selected_type"></span></B> object, you can add it in 
+							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+				
+							</br> </br>
+				
+							<!-- ID (list of responses fields)-->
+							<div id="idLabel-remove" style="display: none;">
+								<p>Assign an ID to this object</p>
+								<!-- <label class="col-form-label ">Id</label></br> -->
+								<select id="type-id-remove" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
+									<option selected>Choose the ID</option>
+								</select>
+							</div>
+							</br></br>
 
-			<!-- Matching Properties -->
-			<!-- <label class="col-form-label ">Match Response Fields to Type Properties</label></br> -->
-			<div id="mapLabel" style="display: none;">
-				<p>Match the API endpoint's response fields to the object's properties.</p>
-				<div id="redips-drag">
-					<table id="table1" class="table table-bordered">
-						<thead>
-							<tr>
-							  <th>API Field</th>
-							  <th>Type Property</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</div> 
-			</div>
+						<a href="javascript:;" class="btn btn-primary" id="" onclick="saveRemoveConfig()">Save</a>
 
-			</br></br>
-			<a href="javascript:;" class="btn btn-primary" id="" onclick="saveTypeConfig()">Save</a>
-	
+						</div>
+						<!-- end tab-pane -->
+
+						<!-- begin tab-pane -->
+						<!-- <div class="tab-pane fade" id="nav-pills-tab-5">
+							<h4 class="m-t-10">Searching for object(s)</h4>
+						</div> -->
+						<!-- end tab-pane -->
+
+					</div>
+					<!-- end tab-content -->
+
 		  </div>
 
 		</div>
@@ -1700,10 +1682,10 @@
 
 				<!-- begin #accordion -->
 				<!-- <div style="height: 100px;"> -->
-
-				<div id="accordion-method" class="accordion">
+				<div style="overflow: scroll; height:260px" class="box">
+					<div id="accordion-method" class="accordion">
+					</div>
 				</div>
-
 				<!-- </div> -->
 				<!-- end #accordion -->
 
@@ -1818,6 +1800,10 @@
 		<link href="assets/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
 		<!-- <link href="jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" /> -->
 		<script src="assets/js/jquery.treetable.js"></script>
+
+
+		<!-- ================== DRAGULA ================== -->
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/$VERSION/dragula.min.js'></script>
 
 
 		<style>

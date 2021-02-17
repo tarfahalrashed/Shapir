@@ -27,6 +27,8 @@ function closeNav() {
 }
 
 
+var clickedType=""
+
 function openNavType(id) {
   closeNav();
   closeNavType();
@@ -34,9 +36,10 @@ function openNavType(id) {
 
   document.getElementById("mySidenavType").style.width = "430px";
   document.getElementById("mySidenavType").style.padding = "20px";
-  //console.log("the name of the property: ", i.getAttribute("id"));
+  // console.log("the name of the type: ", id.getAttribute("id"));
   //document.getElementById('type-name').value= i.getAttribute("id")
   console.log("THE type: ", id);
+  clickedType = id
 
   $("#typeN").text(id);
   $("#siteN").text(site);
@@ -46,15 +49,28 @@ function openNavType(id) {
   // $("#apis-type").empty();
 
   $("#accordion").empty()
+  $("#accordion-add").empty()
+  $("#accordion-remove").empty()
+
   for(var i=0; i<scrapirAPIs.length; ++i){
     var urlText = scrapirAPIs[i].url;
       if(urlText.includes(site)){
         noSpacesTitle = scrapirAPIs[i].title.split(' ').join('');
         $("#accordion").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosen(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion"><div class="card-body" id="cardBody'+noSpacesTitle+'"> </div></div></div>')
-        
         $("#cardBody"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
         $("#cardBody"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
         $("#cardBody"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+       
+        $("#accordion-add").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenAdd(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-add"><div class="card-body" id="cardBodyAdd'+noSpacesTitle+'"> </div></div></div>')
+        $("#cardBodyAdd"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+        $("#cardBodyAdd"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+        $("#cardBodyAdd"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+
+        $("#accordion-remove").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenRemove(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-remove"><div class="card-body" id="cardBodyRemove'+noSpacesTitle+'"> </div></div></div>')
+        $("#cardBodyRemove"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+        $("#cardBodyRemove"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+        $("#cardBodyRemove"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+      
 
         // $("#apis-type").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
       }
@@ -659,7 +675,7 @@ var arrFields=[], wooSchema={}, site="", temp={};
 
 function siteHasBeenChosen(select){
   
-  $("#step3").show();
+  $("#step2").show();
 
   $("#site-objects").empty();
   site = select.options[select.selectedIndex].getAttribute("id");
@@ -801,131 +817,6 @@ function resultTypeHasBeenChosen(select){
   var ttt = select.options[select.selectedIndex].getAttribute("id");
   console.log("resultTypeHasBeenChosen id: ", ttt);
 
-  // propList = temp.objects[ttt].properties;
-
-  // console.log("final response XX", resProplist);
-  // console.log("final properties ", propList);
-
-  // // temp.objects[getter].properties
-
-  // // APPEND the above arrays to the table2
-  // $("#table2 tbody").empty()
-
-  // for(var i=0; i<resProplist.length || i<propList.length ; ++i){
-  //   if(resProplist[i] === undefined){
-  //     var r = ''
-  //   }else{
-  //     var r = resProplist[i]
-  //   }
-
-  //   if(propList[i] === undefined){
-  //     var p = ''
-  //   }else{
-  //     var p = '<div class="redips-drag">'+propList[i]+'</div>'
-  //   }
-    
-  //   $("#table2 tbody").append('<tr><td class="redips-mark">'+r+'</td><td>'+p+'</td></tr>');
-
-  // }
-
-  // /* enable strict mode */
-  // 'use strict';
-
-  //   // create redips container
-  //   let redips = {},
-  //   counter = 0;
-
-  // // redips initialization
-  // //redips.init = function () {
-  //   // reference to the REDIPS.drag library
-  //   let rd = REDIPS.drag;
-  //   // initialization
-  //   rd.init();
-  //   // set mode option to "shift"
-  //   rd.dropMode = 'shift';
-  //   // set animation loop pause
-  //   rd.animation.pause = 20;
-  //   // enable shift.animation
-  //   rd.shift.animation = true;
-  //   // set TD for overflow elements (initially)
-  //   rd.shift.overflow = document.getElementById('overflow');
-  //   // add counter to cloned element name
-  //   // (after cloned DIV element is dropped to the table)
-  //   rd.event.clonedDropped = function () {
-  //     // increase counter
-  //     counter++;
-  //     // append to the DIV element name
-  //     rd.obj.innerHTML += counter;
-  //   };
-  // //};
-
-  // //set current table
-  // redips.setTable = function (e) {
-  //   let value = e.options[e.selectedIndex].value,
-  //     tables = document.getElementById('redips-drag').getElementsByTagName('table'),
-  //     i;
-  //   // loop goes through all fetched tables within drag container
-  //   for (i = 0; i < tables.length; i++) {
-  //     // skip mini table
-  //     if (tables[i].id === 'mini') {
-  //       continue;
-  //     }
-  //     // show selected table
-  //     else if (tables[i].id === value) {
-  //       tables[i].style.display = '';
-  //     }
-  //     // hide all other tables
-  //     else {
-  //       tables[i].style.display = 'none';
-  //     }
-  //   }
-  // };
-
-  // // set shift mode
-  // redips.shiftMode = function (radio) {
-  //   REDIPS.drag.shift.mode = radio.value;
-  // };
-
-  // // set overflow
-  // redips.overflow = function (radio) {
-  //   if (radio.value === 'user') {
-  //     REDIPS.drag.shift.overflow = document.getElementById('overflow');
-  //   }
-  //   else {
-  //     REDIPS.drag.shift.overflow = radio.value;
-  //   }
-  // };
-
-  // // enable / disable animation
-  // redips.shiftAnimation = function (chk) {
-  //   REDIPS.drag.shift.animation = chk.checked;
-  // };
-
-  // // enable / disable shift after element is deleted
-  // redips.shiftAfter = function (chk) {
-  //   REDIPS.drag.shift.after = chk.value;
-  // };
-
-  // // toggles trash_ask parameter defined at the top
-  // redips.toggleConfirm = function (chk) {
-  //   if (chk.checked === true) {
-  //     REDIPS.drag.trash.question = 'Are you sure you want to delete DIV element?';
-  //   }
-  //   else {
-  //     REDIPS.drag.trash.question = null;
-  //   }
-  // };
-
-  // // add onload event listener
-  // if (window.addEventListener) {
-  //   window.addEventListener('load', redips.init, false);
-  // }
-  // else if (window.attachEvent) {
-  //   window.attachEvent('onload', redips.init);
-  // }
-
-
-  // $("#methodMapLabel").show();
 }
 
 
@@ -942,19 +833,19 @@ function urlHasBeenChosen(select){
   $("#idLabel").show()
   
   var resFields;
-  var apiTitle = select.getAttribute("id");//.options[select.selectedIndex].getAttribute("id");
+  var apiTitle = select.getAttribute("id");
   console.log("apiTitle: ", apiTitle);
 
   currentURLGetter = apiTitle
   
-  ob={
-    [currentType]:{
-      "apiEndpoint":apiTitle,
-      "fields":[]
-    }
-  }
+  // ob={
+  //   [currentType]:{
+  //     "apiEndpoint":apiTitle,
+  //     "fields":[]
+  //   }
+  // }
   // ob.currentType.apiEndpoint=apiTitle;
-  console.log("OBJ: ", ob)
+  // console.log("OBJ: ", ob)
 
   firebase.database().ref('/apis/').once('value').then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -989,6 +880,9 @@ function urlHasBeenChosen(select){
           resProplist.push(resFields[i].displayedName);
         }
 
+        $("#type-id").empty();
+        $("#type-id").append('<option selected>Choose the ID</option>')
+
         for(var i=0; i<reqParam.length; ++i){
           if(reqParam[i].displayed && reqParam[i].displayed==true){
             $("#type-id").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
@@ -999,24 +893,21 @@ function urlHasBeenChosen(select){
           }
         }
 
-        console.log("typePropertyType[currentType]: ", typePropertyType[currentType])
+        //change Current type
+        console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
 
         propList=[]
-        for(var j=0; j<typePropertyType[currentType].length; ++j){
-          if(typePropertyType[currentType][j].type=="string" || typePropertyType[currentType][j].type=="integer" || typePropertyType[currentType][j].type=="date" || typePropertyType[currentType][j].type=="boolean"){
+        for(var j=0; j<typePropertyType[clickedType].length; ++j){
+          if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
             //push it
-            propList.push(typePropertyType[currentType][j].name)
+            propList.push(typePropertyType[clickedType][j].name)
           }else{
             //skip it
           }
         }
 
-        // propList = temp.objects[currentType].properties;
-
         console.log("final response ", resProplist);
         console.log("final properties ", propList);
-
-        // temp.objects[getter].properties
 
         // APPEND the above arrays to the table1
         $("#table1 tbody").empty()
@@ -1173,6 +1064,209 @@ function urlHasBeenChosen(select){
   
 }
 
+
+
+function urlHasBeenChosenAdd(select){
+
+  $("#idLabel-add").show()
+  
+  var resFields;
+  var apiTitle = select.getAttribute("id");
+  console.log("apiTitle: ", apiTitle);
+
+  currentURLGetter = apiTitle;
+  
+  ob={
+    [currentType]:{
+      "apiEndpoint":apiTitle,
+      "fields":[]
+    }
+  }
+  console.log("OBJ: ", ob)
+
+  firebase.database().ref('/apis/').once('value').then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.val().title==apiTitle){
+        console.log("par: ",childSnapshot.val().parameters) //choose which one you want to send as parameter to the function
+        console.log("res: ", childSnapshot.val().responses)
+        resFields = childSnapshot.val().responses;
+        reqParam  = childSnapshot.val().parameters;
+        resProplist=[]
+        if(resFields){
+        for(var i=0; i<resFields.length; ++i){
+          currentSimScore = 0;
+          mostSimilarProp=""
+          resProplist.push(resFields[i].displayedName);
+        }
+      }
+
+
+      $("#type-id-add").empty();
+      $("#type-id-add").append('<option selected>Choose the ID</option>')
+
+      if(reqParam){
+        for(var i=0; i<reqParam.length; ++i){
+          if(reqParam[i].displayed && reqParam[i].displayed==true){
+            $("#type-id-add").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+          }else if(!reqParam[i].displayed){
+            $("#type-id-add").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+          }else{
+            // do nothing
+          }
+        }
+      }
+
+        //change Current type
+        console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
+
+        propList=[]
+        for(var j=0; j<typePropertyType[clickedType].length; ++j){
+          if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
+            //push it
+            propList.push(typePropertyType[clickedType][j].name)
+          }else{
+            //skip it
+          }
+        }
+
+        console.log("final response ", resProplist);
+        console.log("final properties ", propList);
+
+        //for each response field, find the most similar property and show them both in a row in a table table-response
+        if(resFields){
+          for(var i=0; i<resFields.length; ++i){
+            for(var j=0; j<propertyList.length; ++j){
+              $("#select-"+resFields[i].displayedName).append("<option value='"+propertyList[j]+"'>"+propertyList[j]+"</option>");
+            }
+          }
+        }
+        
+        $("#request-parameters").show();
+        for(var i=0; i<reqParam.length; ++i){
+          if(reqParam[i].displayedName && reqParam[i].displayedName!=""){
+            $("#select-parameter").append("<option id='"+reqParam[i].displayedName+"'>"+reqParam[i].displayedName+"</option>");
+          }
+        }
+      }
+    });
+  });
+
+  setTimeout(() => {
+    jQuery('.selectpicker').selectpicker('refresh');
+  }, 500);
+  
+}
+
+
+
+
+function urlHasBeenChosenRemove(select){
+
+  $("#idLabel-remove").show()
+  
+  var resFields;
+  var apiTitle = select.getAttribute("id");
+  console.log("apiTitle: ", apiTitle);
+
+  currentURLGetter = apiTitle
+  
+  // ob={
+  //   [currentType]:{
+  //     "apiEndpoint":apiTitle,
+  //     "fields":[]
+  //   }
+  // }
+  // ob.currentType.apiEndpoint=apiTitle;
+  // console.log("OBJ: ", ob)
+
+  firebase.database().ref('/apis/').once('value').then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.val().title==apiTitle){
+        console.log("par: ",childSnapshot.val().parameters) //choose which one you want to send as parameter to the function
+        console.log("res: ", childSnapshot.val().responses)
+        resFields = childSnapshot.val().responses;
+        reqParam  = childSnapshot.val().parameters;
+        //Show a dropdown menu from the response fields to map them to the type properties
+        // var props= allProperties;
+        // var currentSimScore = 0;
+        // var mostSimilarProp=""
+        resProplist=[]
+        if(resFields){
+        for(var i=0; i<resFields.length; ++i){
+          currentSimScore = 0;
+          mostSimilarProp=""
+          resProplist.push(resFields[i].displayedName);
+        }
+      }
+
+      $("#type-id-remove").empty();
+      $("#type-id-remove").append('<option selected>Choose the ID</option>')
+
+      if(reqParam){
+        for(var i=0; i<reqParam.length; ++i){
+          if(reqParam[i].displayed && reqParam[i].displayed==true){
+            $("#type-id-remove").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+          }else if(!reqParam[i].displayed){
+            $("#type-id-remove").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+          }else{
+            // do nothing
+          }
+        }
+      }
+
+        //change Current type
+        console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
+
+        propList=[]
+        for(var j=0; j<typePropertyType[clickedType].length; ++j){
+          if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
+            //push it
+            propList.push(typePropertyType[clickedType][j].name)
+          }else{
+            //skip it
+          }
+        }
+
+        // propList = temp.objects[currentType].properties;
+
+        console.log("final response ", resProplist);
+        console.log("final properties ", propList);
+
+        // temp.objects[getter].properties
+
+        // $("#response-fields").show();
+        // for(var i=0; i<resFields.length; ++i){
+        //   $("#select-response").append("<option id='"+resFields[i].displayedName+"'>"+resFields[i].displayedName+"</option>");
+        //   $("#table-response tbody").append('<tr id="'+resFields[i].displayedName+'"><td>'+resFields[i].displayedName+'</td>  <td><select id="select-'+resFields[i].displayedName+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange=""></select></td>  <td>X</td></tr>');
+        // }
+
+        //for each response field, find the most similar property and show them both in a row in a table table-response
+        if(resFields){
+          for(var i=0; i<resFields.length; ++i){
+            for(var j=0; j<propertyList.length; ++j){
+              $("#select-"+resFields[i].displayedName).append("<option value='"+propertyList[j]+"'>"+propertyList[j]+"</option>");
+            }
+          }
+        }
+        
+        $("#request-parameters").show();
+        for(var i=0; i<reqParam.length; ++i){
+          if(reqParam[i].displayedName && reqParam[i].displayedName!=""){
+            $("#select-parameter").append("<option id='"+reqParam[i].displayedName+"'>"+reqParam[i].displayedName+"</option>");
+          }
+        }
+      }
+    });
+  });
+
+  setTimeout(() => {
+    jQuery('.selectpicker').selectpicker('refresh');
+  }, 500);
+  
+}
+
+
+
 var urlAPI;
 
 function urlHasBeenChosenForMethod(select){
@@ -1199,18 +1293,14 @@ function urlHasBeenChosenForMethod(select){
           resProplist.push(resFields[i].displayedName);
         }
 
-        // for(var i=0; i<reqParam.length; ++i){
-        //   $("#type-id").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
-        // }
 
-
-        console.log("typePropertyType[currentType]: ", typePropertyType[currentType])
+        console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
 
         propList=[]
-        for(var j=0; j<typePropertyType[currentType].length; ++j){
-          if(typePropertyType[currentType][j].type=="string" || typePropertyType[currentType][j].type=="integer" || typePropertyType[currentType][j].type=="date" || typePropertyType[currentType][j].type=="boolean"){
+        for(var j=0; j<typePropertyType[clickedType].length; ++j){
+          if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
             //push it
-            propList.push(typePropertyType[currentType][j].name)
+            propList.push(typePropertyType[clickedType][j].name)
           }else{
             //skip it
           }
@@ -1260,9 +1350,9 @@ function saveTypeConfig(){
   var selector = document.getElementById("type-id");
   var idValue = selector[selector.selectedIndex].value;
 
-  temp.objects[currentType].construct.self.endpoint= currentURLGetter; //get the value of the chosen API
-  temp.objects[currentType].construct.self.id= idValue; //get the value of the chosen ID
-  temp.objects[currentType].properties=[]
+  temp.objects[clickedType].construct.self.endpoint= currentURLGetter; //get the value of the chosen API
+  temp.objects[clickedType].construct.self.id= idValue; //get the value of the chosen ID
+  temp.objects[clickedType].properties=[]
 
   var table = document.getElementById("table1");
   for (var i = 0, row; row = table.rows[i]; i++) {
@@ -1274,7 +1364,7 @@ function saveTypeConfig(){
       var f=row.cells[0].textContent
       var p=row.cells[1].getElementsByClassName('redips-drag').item(0).innerHTML
       
-      temp.objects[currentType].properties.push({
+      temp.objects[clickedType].properties.push({
         field:f,
         property:p
       })
@@ -1282,12 +1372,34 @@ function saveTypeConfig(){
  
   }
 
-  console.log("temp after save", temp.objects[currentType]);
+  console.log("temp after save", temp.objects[clickedType]);
   // save properties -> .properties[]
   // get object->properties->push({field:..., property:... })
   // if property of type object, then object->properties->push({type:..., property:... })
 }
 
+
+
+function saveAddConfig(){
+  // var selector = document.getElementById("type-id-add");
+  // var idValue = selector[selector.selectedIndex].value;
+  temp.objects[clickedType].add.endpoint= currentURLGetter; //get the value of the chosen API
+  // temp.objects[clickedType].remove.id= idValue; //get the value of the chosen ID
+
+  console.log("temp after save", temp.objects[clickedType]);
+
+}
+
+
+function saveRemoveConfig(){
+  var selector = document.getElementById("type-id-remove");
+  var idValue = selector[selector.selectedIndex].value;
+  temp.objects[clickedType].remove.endpoint= currentURLGetter; //get the value of the chosen API
+  temp.objects[clickedType].remove.id= idValue; //get the value of the chosen ID
+
+  console.log("temp after save", temp.objects[clickedType]);
+
+}
 
 
 function saveMethodConfig(){
@@ -1390,11 +1502,19 @@ function methodRadioChecked(){
   }
 }
 
+
+// function doneButton(){
+//   $("#connectDiv").show()
+//   $("#doneDiv").hide()
+// }
+
 var firstType=false, secondType=false, typeList=[], tempObj={}, tempAct={}, tempObjAct={}, gettersList=[];
 
 function typeHasBeenChosen(select){
 
   $("#prop-list").show();
+  $("#step3").show();
+  $("#connectDiv").show()
 
   allProperties=[]
   properties=[]
@@ -1414,7 +1534,7 @@ function typeHasBeenChosen(select){
   typePropertyType[currentType]=[];
 
   // tempObj={}
-  tempObj[type]={"properties":[], "construct":{"self":{"endpoint":"", "id":""}}, "methods":[]}
+  tempObj[type]={"properties":[], "construct":{"self":{"endpoint":"", "id":""}}, "add":{"endpoint":""}, "remove":{"endpoint":"", "id":""}, "setters":[], "methods":[]}
 
   firebase.database().ref('/schema/').once('value').then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) { 
@@ -1556,7 +1676,6 @@ function saveWoOSchema(){
     }
   }
 
-  $("#impText").show();
   
   //Populate available objects 
   $("#method-result-type").empty();
@@ -2103,7 +2222,7 @@ function siteMethodHasBeenChosen(select){
   $("#schema-"+type).empty()
   $("#property-"+type).empty()
 
-  $("#type-list").show();
+  // $("#type-list").show();
 
   var method = select.options[select.selectedIndex].getAttribute("value");
 
