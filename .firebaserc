@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "superapi-52bc2": {
+      "hosting": {
+        "shapir": [
+          "shapir-domain"
+        ]
+      }
+    }
+  }
+}
