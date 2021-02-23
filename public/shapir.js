@@ -1,14 +1,6 @@
+import{config}from"../firebase-config.js";
+
 function shapir(){
-    
-    var config = {
-        apiKey: "AIzaSyBaJakjjAHw0wvBtELAtDLPmhq1piGWwqQ", 
-        authDomain: "superapi-52bc2.firebaseapp.com",
-        databaseURL: "https://superapi-52bc2.firebaseio.com",
-        projectId: "superapi-52bc2",
-        storageBucket: "superapi-52bc2.appspot.com",
-        messagingSenderId: "859121565515"
-    };
-    
     firebase.initializeApp(config);
 
     var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [];
@@ -17,7 +9,6 @@ function shapir(){
     .once('value')
     .then(snapshot=> {
         snapshot.forEach( childSnapshot=> { 
-            // console.log("key sites: ", childSnapshot.key)
 
             if(childSnapshot.key!= "youtube"){
                 var site = childSnapshot.key;    
@@ -28,8 +19,6 @@ function shapir(){
 
                         let siteKey = childSnapshot.key;
                         let siteVal  = childSnapshot.val();
-                        // console.log("type: ", siteKey)
-                        // console.log("val: ", siteVal)
                         
                     if(siteKey == "objects"){
                         for (const [key, value] of Object.entries(siteVal)) {
