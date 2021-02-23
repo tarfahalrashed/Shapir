@@ -66,4 +66,4 @@ node_modules/
 .env
 
 # web
-./firebase-config.js
+./public/firebase-config.js
