@@ -66,4 +66,4 @@ node_modules/
 .env
 
 # web
-./public/firebase-config.js
+./public/Mavo/firebase-config.js
