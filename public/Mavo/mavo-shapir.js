@@ -49,15 +49,13 @@ Mavo.Backend.register($.Class({
                 .then(() => shapir()) //I added this line to load all the global functions from Shapir library 
                 .then(() => this.get())
                 .then(response => {
-					if (typeof response != "string") {
-						// Backend did the parsing, we're done here
-						return response;
-					}
-	
+                    if (typeof response != "string") {
+                        return response;
+                    }
 					response = response.replace(/^\ufeff/, ""); // Remove Unicode BOM
 			
-					return this.format.parse(response);
-				});
+                    return this.format.parse(response);
+                });
     },
 
     // Low-level saving code.
