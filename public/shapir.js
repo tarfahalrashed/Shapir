@@ -1,5 +1,14 @@
 function shapir(){
     
+    var config = {
+        apiKey: "AIzaSyBaJakjjAHw0wvBtELAtDLPmhq1piGWwqQ", 
+        authDomain: "superapi-52bc2.firebaseapp.com",
+        databaseURL: "https://superapi-52bc2.firebaseio.com",
+        projectId: "superapi-52bc2",
+        storageBucket: "superapi-52bc2.appspot.com",
+        messagingSenderId: "859121565515"
+    };
+    
     firebase.initializeApp(config);
 
     var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [];
