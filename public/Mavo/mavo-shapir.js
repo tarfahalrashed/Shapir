@@ -28,7 +28,7 @@ Mavo.Backend.register($.Class({
         this.action     = this.mavo.element.getAttribute("mv-source-action");
         this.params     = this.mavo.element.getAttribute("mv-source-params");
         this.attributes = this.mavo.element.attributes
-	},
+    },
 
     // Low-level functions for reading data. You don’t need to implement this
     // if the mv-storage/mv-source value is a URL and reading the data is just
@@ -52,8 +52,7 @@ Mavo.Backend.register($.Class({
                     if (typeof response != "string") {
                         return response;
                     }
-					response = response.replace(/^\ufeff/, ""); // Remove Unicode BOM
-			
+                    response = response.replace(/^\ufeff/, ""); // Remove Unicode BOM
                     return this.format.parse(response);
                 });
     },
