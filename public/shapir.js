@@ -1,17 +1,8 @@
 function shapir(){
     
-    var config = {
-        apiKey: "AIzaSyBaJakjjAHw0wvBtELAtDLPmhq1piGWwqQ", 
-        authDomain: "superapi-52bc2.firebaseapp.com",
-        databaseURL: "https://superapi-52bc2.firebaseio.com",
-        projectId: "superapi-52bc2",
-        storageBucket: "superapi-52bc2.appspot.com",
-        messagingSenderId: "859121565515"
-    };
-    
     firebase.initializeApp(config);
 
-    var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[]; currentType="", results = [];
+    var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [];
     
     return firebase.database().ref('/abstractions')
     .once('value')
@@ -89,7 +80,7 @@ function shapir(){
                                 }
                             }
 
-                            for(f in properties){
+                            for(var f=0; f< properties.length; ++f){
                                 if(properties[f].field != undefined){
                                     fields.push(properties[f].property)
                                 }
@@ -220,7 +211,7 @@ function shapir(){
                                             var setParams = setters[s].params;
                                             var idd = setters[s].id;
                                             //get the schema.org property mapped to this field
-                                            for(f in properties){
+                                            for(var f=0; f< properties.length; ++f){
                                                 if(properties[f].field == field){
                                                     prop = properties[f].property;
                                                 }
@@ -315,7 +306,7 @@ function shapir(){
                                         }
 
                                         //***************************** METHODS *********************************/
-                                        for(m in methods){
+                                        for(var m=0;  m<methods.length; ++m){
                                             var mName = methods[m].name;
                                             var mEndpoint = methods[m].endpoint;
                                             var mParams = methods[m].params;
@@ -501,7 +492,7 @@ function shapir(){
 
                                     //remove the fields that are not in the class
                                     var keys = Object.keys(o[0])
-                                    for(k in keys){
+                                    for(var k=0; k<keys.length; ++k){
                                         if(!fields.includes(keys[k])){
                                             o.forEach(function(ob) {
                                                 delete ob[keys[k]];
@@ -561,7 +552,7 @@ function shapir(){
                                         var setParams = setters[s].params;
                                         var idd = setters[s].id;
                                         //get the schema.org property mapped to this field
-                                        for(f in properties){
+                                        for(var f=0; f< properties.length; ++f){
                                             if(properties[f].field == field){
                                                 prop = properties[f].property;
                                             }
@@ -656,7 +647,7 @@ function shapir(){
                                     }
 
                                     //***************************** METHODS *********************************/
-                                    for(m in methods){
+                                    for(var m=0;  m<methods.length; ++m){
                                         // console.log("methods[m]: ", methods[m].name)
                                         var mName = methods[m].name;
                                         var mEndpoint = methods[m].endpoint;
@@ -833,7 +824,7 @@ function shapir(){
 
                                     //remove the fields that are not in the class
                                     var keys = Object.keys(o)
-                                    for(k in keys){
+                                    for(var k=0; k<keys.length; ++k){
                                         if(!fields.includes(keys[k])){
                                             delete o[keys[k]];
                                         }
@@ -849,7 +840,8 @@ function shapir(){
                     }//if objects
 
                     if(siteKey == "functions"){
-                        for (v in siteVal) {
+                        for (var v=0; v< siteVal.length; ++v) {
+                            // console.log("siteVal[v]: ", siteVal[v])
                             let funcName = siteVal[v].name;
                             //var mName = methods[m].name;
                             let mEndpoint = siteVal[v].endpoint;
@@ -906,7 +898,7 @@ function shapir(){
                                 //     mParamList+=ob[mParams[0]]
                                 // }
 
-                                for(f in properties){
+                                for(var f=0; f< properties.length; ++f){
                                     if(properties[f].field != undefined){
                                         fields.push(properties[f].property)
                                     }
@@ -1191,7 +1183,7 @@ function shapir(){
                                             // }}
                 
                                             //***************************** METHODS *********************************/
-                                            for(m in methods){
+                                            for(var m=0;  m<methods.length; ++m){
                                                 var mName = methods[m].name;
                                                 var mEndpoint = methods[m].endpoint;
                                                 var mParams = methods[m].params;
@@ -1367,7 +1359,7 @@ function shapir(){
                 
                                         //remove the fields that are not in the class
                                         var keys = Object.keys(o[0])
-                                        for(k in keys){
+                                        for(var k=0; k<keys.length; ++k){
                                             if(!fields.includes(keys[k])){
                                                 o.forEach(function(ob) {
                                                     delete ob[keys[k]];
@@ -1418,7 +1410,7 @@ function shapir(){
                                             var setParams = setters[s].params;
                                             var idd = setters[s].id;
                                             //get the schema.org property mapped to this field
-                                            for(f in properties){
+                                            for(var f=0; f< properties.length; ++f){
                                                 if(properties[f].field == field){
                                                     prop = properties[f].property;
                                                 }
@@ -1513,7 +1505,7 @@ function shapir(){
                                         }
                 
                                         //***************************** METHODS *********************************/
-                                        for(m in methods){
+                                        for(var m=0;  m<methods.length; ++m){
                                             // console.log("methods[m]: ", methods[m].name)
                                             var mName = methods[m].name;
                                             var mEndpoint = methods[m].endpoint;
@@ -1675,7 +1667,7 @@ function shapir(){
                 
                                         //remove the fields that are not in the class
                                         var keys = Object.keys(o)
-                                        for(k in keys){
+                                        for(var k=0; k<keys.length; ++k){
                                             if(!fields.includes(keys[k])){
                                                 delete o[keys[k]];
                                             }
@@ -1735,7 +1727,7 @@ function shapir(){
                                     }
                                 }
                 
-                                for(f in properties){
+                                for(var f=0; f< properties.length; ++f){
                                     if(properties[f].field != undefined){
                                         fields.push(properties[f].property)
                                     }
@@ -1866,7 +1858,7 @@ function shapir(){
                                                 var setParams = setters[s].params;
                                                 var idd = setters[s].id;
                                                 //get the schema.org property mapped to this field
-                                                for(f in properties){
+                                                for(var f=0; f< properties.length; ++f){
                                                     if(properties[f].field == field){
                                                         prop = properties[f].property;
                                                     }
@@ -1961,7 +1953,7 @@ function shapir(){
                                             }
                 
                                             //***************************** METHODS *********************************/
-                                            for(m in methods){
+                                            for(var m=0;  m<methods.length; ++m){
                                                 var mName = methods[m].name;
                                                 var mEndpoint = methods[m].endpoint;
                                                 var mParams = methods[m].params;
@@ -2137,7 +2129,7 @@ function shapir(){
                 
                                         //remove the fields that are not in the class
                                         var keys = Object.keys(o[0])
-                                        for(k in keys){
+                                        for(var k=0; k<keys.length; ++k){
                                             if(!fields.includes(keys[k])){
                                                 o.forEach(function(ob) {
                                                     delete ob[keys[k]];
@@ -2197,7 +2189,7 @@ function shapir(){
                                             var setParams = setters[s].params;
                                             var idd = setters[s].id;
                                             //get the schema.org property mapped to this field
-                                            for(f in properties){
+                                            for(var f=0; f< properties.length; ++f){
                                                 if(properties[f].field == field){
                                                     prop = properties[f].property;
                                                 }
@@ -2292,7 +2284,7 @@ function shapir(){
                                         }
                 
                                         //***************************** METHODS *********************************/
-                                        for(m in methods){
+                                        for(var m=0;  m<methods.length; ++m){
                                             // console.log("methods[m]: ", methods[m].name)
                                             var mName = methods[m].name;
                                             var mEndpoint = methods[m].endpoint;
@@ -2469,7 +2461,7 @@ function shapir(){
                 
                                         //remove the fields that are not in the class
                                         var keys = Object.keys(o)
-                                        for(k in keys){
+                                        for(var k=0; k<keys.length; ++k){
                                             if(!fields.includes(keys[k])){
                                                 delete o[keys[k]];
                                             }
