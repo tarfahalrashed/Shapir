@@ -103,21 +103,23 @@
 						<!-- </div> -->
 						<!-- end wrapper -->
 						<!-- begin vertical-box-row -->
-						<div class="vertical-box-row bg-orange-transparent-5 text-white">
+						<div class="vertical-box-row bg-orange-transparent-4 text-black">
 							<!-- begin vertical-box-cell -->
 							<div class="vertical-box-cell" >
 								<!-- begin vertical-box-inner-cell -->
 								<div class="vertical-box-inner-cell"style="position: relative; overflow: hidden; width: auto; height: 100%;">
 									<!-- begin scrollbar -->
 									<div data-height="100%" class="wrapper">
-										<h6 style="color:black">[ADD A DESCRIPTION ABOUT WHAT WE ARE ASKING THE USER TO DO]</h6>
+										<!-- <h6 style="color:black">[ADD A DESCRIPTION ABOUT WHAT WE ARE ASKING THE USER TO DO]</h6> -->
 										</br>
 
 										<div id="type-list1" class="col-lg-14">
-											<h6 style="color:black"><B>Step#1</B> Choose the name of the website (e.g. youtube)</h6>
+											<h5><B>Step1.</B> Choose the name of the website</h5>
+											<p > (e.g. youtube)</p>
 											<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
-												<option selected>Choose site</option>
+												<option selected>Choose website name</option>
 											</select>
+											<hr>
 										</div>
 										</br>
 
@@ -125,8 +127,8 @@
 									<div id="step2" style="display: none;">
 
 											<div id="type-list" class="col-lg-14">
-												<h6 style=" color:black"><B>Step#2</B> Choose the types of data you want to retrieve/manage (e.g. Choose VideoObject to search for videos or get a specifc video). Types are listed in schema.org <a href="https://schema.org/docs/full.html" target="_blank">https://schema.org/docs/full.html</a></h6>
-												<!-- <p style=" color:black; margin-bottom:5px; margin-top:15px">Choose the types of data you want to retrieve/manage from the site (e.g. Choose VideoObject if you're searching for videos or you want to get a specifc video)</p> -->
+												<h5 style=" color:black"><B>Step2.</B> Choose the types of data you want to retrieve/manage in this site. Check the <a href="https://schema.org/docs/full.html" target="_blank">list of types</a> in schema.org</h5> 
+												<p style="color:black;">(e.g. Choose VideoObject to search for videos or get a specific video from youtube). </p>
 												<select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
 													<option value="" selected>Choose Type</option>
 												</select>
@@ -134,38 +136,48 @@
 	
 											</br>
 	
-											<div id="schema-desc" class="col-lg-14" style="display:none">
-												<p style="color:black; margin-bottom:0px"><B>About this schema.org type</B></p>
-												<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset;"></a>
-												</br>
-	
-												<!-- <p style="color:black; margin-bottom:0px"><B>Schema.org Descreption</B></p> -->
-												<p id="schemaDesc" style="color:black; margin-bottom:0px"></p>
-												</br>
-	
+											<div id="schema-desc" class="col-lg-14" style="padding-left:15px; display:none">
+										
+												<div style="padding-bottom: 5px;">
+													<p style="display: inline; ">Type Page:</p>
+													<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset; display: inline; padding-bottom: 10px;"></a>
+												</div>
+											
+												<div style="padding-bottom: 5px;">
+													<p style="display: inline; ">Type Descreption:</p>
+													<p id="schemaDesc" style="display: inline;"></p>
+												</div>
+											
 												<div id="jsonld-schema" style="display: none;">
-													<p style="color:black; margin-bottom:0px"><B>Usage example encoded as JSON-LD</B></p>
-													<!-- <div id="jsoneditor2" class="jsoneditor22"></div> -->
-													<pre id="json" style="font-size: 0.9em; padding-top: 0px; height: 320px;"> 
+													<p style="display: inline;">Usage example encoded as JSON-LD</p>
+													<a id="exampleLink" href="javascript:;" onclick="showOrHideExample()" style="font-weight: bold; font-style: unset; display: inline; padding-bottom: 10px;">(show)</a>
+
+													<pre id="json" style="font-size: 0.9em; padding-top: 0px; height: 320px; display: none;"> 
 														<code  id="hereCode" class="language-json load">
 														</code>
 													</pre>
 												</div>
+									
+
+												<hr>
 											</div>
+											
 
 											</br>
 
 											<div id="prop-list" style="display:none" class="col-lg-14">
-												<h6 style=" color:black"><B>Step#3</B> Under each type in middle pane, choose the properties and methods.</h6>
+												<h5 style=" color:black"><B>Step3.</B> Under each type in middle pane, choose the properties and methods.</h5>
+												<p >(e.g. For VideoObject type, you can choose the <I>name</I>, <I>description</I> and <I>url</I>)</p>
+												<hr>
 											</div>
 	
 
 											<div id="step3" style="display: none;">
 												<div id="method-list" class="col-lg-14">
-													<h6 style=" color:black"><B>Step#4 [Optional]</B> Are you intertsed in performing an action on the site (e.g. Search for videos on YouTube "Search Action")?</h6>
+													<h5 style=" color:black"><B>Step4. [Optional]</B> Are you intertsed in performing an action on the site (e.g. Search for videos on YouTube "Search Action")?</h5>
 												
 													<div id="method-site" >
-														<p style=" color:black; margin-bottom:5px; margin-top:15px"></p>
+														<p style=" margin-bottom:5px; margin-top:15px"></p>
 														<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
 															<option value="" selected>Choose Action</option>
 														</select>
@@ -209,10 +221,14 @@
 									<!-- begin scrollbar -->
 									<div data-scrollbar="true" data-height="100%" class="wrapper ">
 			
+									  <!-- <h1 class="page-header">Page with Wide Sidebar <small>header small text goes here...</small></h1> -->
+
 										<!-- begin panel -->
-										<div class="panel" ><!--style="height:auto; min-height: 880px;"-->
+										<div class="panel" style="height:auto; min-height: 880px;">
 											<div class="panel-heading">
-												<h4 class="panel-title">Describe your Data Model</h4>
+												<!-- <img src="main_assets/img/icon/number2.svg" width="30px" style="padding-bottom: 10px;"/></br> -->
+
+												<!-- <h4 class="panel-title">Data Model?? What should I call this middle pane?</h4> -->
 												<div class="panel-heading-btn">
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> -->
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
@@ -221,41 +237,34 @@
 												</div>
 											</div>
 											<div class="panel-body">
-												<p>Follow the steps on the left to build your data model.</p>
+												<!-- <p>Follow the steps on the left to build your data model.</p> -->
 							
 												<!-- begin panel-body -->
 												<div class="panel-body panel-form">
 												
-													<div id="site-objects" style="display: none;"> </div>
-												</br></br>
+													<!-- <div id="site-objects" style="display: none;"> </div>
+													</br></br> -->
 
-													<div class="form-group row m-b-50">
-														<!-- ADD TABLE HERE -->
-														<div id="tableSiteDiv" class="table" style="margin-bottom:-15px">
+													<div class="form-group">
+														<h5 style="display: none;" id="desc-site">Descrbe the data model of <span id="siteN"></span> and connect it to its API</h5>
+														<!-- <div id="tableSiteDiv" class="table" style="margin-bottom:-15px">
 															<table id="site-table" class="table table-borderless">
-																<thead>
-																</thead>
 																<tbody>
 																</tbody>
 															</table>
+														</div> -->
+													</div>
+
+													<div class="form-group row m-b-50">
+														<div id="tableDiv" class="table" style="margin-bottom:-15px">
 														</div>
 													</div>
 
-														<div class="form-group row m-b-50">
-
-															<div id="tableDiv" class="table" style="margin-bottom:-15px">
-															</div>
-
-													</div>
-
-													<!-- <div id="doneDiv" style="display:none">
-														</br> <p id="" >&nbsp;Click on this button when you're done describing your data model. </p>
-														<a id="doneBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px;" onclick="doneButton()">Done</a>
-													</div> -->
-
 													<div id="connectDiv" style="display:none">
-														</br> <p>&nbsp;When you're done, click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the site's API.</p>
-														<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px;" onclick="saveWoOSchema()">Connect to API</a>
+														</br> 
+														<h5 id="beforeDone">&nbsp;<B>Step4.</B>Connect to the API when you are done describing your data model. </h5>
+														<h5 id="afterDone" style="display:none">&nbsp;<B>Step4. </B> Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</h5>
+														<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a>
 													</div>
 
 												</div>
@@ -1259,8 +1268,8 @@
 		<!-- end #content -->
 		
 		<!-- begin theme-panel -->
-		<!-- <div class="theme-panel theme-panel-lg">
-			<a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a>
+		<div class="theme-panel theme-panel-lg">
+			<!-- <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a> -->
 			<div class="theme-panel-content">
 				<h5>App Settings</h5><ul class="theme-list clearfix">
 					<li><a href="javascript:;" class="bg-red" data-theme="red" data-theme-file="assets/css/default/theme/red.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a></li>
@@ -1269,12 +1278,12 @@
 					<li><a href="javascript:;" class="bg-yellow" data-theme="yellow" data-theme-file="assets/css/default/theme/yellow.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Yellow">&nbsp;</a></li>
 					<li><a href="javascript:;" class="bg-lime" data-theme="lime" data-theme-file="assets/css/default/theme/lime.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Lime">&nbsp;</a></li>
 					<li><a href="javascript:;" class="bg-green" data-theme="green" data-theme-file="assets/css/default/theme/green.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Green">&nbsp;</a></li>
-					<li class="active"><a href="javascript:;" class="bg-teal" data-theme="default" data-theme-file="" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Default">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-teal" data-theme="default" data-theme-file="" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Default">&nbsp;</a></li>
 					<li><a href="javascript:;" class="bg-aqua" data-theme="aqua" data-theme-file="assets/css/default/theme/aqua.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Aqua">&nbsp;</a></li>
 					<li><a href="javascript:;" class="bg-blue" data-theme="blue" data-theme-file="assets/css/default/theme/blue.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Blue">&nbsp;</a></li>
 					<li><a href="javascript:;" class="bg-purple" data-theme="purple" data-theme-file="assets/css/default/theme/purple.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Purple">&nbsp;</a></li>
 					<li><a href="javascript:;" class="bg-indigo" data-theme="indigo" data-theme-file="assets/css/default/theme/indigo.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Indigo">&nbsp;</a></li>
-					<li><a href="javascript:;" class="bg-black" data-theme="black" data-theme-file="assets/css/default/theme/black.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
+					<li class="active"><a href="javascript:;" class="bg-black" data-theme="black" data-theme-file="assets/css/default/theme/black.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
 				</ul>
 				<div class="divider"></div>
 				<div class="row m-t-10">
@@ -1405,7 +1414,7 @@
 					</div>
 				</div>
 			</div>
-		</div> -->
+		</div> 
 		<!-- end theme-panel -->
 		
 		<!-- begin scroll to top btn -->
@@ -1422,19 +1431,24 @@
 			<hr>
 
 			<form id="property-div">
-				<label class="col-form-label ">Property Title:</label></br>
-				<input id="property-name" type="text" class="form-control" style="height:30px;" placeholder="" />
-				</br>
-				<label class="col-form-label ">Property Type:</label>
+				<!-- <p style="padding-bottom: 0px;"><B>Property Name:</B></p> -->
+				<label class="col-form-label "><B>Property Name:</B></label>
+				<p id="property-name"></p>
+
+				<!-- <p style="padding-bottom: 0px;" ><B>Property Description:</B></p> -->
+				<label class="col-form-label "><B>Property Description:</B></label>
+				<p id="property-description" style="white-space: normal;"></p>
+				
+				<label class="col-form-label "><B>Property Type:</B></label>
 				<select id="properties-type" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px; " onchange="propertyTypeHasBeenSelected(this)">
-					<option value="string" selected>string</option>
+					<!-- <option value="string" selected>string</option>
 					<option value="integer">integer</option>
 					<option value="date">date</option>
 					<option value="boolean">boolean</option>
-					<option value="object">object</option>
+					<option value="object">object</option> -->
 				</select>
-					
 				</br>
+
 				<div id="property-type" style="display: none;">
 					<label class="col-form-label ">Select Class:</label>
 					<select id="type-select2" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-default" onchange="typeHasBeenChosenForProperty(this)">
@@ -1673,7 +1687,7 @@
 			<hr>
 
 			<div id="property-div" >
-				<label class="col-form-label">Method Name</label></br>
+				<label class="col-form-label"><B>Method Name</B></label></br>
 				<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
 
 				<label class="col-form-label">API Endpoint</label>
@@ -1728,8 +1742,6 @@
 	<!-- end page container -->
 
 
-
-
 	<script>
 
 		
@@ -1757,7 +1769,7 @@
 		<script src="assets/js/app.min.js"></script>
 		<script src="assets/js/theme/default.min.js"></script>
 
-		<script src="assets/js/index.js"></script>
+		<script src="assets/js/shapir_index.js"></script>
 
 		<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
 
@@ -1804,7 +1816,7 @@
 
 
 		<!-- ================== DRAGULA ================== -->
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/$VERSION/dragula.min.js'></script>
+		<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/$VERSION/dragula.min.js'></script> -->
 
 
 		<style>
