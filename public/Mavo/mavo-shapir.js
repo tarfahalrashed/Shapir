@@ -8,36 +8,25 @@ import{config}from"../firebase-config.js";function shapir(){var config={apiKey:"
 Mavo.Backend.register($.Class({
     // Mandatory. You may instead extend another backend, e.g. Mavo.Backend.Github
     extends: Mavo.Backend,
-
-    id: "shapir", // an id for your backend
-
+    id: "Shapir", 
     constructor: function() {
-        // Initialization code
-        // Already defined by the parent constructor:
-        this.permissions.on(["login", "read"]);
-        this.attributes = this.mavo.element.attributes
+        this.permissions.on(["read"]); // Permissions of this particular backend.
 		this.service = this.mavo.element.getAttribute("mv-source-service");
         this.type    = this.mavo.element.getAttribute("mv-source-action");
         this.action  = this.mavo.element.getAttribute("mv-source-action");
         this.params  = this.mavo.element.getAttribute("mv-source-params");
-        
-        this.source // Raw URL (attribute value)
-        this.url // URL object from this.source
-        this.mavo // Mavo instance
-        this.format // Current format
-        this.permissions.on(["read"]); // Permissions of this particular backend.
-        // this.permissions.on(["read", "login"]);
-        this.login(true);
+        this.attributes = this.mavo.element.attributes
+        // Add mv-source-id
+        // Add mv-source-search    
     },
 
     update: function(url, o) {
 		this.super.update.call(this, url, o);
-        
-        this.attributes = this.mavo.element.attributes
 		this.service = this.mavo.element.getAttribute("mv-source-service");
         this.type    = this.mavo.element.getAttribute("mv-source-action");
         this.action  = this.mavo.element.getAttribute("mv-source-action");
         this.params  = this.mavo.element.getAttribute("mv-source-params");
+        this.attributes = this.mavo.element.attributes
 	},
 
     // Low-level functions for reading data. You don’t need to implement this
@@ -45,8 +34,11 @@ Mavo.Backend.register($.Class({
     // a GET request to that URL.
     get: function(url) {
    
-        var func = this.service+'.'+this.type+'('+JSON.stringify(this.attributes['mv-source-params'].value)+')';
-        return new Promise(function(resolve, reject) {resolve( eval(func) )});
+        if(this.attributes['mv-source-service']){// I added this to avoid returning anything if I used mv-value. Maybe using mv-plugin would be more better?
+            var func = this.service+'.'+this.type+'('+JSON.stringify(this.attributes['mv-source-params'].value)+')';
+            return new Promise(function(resolve, reject) {resolve( eval(func) )});
+        }
+        
     },
 
     // High level function for reading data. Calls this.get().
