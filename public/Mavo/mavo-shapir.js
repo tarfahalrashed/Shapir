@@ -1,35 +1,39 @@
+<<<<<<< HEAD
 // import "./firebase.js";
 import 'https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js';
 import 'https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js';
 
 import {config} from"./firebase-config.js";
 firebase.initializeApp(config);
+=======
+import "./firebase.js";
+>>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
 
 function shapir(){
-    
+
     var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [];
-    
+
     return firebase.database().ref('/abstractions')
     .once('value')
     .then(snapshot=> {
-        snapshot.forEach( childSnapshot=> { 
-                var site = childSnapshot.key;    
+        snapshot.forEach( childSnapshot=> {
+                var site = childSnapshot.key;
                 window[site] = {} //initilize function
 
                 var promise = firebase.database().ref('/abstractions/'+site).once('value').then(function(snapshot) {
-                    snapshot.forEach(function(childSnapshot) { 
+                    snapshot.forEach(function(childSnapshot) {
 
                         let siteKey = childSnapshot.key;
                         let siteVal  = childSnapshot.val();
-                        
+
                     if(siteKey == "objects"){
                         for (const [key, value] of Object.entries(siteVal)) {
                             let type = key;
                             let val  = eval(value);
-                        
-                        window[site][type] = function(...args) { return self(type, val, "self", "none", ...args) };  
-                                                
-                        function self (typekey, typeOb, caller, prop, ...args) { 
+
+                        window[site][type] = function(...args) { return self(type, val, "self", "none", ...args) };
+
+                        function self (typekey, typeOb, caller, prop, ...args) {
                             // console.log("typeOb:", typeOb)
                             // console.log("caller:", caller)
                             // console.log("callerTYPE:", typekey)
@@ -68,7 +72,7 @@ function shapir(){
                                         paramList+=args[p]
                                     });
                                     if(p+1<params.length){
-                                        paramList+="&" 
+                                        paramList+="&"
                                     }
                                 }
                             }
@@ -79,7 +83,7 @@ function shapir(){
                                 }
                             }
 
-                            // return new Promise(function(resolve, reject) {resolve(fetch('https://scrapir.org/api/'+endpoint+'?'+paramList+'&Number of Results=2').then(response => response.json())) }).then(o => {                                        
+                            // return new Promise(function(resolve, reject) {resolve(fetch('https://scrapir.org/api/'+endpoint+'?'+paramList+'&Number of Results=2').then(response => response.json())) }).then(o => {
                             return firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
                                 obJSON = snapshot.val();
                                 if(obJSON.oauth2){
@@ -95,7 +99,7 @@ function shapir(){
                                         scope= obJSON.oauth2[0].scope;
                                         grant_type= obJSON.oauth2[0].grantType;
                                         client_auth= obJSON.oauth2[0].clientAuth;
-                                            
+
                                         var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                         //while(acToken === undefined){
                                         var pollTimer = window.setInterval(function() {
@@ -126,9 +130,9 @@ function shapir(){
                                             else
                                                 return results[1];
                                         }//end of gup()
-                                        
+
                                     })
-                                    .then(token=>{ 
+                                    .then(token=>{
                                         return new Promise((resolve, reject) => {
                                         console.log("Token: ",token)
                                         console.log("Token URL: ",token_url)
@@ -162,7 +166,7 @@ function shapir(){
                             .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                             .then(o => {
                                 console.log("result: ", o)
-                                //map response to class properties                
+                                //map response to class properties
                                 if(o.constructor === Array){
                                     // console.log("ARRAY");
                                     o.forEach(function(ob) {
@@ -176,8 +180,8 @@ function shapir(){
                                                 let propType = properties[p].property;
                                                 let typeName = properties[p].type;
 
-                                                Object.defineProperty(ob, propType, { 
-                                                    get: function() { 
+                                                Object.defineProperty(ob, propType, {
+                                                    get: function() {
                                                         let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                                             console.log("typeOb4: ", snapshot.val())
                                                             // return self(snapshot.val(), type, propType, ob[typeId]);
@@ -186,17 +190,22 @@ function shapir(){
                                                         return promise;
                                                     }
                                                 });//end of getter
-            
+
                                             }
                                         }
-                                
+
                                         //***************************** GETTERS *********************************/
 
 
                                         //***************************** SETTERS *********************************/
+<<<<<<< HEAD
                                      if(setters){
                                         for(var s=0; s<setters.length; ++s){
                                             // console.log("setter: ", setters[s])   
+=======
+                                        for(s in setters){
+                                            // console.log("setter: ", setters[s])
+>>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
                                             var field = setters[s].field; //API endpoint field to be set
                                             var prop;
                                             var setEndpoint =  setters[s].endpoint;
@@ -209,8 +218,8 @@ function shapir(){
                                                 }
                                             }
 
-                                            Object.defineProperty(ob, prop, { 
-                                                set: function(newValue) { 
+                                            Object.defineProperty(ob, prop, {
+                                                set: function(newValue) {
                                                     console.log("newValue: ", newValue)
                                                     this.pro = firebase.database().ref('/apis/'+setEndpoint).once('value').then(function(snapshot) {
                                                     obJSON = snapshot.val();
@@ -228,7 +237,7 @@ function shapir(){
                                                                 scope= obJSON.oauth2[0].scope;
                                                                 grant_type= obJSON.oauth2[0].grantType;
                                                                 client_auth= obJSON.oauth2[0].clientAuth;
-                                                                    
+
                                                                 var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                 var pollTimer = window.setInterval(function() {
                                                                     try {
@@ -247,7 +256,7 @@ function shapir(){
                                                                         console.log("error in oauth")
                                                                     }
                                                                 }, 200);
-                                    
+
                                                                 function gup(url, name) {
                                                                     name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                     var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -258,9 +267,9 @@ function shapir(){
                                                                     else
                                                                         return results[1];
                                                                 }//end of gup()
-                                                                
+
                                                             })
-                                                            .then(token=>{ 
+                                                            .then(token=>{
                                                                 return new Promise((resolve, reject) => {
                                                                 console.log("Token: ",token)
                                                                 console.log("Token URL: ",token_url)
@@ -282,17 +291,17 @@ function shapir(){
                                                             })
                                                             // return something
                                                             })
-                                    
+
                                                     }else{ //no oauth
                                                         // console.log("!!!oauth2")
                                                         result =  'https://scrapir.org/api/'+setEndpoint+'?'+paramList+'&'+pro+'='+newValue+'&id='+identifier
                                                         //console.log("result: ",result);
                                                         return result;
                                                     }
-                        
+
                                                 })//firebase
                                                 .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url)) })   })
-                                                    
+
                                                 }
                                             });
                                         }
@@ -306,7 +315,7 @@ function shapir(){
                                             var mParams = methods[m].params;
 
                                             // add the imageId
-                                            Object.defineProperty(ob, mName.toString(), { value: function(mArgs) { 
+                                            Object.defineProperty(ob, mName.toString(), { value: function(mArgs) {
                                                 // var paramLen = Object.entries(mArgs).length;
                                                 // // console.log("paramLen: ", paramLen)
 
@@ -317,7 +326,7 @@ function shapir(){
                                                 //     mParamList+="="
                                                 //     mParamList+= value
                                                 //     if(paramLen>0){
-                                                //         mParamList+="&" 
+                                                //         mParamList+="&"
                                                 //     }
                                                 // }
 
@@ -330,7 +339,7 @@ function shapir(){
                                                                 mParamList+=mArgs[p]//THIS ASSUMES THAT id value will be sent
                                                             // });
                                                             if(p+1<mParams.length){
-                                                                mParamList+="&" 
+                                                                mParamList+="&"
                                                             }
                                                         }
                                                     }
@@ -344,10 +353,10 @@ function shapir(){
                                                 return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                                                 obJSON = snapshot.val();
                                                 //console.log(obJSON)
-                                            
+
                                                 if(obJSON.oauth2){
                                                     // console.log("oauth2")
-                    
+
                                                     var tokenPromise;
                                                     var sTokens = JSON.parse(localStorage.getItem('tokens'));
                                                     console.log(sTokens)
@@ -355,7 +364,7 @@ function shapir(){
                                                     console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
                                                     if(sTokens[elementsIndex].token!=""){
                                                                 tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
-                                                                .then(token=>{ 
+                                                                .then(token=>{
                                                                     return new Promise((resolve, reject) => {
                                                                         console.log("Token: ",token)
                                                                         $.ajax({
@@ -378,7 +387,7 @@ function shapir(){
 
                                                                                 localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                 console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                            
+
                                                                                 resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                             },
                                                                             error: function(response, jqXHR, textStatus, errorThrown) {
@@ -399,7 +408,7 @@ function shapir(){
                                                                     scope= obJSON.oauth2[0].scope;
                                                                     grant_type= obJSON.oauth2[0].grantType;
                                                                     client_auth= obJSON.oauth2[0].clientAuth;
-                                                                        
+
                                                                     var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                     var pollTimer = window.setInterval(function() {
                                                                         try {
@@ -417,7 +426,7 @@ function shapir(){
                                                                             console.log("error in oauth")
                                                                         }
                                                                     }, 200);
-                                            
+
                                                                     function gup(url, name) {
                                                                         name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                         var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -428,9 +437,9 @@ function shapir(){
                                                                         else
                                                                             return results[1];
                                                                     }//end of gup()
-                                                                        
+
                                                                 })
-                                                                .then(token=>{ 
+                                                                .then(token=>{
                                                                     return new Promise((resolve, reject) => {
                                                                         console.log("Token: ",token)
                                                                         $.ajax({
@@ -452,8 +461,8 @@ function shapir(){
 
                                                                                 localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                 console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                            
-                            
+
+
                                                                                 resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                             },
                                                                             error: function(response, jqXHR, textStatus, errorThrown) {
@@ -463,16 +472,16 @@ function shapir(){
                                                                     })
                                                                 })
                                                             }
-                                        
+
                                                     return tokenPromise
 
-                                
+
                                                 }else{ //no oauth
                                                     // console.log("!!!oauth2")
                                                     result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
                                                     return result;
                                                 }
-                    
+
                                                 })//firebase
                                                 .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                             }
@@ -504,14 +513,14 @@ function shapir(){
                                             }
                                         }else{ //if the property is a type
                                             let propType = properties[p].property;
-                                            let typeName = properties[p].type;                                
+                                            let typeName = properties[p].type;
                                             console.log("typeId: ", typeId);
                                             console.log("o[typeId]1: ", o[typeId])
                                             var idVal = o[typeId];
 
                                             // creat a getter for property of type Type
-                                            Object.defineProperty(o, propType, { 
-                                                get: function() { 
+                                            Object.defineProperty(o, propType, {
+                                                get: function() {
                                                     let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                                         console.log("typeOb1: ", snapshot.val())
                                                         console.log("o[typeId]2: ", idVal)
@@ -521,8 +530,8 @@ function shapir(){
                                                 }
                                             });
 
-                                            //*** if you want to remove the getter, replce iti with this 
-                                            // o[propType]= function(){return ""};                               
+                                            //*** if you want to remove the getter, replce iti with this
+                                            // o[propType]= function(){return ""};
                                             // (async function(){
                                             //     o[propType] = await firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                             //         console.log("typeOb1: ", snapshot.val())
@@ -530,7 +539,7 @@ function shapir(){
                                             //     });
                                             //     return o;
                                             // })()
-            
+
                                         }
                                     }//end of for loop properties
 
@@ -538,9 +547,14 @@ function shapir(){
 
 
                                     //***************************** SETTERS *********************************/
+<<<<<<< HEAD
                                     if(setters){
                                     for(var s=0; s<setters.length; ++s){
                                         // console.log("setter: ", setters[s])   
+=======
+                                    for(s in setters){
+                                        // console.log("setter: ", setters[s])
+>>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
                                         var field = setters[s].field; //API endpoint field to be set
                                         var prop;
                                         var setEndpoint =  setters[s].endpoint;
@@ -553,8 +567,8 @@ function shapir(){
                                             }
                                         }
 
-                                        Object.defineProperty(o, prop, { 
-                                            set: function(newValue) { 
+                                        Object.defineProperty(o, prop, {
+                                            set: function(newValue) {
                                                 console.log("newValue: ", newValue)
                                                 this.pro = firebase.database().ref('/apis/'+setEndpoint).once('value').then(function(snapshot) {
                                                 obJSON = snapshot.val();
@@ -572,7 +586,7 @@ function shapir(){
                                                             scope= obJSON.oauth2[0].scope;
                                                             grant_type= obJSON.oauth2[0].grantType;
                                                             client_auth= obJSON.oauth2[0].clientAuth;
-                                                                
+
                                                             var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                             var pollTimer = window.setInterval(function() {
                                                                 try {
@@ -591,7 +605,7 @@ function shapir(){
                                                                     console.log("error in oauth")
                                                                 }
                                                             }, 200);
-                                
+
                                                             function gup(url, name) {
                                                                 name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                 var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -602,9 +616,9 @@ function shapir(){
                                                                 else
                                                                     return results[1];
                                                             }//end of gup()
-                                                            
+
                                                         })
-                                                        .then(token=>{ 
+                                                        .then(token=>{
                                                             return new Promise((resolve, reject) => {
                                                             console.log("Token: ",token)
                                                             console.log("Token URL: ",token_url)
@@ -626,17 +640,17 @@ function shapir(){
                                                         })
                                                         // return something
                                                         })
-                                
+
                                                 }else{ //no oauth
                                                     // console.log("!!!oauth2")
                                                     result =  'https://scrapir.org/api/'+setEndpoint+'?'+paramList+'&'+pro+'='+newValue+'&id='+identifier
                                                     //console.log("result: ",result);
                                                     return result;
                                                 }
-                    
+
                                             })//firebase
                                             .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url)) })   })
-                                                
+
                                             }
                                         });
                                     }
@@ -649,8 +663,8 @@ function shapir(){
                                         var mName = methods[m].name;
                                         var mEndpoint = methods[m].endpoint;
                                         // var mParams = methods[m].params;
-                
-                                        Object.defineProperty(o, mName.toString(), { value: function(mArgs) { 
+
+                                        Object.defineProperty(o, mName.toString(), { value: function(mArgs) {
                                             // if(mParams){
                                             //     for(var p=0; p<mParams.length; ++p){
                                             //         //Object.entries(mParams[p]).forEach(([key, value]) => {
@@ -659,7 +673,7 @@ function shapir(){
                                             //             mParamList+=mArgs[p]
                                             //         // });
                                             //         if(p+1<mParams.length){
-                                            //             mParamList+="&" 
+                                            //             mParamList+="&"
                                             //         }
                                             //     }
                                             // }
@@ -674,7 +688,7 @@ function shapir(){
                                                 mParamList+="="
                                                 mParamList+= value
                                                 if(paramLen>0){
-                                                    mParamList+="&" 
+                                                    mParamList+="&"
                                                 }
                                             }
 
@@ -682,10 +696,10 @@ function shapir(){
                                             return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                                             obJSON = snapshot.val();
                                             console.log(obJSON)
-                                        
+
                                             if(obJSON.oauth2){
                                                 // console.log("oauth2")
-                
+
                                                 var tokenPromise;
                                                 var sTokens = JSON.parse(localStorage.getItem('tokens'));
                                                 console.log(sTokens)
@@ -693,7 +707,7 @@ function shapir(){
                                                 console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
                                                 if(sTokens[elementsIndex].token!=""){
                                                             tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
-                                                            .then(token=>{ 
+                                                            .then(token=>{
                                                                 return new Promise((resolve, reject) => {
                                                                     console.log("Token: ",token)
                                                                     $.ajax({
@@ -716,7 +730,7 @@ function shapir(){
 
                                                                             localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                             console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                        
+
                                                                             resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                         },
                                                                         error: function(response, jqXHR, textStatus, errorThrown) {
@@ -737,7 +751,7 @@ function shapir(){
                                                                 scope= obJSON.oauth2[0].scope;
                                                                 grant_type= obJSON.oauth2[0].grantType;
                                                                 client_auth= obJSON.oauth2[0].clientAuth;
-                                                                    
+
                                                                 var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                 var pollTimer = window.setInterval(function() {
                                                                     try {
@@ -755,7 +769,7 @@ function shapir(){
                                                                         console.log("error in oauth")
                                                                     }
                                                                 }, 200);
-                                        
+
                                                                 function gup(url, name) {
                                                                     name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                     var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -766,9 +780,9 @@ function shapir(){
                                                                     else
                                                                         return results[1];
                                                                 }//end of gup()
-                                                                    
+
                                                             })
-                                                            .then(token=>{ 
+                                                            .then(token=>{
                                                                 return new Promise((resolve, reject) => {
                                                                     console.log("Token: ",token)
                                                                     $.ajax({
@@ -790,8 +804,8 @@ function shapir(){
 
                                                                             localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                             console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                        
-                        
+
+
                                                                             resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                         },
                                                                         error: function(response, jqXHR, textStatus, errorThrown) {
@@ -801,16 +815,16 @@ function shapir(){
                                                                 })
                                                             })
                                                         }
-                                    
+
                                                 return tokenPromise
 
-                            
+
                                             }else{ //no oauth
                                                 // console.log("!!!oauth2")
                                                 result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
                                                 return result;
                                             }
-                
+
                                             })//firebase
                                             .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                         }
@@ -829,8 +843,8 @@ function shapir(){
                                 }//end of else of no array
 
                                 return o;
-                            })         
-                            // return obj; 
+                            })
+                            // return obj;
                         };//end of self function
 
                     }
@@ -849,7 +863,7 @@ function shapir(){
 
                             var properties=[], fields=[];
                             firebase.database().ref('/abstractions/'+site+'/objects/'+mObject+'/properties').once('value').then(function(snapshot) {
-                                snapshot.forEach(function(childSnapshot) { 
+                                snapshot.forEach(function(childSnapshot) {
                                     properties.push(childSnapshot.val())
                                 })
                             }).then(()=>{
@@ -860,9 +874,9 @@ function shapir(){
                                 }
                             })
 
-                            window[site][funcName] = function(...mArgs) { return siteFunction(...mArgs) }; 
-                            
-                            function siteFunction(mArgs) { 
+                            window[site][funcName] = function(...mArgs) { return siteFunction(...mArgs) };
+
+                            function siteFunction(mArgs) {
                                 // console.log("site: ", site)
                                 var paramLen = Object.entries(mArgs).length;
 
@@ -873,7 +887,7 @@ function shapir(){
                                     mParamList+="="
                                     mParamList+= value
                                     if(paramLen>0){
-                                        mParamList+="&" 
+                                        mParamList+="&"
                                     }
                                 }
                                 //   console.log("mParamList: ", mParamList)
@@ -884,7 +898,7 @@ function shapir(){
                                 //                 mParamList+="="
                                 //                 mParamList+=mArgs[p]//THIS ASSUMES THAT id value will be sent
                                 //             if(p+1<mParams.length){
-                                //                 mParamList+="&" 
+                                //                 mParamList+="&"
                                 //             }
                                 //         }
                                 //     }
@@ -902,7 +916,7 @@ function shapir(){
                                 return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                                 obJSON = snapshot.val();
                                 //console.log(obJSON)
-                            
+
                                 if(obJSON.oauth2){
                                     // console.log("oauth2")
 
@@ -913,7 +927,7 @@ function shapir(){
                                     console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
                                     if(sTokens[elementsIndex].token!=""){
                                                 tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
-                                                .then(token=>{ 
+                                                .then(token=>{
                                                     return new Promise((resolve, reject) => {
                                                         console.log("Token: ",token)
                                                         $.ajax({
@@ -957,7 +971,7 @@ function shapir(){
                                                     scope= obJSON.oauth2[0].scope;
                                                     grant_type= obJSON.oauth2[0].grantType;
                                                     client_auth= obJSON.oauth2[0].clientAuth;
-                                                        
+
                                                     var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                     var pollTimer = window.setInterval(function() {
                                                         try {
@@ -975,7 +989,7 @@ function shapir(){
                                                             console.log("error in oauth")
                                                         }
                                                     }, 200);
-                            
+
                                                     function gup(url, name) {
                                                         name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                         var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -986,9 +1000,9 @@ function shapir(){
                                                         else
                                                             return results[1];
                                                     }//end of gup()
-                                                        
+
                                                 })
-                                                .then(token=>{ 
+                                                .then(token=>{
                                                     return new Promise((resolve, reject) => {
                                                         console.log("Token: ",token)
                                                         $.ajax({
@@ -1021,10 +1035,10 @@ function shapir(){
                                                     })
                                                 })
                                             }
-                        
+
                                     return tokenPromise
 
-                
+
                                 }else{ //no oauth
                                     // console.log("!!!oauth2")
                                     result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
@@ -1037,7 +1051,7 @@ function shapir(){
                                     console.log("result: ", o)
                                     // console.log("properties!!! ", properties)
 
-                                    //map response to class properties                
+                                    //map response to class properties
                                     if(o.constructor === Array){
                                         console.log("ARRAY");
                                         o.forEach(function(ob) {
@@ -1053,9 +1067,9 @@ function shapir(){
                                                     let idVal = ob[mID]
                                                     // console.log("typeIdFun1: ", mID)
                                                     // console.log("ob[typeId]Fun1: ", ob[mID])
-                
-                                                    Object.defineProperty(ob, propType, { 
-                                                        get: function() { 
+
+                                                    Object.defineProperty(ob, propType, {
+                                                        get: function() {
                                                             let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                                                 console.log("typeOb2: ", snapshot.val())
                                                                 // return self(snapshot.val(), type, propType, ob[typeId]);
@@ -1065,17 +1079,17 @@ function shapir(){
                                                             return promise;
                                                         }
                                                     });//end of getter
-                
+
                                                 }
                                             }
-                                    
+
                                             //***************************** GETTERS *********************************/
-                
-                
+
+
                                             //***************************** SETTERS *********************************/
                                             // if(setters){
                                             // for(s in setters){
-                                            //     // console.log("setter: ", setters[s])   
+                                            //     // console.log("setter: ", setters[s])
                                             //     var field = setters[s].field; //API endpoint field to be set
                                             //     var prop;
                                             //     var setEndpoint =  setters[s].endpoint;
@@ -1087,9 +1101,9 @@ function shapir(){
                                             //             prop = properties[f].property;
                                             //         }
                                             //     }
-                
-                                            //     Object.defineProperty(ob, prop, { 
-                                            //         set: function(newValue) { 
+
+                                            //     Object.defineProperty(ob, prop, {
+                                            //         set: function(newValue) {
                                             //             console.log("newValue: ", newValue)
                                             //             this.pro = firebase.database().ref('/apis/'+setEndpoint).once('value').then(function(snapshot) {
                                             //             obJSON = snapshot.val();
@@ -1107,7 +1121,7 @@ function shapir(){
                                             //                         scope= obJSON.oauth2[0].scope;
                                             //                         grant_type= obJSON.oauth2[0].grantType;
                                             //                         client_auth= obJSON.oauth2[0].clientAuth;
-                                                                        
+
                                             //                         var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                             //                         var pollTimer = window.setInterval(function() {
                                             //                             try {
@@ -1126,7 +1140,7 @@ function shapir(){
                                             //                                 console.log("error in oauth")
                                             //                             }
                                             //                         }, 200);
-                                        
+
                                             //                         function gup(url, name) {
                                             //                             name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                             //                             var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -1137,9 +1151,9 @@ function shapir(){
                                             //                             else
                                             //                                 return results[1];
                                             //                         }//end of gup()
-                                                                    
+
                                             //                     })
-                                            //                     .then(token=>{ 
+                                            //                     .then(token=>{
                                             //                         return new Promise((resolve, reject) => {
                                             //                         console.log("Token: ",token)
                                             //                         console.log("Token URL: ",token_url)
@@ -1161,30 +1175,30 @@ function shapir(){
                                             //                     })
                                             //                     // return something
                                             //                     })
-                                        
+
                                             //             }else{ //no oauth
                                             //                 console.log("!!!oauth2")
                                             //                 result =  'https://scrapir.org/api/'+setEndpoint+'?'+paramList+'&'+pro+'='+newValue+'&id='+identifier
                                             //                 //console.log("result: ",result);
                                             //                 return result;
                                             //             }
-                            
+
                                             //         })//firebase
                                             //         .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url)) })   })
-                                                        
+
                                             //         }
                                             //     });
                                             // }}
-                
+
                                             //***************************** METHODS *********************************/
-                                         if(methods){ 
+                                         if(methods){
                                             for(var m=0;  m<methods.length; ++m){
                                                 var mName = methods[m].name;
                                                 var mEndpoint = methods[m].endpoint;
                                                 var mParams = methods[m].params;
 
                                                 // add the imageId
-                                                Object.defineProperty(ob, mName.toString(), { value: function(...mArgs) { 
+                                                Object.defineProperty(ob, mName.toString(), { value: function(...mArgs) {
                                                     if(mArgs.length>0){
                                                         if(mParams){
                                                             for(var p=0; p<mParams.length; ++p){
@@ -1194,7 +1208,7 @@ function shapir(){
                                                                     mParamList+=mArgs[p]//THIS ASSUMES THAT id value will be sent
                                                                 // });
                                                                 if(p+1<mParams.length){
-                                                                    mParamList+="&" 
+                                                                    mParamList+="&"
                                                                 }
                                                             }
                                                         }
@@ -1207,15 +1221,15 @@ function shapir(){
                                                         mParamList+="="
                                                         mParamList+=ob[mParams[0]]
                                                     }
-                
+
                                                     console.log("mParamList: ", mParamList)
                                                     return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                                                     obJSON = snapshot.val();
                                                     //console.log(obJSON)
-                                                
+
                                                     if(obJSON.oauth2){
                                                         // console.log("oauth2")
-                        
+
                                                         var tokenPromise;
                                                         var sTokens = JSON.parse(localStorage.getItem('tokens'));
                                                         console.log(sTokens)
@@ -1223,7 +1237,7 @@ function shapir(){
                                                         console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
                                                         if(sTokens[elementsIndex].token!=""){
                                                                     tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
-                                                                    .then(token=>{ 
+                                                                    .then(token=>{
                                                                         return new Promise((resolve, reject) => {
                                                                             console.log("Token: ",token)
                                                                             $.ajax({
@@ -1243,10 +1257,10 @@ function shapir(){
                                                                                     newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
                                                                                     newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
                                                                                     // this.setState({newArray});
-                
+
                                                                                     localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                     console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                                
+
                                                                                     resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                                 },
                                                                                 error: function(response, jqXHR, textStatus, errorThrown) {
@@ -1267,7 +1281,7 @@ function shapir(){
                                                                         scope= obJSON.oauth2[0].scope;
                                                                         grant_type= obJSON.oauth2[0].grantType;
                                                                         client_auth= obJSON.oauth2[0].clientAuth;
-                                                                            
+
                                                                         var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                         var pollTimer = window.setInterval(function() {
                                                                             try {
@@ -1285,7 +1299,7 @@ function shapir(){
                                                                                 console.log("error in oauth")
                                                                             }
                                                                         }, 200);
-                                                
+
                                                                         function gup(url, name) {
                                                                             name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                             var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -1296,9 +1310,9 @@ function shapir(){
                                                                             else
                                                                                 return results[1];
                                                                         }//end of gup()
-                                                                            
+
                                                                     })
-                                                                    .then(token=>{ 
+                                                                    .then(token=>{
                                                                         return new Promise((resolve, reject) => {
                                                                             console.log("Token: ",token)
                                                                             $.ajax({
@@ -1317,11 +1331,11 @@ function shapir(){
                                                                                     newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
                                                                                     newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
                                                                                     // this.setState({newArray});
-                
+
                                                                                     localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                     console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                                
-                                
+
+
                                                                                     resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                                 },
                                                                                 error: function(response, jqXHR, textStatus, errorThrown) {
@@ -1331,28 +1345,28 @@ function shapir(){
                                                                         })
                                                                     })
                                                                 }
-                                            
+
                                                         return tokenPromise
-                
-                                    
+
+
                                                     }else{ //no oauth
                                                         // console.log("!!!oauth2")
                                                         result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
                                                         return result;
                                                     }
-                        
+
                                                     })//firebase
                                                     .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                                 }
                                                 });
                                             //   });
-                
+
                                             }//loop to create methods
                                            }
-                                                
+
                                         });//loop over array of objects
-                
-                
+
+
                                         //remove the fields that are not in the class
                                         var keys = Object.keys(o[0])
                                         for(var k=0; k<keys.length; ++k){
@@ -1362,7 +1376,7 @@ function shapir(){
                                                 })
                                             }
                                         }
-                
+
                                     }else{
                                         // console.log("NOT ARRAY")
                                         for(var p=0; p<properties.length; ++p){
@@ -1380,9 +1394,9 @@ function shapir(){
 
                                                 // creat a getter for property of type Type
                                                 this.status = {};
-                                                Object.defineProperty(o, propType, { 
+                                                Object.defineProperty(o, propType, {
                                                     enumerable: true,
-                                                    get: function() { 
+                                                    get: function() {
                                                         let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                                             console.log("typeOb3: ", snapshot.val())
                                                             // return self(snapshot.val(), type, propType, o[typeId]);
@@ -1393,14 +1407,19 @@ function shapir(){
                                                 });
                                             }
                                         }//end of for loop properties
-                
+
                                         //***************************** GETTERS *********************************/
-                
-                
+
+
                                         //***************************** SETTERS *********************************/
+<<<<<<< HEAD
                                         if(setters){
                                             for(var s=0; s<setters.length; ++s){
                                             // console.log("setter: ", setters[s])   
+=======
+                                        for(s in setters){
+                                            // console.log("setter: ", setters[s])
+>>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
                                             var field = setters[s].field; //API endpoint field to be set
                                             var prop;
                                             var setEndpoint =  setters[s].endpoint;
@@ -1412,9 +1431,9 @@ function shapir(){
                                                     prop = properties[f].property;
                                                 }
                                             }
-                
-                                            Object.defineProperty(o, prop, { 
-                                                set: function(newValue) { 
+
+                                            Object.defineProperty(o, prop, {
+                                                set: function(newValue) {
                                                     console.log("newValue: ", newValue)
                                                     this.pro = firebase.database().ref('/apis/'+setEndpoint).once('value').then(function(snapshot) {
                                                     obJSON = snapshot.val();
@@ -1432,7 +1451,7 @@ function shapir(){
                                                                 scope= obJSON.oauth2[0].scope;
                                                                 grant_type= obJSON.oauth2[0].grantType;
                                                                 client_auth= obJSON.oauth2[0].clientAuth;
-                                                                    
+
                                                                 var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                 var pollTimer = window.setInterval(function() {
                                                                     try {
@@ -1451,7 +1470,7 @@ function shapir(){
                                                                         console.log("error in oauth")
                                                                     }
                                                                 }, 200);
-                                    
+
                                                                 function gup(url, name) {
                                                                     name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                     var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -1462,9 +1481,9 @@ function shapir(){
                                                                     else
                                                                         return results[1];
                                                                 }//end of gup()
-                                                                
+
                                                             })
-                                                            .then(token=>{ 
+                                                            .then(token=>{
                                                                 return new Promise((resolve, reject) => {
                                                                 console.log("Token: ",token)
                                                                 console.log("Token URL: ",token_url)
@@ -1486,22 +1505,26 @@ function shapir(){
                                                             })
                                                             // return something
                                                             })
-                                    
+
                                                     }else{ //no oauth
                                                         // console.log("!!!oauth2")
                                                         result =  'https://scrapir.org/api/'+setEndpoint+'?'+paramList+'&'+pro+'='+newValue+'&id='+identifier
                                                         //console.log("result: ",result);
                                                         return result;
                                                     }
-                        
+
                                                 })//firebase
                                                 .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url)) })   })
-                                                    
+
                                                 }
                                             });
                                         }
+<<<<<<< HEAD
                                        }
                 
+=======
+
+>>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
                                         //***************************** METHODS *********************************/
                                       if(methods){
                                         for(var m=0;  m<methods.length; ++m){
@@ -1509,8 +1532,8 @@ function shapir(){
                                             var mName = methods[m].name;
                                             var mEndpoint = methods[m].endpoint;
                                             var mParams = methods[m].params;
-                    
-                                            Object.defineProperty(o, mName.toString(), { value: function(...mArgs) { 
+
+                                            Object.defineProperty(o, mName.toString(), { value: function(...mArgs) {
                                                 if(mParams){
                                                     for(var p=0; p<mParams.length; ++p){
                                                         //Object.entries(mParams[p]).forEach(([key, value]) => {
@@ -1519,7 +1542,7 @@ function shapir(){
                                                             mParamList+=mArgs[p]
                                                         // });
                                                         if(p+1<mParams.length){
-                                                            mParamList+="&" 
+                                                            mParamList+="&"
                                                         }
                                                     }
                                                 }
@@ -1527,10 +1550,10 @@ function shapir(){
                                                 return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                                                 obJSON = snapshot.val();
                                                 console.log(obJSON)
-                                            
+
                                                 if(obJSON.oauth2){
                                                     // console.log("oauth2")
-                    
+
                                                     var tokenPromise;
                                                     var sTokens = JSON.parse(localStorage.getItem('tokens'));
                                                     console.log(sTokens)
@@ -1538,7 +1561,7 @@ function shapir(){
                                                     console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
                                                     if(sTokens[elementsIndex].token!=""){
                                                                 tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
-                                                                .then(token=>{ 
+                                                                .then(token=>{
                                                                     return new Promise((resolve, reject) => {
                                                                         console.log("Token: ",token)
                                                                         $.ajax({
@@ -1558,10 +1581,10 @@ function shapir(){
                                                                                 newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
                                                                                 newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
                                                                                 // this.setState({newArray});
-                
+
                                                                                 localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                 console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                            
+
                                                                                 resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                             },
                                                                             error: function(response, jqXHR, textStatus, errorThrown) {
@@ -1582,7 +1605,7 @@ function shapir(){
                                                                     scope= obJSON.oauth2[0].scope;
                                                                     grant_type= obJSON.oauth2[0].grantType;
                                                                     client_auth= obJSON.oauth2[0].clientAuth;
-                                                                        
+
                                                                     var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                     var pollTimer = window.setInterval(function() {
                                                                         try {
@@ -1600,7 +1623,7 @@ function shapir(){
                                                                             console.log("error in oauth")
                                                                         }
                                                                     }, 200);
-                                            
+
                                                                     function gup(url, name) {
                                                                         name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                         var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -1611,9 +1634,9 @@ function shapir(){
                                                                         else
                                                                             return results[1];
                                                                     }//end of gup()
-                                                                        
+
                                                                 })
-                                                                .then(token=>{ 
+                                                                .then(token=>{
                                                                     return new Promise((resolve, reject) => {
                                                                         console.log("Token: ",token)
                                                                         $.ajax({
@@ -1632,11 +1655,11 @@ function shapir(){
                                                                                 newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
                                                                                 newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
                                                                                 // this.setState({newArray});
-                
+
                                                                                 localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                 console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                            
-                            
+
+
                                                                                 resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                             },
                                                                             error: function(response, jqXHR, textStatus, errorThrown) {
@@ -1646,22 +1669,22 @@ function shapir(){
                                                                     })
                                                                 })
                                                             }
-                                        
+
                                                     return tokenPromise
-                
-                                
+
+
                                                 }else{ //no oauth
                                                     // console.log("!!!oauth2")
                                                     result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
                                                     return result;
                                                 }
-                    
+
                                                 })//firebase
                                                 .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                             }
                                             });
                                         //   });
-                
+
                                         }//loop to create methods
                                       }
                                         //remove the fields that are not in the class
@@ -1672,24 +1695,24 @@ function shapir(){
                                             }
                                         }
                                     }//end of else of no array
-                
+
                                     return o;
-                                })  
-                            
+                                })
+
                             }
 
 
-                            function self (typekey, typeOb, caller, prop, ...args) { 
+                            function self (typekey, typeOb, caller, prop, ...args) {
                                 // console.log("typeOb:", typeOb)
                                 // console.log("caller:", caller)
                                 console.log("callerTYPE:", typekey)
                                 console.log("typeId: ", typeOb.id)
                                 console.log("args: ", args)
-                
+
                                 currentType = typekey;
-                
+
                                 // console.log("prop:", prop)
-                
+
                                 if(prop == "none"){
                                     var endpoint = typeOb.construct[caller].endpoint;
                                     var params = typeOb.construct[caller].input;
@@ -1704,7 +1727,7 @@ function shapir(){
                                     // var typeId = typeOb.construct[caller][elemIndex].id;
                                     // console.log("typeId2: ", typeId)
                                 }
-                
+
                                 var idValue = args[0];
                                 var typeId = typeOb.id;
                                 var properties = typeOb.properties;
@@ -1712,7 +1735,7 @@ function shapir(){
                                 var setters = typeOb.setters;
                                 var methods = typeOb.methods;
                                 var fields=[], paramList="", mParamList="";
-                
+
                                 if(params){
                                     for(var p=0; p<params.length; ++p){
                                         Object.entries(params[p]).forEach(([key, value]) => {
@@ -1721,19 +1744,19 @@ function shapir(){
                                             paramList+=args[p]
                                         });
                                         if(p+1<params.length){
-                                            paramList+="&" 
+                                            paramList+="&"
                                         }
                                     }
                                 }
-                
+
                                 for(var f=0; f< properties.length; ++f){
                                     if(properties[f].field != undefined){
                                         fields.push(properties[f].property)
                                     }
                                 }
-                
+
                                 // var obj={};
-                                // return new Promise(function(resolve, reject) {resolve(fetch('https://scrapir.org/api/'+endpoint+'?'+paramList+'&Number of Results=2').then(response => response.json())) }).then(o => {                                        
+                                // return new Promise(function(resolve, reject) {resolve(fetch('https://scrapir.org/api/'+endpoint+'?'+paramList+'&Number of Results=2').then(response => response.json())) }).then(o => {
                                 return firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
                                     obJSON = snapshot.val();
                                     if(obJSON.oauth2){
@@ -1749,7 +1772,7 @@ function shapir(){
                                             scope= obJSON.oauth2[0].scope;
                                             grant_type= obJSON.oauth2[0].grantType;
                                             client_auth= obJSON.oauth2[0].clientAuth;
-                                                
+
                                             var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                             //while(acToken === undefined){
                                             var pollTimer = window.setInterval(function() {
@@ -1769,7 +1792,7 @@ function shapir(){
                                                     console.log("error in oauth")
                                                 }
                                             }, 200);
-                
+
                                             function gup(url, name) {
                                                 name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                 var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -1780,9 +1803,9 @@ function shapir(){
                                                 else
                                                     return results[1];
                                             }//end of gup()
-                                            
+
                                         })
-                                        .then(token=>{ 
+                                        .then(token=>{
                                             return new Promise((resolve, reject) => {
                                             console.log("Token: ",token)
                                             console.log("Token URL: ",token_url)
@@ -1806,7 +1829,7 @@ function shapir(){
                                         })
                                         // return something
                                         })
-                
+
                                     }else{ //no oauth
                                         // console.log("NOT oauth2")
                                         result =  'https://scrapir.org/api/'+endpoint+'?'+paramList
@@ -1816,7 +1839,7 @@ function shapir(){
                                 .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                 .then(o => {
                                     console.log("result: ", o)
-                                    //map response to class properties                
+                                    //map response to class properties
                                     if(o.constructor === Array){
                                         // console.log("ARRAY");
                                         o.forEach(function(ob) {
@@ -1829,9 +1852,9 @@ function shapir(){
                                                 }else{ //if the property is a type
                                                     let propType = properties[p].property;
                                                     let typeName = properties[p].type;
-                
-                                                    Object.defineProperty(ob, propType, { 
-                                                        get: function() { 
+
+                                                    Object.defineProperty(ob, propType, {
+                                                        get: function() {
                                                             let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                                                 console.log("typeOb4: ", snapshot.val())
                                                                 // return self(snapshot.val(), type, propType, ob[typeId]);
@@ -1840,16 +1863,16 @@ function shapir(){
                                                             return promise;
                                                         }
                                                     });//end of getter
-                
+
                                                 }
                                             }
-                                    
+
                                             //***************************** GETTERS *********************************/
-                
-                
+
+
                                             //***************************** SETTERS *********************************/
                                             for(s in setters){
-                                                // console.log("setter: ", setters[s])   
+                                                // console.log("setter: ", setters[s])
                                                 var field = setters[s].field; //API endpoint field to be set
                                                 var prop;
                                                 var setEndpoint =  setters[s].endpoint;
@@ -1861,9 +1884,9 @@ function shapir(){
                                                         prop = properties[f].property;
                                                     }
                                                 }
-                
-                                                Object.defineProperty(ob, prop, { 
-                                                    set: function(newValue) { 
+
+                                                Object.defineProperty(ob, prop, {
+                                                    set: function(newValue) {
                                                         console.log("newValue: ", newValue)
                                                         this.pro = firebase.database().ref('/apis/'+setEndpoint).once('value').then(function(snapshot) {
                                                         obJSON = snapshot.val();
@@ -1881,7 +1904,7 @@ function shapir(){
                                                                     scope= obJSON.oauth2[0].scope;
                                                                     grant_type= obJSON.oauth2[0].grantType;
                                                                     client_auth= obJSON.oauth2[0].clientAuth;
-                                                                        
+
                                                                     var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                     var pollTimer = window.setInterval(function() {
                                                                         try {
@@ -1900,7 +1923,7 @@ function shapir(){
                                                                             console.log("error in oauth")
                                                                         }
                                                                     }, 200);
-                                        
+
                                                                     function gup(url, name) {
                                                                         name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                         var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -1911,9 +1934,9 @@ function shapir(){
                                                                         else
                                                                             return results[1];
                                                                     }//end of gup()
-                                                                    
+
                                                                 })
-                                                                .then(token=>{ 
+                                                                .then(token=>{
                                                                     return new Promise((resolve, reject) => {
                                                                     console.log("Token: ",token)
                                                                     console.log("Token URL: ",token_url)
@@ -1935,30 +1958,30 @@ function shapir(){
                                                                 })
                                                                 // return something
                                                                 })
-                                        
+
                                                         }else{ //no oauth
                                                             // console.log("!!!oauth2")
                                                             result =  'https://scrapir.org/api/'+setEndpoint+'?'+paramList+'&'+pro+'='+newValue+'&id='+identifier
                                                             //console.log("result: ",result);
                                                             return result;
                                                         }
-                            
+
                                                     })//firebase
                                                     .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url)) })   })
-                                                        
+
                                                     }
                                                 });
                                             }
-                
+
                                             //***************************** METHODS *********************************/
-                                          if(methods){  
+                                          if(methods){
                                             for(var m=0;  m<methods.length; ++m){
                                                 var mName = methods[m].name;
                                                 var mEndpoint = methods[m].endpoint;
                                                 var mParams = methods[m].params;
-                
+
                                                 // add the imageId
-                                                Object.defineProperty(ob, mName.toString(), { value: function(...mArgs) { 
+                                                Object.defineProperty(ob, mName.toString(), { value: function(...mArgs) {
                                                     if(mArgs.length>0){
                                                         if(mParams){
                                                             for(var p=0; p<mParams.length; ++p){
@@ -1968,7 +1991,7 @@ function shapir(){
                                                                     mParamList+=mArgs[p]//THIS ASSUMES THAT id value will be sent
                                                                 // });
                                                                 if(p+1<mParams.length){
-                                                                    mParamList+="&" 
+                                                                    mParamList+="&"
                                                                 }
                                                             }
                                                         }
@@ -1981,15 +2004,15 @@ function shapir(){
                                                         mParamList+="="
                                                         mParamList+=ob[mParams[0]]
                                                     }
-                
+
                                                     console.log("mParamList: ", mParamList)
                                                     return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                                                     obJSON = snapshot.val();
                                                     //console.log(obJSON)
-                                                
+
                                                     if(obJSON.oauth2){
                                                         // console.log("oauth2")
-                        
+
                                                         var tokenPromise;
                                                         var sTokens = JSON.parse(localStorage.getItem('tokens'));
                                                         console.log(sTokens)
@@ -1997,7 +2020,7 @@ function shapir(){
                                                         console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
                                                         if(sTokens[elementsIndex].token!=""){
                                                                     tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
-                                                                    .then(token=>{ 
+                                                                    .then(token=>{
                                                                         return new Promise((resolve, reject) => {
                                                                             console.log("Token: ",token)
                                                                             $.ajax({
@@ -2017,10 +2040,10 @@ function shapir(){
                                                                                     newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
                                                                                     newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
                                                                                     // this.setState({newArray});
-                
+
                                                                                     localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                     console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                                
+
                                                                                     resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                                 },
                                                                                 error: function(response, jqXHR, textStatus, errorThrown) {
@@ -2041,7 +2064,7 @@ function shapir(){
                                                                         scope= obJSON.oauth2[0].scope;
                                                                         grant_type= obJSON.oauth2[0].grantType;
                                                                         client_auth= obJSON.oauth2[0].clientAuth;
-                                                                            
+
                                                                         var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                         var pollTimer = window.setInterval(function() {
                                                                             try {
@@ -2059,7 +2082,7 @@ function shapir(){
                                                                                 console.log("error in oauth")
                                                                             }
                                                                         }, 200);
-                                                
+
                                                                         function gup(url, name) {
                                                                             name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                             var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -2070,9 +2093,9 @@ function shapir(){
                                                                             else
                                                                                 return results[1];
                                                                         }//end of gup()
-                                                                            
+
                                                                     })
-                                                                    .then(token=>{ 
+                                                                    .then(token=>{
                                                                         return new Promise((resolve, reject) => {
                                                                             console.log("Token: ",token)
                                                                             $.ajax({
@@ -2091,11 +2114,11 @@ function shapir(){
                                                                                     newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
                                                                                     newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
                                                                                     // this.setState({newArray});
-                
+
                                                                                     localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                     console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                                
-                                
+
+
                                                                                     resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                                 },
                                                                                 error: function(response, jqXHR, textStatus, errorThrown) {
@@ -2105,27 +2128,27 @@ function shapir(){
                                                                         })
                                                                     })
                                                                 }
-                                            
+
                                                         return tokenPromise
-                
-                                    
+
+
                                                     }else{ //no oauth
                                                         // console.log("!!!oauth2")
                                                         result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
                                                         return result;
                                                     }
-                        
+
                                                     })//firebase
                                                     .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                                 }
                                                 });
                                             //   });
-                
+
                                             }//loop to create methods
-                                          }   
+                                          }
                                         });//loop over array of objects
-                
-                
+
+
                                         //remove the fields that are not in the class
                                         var keys = Object.keys(o[0])
                                         for(var k=0; k<keys.length; ++k){
@@ -2135,7 +2158,7 @@ function shapir(){
                                                 })
                                             }
                                         }
-                
+
                                     }else{
                                         // console.log("NOT ARRAY")
                                         for(var p=0; p<properties.length; ++p){
@@ -2146,14 +2169,14 @@ function shapir(){
                                                 }
                                             }else{ //if the property is a type
                                                 let propType = properties[p].property;
-                                                let typeName = properties[p].type;                                
+                                                let typeName = properties[p].type;
                                                 console.log("typeId: ", typeId);
                                                 console.log("o[typeId]1: ", o[typeId])
                                                 var idVal = o[typeId];
-                
+
                                                 // creat a getter for property of type Type
-                                                Object.defineProperty(o, propType, { 
-                                                    get: function() { 
+                                                Object.defineProperty(o, propType, {
+                                                    get: function() {
                                                         let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                                             console.log("typeOb1: ", snapshot.val())
                                                             console.log("o[typeId]2: ", idVal)
@@ -2162,9 +2185,9 @@ function shapir(){
                                                         return promise;
                                                     }
                                                 });
-                
-                                                //*** if you want to remove the getter, replce iti with this 
-                                                // o[propType]= function(){return ""};                               
+
+                                                //*** if you want to remove the getter, replce iti with this
+                                                // o[propType]= function(){return ""};
                                                 // (async function(){
                                                 //     o[propType] = await firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                                 //         console.log("typeOb1: ", snapshot.val())
@@ -2172,16 +2195,16 @@ function shapir(){
                                                 //     });
                                                 //     return o;
                                                 // })()
-                
+
                                             }
                                         }//end of for loop properties
-                
+
                                         //***************************** GETTERS *********************************/
-                
-                
+
+
                                         //***************************** SETTERS *********************************/
                                         for(s in setters){
-                                            // console.log("setter: ", setters[s])   
+                                            // console.log("setter: ", setters[s])
                                             var field = setters[s].field; //API endpoint field to be set
                                             var prop;
                                             var setEndpoint =  setters[s].endpoint;
@@ -2193,9 +2216,9 @@ function shapir(){
                                                     prop = properties[f].property;
                                                 }
                                             }
-                
-                                            Object.defineProperty(o, prop, { 
-                                                set: function(newValue) { 
+
+                                            Object.defineProperty(o, prop, {
+                                                set: function(newValue) {
                                                     console.log("newValue: ", newValue)
                                                     this.pro = firebase.database().ref('/apis/'+setEndpoint).once('value').then(function(snapshot) {
                                                     obJSON = snapshot.val();
@@ -2213,7 +2236,7 @@ function shapir(){
                                                                 scope= obJSON.oauth2[0].scope;
                                                                 grant_type= obJSON.oauth2[0].grantType;
                                                                 client_auth= obJSON.oauth2[0].clientAuth;
-                                                                    
+
                                                                 var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                 var pollTimer = window.setInterval(function() {
                                                                     try {
@@ -2232,7 +2255,7 @@ function shapir(){
                                                                         console.log("error in oauth")
                                                                     }
                                                                 }, 200);
-                                    
+
                                                                 function gup(url, name) {
                                                                     name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                     var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -2243,9 +2266,9 @@ function shapir(){
                                                                     else
                                                                         return results[1];
                                                                 }//end of gup()
-                                                                
+
                                                             })
-                                                            .then(token=>{ 
+                                                            .then(token=>{
                                                                 return new Promise((resolve, reject) => {
                                                                 console.log("Token: ",token)
                                                                 console.log("Token URL: ",token_url)
@@ -2267,21 +2290,21 @@ function shapir(){
                                                             })
                                                             // return something
                                                             })
-                                    
+
                                                     }else{ //no oauth
                                                         // console.log("!!!oauth2")
                                                         result =  'https://scrapir.org/api/'+setEndpoint+'?'+paramList+'&'+pro+'='+newValue+'&id='+identifier
                                                         //console.log("result: ",result);
                                                         return result;
                                                     }
-                        
+
                                                 })//firebase
                                                 .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url)) })   })
-                                                    
+
                                                 }
                                             });
                                         }
-                
+
                                         //***************************** METHODS *********************************/
                                       if(methods){
                                         for(var m=0;  m<methods.length; ++m){
@@ -2289,8 +2312,8 @@ function shapir(){
                                             var mName = methods[m].name;
                                             var mEndpoint = methods[m].endpoint;
                                             var mParams = methods[m].params;
-                    
-                                            Object.defineProperty(o, mName.toString(), { value: function(mArgs) { 
+
+                                            Object.defineProperty(o, mName.toString(), { value: function(mArgs) {
 
                                                 var paramLen = Object.entries(mArgs).length;
                                                 // console.log("paramLen: ", paramLen)
@@ -2302,10 +2325,10 @@ function shapir(){
                                                     mParamList+="="
                                                     mParamList+= value
                                                     if(paramLen>0){
-                                                        mParamList+="&" 
+                                                        mParamList+="&"
                                                     }
                                                 }
-                                            
+
                                                 // if(mParams){
                                                 //     for(var p=0; p<mParams.length; ++p){
                                                 //         //Object.entries(mParams[p]).forEach(([key, value]) => {
@@ -2314,7 +2337,7 @@ function shapir(){
                                                 //             mParamList+=mArgs[p]
                                                 //         // });
                                                 //         if(p+1<mParams.length){
-                                                //             mParamList+="&" 
+                                                //             mParamList+="&"
                                                 //         }
                                                 //     }
                                                 // }
@@ -2322,10 +2345,10 @@ function shapir(){
                                                 return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                                                 obJSON = snapshot.val();
                                                 console.log(obJSON)
-                                            
+
                                                 if(obJSON.oauth2){
                                                     // console.log("oauth2")
-                    
+
                                                     var tokenPromise;
                                                     var sTokens = JSON.parse(localStorage.getItem('tokens'));
                                                     console.log(sTokens)
@@ -2333,7 +2356,7 @@ function shapir(){
                                                     console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
                                                     if(sTokens[elementsIndex].token!=""){
                                                                 tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
-                                                                .then(token=>{ 
+                                                                .then(token=>{
                                                                     return new Promise((resolve, reject) => {
                                                                         console.log("Token: ",token)
                                                                         $.ajax({
@@ -2353,10 +2376,10 @@ function shapir(){
                                                                                 newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
                                                                                 newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
                                                                                 // this.setState({newArray});
-                
+
                                                                                 localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                 console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                            
+
                                                                                 resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                             },
                                                                             error: function(response, jqXHR, textStatus, errorThrown) {
@@ -2377,7 +2400,7 @@ function shapir(){
                                                                     scope= obJSON.oauth2[0].scope;
                                                                     grant_type= obJSON.oauth2[0].grantType;
                                                                     client_auth= obJSON.oauth2[0].clientAuth;
-                                                                        
+
                                                                     var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
                                                                     var pollTimer = window.setInterval(function() {
                                                                         try {
@@ -2395,7 +2418,7 @@ function shapir(){
                                                                             console.log("error in oauth")
                                                                         }
                                                                     }, 200);
-                                            
+
                                                                     function gup(url, name) {
                                                                         name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
                                                                         var regexS = "[\?&]"+name+"=([^&#]*)";
@@ -2406,9 +2429,9 @@ function shapir(){
                                                                         else
                                                                             return results[1];
                                                                     }//end of gup()
-                                                                        
+
                                                                 })
-                                                                .then(token=>{ 
+                                                                .then(token=>{
                                                                     return new Promise((resolve, reject) => {
                                                                         console.log("Token: ",token)
                                                                         $.ajax({
@@ -2427,11 +2450,11 @@ function shapir(){
                                                                                 newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
                                                                                 newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
                                                                                 // this.setState({newArray});
-                
+
                                                                                 localStorage.setItem('tokens', JSON.stringify(newArray));
                                                                                 console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-                            
-                            
+
+
                                                                                 resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
                                                                             },
                                                                             error: function(response, jqXHR, textStatus, errorThrown) {
@@ -2441,22 +2464,22 @@ function shapir(){
                                                                     })
                                                                 })
                                                             }
-                                        
+
                                                     return tokenPromise
-                
-                                
+
+
                                                 }else{ //no oauth
                                                     // console.log("!!!oauth2")
                                                     result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
                                                     return result;
                                                 }
-                    
+
                                                 })//firebase
                                                 .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                             }
                                             });
                                         //   });
-                
+
                                         }//loop to create methods
                                       }
                                         //remove the fields that are not in the class
@@ -2467,10 +2490,10 @@ function shapir(){
                                             }
                                         }
                                     }//end of else of no array
-                
+
                                     return o;
-                                })         
-                                // return obj; 
+                                })
+                                // return obj;
                             };
 
 
@@ -2495,8 +2518,9 @@ function shapir(){
 
 Mavo.Backend.register($.Class({
     extends: Mavo.Backend,
-    id: "Shapir", 
+    id: "Shapir",
     constructor: function() {
+<<<<<<< HEAD
         this.permissions.on(["read"]); 
         this.service    
         this.type       
@@ -2504,6 +2528,16 @@ Mavo.Backend.register($.Class({
         this.params     
         // this.id //Add mv-source-id
         // this.search //Add mv-source-search    
+=======
+        this.permissions.on(["read"]); // Permissions of this particular backend.
+        this.service    = this.mavo.element.getAttribute("mv-source-service");
+        this.type       = this.mavo.element.getAttribute("mv-source-action");
+        this.action     = this.mavo.element.getAttribute("mv-source-action");
+        this.params     = this.mavo.element.getAttribute("mv-source-params");
+        this.attributes = this.mavo.element.attributes
+        // Add mv-source-id
+        // Add mv-source-search
+>>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
     },
 
     update: function(url, o) { 
@@ -2515,9 +2549,16 @@ Mavo.Backend.register($.Class({
     },
 
     get: function(url) {
+<<<<<<< HEAD
         if(this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
             //constructing one of my global functions from all the mv-source- attributes 
             var func = this.service+'.'+this.action+'('+JSON.stringify(this.params)+')';
+=======
+        if(this.attributes['mv-source-service']){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
+            //constructing one of my global functions from all the mv-source- attributes
+            // var func = this.service+'.'+this.type+'('+this.attributes['mv-source-params'].value+')';
+            var func = this.service+'.'+this.type+'('+JSON.stringify(this.attributes['mv-source-params'].value)+')';
+>>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
             return new Promise(function(resolve, reject) {resolve( eval(func) )});
         }
     },
@@ -2525,7 +2566,7 @@ Mavo.Backend.register($.Class({
     load: function() {
 		//Should return a promise that resolves to the data as an object
             return this.ready
-                .then(() => shapir()) //I added this line to load all the global functions from Shapir library 
+                .then(() => shapir()) //I added this line to load all the global functions from Shapir library
                 .then(() => this.get())
                 .then(response => {
                     if (typeof response != "string") {
@@ -2536,6 +2577,48 @@ Mavo.Backend.register($.Class({
                 });
     },
 
+<<<<<<< HEAD
+=======
+    // Low-level saving code.
+    // serialized: Data serialized according to this.format
+    // path: Path to store data
+    // o: Arbitrary options
+    put: function(serialized, path = this.path, o = {}) {
+        // Returns promise
+    },
+
+    // If your backend supports uploads, this is mandatory.
+    // file: File object to be uploaded
+    // path: relative path to store uploads (e.g. "images")
+    upload: function(file, path) {
+        // Upload code. Should call this.put()
+    },
+
+    // High level function for storing data.
+    // You rarely need to override this, except to avoid serialization.
+    store: function(data, {path, format = this.format} = {}) {
+        // Should return a promise that resolves when the data is saved successfully
+    },
+
+    // Takes care of authentication. If passive is true, only checks if
+    // the user is already logged in, but does not present any login UI.
+    // Typically, you’d call this.login(true) in the constructor
+
+    login: function(passive) {
+        // Typically, you’d check if a user is already authenticated
+        // and return Promise.resolve() if so.
+
+        // Returns promise that resolves when the user has successfully authenticated
+    },
+
+    // Log current user out
+    logout: function() {
+        // Returns promise
+        // return this.oAuthLogout();
+    },
+
+
+>>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
     static: {
         // Mandatory and very important! This determines when your backend is used.
         // value: The mv-storage/mv-source/mv-init value
