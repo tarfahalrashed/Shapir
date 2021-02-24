@@ -235,7 +235,7 @@ function openNav(id) {
     $("#properties-type").append('<option value="'+types[i]+'">'+types[i]+'</option>')
   }
 
-  document.getElementById("mySidenav").style.width = "450px";
+  document.getElementById("mySidenav").style.width = "550px";
   document.getElementById('property-name').innerHTML= id.split('.')[1];
   document.getElementById('property-description').innerHTML= allTheType[typeName][propName].desc.replace(/(<([^>]+)>)/gi, "");;
 
@@ -260,8 +260,8 @@ function openNavType(id) {
   closeNavType();
   closeNavMethod();
 
-  document.getElementById("mySidenavType").style.width = "450px";
-  document.getElementById("mySidenavType").style.padding = "20px";
+  document.getElementById("mySidenavType").style.width = "550px";
+  document.getElementById("mySidenavType").style.padding = "10px";
   // console.log("the name of the type: ", id.getAttribute("id"));
   //document.getElementById('type-name').value= i.getAttribute("id")
   console.log("THE type: ", id);
@@ -269,15 +269,47 @@ function openNavType(id) {
 
   $("#typeN").text(id);
   // $("#siteN").text(site);
-
+  
+  //get tab
+  var siteC = site.charAt(0).toUpperCase() + site.slice(1)
+  $("#sel_siteTitle").text(siteC);
+  $("#sel_obTitle").text(id);
+  $("#sel_site").text(siteC);
+  $("#sel_ob").text(id);
   $("#selected_type").text(id);
+  $("#sel_typeMap").text(id);
 
+  //update tab
+  $("#sel_siteTitle_up").text(siteC);
+  $("#sel_obTitle_up").text(id);
+  $("#sel_site_up").text(siteC);
+  $("#sel_ob_up").text(id);
+  $("#selected_type_up").text(id);
+
+  //remove tab
+  $("#sel_siteTitle_re").text(siteC);
+  $("#sel_obTitle_re").text(id);
+  $("#sel_site_re").text(siteC);
+  $("#sel_ob_re").text(id);
+  $("#selected_type_re").text(id);
+
+   //add tab
+   $("#sel_siteTitle_add").text(siteC);
+   $("#sel_obTitle_add").text(id);
+   $("#sel_site_add").text(siteC);
+   $("#sel_ob_add").text(id);
+   $("#selected_type_add").text(id);
+  
   // $("#apis-type").empty();
 
   $("#accordion").empty()
   $("#accordion-add").empty()
   $("#accordion-remove").empty()
   $("#accordion-update").empty()
+
+  $("#idLabel").hide();
+  $("#mapLabel").hide();
+
 
   for(var i=0; i<scrapirAPIs.length; ++i){
     var urlText = scrapirAPIs[i].url;
@@ -347,7 +379,7 @@ function openNavMethod(elem) {
   closeNavType();
   closeNavMethod();
 
-  document.getElementById("mySidenavMethod").style.width = "450px";
+  document.getElementById("mySidenavMethod").style.width = "550px";
 
   methodName= elem.id.split('.')[1];
   methodParent= elem.id.split('.')[0];//id.split('OBJ')[1];
@@ -358,6 +390,10 @@ function openNavMethod(elem) {
 
   // $("#apis-url-method").empty();
   $("#accordion-method").empty();
+
+
+  $("#sel_site_meth").text(site.charAt(0).toUpperCase() + site.slice(1));
+  $("#sel_ob_meth").text(methodName);
 
   for(var i=0; i<scrapirAPIs.length; ++i){
     var urlText = scrapirAPIs[i].url;
@@ -901,14 +937,23 @@ var arrFields=[], wooSchema={}, site="", temp={};
 
 function siteHasBeenChosen(select){
   
-  $("#step2").show();
+  // $("#site-table tbody").append('<tr data-tt-id="" data-tt-parent-id="" data-tt-branch="true"><td id="butt-td"><select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)"><option value="" selected>Choose Type</option></select></td></tr>')
+                          
+  // $("#site-table tbody").append('<tr data-tt-id="" data-tt-parent-id="" data-tt-branch="true"><td id="butt-td"><select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)"><option value="" selected>Choose Action</option></select></td></tr>')
 
+
+  $("#site-table tbody").append('<tr id="typeMenu" data-tt-id="" data-tt-parent-id="" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center; padding-bottom:5px"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Add Type</option></select></div> </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center;"><select id="" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td></tr>')
+
+  
+  // $("#listTypes").show();
+  // $("#listActions").show();
+
+  $("#step2").show();
   $("#site-objects").empty();
   site = select.options[select.selectedIndex].getAttribute("id");
 
-  $("#desc-site").show();
-  document.getElementById('siteN').innerHTML= '<code>'+site+'</code>'
-
+  // $("#desc-site").show();
+  document.getElementById('siteN').innerHTML= '<code>'+site.charAt(0).toUpperCase() + site.slice(1)+'</code>'
   temp = { "objects":{}, "functions":[] };
 
   // firebase.database().ref('/abstractions/').once('value').then(function(snapshot) {
@@ -922,7 +967,6 @@ function siteHasBeenChosen(select){
   //   });
   // });
 
-
   // var table = document.createElement('table');
   // table.setAttribute('id', type);
   // table.setAttribute('class', 'table table-borderless');
@@ -931,8 +975,7 @@ function siteHasBeenChosen(select){
 
   // $("#tableSiteDiv").append(table)
 
-  // $("#site-table tbody").append('<tr data-tt-id="'+site+'" data-tt-parent-id="'+site+'" data-tt-branch="true"><td id="butt-td"><a href="javascript:;" id="'+site+'" class="btn btn-info" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="getButtonIDSite(this.id)">'+site+'</a></td></tr>')
-  
+
   // $("#site-table tbody").append('<tr><td><p id="schema_header" style="text-align:center">schema.org</p></td> <td><p id="api_header" style="text-align:center">API</p></td> </tr>');
   //methods menu
   // $("#site-table tbody").append('<tr id="'+site+'" data-tt-id="'+site+'" data-tt-parent-id="'+site+'" data-tt-branch="true"><td><div style="display: inline-block; width:150px; text-align:center;"><select id="'+site+'_method-select" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td><td></td></tr>')
@@ -1056,7 +1099,7 @@ function idHasBeenChosed(){
 }
 
 
-var currentURLGetter = "", propList=[], resProplist=[], apiURL;
+var currentURLGetter = "", propList=[], resProplist=[], apiURL, propListType=[];
 
 
 function urlHasBeenChosen(select){
@@ -1066,18 +1109,8 @@ function urlHasBeenChosen(select){
   var resFields;
   var apiTitle = select.getAttribute("id");
   console.log("apiTitle: ", apiTitle);
-
   currentURLGetter = apiTitle
   
-  // ob={
-  //   [currentType]:{
-  //     "apiEndpoint":apiTitle,
-  //     "fields":[]
-  //   }
-  // }
-  // ob.currentType.apiEndpoint=apiTitle;
-  // console.log("OBJ: ", ob)
-
   firebase.database().ref('/apis/').once('value').then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       if(childSnapshot.val().title==apiTitle){
@@ -1128,22 +1161,11 @@ function urlHasBeenChosen(select){
         //change Current type
         console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
         
-        var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL"];
         propList=[]
         for(var j=0; j<typePropertyType[clickedType].length; ++j){
-          // Check if a value exists in the fruits array
-          if(dataTypes.indexOf(typePropertyType[clickedType][j].type) !== -1){
-              // alert("Value exists!")
-              propList.push(typePropertyType[clickedType][j].name)
-          } else{
-             //skip it
+          if(propListType.indexOf(typePropertyType[clickedType][j].name) == -1){//if this property NOT of type object
+            propList.push(typePropertyType[clickedType][j].name)
           }
-          // if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
-          //   //push it
-          //   propList.push(typePropertyType[clickedType][j].name)
-          // }else{
-          //   //skip it
-          // }
         }
 
         console.log("final response ", resProplist);
@@ -1897,19 +1919,12 @@ function methodRadioChecked(){
 }
 
 
-// function doneButton(){
-//   $("#connectDiv").show()
-//   $("#doneDiv").hide()
-// }
-
 var firstType=false, secondType=false, typeList=[], tempObj={}, tempAct={}, tempObjAct={}, gettersList=[]; tempObjSet={}, allTheType={}, listOfTypes=[];
 
 
 function typeHasBeenChosen(select){
 
   $("#prop-list").show();
-  // $("#step3").show();
-  $("#connectDiv").show()
   $("#"+type+"_property-select").empty();
   $("#"+type+"_property-select").append("<option selected>Add Property</option>");
 
@@ -2020,18 +2035,21 @@ function typeHasBeenChosen(select){
   var table = document.createElement('table');
   table.setAttribute('id', type);
   table.setAttribute('class', 'table table-borderless');
+  table.setAttribute('style', 'margin-bottom:0px');
+  
   var tbody= document.createElement('tbody');
   table.append(tbody)
 
   $("#tableDiv").append(table)
 
-  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td> </tr>')
+  // $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td> </tr>')
   // $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center;"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Add Property</option></select></div></td><td><div style="display: inline-block; width:150px; text-align:center;"><select id="'+type+'_method-select" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td><td></td></tr>')
-  $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center; padding-bottom:5px"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Add Property</option></select></div> </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center;"><select id="'+type+'_method-select" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td><td></td></tr>')
+  // $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center; padding-bottom:5px"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Add Property</option></select></div> </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center;"><select id="'+type+'_method-select" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td></tr>')
 
   //OLD WITH ARROWS
-  // $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td> </tr>')
+  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td> </tr>')
   // $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center;"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Add Property</option></select></div></td><td><div style="display: inline-block; width:150px; text-align:center;"><select id="'+type+'_method-select" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td><td></td></tr>')
+  $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center; padding-bottom:5px"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Add Property</option></select></div> </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center;"><select id="'+type+'_method-select" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td></tr>')
 
   // $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td" style="white-space: nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select style="display:inline; width: 120px !important; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Add Property</option></select>&nbsp;<select id="'+type+'_method-select" style="display:inline; width: 120px !important; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></td><td></td></tr>')
 
@@ -2115,24 +2133,21 @@ function saveWoOSchema(){
   }
 
  
-  //for each property
-  // for each type
-  // does the type exists in the listOfTypes
-  // if pageYOffset, highlight with pink!
-
+  //properties of type exisiting objects
   var hasType = false;
   for(p in propType){
     for(t in propType[p].types){
-      console.log("propType[p]: ", propType[p])
-      console.log("listOfTypes: ", listOfTypes)
+      // console.log("propType[p]: ", propType[p])
+      // console.log("listOfTypes: ", listOfTypes)
       if(listOfTypes.indexOf(propType[p].types[t]) !== -1){
-        console.log("propType[p].types[t]: ", propType[p].types[t])
+        propListType.push(propType[p].name)
+        console.log("propListType: ", propListType)
+
         for(let a in as){
           if(as[a].innerHTML == propType[p].name){
             as[a].style.border = "3px solid #f90a69";
           }
         }
-        // newPropType.push(propType[p].name)
       }
     }
   }
@@ -2291,6 +2306,8 @@ var currentType="", propertyList=[], isNew=false, elem="property", isNewM=false,
 function propertyHasBeenChosen(select){
   $("#schema-"+type).empty()
   $("#property-"+type).empty()
+  //show step4
+  $("#connectDiv").show()
 
   var property = select.options[select.selectedIndex].getAttribute("value");
   if(select.options[select.selectedIndex].getAttribute("id")=="new"){
@@ -2331,10 +2348,10 @@ function propertyHasBeenChosen(select){
     for(let t in trs){
       if(trs[t].id == thisType){
         //PROPERTY HERE
-        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td> <td></td> </tr>').insertBefore(trs[t]);
+        // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td> </tr>').insertBefore(trs[t]);
 
         //OLD
-        // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td> <td></td> </tr>').insertBefore(trs[t]);
+        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td> <td></td> </tr>').insertBefore(trs[t]);
         // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td> <td></td> <td id="type-td"><code id="code-type" class="">'+typeP+'</code></td><td id="des">'+descP+'</td></tr>').insertBefore(trs[t]);
 
         break;
@@ -2539,7 +2556,7 @@ function methodHasBeenChosen(select){
 
           temp.functions.push(tempAct[method]);
           
-          $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.'+method+'" value="testVal" href="javascript:;" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td><td></td></tr>')
+          $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.'+method+'" value="testVal" href="javascript:;" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td></tr>')
         }else{
           // tempObjAct[method]= {"query":"", "result":"", "name":""};
           tempObjAct[method]= {"endpoint":"", "object":"", "name":"", "type":method};
@@ -2550,7 +2567,7 @@ function methodHasBeenChosen(select){
 
           for(let t in trs){
             if(trs[t].id == thisType){
-              $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="openNavMethod(this)">'+method+'</a></td></tr>').insertBefore(trs[t]);
+              $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="openNavMethod(this)">'+method+'</a></td></tr>').insertBefore(trs[t]);
               break;
             }
           }

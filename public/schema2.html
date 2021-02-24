@@ -116,9 +116,9 @@
 										<div id="type-list1" class="col-lg-14">
 											<h5><B>Step1.</B> Choose the name of the website</h5>
 											<p > (e.g. youtube)</p>
-											<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
+											<!-- <select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
 												<option selected>Choose website name</option>
-											</select>
+											</select> -->
 											<hr>
 										</div>
 										</br>
@@ -180,7 +180,7 @@
 										</div>
 
 
-											<div id="step3" style="display: none;">
+											<div id="step3" style="">
 												<div id="method-list" class="col-lg-14">
 													<h5 style=" color:black"><B>Step4. [Optional]</B> Are you intertsed in performing an action on the site (e.g. Search for videos on YouTube "Search Action")?</h5>
 												
@@ -246,7 +246,7 @@
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 												</div>
 											</div>
-											<div class="panel-body">
+											<div class="panel-body" style="padding:50px">
 												<!-- <p>Follow the steps on the left to build your data model.</p> -->
 							
 												<!-- begin panel-body -->
@@ -255,26 +255,43 @@
 													<!-- <div id="site-objects" style="display: none;"> </div>
 													</br></br> -->
 
-													<!-- <div class="form-group">
-														<div class="col-xs-4">
-															<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
-																<option selected>Choose website name</option>
+													
+
+														<!-- <div id="listTypes" style="display: none;" style="width:150px; height: 30px;">
+															<select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
+																<option value="" selected>Choose Type</option>
 															</select>
-														</div> 
-													</div>  -->
+														</div>
+
+														<div id="listActions" style="display: none;" style="width:150px; height: 30px;">
+															<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
+																<option value="" selected>Choose Action</option>
+															</select>
+														</div> -->
+													
 
 														<h5 style="display: none;" id="desc-site">Describe the data model of <span id="siteN"></span> and connect it to its API</h5>
-														<!-- <div id="tableSiteDiv" class="table" style="margin-bottom:-15px">
+														
+														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px">
 															<table id="site-table" class="table table-borderless">
 																<tbody>
+																	<tr>
+																		<td>
+																			<div style="display: inline-block; width:150px; text-align:center; padding-bottom:5px">
+																			<select  style="width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-info" onchange="siteHasBeenChosen(this)">
+																				<option style="width:150px; height: 30px;" selected>Choose website</option>
+																			</select>
+																		</div>
+																		</td>
+																	</tr>
 																</tbody>
 															</table>
-														</div> -->
-													</div>
-
-													<div class="form-group row m-b-50">
-														<div id="tableDiv" class="table" style="margin-bottom:-15px">
 														</div>
+													
+
+													<div id="tableDiv" class="form-group row m-b-50" style="margin-bottom:-15px">
+														<!-- <div  class="table">
+														</div> -->
 													</div>
 
 													<!-- step4. was here -->

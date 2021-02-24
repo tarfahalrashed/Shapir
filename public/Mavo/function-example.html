@@ -8,14 +8,28 @@
         
     <body>
         <!-- dailymotion.VideoObject("x7xf8kc") -->
-        <div mv-app="test" mv-source="shapir" mv-source-service="dailymotion" mv-source-action="VideoObject" mv-source-params="x7xf8kc">
-            <!-- [test] -->
+        <div mv-app="test" mv-source="shapir" mv-source-service="dailymotion" mv-source-action="VideoObject" mv-source-params="[id]">
+            <input property="id" />
             <h3 property="name"></h3>
             <p property="creator"></p>
             <p property="channel"></p>
 
             <button mv-action="addToWatchlater()">Add to Watchlater</button>
         </div>
+
+        <!-- <div mv-app="test" mv-source="shapir" mv-source-service="dailymotion" mv-source-action="MusicPlaylist" mv-source-params="x706zx">
+
+            <h3 property="name"></h3>
+
+            <div property="video" mv-multiple>
+                <h3 property="name"></h3>
+                <p property="creator"></p>
+                <p property="channel"></p>
+                <hr>
+            </div>
+            
+        </div>  -->
+
    </body>
    
 </html>

@@ -5,7 +5,8 @@
 
 /* table */
 div#redips-drag table {
-    background-color: #f2f4f5;
+    background-color: white;
+    /* background-color: #f2f4f5; */
     /* border-collapse: collapse; */
     margin: 7px;
     width: 95%;
