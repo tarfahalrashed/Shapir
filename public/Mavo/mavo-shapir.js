@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 // import "./firebase.js";
 import 'https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js';
 import 'https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js';
 
 import {config} from"./firebase-config.js";
 firebase.initializeApp(config);
-=======
-import "./firebase.js";
->>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
 
 function shapir(){
 
@@ -198,14 +194,9 @@ function shapir(){
 
 
                                         //***************************** SETTERS *********************************/
-<<<<<<< HEAD
                                      if(setters){
                                         for(var s=0; s<setters.length; ++s){
                                             // console.log("setter: ", setters[s])   
-=======
-                                        for(s in setters){
-                                            // console.log("setter: ", setters[s])
->>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
                                             var field = setters[s].field; //API endpoint field to be set
                                             var prop;
                                             var setEndpoint =  setters[s].endpoint;
@@ -547,14 +538,9 @@ function shapir(){
 
 
                                     //***************************** SETTERS *********************************/
-<<<<<<< HEAD
                                     if(setters){
                                     for(var s=0; s<setters.length; ++s){
                                         // console.log("setter: ", setters[s])   
-=======
-                                    for(s in setters){
-                                        // console.log("setter: ", setters[s])
->>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
                                         var field = setters[s].field; //API endpoint field to be set
                                         var prop;
                                         var setEndpoint =  setters[s].endpoint;
@@ -1412,14 +1398,9 @@ function shapir(){
 
 
                                         //***************************** SETTERS *********************************/
-<<<<<<< HEAD
                                         if(setters){
                                             for(var s=0; s<setters.length; ++s){
                                             // console.log("setter: ", setters[s])   
-=======
-                                        for(s in setters){
-                                            // console.log("setter: ", setters[s])
->>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
                                             var field = setters[s].field; //API endpoint field to be set
                                             var prop;
                                             var setEndpoint =  setters[s].endpoint;
@@ -1519,12 +1500,8 @@ function shapir(){
                                                 }
                                             });
                                         }
-<<<<<<< HEAD
                                        }
                 
-=======
-
->>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
                                         //***************************** METHODS *********************************/
                                       if(methods){
                                         for(var m=0;  m<methods.length; ++m){
@@ -2520,7 +2497,6 @@ Mavo.Backend.register($.Class({
     extends: Mavo.Backend,
     id: "Shapir",
     constructor: function() {
-<<<<<<< HEAD
         this.permissions.on(["read"]); 
         this.service    
         this.type       
@@ -2528,16 +2504,6 @@ Mavo.Backend.register($.Class({
         this.params     
         // this.id //Add mv-source-id
         // this.search //Add mv-source-search    
-=======
-        this.permissions.on(["read"]); // Permissions of this particular backend.
-        this.service    = this.mavo.element.getAttribute("mv-source-service");
-        this.type       = this.mavo.element.getAttribute("mv-source-action");
-        this.action     = this.mavo.element.getAttribute("mv-source-action");
-        this.params     = this.mavo.element.getAttribute("mv-source-params");
-        this.attributes = this.mavo.element.attributes
-        // Add mv-source-id
-        // Add mv-source-search
->>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
     },
 
     update: function(url, o) { 
@@ -2549,16 +2515,9 @@ Mavo.Backend.register($.Class({
     },
 
     get: function(url) {
-<<<<<<< HEAD
         if(this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
             //constructing one of my global functions from all the mv-source- attributes 
             var func = this.service+'.'+this.action+'('+JSON.stringify(this.params)+')';
-=======
-        if(this.attributes['mv-source-service']){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
-            //constructing one of my global functions from all the mv-source- attributes
-            // var func = this.service+'.'+this.type+'('+this.attributes['mv-source-params'].value+')';
-            var func = this.service+'.'+this.type+'('+JSON.stringify(this.attributes['mv-source-params'].value)+')';
->>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
             return new Promise(function(resolve, reject) {resolve( eval(func) )});
         }
     },
@@ -2577,48 +2536,6 @@ Mavo.Backend.register($.Class({
                 });
     },
 
-<<<<<<< HEAD
-=======
-    // Low-level saving code.
-    // serialized: Data serialized according to this.format
-    // path: Path to store data
-    // o: Arbitrary options
-    put: function(serialized, path = this.path, o = {}) {
-        // Returns promise
-    },
-
-    // If your backend supports uploads, this is mandatory.
-    // file: File object to be uploaded
-    // path: relative path to store uploads (e.g. "images")
-    upload: function(file, path) {
-        // Upload code. Should call this.put()
-    },
-
-    // High level function for storing data.
-    // You rarely need to override this, except to avoid serialization.
-    store: function(data, {path, format = this.format} = {}) {
-        // Should return a promise that resolves when the data is saved successfully
-    },
-
-    // Takes care of authentication. If passive is true, only checks if
-    // the user is already logged in, but does not present any login UI.
-    // Typically, you’d call this.login(true) in the constructor
-
-    login: function(passive) {
-        // Typically, you’d check if a user is already authenticated
-        // and return Promise.resolve() if so.
-
-        // Returns promise that resolves when the user has successfully authenticated
-    },
-
-    // Log current user out
-    logout: function() {
-        // Returns promise
-        // return this.oAuthLogout();
-    },
-
-
->>>>>>> 6c7629301bb13690bd1df4ff4da7b85c7a111f20
     static: {
         // Mandatory and very important! This determines when your backend is used.
         // value: The mv-storage/mv-source/mv-init value
