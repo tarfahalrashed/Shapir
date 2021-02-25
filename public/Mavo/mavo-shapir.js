@@ -2496,22 +2496,16 @@ function shapir(){
 Mavo.Backend.register($.Class({
     extends: Mavo.Backend,
     id: "Shapir",
-    constructor: function() {
-        this.permissions.on(["read"]); 
-        this.service    
-        this.type       
-        this.action     
-        this.params     
+    constructor: function(url, o) {
+        this.permissions.on(["read"]);
+        this.update(url, o);
         // this.id //Add mv-source-id
         // this.search //Add mv-source-search    
     },
 
-    update: function(url, o) { 
+    update: function(url, o) {
         this.super.update.call(this, url, o);
-        this.service    = o.service;
-        this.type       = o.action; 
-        this.action     = o.action;
-        this.params     = o.params; 
+        Object.assign(this, o);
     },
 
     get: function(url) {
