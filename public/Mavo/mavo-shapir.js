@@ -2533,6 +2533,7 @@ Mavo.Backend.register($.Class({
     constructor: function(url, o) {
         this.permissions.on(["read"]);
         this.update(url, o);
+        this.ready = shapir();
         // this.id //Add mv-source-id
         // this.search //Add mv-source-search
     },
@@ -2542,26 +2543,13 @@ Mavo.Backend.register($.Class({
         Object.assign(this, o);
     },
 
-    get: function(url) {
+    get: async function(url) {
         if (this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
             //constructing one of my global functions from all the mv-source- attributes
             var func = this.service+'.'+this.action+'('+JSON.stringify(this.params)+')';
-            return new Promise(function(resolve, reject) {resolve( eval(func) )});
+            let ret = await eval(func);
+            return ret;
         }
-    },
-
-    load: function() {
-		//Should return a promise that resolves to the data as an object
-            return this.ready
-                .then(() => shapir()) //I added this line to load all the global functions from Shapir library
-                .then(() => this.get())
-                .then(response => {
-                    if (typeof response != "string") {
-                        return response;
-                    }
-                    response = response.replace(/^\ufeff/, ""); // Remove Unicode BOM
-                    return this.format.parse(response);
-                });
     },
 
     static: {
