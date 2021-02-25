@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>      
+    <head>
         <link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
         <script src="https://get.mavo.io/mavo.js"></script>
         <script type="module" src="mavo-shapir.js"></script>
     </head>
-        
+
     <body>
 
+        <!-- All search functions will have a search parameter, and it will be positional. So in Mavo, we will have mv-source-search="Music" -->
+        <!-- OR in mv-value="songkick.searchVenues('Music')" -->
         <div mv-bar="none" mv-app="searchSongkick" mv-source="shapir" mv-source-service="songkick" mv-source-action="searchVenues" mv-source-params="{'query': 'music'}">
             <meta mv-multiple property="results">
             <meta mv-multiple property="events" mv-value="results.event">
         </div>
-        
+
         <div mv-bar="none" mv-app="searchSeatgeek" mv-source="shapir" mv-source-service="seatgeek" mv-source-action="searchVenues" mv-source-params="{'q': 'music'}">
             <meta mv-multiple property="results">
             <meta mv-multiple property="events" mv-value="results.event">
         </div>
-        
+
         <div mv-bar="none" mv-app="searchTicketmaster" mv-source="shapir" mv-source-service="ticketmaster" mv-source-action="searchVenues" mv-source-params="{'keyword': 'music'}">
             <meta mv-multiple property="results">
             <meta mv-multiple property="events" mv-value="results.event">
         </div>
-        
+
         <div mv-app="main">
             <!-- <label>Search:</label>
             <input property="searchTerm" mv-value="Music"/> -->
-            
+
             <h1>Music Venues</h1>
-            <div property="venue" mv-multiple mv-value="list(searchSongkick.results, searchSeatgeek.results, searchTicketmaster.results)"> 
+            <div property="venue" mv-multiple mv-value="list(searchSongkick.results, searchSeatgeek.results, searchTicketmaster.results)">
                 <h1 property="name"></h1>
                 <a property="url">[url]</a>
                 <p property="maximumAttendeeCapacity"></p>
@@ -47,5 +49,5 @@
         </div>
 
 </body>
-   
+
 </html>
