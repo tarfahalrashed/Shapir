@@ -2055,11 +2055,6 @@ function typeHasBeenChosen(select){
   //Next to each other
   $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <div style="display:flex;">   <div style="display:flex;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  <div  id="step2_hint" class="hint-content do--split-children" ><p>For each type you add, choose the properties and methods.</p></div></div></div> </td></tr>')
 
-
-
-
-
-
   jQuery('.selectpicker').selectpicker('refresh');
 
   setTimeout(() => {

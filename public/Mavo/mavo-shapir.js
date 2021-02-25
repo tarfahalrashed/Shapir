@@ -195,9 +195,6 @@ async function shapir(){
                                     }
                                 }
 
-                                //***************************** GETTERS *********************************/
-
-
                                 //***************************** SETTERS *********************************/
                              if (setters){
                                 for (var s=0; s<setters.length; ++s){
@@ -312,29 +309,14 @@ async function shapir(){
                                     var mParams = methods[m].params;
 
                                     // add the imageId
-                                    Object.defineProperty(ob, mName.toString(), { value: function(mArgs) {
-                                        // var paramLen = Object.entries(mArgs).length;
-                                        // // console.log("paramLen: ", paramLen)
-
-                                        // for (const [key, value] of Object.entries(mArgs)) {
-                                        //     --paramLen
-                                        //     console.log(`${key}: ${value}`);
-                                        //     mParamList+= key
-                                        //     mParamList+="="
-                                        //     mParamList+= value
-                                        //     if (paramLen>0){
-                                        //         mParamList+="&"
-                                        //     }
-                                        // }
+                                    Object.defineProperty(ob, mName.toString(), {enumerable: true, value: function(mArgs) {
 
                                         if (mArgs.length>0){
                                             if (mParams){
                                                 for (var p=0; p<mParams.length; ++p){
-                                                    //Object.entries(mParams[p]).forEach(([key, value]) => {
-                                                        mParamList+=mParams[p]//`${key}`
-                                                        mParamList+="="
-                                                        mParamList+=mArgs[p]//THIS ASSUMES THAT id value will be sent
-                                                    // });
+                                                    mParamList+=mParams[p]
+                                                    mParamList+="="
+                                                    mParamList+=mArgs[p]
                                                     if (p+1<mParams.length){
                                                         mParamList+="&"
                                                     }
@@ -545,8 +527,6 @@ async function shapir(){
                                 }
                             }//end of for loop properties
 
-                            //***************************** GETTERS *********************************/
-
 
                             //***************************** SETTERS *********************************/
                             if (setters){
@@ -662,83 +642,73 @@ async function shapir(){
                                 var mEndpoint = methods[m].endpoint;
                                 // var mParams = methods[m].params;
 
-                                Object.defineProperty(o, mName.toString(), { value: function(mArgs) {
-                                    // if (mParams){
-                                    //     for (var p=0; p<mParams.length; ++p){
-                                    //         //Object.entries(mParams[p]).forEach(([key, value]) => {
-                                    //             mParamList+=mParams[p]//`${key}`
-                                    //             mParamList+="="
-                                    //             mParamList+=mArgs[p]
-                                    //         // });
-                                    //         if (p+1<mParams.length){
-                                    //             mParamList+="&"
-                                    //         }
-                                    //     }
-                                    // }
+                                Object.defineProperty(o, mName.toString(), {enumerable: true, value: function(mArgs) {
 
-                                    var paramLen = Object.entries(mArgs).length;
-                                    // console.log("paramLen: ", paramLen)
-
-                                    for (const [key, value] of Object.entries(mArgs)) {
-                                        --paramLen
-                                        console.log(`${key}: ${value}`);
-                                        mParamList+= key
-                                        mParamList+="="
-                                        mParamList+= value
-                                        if (paramLen>0){
-                                            mParamList+="&"
+                                    if(mArgs){
+                                        if(mParams){
+                                            for(var p=0; p<mParams.length; ++p){
+                                                mParamList+=mParams[p]
+                                                mParamList+="="
+                                                mParamList+=mArgs[p]
+                                                if(p+1<mParams.length){
+                                                    mParamList+="&"
+                                                }
+                                            }
                                         }
+                                    }else{
+                                        mParamList+=mParams[0]
+                                        mParamList+="="
+                                        mParamList+=o[typeId];
                                     }
 
-                                    console.log("mParamList: ", mParamList)
+                                    // console.log("mParamList: ", mParamList)
                                     return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                                     obJSON = snapshot.val();
-                                    console.log(obJSON)
+                                    // console.log(obJSON)
 
                                     if (obJSON.oauth2){
                                         // console.log("oauth2")
-
                                         var tokenPromise;
-                                        var sTokens = JSON.parse(localStorage.getItem('tokens'));
-                                        console.log(sTokens)
-                                        const elementsIndex = sTokens.findIndex(element => element.site == site)
-                                        console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
-                                        if (sTokens[elementsIndex].token!=""){
-                                                    tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
-                                                    .then(token=>{
-                                                        return new Promise((resolve, reject) => {
-                                                            console.log("Token: ",token)
-                                                            $.ajax({
-                                                                url: token_url,
-                                                                method: "POST",
-                                                                data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
-                                                                success: function(response) {
-                                                                    console.log("response: ",response);
-                                                                    tok = response.access_token;
-                                                                    expires_in = response.expires_in;
-                                                                    console.log("tok: ", tok)
-                                                                    console.log("expires_in: ", expires_in)
-                                                                    // localStorage.setItem('tokens', JSON.stringify(sitesToken));
-                                                                    // console.log("tokens: ", localStorage.getItem('tokens'));
-                                                                    //const elementsIndex = this.sTokens.findIndex(element => element.site == site)
-                                                                    let newArray = [...sTokens]
-                                                                    newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
-                                                                    newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
-                                                                    // this.setState({newArray});
+                                        // var sTokens = JSON.parse(localStorage.getItem('tokens'));
+                                        // console.log(sTokens)
+                                        // const elementsIndex = sTokens.findIndex(element => element.site == site)
+                                        // console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
+                                        // if (sTokens[elementsIndex].token!=""){
+                                        //             tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
+                                        //             .then(token=>{
+                                        //                 return new Promise((resolve, reject) => {
+                                        //                     console.log("Token: ",token)
+                                        //                     $.ajax({
+                                        //                         url: token_url,
+                                        //                         method: "POST",
+                                        //                         data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                        //                         success: function(response) {
+                                        //                             console.log("response: ",response);
+                                        //                             tok = response.access_token;
+                                        //                             expires_in = response.expires_in;
+                                        //                             console.log("tok: ", tok)
+                                        //                             console.log("expires_in: ", expires_in)
+                                        //                             // localStorage.setItem('tokens', JSON.stringify(sitesToken));
+                                        //                             // console.log("tokens: ", localStorage.getItem('tokens'));
+                                        //                             //const elementsIndex = this.sTokens.findIndex(element => element.site == site)
+                                        //                             let newArray = [...sTokens]
+                                        //                             newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
+                                        //                             newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
+                                        //                             // this.setState({newArray});
 
-                                                                    localStorage.setItem('tokens', JSON.stringify(newArray));
-                                                                    console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
+                                        //                             localStorage.setItem('tokens', JSON.stringify(newArray));
+                                        //                             console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
 
-                                                                    resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
-                                                                },
-                                                                error: function(response, jqXHR, textStatus, errorThrown) {
-                                                                    console.log("error: ",response);
-                                                                }
-                                                            })
-                                                        })
-                                                    })
-                                                }
-                                                else {
+                                        //                             resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
+                                        //                         },
+                                        //                         error: function(response, jqXHR, textStatus, errorThrown) {
+                                        //                             console.log("error: ",response);
+                                        //                         }
+                                        //                     })
+                                        //                 })
+                                        //             })
+                                        //         }
+                                        //         else {
                                                     tokenPromise= new Promise((resolve, reject) => {
                                                         console.log("auth function");
                                                         auth_url= obJSON.oauth2[0].authURL;
@@ -813,7 +783,7 @@ async function shapir(){
                                                             })
                                                         })
                                                     })
-                                                }
+                                                //}
 
                                         return tokenPromise
 
@@ -1085,9 +1055,6 @@ async function shapir(){
 
                                         }
                                     }
-
-                                    //***************************** GETTERS *********************************/
-
 
                                     //***************************** SETTERS *********************************/
                                     // if (setters){
@@ -1415,8 +1382,6 @@ async function shapir(){
                                         });
                                     }
                                 }//end of for loop properties
-
-                                //***************************** GETTERS *********************************/
 
 
                                 //***************************** SETTERS *********************************/
@@ -1872,9 +1837,6 @@ async function shapir(){
                                         }
                                     }
 
-                                    //***************************** GETTERS *********************************/
-
-
                                     //***************************** SETTERS *********************************/
                                     for (s in setters){
                                         // console.log("setter: ", setters[s])
@@ -2197,7 +2159,7 @@ async function shapir(){
                                             }
                                         });
 
-                                        //*** if you want to remove the getter, replce iti with this
+                                        //*** if you want to remove the getter, replce it with this
                                         // o[propType]= function(){return ""};
                                         // (async function(){
                                         //     o[propType] = await firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
@@ -2209,8 +2171,6 @@ async function shapir(){
 
                                     }
                                 }//end of for loop properties
-
-                                //***************************** GETTERS *********************************/
 
 
                                 //***************************** SETTERS *********************************/
