@@ -309,7 +309,10 @@ async function shapir(){
                                     var mParams = methods[m].params;
 
                                     // add the imageId
-                                    Object.defineProperty(ob, mName.toString(), {enumerable: true, value: function(mArgs) {
+                                    Object.defineProperty(ob, mName.toString(), {
+                                        enumerable: true,
+                                        configurable: true,
+                                        value: function(mArgs) {
 
                                         if (mArgs.length>0){
                                             if (mParams){
@@ -642,7 +645,10 @@ async function shapir(){
                                 var mEndpoint = methods[m].endpoint;
                                 // var mParams = methods[m].params;
 
-                                Object.defineProperty(o, mName.toString(), {enumerable: true, value: function(mArgs) {
+                                Object.defineProperty(o, mName.toString(), {
+                                    enumerable: true,
+                                    configurable: true,
+                                    value: function(mArgs) {
 
                                     if(mArgs){
                                         if(mParams){
@@ -1371,6 +1377,7 @@ async function shapir(){
                                         this.status = {};
                                         Object.defineProperty(o, propType, {
                                             enumerable: true,
+                                            configurable: true,
                                             get: function() {
                                                 let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                                     console.log("typeOb3: ", snapshot.val())
