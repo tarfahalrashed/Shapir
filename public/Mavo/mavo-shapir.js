@@ -2525,7 +2525,7 @@ async function shapir(){
     return Promise.all(results);
 }
 
-
+Mavo.dependencies.push(shapir());
 
 Mavo.Backend.register($.Class({
     extends: Mavo.Backend,
