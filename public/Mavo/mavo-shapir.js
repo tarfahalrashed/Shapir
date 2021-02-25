@@ -1,13 +1,18 @@
-// import "./firebase.js";
-import 'https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js';
-import 'https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js';
+import {config} from "./firebase-config.js";
 
-import {config} from"./firebase-config.js";
-firebase.initializeApp(config);
+let firebaseLoaded = Promise.all([
+    $.include(self.firebase, "https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"),
+    $.include(self.firebase, "https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js")
+]).then(() => {
+    firebase.initializeApp(config);
+});
 
-function shapir(){
 
+
+async function shapir(){
     var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [];
+
+    await firebaseLoaded;
 
     return firebase.database().ref('/abstractions')
     .once('value')
