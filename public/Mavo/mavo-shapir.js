@@ -2513,8 +2513,7 @@ Mavo.Backend.register($.Class({
     get: async function(url) {
         if (this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
             //constructing one of my global functions from all the mv-source- attributes
-            var func = this.service+'.'+this.action+'('+JSON.stringify(this.params)+')';
-            let ret = await eval(func);
+            let ret = await window[this.service][this.action](this.params);
             return ret;
         }
     },
