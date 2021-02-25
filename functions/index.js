@@ -9,6 +9,8 @@ var https = require('https');
 const axios = require('axios');
 
 var app = express();
+// import {shapir} from "../public/shapir.js";
+
 
 app.get("/schemaOrg/:name", (req, res, next) => {
 
@@ -26,5 +28,15 @@ app.get("/schemaOrg/:name", (req, res, next) => {
   })//cors
 
 })
+
+
+app.get("/api/:type", (req, res, next) => {
+  // (async function(){
+  //   await shapir();
+  //   res.send(await dailymotion.VideoObject("x7xf8kc"))
+  // })()
+
+})
+
 
 exports.app = functions.https.onRequest(app);

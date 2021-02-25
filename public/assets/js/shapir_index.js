@@ -1128,7 +1128,15 @@ function resultTypeHasBeenChosen(select){
 
 
 function idHasBeenChosed(){
-  $("#mapLabel").show()
+  $("#mapLabel").show();
+
+  // $("#fields-select").empty();
+  // $("#fields-select").append("<option selected>Choose field</option>");
+
+  // for(var f=0; f<resProplist.length; ++f){
+  //   $("#fields-select").append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
+  // }
+  // jQuery('.selectpicker').selectpicker('refresh');
 }
 
 
@@ -1733,32 +1741,76 @@ function saveTypeConfig(){
   temp.objects[clickedType].construct.self.id= idValue; //get the value of the chosen ID
   temp.objects[clickedType].properties=[]
 
+  //Go over the clicked table rows
+  var typeTable = document.getElementById(clickedType);
+  var typeTbody = typeTable.getElementsByTagName("TBODY")[0];
+  var tableTrs = typeTbody.getElementsByTagName("TR");
+  console.log("tableTrs: ", tableTrs)
+  //Insert the API URL next to the type
   var rowType = document.getElementById(clickedType+'_row');
   var typeCell1 = rowType.insertCell(1);
   typeCell1.innerHTML =  '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
 
-  var table = document.getElementById("table1");
-  for (var i = 0, row; row = table.rows[i]; i++) {
-    //iterate through rows
-    if(row.cells[1].getElementsByClassName('redips-drag').length==0){
+  //Insert a drop down menu next to each property (not method)
+  for(var i=1; i<tableTrs.length; ++i){
+    // console.log("tableTrs[i].id: ", tableTrs[i].id)
+    if(propList.indexOf(tableTrs[i].id.split('_')[1]) == -1){//if a method and not a property
+      continue;
     }else{
-      console.log("col[0]: ", row.cells[0].textContent);
-      console.log("col[1]: ", row.cells[1].getElementsByClassName('redips-drag').item(0).innerHTML)
-      var f=row.cells[0].textContent
-      var p=row.cells[1].getElementsByClassName('redips-drag').item(0).innerHTML
+      let rowProperty = document.getElementById(tableTrs[i].id);
+      let cellField1 = rowProperty.insertCell(1);
 
-      temp.objects[clickedType].properties.push({
-        field:f,
-        property:p
-      })
+      // let div = document.getElementById('fields_');
+      // clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+      // clone.id = "fields_" + tableTrs[i].id;
+      // $(clone).find('select').attr("id", "fields-select_"+tableTrs[i].id);
+      // console.log("CLONE:", clone)
+      // cellField1.appendChild(clone)
+      cellField1.innerHTML =  '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange=""><option selected>Choose field</option></select></div>';
 
-      var row = document.getElementById(clickedType+'_'+row.cells[1].getElementsByClassName('redips-drag').item(0).innerHTML);
-      var cell1 = row.insertCell(1);
-      cell1.innerHTML =  '<a href="javascript:;" class="btn btn-default disabled" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="">'+f+'</a>'
-
+      for(var f=0; f<resProplist.length; ++f){
+        $("#fields_"+tableTrs[i].id).append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
+      }
     }
-
   }
+
+  for(var f=0; f<resProplist.length; ++f){
+    $("#fields-select").append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
+  }
+  jQuery('.selectpicker').selectpicker('refresh');
+
+//drop down of all resProplist excluding the id chosen idValue
+
+  // console.log("final response ", resProplist);
+  // console.log("final properties ", propList);
+
+  // var table = document.getElementById("table1");
+  // for (var i = 0, row; row = table.rows[i]; i++) {
+  //   //iterate through table1 rows
+  //   if(row.cells[1].getElementsByClassName('redips-drag').length==0){
+  //     //do nothing
+  //   }else{
+  //     console.log("col[0]: ", row.cells[0].textContent);
+  //     console.log("col[1]: ", row.cells[1].getElementsByClassName('redips-drag').item(0).innerHTML)
+  //     var f=row.cells[0].textContent
+  //     var p=row.cells[1].getElementsByClassName('redips-drag').item(0).innerHTML
+
+  //     temp.objects[clickedType].properties.push({
+  //       field:f,
+  //       property:p
+  //     })
+
+  //     var row = document.getElementById(clickedType+'_'+row.cells[1].getElementsByClassName('redips-drag').item(0).innerHTML);
+  //     var cell1 = row.insertCell(1);
+  //     console.log("row: ", row);
+  //     console.log("cell1: ", cell1);
+
+  //     cell1.innerHTML =  '<a href="javascript:;" class="btn btn-default disabled" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="">'+f+'</a>'
+
+  //   }
+  // }//end for loop
+
+  //for each type
 
 
   console.log("temp after save", temp.objects[clickedType]);
@@ -2078,12 +2130,7 @@ function typeHasBeenChosen(select){
   $("#tableDiv").append(table)
 
   //OLD WITH ARROWS
-  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:200px; height: 30px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td> </tr>')
-  // $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center;"><select style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option style="width:150px; height: 30px;" value="" selected>Add Property</option></select></div></td><td><div style="display: inline-block; width:150px; text-align:center;"><select id="'+type+'_method-select" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td><td></td></tr>')
-
-  // $("#"+type+" tbody").append('<tr id="'+type+'_row"><td><button class="btn"><i class="fa fa-plus"></i></button></td></tr>');
-
-  // $("#"+type+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:100px; text-align:center; padding-bottom:5px"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div> </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="display: inline-block; width:150px; text-align:center;"><select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="methodHasBeenChosen(this)"><option selected>Add Method</option></select></div></td></tr>')
+  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 30px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>      <td><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Next to each other
   if(firstType){
@@ -2374,7 +2421,7 @@ function propertyHasBeenChosen(select){
     for(let t in trs){
       if(trs[t].id == thisType){
         // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td></tr>').insertBefore(trs[t]);
-        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:240px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td></tr>').insertBefore(trs[t]);
+        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:240px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>  <td><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
         break;
       }
     }
@@ -2394,7 +2441,7 @@ function propertyHasBeenChosen(select){
         // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td> </tr>').insertBefore(trs[t]);
 
         //OLD
-        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td> <td></td> </tr>').insertBefore(trs[t]);
+        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td> <td><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
         // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td> <td></td> <td id="type-td"><code id="code-type" class="">'+typeP+'</code></td><td id="des">'+descP+'</td></tr>').insertBefore(trs[t]);
 
         break;
@@ -2582,7 +2629,7 @@ function methodHasBeenChosen(select){
 
           for(let t in trs){
             if(trs[t].id == thisType){
-              $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:240px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="openNavMethod(this)">'+method+'</a></td></tr>').insertBefore(trs[t]);
+              $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:240px; height: 30px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="openNavMethod(this)">'+method+'</a></td>  <td><button id="'+thisType+'_'+child+'" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
               break;
             }
           }
@@ -2781,14 +2828,18 @@ function addNewMethod(){
 
 
 function deleteRow(row) {
+  // console.log("row ID: ", row.id)
+  var rowID = row.id.split('_close')[0];
+  var tableID= rowID.split('_')[0]
 
-  var i = row.parentNode.parentNode.rowIndex;
-  document.getElementById('requestTabel').deleteRow(i);
-
-  var paramName = row.parentNode.parentNode.childNodes[0].childNodes[0].value;
+  if(rowID.includes('_row')){//remove the whole type table
+    document.getElementById(tableID).remove();
+  }else{//remove this row
+    var i = row.parentNode.parentNode.rowIndex;
+    document.getElementById(tableID).deleteRow(i);
+  }
 
 }
-
 
 
 function matchFeildsToProperties(select){

@@ -166,34 +166,34 @@
 
 											</br>
 
-											<div id="prop-list" style="display:none" class="col-lg-14">
+											<!-- <div id="prop-list" style="display:none" class="col-lg-14">
 												<h5 style=" color:black"><B>Step3.</B> Under each type in middle pane, choose the properties and methods.</h5>
 												<p >(e.g. For VideoObject type, you can choose the <I>name</I>, <I>description</I> and <I>url</I>)</p>
 												<hr>
-											</div>
+											</div> -->
 
 
-										<div id="connectDiv" style="display:none">
+										<!-- <div id="connectDiv" style="display:none">
 											</br>
 											<h5 id="beforeDone"><B>Step4.</B> Connect to the API when you are done describing your data model. </h5>
 											<h5 id="afterDone" style="display:none">&nbsp;<B>Step4. </B> Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</h5>
 											<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a>
-										</div>
+										</div> -->
 
 
-											<div id="step3" style="">
+											<!-- <div id="step3" style="">
 												<div id="method-list" class="col-lg-14">
 													<h5 style=" color:black"><B>Step4. [Optional]</B> Are you intertsed in performing an action on the site (e.g. Search for videos on YouTube "Search Action")?</h5>
 
 													<div id="method-site" >
 														<p style=" margin-bottom:5px; margin-top:15px"></p>
-														<!-- <select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
+														<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
 															<option value="" selected>Choose Action</option>
-														</select> -->
+														</select>
 													</div>
 													</br>
 												</div>
-											</div>
+											</div> -->
 
 
 
@@ -309,7 +309,7 @@
 														</div> -->
 													</div>
 
-													<table id="type-method" class="table table-borderless" style="margin-top:15px">
+													<table id="type-method" class="table table-borderless" style="margin-top:15px;">
 														<tbody>
 															<tr id="site-row2" style="display:none">
 																<td style="display:flex; flex-wrap:wrap;">
@@ -319,7 +319,7 @@
 
 																			<div style="display:flex;">
 																				<div>
-																					&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
+																					&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
 																				</div>
 																				<div style="width:240px; text-align:center; ">
 																					<select  id="type-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
@@ -336,11 +336,12 @@
 
 																</td>
 															</tr>
+
 															<tr  id="site-row3" style="display:none;">
 																<td style="display:flex; flex-wrap:wrap;">
 																	<div style="display:flex;">
 																		<div>
-																		&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
+																		&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
 																	</div>
 																	<div style="width:240px; text-align:center; ">
 																		<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
@@ -351,6 +352,21 @@
 															</tr>
 														</tbody>
 													</table>
+
+												</br>
+													<div id="connectDiv" style="display:none">
+														<h5 id="beforeDone">Connect to the API when you are done describing your data model. </h5>
+														<h5 id="afterDone" style="display:none">Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</h5>
+														<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a>
+													</div>
+
+													<div style="display: none;">
+														<div id="fields_" style="width:240px; height:30px; text-align:center;">
+															<select id="fields-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="">
+																<option selected>Choose field</option>
+															</select>
+														</div>
+													</div>
 
 													<!-- step4. was here -->
 
