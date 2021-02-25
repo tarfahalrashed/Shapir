@@ -201,7 +201,7 @@ async function shapir(){
                                         //***************************** SETTERS *********************************/
                                      if(setters){
                                         for(var s=0; s<setters.length; ++s){
-                                            // console.log("setter: ", setters[s])   
+                                            // console.log("setter: ", setters[s])
                                             var field = setters[s].field; //API endpoint field to be set
                                             var prop;
                                             var setEndpoint =  setters[s].endpoint;
@@ -545,7 +545,7 @@ async function shapir(){
                                     //***************************** SETTERS *********************************/
                                     if(setters){
                                     for(var s=0; s<setters.length; ++s){
-                                        // console.log("setter: ", setters[s])   
+                                        // console.log("setter: ", setters[s])
                                         var field = setters[s].field; //API endpoint field to be set
                                         var prop;
                                         var setEndpoint =  setters[s].endpoint;
@@ -1405,7 +1405,7 @@ async function shapir(){
                                         //***************************** SETTERS *********************************/
                                         if(setters){
                                             for(var s=0; s<setters.length; ++s){
-                                            // console.log("setter: ", setters[s])   
+                                            // console.log("setter: ", setters[s])
                                             var field = setters[s].field; //API endpoint field to be set
                                             var prop;
                                             var setEndpoint =  setters[s].endpoint;
@@ -1506,7 +1506,7 @@ async function shapir(){
                                             });
                                         }
                                        }
-                
+
                                         //***************************** METHODS *********************************/
                                       if(methods){
                                         for(var m=0;  m<methods.length; ++m){
@@ -2505,7 +2505,7 @@ Mavo.Backend.register($.Class({
         this.permissions.on(["read"]);
         this.update(url, o);
         // this.id //Add mv-source-id
-        // this.search //Add mv-source-search    
+        // this.search //Add mv-source-search
     },
 
     update: function(url, o) {
@@ -2515,7 +2515,7 @@ Mavo.Backend.register($.Class({
 
     get: function(url) {
         if(this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
-            //constructing one of my global functions from all the mv-source- attributes 
+            //constructing one of my global functions from all the mv-source- attributes
             var func = this.service+'.'+this.action+'('+JSON.stringify(this.params)+')';
             return new Promise(function(resolve, reject) {resolve( eval(func) )});
         }
