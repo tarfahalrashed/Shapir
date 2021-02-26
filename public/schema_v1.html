@@ -6,7 +6,7 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-
+	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<link href="assets/css/default/app.min.css" rel="stylesheet" />
@@ -36,11 +36,9 @@
 
 	<link href="css/jsoneditor.css" rel="stylesheet" type="text/css">
 	<script src="assets/js/jsoneditor.js"></script>
-
+	
 	<!-- ================== redips-drag STYLE ================== -->
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
-
-	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
 
 	<script type="text/javascript" src="assets/js/redips-drag-min.js"></script>
 	<script type="text/javascript" src="assets/js/script.js"></script>
@@ -53,7 +51,7 @@
 		<span class="spinner"></span>
 	</div>
 	<!-- end #page-loader -->
-
+	
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-content-full-height">
 		                           <!-- page-container fade page-sidebar-fixed page-header-fixe -->
@@ -68,7 +66,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button> -->
-
+				
 			<!-- </div> -->
 			<a href="index.html" class="navbar-brand">
 				<!-- <span class="brand-logo"></span> -->
@@ -87,9 +85,9 @@
 			<!-- end header-nav -->
 		</div>
 		<!-- end #header -->
+		
 
-
-
+		
 		<!-- begin #content -->
 		<div id="content" class="content content-full-width">
 			<!-- begin vertical-box -->
@@ -112,10 +110,10 @@
 								<div class="vertical-box-inner-cell"style="position: relative; overflow: hidden; width: auto; height: 100%;">
 									<!-- begin scrollbar -->
 									<div data-height="100%" class="wrapper">
-										<!-- <h4 style="color:black"><B>Follow these steps to ....?</B></h4>
-										</br> -->
+										<h4 style="color:black"><B>Follow these steps to ....?</B></h4>
+										</br>
 
-										<!-- <div id="type-list1" class="col-lg-14">
+										<div id="type-list1" class="col-lg-14">
 											<h5><B>Step1.</B> Choose the name of the website</h5>
 											<p > (e.g. youtube)</p>
 											<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
@@ -123,68 +121,69 @@
 											</select>
 											<hr>
 										</div>
-										</br> -->
+										</br>
 
 
 									<div id="step2" style="display: none;">
 
-											<!-- <div id="type-list" class="col-lg-14">
-												<h5 style=" color:black"><B>Step2.</B> Choose the types of data you want to retrieve/manage in this website. Check the <a href="https://schema.org/docs/full.html" target="_blank">list of types</a> in schema.org</h5>
+											<div id="type-list" class="col-lg-14">
+												<h5 style=" color:black"><B>Step2.</B> Choose the types of data you want to retrieve/manage in this website. Check the <a href="https://schema.org/docs/full.html" target="_blank">list of types</a> in schema.org</h5> 
 												<p style="color:black;">(e.g. Choose VideoObject to search for videos or get a specific video from youtube). </p>
 												<select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
 													<option value="" selected>Choose Type</option>
 												</select>
 											</div>
-											</br> -->
-
+	
+											</br>
+	
 											<div id="schema-desc" class="col-lg-14" style="padding-left:15px; display:none">
-
+										
 												<div style="padding-bottom: 5px;">
 													<p style="display: inline; ">Type Page:</p>
 													<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset; display: inline; padding-bottom: 10px;"></a>
 												</div>
-
+											
 												<div style="padding-bottom: 5px;">
 													<p style="display: inline; ">Type Descreption:</p>
 													<p id="schemaDesc" style="display: inline;"></p>
 												</div>
-
+											
 												<div id="jsonld-schema" style="display: none;">
 													<p style="display: inline;">Usage example encoded as JSON-LD</p>
 													<a id="exampleLink" href="javascript:;" onclick="showOrHideExample()" style="font-weight: bold; font-style: unset; display: inline; padding-bottom: 10px;">(show)</a>
 
-													<pre id="json" style="font-size: 0.9em; padding-top: 0px; height: 320px; display: none;">
+													<pre id="json" style="font-size: 0.9em; padding-top: 0px; height: 320px; display: none;"> 
 														<code  id="hereCode" class="language-json load">
 														</code>
 													</pre>
 												</div>
-
+									
 
 												<hr>
 											</div>
-
+											
 
 											</br>
 
-											<!-- <div id="prop-list" style="display:none" class="col-lg-14">
+											<div id="prop-list" style="display:none" class="col-lg-14">
 												<h5 style=" color:black"><B>Step3.</B> Under each type in middle pane, choose the properties and methods.</h5>
 												<p >(e.g. For VideoObject type, you can choose the <I>name</I>, <I>description</I> and <I>url</I>)</p>
 												<hr>
-											</div> -->
+											</div>
+	
 
-
-										<!-- <div id="connectDiv" style="display:none">
-											</br>
+										<div id="connectDiv" style="display:none">
+											</br> 
 											<h5 id="beforeDone"><B>Step4.</B> Connect to the API when you are done describing your data model. </h5>
 											<h5 id="afterDone" style="display:none">&nbsp;<B>Step4. </B> Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</h5>
 											<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a>
-										</div> -->
+										</div>
 
 
-											<!-- <div id="step3" style="">
+											<div id="step3" style="display: none;">
 												<div id="method-list" class="col-lg-14">
 													<h5 style=" color:black"><B>Step4. [Optional]</B> Are you intertsed in performing an action on the site (e.g. Search for videos on YouTube "Search Action")?</h5>
-
+												
 													<div id="method-site" >
 														<p style=" margin-bottom:5px; margin-top:15px"></p>
 														<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
@@ -193,12 +192,12 @@
 													</div>
 													</br>
 												</div>
-											</div> -->
+											</div>
 
 
 
 										</div>
-
+										
 										<!-- You got the bottom -->
 									</div>
 									<!-- end scrollbar -->
@@ -231,7 +230,7 @@
 								<div class="vertical-box-inner-cell ">
 									<!-- begin scrollbar -->
 									<div data-scrollbar="true" data-height="100%" class="wrapper ">
-
+			
 									  <!-- <h1 class="page-header">Page with Wide Sidebar <small>header small text goes here...</small></h1> -->
 
 										<!-- begin panel -->
@@ -247,124 +246,34 @@
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 												</div>
 											</div>
-											<div class="panel-body" style="padding:50px; padding-left:100px">
+											<div class="panel-body">
 												<!-- <p>Follow the steps on the left to build your data model.</p> -->
-
+							
 												<!-- begin panel-body -->
 												<div class="panel-body panel-form">
-
+												
 													<!-- <div id="site-objects" style="display: none;"> </div>
 													</br></br> -->
 
-
-
-														<!-- <div id="listTypes" style="display: none;" style="width:150px; height: 30px;">
-															<select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
-																<option value="" selected>Choose Type</option>
+													<!-- <div class="form-group">
+														<div class="col-xs-4">
+															<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
+																<option selected>Choose website name</option>
 															</select>
-														</div>
-
-														<div id="listActions" style="display: none;" style="width:150px; height: 30px;">
-															<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
-																<option value="" selected>Choose Action</option>
-															</select>
-														</div> -->
-
+														</div> 
+													</div>  -->
 
 														<h5 style="display: none;" id="desc-site">Describe the data model of <span id="siteN"></span> and connect it to its API</h5>
-
-														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px">
+														<!-- <div id="tableSiteDiv" class="table" style="margin-bottom:-15px">
 															<table id="site-table" class="table table-borderless">
 																<tbody>
-																	<tr id="site-row1">
-																		<td>
-
-																			<!-- <div style="width:150px; text-align:center; ">
-																				<select id="sites-name" class="form-control selectpicker tool" data-size="10" data-live-search="true" data-style="btn-info" data-toggle="tooltip" data-placement="top" title="Tooltip on right!" onchange="siteHasBeenChosen(this)">
-																					<option selected>Choose website</option>
-																				</select>
-																			</div> -->
-																			<div id="tar" class="item-hints">
-																				<div class="hint" data-position="4">
-																					<div style="width:240px; text-align:center; ">
-																						<select id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-info" onchange="siteHasBeenChosen(this)">
-																							<option selected>Choose website</option>
-																						</select>
-																					</div>
-																					<div  id="step1_hint" class="hint-content do--split-children" >
-																						<p>Start describing your data model, by choosing a website.</p>
-																					</div>
-																				</div>
-																			</div>
-																		</td>
-																	</tr>
-
 																</tbody>
 															</table>
-														</div>
-
-
-													<div id="tableDiv" class="form-group row m-b-50" style="margin-bottom:-15px">
-														<!-- <div  class="table">
 														</div> -->
 													</div>
 
-													<table id="type-method" class="table table-borderless" style="margin-top:15px;">
-														<tbody>
-															<tr id="site-row2" style="display:none">
-																<td style="display:flex; flex-wrap:wrap;">
-
-																	<div id="tar" class="item-hints"  style="margin-top:-20px">
-																		<div class="hint" data-position="4">
-
-																			<div style="display:flex;">
-																				<div>
-																					&nbsp;<img src="main_assets/img/new/arrow.png" width="15px"/>
-																				</div>
-																				<div style="width:240px; text-align:center; ">
-																					<select  id="type-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
-																						<option selected>Add Type</option>
-																					</select>
-																				</div>
-																			</div>
-
-																			<div  id="step2_hint" class="hint-content do--split-children" >
-																				<p>Choose the types of data you want to retrieve/manage in this website. </br>Check the <a href="https://schema.org/docs/full.html" target="_blank">list of types</a> in schema.org</p>
-																			</div>
-																		</div>
-																	</div>
-
-																</td>
-															</tr>
-
-															<tr  id="site-row3" style="display:none;">
-																<td style="display:flex; flex-wrap:wrap;">
-																	<div style="display:flex;">
-																		<div>
-																		&nbsp;<img src="main_assets/img/new/arrow.png" width="15px"/>
-																	</div>
-																	<div style="width:240px; text-align:center; ">
-																		<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
-																			<option selected>Add Action</option>
-																		</select>
-																	</div>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-
-												</br>
-													<div id="connectDiv" style="display:none">
-														<h5 id="beforeDone">Connect to the API when you are done describing your data model. </h5>
-														<h5 id="afterDone" style="display:none">Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</h5>
-														<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a>
-													</div>
-
-													<div style="display: none;">
-														<div id="fields_" style="width:240px; height:30px; text-align:center;">
-															<select id="fields-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="">
-																<option selected>Choose field</option>
-															</select>
+													<div class="form-group row m-b-50">
+														<div id="tableDiv" class="table" style="margin-bottom:-15px">
 														</div>
 													</div>
 
@@ -374,10 +283,10 @@
 												<!-- end panel-body -->
 											</div>
 
-
+											
 										</div>
 										<!-- end panel -->
-
+								
 
 										<!-- begin panel GETTERS-->
 										<div class="panel" style="display: none;">
@@ -409,7 +318,7 @@
 													<span class="d-sm-block d-none">Mavo</span>
 												</a>
 											</li>
-
+											
 										</ul>
 										<!-- end nav-tabs -->
 										<!-- begin tab-content -->
@@ -417,7 +326,7 @@
 											<!-- begin tab-pane -->
 											<div class="tab-pane fade active show" id="default-tab-1">
 												<h3 class="m-t-10">Javascript</h3>
-
+											
 											</div>
 											<!-- end tab-pane -->
 											<!-- begin tab-pane -->
@@ -425,13 +334,13 @@
 												<h3 class="m-t-10">Mavo</h3>
 											</div>
 											<!-- end tab-pane -->
-
+											
 										</div>
 										<!-- end tab-content -->
 
 												<!-- <div class="panel-body panel-form"> -->
 													<!-- <form class="form-horizontal">
-
+	
 														<div class="form-group row m-b-50">
 															<label class="col-form-label col-xs-1"><h5>Types</h5></label>
 															<div class="col-xs-4">
@@ -466,7 +375,7 @@
 												<!-- begin panel-body -->
 												<div class="panel-body panel-form">
 													<form class="form-horizontal">
-
+	
 														<div class="form-group row m-b-50">
 															<!-- <label class="col-form-label col-xs-1"><h5>Method</h5></label> -->
 															<!-- <div class="col-xs-4">
@@ -490,7 +399,7 @@
 																	<div class="form-group row m-b-50">
 																		<label class="col-form-label"><h5>Method Name</h5></label>
 																	</div>
-
+				
 																	<div class="form-group row m-b-50">
 																		<label class="col-form-label col-xs-1"><h5>API Endpoint</h5></label>
 																		<div class="col-xs-4">
@@ -500,7 +409,7 @@
 																		</div>
 																	</div>
 
-
+																			
 																	<div class="form-group row m-b-50">
 																		<label class="col-form-label col-xs-1"><h5>Parameters</h5></label>
 																		<div class="col-xs-4">
@@ -516,7 +425,7 @@
 															</div>
 
 														</div>
-													</form>
+													</form> 
 												</div>
 
 											</div>
@@ -543,7 +452,7 @@
 													<!-- <form class="form-horizontal form-bordered"> -->
 
 														<form class="form-horizontal">
-
+														
 															<div class="form-group row m-b-50">
 																<label class="col-form-label col-xs-1"><h5>Method</h5></label>
 																<div class="col-xs-4">
@@ -564,14 +473,14 @@
 																	</div>
 																	</div>
 																		<div class="panel-body" id="'">
-
+																			
 																			<div class="form-group row m-b-50">
 																				<label class="col-form-label col-xs-1"><h5>Method Name</h5></label>
 																				<div class="col-xs-4">
 																					<input type="text" class="form-control" placeholder="" />
 																				</div>
 																			</div>
-
+				
 																			<div class="form-group row m-b-50">
 																				<label class="col-form-label col-xs-1"><h5>API Endpoint</h5></label>
 																				<div class="col-xs-4">
@@ -581,7 +490,7 @@
 																				</div>
 																			</div>
 
-
+																			
 																			<div class="form-group row m-b-50">
 																				<label class="col-form-label col-xs-1"><h5>Parameters</h5></label>
 																				<div class="col-xs-4">
@@ -599,7 +508,7 @@
 
 
 												</div>
-
+															
 															<!-- <div class="form-group row m-b-50" id="methodForm0" >
 																<label class="col-form-label ">Method Name</label>
 																<p>'+method+'</p>
@@ -609,7 +518,7 @@
 																</select>
 															</div>
 														 -->
-
+												
 
 															<!-- begin panel -->
 															<!-- <div class="panel panel-info" data-sortable-id="ui-widget-12">
@@ -643,7 +552,7 @@
 
 																<div>
 																	<div id="request-parameters" class="form-group row m-b-50" style="display: none;">
-																		<label class="col-form-label .f-s-15 col-xs-2"><h5>Request Parameters</h5></label>
+																		<label class="col-form-label .f-s-15 col-xs-2"><h5>Request Parameters</h5></label> 
 																		<div class="col-xs-4">
 																			<select id="select-parameter" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="reqHasBeenChosen(this)">
 																				<option selected>Select a parameter</option>
@@ -659,16 +568,16 @@
 																					</tr>
 																				</thead>
 																				<tbody>
-
+	
 																				</tbody>
 																			</table>
 																		</div>
 																</div>
 
-
+															
 																<div>
 																	<div id="response-fields" class="form-group row m-b-50" style="display: none;">
-																		<label class="col-form-label .f-s-15 col-xs-2"><h5>Response Fields</h5></label>
+																		<label class="col-form-label .f-s-15 col-xs-2"><h5>Response Fields</h5></label> 
 																		<div class="col-xs-4">
 																		<select id="select-response" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="resHasBeenChosen(this)">
 																			<option selected>Select a field</option>
@@ -690,7 +599,7 @@
 																		</div>
 																	</div>
 
-
+																
 
 
 																	<div class="col-xs-12">
@@ -710,14 +619,14 @@
 																			<div class="col">
 																		<div class="panel-body tab-content">
 
-
+																		
 																			<div class="tab-pane fade" id="nav-tab2-1">
 																				<h3 class="m-t-10">YouTube Search API</h3></br>
 
 																					<div class="col">
 
 																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Parameters</h5></label>
+																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Parameters</h5></label> 
 																					<div class="col-xs-4">
 																					<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
 																						<option selected>term</option>
@@ -770,13 +679,13 @@
 																				</div>
 
 																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Response</h5></label>
+																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Response</h5></label> 
 																				</div>
 
 																				<div class="form-group row m-b-50">
 																				<div class="col-xs-6">
 																				<table id="param-table" class="table table-borderless">
-
+																				
 																					<tbody>
 																						<tr>
 																							<td>
@@ -807,21 +716,21 @@
 																			</div>
 																				</div>
 
-
+																	
 																	</div>
-
-
+					
+															
 
 															 				</div>
-
-
+																
+																		
 																			<div class="tab-pane fade" id="nav-tab2-2">
 																				<h3 class="m-t-10">YouTube Video API</h3>
-
+																				
 																					<div class="col">
 
 																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Parameters</h5></label>
+																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Parameters</h5></label> 
 																					<div class="col-xs-4">
 																					<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
 																						<option selected>videoId</option>
@@ -858,22 +767,22 @@
 																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
 																							</td>
 																						</tr>
-
+																						
 																					</tbody>
 																				</table>
 																			</div>
 																				</div>
 
 																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Response</h5></label>
+																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Response</h5></label> 
 																				</div>
 
 																				<div class="form-group row m-b-50">
 																				<div class="col-xs-6">
 																				<table id="param-table" class="table table-borderless">
-
+																					
 																					<tbody>
-
+																						
 																						<tr>
 																							<td>
 																								<div class="checkbox checkbox-css">
@@ -882,25 +791,25 @@
 																								</div>
 																							</td>
 																						</tr>
-
+																					
 																					</tbody>
 																				</table>
 																			</div>
 																				</div>
 
-
+																	
 																	</div>
-
+									
 																			</div>
-
+																			
 																			<div class="tab-pane fade" id="nav-tab2-3">
 																				<h3 class="m-t-10">YouTube Comment API</h3>
-
+																				
 																				<div class="row">
 																					<div class="col">
 
 																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Parameters</h5></label>
+																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Parameters</h5></label> 
 																					<div class="col-xs-4">
 																					<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
 																						<option selected>videoId</option>
@@ -937,22 +846,22 @@
 																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
 																							</td>
 																						</tr>
-
+																					
 																					</tbody>
 																				</table>
 																			</div>
 																				</div>
 
 																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Response</h5></label>
+																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Response</h5></label> 
 																				</div>
 
 																				<div class="form-group row m-b-50">
 																				<div class="col-xs-6">
 																				<table id="param-table" class="table table-borderless">
-
+																					
 																					<tbody>
-
+																						
 																						<tr>
 																							<td>
 																								<div class="checkbox checkbox-css">
@@ -970,31 +879,31 @@
 																								</div>
 																							</td>
 																						</tr>
-
+																					
 																					</tbody>
 																				</table>
 																			</div>
 																				</div>
 
-
+																	
 																	</div>
 
 																	</div>
 																			</div>
 
 																			</div>
-
-
+																			
+																			
 																		</div>
-
+															
 
 
 
 																		<div class="col">
-
+																		
 																			</br>
 																				<div id="jsoneditor2" class="jsoneditor22"></div>
-
+	
 																			</div>
 
 																		</div>
@@ -1003,8 +912,8 @@
 
 
 																		<div class="form-group row m-b-50">
-																			<label class="col-form-label .f-s-15"><h5>Final Response</h5></label>
-
+																			<label class="col-form-label .f-s-15"><h5>Final Response</h5></label> 
+																
 																		</div>
 																		<div class="form-group row m-b-50">
 																			<div class="col-xs-8">
@@ -1019,7 +928,7 @@
 																					<tbody>
 																						<tr>
 																							<td>name</td>
-																							<td>
+																							<td>	
 																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
 																									<option selected>name</option>
 																									<option>Title</option>
@@ -1036,7 +945,7 @@
 																						</tr>
 																						<tr>
 																							<td>description</td>
-																							<td>
+																							<td>	
 																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
 																									<option>name</option>
 																									<option>Title</option>
@@ -1053,7 +962,7 @@
 																						</tr>
 																						<tr>
 																							<td>publishedAt</td>
-																							<td>
+																							<td>	
 																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
 																									<option selected>datePublished</option>
 																									<option>Title</option>
@@ -1071,7 +980,7 @@
 
 																						<tr>
 																							<td>author</td>
-																							<td>
+																							<td>	
 																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
 																									<option selected>author</option>
 																									<option>Title</option>
@@ -1089,7 +998,7 @@
 
 																						<tr>
 																							<td>text</td>
-																							<td>
+																							<td>	
 																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
 																									<option selected>text</option>
 																									<option>Title</option>
@@ -1111,27 +1020,27 @@
 
 
 																	</div>
-
+																	
 																  </div>
 																</div>
-
+															
 															</div> -->
 															<!-- end panel -->
 
-
+													
 												<style>
 													#methodDiv {
 														border-radius: 25px;
 														border: 2px solid lightgray;
-														padding: 20px;
+														padding: 20px; 
 														width: 200px;
-														height: 150px;
+														height: 150px;  
 													}
 
 												</style>
 
 
-
+	
 																				<!-- <pre id="json" style="height:500px; font-size: 1em;"> -->
 																					<!-- <code class="language-json load"> -->
 	<!-- {
@@ -1143,9 +1052,9 @@
 	<!-- </code> -->
 	<!-- </pre> -->
 																				<!-- <pre><code class="language-css">p { color: red }</code></pre> -->
-
-
-
+																				
+															
+											
 
 																	<!-- <div class="form-group row m-b-50">
 																		<label class="col-form-label col-xs-1">Method Name</label>
@@ -1153,8 +1062,8 @@
 																			<input type="text" class="form-control " placeholder="Enter a name for the method" />
 																		</div>
 																	</div>
-
-
+																
+												
 																	<div class="form-group row m-b-50">
 																		<label class="col-form-label col-xs-1">API Endpoint</label>
 																		<div class="col-xs-4">
@@ -1164,12 +1073,12 @@
 																		</div>
 																	</div>
 																	 -->
-
-
-
-
-														</form>
-
+	
+	
+			
+			
+														</form> 
+												
 													<!-- begin panel -->
 													<!-- <div class="panel panel-warning">
 														<div class="panel-heading">
@@ -1180,7 +1089,7 @@
 															</div>
 														</div>
 														<div class="panel-body">
-
+			
 															<div style="display:inline">
 																<div class="input-group divcenter">
 																	<div class="input-group-prepend">
@@ -1209,9 +1118,9 @@
 																			<li class="nav-item"><a href="#nav-tab2-4" data-toggle="tab" class="nav-link">Pagination</a></li>
 																		</ul>
 																	</div>
-
+																
 																</div>
-
+															
 																<div class="panel-body tab-content">
 																	<div class="tab-pane fade active show" id="nav-tab2-1">
 																		<h3 class="m-t-10">Parameters</h3>
@@ -1234,20 +1143,20 @@
 																					<td>
 																						<input class="form-control" type="text" id="value" style="">
 																					</td>
-
+																				
 																					<td>
 																						<div>
 																							<input id="displayedName" class="form-control" type="text" placeholder="">
 																						</div>
 																					</td>
-
+																					
 																					<td>
 																						<div class="checkbox checkbox-css">
 																							<input type="checkbox" id="cssCheckbox1" value="" checked />
 																							<label for="cssCheckbox1">Required</label>
 																						</div>
 																					</td>
-
+																					
 																					<td>
 																						<input type="image" src="delete.png" style="width:15px; padding-top: 6px;" onclick="deleteRow(this)" />
 																					</td>
@@ -1261,71 +1170,71 @@
 																			<a class="btn btn-success"onclick="addRow()" style="width:150px; text-align:center; color:white" ><i class="glyphicon glyphicon-plus"></i>Add New Parameter</a>
 																			<a style="color:white; width:150px; text-align:center" class="btn btn-danger" onclick="clearTable()" ><i class="glyphicon glyphicon-trash"></i>Clear Table</a>
 																		</div>
-
+																	
 																	</div>
-
+																	
 																	<div class="tab-pane fade" id="nav-tab2-2">
 																		<h3 class="m-t-10">Nav Tab 2</h3>
 																		<p>
-																			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-																			Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor,
-																			est diam sagittis orci, a ornare nisi quam elementum tortor.
-																			Proin interdum ante porta est convallis dapibus dictum in nibh.
-																			Aenean quis massa congue metus mollis fermentum eget et tellus.
-																			Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien,
+																			Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+																			Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor, 
+																			est diam sagittis orci, a ornare nisi quam elementum tortor. 
+																			Proin interdum ante porta est convallis dapibus dictum in nibh. 
+																			Aenean quis massa congue metus mollis fermentum eget et tellus. 
+																			Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien, 
 																			nec eleifend orci eros id lectus.
 																		</p>
 																		<p>
-																			Aenean eget odio eu justo mollis consectetur non quis enim.
-																			Vivamus interdum quam tortor, et sollicitudin quam pulvinar sit amet.
-																			Donec facilisis auctor lorem, quis mollis metus dapibus nec. Donec interdum tellus vel mauris vehicula,
+																			Aenean eget odio eu justo mollis consectetur non quis enim. 
+																			Vivamus interdum quam tortor, et sollicitudin quam pulvinar sit amet. 
+																			Donec facilisis auctor lorem, quis mollis metus dapibus nec. Donec interdum tellus vel mauris vehicula, 
 																			at ultrices ex gravida. Maecenas at elit tincidunt, vulputate augue vitae, vulputate neque.
-																			Aenean vel quam ligula. Etiam faucibus aliquam odio eget condimentum.
-																			Cras lobortis, orci nec eleifend ultrices, orci elit pellentesque ex, eu sodales felis urna nec erat.
+																			Aenean vel quam ligula. Etiam faucibus aliquam odio eget condimentum. 
+																			Cras lobortis, orci nec eleifend ultrices, orci elit pellentesque ex, eu sodales felis urna nec erat. 
 																			Fusce lacus est, congue quis nisi quis, sodales volutpat lorem.
 																		</p>
 																	</div>
-
+																
 																	<div class="tab-pane fade" id="nav-tab2-3">
 																		<h3 class="m-t-10">Nav Tab 3</h3>
 																		<p>
-																			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-																			Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor,
-																			est diam sagittis orci, a ornare nisi quam elementum tortor.
-																			Proin interdum ante porta est convallis dapibus dictum in nibh.
-																			Aenean quis massa congue metus mollis fermentum eget et tellus.
-																			Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien,
+																			Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+																			Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor, 
+																			est diam sagittis orci, a ornare nisi quam elementum tortor. 
+																			Proin interdum ante porta est convallis dapibus dictum in nibh. 
+																			Aenean quis massa congue metus mollis fermentum eget et tellus. 
+																			Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien, 
 																			nec eleifend orci eros id lectus.
 																		</p>
 																		<p>
-																			Aenean eget odio eu justo mollis consectetur non quis enim.
-																			Vivamus interdum quam tortor, et sollicitudin quam pulvinar sit amet.
-																			Donec facilisis auctor lorem, quis mollis metus dapibus nec. Donec interdum tellus vel mauris vehicula,
+																			Aenean eget odio eu justo mollis consectetur non quis enim. 
+																			Vivamus interdum quam tortor, et sollicitudin quam pulvinar sit amet. 
+																			Donec facilisis auctor lorem, quis mollis metus dapibus nec. Donec interdum tellus vel mauris vehicula, 
 																			at ultrices ex gravida. Maecenas at elit tincidunt, vulputate augue vitae, vulputate neque.
-																			Aenean vel quam ligula. Etiam faucibus aliquam odio eget condimentum.
-																			Cras lobortis, orci nec eleifend ultrices, orci elit pellentesque ex, eu sodales felis urna nec erat.
+																			Aenean vel quam ligula. Etiam faucibus aliquam odio eget condimentum. 
+																			Cras lobortis, orci nec eleifend ultrices, orci elit pellentesque ex, eu sodales felis urna nec erat. 
 																			Fusce lacus est, congue quis nisi quis, sodales volutpat lorem.
 																		</p>
 																	</div>
-
+																	
 																	<div class="tab-pane fade" id="nav-tab2-4">
 																		<h3 class="m-t-10">Connect response to type's properties</h3>
 																		<p>
-																			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-																			Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor,
-																			est diam sagittis orci, a ornare nisi quam elementum tortor.
-																			Proin interdum ante porta est convallis dapibus dictum in nibh.
-																			Aenean quis massa congue metus mollis fermentum eget et tellus.
-																			Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien,
+																			Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+																			Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor, 
+																			est diam sagittis orci, a ornare nisi quam elementum tortor. 
+																			Proin interdum ante porta est convallis dapibus dictum in nibh. 
+																			Aenean quis massa congue metus mollis fermentum eget et tellus. 
+																			Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien, 
 																			nec eleifend orci eros id lectus.
 																		</p>
 																		<p>
-																			Aenean eget odio eu justo mollis consectetur non quis enim.
-																			Vivamus interdum quam tortor, et sollicitudin quam pulvinar sit amet.
-																			Donec facilisis auctor lorem, quis mollis metus dapibus nec. Donec interdum tellus vel mauris vehicula,
+																			Aenean eget odio eu justo mollis consectetur non quis enim. 
+																			Vivamus interdum quam tortor, et sollicitudin quam pulvinar sit amet. 
+																			Donec facilisis auctor lorem, quis mollis metus dapibus nec. Donec interdum tellus vel mauris vehicula, 
 																			at ultrices ex gravida. Maecenas at elit tincidunt, vulputate augue vitae, vulputate neque.
-																			Aenean vel quam ligula. Etiam faucibus aliquam odio eget condimentum.
-																			Cras lobortis, orci nec eleifend ultrices, orci elit pellentesque ex, eu sodales felis urna nec erat.
+																			Aenean vel quam ligula. Etiam faucibus aliquam odio eget condimentum. 
+																			Cras lobortis, orci nec eleifend ultrices, orci elit pellentesque ex, eu sodales felis urna nec erat. 
 																			Fusce lacus est, congue quis nisi quis, sodales volutpat lorem.
 																		</p>
 																	</div>
@@ -1336,7 +1245,7 @@
 
 														</div>
 
-
+														
 													</div> -->
 													<!-- end panel -->
 
@@ -1345,8 +1254,8 @@
 												<!-- end panel-body -->
 										</div>
 										<!-- </div> -->
-										<!-- end panel -->
-
+										<!-- end panel -->										
+										
 
 
 
@@ -1363,13 +1272,13 @@
 				</div>
 				<!-- end vertical-box-column -->
 				<!-- begin vertical-box-column -->
-
+			
 				<!-- end vertical-box-column -->
 			</div>
 			<!-- end vertical-box -->
 		</div>
 		<!-- end #content -->
-
+		
 		<!-- begin theme-panel -->
 		<div class="theme-panel theme-panel-lg">
 			<!-- <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a> -->
@@ -1388,20 +1297,148 @@
 					<li><a href="javascript:;" class="bg-indigo" data-theme="indigo" data-theme-file="assets/css/default/theme/indigo.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Indigo">&nbsp;</a></li>
 					<li class="active"><a href="javascript:;" class="bg-black" data-theme="black" data-theme-file="assets/css/default/theme/black.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
 				</ul>
+				<div class="divider"></div>
+				<div class="row m-t-10">
+					<div class="col-6 control-label text-inverse f-w-600">Header Fixed</div>
+					<div class="col-6 d-flex">
+						<div class="custom-control custom-switch ml-auto">
+							<input type="checkbox" class="custom-control-input" name="header-fixed" id="headerFixed" value="1" checked />
+							<label class="custom-control-label" for="headerFixed">&nbsp;</label>
+						</div>
+					</div>
+				</div>
+				<div class="row m-t-10">
+					<div class="col-6 control-label text-inverse f-w-600">Header Inverse</div>
+					<div class="col-6 d-flex">
+						<div class="custom-control custom-switch ml-auto">
+							<input type="checkbox" class="custom-control-input" name="header-inverse" id="headerInverse" value="1" />
+							<label class="custom-control-label" for="headerInverse">&nbsp;</label>
+						</div>
+					</div>
+				</div>
+				<div class="row m-t-10">
+					<div class="col-6 control-label text-inverse f-w-600">Sidebar Fixed</div>
+					<div class="col-6 d-flex">
+						<div class="custom-control custom-switch ml-auto">
+							<input type="checkbox" class="custom-control-input" name="sidebar-fixed" id="sidebarFixed" value="1" checked />
+							<label class="custom-control-label" for="sidebarFixed">&nbsp;</label>
+						</div>
+					</div>
+				</div>
+				<div class="row m-t-10">
+					<div class="col-6 control-label text-inverse f-w-600">Sidebar Grid</div>
+					<div class="col-6 d-flex">
+						<div class="custom-control custom-switch ml-auto">
+							<input type="checkbox" class="custom-control-input" name="sidebar-grid" id="sidebarGrid" value="1" />
+							<label class="custom-control-label" for="sidebarGrid">&nbsp;</label>
+						</div>
+					</div>
+				</div>
+				<div class="row m-t-10">
+					<div class="col-md-6 control-label text-inverse f-w-600">Sidebar Gradient</div>
+					<div class="col-md-6 d-flex">
+						<div class="custom-control custom-switch ml-auto">
+							<input type="checkbox" class="custom-control-input" name="sidebar-gradient" id="sidebarGradient" value="1" />
+							<label class="custom-control-label" for="sidebarGradient">&nbsp;</label>
+						</div>
+					</div>
+				</div>
+				<div class="divider"></div>
+				<h5>Admin Design (5)</h5>
+				<div class="theme-version">
+					<a href="../template_html/index_v2.html" class="active">
+						<span style="background-image: url(assets/img/theme/default.jpg);"></span>
+					</a>
+					<a href="../template_transparent/index_v2.html">
+						<span style="background-image: url(assets/img/theme/transparent.jpg);"></span>
+					</a>
+				</div>
+				<div class="theme-version">
+					<a href="../template_apple/index_v2.html">
+						<span style="background-image: url(assets/img/theme/apple.jpg);"></span>
+					</a>
+					<a href="../template_material/index_v2.html">
+						<span style="background-image: url(assets/img/theme/material.jpg);"></span>
+					</a>
+				</div>
+				<div class="theme-version">
+					<a href="../template_facebook/index_v2.html">
+						<span style="background-image: url(assets/img/theme/facebook.jpg);"></span>
+					</a>
+					<a href="../template_google/index_v2.html">
+						<span style="background-image: url(assets/img/theme/google.jpg);"></span>
+					</a>
+				</div>
+				<div class="divider"></div>
+				<h5>Language Version (7)</h5>
+				<div class="theme-version">
+					<a href="../template_html/index_v2.html" class="active">
+						<span style="background-image: url(assets/img/version/html.jpg);"></span>
+					</a>
+					<a href="../template_ajax/index_v2.html">
+						<span style="background-image: url(assets/img/version/ajax.jpg);"></span>
+					</a>
+				</div>
+				<div class="theme-version">
+					<a href="../template_angularjs/index_v2.html">
+						<span style="background-image: url(assets/img/version/angular1x.jpg);"></span>
+					</a>
+					<a href="../template_angularjs8/index_v2.html">
+						<span style="background-image: url(assets/img/version/angular8x.jpg);"></span>
+					</a>
+				</div>
+				<div class="theme-version">
+					<a href="../template_laravel/index_v2.html">
+						<span style="background-image: url(assets/img/version/laravel.jpg);"></span>
+					</a>
+					<a href="../template_vuejs/index_v2.html">
+						<span style="background-image: url(assets/img/version/vuejs.jpg);"></span>
+					</a>
+				</div>
+				<div class="theme-version">
+					<a href="../template_reactjs/index_v2.html">
+						<span style="background-image: url(assets/img/version/reactjs.jpg);"></span>
+					</a>
+				</div>
+				<div class="divider"></div>
+				<h5>Frontend Design (4)</h5>
+				<div class="theme-version">
+					<a href="../../../frontend/template/template_one_page_parallax/index.html">
+						<span style="background-image: url(assets/img/theme/one-page-parallax.jpg);"></span>
+					</a>
+					<a href="../../../frontend/template/template_e_commerce/index.html">
+						<span style="background-image: url(assets/img/theme/e-commerce.jpg);"></span>
+					</a>
+				</div>
+				<div class="theme-version">
+					<a href="../../../frontend/template/template_blog/index.html">
+						<span style="background-image: url(assets/img/theme/blog.jpg);"></span>
+					</a>
+					<a href="../../../frontend/template/template_forum/index.html">
+						<span style="background-image: url(assets/img/theme/forum.jpg);"></span>
+					</a>
+				</div>
+				<div class="divider"></div>
+				<div class="row m-t-10">
+					<div class="col-md-12">
+						<a href="https://seantheme.com/color-admin/documentation/" class="btn btn-inverse btn-block btn-rounded" target="_blank"><b>Documentation</b></a>
+						<a href="javascript:;" class="btn btn-default btn-block btn-rounded" data-click="reset-local-storage"><b>Reset Local Storage</b></a>
+					</div>
+				</div>
 			</div>
-		</div>
+		</div> 
 		<!-- end theme-panel -->
-
+		
 		<!-- begin scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 		<!-- end scroll to top btn -->
-
+	
 
 		<div id="mySidenav" style="border-color: #919191;  " class="sidenav">
 			<div style="padding:20px;">
 
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
+		
 			<h5 class = "panel-title">Property Configuration</h5>
 			<hr>
 
@@ -1413,7 +1450,7 @@
 				<!-- <p style="padding-bottom: 0px;" ><B>Property Description:</B></p> -->
 				<label class="col-form-label "><B>Property Description:</B></label>
 				<p id="property-description" style="white-space: normal;"></p>
-
+				
 				<label class="col-form-label "><B>Property Type:</B></label>
 				<select id="properties-type" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px; " onchange="propertyTypeHasBeenSelected(this)">
 					<!-- <option value="string" selected>string</option>
@@ -1429,9 +1466,9 @@
 					<select id="type-select2" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-default" onchange="typeHasBeenChosenForProperty(this)">
 						<option value="" selected>Type</option>
 					</select>
-				</div>
+				</div>	
 				</br>
-
+					
 				<label class="col-form-label " for="propIsArray"><input type="checkbox" id="propIsArray" onclick="isArray(this)"/> Is Array</label></br>
 				<!-- </br></br></br>
 				<a href="javascript:;" class="btn btn-default" style="width:100px; height:32px;" id="" onclick="addNewProperty()">Submit</a> -->
@@ -1446,7 +1483,7 @@
 			<h5 class = "panel-title">Object Configuration</h5>
 			<hr>
 
-
+			
 			<!-- <h6>Map schema.org/<span id="typeN"></span> to one of <span id="siteN"></span> API endpoint.</h6>
 			</br> -->
 
@@ -1498,13 +1535,13 @@
 							<h5 class="m-t-10">Get a specific <span id="sel_obTitle"></span> from <span id="sel_siteTitle"></span> by its ID</h5></br>
 							<p>1. Which of the following <span id="sel_site"></span> API endpoints returns a <span id="sel_ob"></span> object?
 								Click on each one to view their descreption.</p>
-
+							
 							<!-- API Endpoint -->
 							<!-- <label class="col-form-label">API Endpoint</label> -->
 							<!-- <select id="apis-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosen(this)">
 								<option selected>Choose API Endpoint</option>
 							</select> -->
-
+			
 							<div style="overflow: scroll; height:260px" class="box">
 								<!-- begin #accordion -->
 								<div id="accordion" class="accordion">
@@ -1512,13 +1549,13 @@
 								<!-- end #accordion -->
 							</div>
 							</br>
-
+			
 							<!-- <p style="display:inline"> </p> -->
-							<p style="display:inline;">If none of the above API endpoints returns a <B><span id="selected_type"></span></B> object, you can integrate it in
+							<p style="display:inline;">If none of the above API endpoints returns a <B><span id="selected_type"></span></B> object, you can integrate it in 
 							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
-
+				
 							</br> </br>
-
+				
 							<!-- ID (list of responses fields)-->
 							<div id="idLabel" style="display: none;">
 								<p>2. Choose the ID parameter of this API</p>
@@ -1528,7 +1565,7 @@
 								</select>
 							</div>
 							</br>
-
+				
 							<!-- Matching Properties -->
 							<!-- <label class="col-form-label ">Match Response Fields to Type Properties</label></br> -->
 							<div id="mapLabel" style="display: none;">
@@ -1544,12 +1581,12 @@
 										<tbody>
 										</tbody>
 									</table>
-								</div>
+								</div> 
 							</div>
-
+				
 							</br></br>
 							<a href="javascript:;" class="btn btn-primary" id="" onclick="saveTypeConfig()">Save</a>
-
+					
 						</div>
 						<!-- end tab-pane -->
 						<!-- begin tab-pane -->
@@ -1565,7 +1602,7 @@
 							</div>
 							</br>
 
-							<p style="display:inline;">If none of the above API endpoints updates a <B><span id="selected_type_up"></span></B> object, you can integrate it in
+							<p style="display:inline;">If none of the above API endpoints updates a <B><span id="selected_type_up"></span></B> object, you can integrate it in 
 							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
 							</br> </br>
 
@@ -1578,7 +1615,7 @@
 							</div>
 							</br></br>
 
-
+							
 
 							<a href="javascript:;" class="btn btn-primary" id="" onclick="saveUpdateConfig()">Save</a>
 
@@ -1598,13 +1635,13 @@
 								<!-- end #accordion -->
 							</div>
 							</br>
-
+			
 							<!-- <p style="display:inline"> </p> -->
-							<p style="display:inline;">If none of the above API endpoints creates a new <B><span id="selected_type_add"></span></B> object, you can integrate it in
+							<p style="display:inline;">If none of the above API endpoints creates a new <B><span id="selected_type_add"></span></B> object, you can integrate it in 
 							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
-
+				
 							</br> </br>
-
+				
 							<!-- ID (list of responses fields)-->
 							<!-- <div id="idLabel-add" style="display: none;">
 								<p>Assign an ID to this object</p>
@@ -1624,7 +1661,7 @@
 							<h5 class="m-t-10">Remove a specific <span id="sel_obTitle_re"></span> from <span id="sel_siteTitle_re"></span> by its ID</h5></br>
 							<p>1. Which of the following <span id="sel_site_re"></span> API endpoints removes a <span id="sel_ob_re"></span> object?
 								Click on each one to view their descreption.</p>
-
+							
 							<div style="overflow: scroll; height:260px" class="box">
 								<!-- begin #accordion -->
 								<div id="accordion-remove" class="accordion">
@@ -1632,13 +1669,13 @@
 								<!-- end #accordion -->
 							</div>
 							</br>
-
+			
 							<!-- <p style="display:inline"> </p> -->
-							<p style="display:inline;">If none of the above API endpoints removes a <B><span id="selected_type_re"></span></B> object, you can integrate it in
+							<p style="display:inline;">If none of the above API endpoints removes a <B><span id="selected_type_re"></span></B> object, you can integrate it in 
 							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
-
+				
 							</br> </br>
-
+				
 							<!-- ID (list of responses fields)-->
 							<div id="idLabel-remove" style="display: none;">
 								<p>2. Choose the ID parameter of this API</p>
@@ -1679,10 +1716,10 @@
 				<!-- <label class="col-form-label"><B>Method Name</B></label></br> -->
 				<p>1. Change the name of the method [optional] </p>
 				<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
-
+				
 
 				<!-- <label class="col-form-label">API Endpoint</label> -->
-
+				
 				<!-- <select id="apis-url-method" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosenForMethod(this)">
 					<option selected>Choose the API Endpoint</option>
 				</select> -->
@@ -1696,7 +1733,7 @@
 				</div>
 				<!-- end #accordion -->
 
-				</br>
+				</br> 
 				<!-- <label class="col-form-label" for=""><input type="checkbox" id="noResult" onclick=""/> No Result</label>
 				</br> -->
 
@@ -1709,8 +1746,8 @@
 
 			</br></br>
 			<a href="javascript:;" class="btn btn-primary" id="" onclick="saveMethodConfig()">Save</a>
-
-
+	
+		
 		</div>
 	</div>
 
@@ -1721,7 +1758,7 @@
 
 	<script>
 
-
+		
 		//OLD
 		function openRightMenu() {
 			document.getElementById("rightMenu").style.display = "block";
@@ -1741,7 +1778,7 @@
 		<!-- ================== END PRISM JS ================== -->
 
 
-
+	
 		<!-- ================== BEGIN BASE JS ================== -->
 		<script src="assets/js/app.min.js"></script>
 		<script src="assets/js/theme/default.min.js"></script>
@@ -1797,115 +1834,12 @@
 
 
 		<style>
-
-
-
-/* HINTS */
-/* html,body{
-  height: 100%;
-  background: #212121;
-  font-family: 'Ubuntu', sans-serif;
-  line-height: 24px;
-  letter-spacing: 1px;
-} */
-.item-hints{
-/*   height: 500px;
-  width: 500px;
-  margin: 250px auto; */
-  position: relative;
-  display: flex;
-}
-.item-hints .hint {
-  /* width: 60px;
-  height: 60px; */
-  margin-top: 20px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.item-hints .hint::before{ /* //rotated squre */
-  background-color: black;
-/*   width: 8px;
-  height: 8px; */
-  z-index: 2;
-/*   -webkit-clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
-  clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%); */
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
-
-
-
-
-
-.item-hints .hint-content {
-  color: black;
-  width: 300px;
-  position: absolute;
-  z-index: 5;
-  /* padding-bottom: 12px 0; */
-  opacity: 1;
-  visibility: visible !important;
-  -webkit-transition: opacity .7s ease,visibility .7s ease;
-  transition: opacity .7s ease,visibility .7s ease;
-  pointer-events: none;
-  color: black;
-  visibility: hidden;
-  pointer-events: none
-}
-.item-hints .hint-content::before {
-  width: 0px;
-  bottom: -5px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
-  left: 0;
-  content: '';
-  background-color: black;
-  height: 1px;
-  position: absolute;
-  transition: width 0.4s;
-}
-.item-hints .hint-content::before {
-  width: 250px;
-  transition: width 0.4s;
-}
-.item-hints .hint-content::after {
-  -webkit-transform-origin: 0 50%;
-  transform-origin: 0 50%;
-  -webkit-transform: rotate(-225deg);
-  transform: rotate(-225deg);
-  bottom: -5px; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
-  left: 0px;
-  width: 20px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
-  content: '';
-  background-color: black;
-  height: 1px;
-  position: absolute;
-  opacity: 1;
-  -webkit-transition: opacity .5s ease;
-  transition: opacity .5s ease;
-  transition-delay: 0s;
-  -webkit-transition-delay: 0s;
-  transition-delay: 0s;
-}
-.item-hints .hint-content::after {
-  opacity: 1;
-  visibility: visible;
-}
-.item-hints .hint[data-position="4"] .hint-content {
-/*   bottom: 85px; */
-  bottom: 55px;
-  left: 100%; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
-  margin-left: 20px;
-}
+			/* body{
+				background-color: white;
+			} */
 
 			.bootstrap-select .dropdown-menu { max-width: 100% !important; }
-
+			
 			.table td, .table th {padding:3px;}
 
 			.sidenav {

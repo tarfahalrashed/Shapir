@@ -6,7 +6,7 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-	
+
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<link href="../assets/css/default/app.min.css" rel="stylesheet" />
@@ -34,7 +34,7 @@
 
 	<link href="css/jsoneditor.css" rel="stylesheet" type="text/css">
 	<script src="assets/js/jsoneditor.js"></script>
-	
+
 
 	<!-- <link href="css/prism-default.css" rel="stylesheet" /> -->
 	<link href="css/prism-coy.css" rel="stylesheet" />
@@ -44,7 +44,7 @@
 		body {
 		  font-family: "Lato", sans-serif;
 		}
-		
+
 		.sidenav {
 		  height: 100%;
 		  width: 240px;
@@ -56,7 +56,7 @@
 		  overflow-x: hidden;
 		  padding-top: 20px;
 		}
-		
+
 		.sidenav a {
 		  padding: 6px 8px 6px 16px;
 		  text-decoration: none;
@@ -64,17 +64,17 @@
 		  color: #818181;
 		  display: block;
 		}
-		
+
 		.sidenav a:hover {
 		  color: #f1f1f1;
 		}
-		
+
 		.main {
 		  margin-left: 160px; /* Same as the width of the sidenav */
 		  font-size: 28px; /* Increased text to enable scrolling */
 		  padding: 0px 10px;
 		}
-		
+
 		@media screen and (max-height: 450px) {
 		  .sidenav {padding-top: 15px;}
 		  .sidenav a {font-size: 18px;}
@@ -88,7 +88,7 @@
 		<span class="spinner"></span>
 	</div>
 	<!-- end #page-loader -->
-	
+
 	<!-- begin #page-container -->
 	<div id="page-container" class="page-container fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar">
 		<!-- begin #header -->
@@ -102,7 +102,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button> -->
-				
+
 			<!-- </div> -->
 			<a href="index.html" class="navbar-brand">
 				<!-- <span class="brand-logo"></span> -->
@@ -121,7 +121,7 @@
 			<!-- end header-nav -->
 		</div>
 		<!-- end #header -->
-		
+
 		<div class="sidenav">
 		</br></br></br></br>
 			<!-- <a href="#about">About</a>
@@ -130,7 +130,7 @@
 			<a href="#contact">Contact</a> -->
 		</div>
 		<!-- end #sidebar -->
-		
+
 		<!-- begin #content -->
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
@@ -143,7 +143,7 @@
 			<!-- begin page-header -->
 			<!-- <h1 class="page-header">Page with Wide Sidebar <small>header small text goes here...</small></h1> -->
 			<!-- end page-header -->
-			
+
 			<!-- begin panel -->
 			<div id="doc" class="panel panel-inverse">
 				<div class="panel-heading">
@@ -158,18 +158,18 @@
 				<div class="panel-body">
 					<!-- Panel Content Here -->
 
-					<!-- <pre id="json" style="font-size: 0.9em; padding-top: 0px;"  class="language-html"> 
+					<!-- <pre id="json" style="font-size: 0.9em; padding-top: 0px;"  class="language-html">
 						<code  id="hereCode" class="html language-html">
 							<head>
-								
+
 								<link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
 								<script src="https://get.mavo.io/mavo.js"></script>
-								
-							</head>				
+
+							</head>
 						</code>
 					</pre> -->
 
-					
+
 					<pre class="language-html"><code class="language-html">&lt;head>
 	...
 	&lt;script src="shapir.js">&lt;/script>
@@ -199,7 +199,7 @@
 <script>
 	var videos;
 	function getPlaylist(){
-		setTimeout(() => { 
+		setTimeout(() => {
 			(async function(){
 				var playlist = await dailymotion.MusicPlaylist("x706zx");
 
@@ -212,7 +212,7 @@
 
 			})()
 		}, 6000);
-	}		
+	}
 
 	function getVideos(){
 		$("#videosExample").show();
@@ -260,26 +260,26 @@
 							<!-- Panel Content Here -->
 							<!-- a dropdown menue of all the sites intergrated (under abstraction) -->
 							<!-- when an option gets selected, read the functions, objects and create the lines -->
-	
+
 							<div class="col-lg-6">
 								<h6 style="color:black">Choose the name of the website:</h6>
 								<select id="sites" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosen(this)">
 									<option selected>Choose site</option>
 								</select>
 							</div>
-	
-	
+
+
 							<div id="functions" style="display:none">
 								<h5>Functions</h5>
 								<pre style="display: inline;" class="language-javascript"><code id="function" class="language-javascript"></code></pre>
 							</div>
-	
+
 							<div id="objects" style="display:none">
 								<h5>Objects</h5>
 								<pre id="preObjects" style="display: inline;" class="language-javascript"><code id="object" class="language-javascript"></code></pre>
 							</div>
-	
-							
+
+
 							</br></br>
 						</div>
 					</div>
@@ -303,7 +303,7 @@
 					<!-- end panel -->
 		</div>
 		<!-- end #content -->
-		
+
 		<!-- begin theme-panel -->
 		<div class="theme-panel theme-panel-lg">
 			<!-- <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a> -->
@@ -322,144 +322,16 @@
 					<li><a href="javascript:;" class="bg-indigo" data-theme="indigo" data-theme-file="../assets/css/default/theme/indigo.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Indigo">&nbsp;</a></li>
 					<li><a href="javascript:;" class="bg-black" data-theme="black" data-theme-file="../assets/css/default/theme/black.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
 				</ul>
-				<div class="divider"></div>
-				<div class="row m-t-10">
-					<div class="col-6 control-label text-inverse f-w-600">Header Fixed</div>
-					<div class="col-6 d-flex">
-						<div class="custom-control custom-switch ml-auto">
-							<input type="checkbox" class="custom-control-input" name="header-fixed" id="headerFixed" value="1" checked />
-							<label class="custom-control-label" for="headerFixed">&nbsp;</label>
-						</div>
-					</div>
-				</div>
-				<div class="row m-t-10">
-					<div class="col-6 control-label text-inverse f-w-600">Header Inverse</div>
-					<div class="col-6 d-flex">
-						<div class="custom-control custom-switch ml-auto">
-							<input type="checkbox" class="custom-control-input" name="header-inverse" id="headerInverse" value="1" />
-							<label class="custom-control-label" for="headerInverse">&nbsp;</label>
-						</div>
-					</div>
-				</div>
-				<div class="row m-t-10">
-					<div class="col-6 control-label text-inverse f-w-600">Sidebar Fixed</div>
-					<div class="col-6 d-flex">
-						<div class="custom-control custom-switch ml-auto">
-							<input type="checkbox" class="custom-control-input" name="sidebar-fixed" id="sidebarFixed" value="1" checked />
-							<label class="custom-control-label" for="sidebarFixed">&nbsp;</label>
-						</div>
-					</div>
-				</div>
-				<div class="row m-t-10">
-					<div class="col-6 control-label text-inverse f-w-600">Sidebar Grid</div>
-					<div class="col-6 d-flex">
-						<div class="custom-control custom-switch ml-auto">
-							<input type="checkbox" class="custom-control-input" name="sidebar-grid" id="sidebarGrid" value="1" />
-							<label class="custom-control-label" for="sidebarGrid">&nbsp;</label>
-						</div>
-					</div>
-				</div>
-				<div class="row m-t-10">
-					<div class="col-md-6 control-label text-inverse f-w-600">Sidebar Gradient</div>
-					<div class="col-md-6 d-flex">
-						<div class="custom-control custom-switch ml-auto">
-							<input type="checkbox" class="custom-control-input" name="sidebar-gradient" id="sidebarGradient" value="1" />
-							<label class="custom-control-label" for="sidebarGradient">&nbsp;</label>
-						</div>
-					</div>
-				</div>
-				<div class="divider"></div>
-				<h5>Admin Design (5)</h5>
-				<div class="theme-version">
-					<a href="../template_html/index_v2.html" class="active">
-						<span style="background-image: url(../assets/img/theme/default.jpg);"></span>
-					</a>
-					<a href="../template_transparent/index_v2.html">
-						<span style="background-image: url(../assets/img/theme/transparent.jpg);"></span>
-					</a>
-				</div>
-				<div class="theme-version">
-					<a href="../template_apple/index_v2.html">
-						<span style="background-image: url(../assets/img/theme/apple.jpg);"></span>
-					</a>
-					<a href="../template_material/index_v2.html">
-						<span style="background-image: url(../assets/img/theme/material.jpg);"></span>
-					</a>
-				</div>
-				<div class="theme-version">
-					<a href="../template_facebook/index_v2.html">
-						<span style="background-image: url(../assets/img/theme/facebook.jpg);"></span>
-					</a>
-					<a href="../template_google/index_v2.html">
-						<span style="background-image: url(../assets/img/theme/google.jpg);"></span>
-					</a>
-				</div>
-				<div class="divider"></div>
-				<h5>Language Version (7)</h5>
-				<div class="theme-version">
-					<a href="../template_html/index_v2.html" class="active">
-						<span style="background-image: url(../assets/img/version/html.jpg);"></span>
-					</a>
-					<a href="../template_ajax/index_v2.html">
-						<span style="background-image: url(../assets/img/version/ajax.jpg);"></span>
-					</a>
-				</div>
-				<div class="theme-version">
-					<a href="../template_angularjs/index_v2.html">
-						<span style="background-image: url(../assets/img/version/angular1x.jpg);"></span>
-					</a>
-					<a href="../template_angularjs8/index_v2.html">
-						<span style="background-image: url(../assets/img/version/angular8x.jpg);"></span>
-					</a>
-				</div>
-				<div class="theme-version">
-					<a href="../template_laravel/index_v2.html">
-						<span style="background-image: url(../assets/img/version/laravel.jpg);"></span>
-					</a>
-					<a href="../template_vuejs/index_v2.html">
-						<span style="background-image: url(../assets/img/version/vuejs.jpg);"></span>
-					</a>
-				</div>
-				<div class="theme-version">
-					<a href="../template_reactjs/index_v2.html">
-						<span style="background-image: url(../assets/img/version/reactjs.jpg);"></span>
-					</a>
-				</div>
-				<div class="divider"></div>
-				<h5>Frontend Design (4)</h5>
-				<div class="theme-version">
-					<a href="../../../frontend/template/template_one_page_parallax/index.html">
-						<span style="background-image: url(../assets/img/theme/one-page-parallax.jpg);"></span>
-					</a>
-					<a href="../../../frontend/template/template_e_commerce/index.html">
-						<span style="background-image: url(../assets/img/theme/e-commerce.jpg);"></span>
-					</a>
-				</div>
-				<div class="theme-version">
-					<a href="../../../frontend/template/template_blog/index.html">
-						<span style="background-image: url(../assets/img/theme/blog.jpg);"></span>
-					</a>
-					<a href="../../../frontend/template/template_forum/index.html">
-						<span style="background-image: url(../assets/img/theme/forum.jpg);"></span>
-					</a>
-				</div>
-				<div class="divider"></div>
-				<div class="row m-t-10">
-					<div class="col-md-12">
-						<a href="https://seantheme.com/color-admin/documentation/" class="btn btn-inverse btn-block btn-rounded" target="_blank"><b>Documentation</b></a>
-						<a href="javascript:;" class="btn btn-default btn-block btn-rounded" data-click="reset-local-storage"><b>Reset Local Storage</b></a>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!-- end theme-panel -->
-		
+
 		<!-- begin scroll to top btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
 		<!-- end scroll to top btn -->
 	</div>
 	<!-- end page container -->
-	
+
 
 	<!-- ================== BEGIN PRISM JS ================== -->
 	<script src="assets/js/prism.js"></script>
