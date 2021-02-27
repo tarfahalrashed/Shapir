@@ -10,27 +10,40 @@
 
         <!-- All search functions will have a search parameter, and it will be positional. So in Mavo, we will have mv-source-search="Music" -->
         <!-- OR in mv-value="songkick.searchVenues('Music')" -->
-        <div mv-bar="none" mv-app="searchSongkick" mv-source="shapir" mv-source-service="songkick" mv-source-action="searchVenues" mv-source-params="{'query': 'music'}">
+        <!-- <div mv-bar="none" mv-app="searchSongkick" mv-source="shapir" mv-source-service="songkick" mv-source-action="searchVenues" mv-source-params="music">
             <meta mv-multiple property="results">
             <meta mv-multiple property="events" mv-value="results.event">
         </div>
 
-        <div mv-bar="none" mv-app="searchSeatgeek" mv-source="shapir" mv-source-service="seatgeek" mv-source-action="searchVenues" mv-source-params="{'q': 'music'}">
+        <div mv-bar="none" mv-app="searchSeatgeek" mv-source="shapir" mv-source-service="seatgeek" mv-source-action="searchVenues" mv-source-params="music">
             <meta mv-multiple property="results">
             <meta mv-multiple property="events" mv-value="results.event">
         </div>
 
-        <div mv-bar="none" mv-app="searchTicketmaster" mv-source="shapir" mv-source-service="ticketmaster" mv-source-action="searchVenues" mv-source-params="{'keyword': 'music'}">
+        <div mv-bar="none" mv-app="searchTicketmaster" mv-source="shapir" mv-source-service="ticketmaster" mv-source-action="searchVenues" mv-source-params="music">
             <meta mv-multiple property="results">
             <meta mv-multiple property="events" mv-value="results.event">
-        </div>
+        </div> -->
 
-        <div mv-app="main">
+
+        <!-- <div mv-app="test" mv-source="shapir">
+            <div property="video"  mv-multiple mv-value="songkick.searchVenues('Music')">
+                <h3 property="name"></h3>
+            </div>
+        </div> -->
+
+
+        <div mv-app="main" mv-source="shapir">
             <!-- <label>Search:</label>
             <input property="searchTerm" mv-value="Music"/> -->
+            <div property="searchSongkick" mv-multiple mv-value="songkick.searchVenues('Music')"></div>
+            <div property="searchSeatgeek" mv-multiple mv-value="seatgeek.searchVenues('Music')"></div>
+            <!-- <div property="searchTicketmaster" mv-multiple mv-value="ticketmaster.searchVenues('Music')"></div> -->
 
             <h1>Music Venues</h1>
-            <div property="venue" mv-multiple mv-value="list(searchSongkick.results, searchSeatgeek.results, searchTicketmaster.results)">
+            <!-- This line returns the first object of the collection from each site. mv-multiple is not working with them individually-->
+            <!-- <div property="venue" mv-multiple mv-value="list(songkick.searchVenues('Music'), seatgeek.searchVenues('Music'))"> -->
+            <div property="venue" mv-multiple mv-value="list(searchSongkick, searchSeatgeek)">
                 <h1 property="name"></h1>
                 <a property="url">[url]</a>
                 <p property="maximumAttendeeCapacity"></p>
@@ -46,8 +59,9 @@
                     </ul>
                 </div> -->
             </div>
+
         </div>
 
-</body>
+    </body>
 
 </html>
