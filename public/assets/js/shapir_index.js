@@ -1127,7 +1127,7 @@ function resultTypeHasBeenChosen(select){
 
 
 function idHasBeenChosed(){
-  $("#mapLabel").show();
+  // $("#mapLabel").show();
   temp.objects[clickedType].id= document.getElementById("type-id");
 }
 
@@ -1739,6 +1739,7 @@ function saveTypeConfig(){
   console.log("tableTrs: ", tableTrs)
   //Insert the API URL next to the type
   var rowType = document.getElementById(clickedType+'_row');
+  rowType.deleteCell(1);
   var typeCell1 = rowType.insertCell(1);
   typeCell1.innerHTML =  '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
 
@@ -1749,6 +1750,7 @@ function saveTypeConfig(){
       continue;
     }else{
       var rowProperty = document.getElementById(tableTrs[i].id);
+      rowProperty.deleteCell(1);
       var cellField1 = rowProperty.insertCell(1);
       // style="width: 1%;"
       // cellField1.style.width="0%";
@@ -1809,7 +1811,7 @@ function saveTypeConfig(){
     var ftbody = document.getElementsByTagName('TBODY')[0]
     var ftr = document.getElementsByTagName('TR')[0]
 
-    $('<tr id="header"><td><h6 id="schema_header">Schema.org</h6></td> <td><h6 id="api_header">Web API</h6></td> </tr>').insertBefore(ftr);
+    // $('<tr id="header"><td><h6 id="schema_header">Schema.org</h6></td> <td><h6 id="api_header">Web API</h6></td> </tr>').insertBefore(ftr);
   }
 
 }
@@ -2134,7 +2136,7 @@ function typeHasBeenChosen(select){
   $("#tableDiv").append(table)
 
   //OLD WITH ARROWS
-  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>      <td style="width:100%"><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>   <td></td>   <td style="width:100%"><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Next to each other
   if(firstType){
@@ -2193,7 +2195,7 @@ function saveWoOSchema(){
   console.log("gettersList: ", gettersList)
 
   var as = document.getElementsByTagName("A")
-  var objs= gettersList;//Object.keys(temp.objects);
+  var objs= gettersList;
 
   //types
   for (let j in objs) {
@@ -2418,43 +2420,6 @@ function propertyHasBeenChosen(select){
   var thisType = select.getAttribute("id").split('_')[0];
 
   console.log("thisType: ", thisType);
-  //all <tr> elements
-  var trs = document.getElementsByTagName("TR")
-
-  if(isNew){
-    for(let t in trs){
-      if(trs[t].id == thisType){
-        // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td></tr>').insertBefore(trs[t]);
-        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>  <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
-        break;
-      }
-    }
-  }else{
-    for(var i=0; i<allTheType.length; ++i){
-      console.log("allTheType[i]: ", allTheType[i])
-      if(allTheType[i]['name'] == property){
-        typeP = allTheType[i]['type']
-        descP = allTheType[i]['desc']
-      }
-    }
-
-
-    for(let t in trs){
-      if(trs[t].id == thisType){
-        //PROPERTY HERE
-        // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td> </tr>').insertBefore(trs[t]);
-
-        //OLD
-        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td> <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
-        // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this)">'+property+'</a></td> <td></td> <td id="type-td"><code id="code-type" class="">'+typeP+'</code></td><td id="des">'+descP+'</td></tr>').insertBefore(trs[t]);
-
-        break;
-      }
-    }
-  }
-
-  console.log("tempObj properties: ", tempObj[thisType].properties);
-  propList= tempObj[thisType].properties; //NEED TO BE FIXED
 
   typeP = allTheType[thisType][property].types[0]
   descP = allTheType[thisType][property].desc
@@ -2470,6 +2435,32 @@ function propertyHasBeenChosen(select){
     name: property,
     types: types
   })
+
+  var hasType = false;
+  var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL"]
+  for(t in types){
+    if(dataTypes.indexOf(types[t]) !== -1){
+      hasType = true;
+    }
+  }
+
+  //all <tr> elements
+  var trs = document.getElementsByTagName("TR")
+
+  for(let t in trs){
+    if(trs[t].id == thisType){
+      // if(hasType){//if type is object
+      //   $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td style="display:flex; flex-wrap:wrap;"><div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4"><div style="display:flex;"><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div><div style="width:240px; text-align:center; "><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></div></div><div  id="step2_hint" class="hint-content do--split-children" ><p>XXXXXXXXXXXXXXXXXXXX</p></div></div></div></td></tr>').insertBefore(trs[t]);
+      // }else{//if not of type object
+        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>  <td></td>   <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
+      // }
+
+      break;
+      }
+    }
+
+  console.log("tempObj properties: ", tempObj[thisType].properties);
+  propList= tempObj[thisType].properties;
 
   console.log("typePropertyType: ", typePropertyType);
   console.log("propType: ", propType);

@@ -1,5 +1,5 @@
 export var config = {
-    apiKey: "AIzaSyBaJakjjAHw0wvBtELAtDLPmhq1piGWwqQ", 
+    apiKey: "AIzaSyBaJakjjAHw0wvBtELAtDLPmhq1piGWwqQ",
     authDomain: "superapi-52bc2.firebaseapp.com",
     databaseURL: "https://superapi-52bc2.firebaseio.com",
     projectId: "superapi-52bc2",

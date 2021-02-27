@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+
+</head>
+
+<body class="stretched" onload="">
+
+	<script type="module">
+
+		import shapir, {include} from "../shapir.js";
+
+		(async function(){
+
+			await shapir();
+
+			let video = await dailymotion.VideoObject("x7xf8kc");
+			console.log("video: ", video);
+
+			// await video.addToWatchlater();
+
+			// console.log(await seatgeek.searchVenues({'q': 'music'}));
+
+		    // var playlist = await dailymotion.MusicPlaylist("x70yld"); //method to get an exisiting playlist
+			// console.log("playlist: ", playlist)
+			// playlist.name="NEWEST DUH"
+
+			// await dailymotion.MusicPlaylist().create()
+			// await dailymotion.MusicPlaylist.add({"name":"Test X", "description":"Test playlist"});
+		})()
+
+
+</script>
+</body>
+</html>

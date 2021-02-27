@@ -49,9 +49,9 @@
 <body onload="fetchSchemaTypes()">
 
 	<!-- begin #page-loader -->
-	<div id="page-loader" class="fade show">
+	<!-- <div id="page-loader" class="fade show">
 		<span class="spinner"></span>
-	</div>
+	</div> -->
 	<!-- end #page-loader -->
 
 	<!-- begin #page-container -->
@@ -60,34 +60,20 @@
 		<!-- begin #header -->
 		<div id="header" class="header navbar-default">
 			<!-- header navbar navbar-transparent navbar-fixed-top navbar-expand-lg -->
-			<!-- begin navbar-header -->
-			<!-- <div class="navbar-header"> -->
-				<!-- <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>Color</b> Admin</a>
-				<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button> -->
 
-			<!-- </div> -->
 			<a href="index.html" class="navbar-brand">
-				<!-- <span class="brand-logo"></span> -->
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/bg/logoP.svg" width="70px"/>
-				<!-- <B><span class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh<span class="">api</span>r</span></B> -->
 			</a>
-			<!-- end navbar-header --><!-- begin header-nav -->
 			<ul class="navbar-nav navbar-right">
-				<li class="nav-item"><a class="nav-link active" href="#home" data-click="scroll-to-target" data-scroll-target="#home">HOME</a></li>
+				<li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target" data-scroll-target="#home">HOME</a></li>
 				<li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT</a></li>
 				<li class="nav-item"><a class="nav-link" href="schema.html" >CREATE</a></li>
 				<li class="nav-item"><a class="nav-link" href="doc.html" >EXPLORE</a></li>
 				<li class="nav-item"><a class="nav-link" href="doc.html" >DOC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 				<!-- <li class="nav-item"><a class="nav-link" href="#team" data-click="scroll-to-target">TEAM</a></li> -->
 			</ul>
-			<!-- end header-nav -->
 		</div>
 		<!-- end #header -->
-
 
 
 		<!-- begin #content -->
@@ -137,20 +123,20 @@
 											</div>
 											</br> -->
 
-											<div id="schema-desc" class="col-lg-14" style="padding-left:15px; display:none">
+											<div id="schema-desc" class="col-lg-14" style="padding-left:15px; padding-top:15px; display:none">
 
-												<div style="padding-bottom: 5px;">
-													<p style="display: inline; ">Type Page:</p>
-													<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset; display: inline; padding-bottom: 10px;"></a>
+												<div style="padding-bottom: 15px;">
+													<h6>Type Page:</h6>
+													<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset; "></a>
 												</div>
 
-												<div style="padding-bottom: 5px;">
-													<p style="display: inline; ">Type Descreption:</p>
-													<p id="schemaDesc" style="display: inline;"></p>
+												<div style="padding-bottom: 0px;">
+													<h6>Type Descreption:</h6>
+													<p id="schemaDesc"></p>
 												</div>
 
 												<div id="jsonld-schema" style="display: none;">
-													<p style="display: inline;">Usage example encoded as JSON-LD</p>
+													<h6 style="display: inline;">Usage example encoded as JSON-LD</h6>
 													<a id="exampleLink" href="javascript:;" onclick="showOrHideExample()" style="font-weight: bold; font-style: unset; display: inline; padding-bottom: 10px;">(show)</a>
 
 													<pre id="json" style="font-size: 0.9em; padding-top: 0px; height: 320px; display: none;">
@@ -291,8 +277,8 @@
 																							<option selected>Choose website</option>
 																						</select>
 																					</div>
-																					<div  id="step1_hint" class="hint-content do--split-children" >
-																						<p>Start describing your data model, by choosing a website.</p>
+																					<div id="step1_hint" class="hint-content do--split-children" >
+																						<p>Choose a website that you would like to describe using schema.org vocabulary.</p>
 																					</div>
 																				</div>
 																			</div>
@@ -341,7 +327,7 @@
 																<td style="display:flex; flex-wrap:wrap;">
 																	<div style="display:flex;">
 																		<div>
-																		&nbsp;<img src="main_assets/img/new/arrow.png" width="15px"/>
+																		&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
 																	</div>
 																	<div style="width:240px; text-align:center; ">
 																		<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
@@ -1858,7 +1844,8 @@
   pointer-events: none;
   color: black;
   visibility: hidden;
-  pointer-events: none
+  pointer-events: none;
+
 }
 .item-hints .hint-content::before {
   width: 0px;
@@ -1962,7 +1949,7 @@
 			#butt-td
 			{
 				table-layout: fixed;
-				width: 20%;
+				width: 30%;
 			}
 			#type-td
 			{
