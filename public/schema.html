@@ -123,6 +123,10 @@
 											</div>
 											</br> -->
 
+											<div id="site-info" class="col-lg-14" style="padding-left:15px; padding-top:15px; display:none">
+											</div>
+											<!-- </br> -->
+
 											<div id="schema-desc" class="col-lg-14" style="padding-left:15px; padding-top:15px; display:none">
 
 												<div style="padding-bottom: 15px;">
@@ -233,7 +237,7 @@
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 												</div>
 											</div>
-											<div class="panel-body" style="padding:50px; padding-left:100px">
+											<div class="panel-body" style="padding-left:100px">
 												<!-- <p>Follow the steps on the left to build your data model.</p> -->
 
 												<!-- begin panel-body -->
@@ -259,29 +263,47 @@
 
 														<h5 style="display: none;" id="desc-site">Describe the data model of <span id="siteN"></span> and connect it to its API</h5>
 
-														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px">
+														<!-- <div class="form-group">
+															<label for="">Enter the URL of a Website</label>
+															<div class="col-4" style="display: inline-block;">
+																<input style="display: inline;" id="url-site" type="text" class="form-control" placeholder="" />
+																<button style="display: inline;" type="button" >Start</button>
+															</div>
+														</div> -->
+
+														<!-- <a href="#" id="tglr" class="popover-toggle" title="Popover Header">Toggle popover</a> -->
+
+
+														<div class="input-group mb-5">
+															<label style="padding-top:7px">Enter the URL of a Website</label>
+															<div class="input-group col-lg-4">
+																<input id="url-site" type="text" class="form-control">
+																<span class="input-group-btn">
+																	<button class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Start</button>
+																</span>
+															</div>
+														</div>
+
+
+														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; display:none">
 															<table id="site-table" class="table table-borderless">
 																<tbody>
 																	<tr id="site-row1">
 																		<td>
-
-																			<!-- <div style="width:150px; text-align:center; ">
-																				<select id="sites-name" class="form-control selectpicker tool" data-size="10" data-live-search="true" data-style="btn-info" data-toggle="tooltip" data-placement="top" title="Tooltip on right!" onchange="siteHasBeenChosen(this)">
-																					<option selected>Choose website</option>
-																				</select>
-																			</div> -->
-																			<div id="tar" class="item-hints">
-																				<div class="hint" data-position="4">
+																			<!-- <div id="tar" class="item-hints">
+																				<div class="hint" data-position="4"> -->
 																					<div style="width:240px; text-align:center; ">
-																						<select id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-info" onchange="siteHasBeenChosen(this)">
+																						<a href="javascript:;" id="site-domain" class="popover-toggle btn btn-info" title="Suggested Types" style="color:white; width:240px; height: 34px;text-align:center; padding: 4px 1px;"></a>
+																						<div id="site-domain-div" style="display: none"></div>
+																						<!-- <select id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-info" onchange="siteHasBeenChosen(this)">
 																							<option selected>Choose website</option>
-																						</select>
+																						</select> -->
 																					</div>
-																					<div id="step1_hint" class="hint-content do--split-children" >
+																					<!-- <div id="step1_hint" class="hint-content do--split-children" >
 																						<p>Choose a website that you would like to describe using schema.org vocabulary.</p>
 																					</div>
 																				</div>
-																			</div>
+																			</div> -->
 																		</td>
 																	</tr>
 
@@ -300,25 +322,27 @@
 															<tr id="site-row2" style="display:none">
 																<td style="display:flex; flex-wrap:wrap;">
 
-																	<div id="tar" class="item-hints"  style="margin-top:-20px">
-																		<div class="hint" data-position="4">
+																	<!-- <div id="tar" class="item-hints"  style="margin-top:-20px">
+																		<div class="hint" data-position="4"> -->
 
 																			<div style="display:flex;">
 																				<div>
 																					&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
 																				</div>
-																				<div style="width:240px; text-align:center; ">
-																					<select  id="type-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
+																				<div style="width:240px; text-align:center;">
+																					<select id="type-select"  class="form-control selectpicker" data-size="10" data-live-search="true" data-style="popover-toggle btn-warning" onchange="typeHasBeenChosen(this)">
 																						<option selected>Add Type</option>
 																					</select>
+																					<div id="type-popover-div" style="display: none"></div>
 																				</div>
 																			</div>
 
-																			<div  id="step2_hint" class="hint-content do--split-children" >
+
+																			<!-- <div  id="step2_hint" class="hint-content do--split-children" >
 																				<p>Choose the types of data you want to retrieve/manage in this website. </br>Check the <a href="https://schema.org/docs/full.html" target="_blank">list of types</a> in schema.org</p>
 																			</div>
 																		</div>
-																	</div>
+																	</div> -->
 
 																</td>
 															</tr>
@@ -327,12 +351,15 @@
 																<td style="display:flex; flex-wrap:wrap;">
 																	<div style="display:flex;">
 																		<div>
-																		&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
-																	</div>
-																	<div style="width:240px; text-align:center; ">
-																		<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
-																			<option selected>Add Action</option>
-																		</select>
+																			&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
+																		</div>
+																		<div style="width:240px; text-align:center; ">
+																			<!-- <select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
+																				<option selected>Search</option>
+																			</select> -->
+																			<a id="methodSite_Search" href="javascript:;" class="popover-toggle btn btn-purple" title="xxx" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">Search</a>
+																			<div id="method-popover-div" style="display: none"></div>
+																		</div>
 																	</div>
 																</td>
 															</tr>
@@ -1106,6 +1133,7 @@
 
 
 												<style>
+
 													#methodDiv {
 														border-radius: 25px;
 														border: 2px solid lightgray;
@@ -1784,6 +1812,22 @@
 
 		<style>
 
+.bootstrap-select .btn .filter-option {
+   text-align: center
+}
+
+/* .popover {
+	top: 120px !important;
+}
+
+.popover .arrow {
+	top: 20px !important;
+	position: absolute;
+} */
+
+/* .popover .arrow{
+    top: 120px !important;
+} */
 
 
 /* HINTS */

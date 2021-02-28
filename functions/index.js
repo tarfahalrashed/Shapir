@@ -7,19 +7,20 @@ const fetch = require('node-fetch');
 var http = require('http');
 var https = require('https');
 const axios = require('axios');
-
 var app = express();
 
 
+//Scrape schema.org type page and retrieve its html
 app.get("/schemaOrg/:name", (req, res, next) => {
 
-  const url = "https://schema.org/"+req.params.name;
+  let url = "https://schema.org/"+req.params.name;
 
   cors(req, res, () => {
+
     axios(url)
     .then(response =>{
-      const html = response.data;
-      console.log(html);
+      let html = response.data;
+      // console.log(html);
       res.send(html)
     })
     .catch(console.error);
@@ -27,6 +28,36 @@ app.get("/schemaOrg/:name", (req, res, next) => {
   })//cors
 
 })
+
+
+//Get a site's domain categories (webshrinker)
+app.get("/categories/:site", (req, res) => {
+
+  //encode site domain
+  let encodedSite = Buffer.from(req.params.site).toString('base64');
+  let url = 'https://api.webshrinker.com/categories/v3/'+encodedSite;
+  let header= {
+    headers: {"Authorization": "Basic VWpqTWhRUURWZldPSExwN2xWcDc6bnVPaXRZWHpFSmp4MHdVMWpodDU="}
+  };
+
+  cors(req, res, () => {
+
+    axios(url, header)
+    .then(response =>{
+      const data = response.data;
+      // console.log(data);
+      res.send(data)
+    })
+    .catch(console.error);
+
+  })//cors
+
+})
+
+
+
+
+
 
 // const {shapir, include} = require('../public/shapir.js');
 
