@@ -282,7 +282,7 @@
 
 														<div class="input-group mb-4">
 														<!-- <div class="mb-5"> -->
-															<label style="padding-top:7px"><B>Step1.</B> Enter the URL of a Website</label>
+															<label style="padding-top:7px; font-size: 1.2em;"><B>Step1.</B> Enter the URL of a Website</label>
 															<div class="input-group col-lg-4">
 																<input id="url-site" type="text" class="form-control">
 																<span class="input-group-btn">
@@ -292,12 +292,12 @@
 														</div>
 
 														<div id="step2-desc" style="display: none;" class="input-group mb-5">
-															<label><B>Step2.</B> Describe what is in this website using schema.org vocuabury</label>
+															<label style="font-size: 1.2em;"><B>Step2.</B> Describe what is in this website using schema.org vocuabury</label>
 															<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
 														</div>
 
 
-														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; padding-top: 50px;">
+														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; padding-top: 10px;">
 															<table id="site-table" class="table table-borderless">
 																<tbody>
 																	<tr id="site-row1" style="display:none">
@@ -390,16 +390,18 @@
 																		</div>
 																	</div>
 																</td>
-																<td></td>
-																<td style="width:100%"><button id="site_Search_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button>
+																<!-- <td></td>
+																<td style="width:100%">
+																	<button id="site_Search_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button>
+																</td> -->
 															</tr>
 														</tbody>
 													</table>
 
 												</br>
 													<div id="connectDiv" style="display:none">
-														<h5 id="beforeDone">Connect to the API when you are done describing your data model. </h5>
-														<h5 id="afterDone" style="display:none">Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</h5>
+														<p style="font-size: 1.2em;" id="beforeDone"><B>Step3.</B> Connect to the API when you are done describing your data model. </p>
+														<p style="font-size: 1.2em; display:none" id="afterDone"><B>Step3.</B> Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</p>
 														<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a>
 													</div>
 
