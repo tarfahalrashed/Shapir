@@ -42,8 +42,14 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
 
+
+	<link href="assets/css/LiteTooltip.css" rel="stylesheet" />
+
+
 	<script type="text/javascript" src="assets/js/redips-drag-min.js"></script>
 	<script type="text/javascript" src="assets/js/script.js"></script>
+
+
 
 </head>
 <body onload="fetchSchemaTypes()">
@@ -237,7 +243,7 @@
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 												</div>
 											</div>
-											<div class="panel-body" style="padding-left:100px">
+											<div class="panel-body" style="padding-left:100px;">
 												<!-- <p>Follow the steps on the left to build your data model.</p> -->
 
 												<!-- begin panel-body -->
@@ -274,8 +280,9 @@
 														<!-- <a href="#" id="tglr" class="popover-toggle" title="Popover Header">Toggle popover</a> -->
 
 
-														<div class="input-group mb-5">
-															<label style="padding-top:7px">Enter the URL of a Website</label>
+														<div class="input-group mb-4">
+														<!-- <div class="mb-5"> -->
+															<label style="padding-top:7px"><B>Step1.</B> Enter the URL of a Website</label>
 															<div class="input-group col-lg-4">
 																<input id="url-site" type="text" class="form-control">
 																<span class="input-group-btn">
@@ -284,33 +291,41 @@
 															</div>
 														</div>
 
+														<div id="step2-desc" style="display: none;" class="input-group mb-5">
+															<label><B>Step2.</B> Describe what is in this website using schema.org vocuabury</label>
+															<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
+														</div>
 
-														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; display:none">
+
+														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; padding-top: 50px;">
 															<table id="site-table" class="table table-borderless">
 																<tbody>
-																	<tr id="site-row1">
-																		<td>
-																			<!-- <div id="tar" class="item-hints">
-																				<div class="hint" data-position="4"> -->
+																	<tr id="site-row1" style="display:none">
+
+																		<td style="display:flex; flex-wrap:wrap;">
+
+																			<div class="item-hints">
+																				<div class="hint" data-position="4">
 																					<div style="width:240px; text-align:center; ">
-																						<a href="javascript:;" id="site-domain" class="popover-toggle btn btn-info" title="Suggested Types" style="color:white; width:240px; height: 34px;text-align:center; padding: 4px 1px;"></a>
-																						<div id="site-domain-div" style="display: none"></div>
+																						<a href="javascript:;" id="site-domain" class="btn btn-info" style="color:white; width:240px; height: 34px; text-align:center;"></a>
+																						<!-- <div id="site-domain-div" style="display: none"></div> -->
 																						<!-- <select id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-info" onchange="siteHasBeenChosen(this)">
 																							<option selected>Choose website</option>
 																						</select> -->
 																					</div>
-																					<!-- <div id="step1_hint" class="hint-content do--split-children" >
-																						<p>Choose a website that you would like to describe using schema.org vocabulary.</p>
+																					<div id="step1_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children" >
+																						<p style="margin-bottom:0px">What types of information is available in this website?</p>
+																						<!-- <a href="https://schema.org/docs/full.html" target="_blank" style="pointer-events: all;">list of types</a> -->
+																						<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="showSuggestedTypes()">Show Suggested Types</button>
+																						<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="showAddTypeButton()">Search for Types</button>
 																					</div>
 																				</div>
-																			</div> -->
+																			</div>
 																		</td>
 																	</tr>
-
 																</tbody>
 															</table>
 														</div>
-
 
 													<div id="tableDiv" class="form-group row m-b-50" style="margin-bottom:-15px">
 														<!-- <div  class="table">
@@ -330,16 +345,16 @@
 																					&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
 																				</div>
 																				<div style="width:240px; text-align:center;">
-																					<select id="type-select"  class="form-control selectpicker" data-size="10" data-live-search="true" data-style="popover-toggle btn-warning" onchange="typeHasBeenChosen(this)">
-																						<option selected>Add Type</option>
+																					<select id="type-select"  style="text-align:center;" class="popover-toggle form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
+																						<option style="text-align:center; display:none" selected>Add Type</option>
 																					</select>
-																					<div id="type-popover-div" style="display: none"></div>
 																				</div>
+																				<!-- <div id="type-popover-div" style="display: none"></div> -->
+
 																			</div>
 
-
-																			<!-- <div  id="step2_hint" class="hint-content do--split-children" >
-																				<p>Choose the types of data you want to retrieve/manage in this website. </br>Check the <a href="https://schema.org/docs/full.html" target="_blank">list of types</a> in schema.org</p>
+																			<!-- <div  id="step2_hint" style="pointer-events: none;" class="hint-content do--split-children" >
+																				<p>Choose the types of data you want to retrieve/manage in this website. </br>Check the <a href="https://schema.org/docs/full.html" target="_blank" style="pointer-events: all;">list of types</a> in schema.org</p>
 																			</div>
 																		</div>
 																	</div> -->
@@ -349,19 +364,34 @@
 
 															<tr  id="site-row3" style="display:none;">
 																<td style="display:flex; flex-wrap:wrap;">
-																	<div style="display:flex;">
-																		<div>
-																			&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
-																		</div>
-																		<div style="width:240px; text-align:center; ">
-																			<!-- <select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
-																				<option selected>Search</option>
-																			</select> -->
-																			<a id="methodSite_Search" href="javascript:;" class="popover-toggle btn btn-purple" title="xxx" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">Search</a>
-																			<div id="method-popover-div" style="display: none"></div>
+																	<div id="tar" class="item-hints">
+																		<div class="hint" data-position="4" style="margin-top:0px;">
+
+																			<div style="display:flex;">
+																				<div>
+																					&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
+																				</div>
+																				<div id="method-select-div" style="width:240px; text-align:center; display:none">
+																					<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
+																						<option style="text-align:center; display:none" selected>Add Method</option>
+																					</select>
+																				</div>
+																				<div id="method-button-div" style="width:240px; text-align:center;">
+																					<a id="methodSite.Search" href="javascript:;" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">Search</a>
+																					<!-- <div id="method-popover-div" style="display: none"></div> -->
+																				</div>
+																				<div id="step4_hint" style="pointer-events:none; height:70px; " class="hint-content do--split-children" >
+																					<p style="margin-bottom:0px">Are you interested in searching the site?</p>
+																					<!-- <a href="https://schema.org/docs/full.html" target="_blank" style="pointer-events: all;">list of types</a> -->
+																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="removeSearchHint()">Yes</button>
+																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="removeSearchBtton()">No</button>
+																				</div>
+																			</div>
 																		</div>
 																	</div>
 																</td>
+																<td></td>
+																<td style="width:100%"><button id="site_Search_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button>
 															</tr>
 														</tbody>
 													</table>
@@ -1693,7 +1723,7 @@
 				<!-- <label class="col-form-label"><B>Method Name</B></label></br> -->
 				<p>1. Change the name of the method [optional] </p>
 				<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
-
+				</br></br>
 
 				<!-- <label class="col-form-label">API Endpoint</label> -->
 
@@ -1720,6 +1750,24 @@
 				<select id="method-result-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
 					<option selected>Choose type of returned result</option>
 				</select>
+				</br></br>
+
+				<div id="search-method" style="display: none;">
+				<p>4. Which of the follwoing parameters is the search term parameter?</p>
+				<!-- <span>Make sure that you've chosen the class and its properties<span> -->
+				<select id="method-search-param" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+					<option selected>Choose search parameter</option>
+				</select>
+				</br></br>
+
+				<p>5. Which of the follwing fields is the id of the </p>
+				<!-- <span>Make sure that you've chosen the class and its properties<span> -->
+				<select id="method-result-type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+					<option selected>Choose the ID</option>
+				</select>
+				</div>
+
+
 
 			</br></br>
 			<a href="javascript:;" class="btn btn-primary" id="" onclick="saveMethodConfig()">Save</a>
@@ -1809,21 +1857,24 @@
 		<!-- ================== DRAGULA ================== -->
 		<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/$VERSION/dragula.min.js'></script> -->
 
+		<script type="text/javascript" src="assets/js/LiteTooltip.js"></script>
 
 		<style>
 
-.bootstrap-select .btn .filter-option {
+/* .bootstrap-select .btn .filter-option {
    text-align: center
 }
 
-/* .popover {
+.popover {
 	top: 120px !important;
 }
 
-.popover .arrow {
+#spopover405482 .popover .arrow {
 	top: 20px !important;
 	position: absolute;
 } */
+
+
 
 /* .popover .arrow{
     top: 120px !important;
@@ -1871,13 +1922,9 @@
   transform: translate(-50%,-50%);
 }
 
-
-
-
-
 .item-hints .hint-content {
   color: black;
-  width: 300px;
+  width: 400px; /*CHANGR THE SIZE OF TEXT WIDTH CONTAINER*/
   position: absolute;
   z-index: 5;
   /* padding-bottom: 12px 0; */
@@ -1889,11 +1936,13 @@
   color: black;
   visibility: hidden;
   pointer-events: none;
-
+  /* height: 70px;  */
+  /* CHANGE THE HEIGHT OF THE TETX CONTAINER*/
 }
+
 .item-hints .hint-content::before {
   width: 0px;
-  bottom: -5px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
+  bottom: 10px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
   left: 0;
   content: '';
   background-color: black;
@@ -1901,18 +1950,20 @@
   position: absolute;
   transition: width 0.4s;
 }
+
 .item-hints .hint-content::before {
-  width: 250px;
+  width: 300px;
   transition: width 0.4s;
 }
+
 .item-hints .hint-content::after {
   -webkit-transform-origin: 0 50%;
   transform-origin: 0 50%;
   -webkit-transform: rotate(-225deg);
   transform: rotate(-225deg);
-  bottom: -5px; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
+  bottom: 10px; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
   left: 0px;
-  width: 20px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
+  width: 15px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
   content: '';
   background-color: black;
   height: 1px;
@@ -1930,9 +1981,9 @@
 }
 .item-hints .hint[data-position="4"] .hint-content {
 /*   bottom: 85px; */
-  bottom: 55px;
-  left: 100%; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
-  margin-left: 20px;
+  bottom: 35px;
+  left: 105%; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
+  margin-left: 15px;
 }
 
 			.bootstrap-select .dropdown-menu { max-width: 100% !important; }

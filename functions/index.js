@@ -9,6 +9,11 @@ var https = require('https');
 const axios = require('axios');
 var app = express();
 
+// app.get('*', function(req, res, next){
+//     if(req.headers.host == 'api.shapir.org:3000')  //if it's a sub-domain
+//       req.url = '/' + req.url;  //append some text yourself
+//     next();
+// });
 
 //Scrape schema.org type page and retrieve its html
 app.get("/schemaOrg/:name", (req, res, next) => {
@@ -37,7 +42,7 @@ app.get("/categories/:site", (req, res) => {
   let encodedSite = Buffer.from(req.params.site).toString('base64');
   let url = 'https://api.webshrinker.com/categories/v3/'+encodedSite;
   let header= {
-    headers: {"Authorization": "Basic VWpqTWhRUURWZldPSExwN2xWcDc6bnVPaXRZWHpFSmp4MHdVMWpodDU="}
+    headers: {"Authorization": "Basic <token>"}
   };
 
   cors(req, res, () => {
@@ -55,9 +60,22 @@ app.get("/categories/:site", (req, res) => {
 })
 
 
+//GET AN OBJECT
 
+app.get("X/:type/:site/:id", (req, res, next) => {
 
+    (async function(){
+      console.log("TYPE: ", req.params.type)
+      console.log("SITE: ", req.params.site)
+      console.log("SITE: ", req.params.id)
+      // console.log("PARAM: ", req.query)
+      await shapir();
+      let result = await global[req.params.site][req.params.type](req.params.id);
+      res.send(result)
+        // await dailymotion.VideoObject("x7xf8kc"))
+    })()
 
+  })
 
 // const {shapir, include} = require('../public/shapir.js');
 
