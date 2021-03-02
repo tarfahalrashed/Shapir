@@ -134,7 +134,7 @@
 											<!-- </br> -->
 
 											<div id="schema-desc" class="col-lg-14" style="padding-left:15px; padding-top:15px; display:none">
-
+												<h5>Information about the chosen type</h5>
 												<div style="padding-bottom: 15px;">
 													<h6>Type Page:</h6>
 													<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset; "></a>
@@ -296,6 +296,8 @@
 															<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
 														</div>
 
+														<div id="step2-header" style="display:none;"><h5 style="display: inline; margin-left: 70px; margin-right: 260px;">schema.org</h5> <h5 style="display: inline;">Website API</h5></div>
+
 
 														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; padding-top: 10px;">
 															<table id="site-table" class="table table-borderless">
@@ -304,8 +306,8 @@
 
 																		<td style="display:flex; flex-wrap:wrap;">
 
-																			<div class="item-hints">
-																				<div class="hint" data-position="4">
+																			<!-- <div class="item-hints">
+																				<div class="hint" data-position="4"> -->
 																					<div style="width:240px; text-align:center; ">
 																						<a href="javascript:;" id="site-domain" class="btn btn-info" style="color:white; width:240px; height: 34px; text-align:center;"></a>
 																						<!-- <div id="site-domain-div" style="display: none"></div> -->
@@ -313,14 +315,13 @@
 																							<option selected>Choose website</option>
 																						</select> -->
 																					</div>
-																					<div id="step1_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children" >
+																					<!-- <div id="step1_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children" >
 																						<p style="margin-bottom:0px">What types of information is available in this website?</p>
-																						<!-- <a href="https://schema.org/docs/full.html" target="_blank" style="pointer-events: all;">list of types</a> -->
 																						<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="showSuggestedTypes()">Show Suggested Types</button>
 																						<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="showAddTypeButton()">Search for Types</button>
 																					</div>
 																				</div>
-																			</div>
+																			</div> -->
 																		</td>
 																	</tr>
 																</tbody>
@@ -337,8 +338,8 @@
 															<tr id="site-row2" style="display:none">
 																<td style="display:flex; flex-wrap:wrap;">
 
-																	<!-- <div id="tar" class="item-hints"  style="margin-top:-20px">
-																		<div class="hint" data-position="4"> -->
+																	<div class="item-hints"  style="margin-top:-20px">
+																		<div class="hint" data-position="4">
 
 																			<div style="display:flex;">
 																				<div>
@@ -350,14 +351,12 @@
 																					</select>
 																				</div>
 																				<!-- <div id="type-popover-div" style="display: none"></div> -->
-
 																			</div>
-
-																			<!-- <div  id="step2_hint" style="pointer-events: none;" class="hint-content do--split-children" >
-																				<p>Choose the types of data you want to retrieve/manage in this website. </br>Check the <a href="https://schema.org/docs/full.html" target="_blank" style="pointer-events: all;">list of types</a> in schema.org</p>
+																			<div  id="step2_hint" style="pointer-events: none;" class="hint-content do--split-children" >
+																				<p>What types of information is available in this website?</p>
 																			</div>
 																		</div>
-																	</div> -->
+																	</div>
 
 																</td>
 															</tr>
@@ -384,7 +383,7 @@
 																					<p style="margin-bottom:0px">Are you interested in searching the site?</p>
 																					<!-- <a href="https://schema.org/docs/full.html" target="_blank" style="pointer-events: all;">list of types</a> -->
 																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="removeSearchHint()">Yes</button>
-																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="removeSearchBtton()">No</button>
+																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="removeSearchButton()">No</button>
 																				</div>
 																			</div>
 																		</div>
@@ -1928,7 +1927,9 @@
   color: black;
   width: 400px; /*CHANGR THE SIZE OF TEXT WIDTH CONTAINER*/
   position: absolute;
-  z-index: 5;
+  /* z-index: 5; */
+  z-index: 1;
+  background-color:"white"; /* to cover the buttons*/
   /* padding-bottom: 12px 0; */
   opacity: 1;
   visibility: visible !important;
@@ -1984,7 +1985,7 @@
 .item-hints .hint[data-position="4"] .hint-content {
 /*   bottom: 85px; */
   bottom: 35px;
-  left: 105%; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
+  left: 100%; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
   margin-left: 15px;
 }
 

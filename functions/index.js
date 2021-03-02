@@ -67,7 +67,7 @@ app.get("X/:type/:site/:id", (req, res, next) => {
     (async function(){
       console.log("TYPE: ", req.params.type)
       console.log("SITE: ", req.params.site)
-      console.log("SITE: ", req.params.id)
+      console.log("ID: ", req.params.id)
       // console.log("PARAM: ", req.query)
       await shapir();
       let result = await global[req.params.site][req.params.type](req.params.id);

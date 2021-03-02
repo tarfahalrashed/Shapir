@@ -607,10 +607,7 @@ function addSchemaToFunctions(){
 
 
 
-var once=false
-var scrapirAPIs = [];
-var allSchemaTypesButActions = [];
-var allTypes;
+var once=false, scrapirAPIs = [], allSchemaTypesButActions = [], allTypes, actionStrings
 
 // window.onload = function () {
 function fetchSchemaTypes(){
@@ -753,22 +750,30 @@ if(!once){
 
   // websites=['4shared', 'abc', 'abcnews', 'about', 'aboutads', 'abril', 'academia', 'accounts', 'addthis', 'addtoany', 'adobe', 'adssettings', 'afternic', 'akamaihd', 'alibaba', 'aliexpress', 'allaboutcookies', 'amazon', 'amzn', 'android', 'answers', 'aol', 'ap', 'apache', 'apple', 'archive', 'archives', 'arxiv', 'asus', 'bandcamp', 'bbc', 'berkeley', 'biblegateway', 'biglobe', 'billboard', 'bing', 'bit', 'bitly', 'blackberry', 'bloglovin', 'bloomberg', 'booking', 'books', 'boston', 'box', 'bp', 'bp1', 'bp2', 'brandbucket', 'britannica', 'bt', 'businessinsider', 'buydomains', 'buzzfeed', 'calameo', 'cambridge', 'canva', 'cbc', 'cbslocal', 'cbsnews', 'cdc', 'change', 'channel4', 'chicagotribune', 'chinadaily', 'chron', 'cia', 'cloudflare', 'cmu', 'cnbc', 'cnet', 'cnn', 'code', 'columbia', 'consumerreports', 'cornell', 'corriere', 'cpanel', 'creativecommons', 'csmonitor', 'dailymail', 'dailymotion', 'dan', 'daum', 'de', 'debian', 'deezer', 'dell', 'depositfiles', 'detik', 'developers', 'dictionary', 'digg', 'digitaltrends', 'discovery', 'disney', 'disqus', 'docs', 'doubleclick', 'draft', 'dreniq', 'drive', 'dropbox', 'dw', 'e-monsite', 'e-recht24', 'ea', 'ebay', 'economist', 'ed', 'ehow', 'elmundo', 'elpais', 'elsevier', 'en', 'enable-javascript', 'engadget', 'eonline', 'epa', 'es', 'espn', 'etsy', 'europa', 'eventbrite', 'evernote', 'example', 'express', 'facebook', 'fandom', 'fastcompany', 'fb', 'fda', 'feedburner', 'feedproxy', 'fifa', 'files', 'finance', 'forbes', 'forms', 'fortune', 'foursquare', 'foxnews', 'fr', 'ft', 'ftc', 'get', 'ggpht', 'giphy', 'github', 'gizmodo', 'globo', 'gmail', 'gnu', 'godaddy', 'gofundme', 'goo', 'goodreads', 'google', 'googleblog', 'googleusercontent', 'gravatar', 'greenpeace', 'groups', 'gstatic', 'guardian', 'harvard', 'hatena', 'hm', 'hollywoodreporter', 'house', 'hp', 'huawei', 'huffingtonpost', 'huffpost', 'hugedomains', 'ibm', 'icann', 'id', 'ietf', 'ig', 'ign', 'ikea', 'imageshack', 'imdb', 'inc', 'independent', 'indiatimes', 'instagram', 'instructables', 'intel', 'ipv4', 'iso', 'issuu', 'istockphoto', 'it', 'iubenda', 'ja', 'jimdofree', 'khanacademy', 'kickstarter', 'last', 'latimes', 'lefigaro', 'lemonde', 'lifehacker', 'line', 'linkedin', 'list-manage', 'live', 'liveinternet', 'loc', 'lonelyplanet', 'm', 'mail', 'maps', 'marketingplatform', 'marketwatch', 'marriott', 'mashable', 'mayoclinic', 'mediafire', 'medium', 'mega', 'megaupload', 'merriam-webster', 'metro', 'microsoft', 'mirror', 'mit', 'mixcloud', 'mozilla', 'msn', 'my', 'myaccount', 'myspace', 'mysql', 'namecheap', 'narod', 'nasa', 'nationalgeographic', 'nature', 'naver', 'nba', 'nbcnews', 'netflix', 'netvibes', 'networkadvertising', 'news', 'newsweek', 'newyorker', 'nginx', 'nicovideo', 'nih', 'nikkei', 'noaa', 'nokia', 'npr', 'nvidia', 'nydailynews', 'nypost', 'nytimes', 'office', 'ok', 'opera', 'oracle', 'orange', 'oreilly', 'oup', 'over-blog-kiwi', 'ovh', 'ox', 'parallels', 'paypal', 'pbs', 'pcmag', 'pexels', 'photobucket', 'photos', 'php', 'picasa', 'picasaweb', 'pinterest', 'pixabay', 'pl', 'play', 'playstation', 'plesk', 'plos', 'plus', 'policies', 'politico', 'prestashop', 'princeton', 'privacyshield', 'prnewswire', 'psu', 'psychologytoday', 'pt', 'public-api', 'qq', 'quora', 'rakuten', 'rapidshare', 'rediff', 'repubblica', 'researchgate', 'reuters', 'reverbnation', 'ria', 'rollingstone', 'rottentomatoes', 'rt', 'ru', 'samsung', 'sapo', 'sciencedaily', 'sciencedirect', 'sciencemag', 'scientificamerican', 'scoop', 'scribd', 'search', 'secureserver', 'sedo', 'sendspace', 'sfgate', 'shop-pro', 'shopify', 'shutterstock', 'si', 'sina', 'sites', 'sky', 'skype', 'slate', 'slideshare', 'smh', 'so-net', 'softpedia', 'soratemplates', 'soundcloud', 'spiegel', 'sports', 'spotify', 'springer', 'sputniknews', 'ssl-images-amazon', 'stackoverflow', 'standard', 'stanford', 'state', 'statista', 'steampowered', 'storage', 'stuff', 'support', 'surveymonkey', 't', 'tabelog', 'target', 'teamviewer', 'techcrunch', 'techradar', 'ted', 'telegram', 'telegraph', 'terra', 'theatlantic', 'thedailybeast', 'thefreedictionary', 'theglobeandmail', 'theguardian', 'themeforest', 'thestar', 'thesun', 'thetimes', 'theverge', 'thoughtco', 'time', 'timeout', 'tinyurl', 'tools', 'translate', 'tripadvisor', 'trustpilot', 'twitch', 'twitter', 'ubuntu', 'ucoz', 'umich', 'un', 'unesco', 'unsplash', 'uol', 'urbandictionary', 'usatoday', 'usgs', 'usnews', 'utexas', 'variety', 'vchecks', 'venturebeat', 'viagens', 'vice', 'video', 'vimeo', 'vk', 'vox', 'w3', 'wa', 'walmart', 'washington', 'washingtonpost', 'weather', 'webmd', 'weibo', 'welt', 'whatsapp', 'whitehouse', 'who', 'wikia', 'wikihow', 'wikimedia', 'wiktionary', 'wiley', 'windowsphone', 'wired', 'wordpress', 'worldbank', 'wp', 'wsj', 'www', 'xbox', 'xing', 'xinhuanet', 'yadi', 'yahoo', 'yale', 'yandex', 'yelp', 'youronlinechoices', 'youtu', 'youtube', 'ytimg', 'zeit', 'zendesk', 'ziddu'];
   allTypes = ["API Reference","About Page","Accept Action","Accounting Service","Achieve Action","Action","Add Action","Administrative Area","Adult Entertainment","Aggregate Offer","Aggregate Rating","Agree Action","Airport","Alignment Object","Allocate Action","Amusement Park","Anatomical Structure","Anatomical System","Animal Shelter","Apartment Complex","Append Action","Apply Action","Approved Indication","Aquarium","Arrive Action","Art Gallery","Artery","Article","Ask Action","Assess Action","Assign Action","Attorney","Audience","Audio Object","Authorize Action","Auto Body Shop","Auto Dealer","Auto Parts Store","Auto Rental","Auto Repair","Auto Wash","Automated Teller","Automotive Business","Bakery","Bank or Credit Union","Bar or Pub","Beach","Beauty Salon","Bed And Breakfast","Befriend Action","Bike Store","Blog","Blog Posting","Blood Test","Body of Water","Bone","Book","Book Format Type","Book Store","Bookmark Action","Borrow Action","Bowling Alley","Brain Structure","Brand","Brewery","Broadcast Event","Broadcast Service","Buddhist Temple","Bus Station","Bus Stop","Business Audience","Business Entity Type","Business Event","Business Function","Buy Action","Cafe or Coffee Shop","Campground","Canal","Cancel Action","Casino","Catholic Church","Cemetery","Check Action","Check in Action","Check Out Action","Checkout Page","Child Care","Childrens Event","Choose Action","Church","City","City Hall","Civic Structure","Class","Clip","Clothing Store","Code","Collection Page","College or University","Comedy Club","Comedy Event","Comment","Comment Action","Communicate Action","Computer Store","Confirm Action","Consume Action","Contact Page","Contact Point","Contact Point Option","Continent","Convenience Store","Cook Action","Corporation","Country","Courthouse","Create Action","Creative Work","Credit Card","Crematorium","D Dx Element","Dance Event","Dance Group","Data Catalog","Data Download","Dataset","Day of Week","Day Spa","Defence Establishment","Delete Action","Delivery Charge Specification","Delivery Event","Delivery Method","Demand","Dentist","Depart Action","Department Store","Diagnostic Lab","Diagnostic Procedure","Diet","Dietary Supplement","Disagree Action","Discover Action","Dislike Action","Distance","Donate Action","Dose Schedule","Download Action","Draw Action","Drink Action","Drug","Drug Class","Drug Cost","Drug Cost Category","Drug Legal Status","Drug Pregnancy Category","Drug Prescription Status","Drug Strength","Dry Cleaning or Laundry","Duration","Eat Action","Education Event","Educational Audience","Educational Organization","Electrician","Electronics Store","Elementary School","Embassy","Emergency Service","Employment Agency","Endorse Action","Energy","Entertainment Business","Enumeration","Episode","Event","Event Status Type","Event Venue","Exercise Action","Exercise Gym","Exercise Plan","Fast Food Restaurant","Festival","Film Action","Financial Service","Find Action","Fire Station","Florist","Follow Action","Food Establishment","Food Event","Furniture Store","Garden Store","Gas Station","Gated Residence Community","General Contractor","Geo Coordinates","Geo Shape","Give Action","Golf Course","Government Building","Government Office","Government Organization","Government Permit","Government Service","Grocery Store","HVAC Business","Hair Salon","Hardware Store","Health And Beauty Business","Health Club","High School","Hindu Temple","Hobby Shop","Home And Construction Business","Home Goods Store","Hospital","Hostel","Hotel","House Painter","Ice Cream Shop","Ignore Action","Image Gallery","Image Object","Imaging Test","Individual Product","Infectious Agent Class","Infectious Disease","Inform Action","Insert Action","Install Action","Insurance Agency","Intangible","Interact Action","Internet Cafe","Invite Action","Item Availability","Item List","Item Page","Jewelry Store","Job Posting","Join Action","Joint","Lake Body of Water","Landform","Landmarks or Historical Buildings","Language","Leave Action","Legislative Building","Lend Action","Library","Lifestyle Modification","Ligament","Like Action","Liquor Store","Listen Action","Literary Event","Local Business","Locker Delivery","Locksmith","Lodging Business","Lose Action","Lymphatic Vessel","Map","Marry Action","Mass","Maximum Dose Schedule","Media Object","Medical Audience","Medical Cause","Medical Clinic","Medical Code","Medical Condition","Medical Condition Stage","Medical Contraindication","Medical Device","Medical Device Purpose","Medical Entity","Medical Enumeration","Medical Evidence Level","Medical Guideline","Medical Guideline Contraindication","Medical Guideline Recommendation","Medical Imaging Technique","Medical Indication","Medical Intangible","Medical Observational Study","Medical Observational Study Design","Medical Organization","Medical Procedure","Medical Procedure Type","Medical Risk Calculator","Medical Risk Estimator","Medical Risk Factor","Medical Risk Score","Medical Scholarly Article","Medical Sign","Medical Sign or Symptom","Medical Specialty","Medical Study","Medical Study Status","Medical Symptom","Medical Test","Medical Test Panel","Medical Therapy","Medical Trial","Medical Trial Design","Medical Web Page","Medicine System","Mens Clothing Store","Middle School","Mobile Application","Mobile Phone Store","Mosque","Motel","Motorcycle Dealer","Motorcycle Repair","Mountain","Move Action","Movie","Movie Rental Store","Movie Theater","Moving Company","Muscle","Museum","Music Album","Music Event","Music Group","Music Playlist","Music Recording","Music Store","Music Venue","Music Video Object","NGO","Nail Salon","Nerve","News Article","Night Club","Notary","Nutrition Information","Ocean Body of Water","Offer","Offer Item Condition","Office Equipment Store","On Demand Event","On Site Pickup","Opening Hours Specification","Optician","Order","Order Action","Order Status","Organization","Organize Action","Outlet Store","Ownership Info","Paint Action","Painting","Palliative Procedure","Parcel Delivery","Parcel Service","Parent Audience","Park","Parking Facility","Pathology Test","Pawn Shop","Pay Action","Payment Charge Specification","Payment Method","People Audience","Perform Action","Performing Arts Theater","Performing Group","Permit","Person","Pet Store","Pharmacy","Photograph","Photograph Action","Physical Activity","Physical Activity Category","Physical Exam","Physical Therapy","Physician","Place","Place of Worship","Plan Action","Play Action","Playground","Plumber","Police Station","Pond","Post Office","Postal Address","Prepend Action","Preschool","Prevention Indication","Price Specification","Product","Product Model","Professional Service","Profile Page","Property","Psychological Treatment","Public Swimming Pool","Publication Event","Qualitative Value","Quantitative Value","Quantity","Quote Action","RV Park","Radiation Therapy","Radio Clip","Radio Episode","Radio Season","Radio Series","Radio Station","Rating","React Action","Read Action","Real Estate Agent","Receive Action","Recipe","Recommended Dose Schedule","Recycling Center","Register Action","Reject Action","Rent Action","Replace Action","Reply Action","Reported Dose Schedule","Reserve Action","Reservoir","Residence","Restaurant","Return Action","Review","Review Action","River Body of Water","Roofing Contractor","Rsvp Action","Sale Event","Schedule Action","Scholarly Article","School","Sculpture","Sea Body of Water","Search Action","Search Results Page","Season","Self Storage","Sell Action","Send Action","Series","Service","Service Channel","Share Action","Shoe Store","Shopping Center","Single Family Residence","Site Navigation Element","Ski Resort","Social Event","Software Application","Some Products","Specialty","Sporting Goods Store","Sports Activity Location","Sports Club","Sports Event","Sports Team","Stadium or Arena","State","Store","Structured Value","Subscribe Action","Subway Station","Superficial Anatomy","Synagogue","TV Clip","TV Episode","TV Season","TV Series","Table","Take Action","Tattoo Parlor","Taxi Stand","Tech Article","Television Station","Tennis Complex","Theater Event","Theater Group","Therapeutic Procedure","Thing","Tie Action","Tip Action","Tire Shop","Tourist Attraction","Tourist Information Center","Toy Store","Track Action","Trade Action","Train Station","Transfer Action","Travel Action","Travel Agency","Treatment Indication","Type And Quantity Node","Un Register Action","Unit Price Specification","Update Action","Use Action","User Blocks","User Checkins","User Comments","User Downloads","User Interaction","User Likes","User Page Visits","User Plays","User Plus Ones","User Tweets","Vein","Vessel","Veterinary Care","Video Gallery","Video Object","View Action","Visual Arts Event","Volcano","Vote Action","WP Ad Block","WP Footer","WP Header","WP Side Bar","Want Action","Warranty Promise","Warranty Scope","Watch Action","Waterfall","Wear Action","Web Application","Web Page","Web Page Element","Wholesale Store","Win Action","Winery","Write Action","Zoo"];
-  var actionStrings= ["TouristAttraction", "InteractionCounter", "ActionStatusType", "ActiveActionStatus", "CompletedActionStatus", "FailedActionStatus", "PotentialActionStatus", "ActionAccessSpecification"]
+  actionStrings= ["TouristAttraction", "InteractionCounter", "ActionStatusType", "ActiveActionStatus", "CompletedActionStatus", "FailedActionStatus", "PotentialActionStatus", "ActionAccessSpecification"]
 
   for(var i=0; i<websites.length; ++i){
     $("#sites-name").append("<option id="+websites[i]+">"+websites[i]+"</option>");
   }
 
+  // $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+  // for(var j=0; j<suggestedTypes.length; ++j){
+  //   $("#type-select-optgroup").append("<option id="+suggestedTypes[j]+">"+suggestedTypes[j]+"</option>");
+  // }
+  // $("#type-select").append('</optgroup>');
+
+  // $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
   for(var i=0; i<allTypes.length; ++i){
     if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
       allMethods.push(allTypes[i])
       $("#method-select").append("<option value="+allTypes[i]+">"+allTypes[i]+"</option>");
     }else{
       type= allTypes[i].split(' ').join('')
-      $("#type-select").append("<option id="+type+">"+allTypes[i]+"</option>");
+      // $("#type-select-other-optgroup").append("<option id="+type+">"+allTypes[i]+"</option>");
       // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
     }
   }
+  // $("#type-select").append('</optgroup>');
 
   jQuery('.selectpicker').selectpicker('refresh');
 
@@ -958,10 +963,81 @@ if(!once){
 
 }
 
+
+  function wordCountMap(str){
+    let words = str.split(' ');
+    let wordCount = {};
+    words.forEach((w)=>{
+        wordCount[w] = (wordCount[w] || 0) +1;
+
+    });
+  return wordCount;
+  }
+
+  function addWordsToDictionary(wordCountmap, dict){
+    for(let key in wordCountmap){
+        dict[key] = true;
+    }
+  }
+
+  function wordMapToVector(map,dict){
+    let wordCountVector = [];
+    for (let term in dict){
+        wordCountVector.push(map[term] || 0);
+    }
+    return wordCountVector;
+  }
+
+  function dotProduct(vecA, vecB){
+    let product = 0;
+    for(let i=0;i<vecA.length;i++){
+        product += vecA[i] * vecB[i];
+    }
+    return product;
+  }
+
+  function magnitude(vec){
+    let sum = 0;
+    for (let i = 0;i<vec.length;i++){
+        sum += vec[i] * vec[i];
+    }
+    return Math.sqrt(sum);
+  }
+
+  function cosineSimilarity(vecA,vecB){
+    return dotProduct(vecA,vecB)/ (magnitude(vecA) * magnitude(vecB));
+  }
+
+  function textCosineSimilarity(txtA,txtB){
+    const wordCountA = wordCountMap(txtA);
+    const wordCountB = wordCountMap(txtB);
+    let dict = {};
+    addWordsToDictionary(wordCountA,dict);
+    addWordsToDictionary(wordCountB,dict);
+    const vectorA = wordMapToVector(wordCountA,dict);
+    const vectorB = wordMapToVector(wordCountB,dict);
+    return cosineSimilarity(vectorA, vectorB);
+  }
+
+
+  function getSimilarityScore(val){
+    return Math.round(val * 100)
+  }
+
+  function checkSimilarity(sentence1, sentence2){
+    const text1 = sentence1;
+    const text2 = sentence2;
+    const similarity = getSimilarityScore(textCosineSimilarity(text1,text2));
+    return similarity;
+  }
+
+
 var arrFields=[], wooSchema={}, site="", temp={}, suggestedTypes=[];
 
-
 function siteHasBeenEntered(select){
+
+  suggestedTypes=[];
+  $("#type-select").empty();
 
   $("#step1_hint").show();
   // $("#site-row2").show(); //types select
@@ -984,6 +1060,7 @@ function siteHasBeenEntered(select){
 
   document.getElementById("site-domain").innerHTML = domain;
   $("#site-row1").show();
+  $("#site-row2").show();
 
   //Getting website categories
   // $.ajax({
@@ -996,9 +1073,8 @@ function siteHasBeenEntered(select){
   //     var categories = res.domain.categories;
 
   //     if(res.domain.logo_url !=null || res.domain.logo_url!=""){
-  //       $("#site-info").append('<div><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/></div>');
+  //       $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
   //     }
-  //     // $("#site-info").append('<h5>'+domain+'</h5></br>');
 
   //     $("#site-info").append('</br><h5>Website categories</h5>');
   //     $("#site-info").append('<ul>');
@@ -1013,6 +1089,7 @@ function siteHasBeenEntered(select){
   //     // }).name;
   //     // console.log("Category: ", category)
 
+  //     var categoryWords=[]
   //     var str="";
   //     // var categories =res.data[0].categories;
   //     for(var l=0; l<categories.length; ++l){
@@ -1021,43 +1098,133 @@ function siteHasBeenEntered(select){
   //       var lastType = name.substring(lastIndex + 1);
   //       str+= lastType;
   //       str+=" "
+  //       categoryWords.push(lastType);
   //     }
-  //     //console.log("str: ", str);
+
   //     $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
   //     $("#site-info").append('<ul>');
 
+  //     for(var c=0; c<categoryWords.length; ++c){
+  //       for(var j=0; j<allTypes.length; ++j){
+  //         var similar = checkSimilarity(categoryWords[c], allTypes[j]);
+  //         if(similar>40){
+  //           // console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
+  //           suggestedTypes.push(allTypes[j])
+  //           $("#site-info").append('<li>'+allTypes[j]+'</li>');
+  //         }
+  //       }
+  //       if(c+1==categoryWords.length){
+  //         $("#site-info").append('</ul><hr>');
+  //         // $("#site-info").append('<hr>');
+  //         $("#site-info").show();
+
+  //         if(suggestedTypes.length>0){
+  //           console.log("SUGGESTED")
+  //           $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+  //           for(var j=0; j<suggestedTypes.length; ++j){
+  //             $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
+  //           }
+  //           $("#type-select").append('</optgroup>');
+
+  //           $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+  //                 $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //               }
+  //             }
+  //           }
+  //           $("#type-select").append('</optgroup>');
+  //         }else{
+  //           console.log("NOT SUGGESTED")
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //               // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
+  //             }
+  //           }
+
+  //         }
+  //       }
+  //     }
+
+  //     //console.log("str: ", str);
+
+
   //     //remove repeated words
-  //     str =str.split(" ").filter(function(allItems,i,a){
-  //       return i==a.indexOf(allItems);
-  //     }).join(" ");
+  //     // str =str.split(" ").filter(function(allItems,i,a){
+  //     //   return i==a.indexOf(allItems);
+  //     // }).join(" ");
 
-  //     var words = str.split(" ");
-  //     console.log("words: ", words);
+  //     // var words = str.split(" ");
+  //     // console.log("words: ", words);
 
-  //     var htmlContent='<p>These are some of the suggested schema.org types:</p></br>'
+  //     // var htmlContent='<p>These are some of the suggested schema.org types:</p></br>'
   //     // +'<a href="#" class="btn btn-secondary">Edit</a>'
   //     // +'<a href="#" class="btn btn-info">Activate</a>'
   //     // +'<li><a href="#" class="btn btn-danger">Delete</a></li>'
 
-  //     for (var w = 0; w < words.length; ++w) {
-  //       if ((!/[^a-zA-Z]/.test(words[w])) && words[w]!=""){//ignor non-letters and ""
-  //         // console.log("words[i]: ", words[w])
-  //         for(var j=0; j<allTypes.length; ++j){
-  //           if(allTypes[j].includes(words[w])){
-  //             // console.log("allTypes[j]: ", allTypes[j])
-  //             $("#site-info").append('<li>'+allTypes[j]+'</li>');
+  //     // for (var w = 0; w < words.length; ++w) {
+  //     //   if ((!/[^a-zA-Z]/.test(words[w])) && words[w]!=""){//ignor non-letters and ""
+  //     //     // console.log("words[i]: ", words[w])
+  //     //     for(var j=0; j<allTypes.length; ++j){
+  //     //       if(allTypes[j].includes(words[w])){
+  //     //         $("#site-info").append('<li>'+allTypes[j]+'</li>');
+  //     //         // $("#site-info").append('<a href="javascript:;" id="'+allTypes[j]+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; margin-bottom:10px" onClick="typeHasBeenChosen(this.id)">'+allTypes[j]+'</a>');
+  //     //         //add type to an array
+  //     //         suggestedTypes.push(allTypes[j])
+  //     //         // htmlContent+='<a href="javascript:;" id="'+allTypes[j]+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" onClick="openNavType(this.id)">'+allTypes[j]+'</a></br>';
+  //     //       }
+  //     //     }
+  //     //   }
+  //     //   if(w+1==words.length){
+  //     //     $("#site-info").append('</ul><hr>');
+  //     //     // $("#site-info").append('<hr>');
+  //     //     $("#site-info").show();
 
-  //             //add type to an array
-  //             suggestedTypes.push(allTypes[j])
+  //     //     if(suggestedTypes.length>0){
+  //     //       console.log("SUGGESTED")
+  //     //       $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+  //     //       for(var j=0; j<suggestedTypes.length; ++j){
+  //     //         $("#type-select-optgroup").append("<option id="+suggestedTypes[j]+">"+suggestedTypes[j]+"</option>");
+  //     //       }
+  //     //       $("#type-select").append('</optgroup>');
 
-  //             // htmlContent+='<a href="javascript:;" id="'+allTypes[j]+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" onClick="openNavType(this.id)">'+allTypes[j]+'</a></br>';
+  //     //       $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+  //     //       for(var i=0; i<allTypes.length; ++i){
+  //     //         if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //     //           //no action
+  //     //         }else{
+  //     //           type= allTypes[i].split(' ').join('')
+  //     //           if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+  //     //             $("#type-select-other-optgroup").append("<option id="+type+">"+allTypes[i]+"</option>");
+  //     //           }
+  //     //         }
+  //     //       }
+  //     //       $("#type-select").append('</optgroup>');
+  //     //     }else{
+  //     //       console.log("NOT SUGGESTED")
+  //     //       for(var i=0; i<allTypes.length; ++i){
+  //     //         if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //     //           //no action
+  //     //         }else{
+  //     //           type= allTypes[i].split(' ').join('')
+  //     //           $("#type-select").append("<option id="+type+">"+allTypes[i]+"</option>");
+  //     //           // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
+  //     //         }
+  //     //       }
 
-  //           }
-  //         }
-  //       }
-  //     }
-  //     $("#site-info").append('</ul><hr>');
-  //     $("#site-info").show();
+  //     //     }
+  //     //   }
+  //     // }
+
+
 
   //     // $('#site-domain').popover({
   //     //   placement: 'right',
@@ -1072,6 +1239,13 @@ function siteHasBeenEntered(select){
 
   //   }
   // });
+
+
+  setTimeout(() => {
+    jQuery('.selectpicker').selectpicker('refresh');
+  }, 2000);
+
+
 
   // var htmlContent='<p>Given the URL you provided, you might be intersted in adding the one or more of these types. Click on them add and</p>'
   // +'<a href="javascript:;" id="VideoObject1" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" >VideoObject1</a></br></br>'
@@ -1167,6 +1341,54 @@ function siteHasBeenEntered(select){
   // $("#site-table tbody").append('<tr><td><p id="schema_header" style="text-align:center">schema.org</p></td> <td><p id="api_header" style="text-align:center">API</p></td> </tr>');
   //methods menu
   // $("#site-table tbody").append('<tr id="'+site+'" data-tt-id="'+site+'" data-tt-parent-id="'+site+'" data-tt-branch="true"><td><div style="display: inline-block; width:150px; text-align:center;"><select id="'+site+'_method-select" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td><td></td></tr>')
+
+  let allAPIParams={};
+  //Go over all the site's API endpoints in scrapir and get all the response fields
+  for(var i=0; i<scrapirAPIs.length; ++i){
+    var urlText = scrapirAPIs[i].url;
+    // if(urlText.includes('dailymotion') || urlText.includes('vimeo') || urlText.includes('youtube')){
+      let domain = new URL(scrapirAPIs[i].url);
+      console.log(scrapirAPIs[i].url)
+      domain = domain.hostname.replace('www.','');
+      allAPIParams[domain]=scrapirAPIs[i].params;
+  }
+
+
+
+  Object.entries(allAPIParams).forEach(([key, value]) => {
+    console.log(`${key}`+":"+ `${value}`);
+  });
+
+  // console.log("All fields: ", allAPIParams);
+
+  // //Remove duplicate fields in the array
+  // allAPIParams = allAPIParams.filter((c, index) => {
+  //   return allAPIParams.indexOf(c) === index;
+  // });
+
+  // //remove "" elements
+  // allAPIParams = allAPIParams.filter(function (el) {
+  //   return el != null;
+  // });
+  // console.log("Remove duplicates and '': ", allAPIParams);
+
+  // //replace weird characters with space " "
+  // for(var j=0; j<allAPIParams.length; ++j){
+  //   allAPIParams[j]= allAPIParams[j].replace(/[^0-9a-z]/gi, ' ');
+  // }
+
+  // console.log("ALL VIDEO PARAMS: ", allAPIParams)
+  //go over the propertes and get the similar properties
+  // for(var c=0; c<typeProperties.length; ++c){
+  //   for(var j=0; j<allAPIParams.length; ++j){
+  //     var similar = checkSimilarity(typeProperties[c], allAPIParams[j]);
+  //     if(similar>40){
+  //       console.log(typeProperties[c]+' : '+allAPIParams[j]+' = '+similar+'%');
+  //       suggestedProperties.push(typeProperties[c]);
+  //     }
+  //   }
+
+
 }
 
 
@@ -1175,12 +1397,13 @@ function showSuggestedTypes(){
   for(var i=0; i<suggestedTypes.length; ++i){
     typeHasBeenChosen(suggestedTypes[i])
   }
+  // $("#site-row2").show();
 }
 
 
 function showAddTypeButton(){
   $("#step1_hint").hide();
-  $("#site-row2").show();
+  // $("#site-row2").show();
 }
 
 
@@ -2022,7 +2245,6 @@ function urlHasBeenChosenForMethod(select){
 var firstSave=true;
 
 function saveTypeConfig(){
-
   //save construct -> self -> endpoint: name of api endint
   //                       -> id: chosen id
   var selector = document.getElementById("type-id");
@@ -2054,8 +2276,7 @@ function saveTypeConfig(){
       var cellField1 = rowProperty.insertCell(1);
       // style="width: 1%;"
       // cellField1.style.width="0%";
-
-      cellField1.innerHTML =  '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
+      cellField1.innerHTML = '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
 
       for(var f=0; f<resProplist.length; ++f){
         $("#fields_"+tableTrs[i].id).append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
@@ -2110,12 +2331,10 @@ function saveTypeConfig(){
     var ftable = document.getElementsByTagName('TABLE')[0]
     var ftbody = document.getElementsByTagName('TBODY')[0]
     var ftr = document.getElementsByTagName('TR')[0]
-
     // $('<tr id="header"><td><h6 id="schema_header">Schema.org</h6></td> <td><h6 id="api_header">Web API</h6></td> </tr>').insertBefore(ftr);
   }
 
 }
-
 
 function fieldHasBeenSelected(select){
   console.log("field select: ", select.id);
@@ -2207,20 +2426,65 @@ function saveMethodConfig(){
 
   var u = urlAPI;//document.getElementById("apis-url-method");
   var r = document.getElementById("method-result-type");
+  var term = document.getElementById("method-search-param");
+  var id = document.getElementById("method-result-type-id");
 
   // console.log("U: ", u.options[u.selectedIndex].text)
   console.log("R: ", r.options[r.selectedIndex].text)
+  console.log("TERM: ", term.options[term.selectedIndex].text)
+  console.log("ID: ", id.options[id.selectedIndex].text)
   // tempAct[method]= {"endpoint":"", "object":"", "name":"", "type":""};
 
-
-
+  var returnedObject=r.options[r.selectedIndex].text;
   //if a site method,
   if(methodParent.includes('methodSite')){
+    //add the API endpoint cell next to the method
+    var rowType = document.getElementById(methodName);
+    console.log("method row: ", rowType)
+    var cell1 = rowType.insertCell(1);
+    cell1.innerHTML =  '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
+
+    //add the API endpoint parameters to the method object table!
+    //Go over the clicked table rows
+    var typeTable = document.getElementById(returnedObject);
+    var typeTbody = typeTable.getElementsByTagName("TBODY")[0];
+    var tableTrs = typeTbody.getElementsByTagName("TR");
+    console.log("tableTrs: ", tableTrs)
+    //Insert the API URL next to the type
+    var rowType = document.getElementById(returnedObject+'_row');
+    rowType.deleteCell(1);
+    var typeCell1 = rowType.insertCell(1);
+    typeCell1.innerHTML = '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
+
+    //Insert a drop down menu next to each property (not method)
+    for(var i=1; i<tableTrs.length; ++i){
+      if(tableTrs[i].id.includes('_')){
+      console.log("tableTrs[i].id: ", tableTrs[i].id)
+      // if(propList.indexOf(tableTrs[i].id.split('_')[1]) == -1){//if a method and not a property
+      //   continue;
+      // }else{
+        var rowProperty = document.getElementById(tableTrs[i].id);
+        console.log("rowProperty: ", rowProperty)
+
+        rowProperty.deleteCell(1);
+        var cellField1 = rowProperty.insertCell(1);
+        cellField1.innerHTML = '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
+
+        for(var f=0; f<resProplist.length; ++f){
+          $("#fields_"+tableTrs[i].id).append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
+        }
+      }
+    }
+
     console.log("OBJECT: ", temp.functions.find( ({ type }) => type === methodName ))
     temp.functions.find( ({ type }) => type === methodName ).endpoint = u; //"TEST"//u.options[u.selectedIndex].text;
     temp.functions.find( ({ type }) => type === methodName ).object = r.options[r.selectedIndex].text;
     temp.functions.find( ({ type }) => type === methodName ).name = document.getElementById('meth-name').value;
     // temp.functions[methodName].type = "";"
+    if(name=='Search'){
+      temp.functions.find( ({ type }) => type === methodName ).searchParam = term.options[term.selectedIndex].text;
+      temp.functions.find( ({ type }) => type === methodName ).id = id.options[id.selectedIndex].text;
+    }
   }else{
     // console.log("OBJECT: ", temp.objects[methodParent].methods.find( ({ type }) => type === methodName ))
     var rowType = document.getElementById(methodParent+'_'+methodName);
@@ -2310,7 +2574,7 @@ function methodRadioChecked(){
 }
 
 
-var firstType=false, secondType=false, typeList=[], tempObj={}, tempAct={}, tempObjAct={}, gettersList=[]; tempObjSet={}, allTheType={}, listOfTypes=[], firstType=true;
+var firstType=false, secondType=false, typeList=[], tempObj={}, tempAct={}, tempObjAct={}, gettersList=[]; tempObjSet={}, allTheType={}, listOfTypes=[], firstType=true, suggestedProperties=[];
 
 
 function typeHasBeenChosen(select){
@@ -2338,6 +2602,7 @@ function typeHasBeenChosen(select){
   allSchemaTypes=[]
   type = type.split(' ').join('');
   var child = type;
+  suggestedProperties=[];
 
   console.log("Child: ", child)
 
@@ -2349,6 +2614,7 @@ function typeHasBeenChosen(select){
 
   // tempObj={}
   tempObj[type]={"properties":[], "id":"", "construct":{"self":{"endpoint":"", "id":""}}, "add":{"endpoint":""}, "remove":{"endpoint":"", "id":""}, "setters":[], "methods":[]}
+  var typeProperties =[];
 
   $.ajax({
       url: '/schemaOrg/'+type,
@@ -2399,7 +2665,8 @@ function typeHasBeenChosen(select){
             obProp.types=aTypes;
             propsInfo[as]= obProp
 
-            $("#"+type+"_property-select").append("<option value="+as+">"+as+"</option>");
+            typeProperties.push(as);
+            // $("#"+type+"_property-select").append("<option value="+as+">"+as+"</option>");
 
           }
         }
@@ -2446,8 +2713,7 @@ function typeHasBeenChosen(select){
   jQuery('.selectpicker').selectpicker('refresh');
 
   setTimeout(() => {
-    jQuery('.selectpicker').selectpicker('refresh');
-  }, 1000);
+
 
   //   // console.log("Returned Properties: ", allProperties);
   //   // console.log("Returned PropertiesINFO: ", propertiesInfo);
@@ -2484,10 +2750,99 @@ function typeHasBeenChosen(select){
   jQuery('.selectpicker').selectpicker('refresh');
 
 
+  // For each type chosen:
+  // - Get all the response fields of all the API endpoints with same site name
+  // - Replace all weird character like “_” with “ ”
+  // - Run cosine similarity between each field and property
+  // - Save the highest ones
+
+  // scrapirAPIs.push({
+  //   title: childSnapshot.val().title,
+  //   url: childSnapshot.val().url,
+  //   params: paramList,
+  //   res: resList
+  // })
+
+  // typeProperties
+
+  let allAPIFeilds=[];
+
+  //Go over all the site's API endpoints in scrapir and get all the response fields
+  for(var i=0; i<scrapirAPIs.length; ++i){
+    var urlText = scrapirAPIs[i].url;
+    if(urlText.includes(site)){
+      allAPIFeilds = allAPIFeilds.concat(scrapirAPIs[i].res)
+    }
+  }
+  console.log("All properties: ", typeProperties);
+  console.log("All fields: ", allAPIFeilds);
+
+  //Remove duplicate fields in the array
+  allAPIFeilds = allAPIFeilds.filter((c, index) => {
+    return allAPIFeilds.indexOf(c) === index;
+  });
+
+  //remove "" elements
+  allAPIFeilds = allAPIFeilds.filter(function (el) {
+    return el != null;
+  });
+  console.log("Remove duplicates and '': ", allAPIFeilds);
+
+  //replace weird characters with space " "
+  for(var j=0; j<allAPIFeilds.length; ++j){
+    allAPIFeilds[j]= allAPIFeilds[j].replace(/[^0-9a-z]/gi, ' ');
+  }
+
+  //go over the propertes and get the similar properties
+  for(var c=0; c<typeProperties.length; ++c){
+    for(var j=0; j<allAPIFeilds.length; ++j){
+      var similar = checkSimilarity(typeProperties[c], allAPIFeilds[j]);
+      if(similar>40){
+        console.log(typeProperties[c]+' : '+allAPIFeilds[j]+' = '+similar+'%');
+        suggestedProperties.push(typeProperties[c]);
+      }
+    }
+    if(c+1==typeProperties.length){
+
+      //remove duplicates properties
+      suggestedProperties = suggestedProperties.filter((c, index) => {
+        return suggestedProperties.indexOf(c) === index;
+      });
+
+      if(suggestedProperties.length>0){
+        console.log("SUGGESTED")
+        $("#"+type+"_property-select").append('<optgroup id="property-select-optgroup" label="Suggested">');
+        for(var j=0; j<suggestedProperties.length; ++j){
+          $("#property-select-optgroup").append('<option id="'+suggestedProperties[j]+'">'+suggestedProperties[j]+'</option>');
+        }
+        $("#"+type+"_property-select").append('</optgroup>');
+
+        $("#"+type+"_property-select").append('<optgroup id="property-select-other-optgroup" label="Other Types">');
+        for(var i=0; i<typeProperties.length; ++i){
+            if(suggestedProperties.indexOf(typeProperties[i]) == -1){
+              $("#property-select-other-optgroup").append('<option id="'+typeProperties[i]+'">'+typeProperties[i]+'</option>');
+            }
+        }
+        $("#"+type+"_property-select").append('</optgroup>');
+      }else{
+        console.log("NOT SUGGESTED")
+        for(var i=0; i<typeProperties.length; ++i){
+            $("#"+type+"_property-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+
+        }
+      }
+    }
+  }
+
+  jQuery('.selectpicker').selectpicker('refresh');
+
+}, 100);
+
 }
 
 
 function saveWoOSchema(){
+  $("#step2-header").show();
   $("#beforeDone").hide();
   $("#afterDone").show();
 
@@ -2700,9 +3055,10 @@ $(document).ready(function (e) {
 
 function removeSearchHint(){
   $("#step4_hint").hide();
+  methodsImp.push('Search')
 }
 
-function removeSearchBtton(){
+function removeSearchButton(){
   //remove search button
   $("#method-button-div").hide();
   //show select method to give the user the option to add search again
@@ -2764,7 +3120,8 @@ function propertyHasBeenChosen(select){
   var hasType = false;
   var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL"]
   for(t in types){
-    if(dataTypes.indexOf(types[t]) !== -1){
+    if(dataTypes.indexOf(types[t]) == -1){
+      // console.log("types[t]")
       hasType = true;
     }
   }
@@ -2774,12 +3131,12 @@ function propertyHasBeenChosen(select){
 
   for(let t in trs){
     if(trs[t].id == thisType){
-      // if(hasType){//if type is object
-      //   $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td style="display:flex; flex-wrap:wrap;"><div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4"><div style="display:flex;"><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div><div style="width:240px; text-align:center; "><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></div></div><div  id="step2_hint" class="hint-content do--split-children" ><p>XXXXXXXXXXXXXXXXXXXX</p></div></div></div></td></tr>').insertBefore(trs[t]);
-      // }else{//if not of type object
+      if(hasType){//if type is object
+        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td style="display:flex; flex-wrap:wrap;"><div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4"><div style="display:flex;"><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div><div style="width:240px; text-align:center; "><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></div></div><div  id="step2_hint" class="hint-content do--split-children" ><p>This property can be of the follwoing types'+types+'</p></div></div></div></td></tr>').insertBefore(trs[t]);
+      }else{//if not of type object
       //GO!
         $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>  <td></td>   <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
-      // }
+      }
 
       break;
       }
@@ -2870,13 +3227,12 @@ var methodsImp=[]
 function methodHasBeenChosen(select){
 
   $("#step3_hint").hide();
-
+  $("#search-method").hide();
   //add it to an array of methods to be implemented
   $("#schema-"+type).empty()
   $("#property-"+type).empty()
 
   var method = select.options[select.selectedIndex].getAttribute("value");
-
   var child = method
   var parent = select.getAttribute("id").split('-')[1];
   var thisType = select.getAttribute("id").split('_')[0];
@@ -2889,7 +3245,6 @@ function methodHasBeenChosen(select){
   }
   var typeP="", descP=""; //LET USER CREATE THIS
   // console.log("method: ",method)
-
   methodsImp.push(method)
 
   // var table = document.createElement('table');
@@ -2900,7 +3255,6 @@ function methodHasBeenChosen(select){
   // $("#tableDiv").append(table)
 
   var trs = document.getElementsByTagName("TR")
-
 
   if(siteIsClicked){
     $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="method-site" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="method-siteM" class="btn btn-purple" style="width:150px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'X" onclick="newMethed(this)">'+method+'</a></td></tr>')
@@ -2917,12 +3271,12 @@ function methodHasBeenChosen(select){
         tempObj[thisType].methods.push(tempObjAct[method]);
         console.log("tempObj[thisType]: ", tempObj[thisType])
 
-          for(let t in trs){
-            if(trs[t].id == thisType){
-              $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="newMethed(this)">'+method+'Z</a></td></tr>').insertBefore(trs[t]);
-              break;
-            }
+        for(let t in trs){
+          if(trs[t].id == thisType){
+            $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="newMethed(this)">'+method+'Z</a></td></tr>').insertBefore(trs[t]);
+            break;
           }
+        }
       }
     }else{
       for(var i=0; i<methodsInfo.length; ++i){
@@ -2986,7 +3340,7 @@ function siteMethodHasBeenChosen(select){
 
   methodsImp.push(method)
 
-  tempAct[method]= {"endpoint":"", "object":"", "name":"", "type":method};
+  tempAct[method]= {"endpoint":"", "object":"", "name":"", "type":method, "id":"", "searchParam":""};
   temp.functions.push(tempAct[method]);
 
   var trs = document.getElementsByTagName("TR")
