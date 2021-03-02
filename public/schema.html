@@ -42,10 +42,6 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
 
-
-	<link href="assets/css/LiteTooltip.css" rel="stylesheet" />
-
-
 	<script type="text/javascript" src="assets/js/redips-drag-min.js"></script>
 	<script type="text/javascript" src="assets/js/script.js"></script>
 
@@ -1568,7 +1564,7 @@
 							<div id="idLabel" style="display: none;">
 								<p>2. Choose the ID parameter of this API</p>
 								<!-- <label class="col-form-label ">Id</label></br> -->
-								<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed()">
+								<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed(this)">
 									<option selected>Choose the ID</option>
 								</select>
 							</div>
@@ -1857,8 +1853,6 @@
 
 		<!-- ================== DRAGULA ================== -->
 		<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/$VERSION/dragula.min.js'></script> -->
-
-		<script type="text/javascript" src="assets/js/LiteTooltip.js"></script>
 
 		<style>
 

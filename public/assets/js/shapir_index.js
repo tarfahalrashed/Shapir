@@ -965,6 +965,7 @@ if(!once){
 
 
   function wordCountMap(str){
+    // console.log("wordCountMap str: ", str)
     let words = str.split(' ');
     let wordCount = {};
     words.forEach((w)=>{
@@ -1025,6 +1026,7 @@ if(!once){
   }
 
   function checkSimilarity(sentence1, sentence2){
+    // console.log(sentence1+': '+sentence2)
     const text1 = sentence1;
     const text2 = sentence2;
     const similarity = getSimilarityScore(textCosineSimilarity(text1,text2));
@@ -1063,187 +1065,205 @@ function siteHasBeenEntered(select){
   $("#site-row2").show();
 
   //Getting website categories
-  // $.ajax({
-  //   url: 'https://www.klazify.com/api/categorize?url='+url,
-  //   type: 'POST',
-  //   crossDomain:true,
-  //   headers: {"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig"},
-  //   success: function(res) {
-  //     console.log("Categories: ", res);
-  //     var categories = res.domain.categories;
+  $.ajax({
+    url: 'https://www.klazify.com/api/categorize?url='+url,
+    type: 'POST',
+    crossDomain:true,
+    headers: {"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig"},
+    success: function(res) {
+      console.log("Categories: ", res);
+      var categories = res.domain.categories;
 
-  //     if(res.domain.logo_url !=null || res.domain.logo_url!=""){
-  //       $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
-  //     }
+      if(res.domain.logo_url !=null || res.domain.logo_url!=""){
+        $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
+      }
 
-  //     $("#site-info").append('</br><h5>Website categories</h5>');
-  //     $("#site-info").append('<ul>');
-  //     for(var c=0; c<categories.length; ++c){
-  //       $("#site-info").append('<li>'+categories[c].name+'</li>');
-  //     }
-  //     $("#site-info").append('</ul>');
+      $("#site-info").append('</br><h5>Website categories</h5>');
+      $("#site-info").append('<ul>');
+      for(var c=0; c<categories.length; ++c){
+        $("#site-info").append('<li>'+categories[c].name+'</li>');
+      }
+      $("#site-info").append('</ul>');
 
-  //     // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
-  //     // var category = categories.find(o => {
-  //     //   return o.confidence === maxconfidence
-  //     // }).name;
-  //     // console.log("Category: ", category)
+      // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
+      // var category = categories.find(o => {
+      //   return o.confidence === maxconfidence
+      // }).name;
+      // console.log("Category: ", category)
 
-  //     var categoryWords=[]
-  //     var str="";
-  //     // var categories =res.data[0].categories;
-  //     for(var l=0; l<categories.length; ++l){
-  //       var name= categories[l].name;
-  //       var lastIndex = name.lastIndexOf("/")//get the last type
-  //       var lastType = name.substring(lastIndex + 1);
-  //       str+= lastType;
-  //       str+=" "
-  //       categoryWords.push(lastType);
-  //     }
+      var categoryWords=[]
+      var str="";
+      // var categories =res.data[0].categories;
+      for(var l=0; l<categories.length; ++l){
+        var name= categories[l].name;
+        var lastIndex = name.lastIndexOf("/")//get the last type
+        var lastType = name.substring(lastIndex + 1);
+        str+= lastType;
+        str+=" "
+        categoryWords.push(lastType);
+      }
 
-  //     $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
-  //     $("#site-info").append('<ul>');
+      $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
+      $("#site-info").append('<ul>');
 
-  //     for(var c=0; c<categoryWords.length; ++c){
-  //       for(var j=0; j<allTypes.length; ++j){
-  //         var similar = checkSimilarity(categoryWords[c], allTypes[j]);
-  //         if(similar>40){
-  //           // console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
-  //           suggestedTypes.push(allTypes[j])
-  //           $("#site-info").append('<li>'+allTypes[j]+'</li>');
-  //         }
-  //       }
-  //       if(c+1==categoryWords.length){
-  //         $("#site-info").append('</ul><hr>');
-  //         // $("#site-info").append('<hr>');
-  //         $("#site-info").show();
+      for(var c=0; c<categoryWords.length; ++c){
+        for(var j=0; j<allTypes.length; ++j){
+          var similar = checkSimilarity(categoryWords[c], allTypes[j]);
+          if(similar>40){
+            // console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
+            suggestedTypes.push(allTypes[j])
+            $("#site-info").append('<li>'+allTypes[j]+'</li>');
+          }
+        }
+        if(c+1==categoryWords.length){
+          $("#site-info").append('</ul><hr>');
+          // $("#site-info").append('<hr>');
+          $("#site-info").show();
 
-  //         if(suggestedTypes.length>0){
-  //           console.log("SUGGESTED")
-  //           $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
-  //           for(var j=0; j<suggestedTypes.length; ++j){
-  //             $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
-  //           }
-  //           $("#type-select").append('</optgroup>');
+          if(suggestedTypes.length>0){
+            console.log("SUGGESTED")
+            $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+            for(var j=0; j<suggestedTypes.length; ++j){
+              $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
+            }
+            $("#type-select").append('</optgroup>');
 
-  //           $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
-  //           for(var i=0; i<allTypes.length; ++i){
-  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //               //no action
-  //             }else{
-  //               type= allTypes[i].split(' ').join('')
-  //               if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
-  //                 $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //               }
-  //             }
-  //           }
-  //           $("#type-select").append('</optgroup>');
-  //         }else{
-  //           console.log("NOT SUGGESTED")
-  //           for(var i=0; i<allTypes.length; ++i){
-  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //               //no action
-  //             }else{
-  //               type= allTypes[i].split(' ').join('')
-  //               $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //               // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
-  //             }
-  //           }
+            $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+            for(var i=0; i<allTypes.length; ++i){
+              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+                //no action
+              }else{
+                type= allTypes[i].split(' ').join('')
+                if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+                  $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+                }
+              }
+            }
+            $("#type-select").append('</optgroup>');
+          }else{
+            console.log("NOT SUGGESTED")
+            for(var i=0; i<allTypes.length; ++i){
+              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+                //no action
+              }else{
+                type= allTypes[i].split(' ').join('')
+                $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+                // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
+              }
+            }
 
-  //         }
-  //       }
-  //     }
-
-  //     //console.log("str: ", str);
+          }
 
 
-  //     //remove repeated words
-  //     // str =str.split(" ").filter(function(allItems,i,a){
-  //     //   return i==a.indexOf(allItems);
-  //     // }).join(" ");
+          // setTimeout(() => {
+            jQuery('.selectpicker').selectpicker('refresh');
+          // }, 2000);
+        }
 
-  //     // var words = str.split(" ");
-  //     // console.log("words: ", words);
+      }
 
-  //     // var htmlContent='<p>These are some of the suggested schema.org types:</p></br>'
-  //     // +'<a href="#" class="btn btn-secondary">Edit</a>'
-  //     // +'<a href="#" class="btn btn-info">Activate</a>'
-  //     // +'<li><a href="#" class="btn btn-danger">Delete</a></li>'
-
-  //     // for (var w = 0; w < words.length; ++w) {
-  //     //   if ((!/[^a-zA-Z]/.test(words[w])) && words[w]!=""){//ignor non-letters and ""
-  //     //     // console.log("words[i]: ", words[w])
-  //     //     for(var j=0; j<allTypes.length; ++j){
-  //     //       if(allTypes[j].includes(words[w])){
-  //     //         $("#site-info").append('<li>'+allTypes[j]+'</li>');
-  //     //         // $("#site-info").append('<a href="javascript:;" id="'+allTypes[j]+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; margin-bottom:10px" onClick="typeHasBeenChosen(this.id)">'+allTypes[j]+'</a>');
-  //     //         //add type to an array
-  //     //         suggestedTypes.push(allTypes[j])
-  //     //         // htmlContent+='<a href="javascript:;" id="'+allTypes[j]+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" onClick="openNavType(this.id)">'+allTypes[j]+'</a></br>';
-  //     //       }
-  //     //     }
-  //     //   }
-  //     //   if(w+1==words.length){
-  //     //     $("#site-info").append('</ul><hr>');
-  //     //     // $("#site-info").append('<hr>');
-  //     //     $("#site-info").show();
-
-  //     //     if(suggestedTypes.length>0){
-  //     //       console.log("SUGGESTED")
-  //     //       $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
-  //     //       for(var j=0; j<suggestedTypes.length; ++j){
-  //     //         $("#type-select-optgroup").append("<option id="+suggestedTypes[j]+">"+suggestedTypes[j]+"</option>");
-  //     //       }
-  //     //       $("#type-select").append('</optgroup>');
-
-  //     //       $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
-  //     //       for(var i=0; i<allTypes.length; ++i){
-  //     //         if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //     //           //no action
-  //     //         }else{
-  //     //           type= allTypes[i].split(' ').join('')
-  //     //           if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
-  //     //             $("#type-select-other-optgroup").append("<option id="+type+">"+allTypes[i]+"</option>");
-  //     //           }
-  //     //         }
-  //     //       }
-  //     //       $("#type-select").append('</optgroup>');
-  //     //     }else{
-  //     //       console.log("NOT SUGGESTED")
-  //     //       for(var i=0; i<allTypes.length; ++i){
-  //     //         if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //     //           //no action
-  //     //         }else{
-  //     //           type= allTypes[i].split(' ').join('')
-  //     //           $("#type-select").append("<option id="+type+">"+allTypes[i]+"</option>");
-  //     //           // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
-  //     //         }
-  //     //       }
-
-  //     //     }
-  //     //   }
-  //     // }
+      //console.log("str: ", str);
 
 
+      //remove repeated words
+      // str =str.split(" ").filter(function(allItems,i,a){
+      //   return i==a.indexOf(allItems);
+      // }).join(" ");
 
-  //     // $('#site-domain').popover({
-  //     //   placement: 'right',
-  //     //   container: 'body',
-  //     //   html: true,
-  //     //   content: function() {
-  //     //     $('#site-domain-div').html(htmlContent);
-  //     //     return $('#site-domain-div').html();
-  //     //   }
-  //     // });
-  //     // $('#site-domain').popover('show');
+      // var words = str.split(" ");
+      // console.log("words: ", words);
 
-  //   }
-  // });
+      // var htmlContent='<p>These are some of the suggested schema.org types:</p></br>'
+      // +'<a href="#" class="btn btn-secondary">Edit</a>'
+      // +'<a href="#" class="btn btn-info">Activate</a>'
+      // +'<li><a href="#" class="btn btn-danger">Delete</a></li>'
+
+      // for (var w = 0; w < words.length; ++w) {
+      //   if ((!/[^a-zA-Z]/.test(words[w])) && words[w]!=""){//ignor non-letters and ""
+      //     // console.log("words[i]: ", words[w])
+      //     for(var j=0; j<allTypes.length; ++j){
+      //       if(allTypes[j].includes(words[w])){
+      //         $("#site-info").append('<li>'+allTypes[j]+'</li>');
+      //         // $("#site-info").append('<a href="javascript:;" id="'+allTypes[j]+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; margin-bottom:10px" onClick="typeHasBeenChosen(this.id)">'+allTypes[j]+'</a>');
+      //         //add type to an array
+      //         suggestedTypes.push(allTypes[j])
+      //         // htmlContent+='<a href="javascript:;" id="'+allTypes[j]+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" onClick="openNavType(this.id)">'+allTypes[j]+'</a></br>';
+      //       }
+      //     }
+      //   }
+      //   if(w+1==words.length){
+      //     $("#site-info").append('</ul><hr>');
+      //     // $("#site-info").append('<hr>');
+      //     $("#site-info").show();
+
+      //     if(suggestedTypes.length>0){
+      //       console.log("SUGGESTED")
+      //       $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+      //       for(var j=0; j<suggestedTypes.length; ++j){
+      //         $("#type-select-optgroup").append("<option id="+suggestedTypes[j]+">"+suggestedTypes[j]+"</option>");
+      //       }
+      //       $("#type-select").append('</optgroup>');
+
+      //       $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+      //       for(var i=0; i<allTypes.length; ++i){
+      //         if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+      //           //no action
+      //         }else{
+      //           type= allTypes[i].split(' ').join('')
+      //           if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+      //             $("#type-select-other-optgroup").append("<option id="+type+">"+allTypes[i]+"</option>");
+      //           }
+      //         }
+      //       }
+      //       $("#type-select").append('</optgroup>');
+      //     }else{
+      //       console.log("NOT SUGGESTED")
+      //       for(var i=0; i<allTypes.length; ++i){
+      //         if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+      //           //no action
+      //         }else{
+      //           type= allTypes[i].split(' ').join('')
+      //           $("#type-select").append("<option id="+type+">"+allTypes[i]+"</option>");
+      //           // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
+      //         }
+      //       }
+
+      //     }
+      //   }
+      // }
 
 
-  setTimeout(() => {
-    jQuery('.selectpicker').selectpicker('refresh');
-  }, 2000);
+
+      // $('#site-domain').popover({
+      //   placement: 'right',
+      //   container: 'body',
+      //   html: true,
+      //   content: function() {
+      //     $('#site-domain-div').html(htmlContent);
+      //     return $('#site-domain-div').html();
+      //   }
+      // });
+      // $('#site-domain').popover('show');
+
+    },
+    error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
+      for(var i=0; i<allTypes.length; ++i){
+        if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+          //no action
+        }else{
+          type= allTypes[i].split(' ').join('')
+          $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+          // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
+        }
+      }
+    }
+
+  });
+
+
+  // setTimeout(() => {
+  //   jQuery('.selectpicker').selectpicker('refresh');
+  // }, 2000);
 
 
 
@@ -1348,16 +1368,16 @@ function siteHasBeenEntered(select){
     var urlText = scrapirAPIs[i].url;
     // if(urlText.includes('dailymotion') || urlText.includes('vimeo') || urlText.includes('youtube')){
       let domain = new URL(scrapirAPIs[i].url);
-      console.log(scrapirAPIs[i].url)
+      // console.log(scrapirAPIs[i].url)
       domain = domain.hostname.replace('www.','');
       allAPIParams[domain]=scrapirAPIs[i].params;
   }
 
 
 
-  Object.entries(allAPIParams).forEach(([key, value]) => {
-    console.log(`${key}`+":"+ `${value}`);
-  });
+  // Object.entries(allAPIParams).forEach(([key, value]) => {
+  //   console.log(`${key}`+":"+ `${value}`);
+  // });
 
   // console.log("All fields: ", allAPIParams);
 
@@ -1619,9 +1639,15 @@ function resultTypeHasBeenChosen(select){
 }
 
 
-function idHasBeenChosed(){
+function idHasBeenChosed(selector){
   // $("#mapLabel").show();
-  temp.objects[clickedType].id= document.getElementById("type-id");
+  // temp.objects[clickedType].id= document.getElementById("type-id");
+
+  var selector = document.getElementById("type-id");
+  temp.objects[clickedType].id= selector[selector.selectedIndex].id;
+
+  console.log("temp: ", temp)
+
 }
 
 
@@ -1635,6 +1661,8 @@ function urlHasBeenChosen(select){
   var apiTitle = select.getAttribute("id");
   console.log("apiTitle: ", apiTitle);
   currentURLGetter = apiTitle
+  resProplist=[];
+  propList=[];
 
   firebase.database().ref('/apis/').once('value').then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -1649,7 +1677,6 @@ function urlHasBeenChosen(select){
         var props= allProperties;
         var currentSimScore = 0;
         var mostSimilarProp=""
-        resProplist=[]
         for(var i=0; i<resFields.length; ++i){
           currentSimScore = 0;
           mostSimilarProp=""
@@ -1686,7 +1713,6 @@ function urlHasBeenChosen(select){
         //change Current type
         console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
 
-        propList=[]
         for(var j=0; j<typePropertyType[clickedType].length; ++j){
           if(propListType.indexOf(typePropertyType[clickedType][j].name) == -1){//if this property NOT of type object
             propList.push(typePropertyType[clickedType][j].name)
@@ -2245,10 +2271,13 @@ function urlHasBeenChosenForMethod(select){
 var firstSave=true;
 
 function saveTypeConfig(){
+  console.log("temp: ", temp)
+  console.log("clickedType: ", clickedType)
+
   //save construct -> self -> endpoint: name of api endint
   //                       -> id: chosen id
   var selector = document.getElementById("type-id");
-  var idValue = selector[selector.selectedIndex].value;
+  var idValue = selector[selector.selectedIndex].id;
 
   temp.objects[clickedType].construct.self.endpoint= currentURLGetter; //get the value of the chosen API
   temp.objects[clickedType].construct.self.id= idValue; //get the value of the chosen ID
@@ -2258,7 +2287,7 @@ function saveTypeConfig(){
   var typeTable = document.getElementById(clickedType);
   var typeTbody = typeTable.getElementsByTagName("TBODY")[0];
   var tableTrs = typeTbody.getElementsByTagName("TR");
-  console.log("tableTrs: ", tableTrs)
+  // console.log("tableTrs: ", tableTrs)
   //Insert the API URL next to the type
   var rowType = document.getElementById(clickedType+'_row');
   rowType.deleteCell(1);
@@ -2272,21 +2301,57 @@ function saveTypeConfig(){
       continue;
     }else{
       var rowProperty = document.getElementById(tableTrs[i].id);
-      rowProperty.deleteCell(1);
+      // rowProperty.deleteCell(1);
       var cellField1 = rowProperty.insertCell(1);
       // style="width: 1%;"
       // cellField1.style.width="0%";
       cellField1.innerHTML = '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
 
+      //make the the similar field selected
+      var theProperty = rowProperty.cells[0];
+      theProperty = theProperty.getElementsByTagName('A')[0] //get a.id then split '.'[1]
+      theProperty = theProperty.getAttribute('id').split('.')[1];
+      console.log("theProperty: ",theProperty);
+
+      var mostSimilar =0;
+      var similarOption="";
+      // console.log("resProplist BEFORE: ", resProplist);
+
+      var thePropertyArr = []
+      thePropertyArr.push(theProperty);
+
+      resProplist = cleanArray(resProplist);
+      // thePropertyArr = cleanArray(thePropertyArr);
+
+      var resProplistCleaned = prepareArrayForCosineSim(resProplist);
+      var thePropertyArrCleaned = prepareArrayForCosineSim(thePropertyArr);
+
+      // console.log("resProplist AFTER: ", resProplist);
+
       for(var f=0; f<resProplist.length; ++f){
         $("#fields_"+tableTrs[i].id).append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
+        //cosine similarity between theProperty and each field in resProplist[] and get the one with the highest similarity
+        var tempSim = checkSimilarity(thePropertyArrCleaned[0], resProplistCleaned[f]);
+        if(mostSimilar <  tempSim){
+          mostSimilar = tempSim;
+          similarOption =resProplist[f];
+        }
       }
+      // console.log("similarOption: ", similarOption)
+      // console.log("Field most similar: ", resProplist);
+
+      if(similarOption!=""){
+        var selectChosen = document.querySelector('#fields_'+tableTrs[i].id);
+        selectChosen.querySelector("#"+similarOption).selected=true;
+      }
+
     }
   }
 
   for(var f=0; f<resProplist.length; ++f){
     $("#fields-select").append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
   }
+
   jQuery('.selectpicker').selectpicker('refresh');
 
 //drop down of all resProplist excluding the id chosen idValue
@@ -2622,7 +2687,6 @@ function typeHasBeenChosen(select){
       crossDomain:true,
       dataType: "html",
       success: function(res) {
-        console.log("RES: ", res)
         document.getElementById("schemaURL").href = 'http://schema.org/'+type;//childSnapshot.val().format;
         document.getElementById("schemaURL").innerText = 'http://schema.org/'+type;//childSnapshot.val().format;
         document.getElementById("schemaDesc").innerText = $(res).find('.description')[0].innerHTML;
@@ -2774,30 +2838,23 @@ function typeHasBeenChosen(select){
       allAPIFeilds = allAPIFeilds.concat(scrapirAPIs[i].res)
     }
   }
+  // console.log("All properties: ", typeProperties);
+  // console.log("All fields: ", allAPIFeilds);
+
+  allAPIFeilds = cleanArray(allAPIFeilds);
+  // typeProperties = cleanArray(typeProperties);
+
+  var allAPIFeildsCleaned = prepareArrayForCosineSim(allAPIFeilds);
+  var typePropertiesCleaned = prepareArrayForCosineSim(typeProperties);
+
   console.log("All properties: ", typeProperties);
   console.log("All fields: ", allAPIFeilds);
-
-  //Remove duplicate fields in the array
-  allAPIFeilds = allAPIFeilds.filter((c, index) => {
-    return allAPIFeilds.indexOf(c) === index;
-  });
-
-  //remove "" elements
-  allAPIFeilds = allAPIFeilds.filter(function (el) {
-    return el != null;
-  });
-  console.log("Remove duplicates and '': ", allAPIFeilds);
-
-  //replace weird characters with space " "
-  for(var j=0; j<allAPIFeilds.length; ++j){
-    allAPIFeilds[j]= allAPIFeilds[j].replace(/[^0-9a-z]/gi, ' ');
-  }
 
   //go over the propertes and get the similar properties
   for(var c=0; c<typeProperties.length; ++c){
     for(var j=0; j<allAPIFeilds.length; ++j){
-      var similar = checkSimilarity(typeProperties[c], allAPIFeilds[j]);
-      if(similar>40){
+      var similar = checkSimilarity(typePropertiesCleaned[c], allAPIFeildsCleaned[j]);
+      if(similar>0){
         console.log(typeProperties[c]+' : '+allAPIFeilds[j]+' = '+similar+'%');
         suggestedProperties.push(typeProperties[c]);
       }
@@ -2811,23 +2868,23 @@ function typeHasBeenChosen(select){
 
       if(suggestedProperties.length>0){
         console.log("SUGGESTED")
-        $("#"+type+"_property-select").append('<optgroup id="property-select-optgroup" label="Suggested">');
+        $("#"+type+"_property-select").append('<optgroup id="'+type+'-property-select-optgroup" label="Suggested">');
         for(var j=0; j<suggestedProperties.length; ++j){
-          $("#property-select-optgroup").append('<option id="'+suggestedProperties[j]+'">'+suggestedProperties[j]+'</option>');
+          $("#"+type+"-property-select-optgroup").append('<option value="'+suggestedProperties[j]+'">'+suggestedProperties[j]+'</option>');
         }
         $("#"+type+"_property-select").append('</optgroup>');
 
-        $("#"+type+"_property-select").append('<optgroup id="property-select-other-optgroup" label="Other Types">');
+        $("#"+type+"_property-select").append('<optgroup id="'+type+'-property-select-other-optgroup" label="Other Types">');
         for(var i=0; i<typeProperties.length; ++i){
             if(suggestedProperties.indexOf(typeProperties[i]) == -1){
-              $("#property-select-other-optgroup").append('<option id="'+typeProperties[i]+'">'+typeProperties[i]+'</option>');
+              $("#"+type+"-property-select-other-optgroup").append('<option value="'+typeProperties[i]+'">'+typeProperties[i]+'</option>');
             }
         }
         $("#"+type+"_property-select").append('</optgroup>');
       }else{
         console.log("NOT SUGGESTED")
         for(var i=0; i<typeProperties.length; ++i){
-            $("#"+type+"_property-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+            $("#"+type+"_property-select").append('<option value="'+type+'">'+allTypes[i]+'</option>');
 
         }
       }
@@ -2839,6 +2896,46 @@ function typeHasBeenChosen(select){
 }, 100);
 
 }
+
+
+function cleanArray(array){
+  var arrayTemp=[]
+  var arrayTemp=array;
+
+    //Remove duplicate fields in the array
+    arrayTemp = arrayTemp.filter((c, index) => {
+      return arrayTemp.indexOf(c) === index;
+    });
+
+    //remove "" elements
+    arrayTemp = arrayTemp.filter(function (el) {
+      return el != null;
+    });
+
+    return arrayTemp;
+}
+
+
+function prepareArrayForCosineSim(array){
+
+    //replace weird characters with space " "
+    //split words by capital letters (e.g. displayedName => displayed Name)
+    var arrayTemp=[];
+
+    for(var j=0; j<array.length; ++j){
+      arrayTemp.push(array[j])
+    }
+
+    for(var j=0; j<arrayTemp.length; ++j){
+      arrayTemp[j]= arrayTemp[j].replace(/[^0-9a-z]/gi, ' ');
+      arrayTemp[j] = arrayTemp[j].replace(/([A-Z])/g, ' $1').trim()
+      arrayTemp[j] = arrayTemp[j].toLowerCase()
+    }
+
+    // console.log("Remove duplicates and '': ", array);
+    return arrayTemp;
+}
+
 
 
 function saveWoOSchema(){

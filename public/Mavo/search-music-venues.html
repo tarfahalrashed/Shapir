@@ -36,14 +36,14 @@
         <div mv-app="main" mv-source="shapir">
             <!-- <label>Search:</label>
             <input property="searchTerm" mv-value="Music"/> -->
-            <div property="searchSongkick" mv-multiple mv-value="songkick.searchVenues('Music')"></div>
-            <div property="searchSeatgeek" mv-multiple mv-value="seatgeek.searchVenues('Music')"></div>
-            <!-- <div property="searchTicketmaster" mv-multiple mv-value="ticketmaster.searchVenues('Music')"></div> -->
+            <meta property="searchSongkick" mv-value="[songkick.searchVenues('Music')]">
+            <meta property="searchSeatgeek" mv-value="[seatgeek.searchVenues('Music')]">
+            <meta property="searchTicketmaster" mv-value="[ticketmaster.searchVenues('Music')]">
 
             <h1>Music Venues</h1>
             <!-- This line returns the first object of the collection from each site. mv-multiple is not working with them individually-->
             <!-- <div property="venue" mv-multiple mv-value="list(songkick.searchVenues('Music'), seatgeek.searchVenues('Music'))"> -->
-            <div property="venue" mv-multiple mv-value="list(searchSongkick, searchSeatgeek)">
+            <div property="venue" mv-multiple mv-value="list(searchSongkick, searchSeatgeek, searchTicketmaster)">
                 <h1 property="name"></h1>
                 <a property="url">[url]</a>
                 <p property="maximumAttendeeCapacity"></p>
