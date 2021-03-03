@@ -298,8 +298,8 @@
 														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; padding-top: 10px;">
 															<table id="site-table" class="table table-borderless">
 																<tbody>
-																	<tr id="site-row1" style="display:none">
-
+																	<tr id="site-row1" style="display:none" >
+																		<!-- <td width="1%"></td> -->
 																		<td style="display:flex; flex-wrap:wrap;">
 
 																			<!-- <div class="item-hints">
@@ -331,7 +331,8 @@
 
 													<table id="type-method" class="table table-borderless" style="margin-top:15px;">
 														<tbody>
-															<tr id="site-row2" style="display:none">
+															<tr id="site-row2" style="display:none" width="100%">
+																<td width="1%"></td>
 																<td style="display:flex; flex-wrap:wrap;">
 
 																	<div class="item-hints"  style="margin-top:-20px">
@@ -357,7 +358,8 @@
 																</td>
 															</tr>
 
-															<tr  id="site-row3" style="display:none;">
+															<tr  id="site-row3" style="display:none;" width="100%">
+																<td width="1%"></td>
 																<td style="display:flex; flex-wrap:wrap;">
 																	<div id="tar" class="item-hints">
 																		<div class="hint" data-position="4" style="margin-top:0px;">
@@ -1923,7 +1925,7 @@
   position: absolute;
   /* z-index: 5; */
   z-index: 1;
-  background-color:"white"; /* to cover the buttons*/
+  background-color:white; /* to cover the buttons*/
   /* padding-bottom: 12px 0; */
   opacity: 1;
   visibility: visible !important;
@@ -2027,14 +2029,25 @@
 			/* .sidenav a {font-size: 18px;} */
 			}
 
+			select {
+				width: 240px;
+				margin: 10px;
+			}
+
+			select:focus {
+				min-width: 240px;
+				width: auto;
+			}
+
 
 			.code {
 				padding: 2px 4px;
-				font-size: 90%;
+				font-size: 95%;
 				color: tomato;
 				background-color: #FFE5CC;
 				-webkit-border-radius: 4px;
-				border-radius:4px
+				border-radius:4px;
+				font-size: 1em;
 			}
 
 

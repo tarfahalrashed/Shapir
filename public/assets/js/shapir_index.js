@@ -1069,7 +1069,12 @@ function siteHasBeenEntered(select){
     url: 'https://www.klazify.com/api/categorize?url='+url,
     type: 'POST',
     crossDomain:true,
-    headers: {"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig"},
+    headers: {
+      'Accept': "application/json",
+      'Content-Type': "application/json",
+      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
+      'cache-control': "no-cache"
+    },
     success: function(res) {
       console.log("Categories: ", res);
       var categories = res.domain.categories;
@@ -1261,9 +1266,21 @@ function siteHasBeenEntered(select){
   });
 
 
+  //////FOR TESTING
+  // for(var i=0; i<allTypes.length; ++i){
+  //   if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //     //no action
+  //   }else{
+  //     type= allTypes[i].split(' ').join('')
+  //     $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //     // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
+  //   }
+  // }
+
+
   // setTimeout(() => {
-  //   jQuery('.selectpicker').selectpicker('refresh');
-  // }, 2000);
+    jQuery('.selectpicker').selectpicker('refresh');
+  // }, 100);
 
 
 
@@ -2653,8 +2670,29 @@ function typeHasBeenChosen(select){
 
   }else{
     console.log("it is NOT a select")
-    var type=select;
+    var type=select.split('-')[0];
+    var prop=select.split('-')[1];
     var parent="";
+    // console.log("select: ",select)
+    // console.log("type: ",type)
+    // console.log("prop: ",prop)
+
+    var trs = document.getElementsByTagName("TR");
+
+    for(let t in trs){
+      if(trs[t].id.includes('_')){
+      if(trs[t].id.split('_')[1] == prop){
+        var row = document.getElementById(trs[t].id);
+        console.log("row: ", row)
+
+        row.deleteCell(1);
+        var cell1 = row.insertCell(1);
+        cell1.innerHTML = '<td id="type-td"><code class="code">'+type+'</code></td>';
+        break;
+      }
+      }
+    }
+
   }
 
   $("#step2_hint").hide();
@@ -2766,6 +2804,8 @@ function typeHasBeenChosen(select){
   //OLD WITH ARROWS
   $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>   <td></td>   <td style="width:100%"><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
+  // $("#"+type+" tbody").append('<tr width="100%" id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">  <td width=1%><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   <td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>  </tr>')
+
   //Next to each other
   if(firstType){
     firstType=false;
@@ -2852,10 +2892,10 @@ function typeHasBeenChosen(select){
 
   //go over the propertes and get the similar properties
   for(var c=0; c<typeProperties.length; ++c){
-    for(var j=0; j<allAPIFeilds.length; ++j){
+    for(var j=0; j< allAPIFeilds.length; ++j){
       var similar = checkSimilarity(typePropertiesCleaned[c], allAPIFeildsCleaned[j]);
       if(similar>0){
-        console.log(typeProperties[c]+' : '+allAPIFeilds[j]+' = '+similar+'%');
+        // console.log(typeProperties[c]+' : '+allAPIFeilds[j]+' = '+similar+'%');
         suggestedProperties.push(typeProperties[c]);
       }
     }
@@ -2889,11 +2929,12 @@ function typeHasBeenChosen(select){
         }
       }
     }
+
   }
 
   jQuery('.selectpicker').selectpicker('refresh');
 
-}, 100);
+}, 200);
 
 }
 
@@ -2971,13 +3012,13 @@ function saveWoOSchema(){
   }
 
   //properties of type Object
-  for (let p in propType) {
-    for(let a in as){
-      if(as[a].innerHTML == propType[p]){
-        as[a].style.border = "3px solid #f90a69";
-      }
-    }
-  }
+  // for (let p in propType) {
+  //   for(let a in as){
+  //     if(as[a].innerHTML == propType[p]){
+  //       as[a].style.border = "3px solid #f90a69";
+  //     }
+  //   }
+  // }
 
 
   //properties of type exisiting objects
@@ -2992,7 +3033,7 @@ function saveWoOSchema(){
 
         for(let a in as){
           if(as[a].innerHTML == propType[p].name){
-            as[a].style.border = "3px solid #f90a69";
+            // as[a].style.border = "3px solid #f90a69";
           }
         }
       }
@@ -3215,13 +3256,26 @@ function propertyHasBeenChosen(select){
   })
 
   var hasType = false;
-  var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL"]
+  var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL", "Float",
+    "Integer",
+    "CssSelectorType",
+    "PronounceableText",
+    "URL",
+    "XPathType",
+    "True",
+    "False"]
+
+  var typeElem = '<div>'
+
   for(t in types){
     if(dataTypes.indexOf(types[t]) == -1){
       // console.log("types[t]")
       hasType = true;
+      typeElem+='<a href="javascript:;" id="'+types[t]+'-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;" onClick="typeHasBeenChosen(this.id)">'+types[t]+'</a>&nbsp;&nbsp;';
     }
   }
+
+  typeElem += '</div>'
 
   //all <tr> elements
   var trs = document.getElementsByTagName("TR")
@@ -3229,12 +3283,11 @@ function propertyHasBeenChosen(select){
   for(let t in trs){
     if(trs[t].id == thisType){
       if(hasType){//if type is object
-        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td style="display:flex; flex-wrap:wrap;"><div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4"><div style="display:flex;"><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div><div style="width:240px; text-align:center; "><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></div></div><div  id="step2_hint" class="hint-content do--split-children" ><p>This property can be of the follwoing types'+types+'</p></div></div></div></td></tr>').insertBefore(trs[t]);
+        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td style="display:flex; flex-wrap:wrap;"><div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4"><div style="display:flex;"><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div><div style="width:240px; text-align:center; "><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></div></div><div  id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children" ><p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div></div></div></td>   <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   </tr>').insertBefore(trs[t]);
       }else{//if not of type object
       //GO!
-        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>  <td></td>   <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
+        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>   <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
       }
-
       break;
       }
     }
