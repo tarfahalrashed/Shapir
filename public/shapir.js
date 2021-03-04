@@ -879,12 +879,12 @@ export default async function shapir(){
 
                             return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                             obJSON = snapshot.val();
+
                             let paramNames = []
                             for(let p in obJSON.parameters){
                                 paramNames.push(obJSON.parameters[p].name)
                             }
                             //check that the parameters passed are correct
-                            // console.log("args: ", mArgs[1].search)
                             if(typeof mArgs[0] === 'object' && mArgs[0] !== null){
                                 var hasKeywords=false;
                                 var otherArgs = mArgs[0];
@@ -892,13 +892,6 @@ export default async function shapir(){
                                 var hasKeywords=true;
                                 var keywords = mArgs[0];
                                 var otherArgs = mArgs[1];
-                            }
-
-                            //remove wrong parameters
-                            for(let a in otherArgs){
-                                if(paramNames.indexOf(otherArgs[a]) == -1){
-                                    delete otherArgs[a];
-                                }
                             }
 
                             //search keywords
@@ -915,15 +908,19 @@ export default async function shapir(){
                                 var paramLen = Object.entries(otherArgs).length;
                                 for (const [key, value] of Object.entries(otherArgs)) {
                                     --paramLen
-                                    console.log(`${key}: ${value}`);
-                                    mParamList+= key
-                                    mParamList+="="
-                                    mParamList+= value
-                                    if (paramLen>0){
-                                        mParamList+="&"
+                                    if(paramNames.indexOf(key) != -1){//check if the param is correct
+                                        console.log(`${key}: ${value}`);
+                                        mParamList+= key
+                                        mParamList+="="
+                                        mParamList+= value
+                                        if (paramLen>0){
+                                            mParamList+="&"
+                                        }
                                     }
                                 }
+                                mParamList = mParamList.slice(0, -1);
                             }
+
 
                             if (obJSON.oauth2){
                                 // console.log("oauth2")
