@@ -33,6 +33,8 @@ Mavo.Backend.register($.Class({
                         promises.push(window[service][this.action](this.search, this));
                         // I know that "this" includes "this.search" but my global function expects a positional argument for search and an object
                         // e.g. seatgeek.search('Music', {'city': 'New York', 'country': 'US'})
+                        // My global function already checks if the passed parameters are correct (can be used with the API endpoint).
+                        // So sending "this" is fine because the function will only take the relevant parameters and ignore the rest
                     })
 
                     return Promise.all(promises).then(response => {return response})
