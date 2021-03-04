@@ -26,13 +26,13 @@ Mavo.Backend.register($.Class({
                 return ret;
             }else{ //Search one or multiple sites
                 if(this.service.includes(",")){//more than one site
-                    let services = this.service.split(",").map(function (value) { //"seatgeek, songkick, ticketmaster" => ["seatgeek", "songkick", "ticketmaster"]
-                        return value.trim();
-                     });
+                    let services = this.service.split(",").map(function (value) { return value.trim(); });
                     let promises = [];
 
                     services.map((service) => {
                         promises.push(window[service][this.action](this.search, this));
+                        // I know that "this" includes "this.search" but my global function expects a positional argument for search and an object
+                        // e.g. seatgeek.search('Music', {'city': 'New York', 'country': 'US'})
                     })
 
                     return Promise.all(promises).then(response => {return response})
@@ -40,7 +40,7 @@ Mavo.Backend.register($.Class({
                         return [].concat.apply([], arrayOfResponses);
                     });
 
-                }else{
+                }else{//just one site
                     let ret = await window[this.service][this.action](this.search, this);
                     return ret;
                 }
