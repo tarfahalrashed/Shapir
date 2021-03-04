@@ -32,8 +32,7 @@ Mavo.Backend.register($.Class({
                     let promises = [];
 
                     services.map((service) => {
-                        promises.push(window[service][this.action](this.search));
-                        // promises.push(window[service][this.action](this.search /*, an object of other params */ ));
+                        promises.push(window[service][this.action](this.search, this));
                     })
 
                     return Promise.all(promises).then(response => {return response})

@@ -8,40 +8,10 @@
 
     <body>
 
-        <!-- All search functions will have a search parameter, and it will be positional. So in Mavo, we will have mv-source-search="Music" -->
-        <!-- OR in mv-value="songkick.searchVenues('Music')" -->
-        <!-- <div mv-bar="none" mv-app="searchSongkick" mv-source="shapir" mv-source-service="songkick" mv-source-action="searchVenues" mv-source-params="music">
-            <meta mv-multiple property="results">
-            <meta mv-multiple property="events" mv-value="results.event">
-        </div>
-
-        <div mv-bar="none" mv-app="searchSeatgeek" mv-source="shapir" mv-source-service="seatgeek" mv-source-action="searchVenues" mv-source-params="music">
-            <meta mv-multiple property="results">
-            <meta mv-multiple property="events" mv-value="results.event">
-        </div>
-
-        <div mv-bar="none" mv-app="searchTicketmaster" mv-source="shapir" mv-source-service="ticketmaster" mv-source-action="searchVenues" mv-source-params="music">
-            <meta mv-multiple property="results">
-            <meta mv-multiple property="events" mv-value="results.event">
-        </div> -->
-
-        <!-- <div mv-app="test" mv-source="shapir">
-            <div property="video"  mv-multiple mv-value="songkick.searchVenues('Music')">
-                <h3 property="name"></h3>
-            </div>
-        </div> -->
-
-        <div mv-app="main" mv-source="shapir">
-            <!-- <label>Search:</label>
-            <input property="searchTerm" mv-value="Music"/> -->
-            <meta property="searchSongkick" mv-value="[songkick.searchVenues('Music')]">
-            <meta property="searchSeatgeek" mv-value="[seatgeek.searchVenues('Music')]">
-            <meta property="searchTicketmaster" mv-value="[ticketmaster.searchVenues('Music')]">
+        <div mv-app="test" mv-source="shapir" mv-source-service="seatgeek, songkick, ticketmaster" mv-source-action="searchVenues" mv-source-search="music" mv-source-sort="relevance" mv-source-countryCode="US">
 
             <h1>Music Venues</h1>
-            <!-- This line returns the first object of the collection from each site. mv-multiple is not working with them individually-->
-            <!-- <div property="venue" mv-multiple mv-value="list(songkick.searchVenues('Music'), seatgeek.searchVenues('Music'))"> -->
-            <div property="venue" mv-multiple mv-value="list(searchSongkick, searchSeatgeek, searchTicketmaster)">
+            <div property="venue" mv-multiple>
                 <h1 property="name"></h1>
                 <a property="url">[url]</a>
                 <p property="maximumAttendeeCapacity"></p>
