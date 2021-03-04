@@ -20,9 +20,32 @@ Mavo.Backend.register($.Class({
 
     get: async function(url) {
         if (this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
-            //constructing one of my global functions from all the mv-source- attributes
-            let ret = await window[this.service][this.action](this.params);
-            return ret;
+
+            if(this.identifier){ //Get an object by ID
+                let ret = await window[this.service][this.action](this.identifier);
+                return ret;
+            }else{ //Search one or multiple sites
+                if(this.service.includes(",")){//more than one site
+                    let services = this.service.split(",").map(function (value) { //"seatgeek, songkick, ticketmaster" => ["seatgeek", "songkick", "ticketmaster"]
+                        return value.trim();
+                     });
+                    let promises = [];
+
+                    services.map((service) => {
+                        promises.push(window[service][this.action](this.search));
+                        // promises.push(window[service][this.action](this.search /*, an object of other params */ ));
+                    })
+
+                    return Promise.all(promises).then(response => {return response})
+                    .then(arrayOfResponses =>{
+                        return [].concat.apply([], arrayOfResponses);
+                    });
+
+                }else{
+                    let ret = await window[this.service][this.action](this.search, this);
+                    return ret;
+                }
+            }
         }
     },
 

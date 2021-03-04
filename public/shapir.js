@@ -876,6 +876,16 @@ export default async function shapir(){
                         window[site][funcName] = function(...mArgs) { return siteFunction(...mArgs) };
 
                         function siteFunction(...mArgs) {
+
+                            return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
+                            obJSON = snapshot.val();
+                            console.log(obJSON.parameters)
+                            let paramNames = []
+                            for(let p in obJSON.parameters){
+                                paramNames.push(obJSON.parameters[p].name)
+                            }
+                            //check that the parameters passed are correct
+                            console.log("args: ", mArgs[1].search)
                             if(typeof mArgs[0] === 'object' && mArgs[0] !== null){
                                 var hasKeywords=false;
                                 var otherArgs = mArgs[0];
@@ -883,6 +893,13 @@ export default async function shapir(){
                                 var hasKeywords=true;
                                 var keywords = mArgs[0];
                                 var otherArgs = mArgs[1];
+                            }
+
+                            //remove wrong parameters
+                            for(let a in otherArgs){
+                                if(paramNames.indexOf(otherArgs[a]) == -1){
+                                    delete otherArgs[a];
+                                }
                             }
 
                             //search keywords
@@ -909,10 +926,6 @@ export default async function shapir(){
                                 }
                             }
 
-                            // console.log("mParamList: ", mParamList)
-                            return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
-                            obJSON = snapshot.val();
-                            //console.log(obJSON)
 
                             if (obJSON.oauth2){
                                 // console.log("oauth2")

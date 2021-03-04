@@ -8,27 +8,26 @@
 
     <body>
         <!-- dailymotion.VideoObject("x7xf8kc") -->
-        <div mv-app="test" mv-source="shapir" mv-source-service="dailymotion" mv-source-action="VideoObject" mv-source-params="[id]">
+        <!-- <div mv-app="test" mv-source="shapir" mv-source-service="dailymotion" mv-source-action="VideoObject" mv-source-identifier="[id]">
             <input property="id" value="x7xf8kc" />
             <h3 property="name"></h3>
             <p property="creator"></p>
             <p property="channel"></p>
+        </div> -->
+        <!-- <button mv-action="addToWatchlater()">Add to Watchlater</button> -->
 
-            <button mv-action="addToWatchlater()">Add to Watchlater</button>
-        </div>
-
-        <!-- <div mv-app="test" mv-source="shapir" mv-source-service="dailymotion" mv-source-action="MusicPlaylist" mv-source-params="x706zx">
-
-            <h3 property="name"></h3>
-
-            <div property="video" mv-multiple>
-                <h3 property="name"></h3>
-                <p property="creator"></p>
-                <p property="channel"></p>
+<!-- seatgeek,songkick, -->
+        <div mv-app="test" mv-source="shapir" mv-source-service="ticketmaster" mv-source-action="searchVenues" mv-source-search="music" mv-source-sort="relevance" mv-source-countryCode="US">
+            <h1>Music Venues</h1>
+            <div property="venue" mv-multiple>
+                <h1 property="name"></h1>
+                <a property="url">[url]</a>
+                <p property="maximumAttendeeCapacity"></p>
+                <p property="longitude"></p>
+                <p property="latitude"></p>
                 <hr>
             </div>
-
-        </div>  -->
+        </div>
 
    </body>
 

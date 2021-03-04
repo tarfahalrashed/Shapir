@@ -37,6 +37,11 @@
 	<link href="assets/css/jsoneditor.css" rel="stylesheet" type="text/css">
 	<script src="assets/js/jsoneditor.js"></script>
 
+
+	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+	<link href="assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
+	<!-- ================== END PAGE LEVEL STYLE ================== -->
+
 	<!-- ================== redips-drag STYLE ================== -->
 	<link rel="stylesheet" href="assets/css/style.css" type="text/css" media="screen" />
 
@@ -344,13 +349,21 @@
 																				</div>
 																				<div style="width:240px; text-align:center;">
 																					<select id="type-select"  style="text-align:center;" class="popover-toggle form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
-																						<option style="text-align:center; display:none" selected>Add Type</option>
+																						<option style="text-align:center; display:none" selected>Choose Type</option>
 																					</select>
 																				</div>
 																				<!-- <div id="type-popover-div" style="display: none"></div> -->
 																			</div>
-																			<div  id="step2_hint" style="pointer-events: none;" class="hint-content do--split-children" >
-																				<p>What types of information is available in this website?</p>
+																			<div  id="step2_hint" style="pointer-events: none; height:50px;" class="hint-content do--split-children" >
+																				<p style="display: inline;">What types of information is available in this website?</p>
+																				<div class="info" style="pointer-events: all; display: inline; ">
+																					<i class="ion ion-md-information-circle"></i>
+																					<span class="extra-info">
+																					  A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg
+																					</span>
+																				</div>
+
+
 																			</div>
 																		</div>
 																	</div>
@@ -358,7 +371,7 @@
 																</td>
 															</tr>
 
-															<tr  id="site-row3" style="display:none;" width="100%">
+															<!-- <tr  id="site-row3" style="display:none;" width="100%">
 																<td width="1%"></td>
 																<td style="display:flex; flex-wrap:wrap;">
 																	<div id="tar" class="item-hints">
@@ -375,11 +388,9 @@
 																				</div>
 																				<div id="method-button-div" style="width:240px; text-align:center;">
 																					<a id="methodSite.Search" href="javascript:;" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">Search</a>
-																					<!-- <div id="method-popover-div" style="display: none"></div> -->
 																				</div>
 																				<div id="step4_hint" style="pointer-events:none; height:70px; " class="hint-content do--split-children" >
 																					<p style="margin-bottom:0px">Are you interested in searching the site?</p>
-																					<!-- <a href="https://schema.org/docs/full.html" target="_blank" style="pointer-events: all;">list of types</a> -->
 																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="removeSearchHint()">Yes</button>
 																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="removeSearchButton()">No</button>
 																				</div>
@@ -387,13 +398,11 @@
 																		</div>
 																	</div>
 																</td>
-																<!-- <td></td>
-																<td style="width:100%">
-																	<button id="site_Search_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button>
-																</td> -->
-															</tr>
+
+															</tr> -->
 														</tbody>
 													</table>
+
 
 												</br>
 													<div id="connectDiv" style="display:none">
@@ -1457,13 +1466,39 @@
 				<label class="col-form-label "><B>Property Description:</B></label>
 				<p id="property-description" style="white-space: normal;"></p>
 
-				<label class="col-form-label "><B>Property Type:</B></label>
+
+
+
+				<p>1. Which of the following <span id="sel_site_up"></span> API endpoints returns this property a <span id="sel_prop"></span> object?
+					Click on each one to view their descreption.</p>
+
+				<div style="overflow: scroll; height:260px" class="box">
+					<div id="accordion-property" class="accordion">
+					</div>
+				</div>
+				</br>
+
+				<!-- <p style="display:inline"> </p> -->
+				<p style="display:inline;">If none of the above API endpoints returns the property, you can integrate it in
+					<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+
+					</br> </br>
+
+					<!-- ID (list of responses fields)-->
+					<div id="idLabel-property" style="display: none;">
+						<p>2. Choose the ID parameter of this API</p>
+						<!-- <label class="col-form-label ">Id</label></br> -->
+						<select id="type-id-property" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
+							<option selected>Choose the ID</option>
+						</select>
+					</div>
+					</br></br>
+
+				<a href="javascript:;" class="btn btn-primary" id="" onclick="savePropertyConfig()">Save</a>
+
+
+				<!-- <label class="col-form-label "><B>Property Type:</B></label>
 				<select id="properties-type" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px; " onchange="propertyTypeHasBeenSelected(this)">
-					<!-- <option value="string" selected>string</option>
-					<option value="integer">integer</option>
-					<option value="date">date</option>
-					<option value="boolean">boolean</option>
-					<option value="object">object</option> -->
 				</select>
 				</br>
 
@@ -1473,9 +1508,9 @@
 						<option value="" selected>Type</option>
 					</select>
 				</div>
-				</br>
+				</br> -->
 
-				<label class="col-form-label " for="propIsArray"><input type="checkbox" id="propIsArray" onclick="isArray(this)"/> Is Array</label></br>
+				<!-- <label class="col-form-label " for="propIsArray"><input type="checkbox" id="propIsArray" onclick="isArray(this)"/> Is Array</label></br> -->
 				<!-- </br></br></br>
 				<a href="javascript:;" class="btn btn-default" style="width:100px; height:32px;" id="" onclick="addNewProperty()">Submit</a> -->
 			</form>
@@ -1503,29 +1538,26 @@
 								<span class="d-sm-block d-none">Get*</span>
 							</a>
 						</li>
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link">
-								<!-- <span class="d-sm-none">Pills 2</span> -->
 								<span class="d-sm-block d-none">Update</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#nav-pills-tab-3" data-toggle="tab" class="nav-link">
-								<!-- <span class="d-sm-none">Pills 3</span> -->
 								<span class="d-sm-block d-none">Create</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="#nav-pills-tab-4" data-toggle="tab" class="nav-link">
-								<!-- <span class="d-sm-none">Pills 4</span> -->
 								<span class="d-sm-block d-none">Remove</span>
 							</a>
-						</li>
-						<!-- <li class="nav-item">
+						</li> -->
+						<li class="nav-item">
 							<a href="#nav-pills-tab-5" data-toggle="tab" class="nav-link">
 								<span class="d-sm-block d-none">Search</span>
 							</a>
-						</li> -->
+						</li>
 						<!-- <li class="nav-item">
 							<a href="#nav-pills-tab-4" data-toggle="tab" class="nav-link">
 								<span class="d-sm-none">Pills 4</span>
@@ -1700,6 +1732,42 @@
 						<!-- begin tab-pane -->
 						<div class="tab-pane fade" id="nav-pills-tab-5">
 							<h4 class="m-t-10">Searching for object(s)</h4>
+
+								<!-- <p>1. Change the name of the method [optional] </p>
+								<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
+								</br></br> -->
+
+								<p>1. Which of the following <span id="sel_site_meth"></span> API endpoints implement this method <span id="sel_ob_meth"></span> object?
+									Click on each one to view their descreption</p>
+								<div style="overflow: scroll; height:260px" class="box">
+									<div id="accordion-method" class="accordion">
+									</div>
+								</div>
+
+								</br>
+
+								<!-- <p>3. Choose the type of object returned from this method (this can be one or a list of objects)</p>
+								<select id="method-result-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+									<option selected>Choose type of returned result</option>
+								</select>
+								</br></br> -->
+
+								<div id="search-method" style="display: none;">
+								<p>2. Which of the follwoing parameters is the search term parameter?</p>
+								<select id="method-search-param" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+									<option selected>Choose search parameter</option>
+								</select>
+								</br></br>
+
+								<!-- <p>5. Which of the follwing fields is the id of the </p>
+								<select id="method-result-type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+									<option selected>Choose the ID</option>
+								</select>
+								</div> -->
+
+							</br></br>
+							<a href="javascript:;" class="btn btn-primary" id="" onclick="saveMethodConfig()">Save</a>
+
 						</div>
 						<!-- end tab-pane -->
 
@@ -1718,34 +1786,21 @@
 			<h5 class = "panel-title">Method Configuration</h5>
 			<hr>
 
-			<div id="method-div" >
-				<!-- <label class="col-form-label"><B>Method Name</B></label></br> -->
+			<!-- <div id="method-div" >
 				<p>1. Change the name of the method [optional] </p>
 				<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
 				</br></br>
 
-				<!-- <label class="col-form-label">API Endpoint</label> -->
-
-				<!-- <select id="apis-url-method" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosenForMethod(this)">
-					<option selected>Choose the API Endpoint</option>
-				</select> -->
-
 				<p>2. Which of the following <span id="sel_site_meth"></span> API endpoints implement this method <span id="sel_ob_meth"></span> object?
 					Click on each one to view their descreption</p>
-				<!-- begin #accordion -->
 				<div style="overflow: scroll; height:260px" class="box">
 					<div id="accordion-method" class="accordion">
 					</div>
 				</div>
-				<!-- end #accordion -->
 
 				</br>
-				<!-- <label class="col-form-label" for=""><input type="checkbox" id="noResult" onclick=""/> No Result</label>
-				</br> -->
 
-				<!-- <label class="col-form-label ">Result Type</label></br> -->
 				<p>3. Choose the type of object returned from this method (this can be one or a list of objects)</p>
-				<!-- <span>Make sure that you've chosen the class and its properties<span> -->
 				<select id="method-result-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
 					<option selected>Choose type of returned result</option>
 				</select>
@@ -1753,14 +1808,12 @@
 
 				<div id="search-method" style="display: none;">
 				<p>4. Which of the follwoing parameters is the search term parameter?</p>
-				<!-- <span>Make sure that you've chosen the class and its properties<span> -->
 				<select id="method-search-param" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
 					<option selected>Choose search parameter</option>
 				</select>
 				</br></br>
 
 				<p>5. Which of the follwing fields is the id of the </p>
-				<!-- <span>Make sure that you've chosen the class and its properties<span> -->
 				<select id="method-result-type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
 					<option selected>Choose the ID</option>
 				</select>
@@ -1772,7 +1825,7 @@
 			<a href="javascript:;" class="btn btn-primary" id="" onclick="saveMethodConfig()">Save</a>
 
 
-		</div>
+		</div> -->
 	</div>
 
 		</div>
@@ -1857,6 +1910,43 @@
 		<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/$VERSION/dragula.min.js'></script> -->
 
 		<style>
+
+* {
+  transition: all .2s ease;
+}
+
+.extra-info {
+  display: none;
+  line-height: 30px;
+  font-size: 12px;
+  position: relative;
+  top: -30px;
+  left: 330px;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding:10px;
+  word-wrap: break-word;
+  /* text-indent: 10px; */
+}
+
+.info:hover .extra-info {
+  display: block;
+}
+
+.info {
+  font-size: 20px;
+  padding-left: 5px;
+  width: 20px;
+  border-radius: 15px;
+}
+
+.info:hover {
+  background-color:white;
+  padding: 0 0 0 5px;
+  width: 715px;
+  text-align: left !important;
+}
+
 
 /* .bootstrap-select .btn .filter-option {
    text-align: center

@@ -226,6 +226,8 @@ function openNav(id) {
   var typeName = id.split('.')[0]
   var propName = id.split('.')[1]
 
+  document.getElementById('sel_prop').innerHTML= id.split('.')[1];
+
   $("#properties-type").empty();
   $("#properties-type").append("<option selected>Add Property</option>");
 
@@ -238,6 +240,21 @@ function openNav(id) {
   document.getElementById("mySidenav").style.width = "550px";
   document.getElementById('property-name').innerHTML= id.split('.')[1];
   document.getElementById('property-description').innerHTML= allTheType[typeName][propName].desc.replace(/(<([^>]+)>)/gi, "");;
+
+  $("#accordion-property").empty()
+
+  for(var i=0; i<scrapirAPIs.length; ++i){
+    var urlText = scrapirAPIs[i].url;
+      if(urlText.includes(site)){
+        noSpacesTitle = scrapirAPIs[i].title.split(' ').join('');
+        $("#accordion-property").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosen(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion"><div class="card-body" id="cardBodyProp'+noSpacesTitle+'"> </div></div></div>')
+
+        $("#cardBodyProp"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+        $("#cardBodyProp"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+        $("#cardBodyProp"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+
+      }
+    }
 
   jQuery('.selectpicker').selectpicker('refresh');
 
@@ -305,6 +322,8 @@ function openNavType(id) {
   $("#accordion-remove").empty()
   $("#accordion-update").empty()
 
+  $("#accordion-method").empty();
+
   $("#idLabel").hide();
   $("#mapLabel").hide();
 
@@ -324,15 +343,20 @@ function openNavType(id) {
         $("#accordion-update").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenUpdate(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-update"><div class="card-body" id="cardBodyUpdate'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
+        $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
+        $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+
         if(scrapirAPIs[i].params){
           $("#cardBody"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>');
           $("#cardBodyRemove"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>');
           $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+          $("#cardBodyM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
         }
         if(scrapirAPIs[i].res){
           $("#cardBody"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>');
           $("#cardBodyRemove"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>');
           $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>');
+          $("#cardBodyM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
         }
 
         // $("#apis-type").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
@@ -1040,24 +1064,19 @@ function siteHasBeenEntered(select){
 
   suggestedTypes=[];
   $("#type-select").empty();
-
+  $("#type-select").append('<option style="text-align:center; display:none" selected>Add Type</option>')
   $("#step1_hint").show();
-  // $("#site-row2").show(); //types select
-  // $("#site-row3").show(); //methods select
   $("#step2").show();
   $("#site-objects").empty();
   $("#site-info").empty();
-  //site = select.options[select.selectedIndex].getAttribute("id");
   $("#step2-desc").show()
 
-  // $("#desc-site").show();
   document.getElementById('siteN').innerHTML= '<code>'+site.charAt(0).toUpperCase() + site.slice(1)+'</code>'
   temp = { "objects":{}, "functions":[] };
 
   const url = $("#url-site").val();
   let domain = new URL(url);
   domain = domain.hostname.replace('www.','');
-  // console.log(domain);
   site = domain;
 
   document.getElementById("site-domain").innerHTML = domain;
@@ -1065,383 +1084,168 @@ function siteHasBeenEntered(select){
   $("#site-row2").show();
 
   //Getting website categories
-  $.ajax({
-    url: 'https://www.klazify.com/api/categorize?url='+url,
-    type: 'POST',
-    crossDomain:true,
-    headers: {
-      'Accept': "application/json",
-      'Content-Type': "application/json",
-      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
-      'cache-control': "no-cache"
-    },
-    success: function(res) {
-      console.log("Categories: ", res);
-      var categories = res.domain.categories;
+  // $.ajax({
+  //   url: 'https://www.klazify.com/api/categorize?url='+url,
+  //   type: 'POST',
+  //   crossDomain:true,
+  //   headers: {
+  //     'Accept': "application/json",
+  //     'Content-Type': "application/json",
+  //     "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
+  //     'cache-control': "no-cache"
+  //   },
+  //   success: function(res) {
+  //     // console.log("Categories: ", res);
+  //     var categories = res.domain.categories;
 
-      if(res.domain.logo_url !=null || res.domain.logo_url!=""){
-        $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
-      }
+  //     if(res.domain.logo_url !=null || res.domain.logo_url!=""){
+  //       $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
+  //     }
 
-      $("#site-info").append('</br><h5>Website categories</h5>');
-      $("#site-info").append('<ul>');
-      for(var c=0; c<categories.length; ++c){
-        $("#site-info").append('<li>'+categories[c].name+'</li>');
-      }
-      $("#site-info").append('</ul>');
+  //     $("#site-info").append('</br><h5>Website categories</h5>');
+  //     $("#site-info").append('<ul>');
+  //     for(var c=0; c<categories.length; ++c){
+  //       $("#site-info").append('<li>'+categories[c].name+'</li>');
+  //     }
+  //     $("#site-info").append('</ul>');
 
-      // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
-      // var category = categories.find(o => {
-      //   return o.confidence === maxconfidence
-      // }).name;
-      // console.log("Category: ", category)
+  //     // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
+  //     // var category = categories.find(o => {
+  //     //   return o.confidence === maxconfidence
+  //     // }).name;
+  //     // console.log("Category: ", category)
 
-      var categoryWords=[]
-      var str="";
-      // var categories =res.data[0].categories;
-      for(var l=0; l<categories.length; ++l){
-        var name= categories[l].name;
-        var lastIndex = name.lastIndexOf("/")//get the last type
-        var lastType = name.substring(lastIndex + 1);
-        str+= lastType;
-        str+=" "
-        categoryWords.push(lastType);
-      }
+  //     var categoryWords=[]
+  //     for(var l=0; l<categories.length; ++l){
+  //       var name= categories[l].name;
+  //       var lastIndex = name.lastIndexOf("/")//get the last type
+  //       var lastType = name.substring(lastIndex + 1);
+  //       categoryWords.push(lastType);
+  //     }
 
-      $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
-      $("#site-info").append('<ul>');
+  //     $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
+  //     $("#site-info").append('<ul>');
 
-      for(var c=0; c<categoryWords.length; ++c){
-        for(var j=0; j<allTypes.length; ++j){
-          var similar = checkSimilarity(categoryWords[c], allTypes[j]);
-          if(similar>40){
-            // console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
-            suggestedTypes.push(allTypes[j])
-            $("#site-info").append('<li>'+allTypes[j]+'</li>');
-          }
-        }
-        if(c+1==categoryWords.length){
-          $("#site-info").append('</ul><hr>');
-          // $("#site-info").append('<hr>');
-          $("#site-info").show();
+  //     for(var c=0; c<categoryWords.length; ++c){
+  //       for(var j=0; j<allTypes.length; ++j){
+  //         var similar = checkSimilarity(categoryWords[c], allTypes[j]);
+  //         if(similar>40){
+  //           // console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
+  //           suggestedTypes.push(allTypes[j])
+  //           $("#site-info").append('<li>'+allTypes[j]+'</li>');
+  //         }
+  //       }
+  //       if(c+1==categoryWords.length){
+  //         $("#site-info").append('</ul><hr>');
+  //         $("#site-info").show();
 
-          if(suggestedTypes.length>0){
-            console.log("SUGGESTED")
-            $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
-            for(var j=0; j<suggestedTypes.length; ++j){
-              $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
-            }
-            $("#type-select").append('</optgroup>');
+  //         if(suggestedTypes.length>0){
+  //           // console.log("SUGGESTED")
+  //           $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+  //           for(var j=0; j<suggestedTypes.length; ++j){
+  //             $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
+  //           }
+  //           $("#type-select").append('</optgroup>');
 
-            $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
-            for(var i=0; i<allTypes.length; ++i){
-              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-                //no action
-              }else{
-                type= allTypes[i].split(' ').join('')
-                if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
-                  $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-                }
-              }
-            }
-            $("#type-select").append('</optgroup>');
-          }else{
-            console.log("NOT SUGGESTED")
-            for(var i=0; i<allTypes.length; ++i){
-              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-                //no action
-              }else{
-                type= allTypes[i].split(' ').join('')
-                $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-                // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
-              }
-            }
+  //           $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+  //                 $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //               }
+  //             }
+  //           }
+  //           $("#type-select").append('</optgroup>');
+  //         }else{
+  //           // console.log("NOT SUGGESTED")
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //             }
+  //           }
+  //         }
+  //         jQuery('.selectpicker').selectpicker('refresh');
+  //       }
+  //     }
 
-          }
+  //   },
+  //   error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
+  //     for(var i=0; i<allTypes.length; ++i){
+  //       if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //         //no action
+  //       }else{
+  //         type= allTypes[i].split(' ').join('')
+  //         $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //       }
+  //     }
+  //   }
 
-
-          // setTimeout(() => {
-            jQuery('.selectpicker').selectpicker('refresh');
-          // }, 2000);
-        }
-
-      }
-
-      //console.log("str: ", str);
-
-
-      //remove repeated words
-      // str =str.split(" ").filter(function(allItems,i,a){
-      //   return i==a.indexOf(allItems);
-      // }).join(" ");
-
-      // var words = str.split(" ");
-      // console.log("words: ", words);
-
-      // var htmlContent='<p>These are some of the suggested schema.org types:</p></br>'
-      // +'<a href="#" class="btn btn-secondary">Edit</a>'
-      // +'<a href="#" class="btn btn-info">Activate</a>'
-      // +'<li><a href="#" class="btn btn-danger">Delete</a></li>'
-
-      // for (var w = 0; w < words.length; ++w) {
-      //   if ((!/[^a-zA-Z]/.test(words[w])) && words[w]!=""){//ignor non-letters and ""
-      //     // console.log("words[i]: ", words[w])
-      //     for(var j=0; j<allTypes.length; ++j){
-      //       if(allTypes[j].includes(words[w])){
-      //         $("#site-info").append('<li>'+allTypes[j]+'</li>');
-      //         // $("#site-info").append('<a href="javascript:;" id="'+allTypes[j]+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; margin-bottom:10px" onClick="typeHasBeenChosen(this.id)">'+allTypes[j]+'</a>');
-      //         //add type to an array
-      //         suggestedTypes.push(allTypes[j])
-      //         // htmlContent+='<a href="javascript:;" id="'+allTypes[j]+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" onClick="openNavType(this.id)">'+allTypes[j]+'</a></br>';
-      //       }
-      //     }
-      //   }
-      //   if(w+1==words.length){
-      //     $("#site-info").append('</ul><hr>');
-      //     // $("#site-info").append('<hr>');
-      //     $("#site-info").show();
-
-      //     if(suggestedTypes.length>0){
-      //       console.log("SUGGESTED")
-      //       $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
-      //       for(var j=0; j<suggestedTypes.length; ++j){
-      //         $("#type-select-optgroup").append("<option id="+suggestedTypes[j]+">"+suggestedTypes[j]+"</option>");
-      //       }
-      //       $("#type-select").append('</optgroup>');
-
-      //       $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
-      //       for(var i=0; i<allTypes.length; ++i){
-      //         if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-      //           //no action
-      //         }else{
-      //           type= allTypes[i].split(' ').join('')
-      //           if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
-      //             $("#type-select-other-optgroup").append("<option id="+type+">"+allTypes[i]+"</option>");
-      //           }
-      //         }
-      //       }
-      //       $("#type-select").append('</optgroup>');
-      //     }else{
-      //       console.log("NOT SUGGESTED")
-      //       for(var i=0; i<allTypes.length; ++i){
-      //         if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-      //           //no action
-      //         }else{
-      //           type= allTypes[i].split(' ').join('')
-      //           $("#type-select").append("<option id="+type+">"+allTypes[i]+"</option>");
-      //           // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
-      //         }
-      //       }
-
-      //     }
-      //   }
-      // }
-
-
-
-      // $('#site-domain').popover({
-      //   placement: 'right',
-      //   container: 'body',
-      //   html: true,
-      //   content: function() {
-      //     $('#site-domain-div').html(htmlContent);
-      //     return $('#site-domain-div').html();
-      //   }
-      // });
-      // $('#site-domain').popover('show');
-
-    },
-    error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
-      for(var i=0; i<allTypes.length; ++i){
-        if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-          //no action
-        }else{
-          type= allTypes[i].split(' ').join('')
-          $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-          // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
-        }
-      }
-    }
-
-  });
+  // });
 
 
   //////FOR TESTING
-  // for(var i=0; i<allTypes.length; ++i){
-  //   if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //     //no action
-  //   }else{
-  //     type= allTypes[i].split(' ').join('')
-  //     $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //     // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
-  //   }
-  // }
+  for(var i=0; i<allTypes.length; ++i){
+    if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
+      type= allTypes[i].split(' ').join('')
+      $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+    }
+  }
 
 
   // setTimeout(() => {
-    jQuery('.selectpicker').selectpicker('refresh');
+  jQuery('.selectpicker').selectpicker('refresh');
   // }, 100);
 
-
-
-  // var htmlContent='<p>Given the URL you provided, you might be intersted in adding the one or more of these types. Click on them add and</p>'
-  // +'<a href="javascript:;" id="VideoObject1" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" >VideoObject1</a></br></br>'
-  // +'<a href="javascript:;" id="VideoObject2" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" >VideoObject2</a></br></br>'
-  // +'<a href="javascript:;" id="VideoObject3" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" >VideoObject3</a></br></br>'
-  // // +'<a href="javascript:;" id="VideoObject4" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" onClick="">VideoObject4</a></br></br>'
-  // // +'<button type="button" id="close" class="close" onclick="$(&quot;#site-domain&quot;).popover(&quot;hide&quot;);">gggggg</button>';
-  // +'<a id="closeBut" href="javascript:;" class="btn btn-warning" onclick="clikcthis()">Done</a>';
-
-
-  // $('#site-domain').popover({
-  //   title: '<a class="close" href="#">&times;</a>',
-  //   placement: 'right',
-  //   container: 'body',
-  //   html: true,
-  //   content: function() {
-  //     $('#site-domain-div').html(htmlContent);
-  //     return $('#site-domain-div').html();
+  // let tempallAPIParams =[];
+  // //Go over all the site's API endpoints in scrapir and get all the response fields
+  // for(var i=0; i<scrapirAPIs.length; ++i){
+  //   var urlText = scrapirAPIs[i].url;
+  //   if(urlText.includes('site')){
+  //     tempallAPIParams.push(crapirAPIs[i].params);
   //   }
-  // });
-  // $('#site-domain').popover('show');
-
-  // $('[data-toggle=popover]').popover();
-
-  // $(document).on('click', '#closeBut', function(){
-  //   $('#site-domain').popover('hide');
-  //   $("#site-row2").show(); //types select
-  //   $("#site-row3").show(); //methods select
-
-  //   //type popover
-  //   $('#type-select').popover({
-  //     // title: 'Example <a class="close" href="#">&times;</a>',
-  //     placement: 'right',
-  //     container: 'body',
-  //     html: true,
-  //     content: function() {
-  //       $('#type-popover-div').html('<p>Search and add other types</p>');
-  //       return $('#type-popover-div').html();
-  //     }
-  //   });
-  //   $('#type-select').popover('show');
-
-  //   //search method popover
-  //   $('#methodSite_Search').popover({
-  //     // title: '<a class="close" href="#">&times;</a>',
-  //     placement: 'right',
-  //     container: 'body',
-  //     html: true,
-  //     content: function() {
-  //       $('#method-popover-div').html('<p>Are yu intersted in searching the website?</p><a href="javascript:;" id="yes" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" >Yes</a>&nbsp; &nbsp;<a href="javascript:;" id="no" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; padding-bottom:10px" >No</a>');
-  //       return $('#method-popover-div').html();
-  //     }
-  //   });
-  //   $('#methodSite_Search').popover('show');
-
-  // });
-
-  // $(document).on('click', '#VideoObject1', function(){
-  //   typeHasBeenChosen('VideoObject');
-  // });
+  // }
 
 
-
-  // $('#site-domain').popover({
-  //   html : true,
-  //   content: function() {
-  //       return $('#customdiv').html();
-  //   }
-
-  // });
-  // $('#site-domain').popover('show');
-
-
-  // firebase.database().ref('/abstractions/').once('value').then(function(snapshot) {
-  //   snapshot.forEach(function(childSnapshot) {
-  //     if(site == childSnapshot.key){
-  //       arrFields = childSnapshot.val().objects;
-  //       for(obj in arrFields){
-  //         $("#site-objects").append('<a class="code" style="color: tomato; cursor: pointer; padding: 5px; font-size:1.2em" id="'+obj+'" onclick="typeHasBeenChosen2(this)">'+obj+'</a>&nbsp;&nbsp;&nbsp;&nbsp;');
-  //       }
-  //     }
-  //   });
-  // });
-
-  // var table = document.createElement('table');
-  // table.setAttribute('id', type);
-  // table.setAttribute('class', 'table table-borderless');
-  // var tbody= document.createElement('tbody');
-  // table.append(tbody)
-
-  // $("#tableSiteDiv").append(table)
-
-  // $("#site-table tbody").append('<tr><td><p id="schema_header" style="text-align:center">schema.org</p></td> <td><p id="api_header" style="text-align:center">API</p></td> </tr>');
-  //methods menu
-  // $("#site-table tbody").append('<tr id="'+site+'" data-tt-id="'+site+'" data-tt-parent-id="'+site+'" data-tt-branch="true"><td><div style="display: inline-block; width:150px; text-align:center;"><select id="'+site+'_method-select" style="display:inline; width:150px; height: 30px; text-align:center; padding: 4px 1px;" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="methodHasBeenChosen(this)"><option value="" selected>Add Method</option></select></div></td><td></td></tr>')
-
-  let allAPIParams={};
+  let allAPIFeilds=[];
   //Go over all the site's API endpoints in scrapir and get all the response fields
   for(var i=0; i<scrapirAPIs.length; ++i){
     var urlText = scrapirAPIs[i].url;
-    // if(urlText.includes('dailymotion') || urlText.includes('vimeo') || urlText.includes('youtube')){
-      let domain = new URL(scrapirAPIs[i].url);
-      // console.log(scrapirAPIs[i].url)
-      domain = domain.hostname.replace('www.','');
-      allAPIParams[domain]=scrapirAPIs[i].params;
+    if(urlText.includes(site)){
+      allAPIFeilds = allAPIFeilds.concat(scrapirAPIs[i].res)
+    }
   }
 
+  allAPIFeilds = cleanArray(allAPIFeilds);
 
-
-  // Object.entries(allAPIParams).forEach(([key, value]) => {
-  //   console.log(`${key}`+":"+ `${value}`);
-  // });
-
-  // console.log("All fields: ", allAPIParams);
-
-  // //Remove duplicate fields in the array
-  // allAPIParams = allAPIParams.filter((c, index) => {
-  //   return allAPIParams.indexOf(c) === index;
-  // });
-
-  // //remove "" elements
-  // allAPIParams = allAPIParams.filter(function (el) {
-  //   return el != null;
-  // });
-  // console.log("Remove duplicates and '': ", allAPIParams);
-
-  // //replace weird characters with space " "
-  // for(var j=0; j<allAPIParams.length; ++j){
-  //   allAPIParams[j]= allAPIParams[j].replace(/[^0-9a-z]/gi, ' ');
-  // }
-
-  // console.log("ALL VIDEO PARAMS: ", allAPIParams)
-  //go over the propertes and get the similar properties
-  // for(var c=0; c<typeProperties.length; ++c){
-  //   for(var j=0; j<allAPIParams.length; ++j){
-  //     var similar = checkSimilarity(typeProperties[c], allAPIParams[j]);
-  //     if(similar>40){
-  //       console.log(typeProperties[c]+' : '+allAPIParams[j]+' = '+similar+'%');
-  //       suggestedProperties.push(typeProperties[c]);
-  //     }
-  //   }
-
-
-}
-
-
-function showSuggestedTypes(){
-  $("#step1_hint").hide();
-  for(var i=0; i<suggestedTypes.length; ++i){
-    typeHasBeenChosen(suggestedTypes[i])
+  $("#site-info").append('</br><h5>Some of the API Common Response Fields</h5><ul>')
+  for(let p in allAPIFeilds){
+    $("#site-info").append('<li>'+allAPIFeilds[p]+'</li>')
   }
-  // $("#site-row2").show();
+  $("#site-info").append('</ul>')
+
+  $("#site-info").show();
+
 }
 
+// function showSuggestedTypes(){
+//   $("#step1_hint").hide();
+//   for(var i=0; i<suggestedTypes.length; ++i){
+//     typeHasBeenChosen(suggestedTypes[i])
+//   }
+//   // $("#site-row2").show();
+// }
 
-function showAddTypeButton(){
-  $("#step1_hint").hide();
-  // $("#site-row2").show();
-}
+
+// function showAddTypeButton(){
+//   $("#step1_hint").hide();
+//   // $("#site-row2").show();
+// }
 
 
 function siteHasBeenChosen(select){
@@ -2183,6 +1987,11 @@ function urlHasBeenChosenForMethod(select){
   urlAPI = select.getAttribute("id")//.options[select.selectedIndex].getAttribute("id");
   console.log("urlAPI: ", urlAPI);
 
+  $("#search-method").show();
+
+  tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
+  temp.functions.push(tempAct);
+
   firebase.database().ref('/apis/').once('value').then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       if(childSnapshot.val().title==urlAPI){
@@ -2210,27 +2019,19 @@ function urlHasBeenChosenForMethod(select){
           }
         }
 
-        // if(clickedType=="Search"){
-        //   $("#search-method").show();
-          //Configure the ID select
+        $("#method-search-param").empty();
+        $("#method-search-param").append('<option selected>Choose search parameter</option>')
 
-
-          $("#method-search-param").empty();
-          $("#method-search-param").append('<option selected>Choose search parameter</option>')
-
-          if(reqParam){
-            for(var i=0; i<reqParam.length; ++i){
-              if(reqParam[i].displayed && reqParam[i].displayed==true){
-                $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
-              }else if(!reqParam[i].displayed){
-                $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
-              }else{
-                // do nothing
-              }
+        if(reqParam){
+          for(var i=0; i<reqParam.length; ++i){
+            if(reqParam[i].displayed && reqParam[i].displayed==true){
+              $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+            }else if(!reqParam[i].displayed){
+              $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+            }else{
+              // do nothing
             }
-          // }
-
-          //Configure the search param
+          }
 
         }
 
@@ -2283,6 +2084,13 @@ function urlHasBeenChosenForMethod(select){
   }, 500);
 
 }
+
+
+
+function savePropertyConfig(){
+
+}
+
 
 
 var firstSave=true;
@@ -2506,78 +2314,87 @@ function saveRemoveConfig(){
 
 function saveMethodConfig(){
 
+  methodName="Search";
+  methodParent = clickedType;
+  console.log("methodParent: ", methodParent)
+
   var u = urlAPI;//document.getElementById("apis-url-method");
-  var r = document.getElementById("method-result-type");
+  var r = clickedType; //document.getElementById("method-result-type");
   var term = document.getElementById("method-search-param");
-  var id = document.getElementById("method-result-type-id");
+  var id = document.getElementById("type-id"); //the getter ID
 
   // console.log("U: ", u.options[u.selectedIndex].text)
-  console.log("R: ", r.options[r.selectedIndex].text)
+  // console.log("R: ", r.options[r.selectedIndex].text)
+  console.log("SEARCH TYPE: ", clickedType)
   console.log("TERM: ", term.options[term.selectedIndex].text)
-  console.log("ID: ", id.options[id.selectedIndex].text)
+  // console.log("ID: ", id.options[id.selectedIndex].text)
   // tempAct[method]= {"endpoint":"", "object":"", "name":"", "type":""};
 
-  var returnedObject=r.options[r.selectedIndex].text;
+  // var returnedObject=r.options[r.selectedIndex].text;
   //if a site method,
-  if(methodParent.includes('methodSite')){
-    //add the API endpoint cell next to the method
-    var rowType = document.getElementById(methodName);
-    console.log("method row: ", rowType)
-    var cell1 = rowType.insertCell(1);
-    cell1.innerHTML =  '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
+  // if(methodParent.includes('methodSite')){
+  //   //add the API endpoint cell next to the method
+  //   var rowType = document.getElementById(methodName);
+  //   console.log("method row: ", rowType)
+  //   var cell1 = rowType.insertCell(1);
+  //   cell1.innerHTML =  '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
 
-    //add the API endpoint parameters to the method object table!
-    //Go over the clicked table rows
-    var typeTable = document.getElementById(returnedObject);
-    var typeTbody = typeTable.getElementsByTagName("TBODY")[0];
-    var tableTrs = typeTbody.getElementsByTagName("TR");
-    console.log("tableTrs: ", tableTrs)
-    //Insert the API URL next to the type
-    var rowType = document.getElementById(returnedObject+'_row');
-    rowType.deleteCell(1);
-    var typeCell1 = rowType.insertCell(1);
-    typeCell1.innerHTML = '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
+  //   //add the API endpoint parameters to the method object table!
+  //   //Go over the clicked table rows
+  //   var typeTable = document.getElementById(returnedObject);
+  //   var typeTbody = typeTable.getElementsByTagName("TBODY")[0];
+  //   var tableTrs = typeTbody.getElementsByTagName("TR");
+  //   console.log("tableTrs: ", tableTrs)
+  //   //Insert the API URL next to the type
+  //   var rowType = document.getElementById(returnedObject+'_row');
+  //   rowType.deleteCell(1);
+  //   var typeCell1 = rowType.insertCell(1);
+  //   typeCell1.innerHTML = '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
 
-    //Insert a drop down menu next to each property (not method)
-    for(var i=1; i<tableTrs.length; ++i){
-      if(tableTrs[i].id.includes('_')){
-      console.log("tableTrs[i].id: ", tableTrs[i].id)
-      // if(propList.indexOf(tableTrs[i].id.split('_')[1]) == -1){//if a method and not a property
-      //   continue;
-      // }else{
-        var rowProperty = document.getElementById(tableTrs[i].id);
-        console.log("rowProperty: ", rowProperty)
+  //   //Insert a drop down menu next to each property (not method)
+  //   for(var i=1; i<tableTrs.length; ++i){
+  //     if(tableTrs[i].id.includes('_')){
+  //     console.log("tableTrs[i].id: ", tableTrs[i].id)
+  //     // if(propList.indexOf(tableTrs[i].id.split('_')[1]) == -1){//if a method and not a property
+  //     //   continue;
+  //     // }else{
+  //       var rowProperty = document.getElementById(tableTrs[i].id);
+  //       console.log("rowProperty: ", rowProperty)
 
-        rowProperty.deleteCell(1);
-        var cellField1 = rowProperty.insertCell(1);
-        cellField1.innerHTML = '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
+  //       rowProperty.deleteCell(1);
+  //       var cellField1 = rowProperty.insertCell(1);
+  //       cellField1.innerHTML = '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
 
-        for(var f=0; f<resProplist.length; ++f){
-          $("#fields_"+tableTrs[i].id).append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
-        }
-      }
-    }
+  //       for(var f=0; f<resProplist.length; ++f){
+  //         $("#fields_"+tableTrs[i].id).append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
+  //       }
+  //     }
+  //   }
 
-    console.log("OBJECT: ", temp.functions.find( ({ type }) => type === methodName ))
+  //   console.log("OBJECT: ", temp.functions.find( ({ type }) => type === methodName ))
+
     temp.functions.find( ({ type }) => type === methodName ).endpoint = u; //"TEST"//u.options[u.selectedIndex].text;
-    temp.functions.find( ({ type }) => type === methodName ).object = r.options[r.selectedIndex].text;
-    temp.functions.find( ({ type }) => type === methodName ).name = document.getElementById('meth-name').value;
+    temp.functions.find( ({ type }) => type === methodName ).object = r; //r.options[r.selectedIndex].text;
+    temp.functions.find( ({ type }) => type === methodName ).name = "Search";//document.getElementById('meth-name').value;
     // temp.functions[methodName].type = "";"
-    if(name=='Search'){
+    // if(name=='Search'){
       temp.functions.find( ({ type }) => type === methodName ).searchParam = term.options[term.selectedIndex].text;
       temp.functions.find( ({ type }) => type === methodName ).id = id.options[id.selectedIndex].text;
-    }
-  }else{
+    // }
+  // }else{
     // console.log("OBJECT: ", temp.objects[methodParent].methods.find( ({ type }) => type === methodName ))
-    var rowType = document.getElementById(methodParent+'_'+methodName);
-    var cell1 = rowType.insertCell(1);
-    cell1.innerHTML =  '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
+    //ADD THE ROW FOR SEARCH AND THE API
+    // var rowType = document.getElementById(methodParent+'_'+methodName);
+    // var cell1 = rowType.insertCell(1);
+    // cell1.innerHTML =  '<a href="'+apiURL+'" target="_blank">'+apiURL+'</a>'
 
-    temp.objects[methodParent].methods.find( ({ type }) => type === methodName ).endpoint = u; //u.options[u.selectedIndex].text;
-    temp.objects[methodParent].methods.find( ({ type }) => type === methodName ).object = r.options[r.selectedIndex].text;
-    temp.objects[methodParent].methods.find( ({ type }) => type === methodName ).name = document.getElementById('meth-name').value;
+    // temp.objects[methodParent].methods.find( ({ type }) => type === methodName ).endpoint = u; //u.options[u.selectedIndex].text;
+    // temp.objects[methodParent].methods.find( ({ type }) => type === methodName ).object = r.options[r.selectedIndex].text;
+    // temp.objects[methodParent].methods.find( ({ type }) => type === methodName ).name = document.getElementById('meth-name').value;
+      //     temp.functions.find( ({ type }) => type === methodName ).id = id.options[id.selectedIndex].text;
+
     // temp.objects[methodParent].methods[methodName].type = "";
-  }
+  // }
 
   console.log("temp after save", temp);
 
@@ -2809,44 +2626,22 @@ function typeHasBeenChosen(select){
   //Next to each other
   if(firstType){
     firstType=false;
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 43px;">  <div style="display:flex;">   <div style="display:flex;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  <div id="step3_hint" class="hint-content do--split-children" ><p>For each type, choose the properties and methods.</p></div></div></div> </td></tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 43px;">  <div style="display:flex;">   <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  <div id="step3_hint" class="hint-content do--split-children" ><p>Choose the properties for each type. Check the list of parameters that this website API supports on the left sidebar.</p></div></div></div> </td></tr>')
+    // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 43px;">  <div style="display:flex;">   <div style="display:flex;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  <div id="step3_hint" class="hint-content do--split-children" ><p>For each type, choose the properties and methods.</p></div></div></div> </td></tr>')
   }else{
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  </div></div> </td></tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td></tr>')
+    // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  </div></div> </td></tr>')
   }
 
   jQuery('.selectpicker').selectpicker('refresh');
 
   setTimeout(() => {
 
-
-  //   // console.log("Returned Properties: ", allProperties);
-  //   // console.log("Returned PropertiesINFO: ", propertiesInfo);
-  //   $(".selectpicker").selectpicker();
-
-  //   for(var i=0; i<allSchemaTypes.length; ++i){
-  //     $("#schema-"+type).append("<option id="+allSchemaTypes[i]+">"+allSchemaTypes[i]+"</option>");
-  //   }
-
-  //   //remove the properties from the
-  //   // $("#"+type+"_property-select").empty();
-  //   // $("#"+type+"_property-select").append("<option selected>Add Property</option>");
-
-  //   // console.log("ALL: ", allProperties)
-
-  //   // for(var i=0; i<allProperties.length; ++i){
-  //   //   // $("#property-"+type).append("<option id="+allProperties[i]+">"+allProperties[i]+"</option>");
-  //   //   $("#"+type+"_property-select").append("<option value="+allProperties[i]+">"+allProperties[i]+"</option>");
-  //   //   // $("#property-res-select").append("<option id="+allProperties[i]+">"+allProperties[i]+"</option>");
-  //   // }
-
     for(var i=0; i<allMethods.length; ++i){
       $("#"+type+"_method-select").append("<option value="+allMethods[i]+">"+allMethods[i]+"</option>");
       // $("#method-select").append("<option value="+allMethods[i]+">"+allMethods[i]+"</option>");
     }
 
-  //   jQuery('.selectpicker').selectpicker('refresh');
-
-  // }, 3000);
 
   var firstOption = $("#type-select option:first").val();
   $("#type-select").val(firstOption);
@@ -2857,18 +2652,11 @@ function typeHasBeenChosen(select){
   // For each type chosen:
   // - Get all the response fields of all the API endpoints with same site name
   // - Replace all weird character like “_” with “ ”
+  // - Split the owrds by capital letters and lower case all letters (e.g. userName => user name)
   // - Run cosine similarity between each field and property
   // - Save the highest ones
 
-  // scrapirAPIs.push({
-  //   title: childSnapshot.val().title,
-  //   url: childSnapshot.val().url,
-  //   params: paramList,
-  //   res: resList
-  // })
-
   // typeProperties
-
   let allAPIFeilds=[];
 
   //Go over all the site's API endpoints in scrapir and get all the response fields
@@ -2880,6 +2668,9 @@ function typeHasBeenChosen(select){
   }
   // console.log("All properties: ", typeProperties);
   // console.log("All fields: ", allAPIFeilds);
+
+  //Show these APIs fields in the left side bar
+
 
   allAPIFeilds = cleanArray(allAPIFeilds);
   // typeProperties = cleanArray(typeProperties);
@@ -2900,14 +2691,13 @@ function typeHasBeenChosen(select){
       }
     }
     if(c+1==typeProperties.length){
-
       //remove duplicates properties
       suggestedProperties = suggestedProperties.filter((c, index) => {
         return suggestedProperties.indexOf(c) === index;
       });
 
       if(suggestedProperties.length>0){
-        console.log("SUGGESTED")
+        // console.log("SUGGESTED")
         $("#"+type+"_property-select").append('<optgroup id="'+type+'-property-select-optgroup" label="Suggested">');
         for(var j=0; j<suggestedProperties.length; ++j){
           $("#"+type+"-property-select-optgroup").append('<option value="'+suggestedProperties[j]+'">'+suggestedProperties[j]+'</option>');
@@ -2922,7 +2712,7 @@ function typeHasBeenChosen(select){
         }
         $("#"+type+"_property-select").append('</optgroup>');
       }else{
-        console.log("NOT SUGGESTED")
+        // console.log("NOT SUGGESTED")
         for(var i=0; i<typeProperties.length; ++i){
             $("#"+type+"_property-select").append('<option value="'+type+'">'+allTypes[i]+'</option>');
 
