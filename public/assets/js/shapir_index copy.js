@@ -1049,13 +1049,100 @@ if(!once){
     return Math.round(val * 100)
   }
 
-  function checkSimilarity(sentence1, sentence2){
-    // console.log(sentence1+': '+sentence2)
-    const text1 = sentence1;
-    const text2 = sentence2;
-    const similarity = getSimilarityScore(textCosineSimilarity(text1,text2));
-    return similarity;
-  }
+  // function checkSimilarity(sentence1, sentence2){
+  //   // console.log(sentence1+': '+sentence2)
+  //   const text1 = sentence1;
+  //   const text2 = sentence2;
+  //   const similarity = getSimilarityScore(textCosineSimilarity(text1,text2));
+  //   return similarity;
+  // }
+
+
+function checkSimilarity(str1, str2){
+
+//   const str1 = 'This is an example to test cosine similarity between two strings';
+// const str2 = 'This example is testing cosine similatiry for given two strings';
+
+//
+// Preprocess strings and combine words to a unique collection
+//
+
+const str1Words = str1.trim().split(' ').map(omitPunctuations).map(toLowercase);
+const str2Words = str2.trim().split(' ').map(omitPunctuations).map(toLowercase);
+const allWordsUnique = Array.from(new Set(str1Words.concat(str2Words)));
+
+// console.log(str1Words+':'+str2Words)
+
+//
+// Calculate IF-IDF algorithm vectors
+//
+
+const str1Vector = calcTfIdfVectorForDoc(str1Words, [str2Words], allWordsUnique);
+const str2Vector = calcTfIdfVectorForDoc(str2Words, [str1Words], allWordsUnique);
+
+
+//
+// Main
+//
+
+return cosineSimilarity(str1Vector, str2Vector);
+
+//
+// Main function
+//
+
+function cosineSimilarity(vec1, vec2) {
+  const dotProduct = vec1.map((val, i) => val * vec2[i]).reduce((accum, curr) => accum + curr, 0);
+  const vec1Size = calcVectorSize(vec1);
+  const vec2Size = calcVectorSize(vec2);
+
+  return dotProduct / (vec1Size * vec2Size);
+};
+
+
+
+//
+// tf-idf algorithm implementation (https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
+//
+
+function calcTfIdfVectorForDoc(doc, otherDocs, allWordsSet) {
+  return Array.from(allWordsSet).map(word => {
+    return tf(word, doc) * idf(word, doc, otherDocs);
+  });
+};
+
+function tf(word, doc) {
+  const wordOccurences = doc.filter(w => w === word).length;
+  return wordOccurences / doc.length;
+};
+
+function idf(word, doc, otherDocs) {
+  const docsContainingWord = [doc].concat(otherDocs).filter(doc => {
+    return !!doc.find(w => w === word);
+  });
+
+  return (1 + otherDocs.length) / docsContainingWord.length;
+};
+
+
+
+//
+// Helper functions
+//
+
+function omitPunctuations(word) {
+  return word.replace(/[\!\.\,\?\-\?]/gi, '');
+};
+
+function toLowercase(word) {
+  return word.toLowerCase();
+};
+
+function calcVectorSize(vec) {
+  return Math.sqrt(vec.reduce((accum, curr) => accum + Math.pow(curr, 2), 0));
+};
+
+}
 
 
 var arrFields=[], wooSchema={}, site="", temp={}, suggestedTypes=[];
@@ -1086,118 +1173,118 @@ function siteHasBeenEntered(select){
   $("#site-row-get").show();
 
   //Getting website categories
-  $.ajax({
-    url: 'https://www.klazify.com/api/categorize?url='+url,
-    type: 'POST',
-    crossDomain:true,
-    headers: {
-      'Accept': "application/json",
-      'Content-Type': "application/json",
-      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
-      'cache-control': "no-cache"
-    },
-    success: function(res) {
-      // console.log("Categories: ", res);
-      var categories = res.domain.categories;
+  // $.ajax({
+  //   url: 'https://www.klazify.com/api/categorize?url='+url,
+  //   type: 'POST',
+  //   crossDomain:true,
+  //   headers: {
+  //     'Accept': "application/json",
+  //     'Content-Type': "application/json",
+  //     "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
+  //     'cache-control': "no-cache"
+  //   },
+  //   success: function(res) {
+  //     // console.log("Categories: ", res);
+  //     var categories = res.domain.categories;
 
-      if(res.domain.logo_url !=null || res.domain.logo_url!=""){
-        $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
-      }
+  //     if(res.domain.logo_url !=null || res.domain.logo_url!=""){
+  //       $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
+  //     }
 
-      $("#site-info").append('</br><h5>Website categories</h5>');
-      $("#site-info").append('<ul>');
-      for(var c=0; c<categories.length; ++c){
-        $("#site-info").append('<li>'+categories[c].name+'</li>');
-      }
-      $("#site-info").append('</ul>');
+  //     $("#site-info").append('</br><h5>Website categories</h5>');
+  //     $("#site-info").append('<ul>');
+  //     for(var c=0; c<categories.length; ++c){
+  //       $("#site-info").append('<li>'+categories[c].name+'</li>');
+  //     }
+  //     $("#site-info").append('</ul>');
 
-      // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
-      // var category = categories.find(o => {
-      //   return o.confidence === maxconfidence
-      // }).name;
-      // console.log("Category: ", category)
+  //     // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
+  //     // var category = categories.find(o => {
+  //     //   return o.confidence === maxconfidence
+  //     // }).name;
+  //     // console.log("Category: ", category)
 
-      var categoryWords=[]
-      for(var l=0; l<categories.length; ++l){
-        var name= categories[l].name;
-        var lastIndex = name.lastIndexOf("/")//get the last type
-        var lastType = name.substring(lastIndex + 1);
-        categoryWords.push(lastType);
-      }
+  //     var categoryWords=[]
+  //     for(var l=0; l<categories.length; ++l){
+  //       var name= categories[l].name;
+  //       var lastIndex = name.lastIndexOf("/")//get the last type
+  //       var lastType = name.substring(lastIndex + 1);
+  //       categoryWords.push(lastType);
+  //     }
 
-      $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
-      $("#site-info").append('<ul>');
+  //     $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
+  //     $("#site-info").append('<ul>');
 
-      for(var c=0; c<categoryWords.length; ++c){
-        for(var j=0; j<allTypes.length; ++j){
-          var similar = checkSimilarity(categoryWords[c], allTypes[j]);
-          if(similar>40){
-            console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
-            suggestedTypes.push(allTypes[j])
-            $("#site-info").append('<li>'+allTypes[j]+'</li>');
-          }
-        }
-        if(c+1==categoryWords.length){
-          $("#site-info").append('</ul><hr>');
-          $("#site-info").show();
+  //     for(var c=0; c<categoryWords.length; ++c){
+  //       for(var j=0; j<allTypes.length; ++j){
+  //         var similar = checkSimilarity(categoryWords[c], allTypes[j]);
+  //         if(similar>40){
+  //           // console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
+  //           suggestedTypes.push(allTypes[j])
+  //           $("#site-info").append('<li>'+allTypes[j]+'</li>');
+  //         }
+  //       }
+  //       if(c+1==categoryWords.length){
+  //         $("#site-info").append('</ul><hr>');
+  //         $("#site-info").show();
 
-          if(suggestedTypes.length>0){
-            // console.log("SUGGESTED")
-            $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
-            for(var j=0; j<suggestedTypes.length; ++j){
-              $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
-            }
-            $("#type-select").append('</optgroup>');
+  //         if(suggestedTypes.length>0){
+  //           // console.log("SUGGESTED")
+  //           $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+  //           for(var j=0; j<suggestedTypes.length; ++j){
+  //             $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
+  //           }
+  //           $("#type-select").append('</optgroup>');
 
-            $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
-            for(var i=0; i<allTypes.length; ++i){
-              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-                //no action
-              }else{
-                type= allTypes[i].split(' ').join('')
-                if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
-                  $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-                }
-              }
-            }
-            $("#type-select").append('</optgroup>');
-          }else{
-            // console.log("NOT SUGGESTED")
-            for(var i=0; i<allTypes.length; ++i){
-              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-                //no action
-              }else{
-                type= allTypes[i].split(' ').join('')
-                $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-              }
-            }
-          }
-          jQuery('.selectpicker').selectpicker('refresh');
-        }
-      }
+  //           $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+  //                 $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //               }
+  //             }
+  //           }
+  //           $("#type-select").append('</optgroup>');
+  //         }else{
+  //           // console.log("NOT SUGGESTED")
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //             }
+  //           }
+  //         }
+  //         jQuery('.selectpicker').selectpicker('refresh');
+  //       }
+  //     }
 
-    },
-    error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
-      for(var i=0; i<allTypes.length; ++i){
-        if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-          //no action
-        }else{
-          type= allTypes[i].split(' ').join('')
-          $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-        }
-      }
-    }
+  //   },
+  //   error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
+  //     for(var i=0; i<allTypes.length; ++i){
+  //       if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //         //no action
+  //       }else{
+  //         type= allTypes[i].split(' ').join('')
+  //         $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //       }
+  //     }
+  //   }
 
-  });
+  // });
 
 
   //////FOR TESTING
-  // for(var i=0; i<allTypes.length; ++i){
-  //   if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
-  //     type= allTypes[i].split(' ').join('')
-  //     $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //   }
-  // }
+  for(var i=0; i<allTypes.length; ++i){
+    if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
+      type= allTypes[i].split(' ').join('')
+      $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+    }
+  }
 
 
   // setTimeout(() => {
@@ -1214,22 +1301,22 @@ function siteHasBeenEntered(select){
   // }
 
 
-  // let allAPIFeilds=[];
+  let allAPIFeilds=[];
   //Go over all the site's API endpoints in scrapir and get all the response fields
-  // for(var i=0; i<scrapirAPIs.length; ++i){
-  //   var urlText = scrapirAPIs[i].url;
-  //   if(urlText.includes(site)){
-  //     allAPIFeilds = allAPIFeilds.concat(scrapirAPIs[i].res)
-  //   }
-  // }
+  for(var i=0; i<scrapirAPIs.length; ++i){
+    var urlText = scrapirAPIs[i].url;
+    if(urlText.includes(site)){
+      allAPIFeilds = allAPIFeilds.concat(scrapirAPIs[i].res)
+    }
+  }
 
-  // allAPIFeilds = cleanArray(allAPIFeilds);
+  allAPIFeilds = cleanArray(allAPIFeilds);
 
-  // $("#site-info").append('</br><h5>Some of the API Common Response Fields</h5><ul>')
-  // for(let p in allAPIFeilds){
-  //   $("#site-info").append('<li>'+allAPIFeilds[p]+'</li>')
-  // }
-  // $("#site-info").append('</ul>')
+  $("#site-info").append('</br><h5>Some of the API Common Response Fields</h5><ul>')
+  for(let p in allAPIFeilds){
+    $("#site-info").append('<li>'+allAPIFeilds[p]+'</li>')
+  }
+  $("#site-info").append('</ul>')
 
   $("#site-info").show();
 
@@ -1477,7 +1564,6 @@ function idHasBeenChosed(selector){
 var currentURLGetter = "", propList=[], resProplist=[], apiURL, propListType=[];
 
 function urlHasBeenChosen(select){
-  console.log("URL HAS BEEN CHOSEN");
 
   $("#idLabel").show()
 
@@ -2230,101 +2316,22 @@ function saveTypeConfig(){
 }
 
 function fieldHasBeenSelected(select){
+  console.log("field select: ", select.id);
 
-  fieldChosen= true;
-
-  var typeOfProperty = select.id.split('_fields')[0];
+  //e.g. select.id = fields_MusicPlaylist_description
+  var typeOfProperty = select.id.split('fields_')[1].split('_')[0];
+  var nameOfProperty = select.id.split('fields_')[1].split('_')[1];
   var nameOfField = select.options[select.selectedIndex].getAttribute("id")
 
-  globalField = nameOfField;
-  console.log("globalField: ", globalField)
-
-  var trs = document.getElementsByTagName("TR")
-
-  if(propChosen && fieldChosen){//if both property and field have been chosen
-    propChosen=false;
-    fieldChosen=false;
-
-    for(let t in trs){
-      if(trs[t].id == typeOfProperty){
-
-        $('<tr id="'+typeOfProperty+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
-        +'<td>'
-        +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
-        +'</td>'
-        +'<td>'
-        +'<div style="width:240px; text-align:center;">'
-        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
-        +'</div></td>'
-        +'<td style="width:100%"><button id="'+typeOfProperty+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
-        +'</tr>').insertBefore(trs[t]);
-
-        break;
-
-      }
-    }
-  }
-
-
-  var firstOption = $("#"+typeOfProperty+"_field-select option:first").val();
-  $("#"+typeOfProperty+"_field-select").val(firstOption);
+  console.log("type: ", temp.objects[typeOfProperty])
+  temp.objects[typeOfProperty].properties.push({
+    property: nameOfProperty,
+    field: nameOfField
+  });
 
   console.log(temp)
 
 }
-
-
-
-
-function fieldHasBeenSelected(select){
-
-  fieldChosen= true;
-
-  var typeOfProperty = select.id.split('_fields')[0];
-  var nameOfField = select.options[select.selectedIndex].getAttribute("id")
-
-  globalField = nameOfField;
-  console.log("globalField: ", globalField)
-
-  var trs = document.getElementsByTagName("TR")
-
-  if(propChosen && fieldChosen){//if both property and field have been chosen
-    propChosen=false;
-    fieldChosen=false;
-
-    for(let t in trs){
-      if(trs[t].id == typeOfProperty){
-
-        $('<tr id="'+typeOfProperty+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
-        +'<td>'
-        +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
-        +'</td>'
-        +'<td>'
-        +'<div style="width:240px; text-align:center;">'
-        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
-        +'</div></td>'
-        +'<td style="width:100%"><button id="'+typeOfProperty+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
-        +'</tr>').insertBefore(trs[t]);
-
-        break;
-
-      }
-    }
-  }
-
-
-  var firstOption = $("#"+typeOfProperty+"_field-select option:first").val();
-  $("#"+typeOfProperty+"_field-select").val(firstOption);
-
-  console.log(temp)
-
-}
-
-
 
 function saveAddConfig(){
   // var selector = document.getElementById("type-id-add");
@@ -2692,14 +2699,10 @@ function typeHasBeenChosen(select){
   $("#tableDiv").append(table)
 
   //Add the type row id="<type>_row"
-  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>'
-  +'<td></td>'
-  +'<td style="width:100%"><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>   <td></td>   <td style="width:100%"><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type GET row id="<type>_getM"
-  $("#"+type+" tbody").append('<tr id="'+type+'_getM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><div style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_getM" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">Get '+type+' by ID</a> </div> </td>'
-  +'<td></td>'
-  +'<td style="width:100%"><button id="'+type+'_getM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+  $("#"+type+" tbody").append('<tr id="'+type+'_getM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><div style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_getM" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">Get '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_getM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type SEARCH row id="<type>_searchM"
   $("#"+type+" tbody").append('<tr id="'+type+'_searchM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
@@ -2711,12 +2714,12 @@ function typeHasBeenChosen(select){
     firstType=false;
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/> <div style="display:flex;">   <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  <div id="step3_hint" class="hint-content do--split-children" ><p>Choose the properties for each type. Check the list of parameters that this website API supports on the left sidebar.</p></div></div></div> </td></tr>')
 
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="fields_'+type+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Add API Fields</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
 
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 43px;">  <div style="display:flex;">   <div style="display:flex;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  <div id="step3_hint" class="hint-content do--split-children" ><p>For each type, choose the properties and methods.</p></div></div></div> </td></tr>')
   }else{
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td></tr>')
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="fields_'+type+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Add API Fields</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
 
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  </div></div> </td></tr>')
   }
@@ -2827,8 +2830,6 @@ function typeHasBeenChosen(select){
   let tempMaxSimUrlGET=""
   let tempMaxSimUrlSEARCH=""
   let siteUrlOptions="";
-  let tempMaxTitleGet=""
-  let tempMaxTitleSearch=""
 
   for(var i=0; i<scrapirAPIs.length; ++i){
     var urlText = scrapirAPIs[i].url;
@@ -2845,8 +2846,8 @@ function typeHasBeenChosen(select){
       let urlSim = checkSimilarity(typeCleaned, urltextCleaned);
       let titleSim = checkSimilarity(typeCleaned, titleText);
 
-      // let urlSearchSim = checkSimilarity("search", urltextCleaned);
-      // let titleSearchSim = checkSimilarity("search", titleText);
+      let urlSearchSim = checkSimilarity("search", urltextCleaned);
+      let titleSearchSim = checkSimilarity("search", titleText);
 
       //GET API endpoint
       if(urlSim>0 || titleSim>0){
@@ -2854,7 +2855,6 @@ function typeHasBeenChosen(select){
           tempMaxSimGET = Math.max(urlSim, titleSim);
           tempMaxSimUrlGET=urlText;
           tempFieldsGet = scrapirAPIs[i].res;
-          tempMaxTitleGet =titleText.split(' ').join('')
         }
         //make this url selected and exit
       }
@@ -2869,7 +2869,6 @@ function typeHasBeenChosen(select){
           // if(tempMaxSimSEARCH<Math.max(urlSim, titleSim, urlSearchSim, titleSearchSim)){
           //tempMaxSimSEARCH = Math.max(urlSim, titleSim, urlSearchSim, titleSearchSim);
           tempMaxSimUrlSEARCH=urlText;
-          tempMaxTitleSearch =titleText.split(' ').join('')
       }
 
       //populate table
@@ -2878,8 +2877,8 @@ function typeHasBeenChosen(select){
       // Add anumber of properties with their fields selectpicker
 
       // siteUrlOptions += '<option data-subtext="'+scrapirAPIs[i].url+'" id="'+JSON.stringify(scrapirAPIs[i].title)+'">'+scrapirAPIs[i].title+'</option>';
-      var urlTextNoSpaces = titleText.split(' ').join('')
-      siteUrlOptions += '<option data-subtext="'+scrapirAPIs[i].title+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].url+'</option>';
+
+      siteUrlOptions += '<option data-subtext="'+scrapirAPIs[i].title+'" id="'+scrapirAPIs[i].url+'">'+scrapirAPIs[i].url+'</option>';
 
     }
 
@@ -2896,91 +2895,65 @@ function typeHasBeenChosen(select){
   var typeTable = document.getElementById(type);
   var typeTbody = typeTable.getElementsByTagName("TBODY")[0];
   var tableTrs = typeTbody.getElementsByTagName("TR");
-
+  // console.log("tableTrs: ", tableTrs)
   //Insert the API URL next to the type
   var rowTypeGet = document.getElementById(type+'_getM');
   rowTypeGet.deleteCell(1);
   var typeCellGet1 = rowTypeGet.insertCell(1);
-  var getUrlSlect = '<select id="url_get_'+type+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select>';
-  typeCellGet1.innerHTML =  getUrlSlect;
-  //add ID select
-  rowTypeGet.deleteCell(2);
-  var typeCellGet2 = rowTypeGet.insertCell(2);
-  var getUrlSlectID = '<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed(this)"><option selected>Choose the ID</option></select>';
-  typeCellGet2.innerHTML = getUrlSlectID;
+  var getUrlSlect = '<select id="url_get_'+type+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="urlHasBeenChosen(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select>';
+  var searchUrlSlect = '<select id="url_search_'+type+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="urlHasBeenChosen(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select>';
 
+  typeCellGet1.innerHTML =  getUrlSlect; //'<a href="" target="_blank">'+tempMaxSimUrlGET+'</a>' //I should change this to dropdown of url of this site
 
+  // console.log("UUU: ", document.querySelector('#fields_'+type))
   var rowTypeSearch = document.getElementById(type+'_searchM');
   rowTypeSearch.deleteCell(1);
   var typeCellSearch1 = rowTypeSearch.insertCell(1);
-  var searchUrlSlect = '<select id="url_search_'+type+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select>';
-  typeCellSearch1.innerHTML =  searchUrlSlect;
-  //add search term select
-  rowTypeSearch.deleteCell(2);
-  var typeCellSearch2 = rowTypeSearch.insertCell(2);
-  var searchUrlSlectTerm = '<select id="method-search-param" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)"><option selected>Choose search parameter</option></select>'
-  typeCellSearch2.innerHTML = searchUrlSlectTerm;
+  typeCellSearch1.innerHTML =  searchUrlSlect;//'<a href="" target="_blank">'+tempMaxSimUrlSEARCH+'</a>'
 
 
-  if(tempMaxTitleGet){
-    var selectChosen = document.querySelector('#url_get_'+type);
-    selectChosen.querySelector("#"+tempMaxTitleGet).selected=true;
-  }
+  // var selectChosen = document.querySelector('#url_get_'+type);
+  // selectChosen.querySelector("#"+tempMaxSimUrlGET).selected=true;
+  // var selectChosen = document.querySelector('#fields_'+type);
+  // selectChosen.querySelector("#"+tempMaxSimUrlSEARCH).selected=true;
 
-  if(tempMaxTitleSearch){
-    var selectChosen = document.querySelector('#url_search_'+type);
-    selectChosen.querySelector("#"+tempMaxTitleSearch).selected=true;
-  }
-  //go over the fields of the GET API endpoint and show them on
-  var predictedAPI=false;
+  // suggestedPropFields.push({
+  //   property: typeProperties[c],
+  //   field: allAPIFeilds[j]
+  // })
 
-  for(var i=0; i<scrapirAPIs.length; ++i){
-    if(scrapirAPIs[i].title.split(' ').join('') == tempMaxTitleGet){//if the API endpoint is the GET chosen one
-      for(var f=0; f<scrapirAPIs[i].res.length; ++f){
-        $("#"+type+"_field-select").append("<option id="+scrapirAPIs[i].res[f]+">"+scrapirAPIs[i].res[f]+"</option>");
-      }
-      predictedAPI=true;
-    }
-  }
+  //go over the fields and show them on
+  // for(var f=0; f<tempFieldsGet.length; ++f){
+  //   $("#fields_"+type).append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
+  //   //cosine similarity between theProperty and each field in resProplist[] and get the one with the highest similarity
+  //   // var tempSim = checkSimilarity(thePropertyArrCleaned[0], resProplistCleaned[f]);
+  //   // if(mostSimilar <  tempSim){
+  //   //   mostSimilar = tempSim;
+  //   //   similarOption =resProplist[f];
+  //   // }
+  // }
 
-  var tempF=[]
-  //if shapir could not figure out what is the appropriat API call
-  if(!predictedAPI){//if shapir could not figure out what is the appropriat API call
-    console.log("suggestedPropFields: ", suggestedPropFields);
-    $("#"+type+"_field-select").empty();
-    $("#"+type+"_field-select").append('<option selected>Choose API Field</option></select>');
-    if(suggestedPropFields.length>0){
-      for(var f=0; f< suggestedPropFields.length; ++f){
-        if(tempF.indexOf(suggestedPropFields[f].field) !== -1){//skip if duplicate
-          tempF.push(suggestedPropFields[f].field);
-          $("#"+type+"_field-select").append("<option id="+suggestedPropFields[f].field+">"+suggestedPropFields[f].field+"</option>");
-        }
-      }
-    }else{
-      $("#"+type+"_field-select").append('<option selected>This API enpoint does not return result</option></select>');
-    }
-  }
 
   //Add a select bar
 
-  // function wordsExists(typeArr, urlArr){
+  function wordsExists(typeArr, urlArr){
 
-  //   for(let t in typeArr){
-  //     if(urlArr.indexOf(typeArr[t]) !== -1){
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
+    for(let t in typeArr){
+      if(urlArr.indexOf(typeArr[t]) !== -1){
+        return true;
+      }
+    }
+    return false;
+  }
 
-  // function searchExistsF(s, urlArr){
+  function searchExistsF(s, urlArr){
 
-  //     if(urlArr.indexOf(s) !== -1){
-  //       return true;
-  //     }
+      if(urlArr.indexOf(s) !== -1){
+        return true;
+      }
 
-  //   return false;
-  // }
+    return false;
+  }
 
   /************************ END OF SUGGESTED APIs+FIELDS ************************/
 
@@ -2990,33 +2963,6 @@ function typeHasBeenChosen(select){
 }, 200);
 
 }
-
-
-
-function urlHasBeenChosenRetrieve(select){
-
-  var urlType = select.id.split("_").pop()
-  var endpoint = select.options[select.selectedIndex].getAttribute("value");
-
-  $("#"+urlType+"_field-select").empty();
-  $("#"+urlType+"_field-select").append('<option selected>Choose API Field</option></select>')
-
-  for(var i=0; i<scrapirAPIs.length; ++i){
-    if(scrapirAPIs[i].url == endpoint){//if the API endpoint is the GET chosen one
-      if(scrapirAPIs[i].res!=""){
-        for(var f=0; f<scrapirAPIs[i].res.length; ++f){
-          $("#"+urlType+"_field-select").append("<option id="+scrapirAPIs[i].res[f]+">"+scrapirAPIs[i].res[f]+"</option>");
-        }
-      }else{
-        $("#"+urlType+"_field-select").append('<option selected>This API does not return result</option></select>');
-      }
-    }
-  }
-  jQuery('.selectpicker').selectpicker('refresh');
-}
-
-
-
 
 
 function cleanArray(array){
@@ -3290,14 +3236,7 @@ var currentType="", propertyList=[], isNew=false, elem="property", isNewM=false,
 
 var firstProp = true;
 
-var globalProperty="", globalField="";
-
-var propChosen=false, fieldChosen=false;
-
-
 function propertyHasBeenChosen(select){
-
-  propChosen=true;
 
   if(firstProp){
     firstProp= false;
@@ -3312,11 +3251,6 @@ function propertyHasBeenChosen(select){
   $("#connectDiv").show()
 
   var property = select.options[select.selectedIndex].getAttribute("value");
-  globalProperty = property;
-
-  console.log("globalProperty: ", globalProperty)
-
-
   if(select.options[select.selectedIndex].getAttribute("id")=="new"){
     isNew=true;
   }
@@ -3348,10 +3282,17 @@ function propertyHasBeenChosen(select){
   })
 
   var hasType = false;
-  var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL", "Float","Integer","CssSelectorType","PronounceableText","URL","XPathType","True","False"]
+  var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL", "Float",
+    "Integer",
+    "CssSelectorType",
+    "PronounceableText",
+    "URL",
+    "XPathType",
+    "True",
+    "False"]
 
-  //if property is an object
   var typeElem = '<div>'
+
   for(t in types){
     if(dataTypes.indexOf(types[t]) == -1){
       // console.log("types[t]")
@@ -3359,55 +3300,52 @@ function propertyHasBeenChosen(select){
       typeElem+='<a href="javascript:;" id="'+types[t]+'-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;" onClick="typeHasBeenChosen(this.id)">'+types[t]+'</a>&nbsp;&nbsp;';
     }
   }
+
   typeElem += '</div>'
 
   //all <tr> elements
   var trs = document.getElementsByTagName("TR")
 
-  if(propChosen && fieldChosen){//if both property and field have been chosen
-    propChosen=false;
-    fieldChosen=false;
+  for(let t in trs){
+    if(trs[t].id == thisType){
+      // if(hasType){//if type is object
+      //   //
+      //   var trProp="";
+      //   trProp = '<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">';
+      //   +'<td style="display:flex; flex-wrap:wrap;">'
+      //   +'<div id="tar" class="item-hints"  style="margin-top:-20px">'
+      //   +'<div class="hint" data-position="4"><div style="display:flex;">'
+      //   +'<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div>'
+      //   +'<div style="width:240px; text-align:center; ">'
+      //   +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a>'
+      //   +'</div>';
+      //   +'</div>';
+      //   +'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children">'
+      //   +'<p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>'
+      //   +'</div></div>'
+      //   +'</td>'
+      //   +'<td><div style="width:240px; text-align:center;"><select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div></td>    <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   </tr>'
+      //   $(trProp).insertBefore(trs[t]);
 
-    for(let t in trs){
-      if(trs[t].id == thisType){
-        // if(hasType){//if type is object
-        //   //
-        //   var trProp="";
-        //   trProp = '<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">';
-        //   +'<td style="display:flex; flex-wrap:wrap;">'
-        //   +'<div id="tar" class="item-hints"  style="margin-top:-20px">'
-        //   +'<div class="hint" data-position="4"><div style="display:flex;">'
-        //   +'<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div>'
-        //   +'<div style="width:240px; text-align:center; ">'
-        //   +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a>'
-        //   +'</div>';
-        //   +'</div>';
-        //   +'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children">'
-        //   +'<p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>'
-        //   +'</div></div>'
-        //   +'</td>'
-        //   +'<td><div style="width:240px; text-align:center;"><select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div></td>    <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   </tr>'
-        //   $(trProp).insertBefore(trs[t]);
-
-        // }else{//if not of type object
-
-        $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
+      // }else{//if not of type object
+        $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
         +'<td>'
         +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
+        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a>'
         +'</td>'
         +'<td>'
         +'<div style="width:240px; text-align:center;">'
-        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
+        +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
         +'</div></td>'
-        +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+        +'<td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
         +'</tr>').insertBefore(trs[t]);
 
-        break;
+        // $("#"+trs[t]).append()//append a row that contains Add Property and
+      // }
+      break;
       }
     }
-  }
+
 
   console.log("tempObj properties: ", tempObj[thisType].properties);
   propList= tempObj[thisType].properties;
@@ -3416,8 +3354,8 @@ function propertyHasBeenChosen(select){
   console.log("propType: ", propType);
 
 
-  // var firstOption = $("#"+thisType+"_property-select option:first").val();
-  // $("#"+thisType+"_property-select").val(firstOption);
+  var firstOption = $("#"+thisType+"_property-select option:first").val();
+  $("#"+thisType+"_property-select").val(firstOption);
 }
 
 
