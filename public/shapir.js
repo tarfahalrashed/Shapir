@@ -56,11 +56,11 @@ export default async function shapir(){
                         window[site][type] = function(...args) { return self(type, val, "self", "none", ...args) };
 
                         function self (typekey, typeOb, caller, prop, ...args) {
-                            // console.log("typeOb:", typeOb)
-                            // console.log("caller:", caller)
-                            // console.log("callerTYPE:", typekey)
-                            // console.log("typeId: ", typeOb.id)
-                            // console.log("args: ", args)
+                            console.log("typeOb:", typeOb)
+                            console.log("caller:", caller)
+                            console.log("callerTYPE:", typekey)
+                            console.log("typeId: ", typeOb.id)
+                            console.log("args: ", args)
                             currentType = typekey;
 
                             if (prop == "none"){
@@ -71,7 +71,7 @@ export default async function shapir(){
                             }
                             else {
                                 var arrEndpoints= typeOb.construct[caller];
-                                //console.log("arrEndpoints: ", arrEndpoints)
+                                console.log("arrEndpoints: ", arrEndpoints)
                                 var elemIndex = arrEndpoints.findIndex(element => element.property == prop)
                                 var endpoint = typeOb.construct[caller][elemIndex].endpoint;
                                 var params = typeOb.construct[caller][elemIndex].input;
@@ -1054,20 +1054,44 @@ export default async function shapir(){
                             })//firebase
                             .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                             .then(o => {
+                                let otherFields = []
+                                let once=true;
+                                let onceAll = true
                                 console.log("result: ", o)
                                 // console.log("properties!!! ", properties)
                                 //map response to class properties
                                 if (o.constructor === Array){
                                     // console.log("ARRAY");
-                                    o.forEach(function(ob) {
+                                    o.forEach(function(ob) {//for each object
                                         for (var p=0; p<properties.length; ++p){
                                             if (properties[p].field){// it won't check type properties (e.g. comment for VideoObject)
                                                 if (properties[p].property != properties[p].field && ob[properties[p].field]) {
                                                     Object.defineProperty(ob, properties[p].property, Object.getOwnPropertyDescriptor(ob, properties[p].field));
                                                     delete ob[properties[p].field];
                                                 }
-                                            }
-                                            else { //if the property is a type
+                                                else if(ob[properties[p].field]===undefined){// field is not returned with Search but it's retunred in Get
+                                                // console.log(properties[p].field)
+                                                    let propType = properties[p].property;
+                                                    let searchID = ob[mID];
+                                                    if(otherFields.indexOf(propType) == -1){
+                                                        otherFields.push(propType)//otherFields contains the fields in Get but returned by Search
+                                                    }
+
+                                                    if(once){
+                                                        once=false;
+                                                        Object.defineProperty(ob, 'other', { //other contains an object
+                                                            get: function() {
+                                                                let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+mObject).once('value').then(function(snapshot) {
+                                                                    // console.log("typeOb4: ", snapshot.val())
+                                                                    return self(snapshot.key, snapshot.val(), "self", propType, searchID);
+                                                                });
+                                                                return promise;
+                                                            }
+                                                        });//end of getter
+                                                    }
+                                                }
+
+                                            }else{ //if(properties[p].type)//if the property is a type
                                                 let propType = properties[p].property;
                                                 let typeName = properties[p].type;
                                                 let idVal = ob[mID];
@@ -1086,6 +1110,29 @@ export default async function shapir(){
 
                                             }
 
+                                            //Add the other fields in Get but not in Search to the Search
+                                            if(onceAll){
+                                                onceAll=false
+                                                for (let f in otherFields) {
+                                                    Object.defineProperty(ob, otherFields[f], {
+                                                        get: function() {
+                                                        // (async function(){
+                                                        //     var temp = await ob['other']
+                                                        //     return temp//[otherFields[f]]
+                                                        // Object.defineProperty(ob, properties[p].property, Object.getOwnPropertyDescriptor(ob, properties[p].field));
+                                                        // delete ob[properties[p].field];
+                                                        return ob['other'].then(data=>{
+                                                            return data[otherFields[f]];
+                                                        })
+                                                        // })()
+                                                        }
+                                                    });//end of getter
+                                                }
+                                            }
+
+
+                                            //check all the fields in the fiebase for this object
+                                            //if none of them exists in the search result, call the object GET to get the rest of fields
                                             //if the property in GET but not in SEARCH
                                             //enter this once and get everything?
                                             // Object.defineProperty(ob, propType, {
@@ -1100,17 +1147,17 @@ export default async function shapir(){
                                             //     }
                                             // });//end of getter
 
-                                            const object1 = {};
+                                            // const object1 = {};
 
-                                            Object.defineProperties(object1, {
-                                            property1: {
-                                                value: 42,
-                                                writable: true
-                                            },
-                                            property2: {}
-                                            });
+                                            // Object.defineProperties(object1, {
+                                            // property1: {
+                                            //     value: 42,
+                                            //     writable: true
+                                            // },
+                                            // property2: {}
+                                            // });
 
-                                            console.log(object1.property1);
+                                            // console.log(object1.property1);
                                         }
 
                                     //***************************** METHODS *********************************/
@@ -1527,10 +1574,14 @@ export default async function shapir(){
                             else {
                                 var arrEndpoints= typeOb.construct[caller];
                                 // console.log("arrEndpoints: ", arrEndpoints)
-                                var elemIndex = arrEndpoints.findIndex(element => element.property == prop)
-                                var endpoint = typeOb.construct[caller][elemIndex].endpoint;
-                                var params = typeOb.construct[caller][elemIndex].input;
-                                // var typeId = typeOb.construct[caller][elemIndex].id;
+                                var endpoint = typeOb.construct[caller].endpoint;
+                                var params = typeOb.construct[caller].input;
+
+                                // var elemIndex = arrEndpoints.findIndex(element => element.property == prop)
+                                // var endpoint = typeOb.construct[caller][elemIndex].endpoint;
+                                // var params = typeOb.construct[caller][elemIndex].input;
+
+                                var typeId = typeOb.construct[caller].id;
                                 // console.log("typeId2: ", typeId)
                             }
 

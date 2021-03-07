@@ -19,10 +19,15 @@
 
 			// await video.addToWatchlater();
 
-			console.log(await seatgeek.searchVenues('game'));
+			// console.log(await seatgeek.searchVenues('game'));
+
+			var videos = await youtube.searchVideoObject('game');
+
+			console.log("name:  ", videos[0].name)
+			// var other =  videos[0].other
+			// console.log("rating:  ", await videos[0].reviewCount)
 
 			// console.log(await seatgeek.searchVenues({'q': 'game'}));
-
 
 		    // var playlist = await dailymotion.MusicPlaylist("x70yld"); //method to get an exisiting playlist
 			// console.log("playlist: ", playlist)

@@ -2253,100 +2253,6 @@ function saveTypeConfig(){
 
 }
 
-function fieldHasBeenSelected(select){
-
-  fieldChosen= true;
-
-  var typeOfProperty = select.id.split('_fields')[0];
-  var nameOfField = select.options[select.selectedIndex].getAttribute("id")
-
-  globalField = nameOfField;
-  console.log("globalField: ", globalField)
-
-  var trs = document.getElementsByTagName("TR")
-
-  if(propChosen && fieldChosen){//if both property and field have been chosen
-    propChosen=false;
-    fieldChosen=false;
-
-    for(let t in trs){
-      if(trs[t].id == typeOfProperty){
-
-        $('<tr id="'+typeOfProperty+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
-        +'<td>'
-        +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
-        +'</td>'
-        +'<td>'
-        +'<div style="width:240px; text-align:center;">'
-        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
-        +'</div></td>'
-        +'<td style="width:100%"><button id="'+typeOfProperty+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
-        +'</tr>').insertBefore(trs[t]);
-
-        break;
-
-      }
-    }
-  }
-
-
-  var firstOption = $("#"+typeOfProperty+"_field-select option:first").val();
-  $("#"+typeOfProperty+"_field-select").val(firstOption);
-
-  console.log(temp)
-
-}
-
-
-
-
-function fieldHasBeenSelected(select){
-
-  fieldChosen= true;
-
-  var typeOfProperty = select.id.split('_fields')[0];
-  var nameOfField = select.options[select.selectedIndex].getAttribute("id")
-
-  globalField = nameOfField;
-  console.log("globalField: ", globalField)
-
-  var trs = document.getElementsByTagName("TR")
-
-  if(propChosen && fieldChosen){//if both property and field have been chosen
-    propChosen=false;
-    fieldChosen=false;
-
-    for(let t in trs){
-      if(trs[t].id == typeOfProperty){
-
-        $('<tr id="'+typeOfProperty+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
-        +'<td>'
-        +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-        +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
-        +'</td>'
-        +'<td>'
-        +'<div style="width:240px; text-align:center;">'
-        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
-        +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
-        +'</div></td>'
-        +'<td style="width:100%"><button id="'+typeOfProperty+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
-        +'</tr>').insertBefore(trs[t]);
-
-        break;
-
-      }
-    }
-  }
-
-
-  var firstOption = $("#"+typeOfProperty+"_field-select option:first").val();
-  $("#"+typeOfProperty+"_field-select").val(firstOption);
-
-  console.log(temp)
-
-}
 
 
 
@@ -2649,6 +2555,7 @@ function getDescription(type){
 });
 }
 
+var propertyType = false;
 
 function typeHasBeenChosen(select){
 
@@ -2658,6 +2565,19 @@ function typeHasBeenChosen(select){
     console.log("it is a select");
     var type = select.options[select.selectedIndex].getAttribute("id");
     var parent = select.getAttribute("id").split('-')[1]
+
+  }else if(select.includes('popbut_')){
+    var justID = select.split('popbut_')[1];
+    var type=justID.split('-')[0];
+    var prop=justID.split('-')[1];
+    var parent="";
+
+    propertyType = true;
+
+    $("#closeBut").click();
+
+
+    // $("#"+type+"_property-select").popover('hide');
 
   }else{
     console.log("it is NOT a select")
@@ -2803,13 +2723,12 @@ function typeHasBeenChosen(select){
   if(firstType){
     firstType=false;
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/> <div style="display:flex;">   <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  <div id="step3_hint" class="hint-content do--split-children" ><p>Choose the properties for each type. Check the list of parameters that this website API supports on the left sidebar.</p></div></div></div> </td></tr>')
-
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="pop" style="display:flex; margin-left: 43px;">       <div id="pop2" style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="popover-toggle form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option value="0" selected>Choose Property</option></select>     <div id="prop-popover-div" style="display: none"></div>    </div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>       </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>    </td>  </tr>')
 
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 43px;">  <div style="display:flex;">   <div style="display:flex;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  <div id="step3_hint" class="hint-content do--split-children" ><p>For each type, choose the properties and methods.</p></div></div></div> </td></tr>')
   }else{
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td></tr>')
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Response Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="pop" style="display:flex; margin-left: 43px;">        <div id="pop2"style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="popover-toggle form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option value="0" selected>Choose Property</option></select>     <div id="prop-popover-div" style="display: none"></div>     </div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>        </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Response Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>  </td>  </tr>')
 
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  </div></div> </td></tr>')
   }
@@ -3160,12 +3079,37 @@ function urlHasBeenChosenForSearch(select){
 
   }//end of loop
 
-
-
   jQuery('.selectpicker').selectpicker('refresh');
 }
 
 
+
+// function urlHasBeenChosenForProperty(select){
+
+//   console.log("select: ", select)
+//   // property_api_'+thisType+'
+
+//   var urlType = select.split("_").pop()
+//   var endpoint = select.options[select.selectedIndex].getAttribute("value");
+
+//   $("#"+urlType+"_search_term").empty();
+//   $("#"+urlType+"_search_term").append('<option selected>Choose API Field</option></select>')
+
+//   for(var i=0; i<scrapirAPIs.length; ++i){
+//     if(scrapirAPIs[i].url == endpoint){//if the API endpoint is the GET chosen one
+//       if(scrapirAPIs[i].param!=""){
+//         for(var f=0; f<scrapirAPIs[i].params.length; ++f){
+//           $("#"+urlType+"_search_term").append("<option id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
+//         }
+//       }else{
+//         $("#"+urlType+"_search_term").append("<option id="+scrapirAPIs[i].params[f]+">This API does not have parameters</option>");
+//         // $("#"+urlType+"_field-select").append('<option selected>This API does not return result</option></select>');
+//       }
+//     }
+//   }//end of loop
+
+//   jQuery('.selectpicker').selectpicker('refresh');
+// }
 
 
 
@@ -3325,8 +3269,8 @@ function saveSchema(){
         if(typeof(propertyRows[r].id) != 'undefined' && propertyRows[r].id != null)
         if(! (propertyRows[r].id.includes('_row') || propertyRows[r].id.includes('_getM') || propertyRows[r].id.includes('_searchM') || !propertyRows[r].id.includes('_'))){
           properties.push({
-            property: propertyRows[r].cells[0].getElementsByTagName('A').innerHTML,
-            field: propertyRows[r].cells[1].getElementsByTagName('A').innerHTML
+            property: propertyRows[r].cells[0].getElementsByTagName('A')[0].innerHTML,
+            field: propertyRows[r].cells[1].getElementsByTagName('A')[0].innerHTML
           })
         }
       }
@@ -3346,6 +3290,8 @@ function saveSchema(){
       siteObj[site].functions[0].searchParam= selectSearchTerm[selectSearchTerm.selectedIndex].id;
 
       console.log("Final Object: ", siteObj[site]);
+
+      //Push to Firebase!
     }
   }
 
@@ -3514,14 +3460,7 @@ function removeSearchButton(){
 }
 
 
-var currentType="", propertyList=[], isNew=false, elem="property", isNewM=false, typePropertyType={}, propType=[];
-
-var firstProp = true;
-
-var globalProperty="", globalField="";
-
-var propChosen=false, fieldChosen=false;
-
+var currentType="", propertyList=[], isNew=false, elem="property", isNewM=false, typePropertyType={}, propType=[], firstProp = true, globalProperty="", globalField="", propChosen=false, fieldChosen=false;
 
 function propertyHasBeenChosen(select){
 
@@ -3533,10 +3472,8 @@ function propertyHasBeenChosen(select){
   }
 
   $("#step3_hint").hide();
-
   $("#schema-"+type).empty()
   $("#property-"+type).empty()
-  //show step4
   $("#connectDiv").show()
 
   var property = select.options[select.selectedIndex].getAttribute("value");
@@ -3544,12 +3481,10 @@ function propertyHasBeenChosen(select){
 
   console.log("globalProperty: ", globalProperty)
 
-
   if(select.options[select.selectedIndex].getAttribute("id")=="new"){
     isNew=true;
   }
   var typeP, descP;
-  console.log("property: ",property);
   propertyList.push(property);
 
   tempObj[currentType].properties.push(property)
@@ -3579,15 +3514,243 @@ function propertyHasBeenChosen(select){
   var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL", "Float","Integer","CssSelectorType","PronounceableText","URL","XPathType","True","False"]
 
   //if property is an object
-  var typeElem = '<div>'
+  var typeElem='';
+  typeElem = '<div>'
   for(t in types){
     if(dataTypes.indexOf(types[t]) == -1){
       // console.log("types[t]")
       hasType = true;
-      typeElem+='<a href="javascript:;" id="'+types[t]+'-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;" onClick="typeHasBeenChosen(this.id)">'+types[t]+'</a>&nbsp;&nbsp;';
+      typeElem+='<a href="javascript:;" id="popbut_'+types[t]+'-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;" onClick="typeHasBeenChosen(this.id)">'+types[t]+'</a>&nbsp;&nbsp;';
     }
   }
   typeElem += '</div>'
+
+  //all <tr> elements
+  var trs = document.getElementsByTagName("TR")
+
+  if((propChosen && fieldChosen) || propChosen && hasType) {//if both property and field have been chosen
+    propChosen=false;
+    fieldChosen=false;
+
+    for(let t in trs){
+      if(trs[t].id == thisType){
+        if(hasType){//if type is object
+          console.log("HAS TYPE")
+
+          $("#"+thisType+"_property-select").popover('dispose');
+          $("#"+thisType+"_property-select").popover({
+            title: 'YYY<a id="closeBut" class="close" href="#">&times;</a>',
+            placement: 'right',
+            container: 'body',
+            html: true,
+            content: function() {
+              $('#prop-popover-div').html('<p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem);
+              return $('#prop-popover-div').html();
+            }
+          })
+          $("#"+thisType+"_property-select").popover('show');
+
+          $("#url_get_"+thisType+" option").tooltip({
+            placement: 'right',
+            trigger: 'hover',
+            container: 'body'
+            // content:'HAY BBB'
+          });
+
+
+
+          $(document).on('click','[id^="popbut_"]',function () {
+            typeHasBeenChosen(this.id);
+          });
+
+          $('[data-toggle=popover]').popover();
+
+          $(document).on('click', '#closeBut', function(){
+            $("#"+thisType+"_property-select").popover('hide');
+            propChosen=true;
+
+            if(propertyType){
+              propertyType=false;
+              console.log("properType is true!")
+              //show the field selectpicker if a field was chosen
+              if(propChosen && fieldChosen){
+                console.log("NOT A TYPE")
+                $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
+                +'<td>'
+                +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
+                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
+                +'</td>'
+                +'<td>'
+                +'<div style="width:240px; text-align:center;">'
+                // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
+                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
+                +'</div></td>'
+                +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+                +'</tr>').insertBefore(trs[t]);
+
+                var firstOptionP = $("#"+thisType+"_property-select option:first").val();
+                $("#"+thisType+"_property-select").val(firstOptionP);
+
+                var firstOptionF = $("#"+thisType+"_field-select option:first").val();
+                $("#"+thisType+"_field-select").val(firstOptionF);
+
+              }else{
+                propChosen=false;
+                //add the property but next to it an API endpoint selectpicker
+                $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
+                +'<td>'
+                +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
+                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
+                +'</td>'
+                +'<td>'
+                +'<div text-align:center;">'
+                +'<select id="property_api_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange=""><option selected>Choose API Endpoint</option></select>'
+                // +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
+                +'</div></td>'
+                +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+                +'</tr>').insertBefore(trs[t]);
+
+                var firstOptionP = $("#"+thisType+"_property-select option:first").val();
+                $("#"+thisType+"_property-select").val(firstOptionP);
+
+                var firstOptionF = $("#"+thisType+"_field-select option:first").val();
+                $("#"+thisType+"_field-select").val(firstOptionF);
+              }
+            }else{
+              //do nothing
+            }
+
+          });
+
+
+          for(var i=0; i<scrapirAPIs.length; ++i){
+            var urlText = scrapirAPIs[i].url;
+            var titleText = scrapirAPIs[i].title;
+            if(urlText.includes(site)){
+              var urlTextNoSpaces = titleText.split(' ').join('')
+              $('#property_api_'+thisType).append('<option data-subtext="'+scrapirAPIs[i].title+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].url+'</option>');
+            }
+          }
+          jQuery('.selectpicker').selectpicker('refresh');
+
+          //'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children"><p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>');
+
+          // $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
+          // // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
+          // +'<td style="display:flex; flex-wrap:wrap;">'
+          // +'<div id="tar" class="item-hints"  style="margin-top:-20px">'
+          // +'<div class="hint" data-position="4"><div style="display:flex;">'
+          // +'<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div>'
+          // +'<div style="width:240px; text-align:center; ">'
+          // // +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a>'
+          // +'</div>'
+          // +'</div>'
+          // +'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children">'
+          // +'<p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>'
+          // +'</div></div>'
+          // +'</td>'
+          // +'<td><div style="width:240px; text-align:center;">'
+          // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div></td>'
+          // +'<td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+          // +'</tr>').insertBefore(trs[t]);
+
+        }else{//if not of type object
+          console.log("NOT A TYPE")
+          $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
+          +'<td>'
+          +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
+          +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
+          +'</td>'
+          +'<td>'
+          +'<div style="width:240px; text-align:center;">'
+          // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
+          +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
+          +'</div></td>'
+          +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+          +'</tr>').insertBefore(trs[t]);
+
+          break;
+        }
+
+      }
+    }
+  }
+
+  console.log("tempObj properties: ", tempObj[thisType].properties);
+  propList= tempObj[thisType].properties;
+
+  console.log("typePropertyType: ", typePropertyType);
+  console.log("propType: ", propType);
+
+
+}
+
+
+function fieldHasBeenSelected(select){
+
+  fieldChosen=true;
+
+  // if(firstProp){
+  //   firstProp= false;
+  //   $("#site-row3").show();
+  // }
+
+  // $("#step3_hint").hide();
+
+  // $("#schema-"+type).empty()
+  // $("#property-"+type).empty()
+  // //show step4
+  // $("#connectDiv").show()
+
+  var property = select.options[select.selectedIndex].getAttribute("id");
+  globalField = property;
+
+  console.log("globalField: ", globalField)
+
+
+  if(select.options[select.selectedIndex].getAttribute("id")=="new"){
+    isNew=true;
+  }
+  var typeP, descP;
+  console.log("field: ",property);
+  propertyList.push(property);
+
+  tempObj[currentType].properties.push(property)
+
+  var child = property
+  var parent = select.getAttribute("id").split('-')[1];
+  var thisType = select.getAttribute("id").split('_')[0];
+
+  console.log("thisType: ", thisType);
+
+  // typeP = allTheType[thisType][property].types[0]
+  // descP = allTheType[thisType][property].desc
+  // var types = allTheType[thisType][property].types;
+
+  // typePropertyType[thisType].push({
+  //   name: property,
+  //   type: typeP
+  // });
+
+  // propType.push({
+  //   type: thisType,
+  //   name: property,
+  //   types: types
+  // })
+
+  // var hasType = false;
+  // var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL", "Float","Integer","CssSelectorType","PronounceableText","URL","XPathType","True","False"]
+
+  // //if property is an object
+  // var typeElem = '<div>'
+  // for(t in types){
+  //   if(dataTypes.indexOf(types[t]) == -1){
+  //     // console.log("types[t]")
+  //     hasType = true;
+  //     typeElem+='<a href="javascript:;" id="'+types[t]+'-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;" onClick="typeHasBeenChosen(this.id)">'+types[t]+'</a>&nbsp;&nbsp;';
+  //   }
+  // }
+  // typeElem += '</div>'
 
   //all <tr> elements
   var trs = document.getElementsByTagName("TR")
@@ -3598,26 +3761,6 @@ function propertyHasBeenChosen(select){
 
     for(let t in trs){
       if(trs[t].id == thisType){
-        // if(hasType){//if type is object
-        //   //
-        //   var trProp="";
-        //   trProp = '<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">';
-        //   +'<td style="display:flex; flex-wrap:wrap;">'
-        //   +'<div id="tar" class="item-hints"  style="margin-top:-20px">'
-        //   +'<div class="hint" data-position="4"><div style="display:flex;">'
-        //   +'<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div>'
-        //   +'<div style="width:240px; text-align:center; ">'
-        //   +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a>'
-        //   +'</div>';
-        //   +'</div>';
-        //   +'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children">'
-        //   +'<p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>'
-        //   +'</div></div>'
-        //   +'</td>'
-        //   +'<td><div style="width:240px; text-align:center;"><select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div></td>    <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   </tr>'
-        //   $(trProp).insertBefore(trs[t]);
-
-        // }else{//if not of type object
 
         $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
         +'<td>'
@@ -3632,6 +3775,12 @@ function propertyHasBeenChosen(select){
         +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
         +'</tr>').insertBefore(trs[t]);
 
+        var firstOptionP = $("#"+thisType+"_property-select option:first").val();
+        $("#"+thisType+"_property-select").val(firstOptionP);
+
+        var firstOptionF = $("#"+thisType+"_field-select option:first").val();
+        $("#"+thisType+"_field-select").val(firstOptionF);
+
         break;
       }
     }
@@ -3643,10 +3792,8 @@ function propertyHasBeenChosen(select){
   console.log("typePropertyType: ", typePropertyType);
   console.log("propType: ", propType);
 
-
-  // var firstOption = $("#"+thisType+"_property-select option:first").val();
-  // $("#"+thisType+"_property-select").val(firstOption);
 }
+
 
 
 function propertyTypeHasBeenSelected(select){
