@@ -7,6 +7,11 @@ const fetch = require('node-fetch');
 var http = require('http');
 var https = require('https');
 const axios = require('axios');
+
+// const graphqlHTTP = require('express-graphql');
+// const { buildSchema } = require('graphql');
+// const { makeExecutableSchema } = require('graphql-tools');
+
 var app = express();
 
 // app.get('*', function(req, res, next){
@@ -14,6 +19,31 @@ var app = express();
 //       req.url = '/' + req.url;  //append some text yourself
 //     next();
 // });
+
+// const graphqlHTTP = require("express-graphql");
+// const { buildSchema } = require("graphql");
+
+// // Construct a schema, using GraphQL schema language
+// const schema = buildSchema(`
+//   type Query {
+//     hello: String
+//   }
+// `);
+
+// // Provide resolver functions for your schema fields
+// const resolvers = {
+//   hello: () => "Hello world!"
+// };
+
+
+// app.use("/graphql", graphqlHTTP({
+//     schema,
+//     rootValue: resolvers
+//   })
+// );
+// // app.listen(4000);
+
+
 
 //Scrape schema.org type page and retrieve its html
 app.get("/schemaOrg/:name", (req, res, next) => {
@@ -62,20 +92,20 @@ app.get("/categories/:site", (req, res) => {
 
 //GET AN OBJECT
 
-app.get("X/:type/:site/:id", (req, res, next) => {
+// app.get("X/:type/:site/:id", (req, res, next) => {
 
-    (async function(){
-      console.log("TYPE: ", req.params.type)
-      console.log("SITE: ", req.params.site)
-      console.log("ID: ", req.params.id)
-      // console.log("PARAM: ", req.query)
-      await shapir();
-      let result = await global[req.params.site][req.params.type](req.params.id);
-      res.send(result)
-        // await dailymotion.VideoObject("x7xf8kc"))
-    })()
+//     (async function(){
+//       console.log("TYPE: ", req.params.type)
+//       console.log("SITE: ", req.params.site)
+//       console.log("ID: ", req.params.id)
+//       // console.log("PARAM: ", req.query)
+//       await shapir();
+//       let result = await global[req.params.site][req.params.type](req.params.id);
+//       res.send(result)
+//         // await dailymotion.VideoObject("x7xf8kc"))
+//     })()
 
-  })
+//   })
 
 // const {shapir, include} = require('../public/shapir.js');
 
@@ -85,7 +115,7 @@ app.get("/api/:type/:site/:id", (req, res, next) => {
   (async function(){
     console.log("TYPE: ", req.params.type)
     console.log("SITE: ", req.params.site)
-    console.log("SITE: ", req.params.id)
+    console.log("ID: ", req.params.id)
     // console.log("PARAM: ", req.query)
 
     // for(let i=0; i<)
@@ -113,37 +143,37 @@ app.get("/api/:type/:site/:id", (req, res, next) => {
 })
 
 //SEARCH AN OBJECT
-app.get("/api/:type/:site", (req, res, next) => {
+// app.get("/api/:type/:site", (req, res, next) => {
 
-  (async function(){
-    console.log("TYPE: ", req.params.type)
-    console.log("SITE: ", req.params.site)
-    console.log("SITE: ", req.params.id)
-    // console.log("PARAM: ", req.query)
+//   (async function(){
+//     console.log("TYPE: ", req.params.type)
+//     console.log("SITE: ", req.params.site)
+//     console.log("SITE: ", req.params.id)
+//     // console.log("PARAM: ", req.query)
 
-    // for(let i=0; i<)
-    // let paramList="";
-    // var obLength = Object.entries(req.query).length;
+//     // for(let i=0; i<)
+//     // let paramList="";
+//     // var obLength = Object.entries(req.query).length;
 
-    // Object.entries(req.query).forEach(([key, value]) => {
-    //   --obLength;
-    //   paramList+=`${key}`
-    //   paramList+="="
-    //   paramList+=`${value}`
-    //   if(obLength>0){
-    //     paramList+="&"
-    //   }
-    // });
+//     // Object.entries(req.query).forEach(([key, value]) => {
+//     //   --obLength;
+//     //   paramList+=`${key}`
+//     //   paramList+="="
+//     //   paramList+=`${value}`
+//     //   if(obLength>0){
+//     //     paramList+="&"
+//     //   }
+//     // });
 
-    // console.log("paramList: ",paramList)
+//     // console.log("paramList: ",paramList)
 
-    await shapir();
-    let result = await global[req.params.site][req.params.type](req.params.id);
-    res.send(result)
-      // await dailymotion.VideoObject("x7xf8kc"))
-  })()
+//     await shapir();
+//     let result = await global[req.params.site][req.params.type](req.params.id);
+//     res.send(result)
+//       // await dailymotion.VideoObject("x7xf8kc"))
+//   })()
 
-})
+// })
 
 async function shapir(){
 
@@ -2506,6 +2536,51 @@ async function shapir(){
 
   return Promise.all(results);
 }
+
+
+
+
+
+app.get("/sent2vec", (req, res, next) => {
+
+    // const spawn = require("child_process").spawn;
+    // const pythonProcess = spawn('python',["sent2vec.py", 'sent2vec']);
+
+    // print(dataToSendBack)
+    // sys.stdout.flush()
+
+    // pythonProcess.stdout.on('data', (data) => {
+    //     // Do something with the data returned from python script
+    //     res.send(data)
+    // });
+
+    const { spawn } = require('child_process');
+    const pyProg = spawn('python', ['sent2vec.py',"sent2vec"]);
+
+    pyProg.stdout.on('data', function(data) {
+
+        console.log(data.toString());
+    });
+    pyProg.stderr.on('data', (data) => {
+    console.log('Error-->'+ data);
+    });
+
+
+    // const tokenizers = require('./tokenizers');
+    // const FullTokenizer = tokenizers.FullTokenizer;
+    // const vocabFile = 'data/vocab.txt';
+
+    // const tokenizer = new FullTokenizer(vocabFile);
+    // const sentence = 'How do I control my horny emotions?';
+    // const tokens = tokenizer.tokenize(sentence);
+    // const encoded = tokenizer.convertTokensToIds(tokens);
+    // const decoded = tokenizer.convertIdsToTokens(encoded);
+    // console.log('tokens:', tokens);
+    // console.log('encoded:', encoded);
+    // console.log('decoded:', decoded);
+
+});
+
 
 
 

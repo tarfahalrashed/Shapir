@@ -8,7 +8,8 @@
 
     <body>
 
-        <div mv-app="test" mv-source="shapir" mv-source-service="seatgeek, songkick, ticketmaster" mv-source-action="searchVenues" mv-source-search="music" mv-source-city="New York" mv-source-country="US">
+        <div mv-app="test" mv-source="shapir" mv-source-service="seatgeek, songkick, ticketmaster" mv-source-action="searchVenues"
+        mv-source-search="music" mv-source-city="New York" mv-source-country="US">
 
             <h1>Music Venues</h1>
             <div property="venue" mv-multiple>
@@ -18,14 +19,14 @@
                 <p property="longitude"></p>
                 <p property="latitude"></p>
                 <hr>
-                <!-- <h2>Upcoming Events</h2>
-                <div property="event" mv-multiple mv-value="list(searchSongkick.events, searchSeatgeek.events, searchTicketmaster.events)">
+                <h2>Upcoming Events</h2>
+                <div property="event" mv-multiple>
                     <ul>
                         <li><h3 property="name"></h3></li>
                         <a property="url">[url]</a>
                         <p property="startDate"></p>
                     </ul>
-                </div> -->
+                </div>
             </div>
 
         </div>

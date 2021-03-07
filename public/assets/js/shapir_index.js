@@ -247,7 +247,7 @@ function openNav(id) {
     var urlText = scrapirAPIs[i].url;
       if(urlText.includes(site)){
         noSpacesTitle = scrapirAPIs[i].title.split(' ').join('');
-        $("#accordion-property").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosen(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion"><div class="card-body" id="cardBodyProp'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion-property").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosen(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion"><div class="card-body" id="cardBodyProp'+noSpacesTitle+'"> </div></div></div>')
 
         $("#cardBodyProp"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
         $("#cardBodyProp"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
@@ -331,19 +331,19 @@ function openNavType(id) {
     var urlText = scrapirAPIs[i].url;
       if(urlText.includes(site)){
         noSpacesTitle = scrapirAPIs[i].title.split(' ').join('');
-        $("#accordion").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosen(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion"><div class="card-body" id="cardBody'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosen(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion"><div class="card-body" id="cardBody'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBody"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
-        $("#accordion-add").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenAdd(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-add"><div class="card-body" id="cardBodyAdd'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion-add").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenAdd(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-add"><div class="card-body" id="cardBodyAdd'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyAdd"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
-        $("#accordion-remove").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenRemove(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-remove"><div class="card-body" id="cardBodyRemove'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion-remove").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenRemove(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-remove"><div class="card-body" id="cardBodyRemove'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyRemove"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
-        $("#accordion-update").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenUpdate(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-update"><div class="card-body" id="cardBodyUpdate'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion-update").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenUpdate(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-update"><div class="card-body" id="cardBodyUpdate'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
-        $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
         if(scrapirAPIs[i].params){
@@ -403,7 +403,7 @@ function openNavMethod(elem) {
     if(urlText.includes(site)){
       // $("#apis-url-method").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
       var noSpacesTitle = scrapirAPIs[i].title.split(' ').join('');
-      $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
+      $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
 
       $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
       $("#cardBodyM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
@@ -1058,7 +1058,7 @@ if(!once){
   }
 
 
-var arrFields=[], wooSchema={}, site="", temp={}, suggestedTypes=[];
+var arrFields=[], wooSchema={}, site="", temp={}, suggestedTypes=[], pathname, typesMatchUrl = [];
 
 function siteHasBeenEntered(select){
 
@@ -1070,6 +1070,9 @@ function siteHasBeenEntered(select){
   $("#site-objects").empty();
   $("#site-info").empty();
   $("#step2-desc").show()
+  $("#connectDiv").show();
+
+  $("#step2-header").show();
 
   document.getElementById('siteN').innerHTML= '<code>'+site.charAt(0).toUpperCase() + site.slice(1)+'</code>'
   temp = { "objects":{}, "functions":[] };
@@ -1086,132 +1089,152 @@ function siteHasBeenEntered(select){
   $("#site-row-get").show();
 
   //Getting website categories
-  $.ajax({
-    url: 'https://www.klazify.com/api/categorize?url='+url,
-    type: 'POST',
-    crossDomain:true,
-    headers: {
-      'Accept': "application/json",
-      'Content-Type': "application/json",
-      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
-      'cache-control': "no-cache"
-    },
-    success: function(res) {
-      // console.log("Categories: ", res);
-      var categories = res.domain.categories;
+  // $.ajax({
+  //   url: 'https://www.klazify.com/api/categorize?url='+url,
+  //   type: 'POST',
+  //   crossDomain:true,
+  //   headers: {
+  //     'Accept': "application/json",
+  //     'Content-Type': "application/json",
+  //     "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
+  //     'cache-control': "no-cache"
+  //   },
+  //   success: function(res) {
+  //     // console.log("Categories: ", res);
+  //     var categories = res.domain.categories;
 
-      if(res.domain.logo_url !=null || res.domain.logo_url!=""){
-        $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
-      }
+  //     if(res.domain.logo_url !=null || res.domain.logo_url!=""){
+  //       $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
+  //     }
 
-      $("#site-info").append('</br><h5>Website categories</h5>');
-      $("#site-info").append('<ul>');
-      for(var c=0; c<categories.length; ++c){
-        $("#site-info").append('<li>'+categories[c].name+'</li>');
-      }
-      $("#site-info").append('</ul>');
+  //     $("#site-info").append('</br><h5>Website categories</h5>');
+  //     $("#site-info").append('<ul>');
+  //     for(var c=0; c<categories.length; ++c){
+  //       $("#site-info").append('<li>'+categories[c].name+'</li>');
+  //     }
+  //     $("#site-info").append('</ul>');
 
-      // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
-      // var category = categories.find(o => {
-      //   return o.confidence === maxconfidence
-      // }).name;
-      // console.log("Category: ", category)
+  //     // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
+  //     // var category = categories.find(o => {
+  //     //   return o.confidence === maxconfidence
+  //     // }).name;
+  //     // console.log("Category: ", category)
 
-      var categoryWords=[]
-      for(var l=0; l<categories.length; ++l){
-        var name= categories[l].name;
-        var lastIndex = name.lastIndexOf("/")//get the last type
-        var lastType = name.substring(lastIndex + 1);
-        categoryWords.push(lastType);
-      }
+  //     var categoryWords=[]
+  //     for(var l=0; l<categories.length; ++l){
+  //       var name= categories[l].name;
+  //       var lastIndex = name.lastIndexOf("/")//get the last type
+  //       var lastType = name.substring(lastIndex + 1);
+  //       categoryWords.push(lastType);
+  //     }
 
-      $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
-      $("#site-info").append('<ul>');
+  //     $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
+  //     $("#site-info").append('<ul>');
 
-      for(var c=0; c<categoryWords.length; ++c){
-        for(var j=0; j<allTypes.length; ++j){
-          var similar = checkSimilarity(categoryWords[c], allTypes[j]);
-          if(similar>40){
-            console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
-            suggestedTypes.push(allTypes[j])
-            $("#site-info").append('<li>'+allTypes[j]+'</li>');
-          }
-        }
-        if(c+1==categoryWords.length){
-          $("#site-info").append('</ul><hr>');
-          $("#site-info").show();
+  //     for(var c=0; c<categoryWords.length; ++c){
+  //       for(var j=0; j<allTypes.length; ++j){
+  //         var similar = checkSimilarity(categoryWords[c], allTypes[j]);
+  //         if(similar>40){
+  //           console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
+  //           suggestedTypes.push(allTypes[j])
+  //           $("#site-info").append('<li>'+allTypes[j]+'</li>');
+  //         }
+  //       }
+  //       if(c+1==categoryWords.length){
+  //         $("#site-info").append('</ul><hr>');
+  //         $("#site-info").show();
 
-          if(suggestedTypes.length>0){
-            // console.log("SUGGESTED")
-            $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
-            for(var j=0; j<suggestedTypes.length; ++j){
-              $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
-            }
-            $("#type-select").append('</optgroup>');
+  //         if(suggestedTypes.length>0){
+  //           // console.log("SUGGESTED")
+  //           $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+  //           for(var j=0; j<suggestedTypes.length; ++j){
+  //             $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
+  //           }
+  //           $("#type-select").append('</optgroup>');
 
-            $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
-            for(var i=0; i<allTypes.length; ++i){
-              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-                //no action
-              }else{
-                type= allTypes[i].split(' ').join('')
-                if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
-                  $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-                }
-              }
-            }
-            $("#type-select").append('</optgroup>');
-          }else{
-            // console.log("NOT SUGGESTED")
-            for(var i=0; i<allTypes.length; ++i){
-              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-                //no action
-              }else{
-                type= allTypes[i].split(' ').join('')
-                $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-              }
-            }
-          }
-          jQuery('.selectpicker').selectpicker('refresh');
-        }
-      }
+  //           $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+  //                 $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //               }
+  //             }
+  //           }
+  //           $("#type-select").append('</optgroup>');
+  //         }else{
+  //           // console.log("NOT SUGGESTED")
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //             }
+  //           }
+  //         }
+  //         jQuery('.selectpicker').selectpicker('refresh');
+  //       }
+  //     }
 
-    },
-    error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
-      for(var i=0; i<allTypes.length; ++i){
-        if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-          //no action
-        }else{
-          type= allTypes[i].split(' ').join('')
-          $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-        }
-      }
-    }
+  //   },
+  //   error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
+  //     for(var i=0; i<allTypes.length; ++i){
+  //       if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //         //no action
+  //       }else{
+  //         type= allTypes[i].split(' ').join('')
+  //         $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //       }
+  //     }
+  //   }
 
-  });
+  // });
 
 
   //////FOR TESTING
-  // for(var i=0; i<allTypes.length; ++i){
-  //   if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
-  //     type= allTypes[i].split(' ').join('')
-  //     $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //   }
-  // }
+  for(var i=0; i<allTypes.length; ++i){
+    if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
+      type= allTypes[i].split(' ').join('')
+      $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+    }
+  }
 
 
   // setTimeout(() => {
   jQuery('.selectpicker').selectpicker('refresh');
   // }, 100);
 
-  // let tempallAPIParams =[];
-  // //Go over all the site's API endpoints in scrapir and get all the response fields
-  // for(var i=0; i<scrapirAPIs.length; ++i){
-  //   var urlText = scrapirAPIs[i].url;
-  //   if(urlText.includes('site')){
-  //     tempallAPIParams.push(crapirAPIs[i].params);
-  //   }
-  // }
+  // Go over all the site API endpoints and the paths and compare them to schema.org types
+  for(var i=0; i<scrapirAPIs.length; ++i){
+    var urlText = scrapirAPIs[i].url;
+    if(urlText.includes(site)){
+      var title = scrapirAPIs[i].title;
+
+      for(var j=0; j<allTypes.length; ++j){
+        if((allTypes[j].includes("action") || allTypes[j].includes("Action")) && !actionStrings.includes(allTypes[j])){
+          //skip
+        }else{
+          var similar = checkSimilarity(title.toLowerCase(), allTypes[j].toLowerCase());
+
+          if(similar>0){
+            if(typesMatchUrl.indexOf(allTypes[j]) == -1 && allTypes[j]!='Search Results Page'){
+              typesMatchUrl.push(allTypes[j]);
+              console.log(allTypes[j]+' = '+similar+'%')
+            }
+          }
+        }
+      }//end of allTypes loop
+    }
+  }
+
+  console.log(typesMatchUrl);
+
+  for(type in typesMatchUrl){
+    typeHasBeenChosen(typesMatchUrl[type]);
+  }
 
 
   // let allAPIFeilds=[];
@@ -1466,10 +1489,11 @@ function idHasBeenChosed(selector){
   // $("#mapLabel").show();
   // temp.objects[clickedType].id= document.getElementById("type-id");
 
-  var selector = document.getElementById("type-id");
-  temp.objects[clickedType].id= selector[selector.selectedIndex].id;
+  // var selector = document.getElementById("type-id");
+  // VideoObject_get_id
+  // temp.objects[clickedType].id= selector[selector.selectedIndex].id;
 
-  console.log("temp: ", temp)
+  // console.log("temp: ", temp)
 
 }
 
@@ -1673,7 +1697,7 @@ function urlHasBeenChosen(select){
         $("#response-fields").show();
         for(var i=0; i<resFields.length; ++i){
           $("#select-response").append("<option id='"+resFields[i].displayedName+"'>"+resFields[i].displayedName+"</option>");
-          $("#table-response tbody").append('<tr id="'+resFields[i].displayedName+'"><td>'+resFields[i].displayedName+'</td>  <td><select id="select-'+resFields[i].displayedName+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange=""></select></td>  <td>X</td></tr>');
+          $("#table-response tbody").append('<tr id="'+resFields[i].displayedName+'"><td>'+resFields[i].displayedName+'</td>  <td><select id="select-'+resFields[i].displayedName+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style=";" onchange=""></select></td>  <td>X</td></tr>');
         }
 
         //for each response field, find the most similar property and show them both in a row in a table table-response
@@ -2133,7 +2157,7 @@ function saveTypeConfig(){
       var cellField1 = rowProperty.insertCell(1);
       // style="width: 1%;"
       // cellField1.style.width="0%";
-      cellField1.innerHTML = '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
+      cellField1.innerHTML = '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
 
       //make the the similar field selected
       var theProperty = rowProperty.cells[0];
@@ -2255,7 +2279,7 @@ function fieldHasBeenSelected(select){
         +'</td>'
         +'<td>'
         +'<div style="width:240px; text-align:center;">'
-        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
+        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
         +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
         +'</div></td>'
         +'<td style="width:100%"><button id="'+typeOfProperty+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
@@ -2300,12 +2324,12 @@ function fieldHasBeenSelected(select){
         $('<tr id="'+typeOfProperty+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
         +'<td>'
         +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
+        +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
         +'</td>'
         +'<td>'
         +'<div style="width:240px; text-align:center;">'
-        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
+        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
+        +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+typeOfProperty+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
         +'</div></td>'
         +'<td style="width:100%"><button id="'+typeOfProperty+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
         +'</tr>').insertBefore(trs[t]);
@@ -2445,7 +2469,7 @@ function saveMethodConfig(){
 
   //       rowProperty.deleteCell(1);
   //       var cellField1 = rowProperty.insertCell(1);
-  //       cellField1.innerHTML = '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
+  //       cellField1.innerHTML = '<div style="width:240px; text-align:center;"><select id="fields_'+tableTrs[i].id+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div>';
 
   //       for(var f=0; f<resProplist.length; ++f){
   //         $("#fields_"+tableTrs[i].id).append("<option id="+resProplist[f]+">"+resProplist[f]+"</option>");
@@ -2531,7 +2555,7 @@ function resHasBeenChosen(select){
   console.log("res sel: ", select.options[select.selectedIndex].getAttribute("id"));
   var field = select.options[select.selectedIndex].getAttribute("id")
   //table with names, selectProperties, and delete
-  $("#table-response tbody").append('<tr><td>'+field+'</td><td><select id="property-res-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;"></select></td></tr>');
+  $("#table-response tbody").append('<tr><td>'+field+'</td><td><select id="property-res-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style=";"></select></td></tr>');
 
 }
 
@@ -2558,6 +2582,74 @@ function methodRadioChecked(){
 var firstType=false, secondType=false, typeList=[], tempObj={}, tempAct={}, tempObjAct={}, gettersList=[]; tempObjSet={}, allTheType={}, listOfTypes=[], firstType=true, suggestedProperties=[];
 
 
+function getDescription(type){
+  // console.log("TYPE: ", type)
+  var typeProperties2=[];
+
+  $.ajax({
+    url: '/schemaOrg/'+type,
+    type: 'GET',
+    crossDomain:true,
+    dataType: "html",
+    success: function(res) {
+      document.getElementById("schemaURL").href = 'http://schema.org/'+type;//childSnapshot.val().format;
+      document.getElementById("schemaURL").innerText = 'http://schema.org/'+type;//childSnapshot.val().format;
+      document.getElementById("schemaDesc").innerText = $(res).find('.description')[0].innerHTML;
+
+      if($(res).find('.ds-tab-content').length > 0){
+        var str = $(res).find('.ds-tab-content')[3].innerHTML
+        var mySubString = str.split('&lt;script type=\"application/ld+json\"&gt;').pop().split('&lt;/script&gt;')[0]; // returns 'two'
+        document.getElementById('hereCode').innerHTML = mySubString
+        // Refresh Prism to apply the style
+        Prism.highlightElement($('#hereCode')[0]);
+        $("#jsonld-schema").show();
+        //console.log("mySubString: ", mySubString);
+      }else{
+        $("#jsonld-schema").hide()
+      }
+
+      var propTbody = $(res).find('.definition-table')[0].getElementsByTagName("TBODY")[0];
+      var pTrs = propTbody.getElementsByTagName("TR")
+
+      for(var i=0; i<pTrs.length; ++i){
+        let aTypes=[];
+        let obProp = {"types":[], "desc":""}
+        if(pTrs[i].classList.contains('supertype')){
+          continue;
+        }else{
+          let th = pTrs[i].getElementsByTagName("TH")[0];
+          let co = th.getElementsByTagName("CODE")[0];
+          let as = co.getElementsByTagName("A")[0].innerHTML;
+
+          let tdDesc = pTrs[i].getElementsByTagName("TD")[1].innerHTML;
+
+          let tdTypes = pTrs[i].getElementsByTagName("TD")[0]
+          let tdAs = tdTypes.getElementsByTagName("A");
+
+          for(var j=0; j<tdAs.length; ++j){
+            aTypes.push(tdAs[j].innerHTML)
+          }
+
+          obProp.desc= tdDesc;
+          obProp.types=aTypes;
+          propsInfo[as]= obProp
+
+          typeProperties2.push(as);
+          // $("#"+type+"_property-select").append("<option value="+as+">"+as+"</option>");
+
+        }
+      }
+
+      allTheType[type]=propsInfo;
+      // console.log("allTheType: ", allTheType);
+
+      $("#schema-desc").show()
+
+    }
+});
+}
+
+
 function typeHasBeenChosen(select){
 
   // console.log("select sel: ",select);
@@ -2578,23 +2670,23 @@ function typeHasBeenChosen(select){
 
     var trs = document.getElementsByTagName("TR");
 
-    for(let t in trs){
-      if(trs[t].id.includes('_')){
-      if(trs[t].id.split('_')[1] == prop){
-        var row = document.getElementById(trs[t].id);
-        console.log("row: ", row)
+    // for(let t in trs){
+    //   if(trs[t].id.includes('_')){
+    //   if(trs[t].id.split('_')[1] == prop){
+    //     var row = document.getElementById(trs[t].id);
+    //     console.log("row: ", row)
 
-        row.deleteCell(1);
-        var cell1 = row.insertCell(1);
-        cell1.innerHTML = '<td id="type-td"><code class="code">'+type+'</code></td>';
-        break;
-      }
-      }
-    }
+    //     row.deleteCell(1);
+    //     var cell1 = row.insertCell(1);
+    //     cell1.innerHTML = '<td id="type-td"><code class="code">'+type+'</code></td>';
+    //     break;
+    //   }
+    //   }
+    // }
 
   }
 
-  $("#step2_hint").hide();
+  // $("#step2_hint").hide();
   $("#prop-list").show();
   $("#"+type+"_property-select").empty();
   $("#"+type+"_property-select").append("<option selected>Add Property</option>");
@@ -2677,7 +2769,7 @@ function typeHasBeenChosen(select){
         allTheType[type]=propsInfo;
         // console.log("allTheType: ", allTheType);
 
-        $("#schema-desc").show()
+        // $("#schema-desc").show()
 
       }
   });
@@ -2692,31 +2784,32 @@ function typeHasBeenChosen(select){
   $("#tableDiv").append(table)
 
   //Add the type row id="<type>_row"
-  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>'
+  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="getDescription(this.id)">'+type+'</a> <img src="assets/img/new/right-arrows.png" width="20px" style="margin-left:70px"/>     </td>'
+  // +'<td><img src="assets/img/new/right-arrows.png" width="20px"/></td>'
   +'<td></td>'
   +'<td style="width:100%"><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type GET row id="<type>_getM"
-  $("#"+type+" tbody").append('<tr id="'+type+'_getM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><div style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_getM" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">Get '+type+' by ID</a> </div> </td>'
+  $("#"+type+" tbody").append('<tr id="'+type+'_getM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td ><div style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_getM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Get '+type+' by ID</a> </div>   </td>'
   +'<td></td>'
   +'<td style="width:100%"><button id="'+type+'_getM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type SEARCH row id="<type>_searchM"
-  $("#"+type+" tbody").append('<tr id="'+type+'_searchM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+  $("#"+type+" tbody").append('<tr id="'+type+'_searchM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td ><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
-  // $("#"+type+" tbody").append('<tr width="100%" id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">  <td width=1%><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   <td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>  </tr>')
+  // $("#"+type+" tbody").append('<tr width="100%" id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">  <td width=1%><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   <td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>  </tr>')
 
   //Add proeprties selectpicker under the type
   if(firstType){
     firstType=false;
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/> <div style="display:flex;">   <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  <div id="step3_hint" class="hint-content do--split-children" ><p>Choose the properties for each type. Check the list of parameters that this website API supports on the left sidebar.</p></div></div></div> </td></tr>')
 
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
 
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 43px;">  <div style="display:flex;">   <div style="display:flex;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  <div id="step3_hint" class="hint-content do--split-children" ><p>For each type, choose the properties and methods.</p></div></div></div> </td></tr>')
   }else{
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td></tr>')
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Response Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td>  </tr>')
 
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  </div></div> </td></tr>')
   }
@@ -2841,6 +2934,8 @@ function typeHasBeenChosen(select){
       urltextCleaned = urltextCleaned.replace(/\s\s+/g, ' ');
       typeCleaned = typeCleaned.replace(/\s\s+/g, ' ');
 
+      // console.log(urltextCleaned)
+
       //compare "type" with "url" and "title"
       let urlSim = checkSimilarity(typeCleaned, urltextCleaned);
       let titleSim = checkSimilarity(typeCleaned, titleText);
@@ -2860,10 +2955,10 @@ function typeHasBeenChosen(select){
       }
 
       // var simExists = wordsExists(typeCleaned.split(' '), urltextCleaned.split(' '))
-      // var searchExists = searchExistsF(typeCleaned.split(' '),  titleText.split(' '))
+      var searchExists = wordsExists(typeCleaned.split(' '),  titleText.split(' '))
 
       // if((titleText.includes('Search') || urlText.includes('search'))  && (simExists || searchExists) ){
-      if((titleText.includes('Search') || urlText.includes('search')) ){
+      if( (titleText.includes('search') && searchExists) || (urlText.includes('search') && searchExists) || (searchExists)){
         // if(urlSearchSim>0 || titleSearchSim>0){
         console.log("urlText: ",urlText)
           // if(tempMaxSimSEARCH<Math.max(urlSim, titleSim, urlSearchSim, titleSearchSim)){
@@ -2871,11 +2966,6 @@ function typeHasBeenChosen(select){
           tempMaxSimUrlSEARCH=urlText;
           tempMaxTitleSearch =titleText.split(' ').join('')
       }
-
-      //populate table
-      //for each row
-      // For type get add cell selectpciker for API endoints
-      // Add anumber of properties with their fields selectpicker
 
       // siteUrlOptions += '<option data-subtext="'+scrapirAPIs[i].url+'" id="'+JSON.stringify(scrapirAPIs[i].title)+'">'+scrapirAPIs[i].title+'</option>';
       var urlTextNoSpaces = titleText.split(' ').join('')
@@ -2886,11 +2976,7 @@ function typeHasBeenChosen(select){
   }//end of loop
 
   console.log("GET= "+ tempMaxSimUrlGET+' : '+tempMaxSimGET)
-  // if(tempMaxSimSEARCH>0){
   console.log("SEARCH= "+tempMaxSimUrlSEARCH)
-  // }else{
-  //   console.log("SEARCH= "+ tempMaxSimUrlGET+' : '+tempMaxSimGET)
-  // }
 
   //Go over the clicked table rows
   var typeTable = document.getElementById(type);
@@ -2900,25 +2986,39 @@ function typeHasBeenChosen(select){
   //Insert the API URL next to the type
   var rowTypeGet = document.getElementById(type+'_getM');
   rowTypeGet.deleteCell(1);
-  var typeCellGet1 = rowTypeGet.insertCell(1);
-  var getUrlSlect = '<select id="url_get_'+type+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select>';
+  var typeCellGet1 = rowTypeGet.insertCell(1); //style="width:240px;"
+  var getUrlSlect = '<div><select id="url_get_'+type+'"  class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select></div>'
   typeCellGet1.innerHTML =  getUrlSlect;
   //add ID select
   rowTypeGet.deleteCell(2);
   var typeCellGet2 = rowTypeGet.insertCell(2);
-  var getUrlSlectID = '<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed(this)"><option selected>Choose the ID</option></select>';
+  typeCellGet2.style.display = "flex";
+  var getUrlSlectID = '<div style="margin-right:5px"><img / src="assets/img/new/connect.png" width="20px" style="margin-top:10px"></div> <div style="width:240px;"><select id="'+type+'_get_id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" style=";" showSubtext="true" onchange="idHasBeenChosed(this)"><option selected>Choose the ID</option></select></div> '
+  +'<div class="info" style="pointer-events: all; display: inline; ">'
+  +'<i class="ion ion-md-information-circle"></i>'
+  +'<span class="extra-info">'
+  +'A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg'
+  +'</span>'
+  +'</div>'
   typeCellGet2.innerHTML = getUrlSlectID;
 
 
   var rowTypeSearch = document.getElementById(type+'_searchM');
   rowTypeSearch.deleteCell(1);
   var typeCellSearch1 = rowTypeSearch.insertCell(1);
-  var searchUrlSlect = '<select id="url_search_'+type+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select>';
+  var searchUrlSlect = '<div ><select id="url_search_'+type+'"  class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="urlHasBeenChosenForSearch(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select></div>';
   typeCellSearch1.innerHTML =  searchUrlSlect;
   //add search term select
   rowTypeSearch.deleteCell(2);
   var typeCellSearch2 = rowTypeSearch.insertCell(2);
-  var searchUrlSlectTerm = '<select id="method-search-param" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)"><option selected>Choose search parameter</option></select>'
+  typeCellSearch2.style.display = "flex";
+  var searchUrlSlectTerm = '<div style="margin-right:5px"><img / src="assets/img/new/connect.png" width="20px" style="margin-top:10px"></div>   <div style="width:240px;"><select id="'+type+'_search_term" style="width:240px;" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" style=";" showSubtext="true" onchange="resultTypeHasBeenChosen(this)"><option selected>Choose search parameter</option></select></div>'
+  +'<div class="info" style="pointer-events: all; display: inline; ">'
+  +'<i class="ion ion-md-information-circle"></i>'
+  +'<span class="extra-info">'
+  +'A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg'
+  +'</span>'
+  +'</div>'
   typeCellSearch2.innerHTML = searchUrlSlectTerm;
 
 
@@ -2933,13 +3033,30 @@ function typeHasBeenChosen(select){
   }
   //go over the fields of the GET API endpoint and show them on
   var predictedAPI=false;
+  var predictedSearchAPI=false;
 
   for(var i=0; i<scrapirAPIs.length; ++i){
     if(scrapirAPIs[i].title.split(' ').join('') == tempMaxTitleGet){//if the API endpoint is the GET chosen one
+      //Fill out the fields selectpicker
       for(var f=0; f<scrapirAPIs[i].res.length; ++f){
         $("#"+type+"_field-select").append("<option id="+scrapirAPIs[i].res[f]+">"+scrapirAPIs[i].res[f]+"</option>");
       }
+
+      //Fill out the ID selectpicker
+      for(var f=0; f<scrapirAPIs[i].params.length; ++f){
+        $("#"+type+"_get_id").append("<option id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
+      }
       predictedAPI=true;
+    }
+
+    //if search was predicted
+    if(tempMaxSimUrlSEARCH){
+      if(scrapirAPIs[i].url == tempMaxSimUrlSEARCH){
+        for(var f=0; f<scrapirAPIs[i].params.length; ++f){
+          $("#"+type+"_search_term").append("<option id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
+        }
+        predictedSearchAPI=true;
+      }
     }
   }
 
@@ -2959,19 +3076,23 @@ function typeHasBeenChosen(select){
     }else{
       $("#"+type+"_field-select").append('<option selected>This API enpoint does not return result</option></select>');
     }
+    $("#"+type+"_get_id").append('<option selected>Choose an API endpoint first</option></select>');
+  }
+  if(!predictedSearchAPI){
+    $("#"+type+"_search_term").append('<option selected>Choose an API endpoint first</option></select>');
   }
 
   //Add a select bar
 
-  // function wordsExists(typeArr, urlArr){
+  function wordsExists(typeArr, urlArr){
 
-  //   for(let t in typeArr){
-  //     if(urlArr.indexOf(typeArr[t]) !== -1){
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
+    for(let t in typeArr){
+      if(urlArr.indexOf(typeArr[t]) !== -1){
+        return true;
+      }
+    }
+    return false;
+  }
 
   // function searchExistsF(s, urlArr){
 
@@ -3012,6 +3133,35 @@ function urlHasBeenChosenRetrieve(select){
       }
     }
   }
+
+  jQuery('.selectpicker').selectpicker('refresh');
+}
+
+
+function urlHasBeenChosenForSearch(select){
+
+  var urlType = select.id.split("_").pop()
+  var endpoint = select.options[select.selectedIndex].getAttribute("value");
+
+  $("#"+urlType+"_search_term").empty();
+  $("#"+urlType+"_search_term").append('<option selected>Choose API Field</option></select>')
+
+  for(var i=0; i<scrapirAPIs.length; ++i){
+    if(scrapirAPIs[i].url == endpoint){//if the API endpoint is the GET chosen one
+      if(scrapirAPIs[i].param!=""){
+        for(var f=0; f<scrapirAPIs[i].params.length; ++f){
+          $("#"+urlType+"_search_term").append("<option id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
+        }
+      }else{
+        $("#"+urlType+"_search_term").append("<option id="+scrapirAPIs[i].params[f]+">This API does not have parameters</option>");
+        // $("#"+urlType+"_field-select").append('<option selected>This API does not return result</option></select>');
+      }
+    }
+
+  }//end of loop
+
+
+
   jQuery('.selectpicker').selectpicker('refresh');
 }
 
@@ -3137,6 +3287,84 @@ function saveWoOSchema(){
 
 
 
+function saveSchema(){
+
+  var siteObj={};
+  let temp={}
+  siteObj={site:{}}
+  temp = { "objects":{}, "functions":[] };
+  siteObj[site] = temp;
+
+  // Inside the tableDiv go over all the tables
+  var tableDiv = document.getElementById('tableDiv');
+  var tables = tableDiv.getElementsByTagName("TABLE")
+  // console.log("all tables: ", tables);
+
+  for(let t in tables){
+    if(typeof(tables[t].id) != 'undefined' && tables[t].id != null){
+      var typeName = tables[t].id;
+      let tempObj={};
+      tempObj[typeName]= {"properties":[], "id":"", "construct":{"self":{"endpoint":"", "id":""}}, "add":{"endpoint":""}, "remove":{"endpoint":"", "id":""}, "setters":[], "methods":[]};
+      siteObj[site].objects= tempObj;
+
+      //object id
+      var selector = document.getElementById(typeName+"_get_id");
+      var selId = selector[selector.selectedIndex].id;
+      siteObj[site].objects[typeName].id= selId;
+
+      //object construct self "construct":{"self":{"endpoint":"", "id":""}}
+      var selectUrl = document.getElementById("url_get_"+typeName);
+      siteObj[site].objects[typeName].construct.self.endpoint= selectUrl[selectUrl.selectedIndex].value;
+      siteObj[site].objects[typeName].construct.self.id= selId;
+
+      //add properties
+      //go over all the rows that have id type_ but not _row, _getM, or searchM
+      var properties = [];
+      var propertyRows =  tables[t].getElementsByTagName('TR');
+      for(let r in propertyRows){
+        if(typeof(propertyRows[r].id) != 'undefined' && propertyRows[r].id != null)
+        if(! (propertyRows[r].id.includes('_row') || propertyRows[r].id.includes('_getM') || propertyRows[r].id.includes('_searchM') || !propertyRows[r].id.includes('_'))){
+          properties.push({
+            property: propertyRows[r].cells[0].getElementsByTagName('A').innerHTML,
+            field: propertyRows[r].cells[1].getElementsByTagName('A').innerHTML
+          })
+        }
+      }
+      siteObj[site].objects[typeName].properties= properties;
+
+      //search for object fucntion
+      let tempAct={}
+      tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
+      siteObj[site].functions.push(tempAct);
+
+      var selectSearch = document.getElementById("url_search_"+typeName);
+      siteObj[site].functions[0].endpoint= selectSearch[selectSearch.selectedIndex].value;
+      siteObj[site].functions[0].object= typeName;
+      siteObj[site].functions[0].name= "search"+typeName;
+      siteObj[site].functions[0].id= selId;
+      var selectSearchTerm = document.getElementById(typeName+"_search_term");
+      siteObj[site].functions[0].searchParam= selectSearchTerm[selectSearchTerm.selectedIndex].id;
+
+      console.log("Final Object: ", siteObj[site]);
+    }
+  }
+
+
+  //FUNCTINS => searchVideoObject
+  //OBJECT GET => VideoObject
+
+  // //setter
+  // tempObjSet= {"endpoint":"", "field":"", "property":"", "id":"", };
+
+  // temp.objects[clickedType].setters.push(tempObjSet);
+  // tempObj[currentType].properties.push(property)
+
+  // //type method
+  // tempObjAct[method]= {"endpoint":"", "object":"", "name":"", "type":method};
+  // tempObj[thisType].methods.push(tempObjAct[method]);
+
+}
+
 var currentSite=""
 
 function websiteHasBeenChosen(select){
@@ -3188,12 +3416,12 @@ function getButtonID(id){
   //   // document.getElementById("firstType").remove();
   //   $("#schema-"+type).empty()
   //   // $("#types-table tbody").empty()
-  //   // var row = '<tr data-tt-id="'+child+'" data-tt-branch="true"><td id="butt-td"><a href="javascript:;" class="btn btn-warning disabled" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;;">'+type+'</a></td><td id="type-td"><code class="">type</code></td><td><div class="row"><div class="col-xs-3"><select id="schema-'+type+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="typeHasBeenChosen(this)"><option selected>Add a Type</option></select></div><div class="col-xs-3"><select id="property-'+type+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px;" onchange="propertyHasBeenChosen(this)"><option selected>Add a Property</option></select></div></div></td></tr>';
-  //   var row = '<tr data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="getButtonID(this.id)">'+type+'</a></td></tr>';
+  //   // var row = '<tr data-tt-id="'+child+'" data-tt-branch="true"><td ><a href="javascript:;" class="btn btn-warning disabled" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;;">'+type+'</a></td><td id="type-td"><code class="">type</code></td><td><div class="row"><div class="col-xs-3"><select id="schema-'+type+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="typeHasBeenChosen(this)"><option selected>Add a Type</option></select></div><div class="col-xs-3"><select id="property-'+type+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px;" onchange="propertyHasBeenChosen(this)"><option selected>Add a Property</option></select></div></div></td></tr>';
+  //   var row = '<tr data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td ><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="getButtonID(this.id)">'+type+'</a></td></tr>';
   // }else{
   //   $("#schema-"+type).empty()
-  //   // var row = '<tr data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-warning disabled" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;">'+type+'</a></td><td id="type-td"><code class="">type</code></td><td><div class="row"><div class="col-xs-3"><select id="schema-'+type+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="typeHasBeenChosen(this)"><option selected>Add a Type</option></select></div><div class="col-xs-3"><select id="property-'+type+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px;" onchange="propertyHasBeenChosen(this)"><option selected>Add a Property</option></select></div></div></td></tr>';
-  //   var row = '<tr data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td"><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="getButtonID(this.id)">'+type+'</a></td></tr>';
+  //   // var row = '<tr data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td ><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-warning disabled" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;">'+type+'</a></td><td id="type-td"><code class="">type</code></td><td><div class="row"><div class="col-xs-3"><select id="schema-'+type+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="typeHasBeenChosen(this)"><option selected>Add a Type</option></select></div><div class="col-xs-3"><select id="property-'+type+'" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-height: 20px;" onchange="propertyHasBeenChosen(this)"><option selected>Add a Property</option></select></div></div></td></tr>';
+  //   var row = '<tr data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td ><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onClick="getButtonID(this.id)">'+type+'</a></td></tr>';
   // }
 
   // var node = $("#types-table").treetable("node", parent);
@@ -3379,14 +3607,14 @@ function propertyHasBeenChosen(select){
         //   +'<div class="hint" data-position="4"><div style="display:flex;">'
         //   +'<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div>'
         //   +'<div style="width:240px; text-align:center; ">'
-        //   +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a>'
+        //   +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a>'
         //   +'</div>';
         //   +'</div>';
         //   +'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children">'
         //   +'<p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>'
         //   +'</div></div>'
         //   +'</td>'
-        //   +'<td><div style="width:240px; text-align:center;"><select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div></td>    <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   </tr>'
+        //   +'<td><div style="width:240px; text-align:center;"><select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div></td>    <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   </tr>'
         //   $(trProp).insertBefore(trs[t]);
 
         // }else{//if not of type object
@@ -3398,7 +3626,7 @@ function propertyHasBeenChosen(select){
         +'</td>'
         +'<td>'
         +'<div style="width:240px; text-align:center;">'
-        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
+        // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
         +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
         +'</div></td>'
         +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
@@ -3524,14 +3752,14 @@ function methodHasBeenChosen(select){
   var trs = document.getElementsByTagName("TR")
 
   if(siteIsClicked){
-    $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="method-site" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="method-siteM" class="btn btn-purple" style="width:150px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'X" onclick="newMethed(this)">'+method+'</a></td></tr>')
+    $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="method-site" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="method-siteM" class="btn btn-purple" style="width:150px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'X" onclick="newMethed(this)">'+method+'</a></td></tr>')
   }else{
     if(isNewM){
       if(thisType==""){
         // tempAct[method]= {"query":"", "result":"", "name":""};
         tempAct[method]= {"endpoint":"", "object":"", "name":"", "type":method};
         temp.functions.push(tempAct[method]);
-        $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'Y" onclick="newMethed(this)">'+method+'</a></td></tr>')
+        $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'Y" onclick="newMethed(this)">'+method+'</a></td></tr>')
       }else{
         // tempObjAct[method]= {"query":"", "result":"", "name":""};
         tempObjAct[method]= {"endpoint":"", "object":"", "name":"", "type":method};
@@ -3540,7 +3768,7 @@ function methodHasBeenChosen(select){
 
         for(let t in trs){
           if(trs[t].id == thisType){
-            $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="newMethed(this)">'+method+'Z</a></td></tr>').insertBefore(trs[t]);
+            $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:150px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="newMethed(this)">'+method+'Z</a></td></tr>').insertBefore(trs[t]);
             break;
           }
         }
@@ -3557,7 +3785,7 @@ function methodHasBeenChosen(select){
           tempAct[method]= {"endpoint":"", "object":"", "name":"", "type":method};
           temp.functions.push(tempAct[method]);
 
-          $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.'+method+'" value="testVal" href="javascript:;" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td></tr>')
+          $("#site-table tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.'+method+'" value="testVal" href="javascript:;" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td></tr>')
         }else{
           // tempObjAct[method]= {"query":"", "result":"", "name":""};
           tempObjAct[method]= {"endpoint":"", "object":"", "name":"", "type":method};
@@ -3568,12 +3796,12 @@ function methodHasBeenChosen(select){
 
           for(let t in trs){
             if(trs[t].id == thisType){
-              $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="openNavMethod(this)">'+method+'</a></td>  <td></td> <td style="width:100%"><button id="'+thisType+'_'+child+'" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
+              $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="openNavMethod(this)">'+method+'</a></td>  <td></td> <td style="width:100%"><button id="'+thisType+'_'+child+'" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
               break;
             }
           }
 
-          // $("#"+thisType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="OBJ'+currentType+'" href="javascript:;" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this.id)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td></tr>')
+          // $("#"+thisType+" tbody").append('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="OBJ'+currentType+'" href="javascript:;" class="btn btn-purple" style="width:150px; height: 30px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this.id)">'+method+'</a></td><td id="type-td"><code class="">method</code></td><td>'+descP+'</td></tr>')
         }
       }
     }
@@ -3614,8 +3842,8 @@ function siteMethodHasBeenChosen(select){
 
   for(let t in trs){
     if(trs[t].id == "site-row3"){
-      // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>  <td></td>   <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
-      $('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td id="butt-td">&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.'+method+'" value="testVal" href="javascript:;" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">'+method+'</a></td>  <td></td>   <td style="width:100%"><button id="site_'+method+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button>  </tr>').insertBefore(trs[t]);
+      // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>  <td></td>   <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
+      $('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.'+method+'" value="testVal" href="javascript:;" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">'+method+'</a></td>  <td></td>   <td style="width:100%"><button id="site_'+method+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button>  </tr>').insertBefore(trs[t]);
       break;
     }
   }

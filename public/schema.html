@@ -150,7 +150,7 @@
 													<h6 style="display: inline;">Usage example encoded as JSON-LD</h6>
 													<a id="exampleLink" href="javascript:;" onclick="showOrHideExample()" style="font-weight: bold; font-style: unset; display: inline; padding-bottom: 10px;">(show)</a>
 
-													<pre id="json" style="font-size: 0.9em; padding-top: 0px; height: 320px; display: none;">
+													<pre id="json" style="font-size: 0.9em; padding-top: 0px; height: auto; max-height:500px; display: none;">
 														<code  id="hereCode" class="language-json load">
 														</code>
 													</pre>
@@ -297,7 +297,7 @@
 															<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
 														</div>
 
-														<div id="step2-header" style="display:none;"><h5 style="display: inline; margin-left: 70px; margin-right: 260px;">schema.org</h5> <h5 style="display: inline;">Website API</h5></div>
+														<div id="step2-header" style="display:none;"><h5 style="display: inline; margin-left: 100px; margin-right: 300px;">Schema.org</h5> <h5 style="display: inline;">Website API</h5></div>
 
 
 														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; padding-top: 10px;">
@@ -310,12 +310,18 @@
 																			<!-- <div class="item-hints">
 																				<div class="hint" data-position="4"> -->
 																					<div style="width:240px; text-align:center; ">
-																						<a href="javascript:;" id="site-domain" class="btn btn-info" style="color:white; width:240px; height: 34px; text-align:center;"></a>
+																						<a href="javascript:;" id="site-domain" class="btn btn-info disabled" style="color:white; width:240px; height: 34px; text-align:center;"></a>
 																						<!-- <div id="site-domain-div" style="display: none"></div> -->
 																						<!-- <select id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-info" onchange="siteHasBeenChosen(this)">
 																							<option selected>Choose website</option>
 																						</select> -->
 																					</div>
+																					<!-- <div class="info" style="pointer-events: all; display: inline; ">
+																						<i class="ion ion-md-information-circle"></i>
+																						<span class="extra-info">
+																						  A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg
+																						</span>
+																					</div> -->
 																					<!-- <div id="step1_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children" >
 																						<p style="margin-bottom:0px">What types of information is available in this website?</p>
 																						<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="showSuggestedTypes()">Show Suggested Types</button>
@@ -324,6 +330,9 @@
 																				</div>
 																			</div> -->
 																		</td>
+
+																	<td ><h5 style="margin-right:200px">Connect Schema.org to the Web API</h5></td>
+
 																	</tr>
 																</tbody>
 															</table>
@@ -336,7 +345,6 @@
 
 													<table id="get" class="table table-borderless" style="margin-top:15px;">
 														<tbody>
-
 
 															<tr id="site-row2" style="display:none" width="100%">
 																<td style="display:flex; flex-wrap:wrap;">
@@ -354,7 +362,7 @@
 																					</select>
 																				</div>
 																			</div>
-																			<div  id="step2_hint" style="pointer-events: none; height:50px;" class="hint-content do--split-children" >
+																			<!-- <div  id="step2_hint" style="pointer-events: none; height:50px;" class="hint-content do--split-children" >
 																				<p style="display: inline;">What types of information is available in this website?</p>
 																				<div class="info" style="pointer-events: all; display: inline; ">
 																					<i class="ion ion-md-information-circle"></i>
@@ -362,9 +370,7 @@
 																					  A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg
 																					</span>
 																				</div>
-
-
-																			</div>
+																			</div> -->
 																		</div>
 																	</div>
 
@@ -405,19 +411,24 @@
 
 
 												</br>
+													<!-- <div id="connectDiv" style="display:none"> -->
 													<div id="connectDiv" style="display:none">
-														<p style="font-size: 1.2em;" id="beforeDone"><B>Step3.</B> Connect to the API when you are done describing your data model. </p>
-														<p style="font-size: 1.2em; display:none" id="afterDone"><B>Step3.</B> Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</p>
-														<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a>
+														<p style="font-size: 1.2em;" id=""><B>Step3.</B> Save this schema.org description of the website API when youre done.
+															<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; width:100px" onclick="saveSchema()">Save</a>
+														</p>
+
+														<!-- <p style="font-size: 1.2em;" id="beforeDone"><B>Step3.</B> Connect to the API when you are done describing your data model. </p> -->
+														<!-- <p style="font-size: 1.2em; display:none" id="afterDone"><B>Step3.</B> Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</p> -->
+														<!-- <a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a> -->
 													</div>
 
-													<div style="display: none;">
+													<!-- <div style="display: none;">
 														<div id="fields_" style="width:240px; height:30px; text-align:center;">
 															<select id="fields-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="">
 																<option selected>Choose field</option>
 															</select>
 														</div>
-													</div>
+													</div> -->
 
 													<!-- step4. was here -->
 
@@ -1172,6 +1183,12 @@
 
 												<style>
 
+													/* .btn-info{
+														color:black;
+														background-color:black;
+													} */
+
+
 													#methodDiv {
 														border-radius: 25px;
 														border: 2px solid lightgray;
@@ -1532,13 +1549,13 @@
 
 					<!-- begin nav-pills -->
 					<ul class="nav nav-pills mb-2">
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link active">
 								<span class="d-sm-none">Pills 1</span>
 								<span class="d-sm-block d-none">Get*</span>
 							</a>
-						</li>
-						<!-- <li class="nav-item">
+						</li> -->
+						<li class="nav-item">
 							<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link">
 								<span class="d-sm-block d-none">Update</span>
 							</a>
@@ -1552,12 +1569,12 @@
 							<a href="#nav-pills-tab-4" data-toggle="tab" class="nav-link">
 								<span class="d-sm-block d-none">Remove</span>
 							</a>
-						</li> -->
-						<li class="nav-item">
+						</li>
+						<!-- <li class="nav-item">
 							<a href="#nav-pills-tab-5" data-toggle="tab" class="nav-link">
 								<span class="d-sm-block d-none">Search</span>
 							</a>
-						</li>
+						</li> -->
 						<!-- <li class="nav-item">
 							<a href="#nav-pills-tab-4" data-toggle="tab" class="nav-link">
 								<span class="d-sm-none">Pills 4</span>
@@ -1606,7 +1623,7 @@
 
 							<!-- Matching Properties -->
 							<!-- <label class="col-form-label ">Match Response Fields to Type Properties</label></br> -->
-							<div id="mapLabel" style="display: none;">
+							<!-- <div id="mapLabel" style="display: none;">
 								<p>3. Map the API response fields to the <span id="sel_typeMap"></span> properties.</p>
 								<div id="redips-drag">
 									<table id="table1" class="table table-bordered">
@@ -1620,7 +1637,7 @@
 										</tbody>
 									</table>
 								</div>
-							</div>
+							</div> -->
 
 							</br></br>
 							<a href="javascript:;" class="btn btn-primary" id="" onclick="saveTypeConfig()">Save</a>
@@ -1919,14 +1936,18 @@
   display: none;
   line-height: 30px;
   font-size: 12px;
-  position: relative;
-  top: -30px;
-  left: 330px;
+  position: absolute;
+  /* top: 0px; */
+  /* left: 330px; */
   background-color: #f9f9f9;
   border-radius: 15px;
   padding:10px;
   word-wrap: break-word;
   /* text-indent: 10px; */
+  width:230px;
+  z-index: 1;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  /* box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22); */
 }
 
 .info:hover .extra-info {

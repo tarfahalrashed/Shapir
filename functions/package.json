@@ -14,6 +14,7 @@
   },
   "main": "index.js",
   "dependencies": {
+    "@ardatan/graphql-tools": "^4.1.0",
     "@google-cloud/storage": "^5.4.0",
     "apac": "^3.0.2",
     "apollo-server": "^2.18.0",
@@ -53,6 +54,7 @@
     "remote": "^0.2.6",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
+    "sentence-tokenization": "^1.0.2",
     "url": "^0.11.0",
     "websocket-extensions": "^0.1.4",
     "word2vec": "^1.1.4",

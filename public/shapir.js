@@ -1085,6 +1085,32 @@ export default async function shapir(){
                                                 });//end of getter
 
                                             }
+
+                                            //if the property in GET but not in SEARCH
+                                            //enter this once and get everything?
+                                            // Object.defineProperty(ob, propType, {
+                                            //     get: function() {
+                                            //         let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
+                                            //             console.log("typeOb2: ", snapshot.val())
+                                            //             // return self(snapshot.val(), type, propType, ob[typeId]);
+                                            //             return self(snapshot.key, snapshot.val(), mObject, propType, idVal);
+
+                                            //         });
+                                            //         return promise;
+                                            //     }
+                                            // });//end of getter
+
+                                            const object1 = {};
+
+                                            Object.defineProperties(object1, {
+                                            property1: {
+                                                value: 42,
+                                                writable: true
+                                            },
+                                            property2: {}
+                                            });
+
+                                            console.log(object1.property1);
                                         }
 
                                     //***************************** METHODS *********************************/
