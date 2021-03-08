@@ -911,9 +911,17 @@ export default async function shapir(){
                                 var paramLen = Object.entries(otherArgs).length;
                                 for (const [key, value] of Object.entries(otherArgs)) {
                                     --paramLen
-                                    if(paramNames.indexOf(key) != -1){//check if the param is correct
-                                        console.log(`${key}: ${value}`);
-                                        mParamList+= key
+                                    var keyVal=""
+                                    if(key=='numresults'){//mavo lower case the letters
+                                        keyVal = 'numResults'
+                                    }else if(key=='apikey'){//mavo lower case the letters
+                                        keyVal = 'apiKey'
+                                    }else{
+                                        keyVal= key
+                                    }
+                                    if(paramNames.indexOf(keyVal) != -1){//check if the param is correct
+                                        console.log(`${keyVal}: ${value}`);
+                                        mParamList+= keyVal
                                         mParamList+="="
                                         mParamList+= value
                                         if (paramLen>0){
@@ -1051,7 +1059,7 @@ export default async function shapir(){
 
                             }
                             else { //no oauth
-                                console.log("!!!oauth2")
+                                // console.log("!!!oauth2")
                                 result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
                                 return result;
                             }
@@ -1107,7 +1115,7 @@ export default async function shapir(){
                                                 Object.defineProperty(ob, propType, {
                                                     get: function() {
                                                         let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
-                                                            console.log("typeOb2: ", snapshot.val())
+                                                            // console.log("typeOb2: ", snapshot.val())
                                                             // return self(snapshot.val(), type, propType, ob[typeId]);
                                                             return self(snapshot.key, snapshot.val(), mObject, propType, idVal);
                                                         });
@@ -1528,11 +1536,11 @@ export default async function shapir(){
 
 
                         function self (typekey, typeOb, caller, prop, ...args) {
-                            console.log("typeOb:", typeOb)
-                            console.log("caller:", caller)
-                            console.log("callerTYPE:", typekey)
-                            console.log("typeId: ", typeOb.id)
-                            console.log("args: ", args)
+                            // console.log("typeOb:", typeOb)
+                            // console.log("caller:", caller)
+                            // console.log("callerTYPE:", typekey)
+                            // console.log("typeId: ", typeOb.id)
+                            // console.log("args: ", args)
 
                             currentType = typekey;
 

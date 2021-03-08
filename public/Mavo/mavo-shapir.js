@@ -30,6 +30,7 @@ Mavo.Backend.register($.Class({
                     let promises = [];
 
                     services.map((service) => {
+                        console.log("this: ", this)
                         promises.push(window[service][this.action](this.search, this));
                         // I know that "this" includes "this.search" but my global function expects a positional argument for search and an object
                         // e.g. seatgeek.search('Music', {'city': 'New York', 'country': 'US'})
@@ -43,6 +44,8 @@ Mavo.Backend.register($.Class({
                     });
 
                 }else{//just one site
+                    console.log("this: ", this)
+
                     let ret = await window[this.service][this.action](this.search, this);
                     return ret;
                 }
