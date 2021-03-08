@@ -884,6 +884,9 @@ export default async function shapir(){
                             for(let p in obJSON.parameters){
                                 paramNames.push(obJSON.parameters[p].name)
                             }
+                            paramNames.push('numResults');
+                            paramNames.push('apiKey');
+
                             //check that the parameters passed are correct
                             if(typeof mArgs[0] === 'object' && mArgs[0] !== null){
                                 var hasKeywords=false;
@@ -918,7 +921,9 @@ export default async function shapir(){
                                         }
                                     }
                                 }
-                                mParamList = mParamList.slice(0, -1);
+                                if(mParamList.endsWith("&")){
+                                    mParamList = mParamList.slice(0, -1);
+                                }
                             }
 
 
@@ -1057,7 +1062,6 @@ export default async function shapir(){
                                 let otherFields = []
                                 let once=true;
                                 let onceAll = true;
-
                                 console.log("result: ", o)
                                 // console.log("properties!!! ", properties)
                                 //map response to class properties
@@ -1103,10 +1107,9 @@ export default async function shapir(){
                                                 Object.defineProperty(ob, propType, {
                                                     get: function() {
                                                         let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
-                                                            console.log("typeOb2: ", snapshot.val())
+                                                            // console.log("typeOb2: ", snapshot.val())
                                                             // return self(snapshot.val(), type, propType, ob[typeId]);
                                                             return self(snapshot.key, snapshot.val(), mObject, propType, idVal);
-
                                                         });
                                                         return promise;
                                                     }

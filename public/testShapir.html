@@ -21,9 +21,9 @@
 
 			// console.log(await seatgeek.searchVenues('game'));
 
-			var videos = await youtube.searchVideoObject('game');
+			var videos = await youtube.searchVideoObject({'numResults': '5'});
 
-			console.log("name:  ", await videos[1].reviewCount)
+			// console.log("name:  ", await videos[1].reviewCount)
 			// var other =  videos[0].other
 			// console.log("rating:  ", await videos[0].reviewCount)
 
