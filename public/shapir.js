@@ -1056,13 +1056,17 @@ export default async function shapir(){
                             .then(o => {
                                 let otherFields = []
                                 let once=true;
-                                let onceAll = true
+                                let onceAll = true;
+
                                 console.log("result: ", o)
                                 // console.log("properties!!! ", properties)
                                 //map response to class properties
                                 if (o.constructor === Array){
                                     // console.log("ARRAY");
                                     o.forEach(function(ob) {//for each object
+                                        once=true;
+                                        onceAll = true;
+
                                         for (var p=0; p<properties.length; ++p){
                                             if (properties[p].field){// it won't check type properties (e.g. comment for VideoObject)
                                                 if (properties[p].property != properties[p].field && ob[properties[p].field]) {
@@ -1112,53 +1116,18 @@ export default async function shapir(){
 
                                             //Add the other fields in Get but not in Search to the Search
                                             if(onceAll){
-                                                onceAll=false
+                                                onceAll=false;
                                                 for (let f in otherFields) {
                                                     Object.defineProperty(ob, otherFields[f], {
                                                         get: function() {
-                                                        // (async function(){
-                                                        //     var temp = await ob['other']
-                                                        //     return temp//[otherFields[f]]
-                                                        // Object.defineProperty(ob, properties[p].property, Object.getOwnPropertyDescriptor(ob, properties[p].field));
-                                                        // delete ob[properties[p].field];
-                                                        return ob['other'].then(data=>{
-                                                            return data[otherFields[f]];
-                                                        })
-                                                        // })()
+                                                            return ob['other'].then(data=>{
+                                                                return data[otherFields[f]];
+                                                            })
                                                         }
                                                     });//end of getter
                                                 }
                                             }
-
-
-                                            //check all the fields in the fiebase for this object
-                                            //if none of them exists in the search result, call the object GET to get the rest of fields
-                                            //if the property in GET but not in SEARCH
-                                            //enter this once and get everything?
-                                            // Object.defineProperty(ob, propType, {
-                                            //     get: function() {
-                                            //         let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
-                                            //             console.log("typeOb2: ", snapshot.val())
-                                            //             // return self(snapshot.val(), type, propType, ob[typeId]);
-                                            //             return self(snapshot.key, snapshot.val(), mObject, propType, idVal);
-
-                                            //         });
-                                            //         return promise;
-                                            //     }
-                                            // });//end of getter
-
-                                            // const object1 = {};
-
-                                            // Object.defineProperties(object1, {
-                                            // property1: {
-                                            //     value: 42,
-                                            //     writable: true
-                                            // },
-                                            // property2: {}
-                                            // });
-
-                                            // console.log(object1.property1);
-                                        }
+                                        }//for loop
 
                                     //***************************** METHODS *********************************/
                                     if (methods){
@@ -1694,9 +1663,9 @@ export default async function shapir(){
                                     return result;
                                 }
                             })//firebase
-                            .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
+                            .then(url => { return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                             .then(o => {
-                                console.log("result: ", o)
+                                // console.log("result: ", o)
                                 //map response to class properties
                                 if (o.constructor === Array){
                                     // console.log("ARRAY");
@@ -1742,6 +1711,7 @@ export default async function shapir(){
                                             }
 
                                             Object.defineProperty(ob, prop, {
+                                                enumerable: true,
                                                 set: function(newValue) {
                                                     console.log("newValue: ", newValue)
                                                     this.pro = firebase.database().ref('/apis/'+setEndpoint).once('value').then(function(snapshot) {
