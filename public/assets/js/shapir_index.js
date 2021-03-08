@@ -1070,9 +1070,6 @@ function siteHasBeenEntered(select){
   $("#site-objects").empty();
   $("#site-info").empty();
   $("#step2-desc").show()
-  $("#connectDiv").show();
-
-  $("#step2-header").show();
 
   document.getElementById('siteN').innerHTML= '<code>'+site.charAt(0).toUpperCase() + site.slice(1)+'</code>'
   temp = { "objects":{}, "functions":[] };
@@ -1083,10 +1080,7 @@ function siteHasBeenEntered(select){
   site = domain;
 
   document.getElementById("site-domain").innerHTML = domain;
-  $("#site-row1").show();
-  $("#site-row2").show();
 
-  $("#site-row-get").show();
 
   //Getting website categories
   // $.ajax({
@@ -1232,44 +1226,22 @@ function siteHasBeenEntered(select){
 
   console.log(typesMatchUrl);
 
+  $("#site-info").show();
+
+  $("#step2-header").show();
+  $("#site-row1").show();
+  $("#site-row2").show();
+  $("#site-row-get").show();
+  $("#connectDiv").show();
+
   for(type in typesMatchUrl){
     typeHasBeenChosen(typesMatchUrl[type]);
   }
-
-
-  // let allAPIFeilds=[];
-  //Go over all the site's API endpoints in scrapir and get all the response fields
-  // for(var i=0; i<scrapirAPIs.length; ++i){
-  //   var urlText = scrapirAPIs[i].url;
-  //   if(urlText.includes(site)){
-  //     allAPIFeilds = allAPIFeilds.concat(scrapirAPIs[i].res)
-  //   }
-  // }
-
-  // allAPIFeilds = cleanArray(allAPIFeilds);
-
-  // $("#site-info").append('</br><h5>Some of the API Common Response Fields</h5><ul>')
-  // for(let p in allAPIFeilds){
-  //   $("#site-info").append('<li>'+allAPIFeilds[p]+'</li>')
-  // }
-  // $("#site-info").append('</ul>')
-
-  $("#site-info").show();
-
 }
 
-// function showSuggestedTypes(){
-//   $("#step1_hint").hide();
-//   for(var i=0; i<suggestedTypes.length; ++i){
-//     typeHasBeenChosen(suggestedTypes[i])
-//   }
-//   // $("#site-row2").show();
-// }
 
-
-// function showAddTypeButton(){
-//   $("#step1_hint").hide();
-//   // $("#site-row2").show();
+// function populateSuggestedSchema(){
+//
 // }
 
 
@@ -2555,6 +2527,15 @@ function getDescription(type){
 });
 }
 
+
+
+function showRow(id){
+  var t = id.split('show_')[1];
+  $("#"+t+"_searchM").show();
+  $("#butShow_"+t).hide()
+}
+
+
 var propertyType = false;
 
 function typeHasBeenChosen(select){
@@ -2575,7 +2556,6 @@ function typeHasBeenChosen(select){
     propertyType = true;
 
     $("#closeBut").click();
-
 
     // $("#"+type+"_property-select").popover('hide');
 
@@ -2715,7 +2695,11 @@ function typeHasBeenChosen(select){
   +'<td style="width:100%"><button id="'+type+'_getM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type SEARCH row id="<type>_searchM"
-  $("#"+type+" tbody").append('<tr id="'+type+'_searchM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td ><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+  $("#"+type+" tbody").append('<tr id="'+type+'_searchM" style="data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+
+  // add this if you want to give the user the option to add search
+  // $("#"+type+" tbody").append('<tr id="butShow_'+type+'"><td><button id="show_'+type+'" style="margin-left:45px;" onclick="showRow(this.id)">SHOW</button></td></tr>   <tr id="'+type+'_searchM" style="display:none" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+
 
   // $("#"+type+" tbody").append('<tr width="100%" id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">  <td width=1%><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>   <td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a></td>  </tr>')
 
@@ -3238,6 +3222,7 @@ function saveSchema(){
   siteObj={site:{}}
   temp = { "objects":{}, "functions":[] };
   siteObj[site] = temp;
+  let tempObj={};
 
   // Inside the tableDiv go over all the tables
   var tableDiv = document.getElementById('tableDiv');
@@ -3245,36 +3230,37 @@ function saveSchema(){
   // console.log("all tables: ", tables);
 
   for(let t in tables){
-    if(typeof(tables[t].id) != 'undefined' && tables[t].id != null){
+    console.log("tables[t].id: ", tables[t].id)
+    if(typeof(tables[t].id) != undefined && tables[t].id != null){
       var typeName = tables[t].id;
-      let tempObj={};
+      // let tempObj={};
       tempObj[typeName]= {"properties":[], "id":"", "construct":{"self":{"endpoint":"", "id":""}}, "add":{"endpoint":""}, "remove":{"endpoint":"", "id":""}, "setters":[], "methods":[]};
-      siteObj[site].objects= tempObj;
+      // siteObj[site].objects= tempObj;
 
       //object id
       var selector = document.getElementById(typeName+"_get_id");
       var selId = selector[selector.selectedIndex].id;
-      siteObj[site].objects[typeName].id= selId;
+      tempObj[typeName].id= selId;
 
       //object construct self "construct":{"self":{"endpoint":"", "id":""}}
       var selectUrl = document.getElementById("url_get_"+typeName);
-      siteObj[site].objects[typeName].construct.self.endpoint= selectUrl[selectUrl.selectedIndex].value;
-      siteObj[site].objects[typeName].construct.self.id= selId;
+      tempObj[typeName].construct.self.endpoint= selectUrl[selectUrl.selectedIndex].value;
+      tempObj[typeName].construct.self.id= selId;
 
       //add properties
       //go over all the rows that have id type_ but not _row, _getM, or searchM
       var properties = [];
       var propertyRows =  tables[t].getElementsByTagName('TR');
       for(let r in propertyRows){
-        if(typeof(propertyRows[r].id) != 'undefined' && propertyRows[r].id != null)
-        if(! (propertyRows[r].id.includes('_row') || propertyRows[r].id.includes('_getM') || propertyRows[r].id.includes('_searchM') || !propertyRows[r].id.includes('_'))){
+        if(typeof(propertyRows[r].id) != undefined && propertyRows[r].id != null)
+        if(! (propertyRows[r].id.includes('_row') || propertyRows[r].id.includes('_getM') || propertyRows[r].id.includes('_searchM') || !propertyRows[r].id.includes('_') || propertyRows[r].id.includes('show_') )){
           properties.push({
             property: propertyRows[r].cells[0].getElementsByTagName('A')[0].innerHTML,
-            field: propertyRows[r].cells[1].getElementsByTagName('A')[0].innerHTML
+            field:    propertyRows[r].cells[1].getElementsByTagName('A')[0].innerHTML
           })
         }
       }
-      siteObj[site].objects[typeName].properties= properties;
+      tempObj[typeName].properties= properties;
 
       //search for object fucntion
       let tempAct={}
@@ -3289,25 +3275,13 @@ function saveSchema(){
       var selectSearchTerm = document.getElementById(typeName+"_search_term");
       siteObj[site].functions[0].searchParam= selectSearchTerm[selectSearchTerm.selectedIndex].id;
 
-      console.log("Final Object: ", siteObj[site]);
 
       //Push to Firebase!
-    }
+    }//end of loop
+
+    siteObj[site].objects= tempObj
+    console.log("Final Object: ", siteObj[site]);
   }
-
-
-  //FUNCTINS => searchVideoObject
-  //OBJECT GET => VideoObject
-
-  // //setter
-  // tempObjSet= {"endpoint":"", "field":"", "property":"", "id":"", };
-
-  // temp.objects[clickedType].setters.push(tempObjSet);
-  // tempObj[currentType].properties.push(property)
-
-  // //type method
-  // tempObjAct[method]= {"endpoint":"", "object":"", "name":"", "type":method};
-  // tempObj[thisType].methods.push(tempObjAct[method]);
 
 }
 
@@ -3520,7 +3494,7 @@ function propertyHasBeenChosen(select){
     if(dataTypes.indexOf(types[t]) == -1){
       // console.log("types[t]")
       hasType = true;
-      typeElem+='<a href="javascript:;" id="popbut_'+types[t]+'-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;" onClick="typeHasBeenChosen(this.id)">'+types[t]+'</a>&nbsp;&nbsp;';
+      typeElem+='<a href="javascript:;" id="popbut_'+types[t]+'-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;">'+types[t]+'</a>&nbsp;&nbsp;';
     }
   }
   typeElem += '</div>'
@@ -3539,7 +3513,7 @@ function propertyHasBeenChosen(select){
 
           $("#"+thisType+"_property-select").popover('dispose');
           $("#"+thisType+"_property-select").popover({
-            title: 'YYY<a id="closeBut" class="close" href="#">&times;</a>',
+            title: 'Title<a id="closeBut" class="close" href="#">&times;</a>',
             placement: 'right',
             container: 'body',
             html: true,
@@ -3550,22 +3524,28 @@ function propertyHasBeenChosen(select){
           })
           $("#"+thisType+"_property-select").popover('show');
 
-          $("#url_get_"+thisType+" option").tooltip({
-            placement: 'right',
-            trigger: 'hover',
-            container: 'body'
-            // content:'HAY BBB'
-          });
+          // $("#url_get_"+thisType+" option").tooltip({
+          //   placement: 'right',
+          //   trigger: 'hover',
+          //   container: 'body'
+          // });
 
 
+          // $(document).on('click','[id^="popbut_"]',function () {
+          //   typeHasBeenChosen(this.id);
+          // });
 
-          $(document).on('click','[id^="popbut_"]',function () {
+          $('[id^="popbut_"]').unbind().click(function() {
             typeHasBeenChosen(this.id);
           });
 
-          $('[data-toggle=popover]').popover();
+          // $('[data-toggle=popover]').popover();
 
+          var once= true
           $(document).on('click', '#closeBut', function(){
+            if(once){
+              once=false;
+            console.log("close button is clicked")
             $("#"+thisType+"_property-select").popover('hide');
             propChosen=true;
 
@@ -3620,6 +3600,7 @@ function propertyHasBeenChosen(select){
               //do nothing
             }
 
+          }//once
           });
 
 
@@ -3631,7 +3612,10 @@ function propertyHasBeenChosen(select){
               $('#property_api_'+thisType).append('<option data-subtext="'+scrapirAPIs[i].title+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].url+'</option>');
             }
           }
-          jQuery('.selectpicker').selectpicker('refresh');
+          //change
+          setTimeout(() => {
+            jQuery('.selectpicker').selectpicker('refresh');
+          }, 500);
 
           //'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children"><p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>');
 
