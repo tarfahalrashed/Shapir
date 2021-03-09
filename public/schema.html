@@ -283,7 +283,12 @@
 
 														<div class="input-group mb-4" >
 														<!-- <div class="mb-5"> -->
-															<label style="font-size: 1em;"><B>Read the follwoing instructions and follw the steps below to connect schema.org to any Web API.</B></label>
+															<div class="input-group">
+																<label style="font-size: 1em; padding-top:5px"><B>Read the follwoing instructions and follw the steps below to connect schema.org to any Web API.</B>&nbsp;</label>
+																<a href="#modal-without-animation" class="btn btn-sm btn-outline-dark" style="border-radius:15px; height: 28px;" data-toggle="modal">Demo</a>&nbsp;
+																<a href="#modal-without-animation" class="btn btn-sm btn-outline-dark" style="border-radius:15px; height: 28px;"  data-toggle="modal">Details</a>
+															</div>
+
 															<ol style="font-size: 1em;">
 																<li>Enter the URL of a website that you would like to describe with schema.org vocabulary and connect that descreption to the Web API.</li>
 																<li>For the website you entered, choose the <B>types</B> of data in schema.org that matches the type of data in this website.
@@ -316,7 +321,7 @@
 															<div class="input-group col-lg-4">
 																<input id="url-site" type="text" class="form-control">
 																<span class="input-group-btn">
-																	<button class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>
+																	<button id="enterUrl" class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>
 																</span>
 															</div>
 														</div>

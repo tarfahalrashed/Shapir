@@ -1058,6 +1058,17 @@ if(!once){
   }
 
 
+
+var input = document.getElementById("url-site");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("enterUrl").click();
+  }
+});
+
+
+
 var arrFields=[], wooSchema={}, site="", temp={}, suggestedTypes=[], pathname, typesMatchUrl = [];
 
 function siteHasBeenEntered(select){
@@ -2685,7 +2696,7 @@ function typeHasBeenChosen(select){
   $("#tableDiv").append(table)
 
   //Add the type row id="<type>_row"
-  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="getDescription(this.id)">'+type+'</a> <img src="assets/img/new/right-arrows.png" width="20px" style="margin-left:70px"/>     </td>'
+  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a> <img src="assets/img/new/right-arrows.png" width="20px" style="margin-left:70px"/>     </td>'
   // +'<td><img src="assets/img/new/right-arrows.png" width="20px"/></td>'
   +'<td></td>'
   +'<td style="width:100%"><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')

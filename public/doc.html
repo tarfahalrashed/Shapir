@@ -122,14 +122,64 @@
 			<!-- end header-nav -->
 		</div>
 		<!-- end #header -->
+		<div id="sidebar" class="sidebar">
+			<!-- begin sidebar scrollbar -->
+			<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div data-scrollbar="true" data-height="100%" data-init="true" style="overflow: hidden; width: auto; height: 100%;">
+				<!-- begin sidebar user -->
+				<ul class="nav" style="font-size: 1.4em; margin-top: 40px;">
+					<li class="has-sub active">
+						<a href="javascript:;">
+							<!-- <b class="caret"></b> -->
+							<!-- <i class="fa fa-th-large"></i> -->
+							<span>JS Library</span>
+						</a>
+						<ul class="sub-menu active">
+							<li><a href="#">Get Started</a></li>
+							<li><a href="#">Explore</a></li>
+							<li><a href="#">Samples</a></li>
+						</ul>
+					</li>
 
-		<div class="sidenav">
+					<li class="has-sub active">
+						<a href="javascript:;">
+							<!-- <b class="caret"></b> -->
+							<!-- <i class="fa fa-th-large"></i> -->
+							<span>REST API</span>
+						</a>
+						<ul class="sub-menu active">
+							<li><a href="#">API URL</a></li>
+							<!-- <li><a href="#">Functions</a></li> -->
+							<li><a href="#">Samples</a></li>
+						</ul>
+					</li>
+
+					<li class="has-sub active">
+						<a href="javascript:;">
+							<!-- <b class="caret"></b> -->
+							<!-- <i class="fa fa-th-large"></i> -->
+							<span>Mavo+Shapir</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#">Get Started</a></li>
+							<li><a href="#">Explore</a></li>
+							<li><a href="#">Samples</a></li>
+						</ul>
+					</li>
+
+				</ul>
+				<!-- end sidebar nav -->
+			</div><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 117.202px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+			<!-- end sidebar scrollbar -->
+		</div>
+
+
+		<!-- <div class="sidenav">
 		</br></br></br></br>
-			<!-- <a href="#about">About</a>
+			<a href="#about">Get Started</a>
 			<a href="#services">Services</a>
 			<a href="#clients">Clients</a>
-			<a href="#contact">Contact</a> -->
-		</div>
+			<a href="#contact">Contact</a>
+		</div> -->
 		<!-- end #sidebar -->
 
 		<!-- begin #content -->
@@ -253,63 +303,114 @@ app();</code></pre>
 			</div>
 			<!-- end panel -->
 
-					<!-- begin panel -->
-					<div id="explore" class="panel panel-inverse">
-						<div class="panel-heading">
-							<h4 class="panel-title">Explore Shapir JS Library</h4>
-							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-							</div>
-						</div>
-						<div class="panel-body">
-							<!-- Panel Content Here -->
-							<!-- a dropdown menue of all the sites intergrated (under abstraction) -->
-							<!-- when an option gets selected, read the functions, objects and create the lines -->
+			<!-- begin panel -->
+			<div id="explore" class="panel panel-inverse">
+				<div class="panel-heading">
+					<h4 class="panel-title">Explore Shapir JS Library</h4>
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+					</div>
+				</div>
+				<div class="panel-body">
+					<!-- Panel Content Here -->
+					<!-- a dropdown menue of all the sites intergrated (under abstraction) -->
+					<!-- when an option gets selected, read the functions, objects and create the lines -->
 
-							<div class="col-lg-6">
-								<h6 style="color:black">Choose the name of the website:</h6>
-								<select id="sites" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosen(this)">
-									<option selected>Choose site</option>
-								</select>
-							</div>
-							</br>
+					<div class="col-lg-6">
+						<h6 style="color:black">Choose the name of the website:</h6>
+						<select id="sites" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosen(this)">
+							<option selected>Choose site</option>
+						</select>
+					</div>
+					</br>
 
-							<div id="functions" style="display:none">
-								<h5>Search</h5>
-								<pre style="display: inline;" class="language-javascript"><code id="function" class="language-javascript"></code></pre>
-							</div>
-							</br>
+					<div id="functions" style="display:none">
+						<h5>Search</h5>
+						<pre style="display: inline;" class="language-javascript"><code id="function" class="language-javascript"></code></pre>
+					</div>
+					</br>
 
-							<div id="objects" style="display:none">
-								<h5>Get Objects</h5>
-								<pre id="preObjects" style="display: inline;" class="language-javascript"><code id="object" class="language-javascript"></code></pre>
-							</div>
+					<div id="objects" style="display:none">
+						<h5>Get Objects</h5>
+						<pre id="preObjects" style="display: inline;" class="language-javascript"><code id="object" class="language-javascript"></code></pre>
+					</div>
 
 
-							</br></br>
+					</br></br>
+				</div>
+			</div>
+			<!-- end panel -->
+
+				<!-- begin panel -->
+				<div id="js-samples" class="panel panel-inverse">
+					<div class="panel-heading">
+						<h4 class="panel-title">Samples</h4>
+						<div class="panel-heading-btn">
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+							<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+							<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 						</div>
 					</div>
-					<!-- end panel -->
+					<div class="panel-body">
+						<!-- <h4 class="panel-title">JS Code Samples</h4> -->
 
-					<!-- begin panel -->
-					<div id="mavo" class="panel panel-inverse">
-						<div class="panel-heading">
-							<h4 class="panel-title">Mavo + Shapir</h4>
-							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-							</div>
-						</div>
-						<div class="panel-body">
-							Content Here
-						</div><!--END-->
+						<h5 class="panel-title">Get YouTube video comments</h5>
+						<p>This sample gets the list of comments that belongs to a YouTube video, specified by the videoId.</p>
+
+<pre class="language-javascript"><code class="language-javascript">const app = async () => {
+	await shapir();
+	var video = await youtube.VideoObject("x7xf8kc"); // videoId= x7xf8kc
+	var comments = await video.comment
+};
+app();</code></pre>
+
+
+<h5 class="panel-title">Search YouTube for videos</h5>
+<p>This sample searches YouTube for videos, specified by the videoId.</p>
+
+<pre class="language-javascript"><code class="language-javascript">const app = async () => {
+await shapir();
+
+};
+app();</code></pre>
+
+
+<h5 class="panel-title">Search mutliple sites for music videos</h5>
+<p>This sample gets the list of comments that belongs to a YouTube video, specified by the videoId.</p>
+
+<pre class="language-javascript"><code class="language-javascript">const app = async () => {
+await shapir();
+
+};
+app();</code></pre>
+
+
+
+					</div><!--END-->
+				</div>
+				<!-- end panel -->
+
+			<!-- begin panel -->
+			<div id="mavo" class="panel panel-inverse">
+				<div class="panel-heading">
+					<h4 class="panel-title">Mavo + Shapir</h4>
+					<div class="panel-heading-btn">
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 					</div>
-					<!-- end panel -->
+				</div>
+				<div class="panel-body">
+					Content Here
+				</div><!--END-->
+			</div>
+			<!-- end panel -->
+
 		</div>
 		<!-- end #content -->
 
