@@ -8,41 +8,8 @@ var http = require('http');
 var https = require('https');
 const axios = require('axios');
 
-// const graphqlHTTP = require('express-graphql');
-// const { buildSchema } = require('graphql');
-// const { makeExecutableSchema } = require('graphql-tools');
-
+// var subdomain = require('express-subdomain');
 var app = express();
-
-// app.get('*', function(req, res, next){
-//     if(req.headers.host == 'api.shapir.org:3000')  //if it's a sub-domain
-//       req.url = '/' + req.url;  //append some text yourself
-//     next();
-// });
-
-// const graphqlHTTP = require("express-graphql");
-// const { buildSchema } = require("graphql");
-
-// // Construct a schema, using GraphQL schema language
-// const schema = buildSchema(`
-//   type Query {
-//     hello: String
-//   }
-// `);
-
-// // Provide resolver functions for your schema fields
-// const resolvers = {
-//   hello: () => "Hello world!"
-// };
-
-
-// app.use("/graphql", graphqlHTTP({
-//     schema,
-//     rootValue: resolvers
-//   })
-// );
-// // app.listen(4000);
-
 
 
 //Scrape schema.org type page and retrieve its html
@@ -65,57 +32,13 @@ app.get("/schemaOrg/:name", (req, res, next) => {
 })
 
 
-//Get a site's domain categories (webshrinker)
-app.get("/categories/:site", (req, res) => {
-
-  //encode site domain
-  let encodedSite = Buffer.from(req.params.site).toString('base64');
-  let url = 'https://api.webshrinker.com/categories/v3/'+encodedSite;
-  let header= {
-    headers: {"Authorization": "Basic <token>"}
-  };
-
-  cors(req, res, () => {
-
-    axios(url, header)
-    .then(response =>{
-      const data = response.data;
-      // console.log(data);
-      res.send(data)
-    })
-    .catch(console.error);
-
-  })//cors
-
-})
-
-
-//GET AN OBJECT
-
-// app.get("X/:type/:site/:id", (req, res, next) => {
-
-//     (async function(){
-//       console.log("TYPE: ", req.params.type)
-//       console.log("SITE: ", req.params.site)
-//       console.log("ID: ", req.params.id)
-//       // console.log("PARAM: ", req.query)
-//       await shapir();
-//       let result = await global[req.params.site][req.params.type](req.params.id);
-//       res.send(result)
-//         // await dailymotion.VideoObject("x7xf8kc"))
-//     })()
-
-//   })
-
-// const {shapir, include} = require('../public/shapir.js');
-
-//GET AN OBJECT
-app.get("/api/:type/:site/:id", (req, res, next) => {
+//SEARCH AN OBJECT
+app.get("/api/:type/:site", (req, res, next) => {
 
   (async function(){
     console.log("TYPE: ", req.params.type)
     console.log("SITE: ", req.params.site)
-    console.log("ID: ", req.params.id)
+    console.log("SITE: ", req.params.id)
     // console.log("PARAM: ", req.query)
 
     // for(let i=0; i<)
@@ -142,38 +65,6 @@ app.get("/api/:type/:site/:id", (req, res, next) => {
 
 })
 
-//SEARCH AN OBJECT
-// app.get("/api/:type/:site", (req, res, next) => {
-
-//   (async function(){
-//     console.log("TYPE: ", req.params.type)
-//     console.log("SITE: ", req.params.site)
-//     console.log("SITE: ", req.params.id)
-//     // console.log("PARAM: ", req.query)
-
-//     // for(let i=0; i<)
-//     // let paramList="";
-//     // var obLength = Object.entries(req.query).length;
-
-//     // Object.entries(req.query).forEach(([key, value]) => {
-//     //   --obLength;
-//     //   paramList+=`${key}`
-//     //   paramList+="="
-//     //   paramList+=`${value}`
-//     //   if(obLength>0){
-//     //     paramList+="&"
-//     //   }
-//     // });
-
-//     // console.log("paramList: ",paramList)
-
-//     await shapir();
-//     let result = await global[req.params.site][req.params.type](req.params.id);
-//     res.send(result)
-//       // await dailymotion.VideoObject("x7xf8kc"))
-//   })()
-
-// })
 
 async function shapir(){
 

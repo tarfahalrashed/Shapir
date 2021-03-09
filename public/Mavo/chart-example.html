@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Charts</title>
+    <link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
+    <script src="https://get.mavo.io/mavo.js"></script>
+</head>
+<body>
+    <div mv-app="chartApp" mv-source="https://raw.githubusercontent.com/VeronicaG314/mv-data/main/10Day.json" mv-plugin="chart">
+        <table>
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Deaths</th>
+                    <th>Confirmed</th>
+                    <th>Recovered</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr property="stats" mv-multiple>
+                    <th property="date"></th>
+                    <td property="deaths"></td>
+                    <td property="confirmed"></td>
+                    <td property="recovered"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <canvas mv-chart-title="COVID-19 Cases"
+            mv-chart-legend="Deaths, Confirmed, Recovered"
+            mv-chart-legend-position="bottom"
+            mv-chart-data="[get(stats, 'deaths')]; [get(stats, 'confirmed')]; [get(stats, 'recovered')]"
+            mv-chart-labels="[get(stats, 'date')]"
+            mv-chart-series-styles="backgroundColor: transparent, borderColor: royalblue; backgroundColor: transparent, borderColor: gray; backgroundColor: transparent, borderColor: orange"
+            mv-chart-options="scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: Year
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: Quantity
+                        }
+                    }]
+                }">
+            <p>Your browser doesn't support charts in canvas!</p>
+        </canvas>
+    </div>
+</body>
+</html>

@@ -107,10 +107,10 @@ function abstractionSiteHasBeenChosen(select){
     //get
     var func = site+'.'+ o +'("ID")';
     document.getElementById('object').innerHTML += 'var '+oName+' = '+func + '&nbsp; //return a specific ' + o + ' from '+ site;
-    document.getElementById('object').innerHTML += '\n\n';
+    document.getElementById('object').innerHTML += '\n';
 
     var properties = objects[o].properties;
-    document.getElementById('object').innerHTML += '//'+o+' propertiesto get and set\n';
+    document.getElementById('object').innerHTML += '//'+o+' properties\n';
     //properties
     for(p in properties){
       document.getElementById('object').innerHTML += oName+'.'+properties[p].property +'\n';
@@ -1226,6 +1226,11 @@ function siteHasBeenEntered(select){
 
   console.log(typesMatchUrl);
 
+}
+
+
+function populateSuggestedSchema(){
+
   $("#site-info").show();
 
   $("#step2-header").show();
@@ -1237,12 +1242,8 @@ function siteHasBeenEntered(select){
   for(type in typesMatchUrl){
     typeHasBeenChosen(typesMatchUrl[type]);
   }
+
 }
-
-
-// function populateSuggestedSchema(){
-//
-// }
 
 
 function siteHasBeenChosen(select){

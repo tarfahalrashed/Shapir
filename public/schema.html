@@ -281,21 +281,58 @@
 														<!-- <a href="#" id="tglr" class="popover-toggle" title="Popover Header">Toggle popover</a> -->
 
 
-														<div class="input-group mb-4">
+														<div class="input-group mb-4" >
 														<!-- <div class="mb-5"> -->
-															<label style="padding-top:7px; font-size: 1.2em;"><B>Step1.</B> Enter the URL of a Website</label>
+															<label style="font-size: 1em;"><B>Read the follwoing instructions and follw the steps below to connect schema.org to any Web API.</B></label>
+															<ol style="font-size: 1em;">
+																<li>Enter the URL of a website that you would like to describe with schema.org vocabulary and connect that descreption to the Web API.</li>
+																<li>For the website you entered, choose the <B>types</B> of data in schema.org that matches the type of data in this website.
+																	<!-- </br><p style="font-size: 1em; color:grey">e.g. for https://www.youtube.com, you can choose VideoObject for YouTube video, MusicPlaylist for playlist, etc. Types will be represented as an orange node <span class="label label-orange">Type</span></p> -->
+																</li>
+																<li>For each type:
+																	<ul>
+																		<li>What is the website API endpoint that <B>get</B> you this type. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube video, the API endpoint would be https://www.googleapis.com/youtube/v3/videos">example</a>)
+																		<!-- </br>e.g. For YouTube video the API endpoint would be https://www.googleapis.com/youtube/v3/videos. Get will be represnted as a purple node <span class="label label-purple">Get</span> -->
+																		</li>
+																		<li>If you are intersted in <B>searching</B> the website for this type, you will need to choose the search API endpoint. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="To search for YouTube videos, the API endpoint to use would be https://www.googleapis.com/youtube/v3/search">example</a>)
+
+																		<!-- </br>e.g. For YouTube video the API endpoint would be https://www.googleapis.com/youtube/v3/search. Search will be represnted as a purple node <span class="label label-purple">Search</span> -->
+																		</li>
+																		<li>Choose the <B>properties</B> from schema.org that matches the response fields of the API. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube VideoObject, some properties would be the name, description, and publishedAt, the equivalent properties in the API would be title, description and datePublished.">example</a>)
+																		<!-- </br>e.g. For YouTube VideoObject, some properties would be the name, description, . Properties will be represnted as a grey node <span class="label label-grey">Property</span> -->
+																		</li>
+																	</ul>
+																</li>
+																	<!-- <li><p> <span class="label label-purple">Get/Search</span><span class="label label-grey">Property</span></p></li> -->
+															</ol>
+
+
+
+														</div>
+
+
+															<div class="input-group mb-4">
+															<label style="padding-top:7px; font-size: 1em;"><B>Step1.</B> Enter the URL of a Website</label>
 															<div class="input-group col-lg-4">
 																<input id="url-site" type="text" class="form-control">
 																<span class="input-group-btn">
-																	<button class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Start</button>
+																	<button class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>
 																</span>
 															</div>
 														</div>
 
-														<div id="step2-desc" style="display: none;" class="input-group mb-5">
-															<label style="font-size: 1.2em;"><B>Step2.</B> Describe what is in this website using schema.org vocuabury. <button class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Start</button></label>
-															<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
+														<div id="step2-desc" style="display: none;" >
+															<div class="input-group mb-5" style="margin-bottom:-10px!important">
+																<label style="font-size: 1em;"><B>Step2.</B> Connect schema.org types to the Web API types/objects. Click start to show a suggested starting connection.
+																<button class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Start</button></label>
+																	<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
+															</div>
+
+															<p style="padding-top:0px"><span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span>&nbsp; &nbsp;<span style="height: 1px;" class="label label-purple">Get/Search</span>&nbsp;&nbsp;<span style="height: 1px;" class="label label-grey">Property/Field</span></p>
+															<!-- <p style="padding-top:0px">Types will be represented by an orange node<span style="height: 1px;" class="label label-orange">Type</span>, get/search as <span style="height: 1px;" class="label label-purple">Get/Search</span> and properties as <span style="height: 1px;" class="label label-grey">Property</span></p> -->
 														</div>
+														</br>
+
 
 														<div id="step2-header" style="display:none;"><h5 style="display: inline; margin-left: 100px; margin-right: 300px;">Schema.org</h5> <h5 style="display: inline;">Website API</h5></div>
 
@@ -1928,6 +1965,12 @@
 
 		<style>
 
+  /* Tooltip */
+
+
+.tooltip-inner {font-size: 1.1em; text-align: left;}
+.tooltip.right .tooltip-arrow {background-color:grey;}
+
 * {
   transition: all .2s ease;
 }
@@ -1936,7 +1979,7 @@
   display: none;
   line-height: 30px;
   font-size: 12px;
-  position: absolute;
+  position: relative;
   /* top: 0px; */
   /* left: 330px; */
   background-color: #f9f9f9;

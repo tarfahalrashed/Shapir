@@ -37,8 +37,9 @@
 
 
 	<!-- <link href="assets/css/prism-default.css" rel="stylesheet" /> -->
-	<link href="assets/css/prism-coy.css" rel="stylesheet" />
+	<link href="assets/js/prism-coy.css" rel="stylesheet" />
 	<!-- <link href="assets/css/prism-dark.css" rel="stylesheet" /> -->
+
 
 	<style>
 		body {
@@ -81,7 +82,7 @@
 		}
 	</style>
 </head>
-<body onload="docOnLoad()">
+<body onload="docOnLoad()" data-prismjs-copy-timeout="500">
 
 	<!-- begin #page-loader -->
 	<div id="page-loader" class="fade show">
@@ -169,13 +170,20 @@
 						</code>
 					</pre> -->
 
-
+<h4>HTML</h4>
 					<pre class="language-html"><code class="language-html">&lt;head>
 	...
 	&lt;script src="shapir.js">&lt;/script>
 	...
 &lt;/head></code></pre>
 
+<h4>JS</h4>
+
+<pre class="language-javascript"><code class="language-javascript">const app = async () => {
+  await shapir();
+  //Add your Shapir functions here e.g. var video = await youtbe.VideoObject("x7xf8kc")
+};
+app();</code></pre>
 
 <!-- <h5>siteName.object/method(args)</h5> -->
 
@@ -267,15 +275,16 @@
 									<option selected>Choose site</option>
 								</select>
 							</div>
-
+							</br>
 
 							<div id="functions" style="display:none">
-								<h5>Functions</h5>
+								<h5>Search</h5>
 								<pre style="display: inline;" class="language-javascript"><code id="function" class="language-javascript"></code></pre>
 							</div>
+							</br>
 
 							<div id="objects" style="display:none">
-								<h5>Objects</h5>
+								<h5>Get Objects</h5>
 								<pre id="preObjects" style="display: inline;" class="language-javascript"><code id="object" class="language-javascript"></code></pre>
 							</div>
 
@@ -334,8 +343,12 @@
 
 
 	<!-- ================== BEGIN PRISM JS ================== -->
-	<script src="assets/js/prism.js"></script>
+	<!-- <script src="assets/js/prism.js"></script> -->
+	<script src="assets/js/prism-coy.js"></script>
 	<script src="assets/js/prism-json.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+
 	<!-- ================== END PRISM JS ================== -->
 
 

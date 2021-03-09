@@ -10,9 +10,16 @@
 
 		import shapir, {include} from "../shapir.js";
 
-		(async function(){
-
+		const app = async () => {
 			await shapir();
+			//var video = await youtbe.VideoObject("x7xf8kc")
+			//var videos = await youtube.searchVideoObject('Taylor Swift', {'order':'date', 'numResults': '100'});
+		};
+		app();
+
+
+		// (async function(){
+		//})()
 
 			// let video = await dailymotion.VideoObject("x7xf8kc");
 			// console.log("video: ", video);
@@ -20,8 +27,6 @@
 			// await video.addToWatchlater();
 
 			// console.log(await seatgeek.searchVenues('game'));
-
-			var videos = await youtube.searchVideoObject({'numResults': '2'});
 
 			// console.log("name:  ", await videos[1].reviewCount)
 			// var other =  videos[0].other
@@ -35,7 +40,9 @@
 
 			// await dailymotion.MusicPlaylist().create()
 			// await dailymotion.MusicPlaylist.add({"name":"Test X", "description":"Test playlist"});
-		})()
+		// })()
+
+
 
 
 </script>
