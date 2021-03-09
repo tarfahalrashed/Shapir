@@ -321,7 +321,8 @@
 															<div class="input-group col-lg-4">
 																<input id="url-site" type="text" class="form-control">
 																<span class="input-group-btn">
-																	<button id="enterUrl" class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>
+																	<button id="enterUrl"class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>
+
 																</span>
 															</div>
 														</div>
@@ -1553,7 +1554,7 @@
 					</div>
 					</br></br>
 
-				<a href="javascript:;" class="btn btn-primary" id="" onclick="savePropertyConfig()">Save</a>
+				<a href="javascript:;" class="btn btn-dark" id="" onclick="savePropertyConfig()">Save</a>
 
 
 				<!-- <label class="col-form-label "><B>Property Type:</B></label>
@@ -1598,6 +1599,11 @@
 							</a>
 						</li> -->
 						<li class="nav-item">
+							<a href="#nav-pills-tab-5" data-toggle="tab" class="nav-link active">
+								<span class="d-sm-block d-none">Search</span>
+							</a>
+						</li>
+						<li class="nav-item">
 							<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link">
 								<span class="d-sm-block d-none">Update</span>
 							</a>
@@ -1612,17 +1618,13 @@
 								<span class="d-sm-block d-none">Remove</span>
 							</a>
 						</li>
-						<!-- <li class="nav-item">
-							<a href="#nav-pills-tab-5" data-toggle="tab" class="nav-link">
-								<span class="d-sm-block d-none">Search</span>
+
+						<li class="nav-item">
+							<a href="#nav-pills-tab-6" data-toggle="tab" class="nav-link">
+								<!-- <span class="d-sm-none">Pills 6</span> -->
+								<span class="d-sm-block d-none">Methods</span>
 							</a>
-						</li> -->
-						<!-- <li class="nav-item">
-							<a href="#nav-pills-tab-4" data-toggle="tab" class="nav-link">
-								<span class="d-sm-none">Pills 4</span>
-								<span class="d-sm-block d-none">Pills Tab 4</span>
-							</a>
-						</li> -->
+						</li>
 					</ul>
 					<!-- end nav-pills -->
 					<!-- begin tab-content -->
@@ -1682,7 +1684,7 @@
 							</div> -->
 
 							</br></br>
-							<a href="javascript:;" class="btn btn-primary" id="" onclick="saveTypeConfig()">Save</a>
+							<a href="javascript:;" class="btn btn-dark" id="" onclick="saveTypeConfig()">Save</a>
 
 						</div>
 						<!-- end tab-pane -->
@@ -1714,14 +1716,14 @@
 
 
 
-							<a href="javascript:;" class="btn btn-primary" id="" onclick="saveUpdateConfig()">Save</a>
+							<a href="javascript:;" class="btn btn-dark" id="" onclick="saveUpdateConfig()">Save</a>
 
 						</div>
 						<!-- end tab-pane -->
 						<!-- begin tab-pane -->
 						<div class="tab-pane fade" id="nav-pills-tab-3">
 							<!-- <h4 class="m-t-10">Creating a new object</h4> -->
-							<h5 class="m-t-10">Remove a specific <span id="sel_obTitle_add"></span> from <span id="sel_siteTitle_add"></span> by its ID</h5></br>
+							<h5 class="m-t-10">Create a new <span id="sel_obTitle_add"></span> in <span id="sel_siteTitle_add"></span></h5></br>
 							<p>Which of the following <span id="sel_site_add"></span> API endpoints creates a new <span id="sel_ob_add"></span> object?
 								Click on each one to view their descreption.</p>
 
@@ -1748,7 +1750,7 @@
 							</div>
 							</br></br> -->
 
-						<a href="javascript:;" class="btn btn-primary" id="" onclick="saveAddConfig()">Save</a>
+						<a href="javascript:;" class="btn btn-dark" id="" onclick="saveAddConfig()">Save</a>
 
 						</div>
 						<!-- end tab-pane -->
@@ -1783,7 +1785,7 @@
 							</div>
 							</br></br>
 
-						<a href="javascript:;" class="btn btn-primary" id="" onclick="saveRemoveConfig()">Save</a>
+						<a href="javascript:;" class="btn btn-dark" id="" onclick="saveRemoveConfig()">Save</a>
 
 						</div>
 						<!-- end tab-pane -->
@@ -1796,7 +1798,7 @@
 								<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
 								</br></br> -->
 
-								<p>1. Which of the following <span id="sel_site_meth"></span> API endpoints implement this method <span id="sel_ob_meth"></span> object?
+								<p>1. Which of the following <span id="sel_site_meth"></span> API endpoints searches for <span id="sel_ob_meth"></span> object?
 									Click on each one to view their descreption</p>
 								<div style="overflow: scroll; height:260px" class="box">
 									<div id="accordion-method" class="accordion">
@@ -1818,14 +1820,34 @@
 								</select>
 								</br></br>
 
-								<!-- <p>5. Which of the follwing fields is the id of the </p>
+								<p>3. Which of the follwing fields is the id of the object?</p>
 								<select id="method-result-type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
 									<option selected>Choose the ID</option>
 								</select>
-								</div> -->
+								</div>
 
 							</br></br>
-							<a href="javascript:;" class="btn btn-primary" id="" onclick="saveMethodConfig()">Save</a>
+							<a href="javascript:;" class="btn btn-dark" id="" onclick="saveMethodConfig()">Save</a>
+
+						</div>
+						<!-- end tab-pane -->
+
+
+						<div class="tab-pane fade" id="nav-pills-tab-6">
+							<!-- <h4 class="m-t-10">Removing a specific object</h4> -->
+							<h5 class="m-t-10">Add methods to <span id="sel_obTitle_re"></span> object</h5></br>
+							<p>1. Which of the following <span id="sel_site_re"></span> API endpoints correspond to a method that you would like to add <span id="sel_ob_re"></span> object?
+								Click on each one to view their descreption.</p>
+
+							<div style="overflow: scroll; height:260px" class="box">
+								<!-- begin #accordion -->
+								<div id="accordion-type-method" class="accordion">
+								</div>
+								<!-- end #accordion -->
+							</div>
+							</br>
+
+							<!-- whehenevr the user select one enpoint add it to the list of methods -->
 
 						</div>
 						<!-- end tab-pane -->

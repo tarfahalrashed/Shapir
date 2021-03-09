@@ -85,6 +85,8 @@ export default async function shapir(){
                             var getters = typeOb.getters;
                             var setters = typeOb.setters;
                             var methods = typeOb.methods;
+                            var remove = typeOb.delete;
+                            var add = typeOb.add;
                             var fields=[], paramList="", mParamList="";
 
                             if (params){
@@ -525,8 +527,8 @@ export default async function shapir(){
                                         else { //if the property is a type
                                             let propType = properties[p].property;
                                             let typeName = properties[p].type;
-                                            console.log("typeId: ", typeId);
-                                            console.log("o[typeId]1: ", o[typeId])
+                                            // console.log("typeId: ", typeId);
+                                            // console.log("o[typeId]1: ", o[typeId])
                                             var idVal = o[typeId];
 
                                             // creat a getter for property of type Type
@@ -554,15 +556,143 @@ export default async function shapir(){
                                         }
                                     }//end of for loop properties
 
+                                    if(remove){
+
+                                        //for (var m=0;  m<methods.length; ++m){
+                                            // var mName = methods[m].name;
+                                            var mEndpoint = remove.endpoint;
+                                            var mParams = remove.id;
+
+                                            Object.defineProperty(o, 'delete', {
+                                                // enumerable: true,
+                                                // configurable: true,
+                                                value: function() {
+                                                    mParamList+=mParams
+                                                    mParamList+="="
+                                                    mParamList+=o[typeId];
+                                                // console.log("mParamList: ", mParamList)
+                                                return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
+                                                obJSON = snapshot.val();
+                                                // console.log(obJSON)
+
+                                                if (obJSON.oauth2){
+                                                    var tokenPromise;
+                                                    //show a popup window
+                                                    //ask for clientID, clientSecret, and redirectURL
+
+                                                        return new Promise((resolve, reject) => {
+                                                            var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
+
+                                                            newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
+                                                            +'<table><tr><td><label for="male">Client ID</label></td>'
+                                                            +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
+                                                            +'<tr><td><label for="female">Client Secret</label></td>'
+                                                            +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
+                                                            +'<tr><td><label for="other">Redirect URL</label></td>'
+                                                            +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
+                                                            +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
+                                                            );
+                                                            newWindow.document.getElementById('formBut').addEventListener('click', function(){
+                                                                // console.log("C ID: ", newWindow.document.getElementById('cId').value)
+                                                                // console.log("C SEC: ", newWindow.document.getElementById('cSec').value)
+                                                                // console.log("Red: ", newWindow.document.getElementById('red').value)
+                                                                newWindow.close();
+                                                                let clientID  = newWindow.document.getElementById('cId').value;
+                                                                let clientSec = newWindow.document.getElementById('cSec').value;
+                                                                let callbackUrl  = newWindow.document.getElementById('red').value
+                                                                console.log("auth function");
+                                                                auth_url= obJSON.oauth2[0].authURL;
+                                                                token_url= obJSON.oauth2[0].tokenURL;
+                                                                redirect_url= callbackUrl;//obJSON.oauth2[0].callbackURL;
+                                                                client_id= clientID;//obJSON.oauth2[0].clientId;
+                                                                client_secret= clientSec;//obJSON.oauth2[0].clientSec;
+                                                                response_type= obJSON.oauth2[0].resType;
+                                                                scope= obJSON.oauth2[0].scope;
+                                                                grant_type= obJSON.oauth2[0].grantType;
+                                                                client_auth= obJSON.oauth2[0].clientAuth;
+
+                                                                    var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
+                                                                    var pollTimer = window.setInterval(function() {
+                                                                        try {
+                                                                            console.log("url here: ", win.document.URL); //here url
+                                                                            if (win.document.URL.indexOf(redirect_url) != -1) {
+                                                                                window.clearInterval(pollTimer);
+                                                                                var url =   win.document.URL;
+                                                                                // acToken =   gup(url, 'code');
+                                                                                // tokenType = gup(url, 'token_type');
+                                                                                // expiresIn = gup(url, 'expires_in');
+                                                                                win.close();
+                                                                                resolve(gup(url, 'code'))
+                                                                            }
+                                                                        } catch(e) {
+                                                                            console.log("error in oauth")
+                                                                        }
+                                                                    }, 200);
+
+                                                                    function gup(url, name) {
+                                                                        name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
+                                                                        var regexS = "[\?&]"+name+"=([^&#]*)";
+                                                                        var regex = new RegExp( regexS );
+                                                                        var results = regex.exec( url );
+                                                                        if ( results == null )
+                                                                            return "";
+                                                                        else{
+                                                                            return results[1];
+                                                                        }
+                                                                    }//end of gup()
+                                                                // }se value
+                                                            });
+
+
+
+                                                        })//end of promise return
+                                                        .then(token=>{
+                                                            return new Promise((resolve, reject) => {
+                                                            console.log("Token: ",token)
+                                                            console.log("Token URL: ",token_url)
+                                                            $.ajax({
+                                                                url: token_url,
+                                                                method: "POST",
+                                                                data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                success: function(response) {
+                                                                    console.log("response: ",response);
+                                                                    //important to check access token and token type (e.g. bearer)
+                                                                    tok = response.access_token;
+                                                                    console.log("tok: ", tok)
+                                                                    resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
+                                                                },
+                                                                error: function(response, jqXHR, textStatus, errorThrown) {
+                                                                    console.log("error: ",response);
+                                                                }
+                                                            })
+                                                        })
+                                                        // return something
+                                                    })
+
+
+                                                }else { //no oauth
+                                                    // console.log("!!!oauth2")
+                                                    result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
+                                                    return result;
+                                                }
+
+                                                })//firebase
+                                                .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
+                                            }
+                                            });
+                                        //   });
+
+                                        //}//loop to create methods
+                                    }
 
                                     //***************************** SETTERS *********************************/
                                     if (setters){
                                     for (var s=0; s<setters.length; ++s){
-                                        // console.log("setter: ", setters[s])
+                                        console.log("setter: ", setters[s])
                                         var field = setters[s].field; //API endpoint field to be set
-                                        var prop;
+                                        var prop="";
                                         var setEndpoint =  setters[s].endpoint;
-                                        var setParams = setters[s].params;
+                                        // var setParams = setters[s].params;
                                         var idd = setters[s].id;
                                         //get the schema.org property mapped to this field
                                         for (var f=0; f< properties.length; ++f){
@@ -580,48 +710,69 @@ export default async function shapir(){
                                                 if (obJSON.oauth2){
                                                     // console.log("oauth2")
                                                     return new Promise((resolve, reject) => {
+                                                        var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
+
+                                                        newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
+                                                        +'<table><tr><td><label for="male">Client ID</label></td>'
+                                                        +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
+                                                        +'<tr><td><label for="female">Client Secret</label></td>'
+                                                        +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
+                                                        +'<tr><td><label for="other">Redirect URL</label></td>'
+                                                        +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
+                                                        +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
+                                                        );
+                                                        newWindow.document.getElementById('formBut').addEventListener('click', function(){
+                                                            // console.log("C ID: ", newWindow.document.getElementById('cId').value)
+                                                            // console.log("C SEC: ", newWindow.document.getElementById('cSec').value)
+                                                            // console.log("Red: ", newWindow.document.getElementById('red').value)
+                                                            newWindow.close();
+                                                            let clientID  = newWindow.document.getElementById('cId').value;
+                                                            let clientSec = newWindow.document.getElementById('cSec').value;
+                                                            let callbackUrl  = newWindow.document.getElementById('red').value
                                                             console.log("auth function");
                                                             auth_url= obJSON.oauth2[0].authURL;
                                                             token_url= obJSON.oauth2[0].tokenURL;
-                                                            redirect_url= obJSON.oauth2[0].callbackURL;
-                                                            client_id= obJSON.oauth2[0].clientId;
-                                                            client_secret= obJSON.oauth2[0].clientSec;
+                                                            redirect_url= callbackUrl; //obJSON.oauth2[0].callbackURL;
+                                                            client_id= clientID; //obJSON.oauth2[0].clientId;
+                                                            client_secret= clientSec; //obJSON.oauth2[0].clientSec;
                                                             response_type= obJSON.oauth2[0].resType;
                                                             scope= obJSON.oauth2[0].scope;
                                                             grant_type= obJSON.oauth2[0].grantType;
                                                             client_auth= obJSON.oauth2[0].clientAuth;
 
-                                                            var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
-                                                            var pollTimer = window.setInterval(function() {
-                                                                try {
-                                                                    console.log("url here: ", win.document.URL); //here url
-                                                                    if (win.document.URL.indexOf(redirect_url) != -1) {
-                                                                        window.clearInterval(pollTimer);
-                                                                        var url =   win.document.URL;
-                                                                        acToken =   gup(url, 'code');
-                                                                        resolve(acToken)
-                                                                        // tokenType = gup(url, 'token_type');
-                                                                        // expiresIn = gup(url, 'expires_in');
-                                                                        win.close();
-                                                                        // return validateToken(acToken)
+                                                                var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
+                                                                var pollTimer = window.setInterval(function() {
+                                                                    try {
+                                                                        console.log("url here: ", win.document.URL); //here url
+                                                                        if (win.document.URL.indexOf(redirect_url) != -1) {
+                                                                            window.clearInterval(pollTimer);
+                                                                            var url =   win.document.URL;
+                                                                            // acToken =   gup(url, 'code');
+                                                                            // tokenType = gup(url, 'token_type');
+                                                                            // expiresIn = gup(url, 'expires_in');
+                                                                            win.close();
+                                                                            resolve(gup(url, 'code'))
+                                                                        }
+                                                                    } catch(e) {
+                                                                        console.log("error in oauth")
                                                                     }
-                                                                } catch(e) {
-                                                                    console.log("error in oauth")
-                                                                }
-                                                            }, 200);
+                                                                }, 200);
 
-                                                            function gup(url, name) {
-                                                                name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
-                                                                var regexS = "[\?&]"+name+"=([^&#]*)";
-                                                                var regex = new RegExp( regexS );
-                                                                var results = regex.exec( url );
-                                                                if ( results == null )
-                                                                    return "";
-                                                                else
-                                                                    return results[1];
-                                                            }//end of gup()
+                                                                function gup(url, name) {
+                                                                    name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
+                                                                    var regexS = "[\?&]"+name+"=([^&#]*)";
+                                                                    var regex = new RegExp( regexS );
+                                                                    var results = regex.exec( url );
+                                                                    if ( results == null )
+                                                                        return "";
+                                                                    else{
+                                                                        return results[1];
+                                                                    }
+                                                                }//end of gup()
+                                                            // }se value
+                                                        });
 
-                                                        })
+                                                    })//end of promise return
                                                         .then(token=>{
                                                             return new Promise((resolve, reject) => {
                                                             console.log("Token: ",token)
@@ -643,7 +794,7 @@ export default async function shapir(){
                                                             })
                                                         })
                                                         // return something
-                                                        })
+                                                    })
 
                                                 }
                                                 else { //no oauth
@@ -659,7 +810,7 @@ export default async function shapir(){
                                             }
                                         });
                                     }
-                                }
+                                    }
 
                                     //***************************** METHODS *********************************/
                                     if (methods){//return here
@@ -697,126 +848,89 @@ export default async function shapir(){
                                                 // console.log(obJSON)
 
                                                 if (obJSON.oauth2){
-                                                    // console.log("oauth2")
-                                                    var tokenPromise;
-                                                    // var sTokens = JSON.parse(localStorage.getItem('tokens'));
-                                                    // console.log(sTokens)
-                                                    // const elementsIndex = sTokens.findIndex(element => element.site == site)
-                                                    // console.log("sTokens[elementsIndex]: ", sTokens[elementsIndex].token)
-                                                    // if (sTokens[elementsIndex].token!=""){
-                                                    //             tokenPromise= new Promise((resolve, reject) => {resolve(sTokens[elementsIndex].token)})
-                                                    //             .then(token=>{
-                                                    //                 return new Promise((resolve, reject) => {
-                                                    //                     console.log("Token: ",token)
-                                                    //                     $.ajax({
-                                                    //                         url: token_url,
-                                                    //                         method: "POST",
-                                                    //                         data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
-                                                    //                         success: function(response) {
-                                                    //                             console.log("response: ",response);
-                                                    //                             tok = response.access_token;
-                                                    //                             expires_in = response.expires_in;
-                                                    //                             console.log("tok: ", tok)
-                                                    //                             console.log("expires_in: ", expires_in)
-                                                    //                             // localStorage.setItem('tokens', JSON.stringify(sitesToken));
-                                                    //                             // console.log("tokens: ", localStorage.getItem('tokens'));
-                                                    //                             //const elementsIndex = this.sTokens.findIndex(element => element.site == site)
-                                                    //                             let newArray = [...sTokens]
-                                                    //                             newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
-                                                    //                             newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
-                                                    //                             // this.setState({newArray});
+                                                    return new Promise((resolve, reject) => {
+                                                        var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
 
-                                                    //                             localStorage.setItem('tokens', JSON.stringify(newArray));
-                                                    //                             console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
+                                                        newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
+                                                        +'<table><tr><td><label for="male">Client ID</label></td>'
+                                                        +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
+                                                        +'<tr><td><label for="female">Client Secret</label></td>'
+                                                        +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
+                                                        +'<tr><td><label for="other">Redirect URL</label></td>'
+                                                        +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
+                                                        +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
+                                                        );
 
-                                                    //                             resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
-                                                    //                         },
-                                                    //                         error: function(response, jqXHR, textStatus, errorThrown) {
-                                                    //                             console.log("error: ",response);
-                                                    //                         }
-                                                    //                     })
-                                                    //                 })
-                                                    //             })
-                                                    //         }
-                                                    //         else {
-                                                                tokenPromise= new Promise((resolve, reject) => {
-                                                                    console.log("auth function");
-                                                                    auth_url= obJSON.oauth2[0].authURL;
-                                                                    token_url= obJSON.oauth2[0].tokenURL;
-                                                                    redirect_url= obJSON.oauth2[0].callbackURL;
-                                                                    client_id= obJSON.oauth2[0].clientId;
-                                                                    client_secret= obJSON.oauth2[0].clientSec;
-                                                                    response_type= obJSON.oauth2[0].resType;
-                                                                    scope= obJSON.oauth2[0].scope;
-                                                                    grant_type= obJSON.oauth2[0].grantType;
-                                                                    client_auth= obJSON.oauth2[0].clientAuth;
+                                                        newWindow.document.getElementById('formBut').addEventListener('click', function(){
+                                                        newWindow.close();
+                                                        let clientID  = newWindow.document.getElementById('cId').value;
+                                                        let clientSec = newWindow.document.getElementById('cSec').value;
+                                                        let callbackUrl  = newWindow.document.getElementById('red').value
+                                                        console.log("auth function");
+                                                        auth_url= obJSON.oauth2[0].authURL;
+                                                        token_url= obJSON.oauth2[0].tokenURL;
+                                                        redirect_url= callbackUrl; //obJSON.oauth2[0].callbackURL;
+                                                        client_id= clientID;//obJSON.oauth2[0].clientId;
+                                                        client_secret= clientSec; //obJSON.oauth2[0].clientSec;
+                                                        response_type= obJSON.oauth2[0].resType;
+                                                        scope= obJSON.oauth2[0].scope;
+                                                        grant_type= obJSON.oauth2[0].grantType;
+                                                        client_auth= obJSON.oauth2[0].clientAuth;
 
-                                                                    var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
-                                                                    var pollTimer = window.setInterval(function() {
-                                                                        try {
-                                                                            console.log("url here: ", win.document.URL); //here url
-                                                                            if (win.document.URL.indexOf(redirect_url) != -1) {
-                                                                                window.clearInterval(pollTimer);
-                                                                                var url =   win.document.URL;
-                                                                                acToken =   gup(url, 'code');
-                                                                                resolve(acToken)
-                                                                                // tokenType = gup(url, 'token_type');
-                                                                                // expiresIn = gup(url, 'expires_in');
-                                                                                win.close();
-                                                                            }
-                                                                        } catch(e) {
-                                                                            console.log("error in oauth")
-                                                                        }
-                                                                    }, 200);
+                                                            var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
+                                                            var pollTimer = window.setInterval(function() {
+                                                                try {
+                                                                    console.log("url here: ", win.document.URL); //here url
+                                                                    if (win.document.URL.indexOf(redirect_url) != -1) {
+                                                                        window.clearInterval(pollTimer);
+                                                                        var url =   win.document.URL;
+                                                                        // acToken =   gup(url, 'code');
+                                                                        // tokenType = gup(url, 'token_type');
+                                                                        // expiresIn = gup(url, 'expires_in');
+                                                                        win.close();
+                                                                        resolve(gup(url, 'code'))
+                                                                    }
+                                                                } catch(e) {
+                                                                    console.log("error in oauth")
+                                                                }
+                                                            }, 200);
 
-                                                                    function gup(url, name) {
-                                                                        name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
-                                                                        var regexS = "[\?&]"+name+"=([^&#]*)";
-                                                                        var regex = new RegExp( regexS );
-                                                                        var results = regex.exec( url );
-                                                                        if ( results == null )
-                                                                            return "";
-                                                                        else
-                                                                            return results[1];
-                                                                    }//end of gup()
+                                                            function gup(url, name) {
+                                                                name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
+                                                                var regexS = "[\?&]"+name+"=([^&#]*)";
+                                                                var regex = new RegExp( regexS );
+                                                                var results = regex.exec( url );
+                                                                if ( results == null )
+                                                                    return "";
+                                                                else{
+                                                                    return results[1];
+                                                                }
+                                                            }//end of gup()
+                                                            // }se value
+                                                        });
 
+                                                    })//end of promise return
+                                                    .then(token=>{
+                                                        return new Promise((resolve, reject) => {
+                                                                console.log("Token: ",token)
+                                                                console.log("Token URL: ",token_url)
+                                                                $.ajax({
+                                                                    url: token_url,
+                                                                    method: "POST",
+                                                                    data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                    success: function(response) {
+                                                                        console.log("response: ",response);
+                                                                        //important to check access token and token type (e.g. bearer)
+                                                                        tok = response.access_token;
+                                                                        console.log("tok: ", tok)
+                                                                        resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
+                                                                    },
+                                                                    error: function(response, jqXHR, textStatus, errorThrown) {
+                                                                        console.log("error: ",response);
+                                                                    }
                                                                 })
-                                                                .then(token=>{
-                                                                    return new Promise((resolve, reject) => {
-                                                                        console.log("Token: ",token)
-                                                                        $.ajax({
-                                                                            url: token_url,
-                                                                            method: "POST",
-                                                                            data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
-                                                                            success: function(response) {
-                                                                                console.log("response: ",response);
-                                                                                tok = response.access_token;
-                                                                                expires_in = response.expires_in;
-                                                                                console.log("tok: ", tok)
-                                                                                console.log("expires_in: ", expires_in)
-                                                                                // localStorage.setItem('tokens', JSON.stringify(sitesToken));
-                                                                                // console.log("tokens: ", localStorage.getItem('tokens'));
-                                                                                let newArray = [...sTokens]
-                                                                                newArray[elementsIndex] = {...newArray[elementsIndex], token: tok}
-                                                                                newArray[elementsIndex] = {...newArray[elementsIndex], expires_in: expires_in}
-                                                                                // this.setState({newArray});
-
-                                                                                localStorage.setItem('tokens', JSON.stringify(newArray));
-                                                                                console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
-
-
-                                                                                resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
-                                                                            },
-                                                                            error: function(response, jqXHR, textStatus, errorThrown) {
-                                                                                console.log("error: ",response);
-                                                                            }
-                                                                        })
-                                                                    })
-                                                                })
-                                                            //}
-
-                                                    return tokenPromise
-
+                                                            })
+                                                        })
 
                                                 }else { //no oauth
                                                     // console.log("!!!oauth2")
@@ -826,7 +940,10 @@ export default async function shapir(){
 
                                                 })//firebase
                                                 .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
-                                            }
+
+                                            }////////////
+
+
                                             });
                                         //   });
 
@@ -847,7 +964,139 @@ export default async function shapir(){
                             // return obj;
                         };//end of self function
 
-                }
+                        window[site][type]['create'] = function(args) { return create(val, args) };
+
+                        function create(typeOb, args){
+
+                            let createEndpoint =  typeOb.add.endpoint;
+                            console.log("createEndpoint: ", createEndpoint)
+                            console.log("args: ", args)
+
+                            return firebase.database().ref('/apis/'+createEndpoint).once('value').then(function(snapshot) {
+                                obJSON = snapshot.val();
+
+                                let paramNames = []
+                                let mParamList =""
+
+                                for(let p in obJSON.parameters){
+                                    paramNames.push(obJSON.parameters[p].name)
+                                }
+
+                                var paramLen = Object.entries(args).length;
+                                for (const [key, value] of Object.entries(args)) {
+                                    --paramLen
+                                    // if(paramNames.indexOf(key) != -1){//check if the param is correct
+                                        console.log(`${key}: ${value}`);
+                                        mParamList+= key
+                                        mParamList+="="
+                                        mParamList+= value
+                                        if (paramLen>0){
+                                            mParamList+="&"
+                                        }
+                                    // }
+                                }
+                                if(mParamList.endsWith("&")){
+                                    mParamList = mParamList.slice(0, -1);
+                                }
+
+                                if (obJSON.oauth2){
+                                    return new Promise((resolve, reject) => {
+                                        var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
+
+                                        newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
+                                        +'<table><tr><td><label for="male">Client ID</label></td>'
+                                        +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
+                                        +'<tr><td><label for="female">Client Secret</label></td>'
+                                        +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
+                                        +'<tr><td><label for="other">Redirect URL</label></td>'
+                                        +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
+                                        +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
+                                        );
+
+                                        newWindow.document.getElementById('formBut').addEventListener('click', function(){
+                                        newWindow.close();
+                                        let clientID  = newWindow.document.getElementById('cId').value;
+                                        let clientSec = newWindow.document.getElementById('cSec').value;
+                                        let callbackUrl  = newWindow.document.getElementById('red').value
+                                        console.log("auth function");
+                                        auth_url= obJSON.oauth2[0].authURL;
+                                        token_url= obJSON.oauth2[0].tokenURL;
+                                        redirect_url= callbackUrl; //obJSON.oauth2[0].callbackURL;
+                                        client_id= clientID; //obJSON.oauth2[0].clientId;
+                                        client_secret= clientSec;//obJSON.oauth2[0].clientSec;
+                                        response_type= obJSON.oauth2[0].resType;
+                                        scope= obJSON.oauth2[0].scope;
+                                        grant_type= obJSON.oauth2[0].grantType;
+                                        client_auth= obJSON.oauth2[0].clientAuth;
+
+                                            var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
+                                            var pollTimer = window.setInterval(function() {
+                                                try {
+                                                    console.log("url here: ", win.document.URL); //here url
+                                                    if (win.document.URL.indexOf(redirect_url) != -1) {
+                                                        window.clearInterval(pollTimer);
+                                                        var url =   win.document.URL;
+                                                        // acToken =   gup(url, 'code');
+                                                        // tokenType = gup(url, 'token_type');
+                                                        // expiresIn = gup(url, 'expires_in');
+                                                        win.close();
+                                                        resolve(gup(url, 'code'))
+                                                    }
+                                                } catch(e) {
+                                                    console.log("error in oauth")
+                                                }
+                                            }, 200);
+
+                                            function gup(url, name) {
+                                                name = name.replace(/[[]/,"\[").replace(/[]]/,"\]");
+                                                var regexS = "[\?&]"+name+"=([^&#]*)";
+                                                var regex = new RegExp( regexS );
+                                                var results = regex.exec( url );
+                                                if ( results == null )
+                                                    return "";
+                                                else{
+                                                    return results[1];
+                                                }
+                                            }//end of gup()
+                                            // }se value
+                                        });
+
+                                    })//end of promise return
+                                    .then(token=>{
+                                        return new Promise((resolve, reject) => {
+                                            console.log("Token: ",token)
+                                            console.log("Token URL: ",token_url)
+                                            $.ajax({
+                                                url: token_url,
+                                                method: "POST",
+                                                data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                success: function(response) {
+                                                    console.log("response: ",response);
+                                                    //important to check access token and token type (e.g. bearer)
+                                                    tok = response.access_token;
+                                                    console.log("tok: ", tok)
+                                                    resolve('https://scrapir.org/api/'+createEndpoint+'?tokenAPI='+tok+'&'+mParamList)
+                                                },
+                                                error: function(response, jqXHR, textStatus, errorThrown) {
+                                                    console.log("error: ",response);
+                                                }
+                                            })
+                                        })
+                                    })
+
+                                }else { //no oauth
+                                    // console.log("!!!oauth2")
+                                    result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
+                                    return result;
+                                }
+
+                            })//firebase
+
+                            .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
+                        }
+
+                    }//add
+
                 }//if objects
 
                 if (siteKey == "functions"){
@@ -2344,6 +2593,12 @@ export default async function shapir(){
                             // return obj;
                         };
 
+
+                        // support searchVideoObject("funny cats", {in: ["youtube", "dailymotion"], order: "date"})
+                        // functionName1 :[arry of sites] save the object of the search function then outisde of the lo
+                        // functionName2 :[arry of sites] save the object of the search function then outisde of the lo
+                        // Object1: [array of sites]
+                        // window[funcName] = function(...mArgs) { return nameFunction(...mArgs) };
 
 
                     }

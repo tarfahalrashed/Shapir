@@ -8,7 +8,6 @@ var http = require('http');
 var https = require('https');
 const axios = require('axios');
 
-// var subdomain = require('express-subdomain');
 var app = express();
 
 

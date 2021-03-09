@@ -321,8 +321,9 @@ function openNavType(id) {
   $("#accordion-add").empty()
   $("#accordion-remove").empty()
   $("#accordion-update").empty()
-
   $("#accordion-method").empty();
+  $("#accordion-type-method").empty();
+
 
   $("#idLabel").hide();
   $("#mapLabel").hide();
@@ -331,32 +332,37 @@ function openNavType(id) {
     var urlText = scrapirAPIs[i].url;
       if(urlText.includes(site)){
         noSpacesTitle = scrapirAPIs[i].title.split(' ').join('');
-        $("#accordion").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosen(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion"><div class="card-body" id="cardBody'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosen(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion"><div class="card-body" id="cardBody'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBody"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
-        $("#accordion-add").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenAdd(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-add"><div class="card-body" id="cardBodyAdd'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion-add").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForAdd(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-add"><div class="card-body" id="cardBodyAdd'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyAdd"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
-        $("#accordion-remove").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenRemove(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-remove"><div class="card-body" id="cardBodyRemove'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion-remove").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForRemove(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-remove"><div class="card-body" id="cardBodyRemove'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyRemove"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
-        $("#accordion-update").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenUpdate(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-update"><div class="card-body" id="cardBodyUpdate'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion-update").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForUpdate(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-update"><div class="card-body" id="cardBodyUpdate'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
-        $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
+        $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+
+        $("#accordion-type-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForTypeMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-type-method"><div class="card-body" id="cardBodyTM'+noSpacesTitle+'"> </div></div></div>')
+        $("#cardBodyTM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
         if(scrapirAPIs[i].params){
           $("#cardBody"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>');
           $("#cardBodyRemove"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>');
           $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
           $("#cardBodyM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+          $("#cardBodyTM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
         }
         if(scrapirAPIs[i].res){
           $("#cardBody"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>');
           $("#cardBodyRemove"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>');
           $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>');
           $("#cardBodyM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+          $("#cardBodyTM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
         }
 
         // $("#apis-type").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
@@ -1710,8 +1716,9 @@ function urlHasBeenChosen(select){
 }
 
 
+var urlAPIAdd;
 
-function urlHasBeenChosenAdd(select){
+function urlHasBeenChosenForAdd(select){
 
   // $("#idLabel-add").show()
 
@@ -1720,6 +1727,8 @@ function urlHasBeenChosenAdd(select){
   console.log("apiTitle: ", apiTitle);
 
   currentURLGetter = apiTitle;
+
+  urlAPIAdd=apiTitle
 
   ob={
     [currentType]:{
@@ -1804,8 +1813,9 @@ function urlHasBeenChosenAdd(select){
 
 
 
+var urlAPIRemove;
 
-function urlHasBeenChosenRemove(select){
+function urlHasBeenChosenForRemove(select){
 
   $("#idLabel-remove").show()
 
@@ -1814,6 +1824,8 @@ function urlHasBeenChosenRemove(select){
   console.log("apiTitle: ", apiTitle);
 
   currentURLGetter = apiTitle
+
+  urlAPIRemove= apiTitle
 
   // ob={
   //   [currentType]:{
@@ -1910,8 +1922,9 @@ function urlHasBeenChosenRemove(select){
 
 }
 
+var urlAPIUpdate, urlAPIUpdateParams=[];
 
-function urlHasBeenChosenUpdate(select){
+function urlHasBeenChosenForUpdate(select){
   $("#idLabel-update").show()
 
   var resFields;
@@ -1919,6 +1932,7 @@ function urlHasBeenChosenUpdate(select){
   console.log("apiTitle: ", apiTitle);
 
   currentURLGetter = apiTitle;
+  urlAPIUpdate.push(apiTitle);
 
   firebase.database().ref('/apis/').once('value').then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -1943,8 +1957,10 @@ function urlHasBeenChosenUpdate(select){
         for(var i=0; i<reqParam.length; ++i){
           if(reqParam[i].displayed && reqParam[i].displayed==true){
             $("#type-id-update").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+            urlAPIUpdateParams.push(eqParam[i].name)
           }else if(!reqParam[i].displayed){
             $("#type-id-update").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+            urlAPIUpdateParams.push(eqParam[i].name)
           }else{
             // do nothing
           }
@@ -1991,17 +2007,126 @@ function urlHasBeenChosenUpdate(select){
 
 }
 
-var urlAPI;
+var urlAPI, urlAPIMethod;
 
 function urlHasBeenChosenForMethod(select){
 
   urlAPI = select.getAttribute("id")//.options[select.selectedIndex].getAttribute("id");
   console.log("urlAPI: ", urlAPI);
+  urlAPIMethod = urlAPI
 
   $("#search-method").show();
 
-  tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
-  temp.functions.push(tempAct);
+  // tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
+  // temp.functions.push(tempAct);
+
+  firebase.database().ref('/apis/').once('value').then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.val().title==urlAPI){
+        console.log("par: ",childSnapshot.val().parameters) //choose which one you want to send as parameter to the function
+        console.log("res: ", childSnapshot.val().responses)
+        resFields = childSnapshot.val().responses;
+        reqParam  = childSnapshot.val().parameters;
+        apiURL = childSnapshot.val().url;
+        //Show a dropdown menu from the response fields to map them to the type properties
+
+        var props= allProperties;
+        var currentSimScore = 0;
+        var mostSimilarProp=""
+        resProplist=[]
+
+        $("#method-result-type-id").empty();
+        $("#method-result-type-id").append('<option selected>Choose the ID</option>')
+
+        if(resFields){
+          for(var i=0; i<resFields.length; ++i){
+            currentSimScore = 0;
+            mostSimilarProp=""
+            resProplist.push(resFields[i].displayedName);
+            $("#method-result-type-id").append('<option id="'+resFields[i].displayedName+'">'+resFields[i].displayedName+'</option>');
+          }
+        }
+
+        $("#method-search-param").empty();
+        $("#method-search-param").append('<option selected>Choose search parameter</option>')
+
+        if(reqParam){
+          for(var i=0; i<reqParam.length; ++i){
+            if(reqParam[i].displayed && reqParam[i].displayed==true){
+              $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+            }else if(!reqParam[i].displayed){
+              $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+            }else{
+              // do nothing
+            }
+          }
+
+        }
+
+        console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
+
+        propList=[]
+        for(var j=0; j<typePropertyType[clickedType].length; ++j){
+          if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
+            //push it
+            propList.push(typePropertyType[clickedType][j].name)
+          }else{
+            //skip it
+          }
+        }
+
+        // propList = temp.objects[currentType].properties;
+
+        console.log("final response ", resProplist);
+        console.log("final properties GGG ", propList);
+
+        // temp.objects[getter].properties
+
+        // APPEND the above arrays to the table2
+        //$("#table2 tbody").empty()
+
+        for(var i=0; i<resProplist.length || i<propList.length ; ++i){
+          if(resProplist[i] === undefined){
+            var r = ''
+          }else{
+            var r = resProplist[i]
+          }
+
+          if(propList[i] === undefined){
+            var p = ''
+          }else{
+            var p = '<div class="redips-drag">'+propList[i]+'</div>'
+          }
+
+          //$("#table2 tbody").append('<tr><td class="redips-mark">'+r+'</td><td>'+p+'</td></tr>');
+
+        }
+
+      }
+    });
+  });
+
+
+  setTimeout(() => {
+    jQuery('.selectpicker').selectpicker('refresh');
+  }, 500);
+
+}
+
+
+var urlAPITypeMethod;
+
+function urlHasBeenChosenForTypeMethod(select){
+
+  urlAPI = select.getAttribute("id")//.options[select.selectedIndex].getAttribute("id");
+  console.log("urlAPI: ", urlAPI);
+
+  urlAPITypeMethod.push(urlAPI) //list of methods chosen for this type
+
+  $("#search-method").show();
+
+  // tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
+  // temp.functions.push(tempAct);
 
   firebase.database().ref('/apis/').once('value').then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -2308,6 +2433,8 @@ function saveRemoveConfig(){
 }
 
 
+var tempSearch = {}
+
 function saveMethodConfig(){
 
   methodName="Search";
@@ -2317,12 +2444,17 @@ function saveMethodConfig(){
   var u = urlAPI;//document.getElementById("apis-url-method");
   var r = clickedType; //document.getElementById("method-result-type");
   var term = document.getElementById("method-search-param");
-  var id = document.getElementById("type-id"); //the getter ID
+  var id = document.getElementById("method-result-type-id"); //the getter ID
 
   // console.log("U: ", u.options[u.selectedIndex].text)
   // console.log("R: ", r.options[r.selectedIndex].text)
   console.log("SEARCH TYPE: ", clickedType)
   console.log("TERM: ", term.options[term.selectedIndex].text)
+
+  // tempSearch= {};
+  // tempSearch= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
+
+
   // console.log("ID: ", id.options[id.selectedIndex].text)
   // tempAct[method]= {"endpoint":"", "object":"", "name":"", "type":""};
 
@@ -2369,14 +2501,18 @@ function saveMethodConfig(){
 
   //   console.log("OBJECT: ", temp.functions.find( ({ type }) => type === methodName ))
 
-    temp.functions.find( ({ type }) => type === methodName ).endpoint = u; //"TEST"//u.options[u.selectedIndex].text;
-    temp.functions.find( ({ type }) => type === methodName ).object = r; //r.options[r.selectedIndex].text;
-    temp.functions.find( ({ type }) => type === methodName ).name = "Search";//document.getElementById('meth-name').value;
+    // temp.functions.find( ({ type }) => type === methodName ).endpoint = u; //"TEST"//u.options[u.selectedIndex].text;
+    // temp.functions.find( ({ type }) => type === methodName ).object = r; //r.options[r.selectedIndex].text;
+    // temp.functions.find( ({ type }) => type === methodName ).name = "Search";//document.getElementById('meth-name').value;
+
     // temp.functions[methodName].type = "";"
+
     // if(name=='Search'){
-      temp.functions.find( ({ type }) => type === methodName ).searchParam = term.options[term.selectedIndex].text;
-      temp.functions.find( ({ type }) => type === methodName ).id = id.options[id.selectedIndex].text;
-    // }
+
+      // temp.functions.find( ({ type }) => type === methodName ).searchParam = term.options[term.selectedIndex].text;
+      // temp.functions.find( ({ type }) => type === methodName ).id = id.options[id.selectedIndex].text;
+
+      // }
   // }else{
     // console.log("OBJECT: ", temp.objects[methodParent].methods.find( ({ type }) => type === methodName ))
     //ADD THE ROW FOR SEARCH AND THE API
@@ -2707,7 +2843,7 @@ function typeHasBeenChosen(select){
   +'<td style="width:100%"><button id="'+type+'_getM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type SEARCH row id="<type>_searchM"
-  $("#"+type+" tbody").append('<tr id="'+type+'_searchM" style="data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+  $("#"+type+" tbody").append('<tr style="display:none" id="'+type+'_searchM" style="data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   // add this if you want to give the user the option to add search
   // $("#"+type+" tbody").append('<tr id="butShow_'+type+'"><td><button id="show_'+type+'" style="margin-left:45px;" onclick="showRow(this.id)">SHOW</button></td></tr>   <tr id="'+type+'_searchM" style="display:none" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
@@ -3023,7 +3159,7 @@ function typeHasBeenChosen(select){
 
   jQuery('.selectpicker').selectpicker('refresh');
 
-}, 200);
+}, 300);
 
 }
 
@@ -3279,14 +3415,55 @@ function saveSchema(){
       tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
       siteObj[site].functions.push(tempAct);
 
-      var selectSearch = document.getElementById("url_search_"+typeName);
-      siteObj[site].functions[0].endpoint= selectSearch[selectSearch.selectedIndex].value;
-      siteObj[site].functions[0].object= typeName;
-      siteObj[site].functions[0].name= "search"+typeName;
-      siteObj[site].functions[0].id= selId;
-      var selectSearchTerm = document.getElementById(typeName+"_search_term");
-      siteObj[site].functions[0].searchParam= selectSearchTerm[selectSearchTerm.selectedIndex].id;
+      // var selectSearch = document.getElementById("url_search_"+typeName);
+      // siteObj[site].functions[0].endpoint= selectSearch[selectSearch.selectedIndex].value;
+      // siteObj[site].functions[0].object= typeName;
+      // siteObj[site].functions[0].name= "search"+typeName;
+      // siteObj[site].functions[0].id= selId;
+      // var selectSearchTerm = document.getElementById(typeName+"_search_term");
+      // siteObj[site].functions[0].searchParam= selectSearchTerm[selectSearchTerm.selectedIndex].id;
 
+
+      // Add:
+      // Endpoint: urlAPIAdd
+      tempObj[typeName].add.endpoint= urlAPIAdd;
+
+      // Remove:
+      // endpoint: urlAPIRemove
+      // Id: type-id-remove
+      tempObj[typeName].remove.endpoint= urlAPIRemove;
+      tempObj[typeName].remove.id= document.getElementById('type-id-remove').value;
+
+      // Search:
+      // endpoint: urlAPIMethod
+      // Id: method-result-type-id
+      // Search term: method-search-param
+
+      // Update:
+      // endpoint: apiTitle
+      // Id: type-id-update
+      // tempObj[typeName].remove.endpoint= urlAPIRemove;
+      // tempObj[typeName].remove.id= document.getElementById('type-id-remove').value;
+      let tempSetter={"endpoint": "", "field":"", "id":"", "params":[]}
+      for(let p in urlAPIUpdateParams){
+
+        if(urlAPIUpdateParams[p] != document.getElementById('type-id-update').value){
+          //add to the description
+          tempSetter.endpoint= urlAPIUpdate[p];
+          tempSetter.field= urlAPIUpdateParams[p];
+          tempSetter.id= document.getElementById('type-id-update').value;
+          // tempSetter.params[0]= document.getElementById('type-id-update').value;
+          tempObj[typeName].setters.push(tempSetter)
+        }
+      }
+
+      let tempMethod={"endpoint": "", "name":""}
+      //Type methods
+      for(let m in urlAPITypeMethod){
+        tempMethod.endpoint= urlAPITypeMethod[m];
+        // tempMethod.endpoint= urlAPITypeMethod[m];
+        tempObj[typeName].methods.push(tempMethod);
+      }
 
       //Push to Firebase!
     }//end of loop
