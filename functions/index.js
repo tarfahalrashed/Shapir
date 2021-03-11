@@ -7,8 +7,35 @@ const fetch = require('node-fetch');
 var http = require('http');
 var https = require('https');
 const axios = require('axios');
-
 var app = express();
+
+
+app.get("/sent2vec", (req, res, next) => {
+
+    var spawn = require("child_process").spawn;
+    var process = spawn('python',["./sent2vec.py"]);
+    // var process = spawn('python',["./hello.py",
+    // req.query.firstname,
+    // req.query.lastname] );
+    // Takes stdout data from script which executed
+    // with arguments and send this data to res object
+    process.stdout.on('data', function(data) {
+        res.send(data.toString());
+    } )
+
+});
+
+
+
+app.get("/swagger", (req, res, next)=>{
+    const SwaggerClient = require('swagger-client')
+
+    var specUrl = 'https://api.apis.guru/v2/specs/nytimes.com/books_api/3.0.0/openapi.json'
+    var swaggerClient = new SwaggerClient(specUrl)
+
+    swaggerClient.then(client => console.log(res.send( client.apis)) )
+
+});
 
 
 //Scrape schema.org type page and retrieve its html
@@ -35,31 +62,9 @@ app.get("/schemaOrg/:name", (req, res, next) => {
 app.get("/api/:type/:site", (req, res, next) => {
 
   (async function(){
-    console.log("TYPE: ", req.params.type)
-    console.log("SITE: ", req.params.site)
-    console.log("SITE: ", req.params.id)
-    // console.log("PARAM: ", req.query)
-
-    // for(let i=0; i<)
-    // let paramList="";
-    // var obLength = Object.entries(req.query).length;
-
-    // Object.entries(req.query).forEach(([key, value]) => {
-    //   --obLength;
-    //   paramList+=`${key}`
-    //   paramList+="="
-    //   paramList+=`${value}`
-    //   if(obLength>0){
-    //     paramList+="&"
-    //   }
-    // });
-
-    // console.log("paramList: ",paramList)
-
     await shapir();
     let result = await global[req.params.site][req.params.type](req.params.id);
     res.send(result)
-      // await dailymotion.VideoObject("x7xf8kc"))
   })()
 
 })
@@ -2426,36 +2431,6 @@ async function shapir(){
 
   return Promise.all(results);
 }
-
-
-
-app.get("/sent2vec", (req, res, next) => {
-
-    var spawn = require("child_process").spawn;
-    var process = spawn('python',["./sent2vec.py"]);
-    // var process = spawn('python',["./hello.py",
-    // req.query.firstname,
-    // req.query.lastname] );
-    // Takes stdout data from script which executed
-    // with arguments and send this data to res object
-    process.stdout.on('data', function(data) {
-        res.send(data.toString());
-    } )
-
-});
-
-
-
-app.get("/swagger", (req, res, next)=>{
-    const SwaggerClient = require('swagger-client')
-
-    var specUrl = 'https://api.apis.guru/v2/specs/nytimes.com/books_api/3.0.0/openapi.json'
-    var swaggerClient = new SwaggerClient(specUrl)
-
-    swaggerClient.then(client => console.log(res.send( client.apis)) )
-
-});
-
 
 
 exports.app = functions.https.onRequest(app);
