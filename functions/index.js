@@ -2429,48 +2429,32 @@ async function shapir(){
 
 
 
-
-
 app.get("/sent2vec", (req, res, next) => {
 
-    // const spawn = require("child_process").spawn;
-    // const pythonProcess = spawn('python',["sent2vec.py", 'sent2vec']);
-
-    // print(dataToSendBack)
-    // sys.stdout.flush()
-
-    // pythonProcess.stdout.on('data', (data) => {
-    //     // Do something with the data returned from python script
-    //     res.send(data)
-    // });
-
-    const { spawn } = require('child_process');
-    const pyProg = spawn('python', ['sent2vec.py',"sent2vec"]);
-
-    pyProg.stdout.on('data', function(data) {
-
-        console.log(data.toString());
-    });
-    pyProg.stderr.on('data', (data) => {
-    console.log('Error-->'+ data);
-    });
-
-
-    // const tokenizers = require('./tokenizers');
-    // const FullTokenizer = tokenizers.FullTokenizer;
-    // const vocabFile = 'data/vocab.txt';
-
-    // const tokenizer = new FullTokenizer(vocabFile);
-    // const sentence = 'How do I control my horny emotions?';
-    // const tokens = tokenizer.tokenize(sentence);
-    // const encoded = tokenizer.convertTokensToIds(tokens);
-    // const decoded = tokenizer.convertIdsToTokens(encoded);
-    // console.log('tokens:', tokens);
-    // console.log('encoded:', encoded);
-    // console.log('decoded:', decoded);
+    var spawn = require("child_process").spawn;
+    var process = spawn('python',["./sent2vec.py"]);
+    // var process = spawn('python',["./hello.py",
+    // req.query.firstname,
+    // req.query.lastname] );
+    // Takes stdout data from script which executed
+    // with arguments and send this data to res object
+    process.stdout.on('data', function(data) {
+        res.send(data.toString());
+    } )
 
 });
 
+
+
+app.get("/swagger", (req, res, next)=>{
+    const SwaggerClient = require('swagger-client')
+
+    var specUrl = 'https://api.apis.guru/v2/specs/nytimes.com/books_api/3.0.0/openapi.json'
+    var swaggerClient = new SwaggerClient(specUrl)
+
+    swaggerClient.then(client => console.log(res.send( client.apis)) )
+
+});
 
 
 

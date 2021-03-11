@@ -576,36 +576,35 @@ export default async function shapir(){
                                                 // console.log(obJSON)
 
                                                 if (obJSON.oauth2){
-                                                    var tokenPromise;
                                                     //show a popup window
                                                     //ask for clientID, clientSecret, and redirectURL
 
                                                         return new Promise((resolve, reject) => {
-                                                            var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
+                                                            // var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
 
-                                                            newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
-                                                            +'<table><tr><td><label for="male">Client ID</label></td>'
-                                                            +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
-                                                            +'<tr><td><label for="female">Client Secret</label></td>'
-                                                            +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
-                                                            +'<tr><td><label for="other">Redirect URL</label></td>'
-                                                            +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
-                                                            +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
-                                                            );
-                                                            newWindow.document.getElementById('formBut').addEventListener('click', function(){
+                                                            // newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
+                                                            // +'<table><tr><td><label for="male">Client ID</label></td>'
+                                                            // +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
+                                                            // +'<tr><td><label for="female">Client Secret</label></td>'
+                                                            // +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
+                                                            // +'<tr><td><label for="other">Redirect URL</label></td>'
+                                                            // +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
+                                                            // +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
+                                                            // );
+                                                            // newWindow.document.getElementById('formBut').addEventListener('click', function(){
                                                                 // console.log("C ID: ", newWindow.document.getElementById('cId').value)
                                                                 // console.log("C SEC: ", newWindow.document.getElementById('cSec').value)
                                                                 // console.log("Red: ", newWindow.document.getElementById('red').value)
-                                                                newWindow.close();
-                                                                let clientID  = newWindow.document.getElementById('cId').value;
-                                                                let clientSec = newWindow.document.getElementById('cSec').value;
-                                                                let callbackUrl  = newWindow.document.getElementById('red').value
-                                                                console.log("auth function");
+                                                                // newWindow.close();
+                                                                // let clientID  = newWindow.document.getElementById('cId').value;
+                                                                // let clientSec = newWindow.document.getElementById('cSec').value;
+                                                                // let callbackUrl  = newWindow.document.getElementById('red').value
+                                                                // console.log("auth function");
                                                                 auth_url= obJSON.oauth2[0].authURL;
                                                                 token_url= obJSON.oauth2[0].tokenURL;
-                                                                redirect_url= callbackUrl;//obJSON.oauth2[0].callbackURL;
-                                                                client_id= clientID;//obJSON.oauth2[0].clientId;
-                                                                client_secret= clientSec;//obJSON.oauth2[0].clientSec;
+                                                                redirect_url= obJSON.oauth2[0].callbackURL;
+                                                                client_id= obJSON.oauth2[0].clientId;
+                                                                client_secret= obJSON.oauth2[0].clientSec;
                                                                 response_type= obJSON.oauth2[0].resType;
                                                                 scope= obJSON.oauth2[0].scope;
                                                                 grant_type= obJSON.oauth2[0].grantType;
@@ -641,7 +640,7 @@ export default async function shapir(){
                                                                         }
                                                                     }//end of gup()
                                                                 // }se value
-                                                            });
+                                                            //});//new window
 
 
 
@@ -710,31 +709,31 @@ export default async function shapir(){
                                                 if (obJSON.oauth2){
                                                     // console.log("oauth2")
                                                     return new Promise((resolve, reject) => {
-                                                        var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
+                                                        // var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
 
-                                                        newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
-                                                        +'<table><tr><td><label for="male">Client ID</label></td>'
-                                                        +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
-                                                        +'<tr><td><label for="female">Client Secret</label></td>'
-                                                        +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
-                                                        +'<tr><td><label for="other">Redirect URL</label></td>'
-                                                        +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
-                                                        +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
-                                                        );
-                                                        newWindow.document.getElementById('formBut').addEventListener('click', function(){
+                                                        // newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
+                                                        // +'<table><tr><td><label for="male">Client ID</label></td>'
+                                                        // +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
+                                                        // +'<tr><td><label for="female">Client Secret</label></td>'
+                                                        // +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
+                                                        // +'<tr><td><label for="other">Redirect URL</label></td>'
+                                                        // +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
+                                                        // +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
+                                                        // );
+                                                        // newWindow.document.getElementById('formBut').addEventListener('click', function(){
                                                             // console.log("C ID: ", newWindow.document.getElementById('cId').value)
                                                             // console.log("C SEC: ", newWindow.document.getElementById('cSec').value)
                                                             // console.log("Red: ", newWindow.document.getElementById('red').value)
-                                                            newWindow.close();
-                                                            let clientID  = newWindow.document.getElementById('cId').value;
-                                                            let clientSec = newWindow.document.getElementById('cSec').value;
-                                                            let callbackUrl  = newWindow.document.getElementById('red').value
-                                                            console.log("auth function");
+                                                            // newWindow.close();
+                                                            // let clientID  = newWindow.document.getElementById('cId').value;
+                                                            // let clientSec = newWindow.document.getElementById('cSec').value;
+                                                            // let callbackUrl  = newWindow.document.getElementById('red').value
+                                                            // console.log("auth function");
                                                             auth_url= obJSON.oauth2[0].authURL;
                                                             token_url= obJSON.oauth2[0].tokenURL;
-                                                            redirect_url= callbackUrl; //obJSON.oauth2[0].callbackURL;
-                                                            client_id= clientID; //obJSON.oauth2[0].clientId;
-                                                            client_secret= clientSec; //obJSON.oauth2[0].clientSec;
+                                                            redirect_url= obJSON.oauth2[0].callbackURL;
+                                                            client_id= obJSON.oauth2[0].clientId;
+                                                            client_secret= obJSON.oauth2[0].clientSec;
                                                             response_type= obJSON.oauth2[0].resType;
                                                             scope= obJSON.oauth2[0].scope;
                                                             grant_type= obJSON.oauth2[0].grantType;
@@ -770,7 +769,7 @@ export default async function shapir(){
                                                                     }
                                                                 }//end of gup()
                                                             // }se value
-                                                        });
+                                                        //});//end of new window
 
                                                     })//end of promise return
                                                         .then(token=>{
@@ -849,29 +848,28 @@ export default async function shapir(){
 
                                                 if (obJSON.oauth2){
                                                     return new Promise((resolve, reject) => {
-                                                        var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
+                                                        // var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
 
-                                                        newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
-                                                        +'<table><tr><td><label for="male">Client ID</label></td>'
-                                                        +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
-                                                        +'<tr><td><label for="female">Client Secret</label></td>'
-                                                        +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
-                                                        +'<tr><td><label for="other">Redirect URL</label></td>'
-                                                        +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
-                                                        +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
-                                                        );
+                                                        // newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
+                                                        // +'<table><tr><td><label for="male">Client ID</label></td>'
+                                                        // +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
+                                                        // +'<tr><td><label for="female">Client Secret</label></td>'
+                                                        // +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
+                                                        // +'<tr><td><label for="other">Redirect URL</label></td>'
+                                                        // +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
+                                                        // +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
+                                                        // );
 
-                                                        newWindow.document.getElementById('formBut').addEventListener('click', function(){
-                                                        newWindow.close();
-                                                        let clientID  = newWindow.document.getElementById('cId').value;
-                                                        let clientSec = newWindow.document.getElementById('cSec').value;
-                                                        let callbackUrl  = newWindow.document.getElementById('red').value
-                                                        console.log("auth function");
+                                                        // newWindow.document.getElementById('formBut').addEventListener('click', function(){
+                                                        // newWindow.close();
+                                                        // let clientID  = newWindow.document.getElementById('cId').value;
+                                                        // let clientSec = newWindow.document.getElementById('cSec').value;
+                                                        // let callbackUrl  = newWindow.document.getElementById('red').value
                                                         auth_url= obJSON.oauth2[0].authURL;
                                                         token_url= obJSON.oauth2[0].tokenURL;
-                                                        redirect_url= callbackUrl; //obJSON.oauth2[0].callbackURL;
-                                                        client_id= clientID;//obJSON.oauth2[0].clientId;
-                                                        client_secret= clientSec; //obJSON.oauth2[0].clientSec;
+                                                        redirect_url= obJSON.oauth2[0].callbackURL;
+                                                        client_id= obJSON.oauth2[0].clientId;
+                                                        client_secret= obJSON.oauth2[0].clientSec;
                                                         response_type= obJSON.oauth2[0].resType;
                                                         scope= obJSON.oauth2[0].scope;
                                                         grant_type= obJSON.oauth2[0].grantType;
@@ -907,7 +905,7 @@ export default async function shapir(){
                                                                 }
                                                             }//end of gup()
                                                             // }se value
-                                                        });
+                                                       // });//end of new window
 
                                                     })//end of promise return
                                                     .then(token=>{
@@ -1001,29 +999,29 @@ export default async function shapir(){
 
                                 if (obJSON.oauth2){
                                     return new Promise((resolve, reject) => {
-                                        var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
+                                        // var newWindow = window.open("", null, "height=250,width=600,status=yes,toolbar=no,menubar=no,location=no");
 
-                                        newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
-                                        +'<table><tr><td><label for="male">Client ID</label></td>'
-                                        +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
-                                        +'<tr><td><label for="female">Client Secret</label></td>'
-                                        +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
-                                        +'<tr><td><label for="other">Redirect URL</label></td>'
-                                        +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
-                                        +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
-                                        );
+                                        // newWindow.document.write('<h4> This method requires authentication. Please signup for the API and and provide your client id, client secret and callback url</h4>'
+                                        // +'<table><tr><td><label for="male">Client ID</label></td>'
+                                        // +'<td><input style="width:380px"  type="text" id="cId" value=""></td> </tr>'
+                                        // +'<tr><td><label for="female">Client Secret</label></td>'
+                                        // +'<td><input style="width:380px" type="text" id="cSec" value=""></td></tr>'
+                                        // +'<tr><td><label for="other">Redirect URL</label></td>'
+                                        // +'<td><input style="width:380px"  type="text" id="red" value=""><br><br></td></tr>'
+                                        // +'<tr><td><input id="formBut" type="submit"  value="Submit"></td></tr> </table>'
+                                        // );
 
-                                        newWindow.document.getElementById('formBut').addEventListener('click', function(){
-                                        newWindow.close();
-                                        let clientID  = newWindow.document.getElementById('cId').value;
-                                        let clientSec = newWindow.document.getElementById('cSec').value;
-                                        let callbackUrl  = newWindow.document.getElementById('red').value
+                                        // newWindow.document.getElementById('formBut').addEventListener('click', function(){
+                                        // newWindow.close();
+                                        // let clientID  = newWindow.document.getElementById('cId').value;
+                                        // let clientSec = newWindow.document.getElementById('cSec').value;
+                                        // let callbackUrl  = newWindow.document.getElementById('red').value
                                         console.log("auth function");
                                         auth_url= obJSON.oauth2[0].authURL;
                                         token_url= obJSON.oauth2[0].tokenURL;
-                                        redirect_url= callbackUrl; //obJSON.oauth2[0].callbackURL;
-                                        client_id= clientID; //obJSON.oauth2[0].clientId;
-                                        client_secret= clientSec;//obJSON.oauth2[0].clientSec;
+                                        redirect_url= obJSON.oauth2[0].callbackURL;
+                                        client_id= obJSON.oauth2[0].clientId;
+                                        client_secret= obJSON.oauth2[0].clientSec;
                                         response_type= obJSON.oauth2[0].resType;
                                         scope= obJSON.oauth2[0].scope;
                                         grant_type= obJSON.oauth2[0].grantType;
@@ -1059,7 +1057,8 @@ export default async function shapir(){
                                                 }
                                             }//end of gup()
                                             // }se value
-                                        });
+
+                                        //});//end of new window
 
                                     })//end of promise return
                                     .then(token=>{
@@ -1093,9 +1092,9 @@ export default async function shapir(){
                             })//firebase
 
                             .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
-                        }
+                        }//add
 
-                    }//add
+                    }//loop through site's object
 
                 }//if objects
 
@@ -2606,11 +2605,33 @@ export default async function shapir(){
 
             });//end of snapshot
 
-        });
+        })
 
         results.push(promise);
 
     })// end of snapshot.forEach
 
-    return Promise.all(results);
+    //VideoObject({'in':['youtube', 'dailymotion']})
+    // return firebase.database().ref('/types').once('value').then(function(snapshot) {
+    //     snapshot.forEach(function(childSnapshot) {
+    //         let typeName = childSnapshot.key
+    //         let typeSites = childSnapshot.val()
+
+    //         window[typeName]={}
+    //         window[typeName] = function(args) { return getTypeSite(typeName, typeSites, args) };
+    //         //loop through the sites in 'in':['youtube', 'dailymotion']
+
+    //         function getTypeSite(typeName, typeSites, args){
+    //             for(let site in typeSites){
+    //                 widnow[site][typeName](typeName, val, "self", "none", ...args);
+    //                 //concatenate the results from multiple calls
+    //             }
+    //         }
+    //     })
+    // })
+    // .then(()=>{
+        return Promise.all(results);
+    // })
+
+
 }

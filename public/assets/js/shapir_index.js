@@ -1139,8 +1139,8 @@ function siteHasBeenEntered(select){
   //       categoryWords.push(lastType);
   //     }
 
-  //     $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
-  //     $("#site-info").append('<ul>');
+  //     // $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
+  //     // $("#site-info").append('<ul>');
 
   //     for(var c=0; c<categoryWords.length; ++c){
   //       for(var j=0; j<allTypes.length; ++j){
@@ -1148,11 +1148,11 @@ function siteHasBeenEntered(select){
   //         if(similar>40){
   //           console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
   //           suggestedTypes.push(allTypes[j])
-  //           $("#site-info").append('<li>'+allTypes[j]+'</li>');
+  //           // $("#site-info").append('<li>'+allTypes[j]+'</li>');
   //         }
   //       }
   //       if(c+1==categoryWords.length){
-  //         $("#site-info").append('</ul><hr>');
+  //         // $("#site-info").append('</ul><hr>');
   //         $("#site-info").show();
 
   //         if(suggestedTypes.length>0){
@@ -1243,10 +1243,6 @@ function siteHasBeenEntered(select){
 
   console.log(typesMatchUrl);
 
-}
-
-
-function populateSuggestedSchema(){
 
   $("#site-info").show();
 
@@ -1256,11 +1252,23 @@ function populateSuggestedSchema(){
   $("#site-row-get").show();
   $("#connectDiv").show();
 
-  for(type in typesMatchUrl){
-    typeHasBeenChosen(typesMatchUrl[type]);
+  // var i=0;
+  // for(var t=typesMatchUrl.length-1; t>=0 && i<5; --t){
+  //   typeHasBeenChosen(typesMatchUrl[t]);
+  //   ++i;
+  // }
+
+  for(var t=0; t<typesMatchUrl.length && t<5; ++t){
+    typeHasBeenChosen(typesMatchUrl[t]);
   }
 
 }
+
+
+// function populateSuggestedSchema(){
+
+
+// }
 
 
 function siteHasBeenChosen(select){
@@ -1922,7 +1930,7 @@ function urlHasBeenChosenForRemove(select){
 
 }
 
-var urlAPIUpdate, urlAPIUpdateParams=[];
+var urlAPIUpdate="", urlAPIUpdateParams=[];
 
 function urlHasBeenChosenForUpdate(select){
   $("#idLabel-update").show()
@@ -1932,7 +1940,7 @@ function urlHasBeenChosenForUpdate(select){
   console.log("apiTitle: ", apiTitle);
 
   currentURLGetter = apiTitle;
-  urlAPIUpdate.push(apiTitle);
+  urlAPIUpdate = apiTitle;
 
   firebase.database().ref('/apis/').once('value').then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -1956,11 +1964,12 @@ function urlHasBeenChosenForUpdate(select){
       if(reqParam){
         for(var i=0; i<reqParam.length; ++i){
           if(reqParam[i].displayed && reqParam[i].displayed==true){
+            console.log("THERE PARAM")
             $("#type-id-update").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
-            urlAPIUpdateParams.push(eqParam[i].name)
+            urlAPIUpdateParams.push(reqParam[i].name)
           }else if(!reqParam[i].displayed){
             $("#type-id-update").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
-            urlAPIUpdateParams.push(eqParam[i].name)
+            urlAPIUpdateParams.push(reqParam[i].name)
           }else{
             // do nothing
           }
@@ -2425,8 +2434,8 @@ function saveUpdateConfig(){
 function saveRemoveConfig(){
   var selector = document.getElementById("type-id-remove");
   var idValue = selector[selector.selectedIndex].value;
-  temp.objects[clickedType].remove.endpoint= currentURLGetter; //get the value of the chosen API
-  temp.objects[clickedType].remove.id= idValue; //get the value of the chosen ID
+  // temp.objects[clickedType].remove.endpoint= currentURLGetter; //get the value of the chosen API
+  // temp.objects[clickedType].remove.id= idValue; //get the value of the chosen ID
 
   console.log("temp after save", temp.objects[clickedType]);
 
@@ -2838,9 +2847,9 @@ function typeHasBeenChosen(select){
   +'<td style="width:100%"><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type GET row id="<type>_getM"
-  $("#"+type+" tbody").append('<tr id="'+type+'_getM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td ><div style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_getM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Get '+type+' by ID</a> </div>   </td>'
-  +'<td></td>'
-  +'<td style="width:100%"><button id="'+type+'_getM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+  // $("#"+type+" tbody").append('<tr id="'+type+'_getM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td ><div style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_getM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Get '+type+' by ID</a> </div>   </td>'
+  // +'<td></td>'
+  // +'<td style="width:100%"><button id="'+type+'_getM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type SEARCH row id="<type>_searchM"
   $("#"+type+" tbody").append('<tr style="display:none" id="'+type+'_searchM" style="data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
@@ -3035,13 +3044,13 @@ function typeHasBeenChosen(select){
   var tableTrs = typeTbody.getElementsByTagName("TR");
 
   //Insert the API URL next to the type
-  var rowTypeGet = document.getElementById(type+'_getM');
-  rowTypeGet.deleteCell(1);
+  var rowTypeGet = document.getElementById(type+'_row');
+  // rowTypeGet.deleteCell(1);
   var typeCellGet1 = rowTypeGet.insertCell(1); //style="width:240px;"
   var getUrlSlect = '<div><select id="url_get_'+type+'"  class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select></div>'
   typeCellGet1.innerHTML =  getUrlSlect;
   //add ID select
-  rowTypeGet.deleteCell(2);
+  // rowTypeGet.deleteCell(2);
   var typeCellGet2 = rowTypeGet.insertCell(2);
   typeCellGet2.style.display = "flex";
   var getUrlSlectID = '<div style="margin-right:5px"><img / src="assets/img/new/connect.png" width="20px" style="margin-top:10px"></div> <div style="width:240px;"><select id="'+type+'_get_id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" style=";" showSubtext="true" onchange="idHasBeenChosed(this)"><option selected>Choose the ID</option></select></div> '
@@ -3091,6 +3100,23 @@ function typeHasBeenChosen(select){
       //Fill out the fields selectpicker
       for(var f=0; f<scrapirAPIs[i].res.length; ++f){
         $("#"+type+"_field-select").append("<option id="+scrapirAPIs[i].res[f]+">"+scrapirAPIs[i].res[f]+"</option>");
+        //if does not include ID add it
+        //if feild in suggestedPropFields, add both field and property
+        let obj = suggestedPropFields.find(o => o.field === scrapirAPIs[i].res[f]);
+        if(obj){
+          propChosen=true;
+          fieldChosen=true;
+          globalProperty=obj.property
+          globalField= scrapirAPIs[i].res[f];
+
+          fieldHasBeenSelected(type+'_'+globalField)
+
+        }
+        // suggestedPropFields.push({
+        //   property: typeProperties[c],
+        //   field: allAPIFeilds[j]
+        // })
+        //
       }
 
       //Fill out the ID selectpicker
@@ -3410,20 +3436,6 @@ function saveSchema(){
       }
       tempObj[typeName].properties= properties;
 
-      //search for object fucntion
-      let tempAct={}
-      tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
-      siteObj[site].functions.push(tempAct);
-
-      // var selectSearch = document.getElementById("url_search_"+typeName);
-      // siteObj[site].functions[0].endpoint= selectSearch[selectSearch.selectedIndex].value;
-      // siteObj[site].functions[0].object= typeName;
-      // siteObj[site].functions[0].name= "search"+typeName;
-      // siteObj[site].functions[0].id= selId;
-      // var selectSearchTerm = document.getElementById(typeName+"_search_term");
-      // siteObj[site].functions[0].searchParam= selectSearchTerm[selectSearchTerm.selectedIndex].id;
-
-
       // Add:
       // Endpoint: urlAPIAdd
       tempObj[typeName].add.endpoint= urlAPIAdd;
@@ -3438,18 +3450,26 @@ function saveSchema(){
       // endpoint: urlAPIMethod
       // Id: method-result-type-id
       // Search term: method-search-param
+      let tempAct={}
+      tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
+      siteObj[site].functions.push(tempAct);
+      siteObj[site].functions[0].endpoint= urlAPIMethod;
+      siteObj[site].functions[0].object= typeName;
+      siteObj[site].functions[0].name= "search"+typeName;
+      siteObj[site].functions[0].id= document.getElementById('method-result-type-id').value;
+      siteObj[site].functions[0].searchParam= document.getElementById(typeName+"_search_term").value;
 
       // Update:
       // endpoint: apiTitle
       // Id: type-id-update
       // tempObj[typeName].remove.endpoint= urlAPIRemove;
       // tempObj[typeName].remove.id= document.getElementById('type-id-remove').value;
-      let tempSetter={"endpoint": "", "field":"", "id":"", "params":[]}
+      let tempSetter={}
       for(let p in urlAPIUpdateParams){
-
+        tempSetter={"endpoint": "", "field":"", "id":"", "params":[]}
         if(urlAPIUpdateParams[p] != document.getElementById('type-id-update').value){
           //add to the description
-          tempSetter.endpoint= urlAPIUpdate[p];
+          tempSetter.endpoint= urlAPIUpdate;
           tempSetter.field= urlAPIUpdateParams[p];
           tempSetter.id= document.getElementById('type-id-update').value;
           // tempSetter.params[0]= document.getElementById('type-id-update').value;
@@ -3673,6 +3693,8 @@ function propertyHasBeenChosen(select){
     types: types
   })
 
+  console.log("propType: ",propType)
+
   var hasType = false;
   var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL", "Float","Integer","CssSelectorType","PronounceableText","URL","XPathType","True","False"]
 
@@ -3745,9 +3767,9 @@ function propertyHasBeenChosen(select){
               if(propChosen && fieldChosen){
                 console.log("NOT A TYPE")
                 $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
-                +'<td>'
+                +'<td style="margin-right:20px">'
                 +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
+                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a><code>'+propsInfo[globalProperty].types.join()+'</code>'
                 +'</td>'
                 +'<td>'
                 +'<div style="width:240px; text-align:center;">'
@@ -3769,7 +3791,7 @@ function propertyHasBeenChosen(select){
                 $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
                 +'<td>'
                 +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
+                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>&nbsp;&nbsp;<code>'+propsInfo[globalProperty].types.join()+'</code>'
                 +'</td>'
                 +'<td>'
                 +'<div text-align:center;">'
@@ -3801,10 +3823,12 @@ function propertyHasBeenChosen(select){
               $('#property_api_'+thisType).append('<option data-subtext="'+scrapirAPIs[i].title+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].url+'</option>');
             }
           }
+
+          jQuery('.selectpicker').selectpicker('refresh');
           //change
           setTimeout(() => {
             jQuery('.selectpicker').selectpicker('refresh');
-          }, 500);
+          }, 800);
 
           //'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children"><p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>');
 
@@ -3859,6 +3883,55 @@ function propertyHasBeenChosen(select){
 }
 
 
+function testPython(){
+  $.ajax({
+    type: "POST",
+    url: "./sent2vec.py",
+    // data: { param: text}
+  }).done(function( o ) {
+     // do something
+     console.log("cos: ", o)
+  });
+
+
+}
+
+// function saveTypes(){
+//   firebase.initializeApp(config);
+//   firebase.database().ref('/types/').set("{'name':'type'}");
+// }
+
+// function saveTypes(){
+//   //go over all the siteIsClicked, and save the obecjts in an array, then push the array to object with key
+//   firebase.initializeApp(config);
+//   let ob = {};
+//   let obArray = {}
+
+//   var arr = [];
+//   firebase.database().ref('/types').once('value').then(function(snapshot) {
+//     snapshot.forEach(function(childSnapshot) {
+//       // key, val() => site, [types]
+//       var types = childSnapshot.val()
+//       for(var i=0; i<types.length; ++i){
+//         // console.log()
+//         // if()//if the types is one of the keys in this object, push the site to it, otherwise, create a new one
+//         if(Object.keys(ob).indexOf(types[i]) ==-1){
+//           ob[types[i]]=[]
+//           ob[types[i]].push(childSnapshot.key)
+//         }else{
+//         ob[types[i]].push(childSnapshot.key)
+//         }
+//       }
+//         // ob[childSnapshot.key]=[]
+//         // ob[childSnapshot.key] = Object.keys(childSnapshot.val().objects)
+//       });
+//     })
+//     // obArray = ob
+//     console.log(ob);
+
+//     // firebase.database().ref('/types/').set(obArray);
+// }
+
 function fieldHasBeenSelected(select){
 
   fieldChosen=true;
@@ -3875,57 +3948,35 @@ function fieldHasBeenSelected(select){
   // //show step4
   // $("#connectDiv").show()
 
-  var property = select.options[select.selectedIndex].getAttribute("id");
-  globalField = property;
+  if(select.tagName === 'SELECT'){
+    // $('#type-select').popover('hide');
+    console.log("it is a select");
+    var property = select.options[select.selectedIndex].getAttribute("id");
+    globalField = property;
+    if(select.options[select.selectedIndex].getAttribute("id")=="new"){
+      isNew=true;
+    }
+
+    var child = property
+    var parent = select.getAttribute("id").split('-')[1];
+    var thisType = select.getAttribute("id").split('_')[0];
+
+  }else {
+    globalField = select.split('_')[1];
+    var property = select.split('_')[1];
+    var child = select.split('_')[1];
+    var parent = select.split('_')[0];
+    var thisType = select.split('_')[0];
+  }
 
   console.log("globalField: ", globalField)
 
 
-  if(select.options[select.selectedIndex].getAttribute("id")=="new"){
-    isNew=true;
-  }
+
   var typeP, descP;
   console.log("field: ",property);
   propertyList.push(property);
 
-  tempObj[currentType].properties.push(property)
-
-  var child = property
-  var parent = select.getAttribute("id").split('-')[1];
-  var thisType = select.getAttribute("id").split('_')[0];
-
-  console.log("thisType: ", thisType);
-
-  // typeP = allTheType[thisType][property].types[0]
-  // descP = allTheType[thisType][property].desc
-  // var types = allTheType[thisType][property].types;
-
-  // typePropertyType[thisType].push({
-  //   name: property,
-  //   type: typeP
-  // });
-
-  // propType.push({
-  //   type: thisType,
-  //   name: property,
-  //   types: types
-  // })
-
-  // var hasType = false;
-  // var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL", "Float","Integer","CssSelectorType","PronounceableText","URL","XPathType","True","False"]
-
-  // //if property is an object
-  // var typeElem = '<div>'
-  // for(t in types){
-  //   if(dataTypes.indexOf(types[t]) == -1){
-  //     // console.log("types[t]")
-  //     hasType = true;
-  //     typeElem+='<a href="javascript:;" id="'+types[t]+'-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;" onClick="typeHasBeenChosen(this.id)">'+types[t]+'</a>&nbsp;&nbsp;';
-  //   }
-  // }
-  // typeElem += '</div>'
-
-  //all <tr> elements
   var trs = document.getElementsByTagName("TR")
 
   if(propChosen && fieldChosen){//if both property and field have been chosen
@@ -3938,7 +3989,7 @@ function fieldHasBeenSelected(select){
         $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
         +'<td>'
         +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
+        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>&nbsp;&nbsp;<code>'+propsInfo[globalProperty].types.join()+'</code>'
         +'</td>'
         +'<td>'
         +'<div style="width:240px; text-align:center;">'

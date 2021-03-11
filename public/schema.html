@@ -295,16 +295,18 @@
 																	<!-- </br><p style="font-size: 1em; color:grey">e.g. for https://www.youtube.com, you can choose VideoObject for YouTube video, MusicPlaylist for playlist, etc. Types will be represented as an orange node <span class="label label-orange">Type</span></p> -->
 																</li>
 																<li>For each type:
+																	 <!-- What is the website API endpoint that <B>get</B> you this type. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube video, the API endpoint would be https://www.googleapis.com/youtube/v3/videos">example</a>) -->
+																<!-- <li> When you click on the Type node <span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span>&nbsp; &nbsp;</span>, you can do the following:	</li> -->
 																	<ul>
 																		<li>What is the website API endpoint that <B>get</B> you this type. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube video, the API endpoint would be https://www.googleapis.com/youtube/v3/videos">example</a>)
-																		<!-- </br>e.g. For YouTube video the API endpoint would be https://www.googleapis.com/youtube/v3/videos. Get will be represnted as a purple node <span class="label label-purple">Get</span> -->
-																		</li>
-																		<li>If you are intersted in <B>searching</B> the website for this type, you will need to choose the search API endpoint. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="To search for YouTube videos, the API endpoint to use would be https://www.googleapis.com/youtube/v3/search">example</a>)
-
+																			<!-- </br>e.g. For YouTube video the API endpoint would be https://www.googleapis.com/youtube/v3/videos. Get will be represnted as a purple node <span class="label label-purple">Get</span> -->
+																			</li>
+																		<li>If you are intersted in <B>searching</B> the website for this type, you will need to choose the search API endpoint, the search term parameter used to search the API and the id field. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="To search for YouTube videos, the API endpoint to use would be https://www.googleapis.com/youtube/v3/search">example</a>)
 																		<!-- </br>e.g. For YouTube video the API endpoint would be https://www.googleapis.com/youtube/v3/search. Search will be represnted as a purple node <span class="label label-purple">Search</span> -->
 																		</li>
-																		<li>Choose the <B>properties</B> from schema.org that matches the response fields of the API. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube VideoObject, some properties would be the name, description, and publishedAt, the equivalent properties in the API would be title, description and datePublished.">example</a>)
+																		<li>Choose the <B>properties</B> from schema.org that matches the response fields of the API <span style="height: 1px;" class="label label-grey">Property/Field</span>. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube VideoObject, some properties would be the name, description, and publishedAt, the equivalent properties in the API would be title, description and datePublished.">example</a>)
 																		<!-- </br>e.g. For YouTube VideoObject, some properties would be the name, description, . Properties will be represnted as a grey node <span class="label label-grey">Property</span> -->
+																		<li>Click on the Type node <span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span> if you are intertsted in searching the site for this type, updating this type properties, removing an exsiting type and creating a new one.
 																		</li>
 																	</ul>
 																</li>
@@ -334,7 +336,7 @@
 																	<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
 															</div>
 
-															<p style="padding-top:0px"><span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span>&nbsp; &nbsp;<span style="height: 1px;" class="label label-purple">Get/Search</span>&nbsp;&nbsp;<span style="height: 1px;" class="label label-grey">Property/Field</span></p>
+															<!-- <p style="padding-top:0px"><span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span>&nbsp; &nbsp;<span style="height: 1px;" class="label label-purple">Get/Search</span>&nbsp;&nbsp;<span style="height: 1px;" class="label label-grey">Property/Field</span></p> -->
 															<!-- <p style="padding-top:0px">Types will be represented by an orange node<span style="height: 1px;" class="label label-orange">Type</span>, get/search as <span style="height: 1px;" class="label label-purple">Get/Search</span> and properties as <span style="height: 1px;" class="label label-grey">Property</span></p> -->
 														</div>
 														</br>
@@ -1545,7 +1547,7 @@
 					</br> </br>
 
 					<!-- ID (list of responses fields)-->
-					<div id="idLabel-property" style="display: none;">
+					<div id="" style="display: none;">
 						<p>2. Choose the ID parameter of this API</p>
 						<!-- <label class="col-form-label ">Id</label></br> -->
 						<select id="type-id-property" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
@@ -1599,7 +1601,7 @@
 							</a>
 						</li> -->
 						<li class="nav-item">
-							<a href="#nav-pills-tab-5" data-toggle="tab" class="nav-link active">
+							<a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link active">
 								<span class="d-sm-block d-none">Search</span>
 							</a>
 						</li>
@@ -1620,7 +1622,7 @@
 						</li>
 
 						<li class="nav-item">
-							<a href="#nav-pills-tab-6" data-toggle="tab" class="nav-link">
+							<a href="#nav-pills-tab-5" data-toggle="tab" class="nav-link">
 								<!-- <span class="d-sm-none">Pills 6</span> -->
 								<span class="d-sm-block d-none">Methods</span>
 							</a>
@@ -1630,7 +1632,7 @@
 					<!-- begin tab-content -->
 					<div class="tab-content p-15 rounded bg-white mb-4">
 						<!-- begin tab-pane -->
-						<div class="tab-pane fade active show" id="nav-pills-tab-1">
+						<div class="tab-pane fade" id="nav-pills-tab-7">
 							<h5 class="m-t-10">Get a specific <span id="sel_obTitle"></span> from <span id="sel_siteTitle"></span> by its ID</h5></br>
 							<p>1. Which of the following <span id="sel_site"></span> API endpoints returns a <span id="sel_ob"></span> object?
 								Click on each one to view their descreption.</p>
@@ -1656,7 +1658,7 @@
 							</br> </br>
 
 							<!-- ID (list of responses fields)-->
-							<div id="idLabel" style="display: none;">
+							<div id="" style="display: none;">
 								<p>2. Choose the ID parameter of this API</p>
 								<!-- <label class="col-form-label ">Id</label></br> -->
 								<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed(this)">
@@ -1688,6 +1690,49 @@
 
 						</div>
 						<!-- end tab-pane -->
+
+						<!-- begin tab-pane -->
+						<div class="tab-pane fade active show" id="nav-pills-tab-1">
+							<h4 class="m-t-10">Searching for object(s)</h4>
+
+								<!-- <p>1. Change the name of the method [optional] </p>
+								<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
+								</br></br> -->
+
+								<p>1. Which of the following <span id="sel_site_meth"></span> API endpoints searches for <span id="sel_ob_meth"></span> object?
+									Click on each one to view their descreption</p>
+								<div style="overflow: scroll; height:260px" class="box">
+									<div id="accordion-method" class="accordion">
+									</div>
+								</div>
+
+								</br>
+
+								<!-- <p>3. Choose the type of object returned from this method (this can be one or a list of objects)</p>
+								<select id="method-result-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+									<option selected>Choose type of returned result</option>
+								</select>
+								</br></br> -->
+
+								<div id="search-method" style="display: none;">
+								<p>2. Which of the follwoing parameters is the search term parameter?</p>
+								<select id="method-search-param" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+									<option selected>Choose search parameter</option>
+								</select>
+								</br></br>
+
+								<p>3. Which of the following fields is the id of the object?</p>
+								<select id="method-result-type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+									<option selected>Choose the ID</option>
+								</select>
+								</div>
+
+							</br></br>
+							<a href="javascript:;" class="btn btn-dark" id="" onclick="saveMethodConfig()">Save</a>
+
+						</div>
+						<!-- end tab-pane -->
+
 						<!-- begin tab-pane -->
 						<div class="tab-pane fade" id="nav-pills-tab-2">
 							<!-- <h4 class="m-t-10">Updating a specific object</h4> -->
@@ -1790,50 +1835,7 @@
 						</div>
 						<!-- end tab-pane -->
 
-						<!-- begin tab-pane -->
 						<div class="tab-pane fade" id="nav-pills-tab-5">
-							<h4 class="m-t-10">Searching for object(s)</h4>
-
-								<!-- <p>1. Change the name of the method [optional] </p>
-								<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
-								</br></br> -->
-
-								<p>1. Which of the following <span id="sel_site_meth"></span> API endpoints searches for <span id="sel_ob_meth"></span> object?
-									Click on each one to view their descreption</p>
-								<div style="overflow: scroll; height:260px" class="box">
-									<div id="accordion-method" class="accordion">
-									</div>
-								</div>
-
-								</br>
-
-								<!-- <p>3. Choose the type of object returned from this method (this can be one or a list of objects)</p>
-								<select id="method-result-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
-									<option selected>Choose type of returned result</option>
-								</select>
-								</br></br> -->
-
-								<div id="search-method" style="display: none;">
-								<p>2. Which of the follwoing parameters is the search term parameter?</p>
-								<select id="method-search-param" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
-									<option selected>Choose search parameter</option>
-								</select>
-								</br></br>
-
-								<p>3. Which of the follwing fields is the id of the object?</p>
-								<select id="method-result-type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
-									<option selected>Choose the ID</option>
-								</select>
-								</div>
-
-							</br></br>
-							<a href="javascript:;" class="btn btn-dark" id="" onclick="saveMethodConfig()">Save</a>
-
-						</div>
-						<!-- end tab-pane -->
-
-
-						<div class="tab-pane fade" id="nav-pills-tab-6">
 							<!-- <h4 class="m-t-10">Removing a specific object</h4> -->
 							<h5 class="m-t-10">Add methods to <span id="sel_obTitle_re"></span> object</h5></br>
 							<p>1. Which of the following <span id="sel_site_re"></span> API endpoints correspond to a method that you would like to add <span id="sel_ob_re"></span> object?
