@@ -136,7 +136,16 @@
 											</div>
 											<!-- </br> -->
 
-											<div id="schema-desc" class="col-lg-14" style="padding-left:15px; padding-top:15px; display:none">
+											<!-- type select -->
+											<div class="col-lg-14">
+												<h6>You can find all schema.org types here: <a href="https://schema.org/docs/schemas.html" target="_blank">https://schema.org/docs/schemas.html</a></h6>
+												<h6>If you want to know more about a specific type, please choose it from here and read more about it.</h6>
+												<select id="type-menu" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-default" onchange="getDescription(this)">
+													<option selected>Choose Type</option>
+												</select>
+											</div>
+
+											<div id="schema-desc" class="col-lg-14" style="padding-top:15px; display:none">
 												<h5>Information about the chosen type</h5>
 												<div style="padding-bottom: 15px;">
 													<h6>Type Page:</h6>
@@ -334,7 +343,7 @@
 														<div id="step2-desc" style="display: none;" >
 															<div class="input-group mb-5" style="margin-bottom:-10px!important">
 																<label style="font-size: 1em;"><B>Step2.</B> Connect schema.org types to the Web API types/objects. Click start to show a suggested starting connection.
-																<button class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Start</button></label>
+																<!-- <button class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Start</button></label> -->
 																	<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
 															</div>
 
@@ -342,6 +351,17 @@
 															<!-- <p style="padding-top:0px">Types will be represented by an orange node<span style="height: 1px;" class="label label-orange">Type</span>, get/search as <span style="height: 1px;" class="label label-purple">Get/Search</span> and properties as <span style="height: 1px;" class="label label-grey">Property</span></p> -->
 														</div>
 														</br>
+
+														<!-- <div class="col-md-9">
+															<div class="radio radio-css">
+																<input type="radio" name="radio_css_inline" id="inlineCssRadio1" value="option1" checked />
+																<label for="inlineCssRadio1">Radio option 1</label>
+															</div>
+															<div class="radio radio-css">
+																<input type="radio" name="radio_css_inline" id="inlineCssRadio2" value="option2" />
+																<label for="inlineCssRadio2">Radio option 2</label>
+															</div>
+														</div> -->
 
 
 														<div id="step2-header" style="display:none;"><h5 style="display: inline; margin-left: 100px; margin-right: 300px;">Schema.org</h5> <h5 style="display: inline;">Website API</h5></div>

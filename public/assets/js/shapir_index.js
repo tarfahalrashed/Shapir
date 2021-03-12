@@ -992,7 +992,7 @@ if(!once){
     }else{
       type= allTypes[i].split(' ').join('')
       // $("#type-select-other-optgroup").append("<option id="+type+">"+allTypes[i]+"</option>");
-      // $("#type-select2").append("<option id="+type+">"+childSnapshot.val().title+"</option>");
+      $("#type-menu").append("<option id="+type+">"+type+"</option>");
     }
   }
   // $("#type-select").append('</optgroup>');
@@ -2818,8 +2818,13 @@ function methodRadioChecked(){
 var firstType=false, secondType=false, typeList=[], tempObj={}, tempAct={}, tempObjAct={}, gettersList=[]; tempObjSet={}, allTheType={}, listOfTypes=[], firstType=true, suggestedProperties=[];
 
 
-function getDescription(type){
-  // console.log("TYPE: ", type)
+function getDescription(select){
+
+  var type = select.options[select.selectedIndex].getAttribute("id");
+  // var parent = select.getAttribute("id").split('-')[1]
+  console.log("TYPE: ", type)
+
+
   var typeProperties2=[];
 
   $.ajax({
@@ -2894,6 +2899,8 @@ function showRow(id){
 }
 
 
+
+
 var propertyType = false;
 
 function typeHasBeenChosen(select){
@@ -2944,6 +2951,8 @@ function typeHasBeenChosen(select){
     // }
 
   }
+
+  tempDel[type]=[]
 
   // $("#step2_hint").hide();
   $("#prop-list").show();
@@ -3275,7 +3284,7 @@ function typeHasBeenChosen(select){
   //Go over the clicked table rows
   var typeTable = document.getElementById(type);
   var typeTbody = typeTable.getElementsByTagName("TBODY")[0];
-  var tableTrs = typeTbody.getElementsByTagName("TR");
+  // var tableTrs = typeTbody.getElementsByTagName("TR");
 
   //Insert the API URL next to the type
   var rowTypeGet = document.getElementById(type+'_row');
@@ -3656,6 +3665,7 @@ function saveSchema(){
   temp = { "objects":{}, "functions":[] };
   siteObj[site] = temp;
   let tempObj={};
+  // tempObj[typeName]= {"properties":[],
 
   // Inside the tableDiv go over all the tables
   var tableDiv = document.getElementById('tableDiv');
@@ -3903,6 +3913,10 @@ function removeSearchButton(){
 
 var currentType="", propertyList=[], isNew=false, elem="property", isNewM=false, typePropertyType={}, propType=[], firstProp = true, globalProperty="", globalField="", propChosen=false, fieldChosen=false;
 
+// var tempDel = { "objects":{}, "functions":[]};
+var tempDel={}
+
+
 function propertyHasBeenChosen(select){
 
   propChosen=true;
@@ -3928,7 +3942,8 @@ function propertyHasBeenChosen(select){
   var typeP, descP;
   propertyList.push(property);
 
-  tempObj[currentType].properties.push(property)
+  tempDel[thisType].push(property)
+  console.log("Check push: ", tempDel[thisType].push(property))
 
   var child = property
   var parent = select.getAttribute("id").split('-')[1];
@@ -3958,15 +3973,23 @@ function propertyHasBeenChosen(select){
 
   //if property is an object
   var typeElem='';
-  typeElem = '<div>'
+  typeElem = '<div class="input-group col-md-9">'
   for(t in types){
     if(dataTypes.indexOf(types[t]) == -1){
       // console.log("types[t]")
       hasType = true;
+      // typeElem+= '<div class="radio radio-css">'
+      // +'<input type="radio" name="radio_css_inline" id="popbut_'+types[t]+'-'+property+'" value="option1" />'
+      // +'<label for="popbut_'+types[t]+'-'+property+'">Radio option 1</label>'
+      // +'</div>'
       typeElem+='<a href="javascript:;" id="popbut_'+types[t]+'-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;">'+types[t]+'</a>&nbsp;&nbsp;';
     }
   }
-  typeElem += '</div>'
+  // typeElem+='<a href="javascript:;" id="popbut_Text-'+property+'" class="btn btn-warning" style="pointer-events: all; width:100px; height: 34px;text-align:center; padding: 4px 1px;">Text</a>&nbsp;&nbsp;';
+  typeElem += '<label class="" for="propIsArray"><input type="checkbox" id="propIsArray" onclick="isArray(this)"/> Is a list</label>'
+  typeElem += '</div>' //add Text type
+
+
 
   //all <tr> elements
   var trs = document.getElementsByTagName("TR")
@@ -3982,19 +4005,23 @@ function propertyHasBeenChosen(select){
 
           $("#"+thisType+"_property-select").popover('dispose');
           $("#"+thisType+"_property-select").popover({
-            title: 'Title<a id="closeBut" class="close" href="#">&times;</a>',
+            title: 'Choose the proeprty type<a id="closeBut" class="close" href="#">&times;</a>',
             placement: 'right',
             container: 'body',
             html: true,
             content: function() {
-              $('#prop-popover-div').html('<p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem);
+              $('#prop-popover-div').html('<p style="margin-bottom:2px">This property can be of the follwing types. Choose the one that matches your need:</p>'+typeElem);
               return $('#prop-popover-div').html();
             }
           })
           $("#"+thisType+"_property-select").popover('show');
 
           $('[id^="popbut_"]').unbind().click(function() {
-            typeHasBeenChosen(this.id);
+            //if normal type
+            // propsInfo[globalProperty].types.join()
+            // else{
+              typeHasBeenChosen(this.id);
+            // }
           });
 
           // $('[data-toggle=popover]').popover();
@@ -4120,12 +4147,11 @@ function propertyHasBeenChosen(select){
     }
   }
 
-  console.log("tempObj properties: ", tempObj[thisType].properties);
+  console.log("tempObj properties: ", tempDel);
   propList= tempObj[thisType].properties;
 
   console.log("typePropertyType: ", typePropertyType);
   console.log("propType: ", propType);
-
 
 }
 
@@ -4541,21 +4567,28 @@ function addNewMethod(){
 
 
 function deleteRow(row) {
-  // console.log("row ID: ", row.id)
+  console.log("row ID: ", row.id)
   var rowID = row.id.split('_close')[0];
   var tableID= rowID.split('_')[0]
   var name = rowID.split('_')[1] //property or method name
 
   if(rowID.includes('_row')){//remove the whole type table
+    console.log("row: ", rowID)
+    delete temp.objects[tableID];
     document.getElementById(tableID).remove();
     //remove type from temp object
-    delete temp.objects[tableID];
+
     console.log(temp)
   }else{//remove this row
     var i = row.parentNode.parentNode.rowIndex;
-    document.getElementById(tableID).deleteRow(i);
-    var properties = temp.objects[tableID].properties;
-    var methods = temp.objects[tableID].methods;
+    console.log("i: ", i)
+
+    // document.getElementById(tableID).deleteRow(i);
+    // var properties = tempDelObj[tableID];//temp.objects[tableID].properties;
+    // var methods = temp.objects[tableID].methods;
+    console.log("DEL properties: ", tempDel)
+
+    var properties =  tempDel[tableID];
 
     if(typeof properties[0] === 'object' && properties[0] !== null){//if array of objects
       if(properties.some(p=> p.property === name)){

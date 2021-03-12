@@ -21,8 +21,8 @@ Mavo.Backend.register($.Class({
     get: async function(url) {
         if (this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
 
-            if(this.identifier){ //Get an object by ID
-                let ret = await window[this.service][this.action](this.identifier);
+            if(this.id){ //Get an object by ID
+                let ret = await window[this.service][this.type](this.id);
                 return ret;
             }else{ //Search one or multiple sites
                 if(this.service.includes(",")){//more than one site
@@ -30,8 +30,7 @@ Mavo.Backend.register($.Class({
                     let promises = [];
 
                     services.map((service) => {
-                        console.log("this: ", this)
-                        promises.push(window[service][this.action](this.search, this));
+                        promises.push(window[service][this.type](this.search, this));
                         // I know that "this" includes "this.search" but my global function expects a positional argument for search and an object
                         // e.g. seatgeek.search('Music', {'city': 'New York', 'country': 'US'})
                         // My global function already checks if the passed parameters are correct (can be used with the API endpoint).
@@ -44,9 +43,7 @@ Mavo.Backend.register($.Class({
                     });
 
                 }else{//just one site
-                    console.log("this: ", this)
-
-                    let ret = await window[this.service][this.action](this.search, this);
+                    let ret = await window[this.service][this.type](this.search, this);
                     return ret;
                 }
             }
