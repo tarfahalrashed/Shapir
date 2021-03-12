@@ -8,6 +8,25 @@ var config = {
 };
 
 
+
+// function runThis(){
+//   // Create a new word2vec method
+//   const wordVectors = ml5.word2vec("https://raw.githubusercontent.com/cvalenzuela/ml5js-library/master/docs/assets/data/wordvecs/wordvecs10000.json", modelLoaded);
+
+//   // When the model is loaded
+//   function modelLoaded() {
+//     console.log("Model Loaded!");
+//   }
+
+//   // Find the closest word to 'rainbow'
+//   wordVectors.nearest("rainbow", function(err, results) {
+//     console.log(results);
+//   });
+
+// }
+
+
+
 /******************* doc.html *******************/
 
 var abstractObj={} //=>{site:object}
@@ -20,6 +39,7 @@ function docOnLoad(){
       snapshot.forEach(function(childSnapshot) {
         // console.log("site object: ", childSnapshot.key)
         $("#sites").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
+        $("#sites_mavo").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
         var key = childSnapshot.key;
         abstractObj[key] = childSnapshot.val();
       });
@@ -46,6 +66,8 @@ function abstractionSiteHasBeenChosen(select){
   // console.log("value: ", abstractObj[site]);
   functions= abstractObj[site].functions;
   objects= abstractObj[site].objects;
+
+  $("#siteName").text(site);
 
   for(var i=0; i<functions.length; ++i){
     var endpoint = abstractObj[site].functions[i].endpoint
@@ -110,26 +132,37 @@ function abstractionSiteHasBeenChosen(select){
     document.getElementById('object').innerHTML += '\n';
 
     var properties = objects[o].properties;
-    document.getElementById('object').innerHTML += '//'+o+' properties\n';
-    //properties
+    document.getElementById('object').innerHTML += '\n//'+o+' property getters\n';
+    //Getter properties
     for(p in properties){
       document.getElementById('object').innerHTML += oName+'.'+properties[p].property +'\n';
+    }
+
+      //Setter properties
+    if(objects[o].setters){
+      document.getElementById('object').innerHTML += '\n//'+o+' property setters\n';
+      var setters = objects[o].setters;
+      for(let s in setters){
+        let obj = properties.find(o => o.property === setters[s].field);
+        document.getElementById('object').innerHTML += oName+'.'+obj.property +'\n';
+      }
     }
 
     //if methods or delete
     if(objects[o].delete || objects[o].methods){
       var methods = objects[o].methods;
-      document.getElementById('object').innerHTML += '//'+o+' methods \n';
+      // document.getElementById('object').innerHTML += '//'+o+' methods \n';
     }
 
     //Delete
     if(objects[o].delete){
+      document.getElementById('object').innerHTML += '\n// Delete '+o+' object\n';
       document.getElementById('object').innerHTML += oName+'.delete() &nbsp; //delete this ' + o + ' from '+ site+ '\n';
     }
 
     //methods
     if(objects[o].methods){
-      for(m in methods){//for each method
+      for(let m in methods){//for each method
         var mEndpoint = methods[m].endpoint
         var mParams=[];
         firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
@@ -162,32 +195,34 @@ function abstractionSiteHasBeenChosen(select){
     }
 
     //Create
-    // if(objects[o].add){
-    //   // console.log("add: ", objects[o].add)
-    //   var aEndpoint = objects[o].add.endpoint
-    //   var aParams=[];
-    //   firebase.database().ref('/apis/'+aEndpoint).once('value').then(function(snapshot) {
-    //     aParams = snapshot.val().parameters;
-    //     // console.log("aParams! ", aParams)
-    //   }).then(()=>{
-    //       var args =''
-    //       args += '({';
-    //       for(var p=0; p< aParams.length; ++p){
-    //         if(aParams[p].displayed==true){
-    //           // console.log(aParams[p].name)
-    //           // console.log(aParams[p].value)
-    //           args+=JSON.stringify(aParams[p].name);
-    //           args+=':';
-    //           args+=JSON.stringify(aParams[p].value);
-    //           if(p+1<aParams.length){
-    //             args+=', ';
-    //           }
-    //         }
-    //     }
-    //     args+='})';
-    //     document.getElementById('object').innerHTML += site+'.'+o+'.create'+args +'\n';
-    //   })
-    // }
+    if(objects[o].add){
+      // console.log("add: ", objects[o].add)
+      var aEndpoint = objects[o].add.endpoint
+      var aParams=[];
+      firebase.database().ref('/apis/'+aEndpoint).once('value').then(function(snapshot) {
+        aParams = snapshot.val().parameters;
+        // console.log("aParams! ", aParams)
+      }).then(()=>{
+          var args =''
+          args += '({';
+          for(var p=0; p< aParams.length; ++p){
+            if(aParams[p].displayed==true){
+              // console.log(aParams[p].name)
+              // console.log(aParams[p].value)
+              args+=JSON.stringify(aParams[p].name);
+              args+=':';
+              args+=JSON.stringify(aParams[p].value);
+              if(p+1<aParams.length){
+                args+=', ';
+              }
+            }
+        }
+        args+='})';
+
+        document.getElementById('object').innerHTML += '\n// Create a new '+o+' object\n';
+        document.getElementById('object').innerHTML += site+'.'+o+'.create'+args +'\n';
+      })
+    }
 
 
     //Search site for object(s)
@@ -198,6 +233,152 @@ function abstractionSiteHasBeenChosen(select){
   }//end of objects
 
 }
+
+
+function abstractionSiteHasBeenChosenMavo(select){
+
+  var once=true;
+  document.getElementById('mavoAtt').innerHTML=""
+  document.getElementById('mavoAttGet').innerHTML=""
+
+  site = select.options[select.selectedIndex].getAttribute("id");
+  // console.log("value: ", abstractObj[site]);
+  functions= abstractObj[site].functions;
+  objects= abstractObj[site].objects;
+
+  for(var i=0; i<functions.length; ++i){
+    var endpoint = abstractObj[site].functions[i].endpoint
+    var name = abstractObj[site].functions[i].name
+    var object = abstractObj[site].functions[i].object
+    var arry = abstractObj[site].functions[i].array
+    var searchParam = abstractObj[site].functions[i].searchParam;
+    var type = abstractObj[site].functions[i].type;
+
+    document.getElementById('mavoAtt').innerHTML += '<!-- Search for '+object+'-->';
+
+    var code = '&#10;' //new line in HTML
+    code += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+object+'" mv-source-action="search" '
+
+    var params=[]
+    firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
+      return snapshot.val().parameters;
+    }).then((params)=>{
+      for(var p=0; p< params.length; ++p){
+        if(params[p].displayed==true){
+          if(searchParam && params[p].name == searchParam){
+            code+='mv-source-search'
+          }else{
+            code+='mv-source-';
+            code+=params[p].name;
+          }
+          code+='=';
+          code+=JSON.stringify(params[p].value)+' '; // &#10;&#13;
+        }
+      }
+
+      code+='>';
+      code+='&lt;/div>'
+      code+= '&#10;&#13'
+
+      $("#mavo_attributes").show();
+      document.getElementById('mavoAtt').innerHTML += code;
+      Prism.highlightElement($('#mavoAtt')[0]);
+    })
+
+  }//end of functions
+
+  for(o in objects){
+
+    var code2 = '&#10;'
+    code2 += '&lt;!-- Get a specific '+o+' by its ID-->';
+    code2 += '&#10;' //new line in HTML
+    code2 += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ADD ID"'
+    code2 += '>';
+    code2 += '&lt;/div>'
+    code2 += '&#10;'
+
+    document.getElementById('mavoAttGet').innerHTML += code2;
+
+  }//end of objects
+
+
+  $("#mavo_attributes_get").show();
+  Prism.highlightElement($('#mavoAttGet')[0]);
+
+
+}
+
+
+function abstractionSiteHasBeenChosenMavo2(select){
+
+  document.getElementById('mavoAtt').innerHTML=""
+  // document.getElementById('object').innerHTML=""
+
+  site = select.options[select.selectedIndex].getAttribute("id");
+  // console.log("value: ", abstractObj[site]);
+  functions= abstractObj[site].functions;
+  objects= abstractObj[site].objects;
+
+  for(var i=0; i<functions.length; ++i){
+    var endpoint = abstractObj[site].functions[i].endpoint
+    var name = abstractObj[site].functions[i].name
+    var object = abstractObj[site].functions[i].object
+    var arry = abstractObj[site].functions[i].array
+    var searchParam = abstractObj[site].functions[i].searchParam;
+    var type = abstractObj[site].functions[i].type;
+
+    var code =''
+    code += '&lt;!-- Search '+site+'-->';
+    code += '&#10;'; //new line in HTML
+    code += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+object+'" mv-source-action="search" ';
+
+    firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
+      return snapshot.val().parameters;
+    }).then((params)=>{
+      console.log("params: ", params)
+      for(var p=0; p< params.length; ++p){
+        if(params[p].displayed==true){
+          if(searchParam && params[p].name == searchParam){
+            code+='mv-source-search'
+          }else{
+            code+='mv-source-'
+          }
+          code+=params[p].name;
+          code+='=';
+          code+=JSON.stringify(params[p].value)+' '; // &#10;&#13;
+        }
+      }
+      // func+='})';
+
+      code+='>';
+      code+='&lt;/div>'
+      code+= '&#10;'
+
+      // Prism.highlightElement($('#mavoAtt')[0]);
+    })
+
+  }//end of functions
+
+
+  // for(o in objects){
+
+  //   // code += '&lt;!-- Get a specific '+o+' by its ID-->';
+  //   code += '&#10;' //new line in HTML
+  //   code += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ADD ID"'
+  //   code += '>';
+  //   code += '&lt;/div>'
+  //   code += '&#10;'
+
+  // }//end of objects
+
+
+  $("#mavo_attributes").show();
+  document.getElementById('mavoAtt').innerHTML = code;
+  Prism.highlightElement($('#mavoAtt')[0]);
+
+}
+
+
 
 /******************* doc.html *******************/
 
@@ -637,12 +818,23 @@ function addSchemaToFunctions(){
 
 
 
-var once=false, scrapirAPIs = [], allSchemaTypesButActions = [], allTypes, actionStrings
+var once=false, scrapirAPIs = [], allSchemaTypesButActions = [], allTypes, actionStrings, wordVectors="";
 
 // window.onload = function () {
 function fetchSchemaTypes(){
 
 if(!once){
+  // Create a new word2vec method
+  // wordVectors = ml5.word2vec("https://raw.githubusercontent.com/turbomaze/word2vecjson/master/data/wordvecs25000.js", modelLoaded);
+
+  // // When the model is loaded
+  // function modelLoaded() {
+  //   console.log("Model Loaded!");
+  // }
+
+  // console.log(wordVectors.add(['name', 'title']))
+  // ////////
+
   once=true;
   firebase.initializeApp(config);
 
@@ -779,7 +971,7 @@ if(!once){
        'groups.yahoo.com'];
 
   // websites=['4shared', 'abc', 'abcnews', 'about', 'aboutads', 'abril', 'academia', 'accounts', 'addthis', 'addtoany', 'adobe', 'adssettings', 'afternic', 'akamaihd', 'alibaba', 'aliexpress', 'allaboutcookies', 'amazon', 'amzn', 'android', 'answers', 'aol', 'ap', 'apache', 'apple', 'archive', 'archives', 'arxiv', 'asus', 'bandcamp', 'bbc', 'berkeley', 'biblegateway', 'biglobe', 'billboard', 'bing', 'bit', 'bitly', 'blackberry', 'bloglovin', 'bloomberg', 'booking', 'books', 'boston', 'box', 'bp', 'bp1', 'bp2', 'brandbucket', 'britannica', 'bt', 'businessinsider', 'buydomains', 'buzzfeed', 'calameo', 'cambridge', 'canva', 'cbc', 'cbslocal', 'cbsnews', 'cdc', 'change', 'channel4', 'chicagotribune', 'chinadaily', 'chron', 'cia', 'cloudflare', 'cmu', 'cnbc', 'cnet', 'cnn', 'code', 'columbia', 'consumerreports', 'cornell', 'corriere', 'cpanel', 'creativecommons', 'csmonitor', 'dailymail', 'dailymotion', 'dan', 'daum', 'de', 'debian', 'deezer', 'dell', 'depositfiles', 'detik', 'developers', 'dictionary', 'digg', 'digitaltrends', 'discovery', 'disney', 'disqus', 'docs', 'doubleclick', 'draft', 'dreniq', 'drive', 'dropbox', 'dw', 'e-monsite', 'e-recht24', 'ea', 'ebay', 'economist', 'ed', 'ehow', 'elmundo', 'elpais', 'elsevier', 'en', 'enable-javascript', 'engadget', 'eonline', 'epa', 'es', 'espn', 'etsy', 'europa', 'eventbrite', 'evernote', 'example', 'express', 'facebook', 'fandom', 'fastcompany', 'fb', 'fda', 'feedburner', 'feedproxy', 'fifa', 'files', 'finance', 'forbes', 'forms', 'fortune', 'foursquare', 'foxnews', 'fr', 'ft', 'ftc', 'get', 'ggpht', 'giphy', 'github', 'gizmodo', 'globo', 'gmail', 'gnu', 'godaddy', 'gofundme', 'goo', 'goodreads', 'google', 'googleblog', 'googleusercontent', 'gravatar', 'greenpeace', 'groups', 'gstatic', 'guardian', 'harvard', 'hatena', 'hm', 'hollywoodreporter', 'house', 'hp', 'huawei', 'huffingtonpost', 'huffpost', 'hugedomains', 'ibm', 'icann', 'id', 'ietf', 'ig', 'ign', 'ikea', 'imageshack', 'imdb', 'inc', 'independent', 'indiatimes', 'instagram', 'instructables', 'intel', 'ipv4', 'iso', 'issuu', 'istockphoto', 'it', 'iubenda', 'ja', 'jimdofree', 'khanacademy', 'kickstarter', 'last', 'latimes', 'lefigaro', 'lemonde', 'lifehacker', 'line', 'linkedin', 'list-manage', 'live', 'liveinternet', 'loc', 'lonelyplanet', 'm', 'mail', 'maps', 'marketingplatform', 'marketwatch', 'marriott', 'mashable', 'mayoclinic', 'mediafire', 'medium', 'mega', 'megaupload', 'merriam-webster', 'metro', 'microsoft', 'mirror', 'mit', 'mixcloud', 'mozilla', 'msn', 'my', 'myaccount', 'myspace', 'mysql', 'namecheap', 'narod', 'nasa', 'nationalgeographic', 'nature', 'naver', 'nba', 'nbcnews', 'netflix', 'netvibes', 'networkadvertising', 'news', 'newsweek', 'newyorker', 'nginx', 'nicovideo', 'nih', 'nikkei', 'noaa', 'nokia', 'npr', 'nvidia', 'nydailynews', 'nypost', 'nytimes', 'office', 'ok', 'opera', 'oracle', 'orange', 'oreilly', 'oup', 'over-blog-kiwi', 'ovh', 'ox', 'parallels', 'paypal', 'pbs', 'pcmag', 'pexels', 'photobucket', 'photos', 'php', 'picasa', 'picasaweb', 'pinterest', 'pixabay', 'pl', 'play', 'playstation', 'plesk', 'plos', 'plus', 'policies', 'politico', 'prestashop', 'princeton', 'privacyshield', 'prnewswire', 'psu', 'psychologytoday', 'pt', 'public-api', 'qq', 'quora', 'rakuten', 'rapidshare', 'rediff', 'repubblica', 'researchgate', 'reuters', 'reverbnation', 'ria', 'rollingstone', 'rottentomatoes', 'rt', 'ru', 'samsung', 'sapo', 'sciencedaily', 'sciencedirect', 'sciencemag', 'scientificamerican', 'scoop', 'scribd', 'search', 'secureserver', 'sedo', 'sendspace', 'sfgate', 'shop-pro', 'shopify', 'shutterstock', 'si', 'sina', 'sites', 'sky', 'skype', 'slate', 'slideshare', 'smh', 'so-net', 'softpedia', 'soratemplates', 'soundcloud', 'spiegel', 'sports', 'spotify', 'springer', 'sputniknews', 'ssl-images-amazon', 'stackoverflow', 'standard', 'stanford', 'state', 'statista', 'steampowered', 'storage', 'stuff', 'support', 'surveymonkey', 't', 'tabelog', 'target', 'teamviewer', 'techcrunch', 'techradar', 'ted', 'telegram', 'telegraph', 'terra', 'theatlantic', 'thedailybeast', 'thefreedictionary', 'theglobeandmail', 'theguardian', 'themeforest', 'thestar', 'thesun', 'thetimes', 'theverge', 'thoughtco', 'time', 'timeout', 'tinyurl', 'tools', 'translate', 'tripadvisor', 'trustpilot', 'twitch', 'twitter', 'ubuntu', 'ucoz', 'umich', 'un', 'unesco', 'unsplash', 'uol', 'urbandictionary', 'usatoday', 'usgs', 'usnews', 'utexas', 'variety', 'vchecks', 'venturebeat', 'viagens', 'vice', 'video', 'vimeo', 'vk', 'vox', 'w3', 'wa', 'walmart', 'washington', 'washingtonpost', 'weather', 'webmd', 'weibo', 'welt', 'whatsapp', 'whitehouse', 'who', 'wikia', 'wikihow', 'wikimedia', 'wiktionary', 'wiley', 'windowsphone', 'wired', 'wordpress', 'worldbank', 'wp', 'wsj', 'www', 'xbox', 'xing', 'xinhuanet', 'yadi', 'yahoo', 'yale', 'yandex', 'yelp', 'youronlinechoices', 'youtu', 'youtube', 'ytimg', 'zeit', 'zendesk', 'ziddu'];
-  allTypes = ["API Reference","About Page","Accept Action","Accounting Service","Achieve Action","Action","Add Action","Administrative Area","Adult Entertainment","Aggregate Offer","Aggregate Rating","Agree Action","Airport","Alignment Object","Allocate Action","Amusement Park","Anatomical Structure","Anatomical System","Animal Shelter","Apartment Complex","Append Action","Apply Action","Approved Indication","Aquarium","Arrive Action","Art Gallery","Artery","Article","Ask Action","Assess Action","Assign Action","Attorney","Audience","Audio Object","Authorize Action","Auto Body Shop","Auto Dealer","Auto Parts Store","Auto Rental","Auto Repair","Auto Wash","Automated Teller","Automotive Business","Bakery","Bank or Credit Union","Bar or Pub","Beach","Beauty Salon","Bed And Breakfast","Befriend Action","Bike Store","Blog","Blog Posting","Blood Test","Body of Water","Bone","Book","Book Format Type","Book Store","Bookmark Action","Borrow Action","Bowling Alley","Brain Structure","Brand","Brewery","Broadcast Event","Broadcast Service","Buddhist Temple","Bus Station","Bus Stop","Business Audience","Business Entity Type","Business Event","Business Function","Buy Action","Cafe or Coffee Shop","Campground","Canal","Cancel Action","Casino","Catholic Church","Cemetery","Check Action","Check in Action","Check Out Action","Checkout Page","Child Care","Childrens Event","Choose Action","Church","City","City Hall","Civic Structure","Class","Clip","Clothing Store","Code","Collection Page","College or University","Comedy Club","Comedy Event","Comment","Comment Action","Communicate Action","Computer Store","Confirm Action","Consume Action","Contact Page","Contact Point","Contact Point Option","Continent","Convenience Store","Cook Action","Corporation","Country","Courthouse","Create Action","Creative Work","Credit Card","Crematorium","D Dx Element","Dance Event","Dance Group","Data Catalog","Data Download","Dataset","Day of Week","Day Spa","Defence Establishment","Delete Action","Delivery Charge Specification","Delivery Event","Delivery Method","Demand","Dentist","Depart Action","Department Store","Diagnostic Lab","Diagnostic Procedure","Diet","Dietary Supplement","Disagree Action","Discover Action","Dislike Action","Distance","Donate Action","Dose Schedule","Download Action","Draw Action","Drink Action","Drug","Drug Class","Drug Cost","Drug Cost Category","Drug Legal Status","Drug Pregnancy Category","Drug Prescription Status","Drug Strength","Dry Cleaning or Laundry","Duration","Eat Action","Education Event","Educational Audience","Educational Organization","Electrician","Electronics Store","Elementary School","Embassy","Emergency Service","Employment Agency","Endorse Action","Energy","Entertainment Business","Enumeration","Episode","Event","Event Status Type","Event Venue","Exercise Action","Exercise Gym","Exercise Plan","Fast Food Restaurant","Festival","Film Action","Financial Service","Find Action","Fire Station","Florist","Follow Action","Food Establishment","Food Event","Furniture Store","Garden Store","Gas Station","Gated Residence Community","General Contractor","Geo Coordinates","Geo Shape","Give Action","Golf Course","Government Building","Government Office","Government Organization","Government Permit","Government Service","Grocery Store","HVAC Business","Hair Salon","Hardware Store","Health And Beauty Business","Health Club","High School","Hindu Temple","Hobby Shop","Home And Construction Business","Home Goods Store","Hospital","Hostel","Hotel","House Painter","Ice Cream Shop","Ignore Action","Image Gallery","Image Object","Imaging Test","Individual Product","Infectious Agent Class","Infectious Disease","Inform Action","Insert Action","Install Action","Insurance Agency","Intangible","Interact Action","Internet Cafe","Invite Action","Item Availability","Item List","Item Page","Jewelry Store","Job Posting","Join Action","Joint","Lake Body of Water","Landform","Landmarks or Historical Buildings","Language","Leave Action","Legislative Building","Lend Action","Library","Lifestyle Modification","Ligament","Like Action","Liquor Store","Listen Action","Literary Event","Local Business","Locker Delivery","Locksmith","Lodging Business","Lose Action","Lymphatic Vessel","Map","Marry Action","Mass","Maximum Dose Schedule","Media Object","Medical Audience","Medical Cause","Medical Clinic","Medical Code","Medical Condition","Medical Condition Stage","Medical Contraindication","Medical Device","Medical Device Purpose","Medical Entity","Medical Enumeration","Medical Evidence Level","Medical Guideline","Medical Guideline Contraindication","Medical Guideline Recommendation","Medical Imaging Technique","Medical Indication","Medical Intangible","Medical Observational Study","Medical Observational Study Design","Medical Organization","Medical Procedure","Medical Procedure Type","Medical Risk Calculator","Medical Risk Estimator","Medical Risk Factor","Medical Risk Score","Medical Scholarly Article","Medical Sign","Medical Sign or Symptom","Medical Specialty","Medical Study","Medical Study Status","Medical Symptom","Medical Test","Medical Test Panel","Medical Therapy","Medical Trial","Medical Trial Design","Medical Web Page","Medicine System","Mens Clothing Store","Middle School","Mobile Application","Mobile Phone Store","Mosque","Motel","Motorcycle Dealer","Motorcycle Repair","Mountain","Move Action","Movie","Movie Rental Store","Movie Theater","Moving Company","Muscle","Museum","Music Album","Music Event","Music Group","Music Playlist","Music Recording","Music Store","Music Venue","Music Video Object","NGO","Nail Salon","Nerve","News Article","Night Club","Notary","Nutrition Information","Ocean Body of Water","Offer","Offer Item Condition","Office Equipment Store","On Demand Event","On Site Pickup","Opening Hours Specification","Optician","Order","Order Action","Order Status","Organization","Organize Action","Outlet Store","Ownership Info","Paint Action","Painting","Palliative Procedure","Parcel Delivery","Parcel Service","Parent Audience","Park","Parking Facility","Pathology Test","Pawn Shop","Pay Action","Payment Charge Specification","Payment Method","People Audience","Perform Action","Performing Arts Theater","Performing Group","Permit","Person","Pet Store","Pharmacy","Photograph","Photograph Action","Physical Activity","Physical Activity Category","Physical Exam","Physical Therapy","Physician","Place","Place of Worship","Plan Action","Play Action","Playground","Plumber","Police Station","Pond","Post Office","Postal Address","Prepend Action","Preschool","Prevention Indication","Price Specification","Product","Product Model","Professional Service","Profile Page","Property","Psychological Treatment","Public Swimming Pool","Publication Event","Qualitative Value","Quantitative Value","Quantity","Quote Action","RV Park","Radiation Therapy","Radio Clip","Radio Episode","Radio Season","Radio Series","Radio Station","Rating","React Action","Read Action","Real Estate Agent","Receive Action","Recipe","Recommended Dose Schedule","Recycling Center","Register Action","Reject Action","Rent Action","Replace Action","Reply Action","Reported Dose Schedule","Reserve Action","Reservoir","Residence","Restaurant","Return Action","Review","Review Action","River Body of Water","Roofing Contractor","Rsvp Action","Sale Event","Schedule Action","Scholarly Article","School","Sculpture","Sea Body of Water","Search Action","Search Results Page","Season","Self Storage","Sell Action","Send Action","Series","Service","Service Channel","Share Action","Shoe Store","Shopping Center","Single Family Residence","Site Navigation Element","Ski Resort","Social Event","Software Application","Some Products","Specialty","Sporting Goods Store","Sports Activity Location","Sports Club","Sports Event","Sports Team","Stadium or Arena","State","Store","Structured Value","Subscribe Action","Subway Station","Superficial Anatomy","Synagogue","TV Clip","TV Episode","TV Season","TV Series","Table","Take Action","Tattoo Parlor","Taxi Stand","Tech Article","Television Station","Tennis Complex","Theater Event","Theater Group","Therapeutic Procedure","Thing","Tie Action","Tip Action","Tire Shop","Tourist Attraction","Tourist Information Center","Toy Store","Track Action","Trade Action","Train Station","Transfer Action","Travel Action","Travel Agency","Treatment Indication","Type And Quantity Node","Un Register Action","Unit Price Specification","Update Action","Use Action","User Blocks","User Checkins","User Comments","User Downloads","User Interaction","User Likes","User Page Visits","User Plays","User Plus Ones","User Tweets","Vein","Vessel","Veterinary Care","Video Gallery","Video Object","View Action","Visual Arts Event","Volcano","Vote Action","WP Ad Block","WP Footer","WP Header","WP Side Bar","Want Action","Warranty Promise","Warranty Scope","Watch Action","Waterfall","Wear Action","Web Application","Web Page","Web Page Element","Wholesale Store","Win Action","Winery","Write Action","Zoo"];
+  allTypes = ["API Reference","About Page","Accept Action","Accounting Service","Achieve Action","Action","Add Action","Administrative Area","Adult Entertainment","Aggregate Offer","Aggregate Rating","Agree Action","Airport","Alignment Object","Allocate Action","Amusement Park","Anatomical Structure","Anatomical System","Animal Shelter","Apartment Complex","Append Action","Apply Action","Approved Indication","Aquarium","Arrive Action","Art Gallery","Artery","Article","Ask Action","Assess Action","Assign Action","Attorney","Audience","Audio Object","Authorize Action","Auto Body Shop","Auto Dealer","Auto Parts Store","Auto Rental","Auto Repair","Auto Wash","Automated Teller","Automotive Business","Bakery","Bank or Credit Union","Bar or Pub","Beach","Beauty Salon","Bed And Breakfast","Befriend Action","Bike Store","Blog","Blog Posting","Blood Test","Body of Water","Bone","Book","Book Format Type","Book Store","Bookmark Action","Borrow Action","Bowling Alley","Brain Structure","Brand","Brewery","Broadcast Event","Broadcast Service","Buddhist Temple","Bus Station","Bus Stop","Business Audience","Business Entity Type","Business Event","Business Function","Buy Action","Cafe or Coffee Shop","Campground","Canal","Cancel Action","Casino","Catholic Church","Cemetery","Check Action","Check in Action","Check Out Action","Checkout Page","Child Care","Childrens Event","Choose Action","Church","City","City Hall","Civic Structure","Class","Clip","Clothing Store","Code","Collection", "Collection Page","College or University","Comedy Club","Comedy Event","Comment","Comment Action","Communicate Action","Computer Store","Confirm Action","Consume Action","Contact Page","Contact Point","Contact Point Option","Continent","Convenience Store","Cook Action","Corporation","Country","Courthouse","Create Action","Creative Work","Credit Card","Crematorium","D Dx Element","Dance Event","Dance Group","Data Catalog","Data Download","Dataset","Day of Week","Day Spa","Defence Establishment","Delete Action","Delivery Charge Specification","Delivery Event","Delivery Method","Demand","Dentist","Depart Action","Department Store","Diagnostic Lab","Diagnostic Procedure","Diet","Dietary Supplement","Disagree Action","Discover Action","Dislike Action","Distance","Donate Action","Dose Schedule","Download Action","Draw Action","Drink Action","Drug","Drug Class","Drug Cost","Drug Cost Category","Drug Legal Status","Drug Pregnancy Category","Drug Prescription Status","Drug Strength","Dry Cleaning or Laundry","Duration","Eat Action","Education Event","Educational Audience","Educational Organization","Electrician","Electronics Store","Elementary School","Embassy","Emergency Service","Employment Agency","Endorse Action","Energy","Entertainment Business","Enumeration","Episode","Event","Event Status Type","Event Venue","Exercise Action","Exercise Gym","Exercise Plan","Fast Food Restaurant","Festival","Film Action","Financial Service","Find Action","Fire Station","Florist","Follow Action","Food Establishment","Food Event","Furniture Store","Garden Store","Gas Station","Gated Residence Community","General Contractor","Geo Coordinates","Geo Shape","Give Action","Golf Course","Government Building","Government Office","Government Organization","Government Permit","Government Service","Grocery Store","HVAC Business","Hair Salon","Hardware Store","Health And Beauty Business","Health Club","High School","Hindu Temple","Hobby Shop","Home And Construction Business","Home Goods Store","Hospital","Hostel","Hotel","House Painter","Ice Cream Shop","Ignore Action","Image Gallery","Image Object","Imaging Test","Individual Product","Infectious Agent Class","Infectious Disease","Inform Action","Insert Action","Install Action","Insurance Agency","Intangible","Interact Action","Internet Cafe","Invite Action","Item Availability","Item List","Item Page","Jewelry Store","Job Posting","Join Action","Joint","Lake Body of Water","Landform","Landmarks or Historical Buildings","Language","Leave Action","Legislative Building","Lend Action","Library","Lifestyle Modification","Ligament","Like Action","Liquor Store","Listen Action","Literary Event","Local Business","Locker Delivery","Locksmith","Lodging Business","Lose Action","Lymphatic Vessel","Map","Marry Action","Mass","Maximum Dose Schedule","Media Object","Medical Audience","Medical Cause","Medical Clinic","Medical Code","Medical Condition","Medical Condition Stage","Medical Contraindication","Medical Device","Medical Device Purpose","Medical Entity","Medical Enumeration","Medical Evidence Level","Medical Guideline","Medical Guideline Contraindication","Medical Guideline Recommendation","Medical Imaging Technique","Medical Indication","Medical Intangible","Medical Observational Study","Medical Observational Study Design","Medical Organization","Medical Procedure","Medical Procedure Type","Medical Risk Calculator","Medical Risk Estimator","Medical Risk Factor","Medical Risk Score","Medical Scholarly Article","Medical Sign","Medical Sign or Symptom","Medical Specialty","Medical Study","Medical Study Status","Medical Symptom","Medical Test","Medical Test Panel","Medical Therapy","Medical Trial","Medical Trial Design","Medical Web Page","Medicine System","Mens Clothing Store","Middle School","Mobile Application","Mobile Phone Store","Mosque","Motel","Motorcycle Dealer","Motorcycle Repair","Mountain","Move Action","Movie","Movie Rental Store","Movie Theater","Moving Company","Muscle","Museum","Music Album","Music Event","Music Group","Music Playlist","Music Recording","Music Store","Music Venue","Music Video Object","NGO","Nail Salon","Nerve","News Article","Night Club","Notary","Nutrition Information","Ocean Body of Water","Offer","Offer Item Condition","Office Equipment Store","On Demand Event","On Site Pickup","Opening Hours Specification","Optician","Order","Order Action","Order Status","Organization","Organize Action","Outlet Store","Ownership Info","Paint Action","Painting","Palliative Procedure","Parcel Delivery","Parcel Service","Parent Audience","Park","Parking Facility","Pathology Test","Pawn Shop","Pay Action","Payment Charge Specification","Payment Method","People Audience","Perform Action","Performing Arts Theater","Performing Group","Permit","Person","Pet Store","Pharmacy","Photograph","Photograph Action","Physical Activity","Physical Activity Category","Physical Exam","Physical Therapy","Physician","Place","Place of Worship","Plan Action","Play Action","Playground","Plumber","Police Station","Pond","Post Office","Postal Address","Prepend Action","Preschool","Prevention Indication","Price Specification","Product", "Product Collection", "Product Model","Professional Service","Profile Page","Property","Psychological Treatment","Public Swimming Pool","Publication Event","Qualitative Value","Quantitative Value","Quantity","Quote Action","RV Park","Radiation Therapy","Radio Clip","Radio Episode","Radio Season","Radio Series","Radio Station","Rating","React Action","Read Action","Real Estate Agent","Receive Action","Recipe","Recommended Dose Schedule","Recycling Center","Register Action","Reject Action","Rent Action","Replace Action","Reply Action","Reported Dose Schedule","Reserve Action","Reservoir","Residence","Restaurant","Return Action","Review","Review Action","River Body of Water","Roofing Contractor","Rsvp Action","Sale Event","Schedule Action","Scholarly Article","School","Sculpture","Sea Body of Water","Search Action","Search Results Page","Season","Self Storage","Sell Action","Send Action","Series","Service","Service Channel","Share Action","Shoe Store","Shopping Center","Single Family Residence","Site Navigation Element","Ski Resort","Social Event","Software Application","Some Products","Specialty","Sporting Goods Store","Sports Activity Location","Sports Club","Sports Event","Sports Team","Stadium or Arena","State","Store","Structured Value","Subscribe Action","Subway Station","Superficial Anatomy","Synagogue","TV Clip","TV Episode","TV Season","TV Series","Table","Take Action","Tattoo Parlor","Taxi Stand","Tech Article","Television Station","Tennis Complex","Theater Event","Theater Group","Therapeutic Procedure","Thing","Tie Action","Tip Action","Tire Shop","Tourist Attraction","Tourist Information Center","Toy Store","Track Action","Trade Action","Train Station","Transfer Action","Travel Action","Travel Agency","Treatment Indication","Type And Quantity Node","Un Register Action","Unit Price Specification","Update Action","Use Action","User Blocks","User Checkins","User Comments","User Downloads","User Interaction","User Likes","User Page Visits","User Plays","User Plus Ones","User Tweets","Vein","Vessel","Veterinary Care","Video Gallery","Video Object","View Action","Visual Arts Event","Volcano","Vote Action","WP Ad Block","WP Footer","WP Header","WP Side Bar","Want Action","Warranty Promise","Warranty Scope","Watch Action","Waterfall","Wear Action","Web Application","Web Page","Web Page Element","Wholesale Store","Win Action","Winery","Write Action","Zoo"];
   actionStrings= ["TouristAttraction", "InteractionCounter", "ActionStatusType", "ActiveActionStatus", "CompletedActionStatus", "FailedActionStatus", "PotentialActionStatus", "ActionAccessSpecification"]
 
   for(var i=0; i<websites.length; ++i){
@@ -1079,6 +1271,9 @@ var arrFields=[], wooSchema={}, site="", temp={}, suggestedTypes=[], pathname, t
 
 function siteHasBeenEntered(select){
 
+  // $("#tableSiteDiv").empty();
+  $("#tableDiv").empty();
+
   suggestedTypes=[];
   $("#type-select").empty();
   $("#type-select").append('<option style="text-align:center; display:none" selected>Choose Type</option>')
@@ -1233,7 +1428,7 @@ function siteHasBeenEntered(select){
           if(similar>0){
             if(typesMatchUrl.indexOf(allTypes[j]) == -1 && allTypes[j]!='Search Results Page'){
               typesMatchUrl.push(allTypes[j]);
-              console.log(allTypes[j]+' = '+similar+'%')
+              // console.log(allTypes[j]+' = '+similar+'%')
             }
           }
         }
@@ -1241,7 +1436,7 @@ function siteHasBeenEntered(select){
     }
   }
 
-  console.log(typesMatchUrl);
+  console.log("typesMatchUrl", typesMatchUrl);
 
 
   $("#site-info").show();
@@ -1258,8 +1453,14 @@ function siteHasBeenEntered(select){
   //   ++i;
   // }
 
-  for(var t=0; t<typesMatchUrl.length && t<5; ++t){
-    typeHasBeenChosen(typesMatchUrl[t]);
+  if(typesMatchUrl.length > 4){
+    for(var t=0; t<typesMatchUrl.length && t<5; ++t){
+      typeHasBeenChosen(typesMatchUrl[t]);
+    }
+  }else{
+    for(var t=0; t<typesMatchUrl.length; ++t){
+      typeHasBeenChosen(typesMatchUrl[t]);
+    }
   }
 
 }
@@ -2696,8 +2897,9 @@ function showRow(id){
 var propertyType = false;
 
 function typeHasBeenChosen(select){
+// Load the model.
+  // use.load().then(model => {
 
-  // console.log("select sel: ",select);
   if(select.tagName === 'SELECT'){
     // $('#type-select').popover('hide');
     console.log("it is a select");
@@ -2754,8 +2956,6 @@ function typeHasBeenChosen(select){
   type = type.split(' ').join('');
   var child = type;
   var suggestedProperties=[], suggestedPropFields=[];
-
-
   console.log("Child: ", child)
 
   listOfTypes.push(type)
@@ -2766,6 +2966,7 @@ function typeHasBeenChosen(select){
 
   // tempObj={}
   tempObj[type]={"properties":[], "id":"", "construct":{"self":{"endpoint":"", "id":""}}, "add":{"endpoint":""}, "remove":{"endpoint":"", "id":""}, "setters":[], "methods":[]}
+
   var typeProperties =[];
 
   //Access schema.org/{type} and gets its descreption and properties with their descreptions and types
@@ -2915,20 +3116,52 @@ function typeHasBeenChosen(select){
 
   console.log("All properties: ", typeProperties);
   console.log("All fields: ", allAPIFeilds);
-
+  let sentences=[]
+  //remove "" from the array
+  allAPIFeilds = allAPIFeilds.filter(e => e !== "");
   //go over the propertes and get the similar properties
   for(var c=0; c<typeProperties.length; ++c){
     for(var j=0; j< allAPIFeilds.length; ++j){
-      var similar = checkSimilarity(typePropertiesCleaned[c], allAPIFeildsCleaned[j]);
+      // const sentences = ['name playlist', 'title playlist'];
+      let p1=typeProperties[c]
+      let p2= allAPIFeilds[j]
+      // let sentences=[p1, p2]
+      let similar = checkSimilarity(p1, p2)
       if(similar>0){
-        // console.log(typeProperties[c]+' : '+allAPIFeilds[j]+' = '+similar+'%');
-        suggestedProperties.push(typeProperties[c]);
-        suggestedPropFields.push({
-          property: typeProperties[c],
-          field: allAPIFeilds[j]
-        })
+        console.log(p1+' : '+p2+' = '+similar+'%');
+          suggestedProperties.push(typeProperties[c]);
+          suggestedPropFields.push({
+            property: p1,
+            field: p2
+          })
       }
+
+      // sentences.push(typeProperties[c])
+      // sentences.push(allAPIFeilds[j])
+
+      // model.embed(sentences).then(async embeddings => {
+      //   // `embeddings` is a 2D tensor consisting of the 512-dimensional embeddings for each sentence.
+      //   // So in this example `embeddings` has the shape [2, 512].
+      //   // embeddings.print(true /* verbose */);
+      //   const vec = await embeddings.array();
+      //   // console.log("embeddings[0]: ", vec[0])
+      //   const cosine = tf.losses.cosineDistance(vec[0], vec[1], 0);
+      //   const result = await cosine.data();
+      //   console.log(result);
+
+      //   // console.log(`${Math.round((1 - result) * 100)}%`);
+      //   if(Math.round((1 - result) * 100)>80){
+      //     console.log(p1+' : '+p2+' = '+Math.round((1 - result) * 100)+'%');
+      //     suggestedProperties.push(typeProperties[c]);
+      //     suggestedPropFields.push({
+      //       property: typeProperties[c],
+      //       field: allAPIFeilds[j]
+      //     })
+      //   }
+      // });//end of model.embed(sentences)
+
     }
+
     if(c+1==typeProperties.length){
       //remove duplicates properties
       suggestedProperties = suggestedProperties.filter((c, index) => {
@@ -2959,7 +3192,8 @@ function typeHasBeenChosen(select){
       }
     }
 
-  }
+  }//en dof loop
+
 
   /************************ END OF SUGGESTED PROPERTIES ************************/
 
@@ -3036,7 +3270,7 @@ function typeHasBeenChosen(select){
   }//end of loop
 
   console.log("GET= "+ tempMaxSimUrlGET+' : '+tempMaxSimGET)
-  console.log("SEARCH= "+tempMaxSimUrlSEARCH)
+  // console.log("SEARCH= "+tempMaxSimUrlSEARCH)
 
   //Go over the clicked table rows
   var typeTable = document.getElementById(type);
@@ -3049,11 +3283,12 @@ function typeHasBeenChosen(select){
   var typeCellGet1 = rowTypeGet.insertCell(1); //style="width:240px;"
   var getUrlSlect = '<div><select id="url_get_'+type+'"  class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select></div>'
   typeCellGet1.innerHTML =  getUrlSlect;
+
   //add ID select
   // rowTypeGet.deleteCell(2);
   var typeCellGet2 = rowTypeGet.insertCell(2);
   typeCellGet2.style.display = "flex";
-  var getUrlSlectID = '<div style="margin-right:5px"><img / src="assets/img/new/connect.png" width="20px" style="margin-top:10px"></div> <div style="width:240px;"><select id="'+type+'_get_id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" style=";" showSubtext="true" onchange="idHasBeenChosed(this)"><option selected>Choose the ID</option></select></div> '
+  var getUrlSlectID = '<div style="margin-right:5px;"><img / src="assets/img/new/connect.png" width="20px" style="margin-top:10px"></div> <div style="width:240px;"><select id="'+type+'_get_id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" style=";" showSubtext="true" onchange="idHasBeenChosed(this)"><option selected>Choose the ID</option></select></div> '
   +'<div class="info" style="pointer-events: all; display: inline; ">'
   +'<i class="ion ion-md-information-circle"></i>'
   +'<span class="extra-info">'
@@ -3061,6 +3296,7 @@ function typeHasBeenChosen(select){
   +'</span>'
   +'</div>'
   typeCellGet2.innerHTML = getUrlSlectID;
+  typeCellGet2.style.display="none";
 
 
   var rowTypeSearch = document.getElementById(type+'_searchM');
@@ -3121,7 +3357,11 @@ function typeHasBeenChosen(select){
 
       //Fill out the ID selectpicker
       for(var f=0; f<scrapirAPIs[i].params.length; ++f){
-        $("#"+type+"_get_id").append("<option id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
+        if(scrapirAPIs[i].params.length || scrapirAPIs[i].params[f].includes('id')){
+          $("#"+type+"_get_id").append("<option selected id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
+        }else{
+          $("#"+type+"_get_id").append("<option id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
+        }
       }
       predictedAPI=true;
     }
@@ -3186,6 +3426,25 @@ function typeHasBeenChosen(select){
   jQuery('.selectpicker').selectpicker('refresh');
 
 }, 300);
+
+
+// });//load
+//   };
+  //}
+
+  // if (window != self)
+  // worker_function(select);
+
+  // const worker = new Worker(URL.createObjectURL(new Blob(["(" + worker_function.toString() + ")()"], { type: 'text/javascript' })));
+  //   worker.postMessage({});
+  //   worker.onmessage = (message) => {
+  //     // arrrrr.push(message)
+  //     // console.log('from main thread')
+  //     // const {data} = message
+  //     // tf.tensor(message.data.res, message.data.shape).print()
+  // }
+
+  //});
 
 }
 
@@ -3627,7 +3886,6 @@ $(document).ready(function (e) {
 
 
 
-
 function removeSearchHint(){
   $("#step4_hint").hide();
   methodsImp.push('Search')
@@ -3734,17 +3992,6 @@ function propertyHasBeenChosen(select){
             }
           })
           $("#"+thisType+"_property-select").popover('show');
-
-          // $("#url_get_"+thisType+" option").tooltip({
-          //   placement: 'right',
-          //   trigger: 'hover',
-          //   container: 'body'
-          // });
-
-
-          // $(document).on('click','[id^="popbut_"]',function () {
-          //   typeHasBeenChosen(this.id);
-          // });
 
           $('[id^="popbut_"]').unbind().click(function() {
             typeHasBeenChosen(this.id);
@@ -3882,19 +4129,6 @@ function propertyHasBeenChosen(select){
 
 }
 
-
-function testPython(){
-  $.ajax({
-    type: "POST",
-    url: "./sent2vec.py",
-    // data: { param: text}
-  }).done(function( o ) {
-     // do something
-     console.log("cos: ", o)
-  });
-
-
-}
 
 // function saveTypes(){
 //   firebase.initializeApp(config);

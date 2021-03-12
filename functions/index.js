@@ -17,8 +17,7 @@ app.get("/sent2vec", (req, res, next) => {
     // var process = spawn('python',["./hello.py",
     // req.query.firstname,
     // req.query.lastname] );
-    // Takes stdout data from script which executed
-    // with arguments and send this data to res object
+    // Takes stdout data from script which executed with arguments and send this data to res object
     process.stdout.on('data', function(data) {
         res.send(data.toString());
     } )
