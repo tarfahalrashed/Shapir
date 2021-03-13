@@ -26,31 +26,35 @@ var config = {
 // }
 
 
-
 /******************* doc.html *******************/
 
-var abstractObj={} //=>{site:object}
+var abstractObj={}, onceInit=true; //=>{site:object}
+
 function docOnLoad(){
-  firebase.initializeApp(config);
 
-  function loadSelect(){
+  if(onceInit){
+    onceInit=false
+    firebase.initializeApp(config);
 
-    return firebase.database().ref('/abstractions/').once('value').then(function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        // console.log("site object: ", childSnapshot.key)
-        $("#sites").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
-        $("#sites_mavo").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
-        var key = childSnapshot.key;
-        abstractObj[key] = childSnapshot.val();
+    function loadSelect(){
+
+      return firebase.database().ref('/abstractions/').once('value').then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          // console.log("site object: ", childSnapshot.key)
+          $("#sites").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
+          $("#sites_mavo").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
+          var key = childSnapshot.key;
+          abstractObj[key] = childSnapshot.val();
+        });
       });
-    });
 
-  }
+    }
 
     loadSelect().then(()=>{
       // console.log("abstractObj: ", abstractObj)
       jQuery('.selectpicker').selectpicker('refresh');
     })
+  }
 
 }
 
@@ -75,18 +79,23 @@ function abstractionSiteHasBeenChosen(select){
     var object = abstractObj[site].functions[i].object
     var arry = abstractObj[site].functions[i].array
 
+    var oName1= object[0].toLowerCase() + object.slice(1);
+
+
     if(arry){
       var objectStr = 'a list of '+abstractObj[site].functions[i].object;
     }else{
       var objectStr = object
     }
-
+    var func=""
     var params=[]
     firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
       params = snapshot.val().parameters;
       // console.log("params! ", params)
     }).then(()=>{
-      var func = site+'.'+ name+'({';
+      func = 'var '+oName1+'s = '+site+'.search({';
+
+      // var func = site+'.'+ name+'({';
       for(var p=0; p< params.length; ++p){
         if(params[p].displayed==true){
           // console.log(params[p].name)
@@ -100,11 +109,20 @@ function abstractionSiteHasBeenChosen(select){
         }
       }
       func+='})';
+    }).then(()=>{
+      var properties = abstractObj[site].objects[object].properties;
+      func+= '\n// retunrs a list of '+object+'s with the following properties\n';
+      //Getter properties
+      for(p in properties){
+        // func += oName1+'s[i].'+
+        func += properties[p].property +'\n';
+      }
 
       $("#functions").show();
-      document.getElementById('function').innerHTML += func + '&nbsp; //return ' + objectStr;
+      document.getElementById('function').innerHTML += func //+ '&nbsp; //return ' + objectStr;
       document.getElementById('function').innerHTML += '\n\n';
       Prism.highlightElement($('#function')[0]);
+
     })
 
   }//end of functions
@@ -307,77 +325,6 @@ function abstractionSiteHasBeenChosenMavo(select){
 
 
 }
-
-
-function abstractionSiteHasBeenChosenMavo2(select){
-
-  document.getElementById('mavoAtt').innerHTML=""
-  // document.getElementById('object').innerHTML=""
-
-  site = select.options[select.selectedIndex].getAttribute("id");
-  // console.log("value: ", abstractObj[site]);
-  functions= abstractObj[site].functions;
-  objects= abstractObj[site].objects;
-
-  for(var i=0; i<functions.length; ++i){
-    var endpoint = abstractObj[site].functions[i].endpoint
-    var name = abstractObj[site].functions[i].name
-    var object = abstractObj[site].functions[i].object
-    var arry = abstractObj[site].functions[i].array
-    var searchParam = abstractObj[site].functions[i].searchParam;
-    var type = abstractObj[site].functions[i].type;
-
-    var code =''
-    code += '&lt;!-- Search '+site+'-->';
-    code += '&#10;'; //new line in HTML
-    code += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+object+'" mv-source-action="search" ';
-
-    firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
-      return snapshot.val().parameters;
-    }).then((params)=>{
-      console.log("params: ", params)
-      for(var p=0; p< params.length; ++p){
-        if(params[p].displayed==true){
-          if(searchParam && params[p].name == searchParam){
-            code+='mv-source-search'
-          }else{
-            code+='mv-source-'
-          }
-          code+=params[p].name;
-          code+='=';
-          code+=JSON.stringify(params[p].value)+' '; // &#10;&#13;
-        }
-      }
-      // func+='})';
-
-      code+='>';
-      code+='&lt;/div>'
-      code+= '&#10;'
-
-      // Prism.highlightElement($('#mavoAtt')[0]);
-    })
-
-  }//end of functions
-
-
-  // for(o in objects){
-
-  //   // code += '&lt;!-- Get a specific '+o+' by its ID-->';
-  //   code += '&#10;' //new line in HTML
-  //   code += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ADD ID"'
-  //   code += '>';
-  //   code += '&lt;/div>'
-  //   code += '&#10;'
-
-  // }//end of objects
-
-
-  $("#mavo_attributes").show();
-  document.getElementById('mavoAtt').innerHTML = code;
-  Prism.highlightElement($('#mavoAtt')[0]);
-
-}
-
 
 
 /******************* doc.html *******************/
@@ -824,6 +771,14 @@ var once=false, scrapirAPIs = [], allSchemaTypesButActions = [], allTypes, actio
 function fetchSchemaTypes(){
 
 if(!once){
+  var input = document.getElementById("url-site");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("enterUrl").click();
+  }
+});
+
   // Create a new word2vec method
   // wordVectors = ml5.word2vec("https://raw.githubusercontent.com/turbomaze/word2vecjson/master/data/wordvecs25000.js", modelLoaded);
 
@@ -1254,16 +1209,6 @@ if(!once){
     const similarity = getSimilarityScore(textCosineSimilarity(text1,text2));
     return similarity;
   }
-
-
-
-var input = document.getElementById("url-site");
-input.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    document.getElementById("enterUrl").click();
-  }
-});
 
 
 
@@ -1770,127 +1715,132 @@ function urlHasBeenChosen(select){
         console.log("final properties ", propList);
 
         // APPEND the above arrays to the table1
-        $("#table1 tbody").empty()
+        // $("#table1 tbody").empty()
 
-        for(var i=0; i<resProplist.length || i<propList.length ; ++i){
-          if(resProplist[i] === undefined){
-            var r = ''
-          }else{
-            var r = resProplist[i]
-          }
+        // for(var i=0; i<resProplist.length || i<propList.length ; ++i){
+        //   if(resProplist[i] === undefined){
+        //     var r = ''
+        //   }else{
+        //     var r = resProplist[i]
+        //   }
 
-          if(propList[i] === undefined){
-            var p = ''
-          }else{
-            var p = '<div class="redips-drag">'+propList[i]+'</div>'
-          }
+        //   if(propList[i] === undefined){
+        //     var p = ''
+        //   }else{
+        //     var p = '<div class="redips-drag">'+propList[i]+'</div>'
+        //   }
 
-          $("#table1 tbody").append('<tr><td class="redips-mark">'+r+'</td><td>'+p+'</td></tr>');
+        //   $("#table1 tbody").append('<tr><td class="redips-mark">'+r+'</td><td>'+p+'</td></tr>');
 
-        }
+        // }
+
+
+        //****** END OF REDIPS ******//
 
         /* enable strict mode */
-        'use strict';
+        // 'use strict';
 
-        // create redips container
-        let redips = {},
-          counter = 0;
+        // // create redips container
+        // let redips = {},
+        //   counter = 0;
 
-        // redips initialization
-        //redips.init = function () {
-          // reference to the REDIPS.drag library
-          let rd = REDIPS.drag;
-          // initialization
-          rd.init();
-          // set mode option to "shift"
-          rd.dropMode = 'shift';
-          // set animation loop pause
-          rd.animation.pause = 20;
-          // enable shift.animation
-          rd.shift.animation = true;
-          // set TD for overflow elements (initially)
-          rd.shift.overflow = document.getElementById('overflow');
-          // add counter to cloned element name
-          // (after cloned DIV element is dropped to the table)
-          rd.event.clonedDropped = function () {
-            // increase counter
-            counter++;
-            // append to the DIV element name
-            rd.obj.innerHTML += counter;
-          };
-        //};
-
-
-        //set current table
-        redips.setTable = function (e) {
-          let value = e.options[e.selectedIndex].value,
-            tables = document.getElementById('redips-drag').getElementsByTagName('table'),
-            i;
-          // loop goes through all fetched tables within drag container
-          for (i = 0; i < tables.length; i++) {
-            // skip mini table
-            if (tables[i].id === 'mini') {
-              continue;
-            }
-            // show selected table
-            else if (tables[i].id === value) {
-              tables[i].style.display = '';
-            }
-            // hide all other tables
-            else {
-              tables[i].style.display = 'none';
-            }
-          }
-        };
+        // // redips initialization
+        // //redips.init = function () {
+        //   // reference to the REDIPS.drag library
+        //   let rd = REDIPS.drag;
+        //   // initialization
+        //   rd.init();
+        //   // set mode option to "shift"
+        //   rd.dropMode = 'shift';
+        //   // set animation loop pause
+        //   rd.animation.pause = 20;
+        //   // enable shift.animation
+        //   rd.shift.animation = true;
+        //   // set TD for overflow elements (initially)
+        //   rd.shift.overflow = document.getElementById('overflow');
+        //   // add counter to cloned element name
+        //   // (after cloned DIV element is dropped to the table)
+        //   rd.event.clonedDropped = function () {
+        //     // increase counter
+        //     counter++;
+        //     // append to the DIV element name
+        //     rd.obj.innerHTML += counter;
+        //   };
+        // //};
 
 
-        // set shift mode
-        redips.shiftMode = function (radio) {
-          REDIPS.drag.shift.mode = radio.value;
-        };
+        // //set current table
+        // redips.setTable = function (e) {
+        //   let value = e.options[e.selectedIndex].value,
+        //     tables = document.getElementById('redips-drag').getElementsByTagName('table'),
+        //     i;
+        //   // loop goes through all fetched tables within drag container
+        //   for (i = 0; i < tables.length; i++) {
+        //     // skip mini table
+        //     if (tables[i].id === 'mini') {
+        //       continue;
+        //     }
+        //     // show selected table
+        //     else if (tables[i].id === value) {
+        //       tables[i].style.display = '';
+        //     }
+        //     // hide all other tables
+        //     else {
+        //       tables[i].style.display = 'none';
+        //     }
+        //   }
+        // };
 
 
-        // set overflow
-        redips.overflow = function (radio) {
-          if (radio.value === 'user') {
-            REDIPS.drag.shift.overflow = document.getElementById('overflow');
-          }
-          else {
-            REDIPS.drag.shift.overflow = radio.value;
-          }
-        };
+        // // set shift mode
+        // redips.shiftMode = function (radio) {
+        //   REDIPS.drag.shift.mode = radio.value;
+        // };
 
 
-        // enable / disable animation
-        redips.shiftAnimation = function (chk) {
-          REDIPS.drag.shift.animation = chk.checked;
-        };
+        // // set overflow
+        // redips.overflow = function (radio) {
+        //   if (radio.value === 'user') {
+        //     REDIPS.drag.shift.overflow = document.getElementById('overflow');
+        //   }
+        //   else {
+        //     REDIPS.drag.shift.overflow = radio.value;
+        //   }
+        // };
 
 
-        // enable / disable shift after element is deleted
-        redips.shiftAfter = function (chk) {
-          REDIPS.drag.shift.after = chk.value;
-        };
+        // // enable / disable animation
+        // redips.shiftAnimation = function (chk) {
+        //   REDIPS.drag.shift.animation = chk.checked;
+        // };
 
 
-        // toggles trash_ask parameter defined at the top
-        redips.toggleConfirm = function (chk) {
-          if (chk.checked === true) {
-            REDIPS.drag.trash.question = 'Are you sure you want to delete DIV element?';
-          }
-          else {
-            REDIPS.drag.trash.question = null;
-          }
-        };
+        // // enable / disable shift after element is deleted
+        // redips.shiftAfter = function (chk) {
+        //   REDIPS.drag.shift.after = chk.value;
+        // };
 
 
-        // add onload event listener
-        if (window.addEventListener) {
-          window.addEventListener('load', redips.init, false);
-        }
-        else if (window.attachEvent) {
-          window.attachEvent('onload', redips.init);
-        }
+        // // toggles trash_ask parameter defined at the top
+        // redips.toggleConfirm = function (chk) {
+        //   if (chk.checked === true) {
+        //     REDIPS.drag.trash.question = 'Are you sure you want to delete DIV element?';
+        //   }
+        //   else {
+        //     REDIPS.drag.trash.question = null;
+        //   }
+        // };
+
+
+        // // add onload event listener
+        // if (window.addEventListener) {
+        //   window.addEventListener('load', redips.init, false);
+        // }
+        // else if (window.attachEvent) {
+        //   window.attachEvent('onload', redips.init);
+        // }
+
+        //****** END OF REDIPS ******//
 
 
         $("#response-fields").show();
@@ -2292,26 +2242,6 @@ function urlHasBeenChosenForMethod(select){
 
         // temp.objects[getter].properties
 
-        // APPEND the above arrays to the table2
-        //$("#table2 tbody").empty()
-
-        for(var i=0; i<resProplist.length || i<propList.length ; ++i){
-          if(resProplist[i] === undefined){
-            var r = ''
-          }else{
-            var r = resProplist[i]
-          }
-
-          if(propList[i] === undefined){
-            var p = ''
-          }else{
-            var p = '<div class="redips-drag">'+propList[i]+'</div>'
-          }
-
-          //$("#table2 tbody").append('<tr><td class="redips-mark">'+r+'</td><td>'+p+'</td></tr>');
-
-        }
-
       }
     });
   });
@@ -2393,32 +2323,8 @@ function urlHasBeenChosenForTypeMethod(select){
           }
         }
 
-        // propList = temp.objects[currentType].properties;
-
         console.log("final response ", resProplist);
         console.log("final properties GGG ", propList);
-
-        // temp.objects[getter].properties
-
-        // APPEND the above arrays to the table2
-        //$("#table2 tbody").empty()
-
-        for(var i=0; i<resProplist.length || i<propList.length ; ++i){
-          if(resProplist[i] === undefined){
-            var r = ''
-          }else{
-            var r = resProplist[i]
-          }
-
-          if(propList[i] === undefined){
-            var p = ''
-          }else{
-            var p = '<div class="redips-drag">'+propList[i]+'</div>'
-          }
-
-          //$("#table2 tbody").append('<tr><td class="redips-mark">'+r+'</td><td>'+p+'</td></tr>');
-
-        }
 
       }
     });
@@ -2903,6 +2809,8 @@ function showRow(id){
 
 var propertyType = false;
 
+var typeAndProperties =[];
+
 function typeHasBeenChosen(select){
 // Load the model.
   // use.load().then(model => {
@@ -2952,7 +2860,11 @@ function typeHasBeenChosen(select){
 
   }
 
-  tempDel[type]=[]
+  var keyType= type;
+  var type_to_set = {};
+  type_to_set[keyType] = [];
+
+  typeAndProperties.push(type_to_set)
 
   // $("#step2_hint").hide();
   $("#prop-list").show();
@@ -3942,12 +3854,17 @@ function propertyHasBeenChosen(select){
   var typeP, descP;
   propertyList.push(property);
 
-  tempDel[thisType].push(property)
-  console.log("Check push: ", tempDel[thisType].push(property))
-
   var child = property
   var parent = select.getAttribute("id").split('-')[1];
   var thisType = select.getAttribute("id").split('_')[0];
+
+  // typeAndProperties=[{type1:[]},{type2:[]},...]
+  for (const [key, value] of Object.entries(typeAndProperties)) {
+    // console.log(`${key}: ${value}`);
+    if(key == thisType){
+      typeAndProperties[key].push(property)
+    }
+  }
 
   console.log("thisType: ", thisType);
 
@@ -3967,6 +3884,7 @@ function propertyHasBeenChosen(select){
   })
 
   console.log("propType: ",propType)
+
 
   var hasType = false;
   var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL", "Float","Integer","CssSelectorType","PronounceableText","URL","XPathType","True","False"]
@@ -4030,13 +3948,11 @@ function propertyHasBeenChosen(select){
           $(document).on('click', '#closeBut', function(){
             if(once){
               once=false;
-            console.log("close button is clicked")
             $("#"+thisType+"_property-select").popover('hide');
             propChosen=true;
 
             if(propertyType){
               propertyType=false;
-              console.log("properType is true!")
               //show the field selectpicker if a field was chosen
               if(propChosen && fieldChosen){
                 console.log("NOT A TYPE")
@@ -4080,6 +3996,20 @@ function propertyHasBeenChosen(select){
 
                 var firstOptionF = $("#"+thisType+"_field-select option:first").val();
                 $("#"+thisType+"_field-select").val(firstOptionF);
+
+                for(var i=0; i<scrapirAPIs.length; ++i){
+                  var urlText = scrapirAPIs[i].url;
+                  var titleText = scrapirAPIs[i].title;
+
+                  if(urlText.includes(site)){
+                    console.log("SITE: ", site)
+                    var urlTextNoSpaces = titleText.split(' ').join('')
+                    $('#property_api_'+thisType).append('<option data-subtext="'+scrapirAPIs[i].title+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].url+'</option>');
+                  }
+                }
+
+                jQuery('.selectpicker').selectpicker('refresh');
+
               }
             }else{
               //do nothing
@@ -4088,21 +4018,6 @@ function propertyHasBeenChosen(select){
           }//once
           });
 
-
-          for(var i=0; i<scrapirAPIs.length; ++i){
-            var urlText = scrapirAPIs[i].url;
-            var titleText = scrapirAPIs[i].title;
-            if(urlText.includes(site)){
-              var urlTextNoSpaces = titleText.split(' ').join('')
-              $('#property_api_'+thisType).append('<option data-subtext="'+scrapirAPIs[i].title+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].url+'</option>');
-            }
-          }
-
-          jQuery('.selectpicker').selectpicker('refresh');
-          //change
-          setTimeout(() => {
-            jQuery('.selectpicker').selectpicker('refresh');
-          }, 800);
 
           //'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children"><p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>');
 
@@ -4567,65 +4482,66 @@ function addNewMethod(){
 
 
 function deleteRow(row) {
-  console.log("row ID: ", row.id)
   var rowID = row.id.split('_close')[0];
   var tableID= rowID.split('_')[0]
-  var name = rowID.split('_')[1] //property or method name
+  // var name = rowID.split('_')[1] //property or method name
 
   if(rowID.includes('_row')){//remove the whole type table
-    console.log("row: ", rowID)
-    delete temp.objects[tableID];
+    // delete temp.objects[tableID];
     document.getElementById(tableID).remove();
     //remove type from temp object
-
-    console.log(temp)
   }else{//remove this row
-    var i = row.parentNode.parentNode.rowIndex;
-    console.log("i: ", i)
+    var row = document.getElementById(rowID);
+    row.parentNode.removeChild(row);
 
-    // document.getElementById(tableID).deleteRow(i);
+    // var i = row.parentNode.parentNode.rowIndex;
+    // console.log("row: ", row)
+    // // MusicPlaylist_track
+    // document.getElementById(tableID+'_'+name).deleteRow(i);
     // var properties = tempDelObj[tableID];//temp.objects[tableID].properties;
     // var methods = temp.objects[tableID].methods;
-    console.log("DEL properties: ", tempDel)
 
-    var properties =  tempDel[tableID];
+    // var properties =  typeAndProperties[tableID]
+    // console.log("DEL properties: ", typeAndProperties)
+    // let objProp = properties.find(o => o.name === name);
 
-    if(typeof properties[0] === 'object' && properties[0] !== null){//if array of objects
-      if(properties.some(p=> p.property === name)){
-        // if(properties.indexOf(name) !== -1){//if property
-        // console.log("name: ", name)
-        $.each(properties, function(i){
-          if(properties[i].property === name) {
-            properties.splice(i,1);
-              return false;
-          }
-        });
-      }else{//if methods
-        $.each(methods, function(i){
-          if(methods[i].type === name) {
-            methods.splice(i,1);
-              return false;
-          }
-        });
-      }
-    }else{
-      if(properties.indexOf(name) !== -1){//if property
-        // console.log("name: ", name)
-        $.each(properties, function(i){
-          if(properties[i] === name) {
-            properties.splice(i,1);
-              return false;
-          }
-        });
-      }else{//if methods
-        $.each(methods, function(i){
-          if(methods[i].type === name) {
-            methods.splice(i,1);
-              return false;
-          }
-        });
-      }
-    }
+
+    // if(typeof properties[0] === 'object' && properties[0]. !== null){//if array of objects
+    //   if(properties.some(p=> p.property === name)){
+    //     // if(properties.indexOf(name) !== -1){//if property
+    //     // console.log("name: ", name)
+    //     $.each(properties, function(i){
+    //       if(properties[i].property === name) {
+    //         properties.splice(i,1);
+    //           return false;
+    //       }
+    //     });
+    //   }else{//if methods
+    //     $.each(methods, function(i){
+    //       if(methods[i].type === name) {
+    //         methods.splice(i,1);
+    //           return false;
+    //       }
+    //     });
+    //   }
+    // }else{
+      // if(objProp.indexOf(name) !== -1){//if property
+      //   // console.log("name: ", name)
+      //   $.each(properties, function(i){
+      //     if(properties[i] === name) {
+      //       properties.splice(i,1);
+      //         return false;
+      //     }
+      //   });
+      // }else{//if methods
+      //   $.each(methods, function(i){
+      //     if(methods[i].type === name) {
+      //       methods.splice(i,1);
+      //         return false;
+      //     }
+      //   });
+      // }
+   // }
 
 
     //if in methods remove
@@ -4636,7 +4552,7 @@ function deleteRow(row) {
     //       return false;
     //   }
     // });
-    console.log(temp)
+    // console.log(temp)
   }
 
 }

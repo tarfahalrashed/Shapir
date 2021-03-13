@@ -1,4 +1,4 @@
-import shapir, {include} from "../shapir.js";
+import shapir, {include} from "./shapir.js";
 
 Mavo.dependencies.push(shapir());
 
@@ -21,7 +21,7 @@ Mavo.Backend.register($.Class({
     get: async function(url) {
         if (this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
 
-            if(this.id){ //Get an object by ID
+            if(this.id !="Shapir"){ //Get an object by ID (for search ignore this.id="Shapir")
                 let ret = await window[this.service][this.type](this.id);
                 return ret;
             }else{ //Search one or multiple sites
@@ -30,7 +30,7 @@ Mavo.Backend.register($.Class({
                     let promises = [];
 
                     services.map((service) => {
-                        promises.push(window[service][this.type](this.search, this));
+                        promises.push(window[service]['search'](this.search, this));
                         // I know that "this" includes "this.search" but my global function expects a positional argument for search and an object
                         // e.g. seatgeek.search('Music', {'city': 'New York', 'country': 'US'})
                         // My global function already checks if the passed parameters are correct (can be used with the API endpoint).
@@ -43,7 +43,7 @@ Mavo.Backend.register($.Class({
                     });
 
                 }else{//just one site
-                    let ret = await window[this.service][this.type](this.search, this);
+                    let ret = await window[this.service]['search'](this.search, this);
                     return ret;
                 }
             }

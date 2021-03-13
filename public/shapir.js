@@ -191,7 +191,7 @@ export default async function shapir(){
                             })//firebase
                             .then(url => { console.log("url: ", url); return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                             .then(o => {
-                                console.log("result: ", o)
+                                // console.log("result: ", o)
                                 //map response to class properties
                                 if (o.constructor === Array){
                                     // console.log("ARRAY");
@@ -1101,7 +1101,7 @@ export default async function shapir(){
                 if (siteKey == "functions"){
                     for (var v=0; v< siteVal.length; ++v) {
                         // console.log("siteVal[v]: ", siteVal[v])
-                        let funcName = siteVal[v].name;
+                        let funcName = "search";//siteVal[v].name;
                         let mEndpoint = siteVal[v].endpoint;
                         let mObject = siteVal[v].object;
                         let mParamList="";
@@ -1318,7 +1318,7 @@ export default async function shapir(){
                                 let otherFields = []
                                 let once=true;
                                 let onceAll = true;
-                                console.log("result: ", o)
+                                // console.log("result: ", o)
                                 // console.log("properties!!! ", properties)
                                 //map response to class properties
                                 if (o.constructor === Array){
@@ -1388,6 +1388,15 @@ export default async function shapir(){
                                                 }
                                             }
                                         }//for loop
+
+
+                                        //add the siteName property
+                                        Object.defineProperty(ob, "siteName", {
+                                            value: site,
+                                            writable: false
+                                        });
+
+
 
                                     //***************************** METHODS *********************************/
                                     if (methods){
