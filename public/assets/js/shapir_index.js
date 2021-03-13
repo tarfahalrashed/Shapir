@@ -2956,17 +2956,36 @@ function typeHasBeenChosen(select){
   var table = document.createElement('table');
   table.setAttribute('id', type);
   table.setAttribute('class', 'table table-borderless');
-  table.setAttribute('style', 'margin-bottom:0px');
+  table.setAttribute('style', 'width:100%; border-spacing: 0px; border-collapse: collapse; margin-bottom:0px');
+  // table.setAttribute('style', 'border-spacing: 10px;');
+  // table.setAttribute('style', 'border-collapse: separate;');
+  // table.setAttribute('style', 'margin-bottom:0px !important');
+
+
   var tbody= document.createElement('tbody');
   table.append(tbody)
+
+  var header = table.createTHead();
+  var row = header.insertRow(0);
+  var cell0 = row.insertCell(0);
+  var cell1 = row.insertCell(1);
+  var cell2 = row.insertCell(2);
+  var cell3 = row.insertCell(3);
+
+  cell0.setAttribute('style', 'width:10%;');
+  // cell0.setAttribute('style', 'margin-right:30px');
+  cell1.setAttribute('style', 'width:5%');
+  cell2.setAttribute('style', 'width:50%');
+  cell2.setAttribute('style', 'width:35%');
+
 
   $("#tableDiv").append(table)
 
   //Add the type row id="<type>_row"
-  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a> <img src="assets/img/new/right-arrows.png" width="20px" style="margin-left:70px"/>     </td>'
+  $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a>      </td>'
   // +'<td><img src="assets/img/new/right-arrows.png" width="20px"/></td>'
-  +'<td></td>'
-  +'<td style="width:100%"><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+  +'<td><img src="assets/img/new/right-arrows.png" width="20px" style="margin-left:-40px; "/></td>'
+  +'<td ><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type GET row id="<type>_getM"
   // $("#"+type+" tbody").append('<tr id="'+type+'_getM" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td ><div style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_getM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Get '+type+' by ID</a> </div>   </td>'
@@ -2974,7 +2993,7 @@ function typeHasBeenChosen(select){
   // +'<td style="width:100%"><button id="'+type+'_getM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type SEARCH row id="<type>_searchM"
-  $("#"+type+" tbody").append('<tr style="display:none" id="'+type+'_searchM" style="data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
+  // $("#"+type+" tbody").append('<tr style="display:none" id="'+type+'_searchM" style="data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   // add this if you want to give the user the option to add search
   // $("#"+type+" tbody").append('<tr id="butShow_'+type+'"><td><button id="show_'+type+'" style="margin-left:45px;" onclick="showRow(this.id)">SHOW</button></td></tr>   <tr id="'+type+'_searchM" style="display:none" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td><div style="margin-left: 28px;"><img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'_searchM" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="">Search '+type+'</a> </div> </td>   <td></td>   <td style="width:100%"><button id="'+type+'_searchM_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
@@ -2986,12 +3005,12 @@ function typeHasBeenChosen(select){
   if(firstType){
     firstType=false;
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 28px;"> <img src="assets/img/new/arrow.png" width="15px"/> <div style="display:flex;">   <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  <div id="step3_hint" class="hint-content do--split-children" ><p>Choose the properties for each type. Check the list of parameters that this website API supports on the left sidebar.</p></div></div></div> </td></tr>')
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="pop" style="display:flex; margin-left: 43px;">       <div id="pop2" style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="popover-toggle form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option value="0" selected>Choose Property</option></select>     <div id="prop-popover-div" style="display: none"></div>    </div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>       </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>    </td>  </tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="pop" style="display:flex; margin-left: 43px;">       <div id="pop2" style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="popover-toggle form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option value="0" selected>Choose Property</option></select>     <div id="prop-popover-div" style="display: none"></div>    </div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>       </td>      <td></td>     <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>    </td>    <td></td>   </tr>')
 
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="tar" class="item-hints"  style="margin-top:-20px"><div class="hint" data-position="4" style="margin-left: 43px;">  <div style="display:flex;">   <div style="display:flex;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  <div id="step3_hint" class="hint-content do--split-children" ><p>For each type, choose the properties and methods.</p></div></div></div> </td></tr>')
   }else{
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Choose Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div> </td></tr>')
-    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="pop" style="display:flex; margin-left: 43px;">        <div id="pop2"style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="popover-toggle form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option value="0" selected>Choose Property</option></select>     <div id="prop-popover-div" style="display: none"></div>     </div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>        </td>    <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Response Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>  </td>  </tr>')
+    $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div id="pop" style="display:flex; margin-left: 43px;">        <div id="pop2"style="width:240px; text-align:center;"><select id="'+type+'_property-select" class="popover-toggle form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-grey" onchange="propertyHasBeenChosen(this)"><option value="0" selected>Choose Property</option></select>     <div id="prop-popover-div" style="display: none"></div>     </div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>        </td>       <td></td>      <td>  <div style="display:flex;"><div style="width:240px; text-align:center;"><select id="'+type+'_field-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="fieldHasBeenSelected(this)"><option selected>Choose API Response Field</option></select></div>  &nbsp; <div style="width:120px; text-align:center;">  </div>   </div>  </div></div>  </td> <td></td>  </tr>')
 
     // $("#"+type+" tbody").append('<tr id="'+child+'"><td style="display:flex; flex-wrap:wrap;">  <div style="display:flex; margin-left: 43px;"><div style="width:120px; text-align:center;"><select id="'+type+'_property-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="propertyHasBeenChosen(this)"><option selected>Add Property</option></select></div>  &nbsp; <div style="width:120px; text-align:center; ">   <select id="'+type+'_method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" onchange="methodHasBeenChosen(this)" style="width:150px; text-align:center;"><option selected>Add Method</option></select> </div>   </div>  </div></div> </td></tr>')
   }
@@ -3201,42 +3220,42 @@ function typeHasBeenChosen(select){
   //Insert the API URL next to the type
   var rowTypeGet = document.getElementById(type+'_row');
   // rowTypeGet.deleteCell(1);
-  var typeCellGet1 = rowTypeGet.insertCell(1); //style="width:240px;"
+  var typeCellGet1 = rowTypeGet.insertCell(2); //style="width:240px;"
   var getUrlSlect = '<div><select id="url_get_'+type+'"  class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select></div>'
   typeCellGet1.innerHTML =  getUrlSlect;
 
   //add ID select
   // rowTypeGet.deleteCell(2);
-  var typeCellGet2 = rowTypeGet.insertCell(2);
-  typeCellGet2.style.display = "flex";
-  var getUrlSlectID = '<div style="margin-right:5px;"><img / src="assets/img/new/connect.png" width="20px" style="margin-top:10px"></div> <div style="width:240px;"><select id="'+type+'_get_id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" style=";" showSubtext="true" onchange="idHasBeenChosed(this)"><option selected>Choose the ID</option></select></div> '
-  +'<div class="info" style="pointer-events: all; display: inline; ">'
-  +'<i class="ion ion-md-information-circle"></i>'
-  +'<span class="extra-info">'
-  +'A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg'
-  +'</span>'
-  +'</div>'
-  typeCellGet2.innerHTML = getUrlSlectID;
-  typeCellGet2.style.display="none";
+  // var typeCellGet2 = rowTypeGet.insertCell(2);
+  // typeCellGet2.style.display = "flex";
+  // var getUrlSlectID = '<div style="margin-right:5px;"><img / src="assets/img/new/connect.png" width="20px" style="margin-top:10px"></div> <div style="width:240px;"><select id="'+type+'_get_id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" style=";" showSubtext="true" onchange="idHasBeenChosed(this)"><option selected>Choose the ID</option></select></div> '
+  // +'<div class="info" style="pointer-events: all; display: inline; ">'
+  // +'<i class="ion ion-md-information-circle"></i>'
+  // +'<span class="extra-info">'
+  // +'A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg'
+  // +'</span>'
+  // +'</div>'
+  // typeCellGet2.innerHTML = getUrlSlectID;
+  // typeCellGet2.style.display="none";
 
 
-  var rowTypeSearch = document.getElementById(type+'_searchM');
-  rowTypeSearch.deleteCell(1);
-  var typeCellSearch1 = rowTypeSearch.insertCell(1);
-  var searchUrlSlect = '<div ><select id="url_search_'+type+'"  class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="urlHasBeenChosenForSearch(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select></div>';
-  typeCellSearch1.innerHTML =  searchUrlSlect;
-  //add search term select
-  rowTypeSearch.deleteCell(2);
-  var typeCellSearch2 = rowTypeSearch.insertCell(2);
-  typeCellSearch2.style.display = "flex";
-  var searchUrlSlectTerm = '<div style="margin-right:5px"><img / src="assets/img/new/connect.png" width="20px" style="margin-top:10px"></div>   <div style="width:240px;"><select id="'+type+'_search_term" style="width:240px;" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" style=";" showSubtext="true" onchange="resultTypeHasBeenChosen(this)"><option selected>Choose search parameter</option></select></div>'
-  +'<div class="info" style="pointer-events: all; display: inline; ">'
-  +'<i class="ion ion-md-information-circle"></i>'
-  +'<span class="extra-info">'
-  +'A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg'
-  +'</span>'
-  +'</div>'
-  typeCellSearch2.innerHTML = searchUrlSlectTerm;
+  // var rowTypeSearch = document.getElementById(type+'_searchM');
+  // rowTypeSearch.deleteCell(1);
+  // var typeCellSearch1 = rowTypeSearch.insertCell(1);
+  // var searchUrlSlect = '<div ><select id="url_search_'+type+'"  class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="urlHasBeenChosenForSearch(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select></div>';
+  // typeCellSearch1.innerHTML =  searchUrlSlect;
+  // //add search term select
+  // rowTypeSearch.deleteCell(2);
+  // var typeCellSearch2 = rowTypeSearch.insertCell(2);
+  // typeCellSearch2.style.display = "flex";
+  // var searchUrlSlectTerm = '<div style="margin-right:5px"><img / src="assets/img/new/connect.png" width="20px" style="margin-top:10px"></div>   <div style="width:240px;"><select id="'+type+'_search_term" style="width:240px;" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-default" style=";" showSubtext="true" onchange="resultTypeHasBeenChosen(this)"><option selected>Choose search parameter</option></select></div>'
+  // +'<div class="info" style="pointer-events: all; display: inline; ">'
+  // +'<i class="ion ion-md-information-circle"></i>'
+  // +'<span class="extra-info">'
+  // +'A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg'
+  // +'</span>'
+  // +'</div>'
+  // typeCellSearch2.innerHTML = searchUrlSlectTerm;
 
 
   if(tempMaxTitleGet){
@@ -3923,7 +3942,7 @@ function propertyHasBeenChosen(select){
 
           $("#"+thisType+"_property-select").popover('dispose');
           $("#"+thisType+"_property-select").popover({
-            title: 'Choose the proeprty type<a id="closeBut" class="close" href="#">&times;</a>',
+            title: 'Choose the property type<a id="closeBut" class="close" href="#">&times;</a>',
             placement: 'right',
             container: 'body',
             html: true,
@@ -3959,14 +3978,15 @@ function propertyHasBeenChosen(select){
                 $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
                 +'<td style="margin-right:20px">'
                 +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a><code>'+propsInfo[globalProperty].types.join()+'</code>'
+                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
                 +'</td>'
+                +'<td><code style="margin-left:-70px;">'+propsInfo[globalProperty].types.join()+'</code></td>'
                 +'<td>'
                 +'<div style="width:240px; text-align:center;">'
                 // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
                 +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
                 +'</div></td>'
-                +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+                +'<td><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
                 +'</tr>').insertBefore(trs[t]);
 
                 var firstOptionP = $("#"+thisType+"_property-select option:first").val();
@@ -3981,14 +4001,15 @@ function propertyHasBeenChosen(select){
                 $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
                 +'<td>'
                 +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>&nbsp;&nbsp;<code>'+propsInfo[globalProperty].types.join()+'</code>'
+                +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
                 +'</td>'
+                +'<td><code style="margin-left:-60px;">'+propsInfo[globalProperty].types.join()+'</code></td>'
                 +'<td>'
                 +'<div text-align:center;">'
                 +'<select id="property_api_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange=""><option selected>Choose API Endpoint</option></select>'
                 // +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
                 +'</div></td>'
-                +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+                +'<td ><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
                 +'</tr>').insertBefore(trs[t]);
 
                 var firstOptionP = $("#"+thisType+"_property-select option:first").val();
@@ -4002,7 +4023,6 @@ function propertyHasBeenChosen(select){
                   var titleText = scrapirAPIs[i].title;
 
                   if(urlText.includes(site)){
-                    console.log("SITE: ", site)
                     var urlTextNoSpaces = titleText.split(' ').join('')
                     $('#property_api_'+thisType).append('<option data-subtext="'+scrapirAPIs[i].title+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].url+'</option>');
                   }
@@ -4052,7 +4072,7 @@ function propertyHasBeenChosen(select){
           // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
           +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
           +'</div></td>'
-          +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+          +'<td ><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
           +'</tr>').insertBefore(trs[t]);
 
           break;
@@ -4164,14 +4184,15 @@ function fieldHasBeenSelected(select){
         $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
         +'<td>'
         +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
-        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>&nbsp;&nbsp;<code>'+propsInfo[globalProperty].types.join()+'</code>'
+        +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
         +'</td>'
+        +'<td><code style="margin-left:-70px;">'+propsInfo[globalProperty].types.join()+'</code></td>'
         +'<td>'
         +'<div style="width:240px; text-align:center;">'
         // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
         +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
         +'</div></td>'
-        +'<td style="width:100%"><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+        +'<td ><button id="'+thisType+'_'+globalProperty+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
         +'</tr>').insertBefore(trs[t]);
 
         var firstOptionP = $("#"+thisType+"_property-select option:first").val();
@@ -4342,7 +4363,7 @@ function methodHasBeenChosen(select){
 
           for(let t in trs){
             if(trs[t].id == thisType){
-              $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="openNavMethod(this)">'+method+'</a></td>  <td></td> <td style="width:100%"><button id="'+thisType+'_'+child+'" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
+              $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px; color:white;" id="'+thisType+'.'+method+'" onclick="openNavMethod(this)">'+method+'</a></td>  <td></td> <td ><button id="'+thisType+'_'+child+'" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
               break;
             }
           }
@@ -4388,8 +4409,8 @@ function siteMethodHasBeenChosen(select){
 
   for(let t in trs){
     if(trs[t].id == "site-row3"){
-      // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>  <td></td>   <td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
-      $('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.'+method+'" value="testVal" href="javascript:;" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">'+method+'</a></td>  <td></td>   <td style="width:100%"><button id="site_'+method+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button>  </tr>').insertBefore(trs[t]);
+      // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a></td>  <td></td>   <td ><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td> </tr>').insertBefore(trs[t]);
+      $('<tr id="'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.'+method+'" value="testVal" href="javascript:;" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">'+method+'</a></td>  <td></td>   <td ><button id="site_'+method+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button>  </tr>').insertBefore(trs[t]);
       break;
     }
   }
