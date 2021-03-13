@@ -409,7 +409,7 @@ function openNavType(id) {
   document.getElementById("mySidenavType").style.padding = "10px";
   // console.log("the name of the type: ", id.getAttribute("id"));
   //document.getElementById('type-name').value= i.getAttribute("id")
-  console.log("THE type: ", id);
+  // console.log("THE type: ", id);
   clickedType = id
 
   $("#typeN").text(id);
@@ -449,7 +449,7 @@ function openNavType(id) {
   $("#accordion-add").empty()
   $("#accordion-remove").empty()
   $("#accordion-update").empty()
-  $("#accordion-method").empty();
+  // $("#accordion-method").empty();
   $("#accordion-type-method").empty();
 
 
@@ -472,8 +472,8 @@ function openNavType(id) {
         $("#accordion-update").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForUpdate(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-update"><div class="card-body" id="cardBodyUpdate'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
-        $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
-        $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+        // $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
+        // $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
 
         $("#accordion-type-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForTypeMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-type-method"><div class="card-body" id="cardBodyTM'+noSpacesTitle+'"> </div></div></div>')
         $("#cardBodyTM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
@@ -482,14 +482,14 @@ function openNavType(id) {
           $("#cardBody"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>');
           $("#cardBodyRemove"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>');
           $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
-          $("#cardBodyM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+          // $("#cardBodyM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
           $("#cardBodyTM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
         }
         if(scrapirAPIs[i].res){
           $("#cardBody"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>');
           $("#cardBodyRemove"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>');
           $("#cardBodyUpdate"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>');
-          $("#cardBodyM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+          // $("#cardBodyM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
           $("#cardBodyTM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
         }
 
@@ -510,21 +510,23 @@ function closeNavType() {
 
 var methodName="", methodParent="";
 
-function openNavMethod(elem) {
+function openNavMethod() {
   closeNav();
   closeNavType();
   closeNavMethod();
-  if(elem.id.split('.')[1]=="Search"){
-    $("#search-method").show();
-  }
+  // if(elem.id.split('.')[1]=="Search"){
+  //   $("#search-method").show();
+  // }
+  $("#accordion-method").empty();
+
   document.getElementById("mySidenavMethod").style.width = "550px";
 
-  methodName= elem.id.split('.')[1];
-  methodParent= elem.id.split('.')[0];//id.split('OBJ')[1];
+  methodName= "search"//elem.id.split('.')[1];
+  methodParent= site; //elem.id.split('.')[0];//id.split('OBJ')[1];
 
   console.log("the name of the method: ", methodName)
   console.log("the value of the method's parent: ",methodParent)
-  document.getElementById('meth-name').value= methodName;
+  // document.getElementById('meth-name').value= methodName;
 
   // $("#apis-url-method").empty();
   $("#accordion-method").empty();
@@ -537,11 +539,24 @@ function openNavMethod(elem) {
     if(urlText.includes(site)){
       // $("#apis-url-method").append("<option data-subtext='"+scrapirAPIs[i].url+"' id="+JSON.stringify(scrapirAPIs[i].title)+">"+scrapirAPIs[i].title+"</option>");
       var noSpacesTitle = scrapirAPIs[i].title.split(' ').join('');
-      $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
+      // $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-default" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
 
-      $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
-      $("#cardBodyM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
-      $("#cardBodyM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+      // $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+      // $("#cardBodyM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+      // $("#cardBodyM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+
+        $("#accordion-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-method"><div class="card-body" id="cardBodyM'+noSpacesTitle+'"> </div></div></div>')
+        $("#cardBodyM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+
+        // $("#accordion-type-method").append('<div class="card"><div class="card-header pointer-cursor d-flex justify-content-between align-items-center collapsed" data-toggle="collapse" data-target="#'+noSpacesTitle+'">'+scrapirAPIs[i].title+'<button type="button" class="btn btn-grey" id="'+scrapirAPIs[i].title+'" onclick="urlHasBeenChosenForTypeMethod(this)"  style="float: right;">select</button> </div><div id="'+noSpacesTitle+'" class="collapse" data-parent="#accordion-type-method"><div class="card-body" id="cardBodyTM'+noSpacesTitle+'"> </div></div></div>')
+        // $("#cardBodyTM"+noSpacesTitle).append('<label><B>API URL:</B></label><p>'+scrapirAPIs[i].url+'<p>')
+
+        if(scrapirAPIs[i].params){
+          $("#cardBodyM"+noSpacesTitle).append('<label><B>Parameters:</B></label><p>'+scrapirAPIs[i].params+'<p>')
+        }
+        if(scrapirAPIs[i].res){
+          $("#cardBodyM"+noSpacesTitle).append('<label><B>Response Fields:</B></label><p>'+scrapirAPIs[i].res+'<p>')
+        }
 
     }
   }
@@ -944,6 +959,7 @@ input.addEventListener("keyup", function(event) {
     if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
       allMethods.push(allTypes[i])
       $("#method-select").append("<option value="+allTypes[i]+">"+allTypes[i]+"</option>");
+      $("#type-schema-method").append("<option value="+allTypes[i]+">"+allTypes[i]+"</option>");
     }else{
       type= allTypes[i].split(' ').join('')
       // $("#type-select-other-optgroup").append("<option id="+type+">"+allTypes[i]+"</option>");
@@ -2198,6 +2214,19 @@ function urlHasBeenChosenForMethod(select){
         $("#method-result-type-id").empty();
         $("#method-result-type-id").append('<option selected>Choose the ID</option>')
 
+        $("#method-result-type-returned").empty();
+        $("#method-result-type-returned").append('<option id="mutli_types" selected>Multiple Types</option>')
+
+        for (const [key, value] of Object.entries(typePropertyType)) {
+          // console.log(`${key}: ${value}`);
+          // console.log(keys)
+          // for(let k in keys){
+            // console.log(keys[k])
+            $("#method-result-type-returned").append('<option id="'+key+'">'+key+'</option>')
+          // }
+        }
+
+
         if(resFields){
           for(var i=0; i<resFields.length; ++i){
             currentSimScore = 0;
@@ -2223,22 +2252,22 @@ function urlHasBeenChosenForMethod(select){
 
         }
 
-        console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
+        // console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
 
-        propList=[]
-        for(var j=0; j<typePropertyType[clickedType].length; ++j){
-          if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
-            //push it
-            propList.push(typePropertyType[clickedType][j].name)
-          }else{
-            //skip it
-          }
-        }
+        // propList=[]
+        // for(var j=0; j<typePropertyType[clickedType].length; ++j){
+        //   if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
+        //     //push it
+        //     propList.push(typePropertyType[clickedType][j].name)
+        //   }else{
+        //     //skip it
+        //   }
+        // }
 
         // propList = temp.objects[currentType].properties;
 
         console.log("final response ", resProplist);
-        console.log("final properties GGG ", propList);
+        // console.log("final properties GGG ", propList);
 
         // temp.objects[getter].properties
 
@@ -2254,7 +2283,18 @@ function urlHasBeenChosenForMethod(select){
 }
 
 
-var urlAPITypeMethod;
+
+function chooseActionType(select){
+
+  $("#method_name_div").show();
+
+}
+
+
+
+
+
+var urlAPITypeMethod=[];
 
 function urlHasBeenChosenForTypeMethod(select){
 
@@ -2265,70 +2305,73 @@ function urlHasBeenChosenForTypeMethod(select){
 
   $("#search-method").show();
 
+  $("#action_name").show();
+
+
   // tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
   // temp.functions.push(tempAct);
 
-  firebase.database().ref('/apis/').once('value').then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      if(childSnapshot.val().title==urlAPI){
-        console.log("par: ",childSnapshot.val().parameters) //choose which one you want to send as parameter to the function
-        console.log("res: ", childSnapshot.val().responses)
-        resFields = childSnapshot.val().responses;
-        reqParam  = childSnapshot.val().parameters;
-        apiURL = childSnapshot.val().url;
-        //Show a dropdown menu from the response fields to map them to the type properties
+  // firebase.database().ref('/apis/').once('value').then(function(snapshot) {
+  //   snapshot.forEach(function(childSnapshot) {
+  //     if(childSnapshot.val().title==urlAPI){
+  //       console.log("par: ",childSnapshot.val().parameters) //choose which one you want to send as parameter to the function
+  //       console.log("res: ", childSnapshot.val().responses)
+  //       resFields = childSnapshot.val().responses;
+  //       reqParam  = childSnapshot.val().parameters;
+  //       apiURL = childSnapshot.val().url;
+  //       //Show a dropdown menu from the response fields to map them to the type properties
 
-        var props= allProperties;
-        var currentSimScore = 0;
-        var mostSimilarProp=""
-        resProplist=[]
+  //       var props= allProperties;
+  //       var currentSimScore = 0;
+  //       var mostSimilarProp=""
+  //       resProplist=[]
 
-        $("#method-result-type-id").empty();
-        $("#method-result-type-id").append('<option selected>Choose the ID</option>')
+  //       $("#method-result-type-id").empty();
+  //       $("#method-result-type-id").append('<option selected>Choose the ID</option>')
 
-        if(resFields){
-          for(var i=0; i<resFields.length; ++i){
-            currentSimScore = 0;
-            mostSimilarProp=""
-            resProplist.push(resFields[i].displayedName);
-            $("#method-result-type-id").append('<option id="'+resFields[i].displayedName+'">'+resFields[i].displayedName+'</option>');
-          }
-        }
+  //       if(resFields){
+  //         for(var i=0; i<resFields.length; ++i){
+  //           currentSimScore = 0;
+  //           mostSimilarProp=""
+  //           resProplist.push(resFields[i].displayedName);
+  //           $("#method-result-type-id").append('<option id="'+resFields[i].displayedName+'">'+resFields[i].displayedName+'</option>');
+  //         }
+  //       }
 
-        $("#method-search-param").empty();
-        $("#method-search-param").append('<option selected>Choose search parameter</option>')
+  //       $("#method-search-param").empty();
+  //       $("#method-search-param").append('<option selected>Choose search parameter</option>')
 
-        if(reqParam){
-          for(var i=0; i<reqParam.length; ++i){
-            if(reqParam[i].displayed && reqParam[i].displayed==true){
-              $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
-            }else if(!reqParam[i].displayed){
-              $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
-            }else{
-              // do nothing
-            }
-          }
+  //       if(reqParam){
+  //         for(var i=0; i<reqParam.length; ++i){
+  //           if(reqParam[i].displayed && reqParam[i].displayed==true){
+  //             $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+  //           }else if(!reqParam[i].displayed){
+  //             $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+  //           }else{
+  //             // do nothing
+  //           }
+  //         }
 
-        }
+  //       }
 
-        console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
+  //       console.log("typePropertyType[currentType]: ", typePropertyType[clickedType])
 
-        propList=[]
-        for(var j=0; j<typePropertyType[clickedType].length; ++j){
-          if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
-            //push it
-            propList.push(typePropertyType[clickedType][j].name)
-          }else{
-            //skip it
-          }
-        }
+  //       propList=[]
+  //       for(var j=0; j<typePropertyType[clickedType].length; ++j){
+  //         if(typePropertyType[clickedType][j].type=="string" || typePropertyType[clickedType][j].type=="integer" || typePropertyType[clickedType][j].type=="date" || typePropertyType[clickedType][j].type=="boolean"){
+  //           //push it
+  //           propList.push(typePropertyType[clickedType][j].name)
+  //         }else{
+  //           //skip it
+  //         }
+  //       }
 
-        console.log("final response ", resProplist);
-        console.log("final properties GGG ", propList);
+  //       console.log("final response ", resProplist);
+  //       console.log("final properties GGG ", propList);
 
-      }
-    });
-  });
+  //     }
+  //   });
+  // });
 
 
   setTimeout(() => {
@@ -2547,6 +2590,43 @@ function saveRemoveConfig(){
   console.log("temp after save", temp.objects[clickedType]);
 
 }
+
+
+
+function addMethodConfig(){
+
+  if(document.getElementById("method-result-type-returned").value == "Multiple Types"){
+    $("#site-table tbody").append('<tr id="search_site"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search</a></td>'
+    +'<td></td>'
+    +'<td><div style="width:240px"></div></td>'
+    +'<td><button id="search_site_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+    +'</tr>')
+  }else{
+    var typeSearch = document.getElementById("method-result-type-returned").value;
+    $("#"+typeSearch+" tbody").append('<tr id="search_'+typeSearch+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search for '+typeSearch+'</a></td>'
+    +'<td></td>'
+    +'<td><div style="width:240px"></div></td>'
+    +'<td><button id="search_'+typeSearch+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+    +'</tr>')      
+  }
+
+}
+
+
+function addTypeMethodConfig(){
+
+  var methName = document.getElementById("method-name").value;
+  var actionType = document.getElementById("type-schema-method").value;
+
+  //get the name of the method
+  $("#"+clickedType+" tbody").append('<tr id="method_'+clickedType+'_'+methName+'_'+actionType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">'+methName+'</a></td>'
+  +'<td></td>'
+  +'<td><div style="width:240px"></div></td>'
+  +'<td><button id="method_'+clickedType+'_'+methName+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+  +'</tr>')      
+
+}
+
 
 
 var tempSearch = {}
@@ -2974,9 +3054,24 @@ function typeHasBeenChosen(select){
 
   cell0.setAttribute('style', 'width:10%;');
   // cell0.setAttribute('style', 'margin-right:30px');
-  cell1.setAttribute('style', 'width:5%');
-  cell2.setAttribute('style', 'width:50%');
-  cell2.setAttribute('style', 'width:35%');
+  cell1.setAttribute('style', 'width:1%');
+  cell2.setAttribute('style', 'width:20%');
+  cell3.setAttribute('style', 'width:69%');
+
+
+  var table2 = document.getElementById('site-table');
+  var header2 = table2.createTHead();
+  var row = header2.insertRow(0);
+  var cell02 = row.insertCell(0);
+  var cell12 = row.insertCell(1);
+  var cell22 = row.insertCell(2);
+  var cell32 = row.insertCell(3);
+
+  cell02.setAttribute('style', 'width:30%;');
+  // cell0.setAttribute('style', 'margin-right:30px');
+  cell12.setAttribute('style', 'width:7%');
+  cell22.setAttribute('style', 'width:50%');
+  cell22.setAttribute('style', 'width:35%');
 
 
   $("#tableDiv").append(table)
@@ -2984,7 +3079,7 @@ function typeHasBeenChosen(select){
   //Add the type row id="<type>_row"
   $("#"+type+" tbody").append('<tr id="'+type+'_row" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a href="javascript:;" id="'+type+'" class="btn btn-warning" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onClick="openNavType(this.id)">'+type+'</a>      </td>'
   // +'<td><img src="assets/img/new/right-arrows.png" width="20px"/></td>'
-  +'<td><img src="assets/img/new/right-arrows.png" width="20px" style="margin-left:-40px; "/></td>'
+  +'<td><img src="assets/img/new/right-arrows.png" width="20px" style="margin-left:-70px; "/></td>'
   +'<td ><button id="'+type+'_row_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>  </tr>')
 
   //Add the type GET row id="<type>_getM"
@@ -3203,7 +3298,7 @@ function typeHasBeenChosen(select){
 
       // siteUrlOptions += '<option data-subtext="'+scrapirAPIs[i].url+'" id="'+JSON.stringify(scrapirAPIs[i].title)+'">'+scrapirAPIs[i].title+'</option>';
       var urlTextNoSpaces = titleText.split(' ').join('')
-      siteUrlOptions += '<option data-subtext="'+scrapirAPIs[i].title+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].url+'</option>';
+      siteUrlOptions += '<option data-subtext="'+scrapirAPIs[i].url+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].title+'</option>';
 
     }
 
@@ -3221,7 +3316,7 @@ function typeHasBeenChosen(select){
   var rowTypeGet = document.getElementById(type+'_row');
   // rowTypeGet.deleteCell(1);
   var typeCellGet1 = rowTypeGet.insertCell(2); //style="width:240px;"
-  var getUrlSlect = '<div><select id="url_get_'+type+'"  class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select></div>'
+  var getUrlSlect = '<div ><select id="url_get_'+type+'"  class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="urlHasBeenChosenRetrieve(this)"><option selected>Choose API Endpoint</option>'+siteUrlOptions+'</select></div>'
   typeCellGet1.innerHTML =  getUrlSlect;
 
   //add ID select
@@ -3980,7 +4075,7 @@ function propertyHasBeenChosen(select){
                 +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
                 +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
                 +'</td>'
-                +'<td><code style="margin-left:-70px;">'+propsInfo[globalProperty].types.join()+'</code></td>'
+                +'<td><code style="margin-left:-80px;">'+propsInfo[globalProperty].types.join()+'</code></td>'
                 +'<td>'
                 +'<div style="width:240px; text-align:center;">'
                 // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
@@ -4024,7 +4119,7 @@ function propertyHasBeenChosen(select){
 
                   if(urlText.includes(site)){
                     var urlTextNoSpaces = titleText.split(' ').join('')
-                    $('#property_api_'+thisType).append('<option data-subtext="'+scrapirAPIs[i].title+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].url+'</option>');
+                    $('#property_api_'+thisType).append('<option data-subtext="'+scrapirAPIs[i].url+'" value="'+scrapirAPIs[i].url+'" id="'+urlTextNoSpaces+'">'+scrapirAPIs[i].title+'</option>');
                   }
                 }
 

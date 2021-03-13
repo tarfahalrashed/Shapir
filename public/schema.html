@@ -370,7 +370,7 @@
 
 
 														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; padding-top: 10px;">
-															<table id="site-table" class="table table-borderless">
+															<table id="site-table" width="100%" class="table table-borderless">
 																<tbody>
 																	<tr id="site-row1" style="display:none" >
 																		<!-- <td width="1%"></td> -->
@@ -379,7 +379,7 @@
 																			<!-- <div class="item-hints">
 																				<div class="hint" data-position="4"> -->
 																					<div style="width:240px; text-align:center; ">
-																						<a href="javascript:;" id="site-domain" class="btn btn-info disabled" style="color:white; width:240px; height: 34px; text-align:center;"></a>
+																						<a href="javascript:;" id="site-domain" class="btn btn-info" onclick="openNavMethod()" style="color:white; width:240px; height: 34px; text-align:center;"></a>
 																						<!-- <div id="site-domain-div" style="display: none"></div> -->
 																						<!-- <select id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-info" onchange="siteHasBeenChosen(this)">
 																							<option selected>Choose website</option>
@@ -1624,13 +1624,13 @@
 								<span class="d-sm-block d-none">Get*</span>
 							</a>
 						</li> -->
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link active">
 								<span class="d-sm-block d-none">Search</span>
 							</a>
-						</li>
+						</li> -->
 						<li class="nav-item">
-							<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link">
+							<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link active">
 								<span class="d-sm-block d-none">Update</span>
 							</a>
 						</li>
@@ -1716,12 +1716,8 @@
 						<!-- end tab-pane -->
 
 						<!-- begin tab-pane -->
-						<div class="tab-pane fade active show" id="nav-pills-tab-1">
+						<!-- <div class="tab-pane fade active show" id="nav-pills-tab-1">
 							<h4 class="m-t-10">Searching for object(s)</h4>
-
-								<!-- <p>1. Change the name of the method [optional] </p>
-								<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
-								</br></br> -->
 
 								<p>1. Which of the following <span id="sel_site_meth"></span> API endpoints searches for <span id="sel_ob_meth"></span> object?
 									Click on each one to view their descreption</p>
@@ -1731,12 +1727,6 @@
 								</div>
 
 								</br>
-
-								<!-- <p>3. Choose the type of object returned from this method (this can be one or a list of objects)</p>
-								<select id="method-result-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
-									<option selected>Choose type of returned result</option>
-								</select>
-								</br></br> -->
 
 								<div id="search-method" style="display: none;">
 								<p>2. Which of the follwoing parameters is the search term parameter?</p>
@@ -1754,11 +1744,11 @@
 							</br></br>
 							<a href="javascript:;" class="btn btn-dark" id="" onclick="saveMethodConfig()">Save</a>
 
-						</div>
+						</div> -->
 						<!-- end tab-pane -->
 
 						<!-- begin tab-pane -->
-						<div class="tab-pane fade" id="nav-pills-tab-2">
+						<div class="tab-pane fade active show" id="nav-pills-tab-2">
 							<!-- <h4 class="m-t-10">Updating a specific object</h4> -->
 							<h5 class="m-t-10">Update a specific <span id="sel_obTitle_up"></span> from <span id="sel_siteTitle_up"></span></h5></br>
 							<p>1. Which of the following <span id="sel_site_up"></span> API endpoints updates a <span id="sel_ob_up"></span> object?
@@ -1873,7 +1863,32 @@
 							</div>
 							</br>
 
-							<!-- whehenevr the user select one enpoint add it to the list of methods -->
+							<!-- <p style="display:inline"> </p> -->
+							<p style="display:inline;">If can't find the method you need, you can integrate it in
+							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+							</br> </br>
+
+							<!-- Add a select for the type of action this is -->
+							<!-- name optional -->
+
+							<div id="action_name" style="display: none;">
+								<p>2. Choose the type of action that applied to this function from schema.org</p>
+								<!-- <label class="col-form-label ">Id</label></br> -->
+								<select id="type-schema-method" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="chooseActionType(this)">
+									<option selected>Choose the Action</option>
+								</select>
+							</div>
+							</br></br>
+
+
+							<div id="method_name_div" style="display: none;">
+								<p>3. Name this method [optional]</p>
+								<!-- <label class="col-form-label ">Id</label></br> -->
+								<input id="method-name" class="form-control" type="text" placeholder="">
+							</div>
+
+							</br></br>
+							<a href="javascript:;" class="btn btn-dark" id="" onclick="addTypeMethodConfig()">Add</a>
 
 						</div>
 						<!-- end tab-pane -->
@@ -1890,8 +1905,53 @@
 
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNavMethod()">&times;</a>
 
-			<h5 class = "panel-title">Method Configuration</h5>
-			<hr>
+			<h4 class="m-t-10">Searching for object(s)</h4>
+
+			<!-- <p>1. Change the name of the method [optional] </p>
+			<input id="meth-name" type="text" class="form-control" style="height:30px;" placeholder="" />
+			</br></br> -->
+
+			<p>1. Which of the following <span id="sel_site_meth"></span> API endpoints searches for <span id="sel_ob_meth"></span> object?
+				Click on each one to view their descreption</p>
+			<div style="overflow: scroll; height:260px" class="box">
+				<div id="accordion-method" class="accordion">
+				</div>
+			</div>
+
+			</br>
+
+			<!-- <p>3. Choose the type of object returned from this method (this can be one or a list of objects)</p>
+			<select id="method-result-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+				<option selected>Choose type of returned result</option>
+			</select>
+			</br></br> -->
+
+			<div id="search-method" style="display: none;">
+			<p>2. Which of the follwoing parameters is the search term parameter?</p>
+			<select id="method-search-param" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+				<option selected>Choose search parameter</option>
+			</select>
+			</br></br>
+
+			<p>3. Which of the following fields is the id of the object?</p>
+			<select id="method-result-type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+				<option selected>Choose the ID</option>
+			</select>
+			</br></br>
+
+			<p>4. Is this API endpoint search for a specific type or for mutiple types? If for a specific type, please choose this type.</p>
+			<select id="method-result-type-returned" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
+				<!-- <option selected>Choose the type of results</option> -->
+			</select>
+
+			</div>
+
+			</br></br>
+			<a href="javascript:;" width="40px" class="btn btn-dark" id="" onclick="addMethodConfig()">Add</a>
+
+			</div>
+
+
 
 			<!-- <div id="method-div" >
 				<p>1. Change the name of the method [optional] </p>
