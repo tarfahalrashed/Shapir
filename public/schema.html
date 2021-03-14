@@ -79,6 +79,7 @@
 				<li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target" data-scroll-target="#home">HOME</a></li>
 				<li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT</a></li>
 				<li class="nav-item"><a class="nav-link" href="schema.html" >CREATE</a></li>
+				<li class="nav-item"><a class="nav-link" href="doc.html" >DOC</a></li>
 				<li class="nav-item"><a class="nav-link" href="library.html" >LIBRARY</a></li>
 				<li class="nav-item" style="margin-right:50px"><a class="nav-link active" href="mavo.html" >MAVO</a></li>
 				<!-- <li class="nav-item"><a class="nav-link" href="#team" data-click="scroll-to-target">TEAM</a></li> -->
@@ -344,8 +345,10 @@
 
 														<div id="step2-desc" style="display: none;" >
 															<div class="input-group mb-5" style="margin-bottom:-10px!important">
-																<label style="font-size: 1em;"><B>Step2.</B> Connect schema.org types to the Web API types/objects. Click start to show a suggested starting connection.
-																<!-- <button class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Start</button></label> -->
+																<label style="font-size: 1em;"><B>Step2.</B> Connect schema.org types to the Web API types/objects. Click start to show a suggested types or start from scratch.
+																<button class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Show suggested types</button></label>
+																<button class="btn btn-default" type="button" onclick="startFromScratch()">Start from scratch</button></label>
+
 																	<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
 															</div>
 
@@ -482,7 +485,7 @@
 												</br>
 													<!-- <div id="connectDiv" style="display:none"> -->
 													<div id="connectDiv" style="display:none">
-														<p style="font-size: 1.2em;" id=""><B>Step3.</B> Save this schema.org description of the website API when youre done.
+														<p style="font-size: 1.2em;" id=""><B>Step3.</B> Please click the save button to save this schema.org description of the website API when youre done &nbsp;
 															<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; width:100px" onclick="saveSchema()">Save</a>
 														</p>
 

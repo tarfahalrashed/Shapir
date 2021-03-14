@@ -1402,35 +1402,48 @@ function siteHasBeenEntered(select){
 
   $("#site-info").show();
 
+
+
+}
+
+
+function populateSuggestedSchema(){
+
   $("#step2-header").show();
   $("#site-row1").show();
   $("#site-row2").show();
   $("#site-row-get").show();
   $("#connectDiv").show();
 
-  // var i=0;
-  // for(var t=typesMatchUrl.length-1; t>=0 && i<5; --t){
-  //   typeHasBeenChosen(typesMatchUrl[t]);
-  //   ++i;
-  // }
-
-  if(typesMatchUrl.length > 4){
-    for(var t=0; t<typesMatchUrl.length && t<5; ++t){
-      typeHasBeenChosen(typesMatchUrl[t]);
-    }
-  }else{
-    for(var t=0; t<typesMatchUrl.length; ++t){
-      typeHasBeenChosen(typesMatchUrl[t]);
-    }
+  var i=0;
+  for(var t=typesMatchUrl.length-1; t>=0 && i<5; --t){
+    typeHasBeenChosen(typesMatchUrl[t]);
+    ++i;
   }
+
+  // if(typesMatchUrl.length > 4){
+  //   for(var t=0; t<typesMatchUrl.length && t<5; ++t){
+  //     typeHasBeenChosen(typesMatchUrl[t]);
+  //   }
+  // }else{
+  //   for(var t=0; t<typesMatchUrl.length; ++t){
+  //     typeHasBeenChosen(typesMatchUrl[t]);
+  //   }
+  // }
 
 }
 
 
-// function populateSuggestedSchema(){
+function startFromScratch(){
 
+  $("#step2-header").show();
+  $("#site-row1").show();
+  $("#site-row2").show();
+  // $("#site-row-get").show();
+  $("#connectDiv").show();
 
-// }
+}
+
 
 
 function siteHasBeenChosen(select){
@@ -1891,7 +1904,7 @@ function urlHasBeenChosen(select){
 }
 
 
-var urlAPIAdd;
+var urlAPIAdd="";
 
 function urlHasBeenChosenForAdd(select){
 
@@ -1988,7 +2001,7 @@ function urlHasBeenChosenForAdd(select){
 
 
 
-var urlAPIRemove;
+var urlAPIRemove="";
 
 function urlHasBeenChosenForRemove(select){
 
@@ -2131,7 +2144,6 @@ function urlHasBeenChosenForUpdate(select){
       if(reqParam){
         for(var i=0; i<reqParam.length; ++i){
           if(reqParam[i].displayed && reqParam[i].displayed==true){
-            console.log("THERE PARAM")
             $("#type-id-update").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
             urlAPIUpdateParams.push(reqParam[i].name)
           }else if(!reqParam[i].displayed){
@@ -2155,8 +2167,8 @@ function urlHasBeenChosenForUpdate(select){
           }
         }
 
-        console.log("final response ", resProplist);
-        console.log("final properties ", propList);
+        // console.log("final response ", resProplist);
+        // console.log("final properties ", propList);
 
         //for each response field, find the most similar property and show them both in a row in a table table-response
         if(resFields){
@@ -2183,13 +2195,15 @@ function urlHasBeenChosenForUpdate(select){
 
 }
 
-var urlAPI, urlAPIMethod;
+var urlAPIMethod="";
 
 function urlHasBeenChosenForMethod(select){
 
-  urlAPI = select.getAttribute("id")//.options[select.selectedIndex].getAttribute("id");
-  console.log("urlAPI: ", urlAPI);
-  urlAPIMethod = urlAPI
+  onceAddMeth = true
+
+  urlAPIMethod = select.getAttribute("id")//.options[select.selectedIndex].getAttribute("id");
+  console.log("urlAPI: ", urlAPIMethod);
+  // urlAPIMethod = urlAPISearch
 
   $("#search-method").show();
 
@@ -2198,7 +2212,7 @@ function urlHasBeenChosenForMethod(select){
 
   firebase.database().ref('/apis/').once('value').then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
-      if(childSnapshot.val().title==urlAPI){
+      if(childSnapshot.val().title==urlAPIMethod){
         console.log("par: ",childSnapshot.val().parameters) //choose which one you want to send as parameter to the function
         console.log("res: ", childSnapshot.val().responses)
         resFields = childSnapshot.val().responses;
@@ -2294,14 +2308,11 @@ function chooseActionType(select){
 
 
 
-var urlAPITypeMethod=[];
+var urlAPITypeMethod="";
 
 function urlHasBeenChosenForTypeMethod(select){
 
-  urlAPI = select.getAttribute("id")//.options[select.selectedIndex].getAttribute("id");
-  console.log("urlAPI: ", urlAPI);
-
-  urlAPITypeMethod.push(urlAPI) //list of methods chosen for this type
+  urlAPITypeMethod= select.getAttribute("id");//list of methods chosen for this type
 
   $("#search-method").show();
 
@@ -2527,10 +2538,10 @@ function saveTypeConfig(){
 function saveAddConfig(){
   // var selector = document.getElementById("type-id-add");
   // var idValue = selector[selector.selectedIndex].value;
-  temp.objects[clickedType].add.endpoint= currentURLGetter; //get the value of the chosen API
+  // temp.objects[clickedType].add.endpoint= currentURLGetter; //get the value of the chosen API
   // temp.objects[clickedType].remove.id= idValue; //get the value of the chosen ID
 
-  console.log("temp after save", temp.objects[clickedType]);
+  // console.log("temp after save", temp.objects[clickedType]);
 
 }
 
@@ -2558,7 +2569,7 @@ function saveUpdateConfig(){
         tempObjSet.field= reqParam[i].name;
         tempObjSet.property= "";
 
-        temp.objects[clickedType].setters.push(tempObjSet);
+        // temp.objects[clickedType].setters.push(tempObjSet);
         // ++j;
 
       }else if(!reqParam[i].displayed && reqParam[i]!=idValue){
@@ -2592,10 +2603,21 @@ function saveRemoveConfig(){
 }
 
 
+var onceAddMeth = true
 
 function addMethodConfig(){
 
+  if(onceAddMeth){
+
+    onceAddMeth=false;
+
   if(document.getElementById("method-result-type-returned").value == "Multiple Types"){
+    allSearchMethods.push({
+      type: "multi",
+      endpoint: urlAPIMethod,
+      id: document.getElementById('method-result-type-id').value,
+      searchParam: document.getElementById("method-search-param").value
+    });
     $("#site-table tbody").append('<tr id="search_site"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search</a></td>'
     +'<td></td>'
     +'<td><div style="width:240px"></div></td>'
@@ -2603,20 +2625,36 @@ function addMethodConfig(){
     +'</tr>')
   }else{
     var typeSearch = document.getElementById("method-result-type-returned").value;
+    allSearchMethods.push({
+      type: typeSearch,
+      endpoint: urlAPIMethod,
+      id: document.getElementById('method-result-type-id').value,
+      searchParam: document.getElementById("method-search-param").value
+    });
     $("#"+typeSearch+" tbody").append('<tr id="search_'+typeSearch+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search for '+typeSearch+'</a></td>'
     +'<td></td>'
     +'<td><div style="width:240px"></div></td>'
     +'<td><button id="search_'+typeSearch+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
     +'</tr>')      
   }
+}
 
 }
 
+
+var allTypesMethods=[], allSearchMethods=[];
 
 function addTypeMethodConfig(){
 
   var methName = document.getElementById("method-name").value;
   var actionType = document.getElementById("type-schema-method").value;
+
+  allTypesMethods.push({
+    name:methName,
+    action: actionType,
+    type: clickedType,
+    endpoint: urlAPITypeMethod
+  });
 
   //get the name of the method
   $("#"+clickedType+" tbody").append('<tr id="method_'+clickedType+'_'+methName+'_'+actionType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">'+methName+'</a></td>'
@@ -3392,10 +3430,11 @@ function typeHasBeenChosen(select){
 
       //Fill out the ID selectpicker
       for(var f=0; f<scrapirAPIs[i].params.length; ++f){
-        if(scrapirAPIs[i].params.length || scrapirAPIs[i].params[f].includes('id')){
-          $("#"+type+"_get_id").append("<option selected id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
+        if(scrapirAPIs[i].params.length || scrapirAPIs[i].params[f].includes('id') || scrapirAPIs[i].params[f].includes('Id')){
+          urlGetId = scrapirAPIs[i].params[f];
+          // $("#"+type+"_get_id").append("<option selected id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
         }else{
-          $("#"+type+"_get_id").append("<option id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
+          // $("#"+type+"_get_id").append("<option id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
         }
       }
       predictedAPI=true;
@@ -3484,11 +3523,13 @@ function typeHasBeenChosen(select){
 }
 
 
+var urlGetId;
 
 function urlHasBeenChosenRetrieve(select){
 
   var urlType = select.id.split("_").pop()
   var endpoint = select.options[select.selectedIndex].getAttribute("value");
+  urlGetId = ""
 
   $("#"+urlType+"_field-select").empty();
   $("#"+urlType+"_field-select").append('<option selected>Choose API Field</option></select>')
@@ -3502,6 +3543,20 @@ function urlHasBeenChosenRetrieve(select){
       }else{
         $("#"+urlType+"_field-select").append('<option selected>This API does not return result</option></select>');
       }
+
+      if(scrapirAPIs[i].param!=""){
+        if(scrapirAPIs[i].param.length ==1){
+          urlGetId = scrapirAPIs[i].param[0]
+        }else{
+          for(var f=0; f<scrapirAPIs[i].param.length; ++f){
+            if(scrapirAPIs[i].param[f].includes('id') || scrapirAPIs[i].param[f].includes('Id')){
+              urlGetId = scrapirAPIs[i].param[f]
+            }
+          }
+        }
+      }
+
+
     }
   }
 
@@ -3681,7 +3736,7 @@ function saveWoOSchema(){
 
 }
 
-
+var schemaType ="", schemaCallerType="", arrOfTypeProp=[]
 
 function saveSchema(){
 
@@ -3691,7 +3746,6 @@ function saveSchema(){
   temp = { "objects":{}, "functions":[] };
   siteObj[site] = temp;
   let tempObj={};
-  // tempObj[typeName]= {"properties":[],
 
   // Inside the tableDiv go over all the tables
   var tableDiv = document.getElementById('tableDiv');
@@ -3699,22 +3753,36 @@ function saveSchema(){
   // console.log("all tables: ", tables);
 
   for(let t in tables){
-    console.log("tables[t].id: ", tables[t].id)
+    // console.log("tables[t].id: ", tables[t].id)
     if(typeof(tables[t].id) != undefined && tables[t].id != null){
       var typeName = tables[t].id;
       // let tempObj={};
-      tempObj[typeName]= {"properties":[], "id":"", "construct":{"self":{"endpoint":"", "id":""}}, "add":{"endpoint":""}, "remove":{"endpoint":"", "id":""}, "setters":[], "methods":[]};
+      tempObj[typeName]= {"properties":[], "id":"", "construct":{} };
+      // tempObj[typeName]= {"properties":[], "id":"", "construct":{}, "add":{"endpoint":""}, "remove":{"endpoint":"", "id":""}, "setters":[], "methods":[]};
       // siteObj[site].objects= tempObj;
 
       //object id
-      var selector = document.getElementById(typeName+"_get_id");
-      var selId = selector[selector.selectedIndex].id;
+      // var selector = document.getElementById(typeName+"_get_id");//this element does not exist
+      var selId = urlGetId; //selector[selector.selectedIndex].id;
       tempObj[typeName].id= selId;
 
       //object construct self "construct":{"self":{"endpoint":"", "id":""}}
+      var tempGetSelf= {"endpoint":"", "id":""}
       var selectUrl = document.getElementById("url_get_"+typeName);
-      tempObj[typeName].construct.self.endpoint= selectUrl[selectUrl.selectedIndex].value;
-      tempObj[typeName].construct.self.id= selId;
+      tempGetSelf.endpoint= selectUrl[selectUrl.selectedIndex].value;
+      tempGetSelf.id= selId;
+      tempObj[typeName].construct['self']=tempGetSelf
+
+      if(arrOfTypeProp)
+      var typeIndex = arrOfTypeProp.map(function(o) { return o.type; }).indexOf(typeName);
+      if(typeIndex != -1){
+        console.log("NO property of this type")
+        console.log("type: ",arrOfTypeProp[typeIndex].type)
+        console.log("constrcut: ",arrOfTypeProp[typeIndex].construct)
+        tempObj[typeName].construct[arrOfTypeProp[typeIndex].callerType]= arrOfTypeProp[typeIndex].construct;
+      }else{
+        console.log("NO property of this type")
+      }
 
       //add properties
       //go over all the rows that have id type_ but not _row, _getM, or searchM
@@ -3722,63 +3790,121 @@ function saveSchema(){
       var propertyRows =  tables[t].getElementsByTagName('TR');
       for(let r in propertyRows){
         if(typeof(propertyRows[r].id) != undefined && propertyRows[r].id != null)
-        if(! (propertyRows[r].id.includes('_row') || propertyRows[r].id.includes('_getM') || propertyRows[r].id.includes('_searchM') || !propertyRows[r].id.includes('_') || propertyRows[r].id.includes('show_') )){
-          properties.push({
-            property: propertyRows[r].cells[0].getElementsByTagName('A')[0].innerHTML,
-            field:    propertyRows[r].cells[1].getElementsByTagName('A')[0].innerHTML
-          })
+        if(! (propertyRows[r].id.includes('_row') || propertyRows[r].id.includes('_getM') || propertyRows[r].id.includes('_searchM') || !propertyRows[r].id.includes('_') || propertyRows[r].id.includes('show_') || propertyRows[r].id.includes('method_') || propertyRows[r].id.includes('search_') )){
+          var index = schemaProObj.map(function(o) { return o.property; }).indexOf(propertyRows[r].cells[0].getElementsByTagName('A')[0].innerHTML);
+          if(index != -1){
+            properties.push({
+              property:   propertyRows[r].cells[0].getElementsByTagName('A')[0].innerHTML,
+              type:       schemaProObj[index].type,
+              callerType: schemaProObj[index].callerType
+            })
+
+            var propertyAPIUrl = document.getElementById('property_api_'+schemaProObj[index].callerType).value;
+            var key = schemaProObj[index].callerType
+            var tempPropAPI = {"endpoint":"", "id":"", "property":""}
+            tempPropAPI.endpoint = propertyAPIUrl;
+            tempPropAPI.id = "test";//tempObj[callerType].id;
+            tempPropAPI.property = schemaProObj[index].property;
+            var tempX={}
+            tempX[key] = tempPropAPI
+
+            arrOfTypeProp.push({
+              type: schemaProObj[index].type,
+              construct: tempPropAPI,
+              callerType:key
+            })
+
+          }else{
+            properties.push({
+              property: propertyRows[r].cells[0].getElementsByTagName('A')[0].innerHTML,
+              field:    propertyRows[r].cells[2].getElementsByTagName('A')[0].innerHTML
+            })
+          }
         }
       }
       tempObj[typeName].properties= properties;
 
       // Add:
       // Endpoint: urlAPIAdd
-      tempObj[typeName].add.endpoint= urlAPIAdd;
-
+      if(urlAPIAdd!=""){
+        var tempAdd = {"endpoint":""}
+        tempAdd.endpoint= urlAPIAdd;
+        tempObj[typeName]['add']=tempAdd
+      }
       // Remove:
       // endpoint: urlAPIRemove
       // Id: type-id-remove
-      tempObj[typeName].remove.endpoint= urlAPIRemove;
-      tempObj[typeName].remove.id= document.getElementById('type-id-remove').value;
+      if(urlAPIRemove!=""){
+        var temoRemove =  {"endpoint":"", "id":""};
+        temoRemove.endpoint= urlAPIRemove;
+        temoRemove.id= document.getElementById('type-id-remove').value;
+        tempObj[typeName]['remove'] = temoRemove;
+      }
 
+      // Update
+      // endpoint: apiTitle
+      // Id: type-id-update
+      if(urlAPIUpdateParams!=[]){
+        // "setters":[], "methods":[]
+        tempObj[typeName].setters=[]
+        let tempSetter={}
+        for(let p in urlAPIUpdateParams){
+          tempSetter={"endpoint": "", "field":"", "id":"", "params":[]}
+          if(urlAPIUpdateParams[p] != document.getElementById('type-id-update').value){
+            //add to the description
+            tempSetter.endpoint= urlAPIUpdate;
+            tempSetter.field= urlAPIUpdateParams[p];
+            tempSetter.id= document.getElementById('type-id-update').value;
+            // tempSetter.params[0]= document.getElementById('type-id-update').value;
+            tempObj[typeName].setters.push(tempSetter)
+          }
+        }
+      }
+
+
+      // Methods
+      if(urlAPITypeMethod!=[]){
+        tempObj[typeName].methods=[]
+        let tempMethod={"endpoint": "", "name":""}
+        //Type methods
+        for(let m in allTypesMethods){
+          if(allTypesMethods[m].type == typeName){
+            tempMethod.endpoint= allTypesMethods[m].endpoint;
+            tempMethod.name= allTypesMethods[m].name;//urlAPITypeMethod[m];
+            tempObj[typeName].methods.push(tempMethod);
+          }
+        }
+      }
+
+      // allSearchMethods endpoint type
       // Search:
       // endpoint: urlAPIMethod
       // Id: method-result-type-id
       // Search term: method-search-param
-      let tempAct={}
-      tempAct= {"endpoint":"", "object":"", "name":"", "type":"Search", "id":"", "searchParam":""};
-      siteObj[site].functions.push(tempAct);
-      siteObj[site].functions[0].endpoint= urlAPIMethod;
-      siteObj[site].functions[0].object= typeName;
-      siteObj[site].functions[0].name= "search"+typeName;
-      siteObj[site].functions[0].id= document.getElementById('method-result-type-id').value;
-      siteObj[site].functions[0].searchParam= document.getElementById(typeName+"_search_term").value;
+      if(allSearchMethods!=[]){
+        let tempAct={}
+        tempAct= {"endpoint":"", "object":"", "name":"search", "type":"Search", "id":"", "searchParam":""};
 
-      // Update:
-      // endpoint: apiTitle
-      // Id: type-id-update
-      // tempObj[typeName].remove.endpoint= urlAPIRemove;
-      // tempObj[typeName].remove.id= document.getElementById('type-id-remove').value;
-      let tempSetter={}
-      for(let p in urlAPIUpdateParams){
-        tempSetter={"endpoint": "", "field":"", "id":"", "params":[]}
-        if(urlAPIUpdateParams[p] != document.getElementById('type-id-update').value){
-          //add to the description
-          tempSetter.endpoint= urlAPIUpdate;
-          tempSetter.field= urlAPIUpdateParams[p];
-          tempSetter.id= document.getElementById('type-id-update').value;
-          // tempSetter.params[0]= document.getElementById('type-id-update').value;
-          tempObj[typeName].setters.push(tempSetter)
+        for(let s in allSearchMethods){
+          tempAct= {"endpoint":"", "object":"", "name":"search", "type":"Search", "id":"", "searchParam":""};
+          tempAct.object= allSearchMethods[s].type;
+          tempAct.endpoint= allSearchMethods[s].endpoint;
+          tempAct.id= allSearchMethods[s].id;
+          tempAct.searchParam= allSearchMethods[s].searchParam;
+          siteObj[site].functions.push(tempAct);
         }
+        // siteObj[site].functions.push(tempAct);
+        // siteObj[site].functions[0].endpoint= urlAPIMethod;
+        // siteObj[site].functions[0].object= typeName;
+        // siteObj[site].functions[0].name= "search"+typeName;
+        // siteObj[site].functions[0].id= document.getElementById('method-result-type-id').value;
+        // siteObj[site].functions[0].searchParam= document.getElementById(typeName+"_search_term").value;
       }
 
-      let tempMethod={"endpoint": "", "name":""}
-      //Type methods
-      for(let m in urlAPITypeMethod){
-        tempMethod.endpoint= urlAPITypeMethod[m];
-        // tempMethod.endpoint= urlAPITypeMethod[m];
-        tempObj[typeName].methods.push(tempMethod);
-      }
+      console.log("tempAct: ", tempAct)
+
+      console.log("siteObj[site].functions: ", siteObj[site].functions)
+      // method-result-type-returned
 
       //Push to Firebase!
     }//end of loop
@@ -3941,7 +4067,8 @@ var currentType="", propertyList=[], isNew=false, elem="property", isNewM=false,
 
 // var tempDel = { "objects":{}, "functions":[]};
 var tempDel={}
-
+var typeOfProperty = ""
+var schemaProObj =[]
 
 function propertyHasBeenChosen(select){
 
@@ -3972,9 +4099,7 @@ function propertyHasBeenChosen(select){
   var parent = select.getAttribute("id").split('-')[1];
   var thisType = select.getAttribute("id").split('_')[0];
 
-  // typeAndProperties=[{type1:[]},{type2:[]},...]
   for (const [key, value] of Object.entries(typeAndProperties)) {
-    // console.log(`${key}: ${value}`);
     if(key == thisType){
       typeAndProperties[key].push(property)
     }
@@ -3998,7 +4123,6 @@ function propertyHasBeenChosen(select){
   })
 
   console.log("propType: ",propType)
-
 
   var hasType = false;
   var dataTypes = ["Time", "Date", "DateTime", "Number", "Text", "Boolean", "URL", "Float","Integer","CssSelectorType","PronounceableText","URL","XPathType","True","False"]
@@ -4042,7 +4166,7 @@ function propertyHasBeenChosen(select){
             container: 'body',
             html: true,
             content: function() {
-              $('#prop-popover-div').html('<p style="margin-bottom:2px">This property can be of the follwing types. Choose the one that matches your need:</p>'+typeElem);
+              $('#prop-popover-div').html('<p style="margin-bottom:2px">This property can be of the follwing types. Choose the one that matches your need: </p>'+typeElem);
               return $('#prop-popover-div').html();
             }
           })
@@ -4052,8 +4176,34 @@ function propertyHasBeenChosen(select){
             //if normal type
             // propsInfo[globalProperty].types.join()
             // else{
-              typeHasBeenChosen(this.id);
-            // }
+              var thisPropType = this.id.split('_')[1].split('-')[0]
+              // var thisPropName = this.id.split('_')[1].split('-')[1]
+              var indexPropType = propsInfo[globalProperty].types.indexOf(thisPropType);
+              var typeExists = false
+              for(var p in typeAndProperties){
+                if(typeAndProperties[p]){
+                  var keys = Object.keys(typeAndProperties[p])
+                  if(keys[0].split(' ').join('') == thisPropType){
+                    typeExists = true;
+                  }
+                }
+              }
+
+              //save all properties of type object so we can retrieve them in saveSchema()
+              schemaProObj.push({
+                property: property,
+                type: thisPropType,
+                callerType: thisType
+              })
+
+              if(typeExists){
+                typeOfProperty = '['+propsInfo[globalProperty].types[indexPropType]+']'
+                propertyType = true;
+                $("#closeBut").click();
+              }else{
+                typeOfProperty = '['+propsInfo[globalProperty].types[indexPropType]+']'
+                typeHasBeenChosen(this.id);
+              }
           });
 
           // $('[data-toggle=popover]').popover();
@@ -4075,7 +4225,7 @@ function propertyHasBeenChosen(select){
                 +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
                 +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
                 +'</td>'
-                +'<td><code style="margin-left:-80px;">'+propsInfo[globalProperty].types.join()+'</code></td>'
+                +'<td><code style="margin-left:-90px;">'+typeOfProperty+'</code></td>'
                 +'<td>'
                 +'<div style="width:240px; text-align:center;">'
                 // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
@@ -4098,7 +4248,7 @@ function propertyHasBeenChosen(select){
                 +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
                 +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
                 +'</td>'
-                +'<td><code style="margin-left:-60px;">'+propsInfo[globalProperty].types.join()+'</code></td>'
+                +'<td><code style="margin-left:-90px;">'+typeOfProperty+'</code></td>'
                 +'<td>'
                 +'<div text-align:center;">'
                 +'<select id="property_api_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange=""><option selected>Choose API Endpoint</option></select>'
@@ -4281,7 +4431,7 @@ function fieldHasBeenSelected(select){
         +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
         +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
         +'</td>'
-        +'<td><code style="margin-left:-70px;">'+propsInfo[globalProperty].types.join()+'</code></td>'
+        +'<td><code style="margin-left:-90px;">Text</code></td>' //'+propsInfo[globalProperty].types.join()+'
         +'<td>'
         +'<div style="width:240px; text-align:center;">'
         // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
@@ -4604,6 +4754,16 @@ function deleteRow(row) {
 
   if(rowID.includes('_row')){//remove the whole type table
     // delete temp.objects[tableID];
+    // console.log("DEL TABLE: ", typeAndProperties)
+    for(var p in typeAndProperties){
+      if(typeAndProperties[p]){
+        var keys = Object.keys(typeAndProperties[p])
+        if(keys[0].split(' ').join('') == tableID){
+          // console.log("P Index: ", p)
+          typeAndProperties.splice(p, 1)
+        }
+      }
+    }
     document.getElementById(tableID).remove();
     //remove type from temp object
   }else{//remove this row
