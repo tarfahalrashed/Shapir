@@ -42,13 +42,13 @@
 
 
 	<style>
-		body {
+		/* body {
 		  font-family: "Lato", sans-serif;
 		}
 
 		.sidenav {
 		  height: 100%;
-		  width: 240px;
+		  width: 390px;
 		  position: fixed;
 		  z-index: 1;
 		  bottom: 0;
@@ -70,16 +70,8 @@
 		  color: #f1f1f1;
 		}
 
-		.main {
-		  margin-left: 160px; /* Same as the width of the sidenav */
-		  font-size: 28px; /* Increased text to enable scrolling */
-		  padding: 0px 10px;
-		}
-
-		@media screen and (max-height: 450px) {
-		  .sidenav {padding-top: 15px;}
-		  .sidenav a {font-size: 18px;}
-		}
+av a {font-size: 18px;}
+		} */
 	</style>
 </head>
 <body onload="docOnLoad()" data-prismjs-copy-timeout="500">
@@ -116,22 +108,25 @@
 			<!-- end header-nav -->
 		</div>
 		<!-- end #header -->
-		<div id="sidebar" class="sidebar">
+		<div id="sidebar" class="sidebar" style="width:360px !important"> <!-- style="width:300px !important" -->
 			<!-- begin sidebar scrollbar -->
 			<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div data-scrollbar="true" data-height="100%" data-init="true" style="overflow: hidden; width: auto; height: 100%;">
 				<!-- begin sidebar user -->
 				<ul class="nav" style="font-size: 1.4em; margin-top: 40px;">
 					<li class="has-sub active">
 						<a href="javascript:;">
-							<span>JS Library</span>
+							<span>How to</span>
 						</a>
 						<ul class="sub-menu active">
 							<li><a href="#get">Get Started</a></li>
-							<li><a href="#example">Examples</a></li>
-							<li><a href="#explore">Explore</a></li>
-							<li><a href="#explore">Search</a></li>
-							<li><a href="#explore">Create, Remove, and Update</a></li>
-							<li><a href="#explore">Save Final Description</a></li>
+							<!-- <li><a href="#example">Examples</a></li> -->
+							<li><a href="#suggested">Show Suggested Types/Properties</a></li>
+
+							<li><a href="#connect1">Connet Types By Properties</a></li>
+							<li><a href="#connect2">Create, Remove, and Update</a></li>
+							<li><a href="#search">Search</a></li>
+							<li><a href="#methods">Create, Remove, Update, and Methods</a></li>
+							<li><a href="#save">Save Final Description</a></li>
 
 						</ul>
 					</li>
@@ -143,7 +138,7 @@
 		</div>
 
 		<!-- begin #content -->
-		<div id="content" class="content">
+		<div id="content" class="content" style="margin-left:360px !important">
 
 			<!-- begin panel -->
 			<div class="panel">
@@ -179,7 +174,7 @@
 					<!-- end panel -->
 
 					<!-- begin panel -->
-					<div id="example" class="panel panel-inverse">
+					<div id="" class="panel panel-inverse">
 						<div class="panel-heading">
 							<h4 class="panel-title">2) Choose to either start describing your Web APis from scratch or from a suggested descreption</h4>
 							<div class="panel-heading-btn">
@@ -197,7 +192,7 @@
 					<!-- end panel -->
 
 					<!-- begin panel -->
-					<div id="explore" class="panel panel-inverse">
+					<div id="suggested" class="panel panel-inverse">
 						<div class="panel-heading">
 							<h4 class="panel-title">3) Show suggested types</h4>
 							<div class="panel-heading-btn">
@@ -259,6 +254,119 @@
 						</div>
 					</div>
 					<!-- end panel -->
+
+
+					<!-- begin panel -->
+					<div id="connect1" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">6) Connect types by a property (step1)</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Panel Content Here -->
+							<p style="font-size: 1.3em;">When you want to get a property that is an object or a type (e.g. playlits has videos so we choose property video for playit, same with comment for video, etc), then a popover will be displayed asking you to add the type of that property. In this example, I added <B>comment</B> property, an a popover displayed asking me to add the type <span style="height: 1px;" class="label label-orange">Comment</span> .</p>
+							<!-- <p style="font-size: 1.3em;">Map every type to an API endpoint that get that specific type. For the VideoObject type I chose YouTube Video API endpoint https://www.googleapis.com/youtube/v3/videos)</p> -->
+							<img src="assets/img/doc/6comment.png" width="1000px"/>
+						</div>
+					</div>
+					<!-- end panel -->
+
+
+					<!-- begin panel -->
+					<div id="connect2" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">7) Connect types by a property (step2)</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Panel Content Here -->
+							<p style="font-size: 1.3em;">When I clicked on the <span style="height: 1px;" class="label label-orange">Comment</span> on the popover, two things were added:</p>
+							<p style="font-size: 1.3em;">(1) the <span style="height: 1px;" class="label label-grey">comment</span> property under the <span style="height: 1px;" class="label label-orange">VideoObject</span> and next to it a menu to select the API endpoint (YouTube Video Comments) </p>
+							<p style="font-size: 1.3em;">(2) The <B>Comment</B> type was added, where I need to to connect to its API endpoint YouTube comment, and choose its properties</p>
+							<!-- <p style="font-size: 1.3em;">Map every type to an API endpoint that get that specific type. For the VideoObject type I chose YouTube Video API endpoint https://www.googleapis.com/youtube/v3/videos)</p> -->
+							<img src="assets/img/doc/7addComment.png" width="1000px"/>
+						</div>
+					</div>
+					<!-- end panel -->
+
+
+
+					<!-- begin panel -->
+					<div id="search" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">8) Search the site</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Panel Content Here -->
+							<p style="font-size: 1.3em;">To add search to your schema.org descreption. You need to click on the site <span style="height: 1px;" class="label label-info">youtube</span>. In the sidebar, you will need to (1) choose the search API endpoint, if there are multiple one for different types, add the one you're interested in. (2) choose the search keywords parameter for this API endpoint. (3) choose the id field from the response field. (4) finally, choose the type that you're intersted in searching. When you click on the add button, a <span style="height: 1px;" class="label label-purple">search</span> either under the type (if the API endpoint can only be used to search for specific type), or under the site (if the API endpoint can be used to search for multiple types)</p>
+							<!-- <p style="font-size: 1.3em;">Map every type to an API endpoint that get that specific type. For the VideoObject type I chose YouTube Video API endpoint https://www.googleapis.com/youtube/v3/videos)</p> -->
+							<img src="assets/img/doc/8search.png" width="1000px"/>
+						</div>
+					</div>
+					<!-- end panel -->
+
+
+
+
+					<!-- begin panel -->
+					<div id="methods" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">9) Update properties, create a new object of this type, remove an object, and methods to this type</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Panel Content Here -->
+							<p style="font-size: 1.3em;">Click on any type (e.g. <span style="height: 1px;" class="label label-orange">VideoObject</span>) to be able to describe how to update this type's properties, create a new object of this type, remove and object of this type, or add a method to this (e.g. like a video method) add search to your schema.org descreption. You need to click on the site . In the sidebar, you will need to (1) choose the search API endpoint, if there are multiple one for different types, add the one you're interested in. (2) choose the search keywords parameter for this API endpoint. (3) choose the id field from the response field. (4) finally, choose the type that you're intersted in searching</p>
+							<!-- <p style="font-size: 1.3em;">Map every type to an API endpoint that get that specific type. For the VideoObject type I chose YouTube Video API endpoint https://www.googleapis.com/youtube/v3/videos)</p> -->
+							<img src="assets/img/doc/9methods.png" width="1000px"/>
+						</div>
+					</div>
+					<!-- end panel -->
+
+
+
+					<!-- begin panel -->
+					<div id="save" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">10) Save your description when done</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Panel Content Here -->
+							<!-- <p style="font-size: 1.3em;">To add search to your schema.org descreption. You need to click on the site <span style="height: 1px;" class="label label-info">youtube</span>. In the sidebar, you will need to (1) choose the search API endpoint, if there are multiple one for different types, add the one you're interested in. (2) choose the search keywords parameter for this API endpoint. (3) choose the id field from the response field. (4) finally, choose the type that you're intersted in searching</p> -->
+							<!-- <p style="font-size: 1.3em;">Map every type to an API endpoint that get that specific type. For the VideoObject type I chose YouTube Video API endpoint https://www.googleapis.com/youtube/v3/videos)</p> -->
+							<img src="assets/img/doc/10save.png" width="700px"/>
+						</div>
+					</div>
+					<!-- end panel -->
+
+
 
 				</div>
 			</div>
