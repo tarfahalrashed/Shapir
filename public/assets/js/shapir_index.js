@@ -569,6 +569,8 @@ function openNavMethod() {
 
 function closeNavMethod() {
   document.getElementById("mySidenavMethod").style.width = "0";
+  $("#search-method").hide()
+
 }
 
 
@@ -1252,122 +1254,123 @@ function siteHasBeenEntered(select){
   domain = domain.hostname.replace('www.','');
   site = domain;
 
-  document.getElementById("site-domain").innerHTML = domain;
+  site = site.split('.')[0]
 
+  document.getElementById("site-domain").innerHTML = site;
 
   //Getting website categories
-  // $.ajax({
-  //   url: 'https://www.klazify.com/api/categorize?url='+url,
-  //   type: 'POST',
-  //   crossDomain:true,
-  //   headers: {
-  //     'Accept': "application/json",
-  //     'Content-Type': "application/json",
-  //     "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
-  //     'cache-control': "no-cache"
-  //   },
-  //   success: function(res) {
-  //     // console.log("Categories: ", res);
-  //     var categories = res.domain.categories;
+  $.ajax({
+    url: 'https://www.klazify.com/api/categorize?url='+url,
+    type: 'POST',
+    crossDomain:true,
+    headers: {
+      'Accept': "application/json",
+      'Content-Type': "application/json",
+      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
+      'cache-control': "no-cache"
+    },
+    success: function(res) {
+      // console.log("Categories: ", res);
+      var categories = res.domain.categories;
 
-  //     if(res.domain.logo_url !=null || res.domain.logo_url!=""){
-  //       $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
-  //     }
+      if(res.domain.logo_url !=null || res.domain.logo_url!=""){
+        $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
+      }
 
-  //     $("#site-info").append('</br><h5>Website categories</h5>');
-  //     $("#site-info").append('<ul>');
-  //     for(var c=0; c<categories.length; ++c){
-  //       $("#site-info").append('<li>'+categories[c].name+'</li>');
-  //     }
-  //     $("#site-info").append('</ul>');
+      $("#site-info").append('</br><h6>Website categories</h6>');
+      $("#site-info").append('<ul>');
+      for(var c=0; c<categories.length; ++c){
+        $("#site-info").append('<li>'+categories[c].name+'</li>');
+      }
+      $("#site-info").append('</ul>');
 
-  //     // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
-  //     // var category = categories.find(o => {
-  //     //   return o.confidence === maxconfidence
-  //     // }).name;
-  //     // console.log("Category: ", category)
+      // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
+      // var category = categories.find(o => {
+      //   return o.confidence === maxconfidence
+      // }).name;
+      // console.log("Category: ", category)
 
-  //     var categoryWords=[]
-  //     for(var l=0; l<categories.length; ++l){
-  //       var name= categories[l].name;
-  //       var lastIndex = name.lastIndexOf("/")//get the last type
-  //       var lastType = name.substring(lastIndex + 1);
-  //       categoryWords.push(lastType);
-  //     }
+      var categoryWords=[]
+      for(var l=0; l<categories.length; ++l){
+        var name= categories[l].name;
+        var lastIndex = name.lastIndexOf("/")//get the last type
+        var lastType = name.substring(lastIndex + 1);
+        categoryWords.push(lastType);
+      }
 
-  //     // $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
-  //     // $("#site-info").append('<ul>');
+      // $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
+      // $("#site-info").append('<ul>');
 
-  //     for(var c=0; c<categoryWords.length; ++c){
-  //       for(var j=0; j<allTypes.length; ++j){
-  //         var similar = checkSimilarity(categoryWords[c], allTypes[j]);
-  //         if(similar>40){
-  //           console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
-  //           suggestedTypes.push(allTypes[j])
-  //           // $("#site-info").append('<li>'+allTypes[j]+'</li>');
-  //         }
-  //       }
-  //       if(c+1==categoryWords.length){
-  //         // $("#site-info").append('</ul><hr>');
-  //         $("#site-info").show();
+      for(var c=0; c<categoryWords.length; ++c){
+        for(var j=0; j<allTypes.length; ++j){
+          var similar = checkSimilarity(categoryWords[c], allTypes[j]);
+          if(similar>40){
+            console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
+            suggestedTypes.push(allTypes[j])
+            // $("#site-info").append('<li>'+allTypes[j]+'</li>');
+          }
+        }
+        if(c+1==categoryWords.length){
+          // $("#site-info").append('</ul><hr>');
+          $("#site-info").show();
 
-  //         if(suggestedTypes.length>0){
-  //           // console.log("SUGGESTED")
-  //           $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
-  //           for(var j=0; j<suggestedTypes.length; ++j){
-  //             $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
-  //           }
-  //           $("#type-select").append('</optgroup>');
+          if(suggestedTypes.length>0){
+            // console.log("SUGGESTED")
+            $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+            for(var j=0; j<suggestedTypes.length; ++j){
+              $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
+            }
+            $("#type-select").append('</optgroup>');
 
-  //           $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
-  //           for(var i=0; i<allTypes.length; ++i){
-  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //               //no action
-  //             }else{
-  //               type= allTypes[i].split(' ').join('')
-  //               if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
-  //                 $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //               }
-  //             }
-  //           }
-  //           $("#type-select").append('</optgroup>');
-  //         }else{
-  //           // console.log("NOT SUGGESTED")
-  //           for(var i=0; i<allTypes.length; ++i){
-  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //               //no action
-  //             }else{
-  //               type= allTypes[i].split(' ').join('')
-  //               $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //             }
-  //           }
-  //         }
-  //         jQuery('.selectpicker').selectpicker('refresh');
-  //       }
-  //     }
+            $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+            for(var i=0; i<allTypes.length; ++i){
+              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+                //no action
+              }else{
+                type= allTypes[i].split(' ').join('')
+                if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+                  $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+                }
+              }
+            }
+            $("#type-select").append('</optgroup>');
+          }else{
+            // console.log("NOT SUGGESTED")
+            for(var i=0; i<allTypes.length; ++i){
+              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+                //no action
+              }else{
+                type= allTypes[i].split(' ').join('')
+                $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+              }
+            }
+          }
+          jQuery('.selectpicker').selectpicker('refresh');
+        }
+      }
 
-  //   },
-  //   error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
-  //     for(var i=0; i<allTypes.length; ++i){
-  //       if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //         //no action
-  //       }else{
-  //         type= allTypes[i].split(' ').join('')
-  //         $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //       }
-  //     }
-  //   }
+    },
+    error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
+      for(var i=0; i<allTypes.length; ++i){
+        if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+          //no action
+        }else{
+          type= allTypes[i].split(' ').join('')
+          $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+        }
+      }
+    }
 
-  // });
+  });
 
 
   //////FOR TESTING
-  for(var i=0; i<allTypes.length; ++i){
-    if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
-      type= allTypes[i].split(' ').join('')
-      $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-    }
-  }
+  // for(var i=0; i<allTypes.length; ++i){
+  //   if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
+  //     type= allTypes[i].split(' ').join('')
+  //     $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //   }
+  // }
 
 
   // setTimeout(() => {
@@ -1415,16 +1418,17 @@ function populateSuggestedSchema(){
   $("#site-row-get").show();
   $("#connectDiv").show();
 
-  var i=0;
-  for(var t=typesMatchUrl.length-1; t>=0 && i<5; --t){
-    typeHasBeenChosen(typesMatchUrl[t]);
-    ++i;
-  }
+  // var i=0;
+  // for(var t=typesMatchUrl.length-1; t>=0 && i<5; --t){
+  //   typeHasBeenChosen(typesMatchUrl[t]);
+  //   ++i;
+  // }
+  // console.log("typesMatchUrl", typesMatchUrl)
 
   // if(typesMatchUrl.length > 4){
-  //   for(var t=0; t<typesMatchUrl.length && t<5; ++t){
-  //     typeHasBeenChosen(typesMatchUrl[t]);
-  //   }
+    for(var t=0; t<suggestedTypes.length && t<5; ++t){
+      typeHasBeenChosen(suggestedTypes[t]);
+    }
   // }else{
   //   for(var t=0; t<typesMatchUrl.length; ++t){
   //     typeHasBeenChosen(typesMatchUrl[t]);
@@ -2589,6 +2593,8 @@ function saveUpdateConfig(){
   }
 
   console.log("temp after save", temp.objects[clickedType]);
+
+  closeNavType();
 }
 
 
@@ -2638,6 +2644,8 @@ function addMethodConfig(){
     +'</tr>')      
   }
 }
+
+closeNavMethod();
 
 }
 
@@ -3304,19 +3312,27 @@ function typeHasBeenChosen(select){
       // console.log(urltextCleaned)
 
       //compare "type" with "url" and "title"
-      let urlSim = checkSimilarity(typeCleaned, urltextCleaned);
-      let titleSim = checkSimilarity(typeCleaned, titleText);
+      let urlSim = checkSimilarity(typeCleaned.toLowerCase(), urltextCleaned);
+      let titleSim = checkSimilarity(typeCleaned.toLowerCase(), titleText.toLowerCase());
 
       // let urlSearchSim = checkSimilarity("search", urltextCleaned);
       // let titleSearchSim = checkSimilarity("search", titleText);
 
+      console.log("type+URL = "+typeCleaned+":"+urltextCleaned +"="+urlSim)
+      console.log("type+Title = "+typeCleaned+":"+titleText +"="+titleSim)
+
       //GET API endpoint
       if(urlSim>0 || titleSim>0){
+
         if(tempMaxSimGET<Math.max(urlSim, titleSim)){
+          console.log("tempMaxSimGET: ", tempMaxSimGET)
           tempMaxSimGET = Math.max(urlSim, titleSim);
           tempMaxSimUrlGET=urlText;
           tempFieldsGet = scrapirAPIs[i].res;
           tempMaxTitleGet =titleText.split(' ').join('')
+
+          console.log("tempMaxSimUrlGET: ", tempMaxSimUrlGET)
+
         }
         //make this url selected and exit
       }
@@ -3541,10 +3557,10 @@ function urlHasBeenChosenRetrieve(select){
           $("#"+urlType+"_field-select").append("<option id="+scrapirAPIs[i].res[f]+">"+scrapirAPIs[i].res[f]+"</option>");
         }
       }else{
-        $("#"+urlType+"_field-select").append('<option selected>This API does not return result</option></select>');
+        // $("#"+urlType+"_field-select").append('<option selected>This API does not return result</option></select>');
       }
 
-      if(scrapirAPIs[i].param!=""){
+      if(scrapirAPIs[i].param){
         if(scrapirAPIs[i].param.length ==1){
           urlGetId = scrapirAPIs[i].param[0]
         }else{
@@ -3579,7 +3595,7 @@ function urlHasBeenChosenForSearch(select){
           $("#"+urlType+"_search_term").append("<option id="+scrapirAPIs[i].params[f]+">"+scrapirAPIs[i].params[f]+"</option>");
         }
       }else{
-        $("#"+urlType+"_search_term").append("<option id="+scrapirAPIs[i].params[f]+">This API does not have parameters</option>");
+        // $("#"+urlType+"_search_term").append("<option id="+scrapirAPIs[i].params[f]+">This API does not have parameters</option>");
         // $("#"+urlType+"_field-select").append('<option selected>This API does not return result</option></select>');
       }
     }
@@ -4067,7 +4083,7 @@ var currentType="", propertyList=[], isNew=false, elem="property", isNewM=false,
 
 // var tempDel = { "objects":{}, "functions":[]};
 var tempDel={}
-var typeOfProperty = ""
+var typeOfProperty = "Text"
 var schemaProObj =[]
 
 function propertyHasBeenChosen(select){
@@ -4219,15 +4235,14 @@ function propertyHasBeenChosen(select){
               propertyType=false;
               //show the field selectpicker if a field was chosen
               if(propChosen && fieldChosen){
-                console.log("NOT A TYPE")
+                console.log("NOT A TYPE 2")
                 $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
                 +'<td style="margin-right:20px">'
                 +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
                 +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
                 +'</td>'
-                +'<td><code style="margin-left:-90px;">'+typeOfProperty+'</code></td>'
-                +'<td>'
-                +'<div style="width:240px; text-align:center;">'
+                +'<td><code style="margin-left:-90px;">TEXT</code></td>'
+                +'<td><div style="width:240px; text-align:center;">'
                 // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
                 +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
                 +'</div></td>'
@@ -4284,27 +4299,6 @@ function propertyHasBeenChosen(select){
           });
 
 
-          //'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children"><p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>');
-
-          // $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
-          // // $('<tr id="'+thisType+'_'+child+'" data-tt-id="'+child+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
-          // +'<td style="display:flex; flex-wrap:wrap;">'
-          // +'<div id="tar" class="item-hints"  style="margin-top:-20px">'
-          // +'<div class="hint" data-position="4"><div style="display:flex;">'
-          // +'<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/></div>'
-          // +'<div style="width:240px; text-align:center; ">'
-          // // +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+child+'"  onclick="openNav(this.id)">'+property+'</a>'
-          // +'</div>'
-          // +'</div>'
-          // +'<div id="step2_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children">'
-          // +'<p style="margin-bottom:2px">This property can be of the follwoing type(s). Click to add.</p>'+typeElem+'</div>'
-          // +'</div></div>'
-          // +'</td>'
-          // +'<td><div style="width:240px; text-align:center;">'
-          // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select></div></td>'
-          // +'<td style="width:100%"><button id="'+thisType+'_'+child+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
-          // +'</tr>').insertBefore(trs[t]);
-
         }else{//if not of type object
           console.log("NOT A TYPE")
           $('<tr id="'+thisType+'_'+globalProperty+'" data-tt-id="'+globalProperty+'" data-tt-parent-id="'+parent+'" data-tt-branch="true">'
@@ -4312,6 +4306,7 @@ function propertyHasBeenChosen(select){
           +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
           +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
           +'</td>'
+          +'<td><code style="margin-left:-90px;">'+typeOfProperty+'</code></td>'
           +'<td>'
           +'<div style="width:240px; text-align:center;">'
           // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
@@ -4447,6 +4442,7 @@ function fieldHasBeenSelected(select){
         $("#"+thisType+"_field-select").val(firstOptionF);
 
         break;
+
       }
     }
   }

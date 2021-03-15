@@ -165,6 +165,8 @@ export default async function shapir(){
                                             url: token_url,
                                             method: "POST",
                                             data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                            crossDomain: true,
+                                            // headers:{'Access-Control-Allow-Origin': '*'},
                                             success: function(response) {
                                                 console.log("response: ",response);
                                                 //important to check access token and token type (e.g. bearer)
@@ -296,6 +298,7 @@ export default async function shapir(){
                                                                     url: token_url,
                                                                     method: "POST",
                                                                     data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                    crossDomain: true,
                                                                     success: function(response) {
                                                                         console.log("response: ",response);
                                                                         //important to check access token and token type (e.g. bearer)
@@ -380,6 +383,7 @@ export default async function shapir(){
                                                                             url: token_url,
                                                                             method: "POST",
                                                                             data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                            crossDomain: true,
                                                                             success: function(response) {
                                                                                 console.log("response: ",response);
                                                                                 tok = response.access_token;
@@ -456,6 +460,7 @@ export default async function shapir(){
                                                                             url: token_url,
                                                                             method: "POST",
                                                                             data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                            crossDomain: true,
                                                                             success: function(response) {
                                                                                 console.log("response: ",response);
                                                                                 tok = response.access_token;
@@ -653,6 +658,7 @@ export default async function shapir(){
                                                                 url: token_url,
                                                                 method: "POST",
                                                                 data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                crossDomain: true,
                                                                 success: function(response) {
                                                                     console.log("response: ",response);
                                                                     //important to check access token and token type (e.g. bearer)
@@ -687,7 +693,7 @@ export default async function shapir(){
                                     //***************************** SETTERS *********************************/
                                     if (setters){
                                     for (var s=0; s<setters.length; ++s){
-                                        console.log("setter: ", setters[s])
+                                        // console.log("setter: ", setters[s])
                                         var field = setters[s].field; //API endpoint field to be set
                                         var prop="";
                                         var setEndpoint =  setters[s].endpoint;
@@ -780,6 +786,7 @@ export default async function shapir(){
                                                                 url: token_url,
                                                                 method: "POST",
                                                                 data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                crossDomain: true,
                                                                 success: function(response) {
                                                                     console.log("response: ",response);
                                                                     //important to check access token and token type (e.g. bearer)
@@ -916,6 +923,7 @@ export default async function shapir(){
                                                                     url: token_url,
                                                                     method: "POST",
                                                                     data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                    crossDomain: true,
                                                                     success: function(response) {
                                                                         console.log("response: ",response);
                                                                         //important to check access token and token type (e.g. bearer)
@@ -1069,6 +1077,7 @@ export default async function shapir(){
                                                 url: token_url,
                                                 method: "POST",
                                                 data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                crossDomain: true,
                                                 success: function(response) {
                                                     console.log("response: ",response);
                                                     //important to check access token and token type (e.g. bearer)
@@ -1199,6 +1208,7 @@ export default async function shapir(){
                                                         url: token_url,
                                                         method: "POST",
                                                         data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                        crossDomain: true,
                                                         success: function(response) {
                                                             console.log("response: ",response);
                                                             tok = response.access_token;
@@ -1275,6 +1285,7 @@ export default async function shapir(){
                                                         url: token_url,
                                                         method: "POST",
                                                         data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                        crossDomain: true,
                                                         success: function(response) {
                                                             console.log("response: ",response);
                                                             tok = response.access_token;
@@ -1449,6 +1460,7 @@ export default async function shapir(){
                                                                             url: token_url,
                                                                             method: "POST",
                                                                             data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                            crossDomain: true,
                                                                             success: function(response) {
                                                                                 console.log("response: ",response);
                                                                                 tok = response.access_token;
@@ -1525,6 +1537,7 @@ export default async function shapir(){
                                                                             url: token_url,
                                                                             method: "POST",
                                                                             data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                            crossDomain: true,
                                                                             success: function(response) {
                                                                                 console.log("response: ",response);
                                                                                 tok = response.access_token;
@@ -1656,6 +1669,7 @@ export default async function shapir(){
                                                                             url: token_url,
                                                                             method: "POST",
                                                                             data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                            crossDomain: true,
                                                                             success: function(response) {
                                                                                 console.log("response: ",response);
                                                                                 tok = response.access_token;
@@ -1732,6 +1746,7 @@ export default async function shapir(){
                                                                             url: token_url,
                                                                             method: "POST",
                                                                             data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                            crossDomain: true,
                                                                             success: function(response) {
                                                                                 console.log("response: ",response);
                                                                                 tok = response.access_token;
@@ -2042,6 +2057,7 @@ export default async function shapir(){
                                                                     url: token_url,
                                                                     method: "POST",
                                                                     data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                    crossDomain: true,
                                                                     success: function(response) {
                                                                         console.log("response: ",response);
                                                                         //important to check access token and token type (e.g. bearer)
@@ -2127,6 +2143,7 @@ export default async function shapir(){
                                                                             url: token_url,
                                                                             method: "POST",
                                                                             data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                            crossDomain: true,
                                                                             success: function(response) {
                                                                                 console.log("response: ",response);
                                                                                 tok = response.access_token;
@@ -2203,6 +2220,7 @@ export default async function shapir(){
                                                                             url: token_url,
                                                                             method: "POST",
                                                                             data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                            crossDomain: true,
                                                                             success: function(response) {
                                                                                 console.log("response: ",response);
                                                                                 tok = response.access_token;
@@ -2378,6 +2396,7 @@ export default async function shapir(){
                                                                 url: token_url,
                                                                 method: "POST",
                                                                 data: {client_id: client_id ,client_secret: client_secret ,redirect_uri: redirect_url ,code: token ,grant_type:grant_type},
+                                                                crossDomain: true,
                                                                 success: function(response) {
                                                                     console.log("response: ",response);
                                                                     //important to check access token and token type (e.g. bearer)

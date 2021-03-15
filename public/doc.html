@@ -129,6 +129,10 @@
 							<li><a href="#get">Get Started</a></li>
 							<li><a href="#example">Examples</a></li>
 							<li><a href="#explore">Explore</a></li>
+							<li><a href="#explore">Search</a></li>
+							<li><a href="#explore">Create, Remove, and Update</a></li>
+							<li><a href="#explore">Save Final Description</a></li>
+
 						</ul>
 					</li>
 
@@ -144,7 +148,8 @@
 			<!-- begin panel -->
 			<div class="panel">
 				<div class="panel-heading">
-					<h1 class="panel-title">JS Library</h1>
+					<!-- <h2 class="">How to use the Shapir UI? to translate Web APIs to schema.org vocabulary </h2> -->
+					<h1 class="panel-title"> How to use the Shapir UI to translate Web APIs to schema.org vocabulary?</h1>
 					<div class="panel-heading-btn">
 						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> -->
 						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
@@ -154,158 +159,29 @@
 				</div>
 				<div class="panel-body">
 					<!-- Content Here -->
+					<p style="font-size: 1.3em;">This demonstrates how to translate schema.org types and properties to Web APIs. As an example, we are showing how to tranlslate <a href="https://schema.org/VideoObject" target="_blank">VideoObject</a> and <a href="https://schema.org/Comment" target="_blank">Comment</a> to YouTube API's <a href="https://developers.google.com/youtube/v3/docs/videos/list" target="_blank">video</a> and <a href="https://developers.google.com/youtube/v3/docs/comments/list" target="_blank">comment</a> objects. We are also showing how support searching YouTube and applying methods to types.</p></br></br>
+
 
 					<!-- begin panel -->
 					<div id="get" class="panel panel-inverse">
 						<div class="panel-heading">
-							<h4 class="panel-title">Get Started</h4>
+							<h4 class="panel-title">1) Start with entering the website URL</h4>
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 							</div>
 						</div>
 						<div class="panel-body">
 							<!-- Panel Content Here -->
-
-							<!-- <pre id="json" style="font-size: 0.9em; padding-top: 0px;"  class="language-html">
-								<code  id="hereCode" class="html language-html">
-									<head>
-
-										<link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
-										<script src="https://get.mavo.io/mavo.js"></script>
-
-									</head>
-								</code>
-							</pre> -->
-
-		<!-- <h4>HTML</h4>
-							<pre class="language-html"><code class="language-html">&lt;head>
-			...
-			&lt;script src="shapir.js">&lt;/script>
-			...
-		&lt;/head></code></pre> -->
-
-		<h4>JS</h4>
-
-		<pre class="language-javascript"><code class="language-javascript">import shapir from "https://shapir.org/shapir.js";
-
-shapir().then(async () => {
-	//add your Shapir functions here
-});</code></pre>
-
-		<!-- <h5>siteName.object/method(args)</h5> -->
-
-		<!-- <div class="row">
-			<div class="col">
-				<pre style="display: inline;" class="language-javascript"><code class="language-javascript">var playlist = dailymotion.MusicPlaylist("x706zx")
-				</code></pre>
-			</div>
-			<div class="col">
-				<button style="display: inline;" type="button" class="btn btn-grey" onclick="getPlaylist()">Run</button>
-			</div>
-		</div> -->
-
-
-		<div id="playlistExample" style="display:none;" >
-		<pre id="json" style="width:40px"><code  id="playlist" class="language-json load"></code></pre>
-		</div>
-
-		<!-- </br></br> -->
-
-		<script>
-			var videos;
-			function getPlaylist(){
-				setTimeout(() => {
-					(async function(){
-						var playlist = await dailymotion.MusicPlaylist("x706zx");
-
-						// playlist[video] = await playlist.video
-						videos = await playlist.video
-						console.log("videos: ", videos)
-						$("#playlistExample").show();
-						document.getElementById('playlist').innerHTML = JSON.stringify(playlist, null, 2)
-						Prism.highlightElement($('#playlist')[0]);
-
-					})()
-				}, 6000);
-			}
-
-			function getVideos(){
-				$("#videosExample").show();
-				document.getElementById('videos').innerHTML = JSON.stringify(videos, null, 2)
-				Prism.highlightElement($('#videos')[0]);
-			}
-		</script>
-
-					<!-- <div class="row">
-						<div class="col">
-							<pre style="display: inline;" class="language-javascript"><code class="language-javascript">var playlistVideos = playlist.video
-							</code></pre>
+							<img src="assets/img/doc/1url.png" width="1000px" />
 						</div>
-						<div class="col">
-							<button style="display: inline; " type="button" class="btn btn-grey" onclick="getVideos()">Run</button>
-						</div>
-
-						<div id="videosExample" style="display:none">
-							<pre id="json"> <code  id="videos" class="language-json load"></code></pre>
-						</div>
-
-					</div> -->
-
-					</div>
 					</div>
 					<!-- end panel -->
 
 					<!-- begin panel -->
 					<div id="example" class="panel panel-inverse">
 						<div class="panel-heading">
-							<h4 class="panel-title">Examples</h4>
-							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-							</div>
-						</div>
-						<div class="panel-body">
-							<!-- <h4 class="panel-title">JS Code Samples</h4> -->
-
-							<h5 class="panel-title">Get YouTube video comments</h5>
-							<p>This sample gets the list of comments that belongs to a YouTube video, specified by the videoId.</p>
-
-	<pre class="language-javascript"><code class="language-javascript">shapir().then(async () => {
-	var video = await youtube.VideoObject("x7xf8kc"); // videoId= x7xf8kc
-	var comments = await video.comment //returns a list of comments for this specific
-});</code></pre>
-
-
-	<h5 class="panel-title">Search YouTube for videos</h5>
-	<p>This sample searches YouTube for videos, specified by the videoId.</p>
-
-	<pre class="language-javascript"><code class="language-javascript">shapir().then(async () => {
-
-});</code></pre>
-
-
-	<h5 class="panel-title">Search mutliple sites for music videos</h5>
-	<p>This sample gets the list of comments that belongs to a YouTube video, specified by the videoId.</p>
-
-	<pre class="language-javascript"><code class="language-javascript">shapir().then(async () => {
-
-});</code></pre>
-
-
-
-						</div><!--END-->
-					</div>
-					<!-- end panel -->
-
-					<!-- begin panel -->
-					<div id="explore" class="panel panel-inverse">
-						<div class="panel-heading">
-							<h4 class="panel-title">Explore Shapir JS Library</h4>
+							<h4 class="panel-title">2) Choose to either start describing your Web APis from scratch or from a suggested descreption</h4>
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
@@ -315,28 +191,71 @@ shapir().then(async () => {
 						</div>
 						<div class="panel-body">
 							<!-- Panel Content Here -->
-							<!-- a dropdown menue of all the sites intergrated (under abstraction) -->
-							<!-- when an option gets selected, read the functions, objects and create the lines -->
+							<img src="assets/img/doc/2step2_options.png" width="1000px"/>
+						</div>
+					</div>
+					<!-- end panel -->
 
-							<div class="col-lg-6">
-								<h5 >Choose the name of the website that you would like to access:</h5>
-								<select id="sites" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosen(this)">
-									<option selected>Choose site</option>
-								</select>
+					<!-- begin panel -->
+					<div id="explore" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">3) Show suggested types</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 							</div>
-							</br>
+						</div>
+						<div class="panel-body">
+							<!-- Panel Content Here -->
+							<img src="assets/img/doc/3suggested.png" width="1000px"/>
+						</div>
+					</div>
+					<!-- end panel -->
 
-							<div id="functions" style="display:none">
-								<h5>Search <span id="siteName"></span></h5>
-								<pre style="display: inline;" class="language-javascript"><code id="function" class="language-javascript"></code></pre>
+
+					<!-- begin panel -->
+					<div id="explore" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">4) Manage types and properties</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 							</div>
-							</br>
+						</div>
+						<div class="panel-body">
+							<!-- Panel Content Here -->
+							<p style="font-size: 1.3em;">Remove the types you don't care about from the suggested types. I removed all the types from the suggested descreption and I only kept VideoObject.</p>
+							<p style="font-size: 1.3em;">Map every type to an API endpoint that get that specific type. For the VideoObject type I chose YouTube Video API endpoint https://www.googleapis.com/youtube/v3/videos)</p>
+							<p style="font-size: 1.3em;">Under each type, map every <B>property</B> to an API response <B>field</B></p>
 
-							<div id="objects" style="display:none">
-								<h5>Objects and their functions</h5>
-								<pre id="preObjects" style="display: inline;" class="language-javascript"><code id="object" class="language-javascript"></code></pre>
+							<img src="assets/img/doc/4addTypeProp.png" width="1000px"/>
+							<img src="assets/img/doc/5selectapi.png" width="720px" style="margin-left:130px"/>
+
+						</div>
+					</div>
+					<!-- end panel -->
+
+
+					<!-- begin panel -->
+					<div id="explore" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">5) Remove the types you don't care about from the suggested types</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
 							</div>
-
+						</div>
+						<div class="panel-body">
+							<!-- Panel Content Here -->
+							<p style="font-size: 1.3em;">Remove the types you don't care about from the suggested types. I removed all the types from the suggested descreption and I only kept VideoObject.</p>
+							<p style="font-size: 1.3em;">Map every type to an API endpoint that get that specific type. For the VideoObject type I chose YouTube Video API endpoint https://www.googleapis.com/youtube/v3/videos)</p>
+							<img src="assets/img/doc/5selectapi.png" width="1000px"/>
 						</div>
 					</div>
 					<!-- end panel -->
