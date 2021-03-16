@@ -1259,118 +1259,118 @@ function siteHasBeenEntered(select){
   document.getElementById("site-domain").innerHTML = site;
 
   //Getting website categories
-  $.ajax({
-    url: 'https://www.klazify.com/api/categorize?url='+url,
-    type: 'POST',
-    crossDomain:true,
-    headers: {
-      'Accept': "application/json",
-      'Content-Type': "application/json",
-      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
-      'cache-control': "no-cache"
-    },
-    success: function(res) {
-      // console.log("Categories: ", res);
-      var categories = res.domain.categories;
+  // $.ajax({
+  //   url: 'https://www.klazify.com/api/categorize?url='+url,
+  //   type: 'POST',
+  //   crossDomain:true,
+  //   headers: {
+  //     'Accept': "application/json",
+  //     'Content-Type': "application/json",
+  //     "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
+  //     'cache-control': "no-cache"
+  //   },
+  //   success: function(res) {
+  //     // console.log("Categories: ", res);
+  //     var categories = res.domain.categories;
 
-      if(res.domain.logo_url !=null || res.domain.logo_url!=""){
-        $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
-      }
+  //     if(res.domain.logo_url !=null || res.domain.logo_url!=""){
+  //       $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
+  //     }
 
-      $("#site-info").append('</br><h6>Website categories</h6>');
-      $("#site-info").append('<ul>');
-      for(var c=0; c<categories.length; ++c){
-        $("#site-info").append('<li>'+categories[c].name+'</li>');
-      }
-      $("#site-info").append('</ul>');
+  //     $("#site-info").append('</br><h6>Website categories</h6>');
+  //     $("#site-info").append('<ul>');
+  //     for(var c=0; c<categories.length; ++c){
+  //       $("#site-info").append('<li>'+categories[c].name+'</li>');
+  //     }
+  //     $("#site-info").append('</ul>');
 
-      // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
-      // var category = categories.find(o => {
-      //   return o.confidence === maxconfidence
-      // }).name;
-      // console.log("Category: ", category)
+  //     // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
+  //     // var category = categories.find(o => {
+  //     //   return o.confidence === maxconfidence
+  //     // }).name;
+  //     // console.log("Category: ", category)
 
-      var categoryWords=[]
-      for(var l=0; l<categories.length; ++l){
-        var name= categories[l].name;
-        var lastIndex = name.lastIndexOf("/")//get the last type
-        var lastType = name.substring(lastIndex + 1);
-        categoryWords.push(lastType);
-      }
+  //     var categoryWords=[]
+  //     for(var l=0; l<categories.length; ++l){
+  //       var name= categories[l].name;
+  //       var lastIndex = name.lastIndexOf("/")//get the last type
+  //       var lastType = name.substring(lastIndex + 1);
+  //       categoryWords.push(lastType);
+  //     }
 
-      // $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
-      // $("#site-info").append('<ul>');
+  //     // $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
+  //     // $("#site-info").append('<ul>');
 
-      for(var c=0; c<categoryWords.length; ++c){
-        for(var j=0; j<allTypes.length; ++j){
-          var similar = checkSimilarity(categoryWords[c], allTypes[j]);
-          if(similar>40){
-            console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
-            suggestedTypes.push(allTypes[j])
-            // $("#site-info").append('<li>'+allTypes[j]+'</li>');
-          }
-        }
-        if(c+1==categoryWords.length){
-          // $("#site-info").append('</ul><hr>');
-          $("#site-info").show();
+  //     for(var c=0; c<categoryWords.length; ++c){
+  //       for(var j=0; j<allTypes.length; ++j){
+  //         var similar = checkSimilarity(categoryWords[c], allTypes[j]);
+  //         if(similar>40){
+  //           console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
+  //           suggestedTypes.push(allTypes[j])
+  //           // $("#site-info").append('<li>'+allTypes[j]+'</li>');
+  //         }
+  //       }
+  //       if(c+1==categoryWords.length){
+  //         // $("#site-info").append('</ul><hr>');
+  //         $("#site-info").show();
 
-          if(suggestedTypes.length>0){
-            // console.log("SUGGESTED")
-            $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
-            for(var j=0; j<suggestedTypes.length; ++j){
-              $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
-            }
-            $("#type-select").append('</optgroup>');
+  //         if(suggestedTypes.length>0){
+  //           // console.log("SUGGESTED")
+  //           $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+  //           for(var j=0; j<suggestedTypes.length; ++j){
+  //             $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
+  //           }
+  //           $("#type-select").append('</optgroup>');
 
-            $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
-            for(var i=0; i<allTypes.length; ++i){
-              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-                //no action
-              }else{
-                type= allTypes[i].split(' ').join('')
-                if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
-                  $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-                }
-              }
-            }
-            $("#type-select").append('</optgroup>');
-          }else{
-            // console.log("NOT SUGGESTED")
-            for(var i=0; i<allTypes.length; ++i){
-              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-                //no action
-              }else{
-                type= allTypes[i].split(' ').join('')
-                $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-              }
-            }
-          }
-          jQuery('.selectpicker').selectpicker('refresh');
-        }
-      }
+  //           $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+  //                 $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //               }
+  //             }
+  //           }
+  //           $("#type-select").append('</optgroup>');
+  //         }else{
+  //           // console.log("NOT SUGGESTED")
+  //           for(var i=0; i<allTypes.length; ++i){
+  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //               //no action
+  //             }else{
+  //               type= allTypes[i].split(' ').join('')
+  //               $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //             }
+  //           }
+  //         }
+  //         jQuery('.selectpicker').selectpicker('refresh');
+  //       }
+  //     }
 
-    },
-    error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
-      for(var i=0; i<allTypes.length; ++i){
-        if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-          //no action
-        }else{
-          type= allTypes[i].split(' ').join('')
-          $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-        }
-      }
-    }
+  //   },
+  //   error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
+  //     for(var i=0; i<allTypes.length; ++i){
+  //       if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+  //         //no action
+  //       }else{
+  //         type= allTypes[i].split(' ').join('')
+  //         $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //       }
+  //     }
+  //   }
 
-  });
+  // });
 
 
   //////FOR TESTING
-  // for(var i=0; i<allTypes.length; ++i){
-  //   if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
-  //     type= allTypes[i].split(' ').join('')
-  //     $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //   }
-  // }
+  for(var i=0; i<allTypes.length; ++i){
+    if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
+      type= allTypes[i].split(' ').join('')
+      $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+    }
+  }
 
 
   // setTimeout(() => {
@@ -3760,7 +3760,7 @@ function saveSchema(){
   let temp={}
   siteObj={site:{}}
   temp = { "objects":{}, "functions":[] };
-  siteObj[site] = temp;
+  siteObj = temp;
   let tempObj={};
 
   // Inside the tableDiv go over all the tables
@@ -3907,27 +3907,23 @@ function saveSchema(){
           tempAct.endpoint= allSearchMethods[s].endpoint;
           tempAct.id= allSearchMethods[s].id;
           tempAct.searchParam= allSearchMethods[s].searchParam;
-          siteObj[site].functions.push(tempAct);
+          siteObj.functions.push(tempAct);
         }
-        // siteObj[site].functions.push(tempAct);
-        // siteObj[site].functions[0].endpoint= urlAPIMethod;
-        // siteObj[site].functions[0].object= typeName;
-        // siteObj[site].functions[0].name= "search"+typeName;
-        // siteObj[site].functions[0].id= document.getElementById('method-result-type-id').value;
-        // siteObj[site].functions[0].searchParam= document.getElementById(typeName+"_search_term").value;
       }
 
       console.log("tempAct: ", tempAct)
 
-      console.log("siteObj[site].functions: ", siteObj[site].functions)
+      console.log("siteObj[site].functions: ", siteObj.functions)
       // method-result-type-returned
 
-      //Push to Firebase!
+
     }//end of loop
 
-    siteObj[site].objects= tempObj
-    console.log("Final Object: ", siteObj[site]);
+    siteObj.objects= tempObj
   }
+  console.log("Final Object: ", siteObj);
+  //Push to Firebase!
+  firebase.database().ref('/study/'+site).set(siteObj)
 
 }
 
@@ -4087,6 +4083,8 @@ var typeOfProperty = "Text"
 var schemaProObj =[]
 
 function propertyHasBeenChosen(select){
+
+  typeOfProperty="Text"
 
   propChosen=true;
 
