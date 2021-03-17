@@ -339,8 +339,8 @@ export default async function shapir(){
 
                                             // add the imageId
                                             Object.defineProperty(ob, mName.toString(), {
-                                                enumerable: true,
-                                                configurable: true,
+                                                // enumerable: true,
+                                                // configurable: true,
                                                 value: function(mArgs) {
 
                                                 if (mArgs.length>0){
@@ -1178,8 +1178,11 @@ export default async function shapir(){
 
 
                         window[site][funcName] = function(...mArgs) { return siteFunction(...mArgs) };
-
+                        var calledOnce=true
                         function siteFunction(...mArgs) {
+                            calledOnce=true
+                            if(calledOnce){
+                                calledOnce=false
 
                             return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                             obJSON = snapshot.val();
@@ -1436,19 +1439,19 @@ export default async function shapir(){
 
                                             // console.log("other: ", await ob['other'])
                                             //Add the other fields in Get but not in Search to the Search
-                                            if(onceAll){
-                                                onceAll=false;
-                                                for (let f in otherFields) {
+                                            // if(onceAll){
+                                            //     onceAll=false;
+                                            //     for (let f in otherFields) {
 
-                                                    Object.defineProperty(ob, otherFields[f], {
-                                                        get:function() {
-                                                            return ob['other'].then(data=>{
-                                                                return data[otherFields[f]];
-                                                            })
-                                                        }
-                                                    });//end of getter
-                                                }
-                                            }
+                                            //         Object.defineProperty(ob, otherFields[f], {
+                                            //             get:function() {
+                                            //                 return ob['other'].then(data=>{
+                                            //                     return data[otherFields[f]];
+                                            //                 })
+                                            //             }
+                                            //         });//end of getter
+                                            //     }
+                                            // }
                                         }//for loop
 
 
@@ -1857,7 +1860,7 @@ export default async function shapir(){
 
                                 return o;
                             })
-
+                          }//once
                         }
 
 
@@ -2346,8 +2349,8 @@ export default async function shapir(){
                                         else { //if the property is a type
                                             let propType = properties[p].property;
                                             let typeName = properties[p].type;
-                                            console.log("typeId: ", typeId);
-                                            console.log("o[typeId]1: ", o[typeId])
+                                            // console.log("typeId: ", typeId);
+                                            // console.log("o[typeId]1: ", o[typeId])
                                             var idVal = o[typeId];
 
                                             // creat a getter for property of type Type

@@ -1,0 +1,34 @@
+<head>
+    <link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
+    <script src="https://get.mavo.io/mavo.js"></script>
+    <script type="module" src="../mavo-shapir.js"></script>
+ </head>
+
+ <body>
+
+   <div mv-app="test" mv-source="dailymotion.json">
+
+     <label>Playlits ID: </label>
+     <input property="id" value="x71myv"/>
+
+     <h1 property="name"></h1>
+
+     <!-- <iframe property="video" width="640" height="450" src="[embedUrl]" frameborder="0" allowfullscreen></iframe> -->
+
+     <div property="video" mv-multiple>
+       <p property="name"></p>
+       <p property="description"></p>
+       <p property="duration"></p>
+       <p property="ratingValue"></p>
+       <img property="thumbnailUrl" width="200px"/></br>
+
+       <!-- <button  mv-action="set(video, embedUrl)">Play</button> -->
+
+       <iframe width="420" height="315" src="[embedUrl]"></iframe>
+
+       <hr>
+     </div>
+
+   </div>
+
+ </body>

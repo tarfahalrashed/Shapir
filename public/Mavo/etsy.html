@@ -6,25 +6,23 @@
         <script type="module" src="../mavo-shapir.js"></script>
     </head>
 
-     <body>
+    <div mv-app="test" mv-source="etsy.json">
+        <!--     <label>Search Etsy: </label>
+            <input property="keywords" value="jacket"/> -->
 
-       <div mv-app="test" mv-source="shapir" mv-source-service="etsy" mv-source-search="jacket">
-         <label>Keywords: </label>
-         <!-- <input property="keywords" value="jacket"/> -->
+            <div property="products" mv-multiple hidden="[productionDate == '1990s']">
+              <!-- David suggested to use mv-if instead of hidden, not sure which one is better-->
+              <h4 property="name"></h4>
+              <p property="description"></p>
+              <p property="weight"></p>
+              <p property="width"></p>
+              <p property="height"></p>
+              <p property="productionDate"></p>
+              <a property="url">[url]</a>
+              <p property="aggregateRating"></p> <!-- num of favorers-->
+              <hr>
+            </div>
 
-         <div property="products" mv-multiple hidden="[productionDate == '1990s']">
-           <!-- David suggested to use mv-if instead of hidden, not sure which one is better-->
-           <h4 property="name"></h4>
-           <p property="description"></p>
-           <p property="weight"></p>
-           <p property="width"></p>
-           <p property="height"></p>
-           <p property="productionDate"></p>
-           <a property="url">[url]</a>
-           <p property="aggregateRating"></p> <!-- num of favorers-->
-           <hr>
-         </div>
+          </div>
 
-       </div>
-
-     </body>
+        </body>

@@ -8,26 +8,36 @@
 
     <body>
 
-        <div mv-app="test" mv-source="shapir" mv-source-service="seatgeek, songkick, ticketmaster" mv-source-search="music" mv-source-city="New York" mv-source-country="US">
+        <div mv-app="test" mv-source="shapir" mv-source-service="seatgeek" mv-source-search="Music" mv-source-city="New York" mv-source-country="US">
+<!--
+            <label>Search: </label>
+            <input property="term" value="game"/> -->
+
+            <!-- <form mv-action="set(term, idInput)">
+                <label>Search Dailymotion: <input property="searchInput" mv-default="game"></label>
+                <meta property="term" mv-default="">
+                <button>Submit</button>
+            </form> -->
+
 
             <h1>Music Venues</h1>
             <div property="venue" mv-multiple>
-                <h1 property="name"></h1>
-                <a property="url">[url]</a>
-                <p property="maximumAttendeeCapacity"></p>
-                <p property="longitude"></p>
-                <p property="latitude"></p>
-                <p property="siteName"></p>
-                <hr>
-                <!-- <h2>Upcoming Events</h2>
-                <div property="event" mv-multiple>
+              <h1 property="name"></h1>
+              <a property="url">[url]</a>
+              <p property="maximumAttendeeCapacity"></p>
+              <p property="longitude"></p>
+              <p property="latitude"></p>
+              <p property="siteName"></p>
+              <hr>
+              <!-- <h2>Upcoming Events</h2>
+                   <div property="event" mv-multiple>
                     <h3 property="name"></h3>
                     <a property="url">[url]</a>
                     <p property="startDate"></p>
-                </div> -->
-            </div>
+                   </div> -->
+              </div>
 
-        </div>
+            </div>
 
     </body>
 
