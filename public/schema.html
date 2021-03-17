@@ -58,6 +58,7 @@
 
 </head>
 <body onload="fetchSchemaTypes()">
+	<!-- fetchSchemaTypes()"> -->
 
 	<!-- begin #page-loader -->
 	<!-- <div id="page-loader" class="fade show">
@@ -142,6 +143,7 @@
 
 											<!-- type select -->
 											<div class="col-lg-14">
+
 												<h6>You can find all schema.org types here: <a href="https://schema.org/docs/schemas.html" target="_blank">https://schema.org/docs/schemas.html</a></h6>
 												<h6>If you want to know more about a specific type, please choose it from here and read more about it.</h6>
 												<select id="type-menu" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-default" onchange="getDescription(this)">
@@ -351,7 +353,7 @@
 														<div id="step2-desc" style="display: none;" >
 															<div class="input-group mb-5" style="margin-bottom:-10px!important">
 																<label style="font-size: 1em;"><B>Step2.</B> Translate schema.org types to the Web API types/objects.
-																<button class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Show suggested types</button>
+																<button id="sugDblClick" class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Show suggested types</button>
 																<button class="btn btn-default" type="button" onclick="startFromScratch()">Start from scratch</button></label>
 																	<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
 															</div>
@@ -492,6 +494,7 @@
 														<p style="font-size: 1.2em;" id=""><B>Step3.</B> Please click the save button to save this schema.org description of the website API when youre done &nbsp;
 															<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; width:100px" onclick="saveSchema()">Save</a>
 														</p>
+														<p style="font-size: 1.2em; color:red; display: none;" id="saveMsg"><B>Your description was successfully saved!</B></p>
 
 														<!-- <p style="font-size: 1.2em;" id="beforeDone"><B>Step3.</B> Connect to the API when you are done describing your data model. </p> -->
 														<!-- <p style="font-size: 1.2em; display:none" id="afterDone"><B>Step3.</B> Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</p> -->

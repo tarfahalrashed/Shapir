@@ -9,6 +9,10 @@ var config = {
 
 
 
+
+var typeStudy= {"MusicVideoObject":{"associatedArticle":{"types":["NewsArticle"],"desc":""},"bitrate":{"types":["Text"],"desc":""},"contentSize":{"types":["Text"],"desc":""},"contentUrl":{"types":["URL"],"desc":""},"duration":{"types":["Duration"],"desc":""},"embedUrl":{"types":["URL"],"desc":""},"encodesCreativeWork":{"types":["CreativeWork"],"desc":""},"encodingFormat":{"types":["Text","URL"],"desc":""},"endTime":{"types":["DateTime","Time"],"desc":""},"height":{"types":["Distance","QuantitativeValue"],"desc":""},"ineligibleRegion":{"types":["GeoShape","Place","Text"],"desc":""},"playerType":{"types":["Text"],"desc":""},"productionCompany":{"types":["Organization"],"desc":""},"regionsAllowed":{"types":["Place"],"desc":""},"requiresSubscription":{"types":["Boolean","MediaSubscription"],"desc":""},"startTime":{"types":["DateTime","Time"],"desc":""},"uploadDate":{"types":["Date"],"desc":""},"width":{"types":["Distance","QuantitativeValue"],"desc":""},"about":{"types":["Thing"],"desc":""},"abstract":{"types":["Text"],"desc":""},"accessMode":{"types":["Text"],"desc":""},"accessModeSufficient":{"types":["ItemList"],"desc":""},"accessibilityAPI":{"types":["Text"],"desc":""},"accessibilityControl":{"types":["Text"],"desc":""},"accessibilityFeature":{"types":["Text"],"desc":""},"accessibilityHazard":{"types":["Text"],"desc":""},"accessibilitySummary":{"types":["Text"],"desc":""},"accountablePerson":{"types":["Person"],"desc":""},"acquireLicensePage":{"types":["CreativeWork","URL"],"desc":""},"aggregateRating":{"types":["AggregateRating"],"desc":""},"alternativeHeadline":{"types":["Text"],"desc":""},"assesses":{"types":["DefinedTerm","Text"],"desc":""},"associatedMedia":{"types":["MediaObject"],"desc":""},"audience":{"types":["Audience"],"desc":""},"audio":{"types":["AudioObject","Clip","MusicRecording"],"desc":""},"author":{"types":["Organization","Person"],"desc":""},"award":{"types":["Text"],"desc":""},"character":{"types":["Person"],"desc":""},"citation":{"types":["CreativeWork","Text"],"desc":""},"comment":{"types":["Comment"],"desc":""},"commentCount":{"types":["Integer"],"desc":""},"conditionsOfAccess":{"types":["Text"],"desc":""},"contentLocation":{"types":["Place"],"desc":""},"contentRating":{"types":["Rating","Text"],"desc":""},"contentReferenceTime":{"types":["DateTime"],"desc":""},"contributor":{"types":["Organization","Person"],"desc":""},"copyrightHolder":{"types":["Organization","Person"],"desc":""},"copyrightNotice":{"types":["Text"],"desc":""},"copyrightYear":{"types":["Number"],"desc":""},"correction":{"types":["CorrectionComment","Text","URL"],"desc":""},"creativeWorkStatus":{"types":["DefinedTerm","Text"],"desc":""},"creator":{"types":["Organization","Person"],"desc":""},"creditText":{"types":["Text"],"desc":""},"dateCreated":{"types":["Date","DateTime"],"desc":""},"dateModified":{"types":["Date","DateTime"],"desc":""},"datePublished":{"types":["Date","DateTime"],"desc":""},"discussionUrl":{"types":["URL"],"desc":""},"editEIDR":{"types":["Text","URL"],"desc":""},"editor":{"types":["Person"],"desc":""},"educationalAlignment":{"types":["AlignmentObject"],"desc":""},"educationalLevel":{"types":["DefinedTerm","Text","URL"],"desc":""},"educationalUse":{"types":["DefinedTerm","Text"],"desc":""},"encoding":{"types":["MediaObject"],"desc":""},"exampleOfWork":{"types":["CreativeWork"],"desc":""},"expires":{"types":["Date"],"desc":""},"funder":{"types":["Organization","Person"],"desc":""},"genre":{"types":["Text","URL"],"desc":""},"hasPart":{"types":["CreativeWork"],"desc":""},"headline":{"types":["Text"],"desc":""},"inLanguage":{"types":["Language","Text"],"desc":""},"interactionStatistic":{"types":["InteractionCounter"],"desc":""},"interactivityType":{"types":["Text"],"desc":""},"isAccessibleForFree":{"types":["Boolean"],"desc":""},"isBasedOn":{"types":["CreativeWork","Product","URL"],"desc":""},"isFamilyFriendly":{"types":["Boolean"],"desc":""},"isPartOf":{"types":["CreativeWork","URL"],"desc":""},"keywords":{"types":["DefinedTerm","Text","URL"],"desc":""},"learningResourceType":{"types":["DefinedTerm","Text"],"desc":""},"license":{"types":["CreativeWork","URL"],"desc":""},"locationCreated":{"types":["Place"],"desc":""},"mainEntity":{"types":["Thing"],"desc":""},"maintainer":{"types":["Organization","Person"],"desc":""},"material":{"types":["Product","Text","URL"],"desc":""},"materialExtent":{"types":["QuantitativeValue","Text"],"desc":""},"mentions":{"types":["Thing"],"desc":""},"offers":{"types":["Demand","Offer"],"desc":""},"pattern":{"types":["DefinedTerm","Text"],"desc":""},"position":{"types":["Integer","Text"],"desc":""},"producer":{"types":["Organization","Person"],"desc":""},"provider":{"types":["Organization","Person"],"desc":""},"publication":{"types":["PublicationEvent"],"desc":""},"publisher":{"types":["Organization","Person"],"desc":""},"publisherImprint":{"types":["Organization"],"desc":""},"publishingPrinciples":{"types":["CreativeWork","URL"],"desc":""},"recordedAt":{"types":["Event"],"desc":""},"releasedEvent":{"types":["PublicationEvent"],"desc":""},"review":{"types":["Review"],"desc":""},"schemaVersion":{"types":["Text","URL"],"desc":""},"sdDatePublished":{"types":["Date"],"desc":""},"sdLicense":{"types":["CreativeWork","URL"],"desc":""},"sdPublisher":{"types":["Organization","Person"],"desc":""},"size":{"types":["DefinedTerm","QuantitativeValue","SizeSpecification","Text"],"desc":""},"sourceOrganization":{"types":["Organization"],"desc":""},"spatial":{"types":["Place"],"desc":""},"spatialCoverage":{"types":["Place"],"desc":""},"sponsor":{"types":["Organization","Person"],"desc":""},"teaches":{"types":["DefinedTerm","Text"],"desc":""},"temporal":{"types":["DateTime","Text"],"desc":""},"temporalCoverage":{"types":["DateTime","Text","URL"],"desc":""},"text":{"types":["Text"],"desc":""},"thumbnailUrl":{"types":["URL"],"desc":""},"timeRequired":{"types":["Duration"],"desc":""},"translationOfWork":{"types":["CreativeWork"],"desc":""},"translator":{"types":["Organization","Person"],"desc":""},"typicalAgeRange":{"types":["Text"],"desc":""},"usageInfo":{"types":["CreativeWork","URL"],"desc":""},"version":{"types":["Number","Text"],"desc":""},"video":{"types":["Clip","VideoObject"],"desc":""},"workExample":{"types":["CreativeWork"],"desc":""},"workTranslation":{"types":["CreativeWork"],"desc":""},"additionalType":{"types":["URL"],"desc":""},"alternateName":{"types":["Text"],"desc":""},"description":{"types":["Text"],"desc":""},"disambiguatingDescription":{"types":["Text"],"desc":""},"identifier":{"types":["PropertyValue","Text","URL"],"desc":""},"image":{"types":["ImageObject","URL"],"desc":""},"mainEntityOfPage":{"types":["CreativeWork","URL"],"desc":""},"name":{"types":["Text"],"desc":""},"potentialAction":{"types":["Action"],"desc":""},"sameAs":{"types":["URL"],"desc":""},"subjectOf":{"types":["CreativeWork","Event"],"desc":""},"url":{"types":["URL"],"desc":""},"actor":{"types":["Person"],"desc":""},"caption":{"types":["MediaObject","Text"],"desc":""},"director":{"types":["Person"],"desc":""},"musicBy":{"types":["MusicGroup","Person"],"desc":""},"thumbnail":{"types":["ImageObject"],"desc":""},"transcript":{"types":["Text"],"desc":""},"videoFrameSize":{"types":["Text"],"desc":""},"videoQuality":{"types":["Text"],"desc":""},"breadcrumb":{"types":["BreadcrumbList","Text"],"desc":""},"lastReviewed":{"types":["Date"],"desc":""},"mainContentOfPage":{"types":["WebPageElement"],"desc":""},"primaryImageOfPage":{"types":["ImageObject"],"desc":""},"relatedLink":{"types":["URL"],"desc":""},"reviewedBy":{"types":["Organization","Person"],"desc":""},"significantLink":{"types":["URL"],"desc":""},"speakable":{"types":["SpeakableSpecification","URL"],"desc":""},"specialty":{"types":["Specialty"],"desc":""},"exifData":{"types":["PropertyValue","Text"],"desc":""},"representativeOfPage":{"types":["Boolean"],"desc":""}},"VideoObject":{"associatedArticle":{"types":["NewsArticle"],"desc":""},"bitrate":{"types":["Text"],"desc":""},"contentSize":{"types":["Text"],"desc":""},"contentUrl":{"types":["URL"],"desc":""},"duration":{"types":["Duration"],"desc":""},"embedUrl":{"types":["URL"],"desc":""},"encodesCreativeWork":{"types":["CreativeWork"],"desc":""},"encodingFormat":{"types":["Text","URL"],"desc":""},"endTime":{"types":["DateTime","Time"],"desc":""},"height":{"types":["Distance","QuantitativeValue"],"desc":""},"ineligibleRegion":{"types":["GeoShape","Place","Text"],"desc":""},"playerType":{"types":["Text"],"desc":""},"productionCompany":{"types":["Organization"],"desc":""},"regionsAllowed":{"types":["Place"],"desc":""},"requiresSubscription":{"types":["Boolean","MediaSubscription"],"desc":""},"startTime":{"types":["DateTime","Time"],"desc":""},"uploadDate":{"types":["Date"],"desc":""},"width":{"types":["Distance","QuantitativeValue"],"desc":""},"about":{"types":["Thing"],"desc":""},"abstract":{"types":["Text"],"desc":""},"accessMode":{"types":["Text"],"desc":""},"accessModeSufficient":{"types":["ItemList"],"desc":""},"accessibilityAPI":{"types":["Text"],"desc":""},"accessibilityControl":{"types":["Text"],"desc":""},"accessibilityFeature":{"types":["Text"],"desc":""},"accessibilityHazard":{"types":["Text"],"desc":""},"accessibilitySummary":{"types":["Text"],"desc":""},"accountablePerson":{"types":["Person"],"desc":""},"acquireLicensePage":{"types":["CreativeWork","URL"],"desc":""},"aggregateRating":{"types":["AggregateRating"],"desc":""},"alternativeHeadline":{"types":["Text"],"desc":""},"assesses":{"types":["DefinedTerm","Text"],"desc":""},"associatedMedia":{"types":["MediaObject"],"desc":""},"audience":{"types":["Audience"],"desc":""},"audio":{"types":["AudioObject","Clip","MusicRecording"],"desc":""},"author":{"types":["Organization","Person"],"desc":""},"award":{"types":["Text"],"desc":""},"character":{"types":["Person"],"desc":""},"citation":{"types":["CreativeWork","Text"],"desc":""},"comment":{"types":["Comment"],"desc":""},"commentCount":{"types":["Integer"],"desc":""},"conditionsOfAccess":{"types":["Text"],"desc":""},"contentLocation":{"types":["Place"],"desc":""},"contentRating":{"types":["Rating","Text"],"desc":""},"contentReferenceTime":{"types":["DateTime"],"desc":""},"contributor":{"types":["Organization","Person"],"desc":""},"copyrightHolder":{"types":["Organization","Person"],"desc":""},"copyrightNotice":{"types":["Text"],"desc":""},"copyrightYear":{"types":["Number"],"desc":""},"correction":{"types":["CorrectionComment","Text","URL"],"desc":""},"creativeWorkStatus":{"types":["DefinedTerm","Text"],"desc":""},"creator":{"types":["Organization","Person"],"desc":""},"creditText":{"types":["Text"],"desc":""},"dateCreated":{"types":["Date","DateTime"],"desc":""},"dateModified":{"types":["Date","DateTime"],"desc":""},"datePublished":{"types":["Date","DateTime"],"desc":""},"discussionUrl":{"types":["URL"],"desc":""},"editEIDR":{"types":["Text","URL"],"desc":""},"editor":{"types":["Person"],"desc":""},"educationalAlignment":{"types":["AlignmentObject"],"desc":""},"educationalLevel":{"types":["DefinedTerm","Text","URL"],"desc":""},"educationalUse":{"types":["DefinedTerm","Text"],"desc":""},"encoding":{"types":["MediaObject"],"desc":""},"exampleOfWork":{"types":["CreativeWork"],"desc":""},"expires":{"types":["Date"],"desc":""},"funder":{"types":["Organization","Person"],"desc":""},"genre":{"types":["Text","URL"],"desc":""},"hasPart":{"types":["CreativeWork"],"desc":""},"headline":{"types":["Text"],"desc":""},"inLanguage":{"types":["Language","Text"],"desc":""},"interactionStatistic":{"types":["InteractionCounter"],"desc":""},"interactivityType":{"types":["Text"],"desc":""},"isAccessibleForFree":{"types":["Boolean"],"desc":""},"isBasedOn":{"types":["CreativeWork","Product","URL"],"desc":""},"isFamilyFriendly":{"types":["Boolean"],"desc":""},"isPartOf":{"types":["CreativeWork","URL"],"desc":""},"keywords":{"types":["DefinedTerm","Text","URL"],"desc":""},"learningResourceType":{"types":["DefinedTerm","Text"],"desc":""},"license":{"types":["CreativeWork","URL"],"desc":""},"locationCreated":{"types":["Place"],"desc":""},"mainEntity":{"types":["Thing"],"desc":""},"maintainer":{"types":["Organization","Person"],"desc":""},"material":{"types":["Product","Text","URL"],"desc":""},"materialExtent":{"types":["QuantitativeValue","Text"],"desc":""},"mentions":{"types":["Thing"],"desc":""},"offers":{"types":["Demand","Offer"],"desc":""},"pattern":{"types":["DefinedTerm","Text"],"desc":""},"position":{"types":["Integer","Text"],"desc":""},"producer":{"types":["Organization","Person"],"desc":""},"provider":{"types":["Organization","Person"],"desc":""},"publication":{"types":["PublicationEvent"],"desc":""},"publisher":{"types":["Organization","Person"],"desc":""},"publisherImprint":{"types":["Organization"],"desc":""},"publishingPrinciples":{"types":["CreativeWork","URL"],"desc":""},"recordedAt":{"types":["Event"],"desc":""},"releasedEvent":{"types":["PublicationEvent"],"desc":""},"review":{"types":["Review"],"desc":""},"schemaVersion":{"types":["Text","URL"],"desc":""},"sdDatePublished":{"types":["Date"],"desc":""},"sdLicense":{"types":["CreativeWork","URL"],"desc":""},"sdPublisher":{"types":["Organization","Person"],"desc":""},"size":{"types":["DefinedTerm","QuantitativeValue","SizeSpecification","Text"],"desc":""},"sourceOrganization":{"types":["Organization"],"desc":""},"spatial":{"types":["Place"],"desc":""},"spatialCoverage":{"types":["Place"],"desc":""},"sponsor":{"types":["Organization","Person"],"desc":""},"teaches":{"types":["DefinedTerm","Text"],"desc":""},"temporal":{"types":["DateTime","Text"],"desc":""},"temporalCoverage":{"types":["DateTime","Text","URL"],"desc":""},"text":{"types":["Text"],"desc":""},"thumbnailUrl":{"types":["URL"],"desc":""},"timeRequired":{"types":["Duration"],"desc":""},"translationOfWork":{"types":["CreativeWork"],"desc":""},"translator":{"types":["Organization","Person"],"desc":""},"typicalAgeRange":{"types":["Text"],"desc":""},"usageInfo":{"types":["CreativeWork","URL"],"desc":""},"version":{"types":["Number","Text"],"desc":""},"video":{"types":["Clip","VideoObject"],"desc":""},"workExample":{"types":["CreativeWork"],"desc":""},"workTranslation":{"types":["CreativeWork"],"desc":""},"additionalType":{"types":["URL"],"desc":""},"alternateName":{"types":["Text"],"desc":""},"description":{"types":["Text"],"desc":""},"disambiguatingDescription":{"types":["Text"],"desc":""},"identifier":{"types":["PropertyValue","Text","URL"],"desc":""},"image":{"types":["ImageObject","URL"],"desc":""},"mainEntityOfPage":{"types":["CreativeWork","URL"],"desc":""},"name":{"types":["Text"],"desc":""},"potentialAction":{"types":["Action"],"desc":""},"sameAs":{"types":["URL"],"desc":""},"subjectOf":{"types":["CreativeWork","Event"],"desc":""},"url":{"types":["URL"],"desc":""},"actor":{"types":["Person"],"desc":""},"caption":{"types":["MediaObject","Text"],"desc":""},"director":{"types":["Person"],"desc":""},"musicBy":{"types":["MusicGroup","Person"],"desc":""},"thumbnail":{"types":["ImageObject"],"desc":""},"transcript":{"types":["Text"],"desc":""},"videoFrameSize":{"types":["Text"],"desc":""},"videoQuality":{"types":["Text"],"desc":""},"breadcrumb":{"types":["BreadcrumbList","Text"],"desc":""},"lastReviewed":{"types":["Date"],"desc":""},"mainContentOfPage":{"types":["WebPageElement"],"desc":""},"primaryImageOfPage":{"types":["ImageObject"],"desc":""},"relatedLink":{"types":["URL"],"desc":""},"reviewedBy":{"types":["Organization","Person"],"desc":""},"significantLink":{"types":["URL"],"desc":""},"speakable":{"types":["SpeakableSpecification","URL"],"desc":""},"specialty":{"types":["Specialty"],"desc":""},"exifData":{"types":["PropertyValue","Text"],"desc":""},"representativeOfPage":{"types":["Boolean"],"desc":""}},"VideoGallery":{"associatedArticle":{"types":["NewsArticle"],"desc":""},"bitrate":{"types":["Text"],"desc":""},"contentSize":{"types":["Text"],"desc":""},"contentUrl":{"types":["URL"],"desc":""},"duration":{"types":["Duration"],"desc":""},"embedUrl":{"types":["URL"],"desc":""},"encodesCreativeWork":{"types":["CreativeWork"],"desc":""},"encodingFormat":{"types":["Text","URL"],"desc":""},"endTime":{"types":["DateTime","Time"],"desc":""},"height":{"types":["Distance","QuantitativeValue"],"desc":""},"ineligibleRegion":{"types":["GeoShape","Place","Text"],"desc":""},"playerType":{"types":["Text"],"desc":""},"productionCompany":{"types":["Organization"],"desc":""},"regionsAllowed":{"types":["Place"],"desc":""},"requiresSubscription":{"types":["Boolean","MediaSubscription"],"desc":""},"startTime":{"types":["DateTime","Time"],"desc":""},"uploadDate":{"types":["Date"],"desc":""},"width":{"types":["Distance","QuantitativeValue"],"desc":""},"about":{"types":["Thing"],"desc":""},"abstract":{"types":["Text"],"desc":""},"accessMode":{"types":["Text"],"desc":""},"accessModeSufficient":{"types":["ItemList"],"desc":""},"accessibilityAPI":{"types":["Text"],"desc":""},"accessibilityControl":{"types":["Text"],"desc":""},"accessibilityFeature":{"types":["Text"],"desc":""},"accessibilityHazard":{"types":["Text"],"desc":""},"accessibilitySummary":{"types":["Text"],"desc":""},"accountablePerson":{"types":["Person"],"desc":""},"acquireLicensePage":{"types":["CreativeWork","URL"],"desc":""},"aggregateRating":{"types":["AggregateRating"],"desc":""},"alternativeHeadline":{"types":["Text"],"desc":""},"assesses":{"types":["DefinedTerm","Text"],"desc":""},"associatedMedia":{"types":["MediaObject"],"desc":""},"audience":{"types":["Audience"],"desc":""},"audio":{"types":["AudioObject","Clip","MusicRecording"],"desc":""},"author":{"types":["Organization","Person"],"desc":""},"award":{"types":["Text"],"desc":""},"character":{"types":["Person"],"desc":""},"citation":{"types":["CreativeWork","Text"],"desc":""},"comment":{"types":["Comment"],"desc":""},"commentCount":{"types":["Integer"],"desc":""},"conditionsOfAccess":{"types":["Text"],"desc":""},"contentLocation":{"types":["Place"],"desc":""},"contentRating":{"types":["Rating","Text"],"desc":""},"contentReferenceTime":{"types":["DateTime"],"desc":""},"contributor":{"types":["Organization","Person"],"desc":""},"copyrightHolder":{"types":["Organization","Person"],"desc":""},"copyrightNotice":{"types":["Text"],"desc":""},"copyrightYear":{"types":["Number"],"desc":""},"correction":{"types":["CorrectionComment","Text","URL"],"desc":""},"creativeWorkStatus":{"types":["DefinedTerm","Text"],"desc":""},"creator":{"types":["Organization","Person"],"desc":""},"creditText":{"types":["Text"],"desc":""},"dateCreated":{"types":["Date","DateTime"],"desc":""},"dateModified":{"types":["Date","DateTime"],"desc":""},"datePublished":{"types":["Date","DateTime"],"desc":""},"discussionUrl":{"types":["URL"],"desc":""},"editEIDR":{"types":["Text","URL"],"desc":""},"editor":{"types":["Person"],"desc":""},"educationalAlignment":{"types":["AlignmentObject"],"desc":""},"educationalLevel":{"types":["DefinedTerm","Text","URL"],"desc":""},"educationalUse":{"types":["DefinedTerm","Text"],"desc":""},"encoding":{"types":["MediaObject"],"desc":""},"exampleOfWork":{"types":["CreativeWork"],"desc":""},"expires":{"types":["Date"],"desc":""},"funder":{"types":["Organization","Person"],"desc":""},"genre":{"types":["Text","URL"],"desc":""},"hasPart":{"types":["CreativeWork"],"desc":""},"headline":{"types":["Text"],"desc":""},"inLanguage":{"types":["Language","Text"],"desc":""},"interactionStatistic":{"types":["InteractionCounter"],"desc":""},"interactivityType":{"types":["Text"],"desc":""},"isAccessibleForFree":{"types":["Boolean"],"desc":""},"isBasedOn":{"types":["CreativeWork","Product","URL"],"desc":""},"isFamilyFriendly":{"types":["Boolean"],"desc":""},"isPartOf":{"types":["CreativeWork","URL"],"desc":""},"keywords":{"types":["DefinedTerm","Text","URL"],"desc":""},"learningResourceType":{"types":["DefinedTerm","Text"],"desc":""},"license":{"types":["CreativeWork","URL"],"desc":""},"locationCreated":{"types":["Place"],"desc":""},"mainEntity":{"types":["Thing"],"desc":""},"maintainer":{"types":["Organization","Person"],"desc":""},"material":{"types":["Product","Text","URL"],"desc":""},"materialExtent":{"types":["QuantitativeValue","Text"],"desc":""},"mentions":{"types":["Thing"],"desc":""},"offers":{"types":["Demand","Offer"],"desc":""},"pattern":{"types":["DefinedTerm","Text"],"desc":""},"position":{"types":["Integer","Text"],"desc":""},"producer":{"types":["Organization","Person"],"desc":""},"provider":{"types":["Organization","Person"],"desc":""},"publication":{"types":["PublicationEvent"],"desc":""},"publisher":{"types":["Organization","Person"],"desc":""},"publisherImprint":{"types":["Organization"],"desc":""},"publishingPrinciples":{"types":["CreativeWork","URL"],"desc":""},"recordedAt":{"types":["Event"],"desc":""},"releasedEvent":{"types":["PublicationEvent"],"desc":""},"review":{"types":["Review"],"desc":""},"schemaVersion":{"types":["Text","URL"],"desc":""},"sdDatePublished":{"types":["Date"],"desc":""},"sdLicense":{"types":["CreativeWork","URL"],"desc":""},"sdPublisher":{"types":["Organization","Person"],"desc":""},"size":{"types":["DefinedTerm","QuantitativeValue","SizeSpecification","Text"],"desc":""},"sourceOrganization":{"types":["Organization"],"desc":""},"spatial":{"types":["Place"],"desc":""},"spatialCoverage":{"types":["Place"],"desc":""},"sponsor":{"types":["Organization","Person"],"desc":""},"teaches":{"types":["DefinedTerm","Text"],"desc":""},"temporal":{"types":["DateTime","Text"],"desc":""},"temporalCoverage":{"types":["DateTime","Text","URL"],"desc":""},"text":{"types":["Text"],"desc":""},"thumbnailUrl":{"types":["URL"],"desc":""},"timeRequired":{"types":["Duration"],"desc":""},"translationOfWork":{"types":["CreativeWork"],"desc":""},"translator":{"types":["Organization","Person"],"desc":""},"typicalAgeRange":{"types":["Text"],"desc":""},"usageInfo":{"types":["CreativeWork","URL"],"desc":""},"version":{"types":["Number","Text"],"desc":""},"video":{"types":["Clip","VideoObject"],"desc":""},"workExample":{"types":["CreativeWork"],"desc":""},"workTranslation":{"types":["CreativeWork"],"desc":""},"additionalType":{"types":["URL"],"desc":""},"alternateName":{"types":["Text"],"desc":""},"description":{"types":["Text"],"desc":""},"disambiguatingDescription":{"types":["Text"],"desc":""},"identifier":{"types":["PropertyValue","Text","URL"],"desc":""},"image":{"types":["ImageObject","URL"],"desc":""},"mainEntityOfPage":{"types":["CreativeWork","URL"],"desc":""},"name":{"types":["Text"],"desc":""},"potentialAction":{"types":["Action"],"desc":""},"sameAs":{"types":["URL"],"desc":""},"subjectOf":{"types":["CreativeWork","Event"],"desc":""},"url":{"types":["URL"],"desc":""},"actor":{"types":["Person"],"desc":""},"caption":{"types":["MediaObject","Text"],"desc":""},"director":{"types":["Person"],"desc":""},"musicBy":{"types":["MusicGroup","Person"],"desc":""},"thumbnail":{"types":["ImageObject"],"desc":""},"transcript":{"types":["Text"],"desc":""},"videoFrameSize":{"types":["Text"],"desc":""},"videoQuality":{"types":["Text"],"desc":""},"breadcrumb":{"types":["BreadcrumbList","Text"],"desc":""},"lastReviewed":{"types":["Date"],"desc":""},"mainContentOfPage":{"types":["WebPageElement"],"desc":""},"primaryImageOfPage":{"types":["ImageObject"],"desc":""},"relatedLink":{"types":["URL"],"desc":""},"reviewedBy":{"types":["Organization","Person"],"desc":""},"significantLink":{"types":["URL"],"desc":""},"speakable":{"types":["SpeakableSpecification","URL"],"desc":""},"specialty":{"types":["Specialty"],"desc":""},"exifData":{"types":["PropertyValue","Text"],"desc":""},"representativeOfPage":{"types":["Boolean"],"desc":""}},"MediaObject":{"associatedArticle":{"types":["NewsArticle"],"desc":""},"bitrate":{"types":["Text"],"desc":""},"contentSize":{"types":["Text"],"desc":""},"contentUrl":{"types":["URL"],"desc":""},"duration":{"types":["Duration"],"desc":""},"embedUrl":{"types":["URL"],"desc":""},"encodesCreativeWork":{"types":["CreativeWork"],"desc":""},"encodingFormat":{"types":["Text","URL"],"desc":""},"endTime":{"types":["DateTime","Time"],"desc":""},"height":{"types":["Distance","QuantitativeValue"],"desc":""},"ineligibleRegion":{"types":["GeoShape","Place","Text"],"desc":""},"playerType":{"types":["Text"],"desc":""},"productionCompany":{"types":["Organization"],"desc":""},"regionsAllowed":{"types":["Place"],"desc":""},"requiresSubscription":{"types":["Boolean","MediaSubscription"],"desc":""},"startTime":{"types":["DateTime","Time"],"desc":""},"uploadDate":{"types":["Date"],"desc":""},"width":{"types":["Distance","QuantitativeValue"],"desc":""},"about":{"types":["Thing"],"desc":""},"abstract":{"types":["Text"],"desc":""},"accessMode":{"types":["Text"],"desc":""},"accessModeSufficient":{"types":["ItemList"],"desc":""},"accessibilityAPI":{"types":["Text"],"desc":""},"accessibilityControl":{"types":["Text"],"desc":""},"accessibilityFeature":{"types":["Text"],"desc":""},"accessibilityHazard":{"types":["Text"],"desc":""},"accessibilitySummary":{"types":["Text"],"desc":""},"accountablePerson":{"types":["Person"],"desc":""},"acquireLicensePage":{"types":["CreativeWork","URL"],"desc":""},"aggregateRating":{"types":["AggregateRating"],"desc":""},"alternativeHeadline":{"types":["Text"],"desc":""},"assesses":{"types":["DefinedTerm","Text"],"desc":""},"associatedMedia":{"types":["MediaObject"],"desc":""},"audience":{"types":["Audience"],"desc":""},"audio":{"types":["AudioObject","Clip","MusicRecording"],"desc":""},"author":{"types":["Organization","Person"],"desc":""},"award":{"types":["Text"],"desc":""},"character":{"types":["Person"],"desc":""},"citation":{"types":["CreativeWork","Text"],"desc":""},"comment":{"types":["Comment"],"desc":""},"commentCount":{"types":["Integer"],"desc":""},"conditionsOfAccess":{"types":["Text"],"desc":""},"contentLocation":{"types":["Place"],"desc":""},"contentRating":{"types":["Rating","Text"],"desc":""},"contentReferenceTime":{"types":["DateTime"],"desc":""},"contributor":{"types":["Organization","Person"],"desc":""},"copyrightHolder":{"types":["Organization","Person"],"desc":""},"copyrightNotice":{"types":["Text"],"desc":""},"copyrightYear":{"types":["Number"],"desc":""},"correction":{"types":["CorrectionComment","Text","URL"],"desc":""},"creativeWorkStatus":{"types":["DefinedTerm","Text"],"desc":""},"creator":{"types":["Organization","Person"],"desc":""},"creditText":{"types":["Text"],"desc":""},"dateCreated":{"types":["Date","DateTime"],"desc":""},"dateModified":{"types":["Date","DateTime"],"desc":""},"datePublished":{"types":["Date","DateTime"],"desc":""},"discussionUrl":{"types":["URL"],"desc":""},"editEIDR":{"types":["Text","URL"],"desc":""},"editor":{"types":["Person"],"desc":""},"educationalAlignment":{"types":["AlignmentObject"],"desc":""},"educationalLevel":{"types":["DefinedTerm","Text","URL"],"desc":""},"educationalUse":{"types":["DefinedTerm","Text"],"desc":""},"encoding":{"types":["MediaObject"],"desc":""},"exampleOfWork":{"types":["CreativeWork"],"desc":""},"expires":{"types":["Date"],"desc":""},"funder":{"types":["Organization","Person"],"desc":""},"genre":{"types":["Text","URL"],"desc":""},"hasPart":{"types":["CreativeWork"],"desc":""},"headline":{"types":["Text"],"desc":""},"inLanguage":{"types":["Language","Text"],"desc":""},"interactionStatistic":{"types":["InteractionCounter"],"desc":""},"interactivityType":{"types":["Text"],"desc":""},"isAccessibleForFree":{"types":["Boolean"],"desc":""},"isBasedOn":{"types":["CreativeWork","Product","URL"],"desc":""},"isFamilyFriendly":{"types":["Boolean"],"desc":""},"isPartOf":{"types":["CreativeWork","URL"],"desc":""},"keywords":{"types":["DefinedTerm","Text","URL"],"desc":""},"learningResourceType":{"types":["DefinedTerm","Text"],"desc":""},"license":{"types":["CreativeWork","URL"],"desc":""},"locationCreated":{"types":["Place"],"desc":""},"mainEntity":{"types":["Thing"],"desc":""},"maintainer":{"types":["Organization","Person"],"desc":""},"material":{"types":["Product","Text","URL"],"desc":""},"materialExtent":{"types":["QuantitativeValue","Text"],"desc":""},"mentions":{"types":["Thing"],"desc":""},"offers":{"types":["Demand","Offer"],"desc":""},"pattern":{"types":["DefinedTerm","Text"],"desc":""},"position":{"types":["Integer","Text"],"desc":""},"producer":{"types":["Organization","Person"],"desc":""},"provider":{"types":["Organization","Person"],"desc":""},"publication":{"types":["PublicationEvent"],"desc":""},"publisher":{"types":["Organization","Person"],"desc":""},"publisherImprint":{"types":["Organization"],"desc":""},"publishingPrinciples":{"types":["CreativeWork","URL"],"desc":""},"recordedAt":{"types":["Event"],"desc":""},"releasedEvent":{"types":["PublicationEvent"],"desc":""},"review":{"types":["Review"],"desc":""},"schemaVersion":{"types":["Text","URL"],"desc":""},"sdDatePublished":{"types":["Date"],"desc":""},"sdLicense":{"types":["CreativeWork","URL"],"desc":""},"sdPublisher":{"types":["Organization","Person"],"desc":""},"size":{"types":["DefinedTerm","QuantitativeValue","SizeSpecification","Text"],"desc":""},"sourceOrganization":{"types":["Organization"],"desc":""},"spatial":{"types":["Place"],"desc":""},"spatialCoverage":{"types":["Place"],"desc":""},"sponsor":{"types":["Organization","Person"],"desc":""},"teaches":{"types":["DefinedTerm","Text"],"desc":""},"temporal":{"types":["DateTime","Text"],"desc":""},"temporalCoverage":{"types":["DateTime","Text","URL"],"desc":""},"text":{"types":["Text"],"desc":""},"thumbnailUrl":{"types":["URL"],"desc":""},"timeRequired":{"types":["Duration"],"desc":""},"translationOfWork":{"types":["CreativeWork"],"desc":""},"translator":{"types":["Organization","Person"],"desc":""},"typicalAgeRange":{"types":["Text"],"desc":""},"usageInfo":{"types":["CreativeWork","URL"],"desc":""},"version":{"types":["Number","Text"],"desc":""},"video":{"types":["Clip","VideoObject"],"desc":""},"workExample":{"types":["CreativeWork"],"desc":""},"workTranslation":{"types":["CreativeWork"],"desc":""},"additionalType":{"types":["URL"],"desc":""},"alternateName":{"types":["Text"],"desc":""},"description":{"types":["Text"],"desc":""},"disambiguatingDescription":{"types":["Text"],"desc":""},"identifier":{"types":["PropertyValue","Text","URL"],"desc":""},"image":{"types":["ImageObject","URL"],"desc":""},"mainEntityOfPage":{"types":["CreativeWork","URL"],"desc":""},"name":{"types":["Text"],"desc":""},"potentialAction":{"types":["Action"],"desc":""},"sameAs":{"types":["URL"],"desc":""},"subjectOf":{"types":["CreativeWork","Event"],"desc":""},"url":{"types":["URL"],"desc":""},"actor":{"types":["Person"],"desc":""},"caption":{"types":["MediaObject","Text"],"desc":""},"director":{"types":["Person"],"desc":""},"musicBy":{"types":["MusicGroup","Person"],"desc":""},"thumbnail":{"types":["ImageObject"],"desc":""},"transcript":{"types":["Text"],"desc":""},"videoFrameSize":{"types":["Text"],"desc":""},"videoQuality":{"types":["Text"],"desc":""},"breadcrumb":{"types":["BreadcrumbList","Text"],"desc":""},"lastReviewed":{"types":["Date"],"desc":""},"mainContentOfPage":{"types":["WebPageElement"],"desc":""},"primaryImageOfPage":{"types":["ImageObject"],"desc":""},"relatedLink":{"types":["URL"],"desc":""},"reviewedBy":{"types":["Organization","Person"],"desc":""},"significantLink":{"types":["URL"],"desc":""},"speakable":{"types":["SpeakableSpecification","URL"],"desc":""},"specialty":{"types":["Specialty"],"desc":""},"exifData":{"types":["PropertyValue","Text"],"desc":""},"representativeOfPage":{"types":["Boolean"],"desc":""}},"ImageGallery":{"associatedArticle":{"types":["NewsArticle"],"desc":""},"bitrate":{"types":["Text"],"desc":""},"contentSize":{"types":["Text"],"desc":""},"contentUrl":{"types":["URL"],"desc":""},"duration":{"types":["Duration"],"desc":""},"embedUrl":{"types":["URL"],"desc":""},"encodesCreativeWork":{"types":["CreativeWork"],"desc":""},"encodingFormat":{"types":["Text","URL"],"desc":""},"endTime":{"types":["DateTime","Time"],"desc":""},"height":{"types":["Distance","QuantitativeValue"],"desc":""},"ineligibleRegion":{"types":["GeoShape","Place","Text"],"desc":""},"playerType":{"types":["Text"],"desc":""},"productionCompany":{"types":["Organization"],"desc":""},"regionsAllowed":{"types":["Place"],"desc":""},"requiresSubscription":{"types":["Boolean","MediaSubscription"],"desc":""},"startTime":{"types":["DateTime","Time"],"desc":""},"uploadDate":{"types":["Date"],"desc":""},"width":{"types":["Distance","QuantitativeValue"],"desc":""},"about":{"types":["Thing"],"desc":""},"abstract":{"types":["Text"],"desc":""},"accessMode":{"types":["Text"],"desc":""},"accessModeSufficient":{"types":["ItemList"],"desc":""},"accessibilityAPI":{"types":["Text"],"desc":""},"accessibilityControl":{"types":["Text"],"desc":""},"accessibilityFeature":{"types":["Text"],"desc":""},"accessibilityHazard":{"types":["Text"],"desc":""},"accessibilitySummary":{"types":["Text"],"desc":""},"accountablePerson":{"types":["Person"],"desc":""},"acquireLicensePage":{"types":["CreativeWork","URL"],"desc":""},"aggregateRating":{"types":["AggregateRating"],"desc":""},"alternativeHeadline":{"types":["Text"],"desc":""},"assesses":{"types":["DefinedTerm","Text"],"desc":""},"associatedMedia":{"types":["MediaObject"],"desc":""},"audience":{"types":["Audience"],"desc":""},"audio":{"types":["AudioObject","Clip","MusicRecording"],"desc":""},"author":{"types":["Organization","Person"],"desc":""},"award":{"types":["Text"],"desc":""},"character":{"types":["Person"],"desc":""},"citation":{"types":["CreativeWork","Text"],"desc":""},"comment":{"types":["Comment"],"desc":""},"commentCount":{"types":["Integer"],"desc":""},"conditionsOfAccess":{"types":["Text"],"desc":""},"contentLocation":{"types":["Place"],"desc":""},"contentRating":{"types":["Rating","Text"],"desc":""},"contentReferenceTime":{"types":["DateTime"],"desc":""},"contributor":{"types":["Organization","Person"],"desc":""},"copyrightHolder":{"types":["Organization","Person"],"desc":""},"copyrightNotice":{"types":["Text"],"desc":""},"copyrightYear":{"types":["Number"],"desc":""},"correction":{"types":["CorrectionComment","Text","URL"],"desc":""},"creativeWorkStatus":{"types":["DefinedTerm","Text"],"desc":""},"creator":{"types":["Organization","Person"],"desc":""},"creditText":{"types":["Text"],"desc":""},"dateCreated":{"types":["Date","DateTime"],"desc":""},"dateModified":{"types":["Date","DateTime"],"desc":""},"datePublished":{"types":["Date","DateTime"],"desc":""},"discussionUrl":{"types":["URL"],"desc":""},"editEIDR":{"types":["Text","URL"],"desc":""},"editor":{"types":["Person"],"desc":""},"educationalAlignment":{"types":["AlignmentObject"],"desc":""},"educationalLevel":{"types":["DefinedTerm","Text","URL"],"desc":""},"educationalUse":{"types":["DefinedTerm","Text"],"desc":""},"encoding":{"types":["MediaObject"],"desc":""},"exampleOfWork":{"types":["CreativeWork"],"desc":""},"expires":{"types":["Date"],"desc":""},"funder":{"types":["Organization","Person"],"desc":""},"genre":{"types":["Text","URL"],"desc":""},"hasPart":{"types":["CreativeWork"],"desc":""},"headline":{"types":["Text"],"desc":""},"inLanguage":{"types":["Language","Text"],"desc":""},"interactionStatistic":{"types":["InteractionCounter"],"desc":""},"interactivityType":{"types":["Text"],"desc":""},"isAccessibleForFree":{"types":["Boolean"],"desc":""},"isBasedOn":{"types":["CreativeWork","Product","URL"],"desc":""},"isFamilyFriendly":{"types":["Boolean"],"desc":""},"isPartOf":{"types":["CreativeWork","URL"],"desc":""},"keywords":{"types":["DefinedTerm","Text","URL"],"desc":""},"learningResourceType":{"types":["DefinedTerm","Text"],"desc":""},"license":{"types":["CreativeWork","URL"],"desc":""},"locationCreated":{"types":["Place"],"desc":""},"mainEntity":{"types":["Thing"],"desc":""},"maintainer":{"types":["Organization","Person"],"desc":""},"material":{"types":["Product","Text","URL"],"desc":""},"materialExtent":{"types":["QuantitativeValue","Text"],"desc":""},"mentions":{"types":["Thing"],"desc":""},"offers":{"types":["Demand","Offer"],"desc":""},"pattern":{"types":["DefinedTerm","Text"],"desc":""},"position":{"types":["Integer","Text"],"desc":""},"producer":{"types":["Organization","Person"],"desc":""},"provider":{"types":["Organization","Person"],"desc":""},"publication":{"types":["PublicationEvent"],"desc":""},"publisher":{"types":["Organization","Person"],"desc":""},"publisherImprint":{"types":["Organization"],"desc":""},"publishingPrinciples":{"types":["CreativeWork","URL"],"desc":""},"recordedAt":{"types":["Event"],"desc":""},"releasedEvent":{"types":["PublicationEvent"],"desc":""},"review":{"types":["Review"],"desc":""},"schemaVersion":{"types":["Text","URL"],"desc":""},"sdDatePublished":{"types":["Date"],"desc":""},"sdLicense":{"types":["CreativeWork","URL"],"desc":""},"sdPublisher":{"types":["Organization","Person"],"desc":""},"size":{"types":["DefinedTerm","QuantitativeValue","SizeSpecification","Text"],"desc":""},"sourceOrganization":{"types":["Organization"],"desc":""},"spatial":{"types":["Place"],"desc":""},"spatialCoverage":{"types":["Place"],"desc":""},"sponsor":{"types":["Organization","Person"],"desc":""},"teaches":{"types":["DefinedTerm","Text"],"desc":""},"temporal":{"types":["DateTime","Text"],"desc":""},"temporalCoverage":{"types":["DateTime","Text","URL"],"desc":""},"text":{"types":["Text"],"desc":""},"thumbnailUrl":{"types":["URL"],"desc":""},"timeRequired":{"types":["Duration"],"desc":""},"translationOfWork":{"types":["CreativeWork"],"desc":""},"translator":{"types":["Organization","Person"],"desc":""},"typicalAgeRange":{"types":["Text"],"desc":""},"usageInfo":{"types":["CreativeWork","URL"],"desc":""},"version":{"types":["Number","Text"],"desc":""},"video":{"types":["Clip","VideoObject"],"desc":""},"workExample":{"types":["CreativeWork"],"desc":""},"workTranslation":{"types":["CreativeWork"],"desc":""},"additionalType":{"types":["URL"],"desc":""},"alternateName":{"types":["Text"],"desc":""},"description":{"types":["Text"],"desc":""},"disambiguatingDescription":{"types":["Text"],"desc":""},"identifier":{"types":["PropertyValue","Text","URL"],"desc":""},"image":{"types":["ImageObject","URL"],"desc":""},"mainEntityOfPage":{"types":["CreativeWork","URL"],"desc":""},"name":{"types":["Text"],"desc":""},"potentialAction":{"types":["Action"],"desc":""},"sameAs":{"types":["URL"],"desc":""},"subjectOf":{"types":["CreativeWork","Event"],"desc":""},"url":{"types":["URL"],"desc":""},"actor":{"types":["Person"],"desc":""},"caption":{"types":["MediaObject","Text"],"desc":""},"director":{"types":["Person"],"desc":""},"musicBy":{"types":["MusicGroup","Person"],"desc":""},"thumbnail":{"types":["ImageObject"],"desc":""},"transcript":{"types":["Text"],"desc":""},"videoFrameSize":{"types":["Text"],"desc":""},"videoQuality":{"types":["Text"],"desc":""},"breadcrumb":{"types":["BreadcrumbList","Text"],"desc":""},"lastReviewed":{"types":["Date"],"desc":""},"mainContentOfPage":{"types":["WebPageElement"],"desc":""},"primaryImageOfPage":{"types":["ImageObject"],"desc":""},"relatedLink":{"types":["URL"],"desc":""},"reviewedBy":{"types":["Organization","Person"],"desc":""},"significantLink":{"types":["URL"],"desc":""},"speakable":{"types":["SpeakableSpecification","URL"],"desc":""},"specialty":{"types":["Specialty"],"desc":""},"exifData":{"types":["PropertyValue","Text"],"desc":""},"representativeOfPage":{"types":["Boolean"],"desc":""}},"ImageObject":{"associatedArticle":{"types":["NewsArticle"],"desc":""},"bitrate":{"types":["Text"],"desc":""},"contentSize":{"types":["Text"],"desc":""},"contentUrl":{"types":["URL"],"desc":""},"duration":{"types":["Duration"],"desc":""},"embedUrl":{"types":["URL"],"desc":""},"encodesCreativeWork":{"types":["CreativeWork"],"desc":""},"encodingFormat":{"types":["Text","URL"],"desc":""},"endTime":{"types":["DateTime","Time"],"desc":""},"height":{"types":["Distance","QuantitativeValue"],"desc":""},"ineligibleRegion":{"types":["GeoShape","Place","Text"],"desc":""},"playerType":{"types":["Text"],"desc":""},"productionCompany":{"types":["Organization"],"desc":""},"regionsAllowed":{"types":["Place"],"desc":""},"requiresSubscription":{"types":["Boolean","MediaSubscription"],"desc":""},"startTime":{"types":["DateTime","Time"],"desc":""},"uploadDate":{"types":["Date"],"desc":""},"width":{"types":["Distance","QuantitativeValue"],"desc":""},"about":{"types":["Thing"],"desc":""},"abstract":{"types":["Text"],"desc":""},"accessMode":{"types":["Text"],"desc":""},"accessModeSufficient":{"types":["ItemList"],"desc":""},"accessibilityAPI":{"types":["Text"],"desc":""},"accessibilityControl":{"types":["Text"],"desc":""},"accessibilityFeature":{"types":["Text"],"desc":""},"accessibilityHazard":{"types":["Text"],"desc":""},"accessibilitySummary":{"types":["Text"],"desc":""},"accountablePerson":{"types":["Person"],"desc":""},"acquireLicensePage":{"types":["CreativeWork","URL"],"desc":""},"aggregateRating":{"types":["AggregateRating"],"desc":""},"alternativeHeadline":{"types":["Text"],"desc":""},"assesses":{"types":["DefinedTerm","Text"],"desc":""},"associatedMedia":{"types":["MediaObject"],"desc":""},"audience":{"types":["Audience"],"desc":""},"audio":{"types":["AudioObject","Clip","MusicRecording"],"desc":""},"author":{"types":["Organization","Person"],"desc":""},"award":{"types":["Text"],"desc":""},"character":{"types":["Person"],"desc":""},"citation":{"types":["CreativeWork","Text"],"desc":""},"comment":{"types":["Comment"],"desc":""},"commentCount":{"types":["Integer"],"desc":""},"conditionsOfAccess":{"types":["Text"],"desc":""},"contentLocation":{"types":["Place"],"desc":""},"contentRating":{"types":["Rating","Text"],"desc":""},"contentReferenceTime":{"types":["DateTime"],"desc":""},"contributor":{"types":["Organization","Person"],"desc":""},"copyrightHolder":{"types":["Organization","Person"],"desc":""},"copyrightNotice":{"types":["Text"],"desc":""},"copyrightYear":{"types":["Number"],"desc":""},"correction":{"types":["CorrectionComment","Text","URL"],"desc":""},"creativeWorkStatus":{"types":["DefinedTerm","Text"],"desc":""},"creator":{"types":["Organization","Person"],"desc":""},"creditText":{"types":["Text"],"desc":""},"dateCreated":{"types":["Date","DateTime"],"desc":""},"dateModified":{"types":["Date","DateTime"],"desc":""},"datePublished":{"types":["Date","DateTime"],"desc":""},"discussionUrl":{"types":["URL"],"desc":""},"editEIDR":{"types":["Text","URL"],"desc":""},"editor":{"types":["Person"],"desc":""},"educationalAlignment":{"types":["AlignmentObject"],"desc":""},"educationalLevel":{"types":["DefinedTerm","Text","URL"],"desc":""},"educationalUse":{"types":["DefinedTerm","Text"],"desc":""},"encoding":{"types":["MediaObject"],"desc":""},"exampleOfWork":{"types":["CreativeWork"],"desc":""},"expires":{"types":["Date"],"desc":""},"funder":{"types":["Organization","Person"],"desc":""},"genre":{"types":["Text","URL"],"desc":""},"hasPart":{"types":["CreativeWork"],"desc":""},"headline":{"types":["Text"],"desc":""},"inLanguage":{"types":["Language","Text"],"desc":""},"interactionStatistic":{"types":["InteractionCounter"],"desc":""},"interactivityType":{"types":["Text"],"desc":""},"isAccessibleForFree":{"types":["Boolean"],"desc":""},"isBasedOn":{"types":["CreativeWork","Product","URL"],"desc":""},"isFamilyFriendly":{"types":["Boolean"],"desc":""},"isPartOf":{"types":["CreativeWork","URL"],"desc":""},"keywords":{"types":["DefinedTerm","Text","URL"],"desc":""},"learningResourceType":{"types":["DefinedTerm","Text"],"desc":""},"license":{"types":["CreativeWork","URL"],"desc":""},"locationCreated":{"types":["Place"],"desc":""},"mainEntity":{"types":["Thing"],"desc":""},"maintainer":{"types":["Organization","Person"],"desc":""},"material":{"types":["Product","Text","URL"],"desc":""},"materialExtent":{"types":["QuantitativeValue","Text"],"desc":""},"mentions":{"types":["Thing"],"desc":""},"offers":{"types":["Demand","Offer"],"desc":""},"pattern":{"types":["DefinedTerm","Text"],"desc":""},"position":{"types":["Integer","Text"],"desc":""},"producer":{"types":["Organization","Person"],"desc":""},"provider":{"types":["Organization","Person"],"desc":""},"publication":{"types":["PublicationEvent"],"desc":""},"publisher":{"types":["Organization","Person"],"desc":""},"publisherImprint":{"types":["Organization"],"desc":""},"publishingPrinciples":{"types":["CreativeWork","URL"],"desc":""},"recordedAt":{"types":["Event"],"desc":""},"releasedEvent":{"types":["PublicationEvent"],"desc":""},"review":{"types":["Review"],"desc":""},"schemaVersion":{"types":["Text","URL"],"desc":""},"sdDatePublished":{"types":["Date"],"desc":""},"sdLicense":{"types":["CreativeWork","URL"],"desc":""},"sdPublisher":{"types":["Organization","Person"],"desc":""},"size":{"types":["DefinedTerm","QuantitativeValue","SizeSpecification","Text"],"desc":""},"sourceOrganization":{"types":["Organization"],"desc":""},"spatial":{"types":["Place"],"desc":""},"spatialCoverage":{"types":["Place"],"desc":""},"sponsor":{"types":["Organization","Person"],"desc":""},"teaches":{"types":["DefinedTerm","Text"],"desc":""},"temporal":{"types":["DateTime","Text"],"desc":""},"temporalCoverage":{"types":["DateTime","Text","URL"],"desc":""},"text":{"types":["Text"],"desc":""},"thumbnailUrl":{"types":["URL"],"desc":""},"timeRequired":{"types":["Duration"],"desc":""},"translationOfWork":{"types":["CreativeWork"],"desc":""},"translator":{"types":["Organization","Person"],"desc":""},"typicalAgeRange":{"types":["Text"],"desc":""},"usageInfo":{"types":["CreativeWork","URL"],"desc":""},"version":{"types":["Number","Text"],"desc":""},"video":{"types":["Clip","VideoObject"],"desc":""},"workExample":{"types":["CreativeWork"],"desc":""},"workTranslation":{"types":["CreativeWork"],"desc":""},"additionalType":{"types":["URL"],"desc":""},"alternateName":{"types":["Text"],"desc":""},"description":{"types":["Text"],"desc":""},"disambiguatingDescription":{"types":["Text"],"desc":""},"identifier":{"types":["PropertyValue","Text","URL"],"desc":""},"image":{"types":["ImageObject","URL"],"desc":""},"mainEntityOfPage":{"types":["CreativeWork","URL"],"desc":""},"name":{"types":["Text"],"desc":""},"potentialAction":{"types":["Action"],"desc":""},"sameAs":{"types":["URL"],"desc":""},"subjectOf":{"types":["CreativeWork","Event"],"desc":""},"url":{"types":["URL"],"desc":""},"actor":{"types":["Person"],"desc":""},"caption":{"types":["MediaObject","Text"],"desc":""},"director":{"types":["Person"],"desc":""},"musicBy":{"types":["MusicGroup","Person"],"desc":""},"thumbnail":{"types":["ImageObject"],"desc":""},"transcript":{"types":["Text"],"desc":""},"videoFrameSize":{"types":["Text"],"desc":""},"videoQuality":{"types":["Text"],"desc":""},"breadcrumb":{"types":["BreadcrumbList","Text"],"desc":""},"lastReviewed":{"types":["Date"],"desc":""},"mainContentOfPage":{"types":["WebPageElement"],"desc":""},"primaryImageOfPage":{"types":["ImageObject"],"desc":""},"relatedLink":{"types":["URL"],"desc":""},"reviewedBy":{"types":["Organization","Person"],"desc":""},"significantLink":{"types":["URL"],"desc":""},"speakable":{"types":["SpeakableSpecification","URL"],"desc":""},"specialty":{"types":["Specialty"],"desc":""},"exifData":{"types":["PropertyValue","Text"],"desc":""},"representativeOfPage":{"types":["Boolean"],"desc":""}}}
+
+
 // function runThis(){
 //   // Create a new word2vec method
 //   const wordVectors = ml5.word2vec("https://raw.githubusercontent.com/cvalenzuela/ml5js-library/master/docs/assets/data/wordvecs/wordvecs10000.json", modelLoaded);
@@ -275,7 +279,7 @@ function abstractionSiteHasBeenChosenMavo(select){
     document.getElementById('mavoAtt').innerHTML += '<!-- Search for '+object+'-->';
 
     var code = '&#10;' //new line in HTML
-    code += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+object+'" mv-source-action="search" '
+    code += '&lt;div mv-source="shapir" mv-source-service="'+site+'" '// mv-source-type="'+object+'" mv-source-action="search" '
 
     var params=[]
     firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
@@ -295,8 +299,33 @@ function abstractionSiteHasBeenChosenMavo(select){
       }
 
       code+='>';
+      code += '&#10;'
+
+      //add the proeprties here
+      var funcProperties = abstractObj[site].objects[object].properties
+      console.log("funcProperties: ", funcProperties)
+      for(var i=0; i<funcProperties.length; ++i){
+        if(funcProperties[i].type){
+          code += '&#10;'
+          code +='&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
+          code += '&#10;'
+          var funcPropertiesInner = abstractObj[site].objects[funcProperties[i].type].properties;
+          for(var j=0; j<funcPropertiesInner.length; ++j){
+            code +='&nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
+            code += '&#10;'
+          }
+          code +='&nbsp; &lt;/div>'
+          code += '&#10;'
+          code += '&#10;'
+        }else{
+          code +='&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
+          code += '&#10;'
+        }
+      }
+
       code+='&lt;/div>'
-      code+= '&#10;&#13'
+      code+= '&#10;'
+
 
       $("#mavo_attributes").show();
       document.getElementById('mavoAtt').innerHTML += code;
@@ -1244,7 +1273,7 @@ function siteHasBeenEntered(select){
   $("#step2").show();
   $("#site-objects").empty();
   $("#site-info").empty();
-  $("#step2-desc").show()
+  // $("#step2-desc").show()
 
   document.getElementById('siteN').innerHTML= '<code>'+site.charAt(0).toUpperCase() + site.slice(1)+'</code>'
   temp = { "objects":{}, "functions":[] };
@@ -1259,118 +1288,119 @@ function siteHasBeenEntered(select){
   document.getElementById("site-domain").innerHTML = site;
 
   //Getting website categories
-  // $.ajax({
-  //   url: 'https://www.klazify.com/api/categorize?url='+url,
-  //   type: 'POST',
-  //   crossDomain:true,
-  //   headers: {
-  //     'Accept': "application/json",
-  //     'Content-Type': "application/json",
-  //     "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
-  //     'cache-control': "no-cache"
-  //   },
-  //   success: function(res) {
-  //     // console.log("Categories: ", res);
-  //     var categories = res.domain.categories;
+  $.ajax({
+    url: 'https://www.klazify.com/api/categorize?url='+url,
+    type: 'POST',
+    crossDomain:true,
+    headers: {
+      'Accept': "application/json",
+      'Content-Type': "application/json",
+      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZGI4MDg1ZmJhNjY3ODY2YjQyZjcwYzJlMzBjNGE1Yzg4ZGYyMWRiNzJkMDE5NDNmNzc2ZDI1Y2NkOGVkNmI5OTdhMWYzYmE4NmY5OTZhYjIiLCJpYXQiOjE2MTQ0NzkyODQsIm5iZiI6MTYxNDQ3OTI4NCwiZXhwIjoxNjQ2MDE1Mjg0LCJzdWIiOiIyMzQiLCJzY29wZXMiOltdfQ.rnTbrR4TTzOqe2FNrutZLHBA6DdUup53lCrKuURlRY_ESP4CperTOfgmQzpIGcJ2HCCimifGaV7TyXhOinu_Ig",
+      'cache-control': "no-cache"
+    },
+    success: function(res) {
+      // console.log("Categories: ", res);
+      var categories = res.domain.categories;
 
-  //     if(res.domain.logo_url !=null || res.domain.logo_url!=""){
-  //       $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
-  //     }
+      if(res.domain.logo_url !=null || res.domain.logo_url!=""){
+        $("#site-info").append('<h5><img style="width:35px; height: 35px;" src="'+res.domain.logo_url+'"/>&nbsp;&nbsp;'+domain+'</h5>');
+      }
 
-  //     $("#site-info").append('</br><h6>Website categories</h6>');
-  //     $("#site-info").append('<ul>');
-  //     for(var c=0; c<categories.length; ++c){
-  //       $("#site-info").append('<li>'+categories[c].name+'</li>');
-  //     }
-  //     $("#site-info").append('</ul>');
+      $("#site-info").append('</br><h6>Website categories</h6>');
+      $("#site-info").append('<ul>');
+      for(var c=0; c<categories.length; ++c){
+        $("#site-info").append('<li>'+categories[c].name+'</li>');
+      }
+      $("#site-info").append('</ul>');
 
-  //     // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
-  //     // var category = categories.find(o => {
-  //     //   return o.confidence === maxconfidence
-  //     // }).name;
-  //     // console.log("Category: ", category)
+      // var maxconfidence = Math.max.apply(Math, categories.map(function(o) { return o.confidence; }));
+      // var category = categories.find(o => {
+      //   return o.confidence === maxconfidence
+      // }).name;
+      // console.log("Category: ", category)
 
-  //     var categoryWords=[]
-  //     for(var l=0; l<categories.length; ++l){
-  //       var name= categories[l].name;
-  //       var lastIndex = name.lastIndexOf("/")//get the last type
-  //       var lastType = name.substring(lastIndex + 1);
-  //       categoryWords.push(lastType);
-  //     }
+      var categoryWords=[]
+      for(var l=0; l<categories.length; ++l){
+        var name= categories[l].name;
+        var lastIndex = name.lastIndexOf("/")//get the last type
+        var lastType = name.substring(lastIndex + 1);
+        categoryWords.push(lastType);
+      }
 
-  //     // $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
-  //     // $("#site-info").append('<ul>');
+      // $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
+      // $("#site-info").append('<ul>');
 
-  //     for(var c=0; c<categoryWords.length; ++c){
-  //       for(var j=0; j<allTypes.length; ++j){
-  //         var similar = checkSimilarity(categoryWords[c], allTypes[j]);
-  //         if(similar>40){
-  //           console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
-  //           suggestedTypes.push(allTypes[j])
-  //           // $("#site-info").append('<li>'+allTypes[j]+'</li>');
-  //         }
-  //       }
-  //       if(c+1==categoryWords.length){
-  //         // $("#site-info").append('</ul><hr>');
-  //         $("#site-info").show();
+      for(var c=0; c<categoryWords.length; ++c){
+        for(var j=0; j<allTypes.length; ++j){
+          var similar = checkSimilarity(categoryWords[c], allTypes[j]);
+          if(similar>40){
+            // console.log(categoryWords[c]+' : '+allTypes[j]+' = '+similar+'%')
+            suggestedTypes.push(allTypes[j])
+            // $("#site-info").append('<li>'+allTypes[j]+'</li>');
+          }
+        }
+        if(c+1==categoryWords.length){
+          // $("#site-info").append('</ul><hr>');
+          $("#site-info").show();
+          $("#step2-desc").show()
 
-  //         if(suggestedTypes.length>0){
-  //           // console.log("SUGGESTED")
-  //           $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
-  //           for(var j=0; j<suggestedTypes.length; ++j){
-  //             $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
-  //           }
-  //           $("#type-select").append('</optgroup>');
+          if(suggestedTypes.length>0){
+            // console.log("SUGGESTED")
+            $("#type-select").append('<optgroup id="type-select-optgroup" label="Suggested Types">');
+            for(var j=0; j<suggestedTypes.length; ++j){
+              $("#type-select-optgroup").append('<option id="'+suggestedTypes[j]+'">'+suggestedTypes[j]+'</option>');
+            }
+            $("#type-select").append('</optgroup>');
 
-  //           $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
-  //           for(var i=0; i<allTypes.length; ++i){
-  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //               //no action
-  //             }else{
-  //               type= allTypes[i].split(' ').join('')
-  //               if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
-  //                 $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //               }
-  //             }
-  //           }
-  //           $("#type-select").append('</optgroup>');
-  //         }else{
-  //           // console.log("NOT SUGGESTED")
-  //           for(var i=0; i<allTypes.length; ++i){
-  //             if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //               //no action
-  //             }else{
-  //               type= allTypes[i].split(' ').join('')
-  //               $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //             }
-  //           }
-  //         }
-  //         jQuery('.selectpicker').selectpicker('refresh');
-  //       }
-  //     }
+            $("#type-select").append('<optgroup id="type-select-other-optgroup" label="Other Types">');
+            for(var i=0; i<allTypes.length; ++i){
+              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+                //no action
+              }else{
+                type= allTypes[i].split(' ').join('')
+                if(suggestedTypes.indexOf(allTypes[i]) == -1){//if this property NOT of type object
+                  $("#type-select-other-optgroup").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+                }
+              }
+            }
+            $("#type-select").append('</optgroup>');
+          }else{
+            // console.log("NOT SUGGESTED")
+            for(var i=0; i<allTypes.length; ++i){
+              if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+                //no action
+              }else{
+                type= allTypes[i].split(' ').join('')
+                $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+              }
+            }
+          }
+          jQuery('.selectpicker').selectpicker('refresh');
+        }
+      }
 
-  //   },
-  //   error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
-  //     for(var i=0; i<allTypes.length; ++i){
-  //       if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
-  //         //no action
-  //       }else{
-  //         type= allTypes[i].split(' ').join('')
-  //         $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-  //       }
-  //     }
-  //   }
+    },
+    error: function(response, jqXHR, textStatus, errorThrown) {//if the klazify server is down
+      for(var i=0; i<allTypes.length; ++i){
+        if((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i])){
+          //no action
+        }else{
+          type= allTypes[i].split(' ').join('')
+          $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+        }
+      }
+    }
 
-  // });
+  });
 
 
   //////FOR TESTING
-  for(var i=0; i<allTypes.length; ++i){
-    if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
-      type= allTypes[i].split(' ').join('')
-      $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
-    }
-  }
+  // for(var i=0; i<allTypes.length; ++i){
+  //   if(!((allTypes[i].includes("action") || allTypes[i].includes("Action")) && !actionStrings.includes(allTypes[i]))){
+  //     type= allTypes[i].split(' ').join('')
+  //     $("#type-select").append('<option id="'+type+'">'+allTypes[i]+'</option>');
+  //   }
+  // }
 
 
   // setTimeout(() => {
@@ -1410,13 +1440,23 @@ function siteHasBeenEntered(select){
 }
 
 
+var suggOnce= true;
+
+$('sugDblClick').on('click', function () {
+  $(this).trigger('dblclick');
+});
+
 function populateSuggestedSchema(){
 
+  $("#tableDiv").empty()
+  // $("#site-table").empty()
+  // jQuery('#tableDiv div').html('');
   $("#step2-header").show();
   $("#site-row1").show();
   $("#site-row2").show();
   $("#site-row-get").show();
   $("#connectDiv").show();
+  // $("#site-table").show()
 
   // var i=0;
   // for(var t=typesMatchUrl.length-1; t>=0 && i<5; --t){
@@ -1434,6 +1474,13 @@ function populateSuggestedSchema(){
   //     typeHasBeenChosen(typesMatchUrl[t]);
   //   }
   // }
+
+  // if(suggOnce){
+  //   suggOnce=false
+  //   populateSuggestedSchema()
+
+  // }
+
 
 }
 
@@ -2260,9 +2307,9 @@ function urlHasBeenChosenForMethod(select){
         if(reqParam){
           for(var i=0; i<reqParam.length; ++i){
             if(reqParam[i].displayed && reqParam[i].displayed==true){
-              $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+              $("#method-search-param").append('<option data-subtext="'+reqParam[i].description+'" id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
             }else if(!reqParam[i].displayed){
-              $("#method-search-param").append('<option id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
+              $("#method-search-param").append('<option data-subtext="'+reqParam[i].description+'" id="'+reqParam[i].name+'">'+reqParam[i].name+'</option>');
             }else{
               // do nothing
             }
@@ -2547,10 +2594,21 @@ function saveAddConfig(){
 
   // console.log("temp after save", temp.objects[clickedType]);
 
+
+  $("#"+clickedType+" tbody").append('<tr id="crud_'+clickedType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Create</a></td>'
+  +'<td></td>'
+  +'<td><div style="width:240px"></div></td>'
+  +'<td><button id="crud_'+clickedType+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+  +'</tr>')    
+
+  closeNavType()
+
 }
 
 
 function saveUpdateConfig(){
+
+  closeNavType();
   var selector = document.getElementById("type-id-update");
   var idValue = selector[selector.selectedIndex].value;
   //[1] Go over the parameters of this chosen API end point
@@ -2594,7 +2652,14 @@ function saveUpdateConfig(){
 
   console.log("temp after save", temp.objects[clickedType]);
 
-  closeNavType();
+
+   $("#"+clickedType+" tbody").append('<tr id="crud_'+clickedType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Update</a></td>'
+    +'<td></td>'
+    +'<td><div style="width:240px"></div></td>'
+    +'<td><button id="crud_'+clickedType+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+    +'</tr>')      
+
+
 }
 
 
@@ -2604,7 +2669,16 @@ function saveRemoveConfig(){
   // temp.objects[clickedType].remove.endpoint= currentURLGetter; //get the value of the chosen API
   // temp.objects[clickedType].remove.id= idValue; //get the value of the chosen ID
 
-  console.log("temp after save", temp.objects[clickedType]);
+  // console.log("temp after save", temp.objects[clickedType]);
+
+
+  $("#"+clickedType+" tbody").append('<tr id="crud_'+clickedType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Remove</a></td>'
+  +'<td></td>'
+  +'<td><div style="width:240px"></div></td>'
+  +'<td><button id="crud_'+clickedType+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+  +'</tr>')    
+
+  closeNavType()
 
 }
 
@@ -2637,11 +2711,16 @@ function addMethodConfig(){
       id: document.getElementById('method-result-type-id').value,
       searchParam: document.getElementById("method-search-param").value
     });
-    $("#"+typeSearch+" tbody").append('<tr id="search_'+typeSearch+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search for '+typeSearch+'</a></td>'
+    $("#site-table tbody").append('<tr id="search_site"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search for '+typeSearch+'</a></td>'
     +'<td></td>'
     +'<td><div style="width:240px"></div></td>'
-    +'<td><button id="search_'+typeSearch+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
-    +'</tr>')      
+    +'<td><button id="search_site_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+    +'</tr>')
+    // $("#"+typeSearch+" tbody").append('<tr id="search_'+typeSearch+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search for '+typeSearch+'</a></td>'
+    // +'<td></td>'
+    // +'<td><div style="width:240px"></div></td>'
+    // +'<td><button id="search_'+typeSearch+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
+    // +'</tr>')      
   }
 }
 
@@ -2670,6 +2749,8 @@ function addTypeMethodConfig(){
   +'<td><div style="width:240px"></div></td>'
   +'<td><button id="method_'+clickedType+'_'+methName+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
   +'</tr>')      
+
+  closeNavType()
 
 }
 
@@ -2861,6 +2942,7 @@ function getDescription(select){
 
   $.ajax({
     url: '/schemaOrg/'+type,
+    // url: 'https://schema.org/'+type,
     type: 'GET',
     crossDomain:true,
     dataType: "html",
@@ -2932,10 +3014,118 @@ function showRow(id){
 
 
 
+// var typePropertiesX=[]
+
+function getPropFromschema(){
+
+  // console.log("TTTTT", Object.keys(typeStudy['VideoObject']))
+
+  // var propsInfo={}, allTheTypeX={}
+  // var types = ['MusicVideoObject',
+  //   'VideoObject',
+  //   'VideoGallery',
+  //   'MediaObject',
+  //   'ImageGallery',
+  //   'ImageObject']
+
+  // for(var t=0; t<types.length; ++t){
+  //   var type= types[t]
+  //   console.log("type: ", type)
+  //   $.ajax({
+  //     // url: '/schemaOrg/'+type,
+  //     url: 'https://schema.org/'+type,
+  //     type: 'GET',
+  //     crossDomain:true,
+  //     dataType: "html",
+  //     success: function(res) {
+  //       document.getElementById("schemaURL").href = 'http://schema.org/'+type;//childSnapshot.val().format;
+  //       document.getElementById("schemaURL").innerText = 'http://schema.org/'+type;//childSnapshot.val().format;
+  //       document.getElementById("schemaDesc").innerText = $(res).find('.description')[0].innerHTML;
+
+  //       if($(res).find('.ds-tab-content').length > 0){
+  //         var str = $(res).find('.ds-tab-content')[3].innerHTML
+  //         var mySubString = str.split('&lt;script type=\"application/ld+json\"&gt;').pop().split('&lt;/script&gt;')[0]; // returns 'two'
+  //         document.getElementById('hereCode').innerHTML = mySubString
+  //         // Refresh Prism to apply the style
+  //         Prism.highlightElement($('#hereCode')[0]);
+  //         $("#jsonld-schema").show();
+  //         //console.log("mySubString: ", mySubString);
+  //       }else{
+  //         $("#jsonld-schema").hide()
+  //       }
+
+  //       var propTbody = $(res).find('.definition-table')[0].getElementsByTagName("TBODY")[0];
+  //       var pTrs = propTbody.getElementsByTagName("TR")
+
+  //       for(var i=0; i<pTrs.length; ++i){
+  //         let aTypes=[];
+  //         let obProp = {"types":[], "desc":""}
+  //         if(pTrs[i].classList.contains('supertype')){
+  //           continue;
+  //         }else{
+  //           let th = pTrs[i].getElementsByTagName("TH")[0];
+  //           let co = th.getElementsByTagName("CODE")[0];
+  //           let as = co.getElementsByTagName("A")[0].innerHTML;
+
+  //           let tdDesc = pTrs[i].getElementsByTagName("TD")[1].innerHTML;
+
+  //           let tdTypes = pTrs[i].getElementsByTagName("TD")[0]
+  //           let tdAs = tdTypes.getElementsByTagName("A");
+
+  //           for(var j=0; j<tdAs.length; ++j){
+  //             aTypes.push(tdAs[j].innerHTML)
+  //           }
+
+  //           // obProp.desc= tdDesc;
+  //           obProp.types=aTypes;
+  //           propsInfo[as]= obProp
+
+  //           // console.log(propsInfo)
+
+  //           typePropertiesX.push(as);
+  //           // $("#"+type+"_property-select").append("<option value="+as+">"+as+"</option>");
+
+  //         }
+  //       }
+
+  //       // console.log("allTheType: ", typePropertiesX);
+
+
+
+  //       // $("#schema-desc").show()
+
+  //     }
+  //   });
+
+  //   allTheTypeX[type]=propsInfo;
+
+  // }
+
+
+  // setTimeout(function() {
+    //your code to be executed after 1 second
+
+  // function downloadObjectAsJson(exportObj, exportName){
+    // var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(allTheTypeX));
+    // var downloadAnchorNode = document.createElement('a');
+    // downloadAnchorNode.setAttribute("href",     dataStr);
+    // downloadAnchorNode.setAttribute("download", "data.json");
+    // document.body.appendChild(downloadAnchorNode); // required for firefox
+    // downloadAnchorNode.click();
+    // downloadAnchorNode.remove();
+  // }
+
+// }, 1000);
+  // console.log("propsInfoX: ", allTheTypeX);
+
+}
+
 
 var propertyType = false;
 
 var typeAndProperties =[];
+
+var siteTableHeaderOnce= true;
 
 function typeHasBeenChosen(select){
 // Load the model.
@@ -3016,6 +3206,9 @@ function typeHasBeenChosen(select){
 
   var typeProperties =[];
 
+ var sugTypes = Object.keys(typeStudy)
+ if(sugTypes.indexOf(type)==-1){
+
   //Access schema.org/{type} and gets its descreption and properties with their descreptions and types
   $.ajax({
       url: '/schemaOrg/'+type,
@@ -3065,7 +3258,8 @@ function typeHasBeenChosen(select){
             obProp.types=aTypes;
             propsInfo[as]= obProp
 
-            typeProperties.push(as);
+            typeProperties.push(as); //PUSH HERE
+            //???REMOVE
             // $("#"+type+"_property-select").append("<option value="+as+">"+as+"</option>");
 
           }
@@ -3078,6 +3272,28 @@ function typeHasBeenChosen(select){
 
       }
   });
+
+
+}else{//type is not suggested
+  var sugTypes = Object.keys(typeStudy)
+
+  // console.log("TYPE PROP: ", Object.keys(typeStudy[type]))  //Object.keys(sugTypes[sugTypes.indexOf(type)]) )
+  // console.log("propsInfo NEW", typeStudy[type])
+
+  // let obProp = {"types":[], "desc":""}
+
+  // obProp.desc= "";
+  // obProp.types=aTypes;
+  propsInfo= typeStudy[type];
+
+
+  typeProperties= Object.keys(typeStudy[type])//Object.keys(sugTypes[sugTypes.indexOf(type)])//PUSH HERE
+  //???REMOVE
+  // $("#"+type+"_property-select").append("<option value="+as+">"+as+"</option>");
+
+  allTheType[type]=propsInfo;
+
+}
 
   var table = document.createElement('table');
   table.setAttribute('id', type);
@@ -3105,19 +3321,24 @@ function typeHasBeenChosen(select){
   cell3.setAttribute('style', 'width:69%');
 
 
-  var table2 = document.getElementById('site-table');
-  var header2 = table2.createTHead();
-  var row = header2.insertRow(0);
-  var cell02 = row.insertCell(0);
-  var cell12 = row.insertCell(1);
-  var cell22 = row.insertCell(2);
-  var cell32 = row.insertCell(3);
+  if(siteTableHeaderOnce){
+    var table2 = document.getElementById('site-table');
+    var header2 = table2.createTHead();
+    var row = header2.insertRow(0);
+    var cell02 = row.insertCell(0);
+    var cell12 = row.insertCell(1);
+    var cell22 = row.insertCell(2);
+    var cell32 = row.insertCell(3);
 
-  cell02.setAttribute('style', 'width:30%;');
-  // cell0.setAttribute('style', 'margin-right:30px');
-  cell12.setAttribute('style', 'width:7%');
-  cell22.setAttribute('style', 'width:50%');
-  cell22.setAttribute('style', 'width:35%');
+    cell02.setAttribute('style', 'width:30%;');
+    // cell0.setAttribute('style', 'margin-right:30px');
+    cell12.setAttribute('style', 'width:7%');
+    cell22.setAttribute('style', 'width:50%');
+    cell22.setAttribute('style', 'width:35%');
+
+    siteTableHeaderOnce=false
+  }
+
 
 
   $("#tableDiv").append(table)
@@ -3209,7 +3430,7 @@ function typeHasBeenChosen(select){
       // let sentences=[p1, p2]
       let similar = checkSimilarity(p1, p2)
       if(similar>0){
-        console.log(p1+' : '+p2+' = '+similar+'%');
+        // console.log(p1+' : '+p2+' = '+similar+'%');
           suggestedProperties.push(typeProperties[c]);
           suggestedPropFields.push({
             property: p1,
@@ -3318,14 +3539,14 @@ function typeHasBeenChosen(select){
       // let urlSearchSim = checkSimilarity("search", urltextCleaned);
       // let titleSearchSim = checkSimilarity("search", titleText);
 
-      console.log("type+URL = "+typeCleaned+":"+urltextCleaned +"="+urlSim)
-      console.log("type+Title = "+typeCleaned+":"+titleText +"="+titleSim)
+      // console.log("type+URL = "+typeCleaned+":"+urltextCleaned +"="+urlSim)
+      // console.log("type+Title = "+typeCleaned+":"+titleText +"="+titleSim)
 
       //GET API endpoint
       if(urlSim>0 || titleSim>0){
 
         if(tempMaxSimGET<Math.max(urlSim, titleSim)){
-          console.log("tempMaxSimGET: ", tempMaxSimGET)
+          // console.log("tempMaxSimGET: ", tempMaxSimGET)
           tempMaxSimGET = Math.max(urlSim, titleSim);
           tempMaxSimUrlGET=urlText;
           tempFieldsGet = scrapirAPIs[i].res;
@@ -3756,6 +3977,8 @@ var schemaType ="", schemaCallerType="", arrOfTypeProp=[]
 
 function saveSchema(){
 
+  $("#saveMsg").show();
+
   var siteObj={};
   let temp={}
   siteObj={site:{}}
@@ -3806,7 +4029,7 @@ function saveSchema(){
       var propertyRows =  tables[t].getElementsByTagName('TR');
       for(let r in propertyRows){
         if(typeof(propertyRows[r].id) != undefined && propertyRows[r].id != null)
-        if(! (propertyRows[r].id.includes('_row') || propertyRows[r].id.includes('_getM') || propertyRows[r].id.includes('_searchM') || !propertyRows[r].id.includes('_') || propertyRows[r].id.includes('show_') || propertyRows[r].id.includes('method_') || propertyRows[r].id.includes('search_') )){
+        if(! (propertyRows[r].id.includes('_row') || propertyRows[r].id.includes('_getM') || propertyRows[r].id.includes('_searchM') || !propertyRows[r].id.includes('_') || propertyRows[r].id.includes('show_') || propertyRows[r].id.includes('method_') || propertyRows[r].id.includes('search_') || propertyRows[r].id.includes('crud_') )){
           var index = schemaProObj.map(function(o) { return o.property; }).indexOf(propertyRows[r].cells[0].getElementsByTagName('A')[0].innerHTML);
           if(index != -1){
             properties.push({
@@ -4325,6 +4548,11 @@ function propertyHasBeenChosen(select){
 
   console.log("typePropertyType: ", typePropertyType);
   console.log("propType: ", propType);
+
+
+  setTimeout(() => {
+    jQuery('.selectpicker').selectpicker('refresh');
+  }, 1000);
 
 }
 
@@ -5100,4 +5328,5 @@ function curretnMethodHasBeenSelected(select){
 //   });
 
 // }
+
 

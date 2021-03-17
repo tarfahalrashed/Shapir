@@ -6,44 +6,25 @@
         <script type="module" src="../mavo-shapir.js"></script>
     </head>
 
-    <body>
+     <body>
 
-        <!-- <div mv-app="test" mv-source="shapir" mv-source-service="etsy" mv-source-search="jacket" mv-source-numResults="7">
+       <div mv-app="test" mv-source="shapir" mv-source-service="etsy" mv-source-search="jacket">
+         <label>Keywords: </label>
+         <!-- <input property="keywords" value="jacket"/> -->
 
-            <div property="resturant" mv-multiple>
-                <h3 property="name"></h3>
-                <p property="description"></p>
-                <p property="weight" ></p>
-                <p property="height" ></p>
-                <p property="productionDate"></p>
-                <p property="url"></p>
-                <p property="aggregateRating"></p>
+         <div property="products" mv-multiple hidden="[productionDate == '1990s']">
+           <!-- David suggested to use mv-if instead of hidden, not sure which one is better-->
+           <h4 property="name"></h4>
+           <p property="description"></p>
+           <p property="weight"></p>
+           <p property="width"></p>
+           <p property="height"></p>
+           <p property="productionDate"></p>
+           <a property="url">[url]</a>
+           <p property="aggregateRating"></p> <!-- num of favorers-->
+           <hr>
+         </div>
 
-                <hr>
-            </div>
+       </div>
 
-        </div> -->
-
-
-
-        <div mv-app="test" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">
-
-                <h3 property="description"></h3>
-                <p property="dateModified"></p>
-                <p property="datePublished" ></p>
-                <p property="contentRating" ></p>
-                <p property="url"></p>
-                <p property="width"></p>
-                <p property="height"></p>
-                <p property="contentUrl"></p>
-
-        </div>
-
-
-    </body>
-
-</html>
-
-
-
-
+     </body>

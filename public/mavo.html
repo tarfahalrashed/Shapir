@@ -234,22 +234,6 @@
 						</div>
 						<div class="panel-body">
 							<!-- Content Here -->
-							<h4>Search Yelp and Foursquare for seafood resturants</h4>
-							<p>Only show the ones that has rating > 4</p>
-<pre class="language-html"><code class="language-html">&lt;div mv-app="test" mv-source="shapir" mv-source-service="yelp, foursquare" mv-source-search="seafood" mv-source-numResults="10">
-
-	&lt;div property="resturant" mv-multiple hidden="[aggregateRating > 4]">
-		&lt;h3 property="name">&lt;/h3>
-		&lt;p property="aggregateRating">&lt;/p>
-		&lt;p property="priceRange" >&lt;/p>
-		&lt;p property="longitude" >&lt;/p>
-		&lt;p property="latitude">&lt;/p>
-		&lt;p property="siteName">&lt;/p> &lt;!-- "siteName" property is added to all the site to show which data came from which site-->
-	&lt;/div>
-
-&lt;/div></code></pre>
-
-
 <h4>Get an image information from Unsplash</h4>
 <pre class="language-html"><code class="language-html">&lt;div mv-app="test" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">
 
@@ -263,6 +247,30 @@
 	&lt;p property="contentUrl"></p>
 
 &lt;/div></code></pre>
+
+
+							<h4>Search Yelp and Foursquare for seafood resturants and their reviews</h4>
+							<p>Only show the ones that has rating > 4</p>
+<pre class="language-html"><code class="language-html">&lt;div mv-app="test" mv-source="shapir" mv-source-service="yelp, foursquare" mv-source-search="seafood" mv-source-numResults="10">
+
+	&lt;div property="resturant" mv-multiple hidden="[aggregateRating > 4]">
+		&lt;h3 property="name">&lt;/h3>
+		&lt;p property="aggregateRating">&lt;/p>
+		&lt;p property="priceRange" >&lt;/p>
+		&lt;p property="longitude" >&lt;/p>
+		&lt;p property="latitude">&lt;/p>
+		&lt;p property="siteName">&lt;/p> &lt;!-- "siteName" property is added to all the site to show which data came from which site-->
+
+		&lt;div property="review" mv-multiple>
+			&lt;p property="text">&lt;/p>
+			&lt;p property="dateCreated">&lt;/p>
+			&lt;p property="reviewRating" >&lt;/p>
+		&lt;/div>
+
+	&lt;/div>
+
+&lt;/div></code></pre>
+
 						</div>
 					</div><!--END get started-->
 
@@ -339,7 +347,10 @@
 		<B>mv-source-id</B> ="the ID of the object"
 	</li>
 </ul>
-								<pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div></code></pre>
+								<pre class="language-html"><code class="language-html">
+&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div>
+
+</code></pre>
 						</div><!--END-->
 					</div>
 					<!-- end panel -->
@@ -374,7 +385,47 @@
 								</ul>
 
 								<!-- <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div></code></pre> -->
-								<pre class="language-html"><code class="language-html">&lt;div mv-source="shapir" mv-source-service="dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent" >&lt;/div></code></pre>
+								<pre class="language-html"><code class="language-html">
+&lt;div mv-source="shapir" mv-source-service="dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent" >&lt;/div>
+
+</code></pre>
+
+
+						</div><!--END-->
+					</div>
+					<!-- end panel -->
+
+
+					<div id="search" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">Search Multiple Sites</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Content Here -->
+							<p>If you are ontersted in getting an onformation about a specific object on the web, for example an infomraiton about a channel on YouTube or an image on Unsplash, then you can use the following attributes in mv-app div<p>
+								<!-- <ul>
+									<li>
+										<B>mv-source-service</B> ="the name of website here"
+									</li>
+									<li>
+										<B>mv-source-search</B> ="the search term or keywords"
+									</li>
+									<li>
+										<B>mv-source-PARAMETER</B> PARAMETER can be any parameter provided by the website. Please click on explor and choose the website to check the parameters its offereing. In the below example, I am searching Dailymotion for Taylor Swift music sorted by recent. <B>mv-source-sort</B> is one of Dailymotion parameters.
+									</li>
+								</ul> -->
+
+								<!-- <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div></code></pre> -->
+								<pre class="language-html"><code class="language-html">
+&lt;div mv-source="shapir" mv-source-service="youtube, dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent"  mv-source-order="date" >&lt;/div>
+
+								</code></pre>
 
 
 						</div><!--END-->

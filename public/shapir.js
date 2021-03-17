@@ -1375,7 +1375,7 @@ export default async function shapir(){
                                 let otherFields = []
                                 let once=true;
                                 let onceAll = true;
-                                // console.log("result: ", o)
+                                console.log("result: ", o)
                                 // console.log("properties!!! ", properties)
                                 //map response to class properties
                                 if (o.constructor === Array){
@@ -1639,14 +1639,17 @@ export default async function shapir(){
 
 
                                     //remove the response fields that are not mapped to the schema.org type properties
-                                    var keys = Object.keys(o[0])
-                                    for (var k=0; k<keys.length; ++k){
-                                        if (!fields.includes(keys[k])){
-                                            o.forEach(function(ob) {
-                                                delete ob[keys[k]];
-                                            })
+                                    if(o[0]){
+                                        var keys = Object.keys(o[0])
+                                        for (var k=0; k<keys.length; ++k){
+                                            if (!fields.includes(keys[k])){
+                                                o.forEach(function(ob) {
+                                                    delete ob[keys[k]];
+                                                })
+                                            }
                                         }
                                     }
+
 
                                 }
                                 else {

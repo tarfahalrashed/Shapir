@@ -10,12 +10,10 @@
   <script type="text/javascript">
 
     window.addEventListener('load', (event) => {
-        console.log('page is fully loaded: ', window.location.href);
+        // console.log('page is fully loaded: ', window.location.href);
         window.opener.postMessage(window.location.href, '*');
         window.close();
     });
-
-    // window.addEventListener("message", receiveOauthData)
 
   </script>
 </body>
