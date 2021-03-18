@@ -205,7 +205,12 @@
 						</div>
 						<div class="panel-body">
 							<!-- Content Here -->
-							<h4>HTML</h4>
+
+								<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">To be ble to connect to Web APIs using Mavo, you will need to add the following attributes to the <code>mv-app</code> div: </br>
+									(1) Mavo uses <code>mv-source</code> to specify the source of the data. So the First thing you need to specify is <code>mv-source="shapir"</code>. </br>
+									(2) You will also need to specify the websites ot services that you are retrieving the data from, by using <code>mv-source-service</code></p>
+								</br>
+
 <pre class="language-html"><code class="language-html">&lt;head>
 	...
 	&lt;script rel="stylesheet" src="https://get.mavo.io/mavo.css">&lt;/script>
@@ -214,13 +219,110 @@
 	...
 &lt;/head>
 &lt;body>
-	&lt;div mv-source="shapir" mv-source-service="site(s) names" >
-		&lt;!-- your Mavo code here -->
+	&lt;div mv-source="shapir" mv-source-service="websites names" >
+		&lt;!-- add your Mavo code here -->
 	&lt;/div>
 &lt;/body></code></pre>
 
+
 						</div>
 					</div><!--END get started-->
+
+
+
+					<div id="get" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">Get a specific object</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Content Here -->
+							<!-- <h4>Properties</h4> -->
+							<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you are intersted in getting an information about a specific object on the web, for example an infomraiton about a video on YouTube or an image on Unsplash, then you can use the following attributes in mv-app div<p>
+<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">In addition to using <code>mv-source= "shapir"</code> and <code>mv-source-service</code>, you will need to use two additional attributes: <code>mv-source-type</code> to specify the type of data you want to get (e.g. VideoObject or an ImageObject), and (2) <code>mv-source-id</code> to specify the id of the object your are getting.</p></br>
+
+<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
+								<pre class="language-html"><code class="language-html">
+&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div>
+
+</code></pre>
+						</div><!--END-->
+					</div>
+					<!-- end panel -->
+
+
+					<div id="search" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">Search</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Content Here -->
+							<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you are interested in searching a website, for example searching YouTube for videos, then you can use the following attributes<code>mv-app</code> div<p>
+								<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">In addition to using <code>mv-source= "shapir"</code> and <code>mv-source-service</code>, you will need to use <code>mv-source-search="keywords..."</code> to specify the term or keywords you are searching for. <code>search</code> is not the only filter or parameter you can use, some Web APIs offer more parameters (e.g. sort, location, etc). These parameters are specified by each website, please go to the Explore section and choose the website you are intersted in to know more about what other parameters a given website supports.</p></br>
+
+								<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
+								<!-- <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div></code></pre> -->
+								<pre class="language-html"><code class="language-html">
+&lt;div mv-source="shapir" mv-source-service="dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent" >&lt;/div>
+
+</code></pre>
+
+
+						</div><!--END-->
+					</div>
+					<!-- end panel -->
+
+
+					<div id="search" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">Search Multiple Sites</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Content Here -->
+							<p>If you are ontersted in getting an onformation about a specific object on the web, for example an infomraiton about a channel on YouTube or an image on Unsplash, then you can use the following attributes in mv-app div<p>
+								<!-- <ul>
+									<li>
+										<B>mv-source-service</B> ="the name of website here"
+									</li>
+									<li>
+										<B>mv-source-search</B> ="the search term or keywords"
+									</li>
+									<li>
+										<B>mv-source-PARAMETER</B> PARAMETER can be any parameter provided by the website. Please click on explor and choose the website to check the parameters its offereing. In the below example, I am searching Dailymotion for Taylor Swift music sorted by recent. <B>mv-source-sort</B> is one of Dailymotion parameters.
+									</li>
+								</ul> -->
+
+								<!-- <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div></code></pre> -->
+								<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
+
+								<pre class="language-html"><code class="language-html">
+&lt;div mv-source="shapir" mv-source-service="youtube, dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent"  mv-source-order="date" >&lt;/div>
+
+								</code></pre>
+
+
+						</div><!--END-->
+					</div>
+					<!-- end panel -->
+
+
 
 					<div id="example" class="panel panel-inverse">
 						<div class="panel-heading">
@@ -289,22 +391,42 @@
 							<!-- Content Here -->
 							<h4>Mavo Attributes</h4>
 
+							<div class="input-group mb-4">
+								<label style="padding-top:7px; font-size: 1em;">Get the Mavo code by choosing the type and or the site(s)</label>
+								<div class="input-group col-lg-4">
+									<!-- <input id="url-site" type="text" class="form-control"> -->
+									<select id="types_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="updateSelectSites(this)">
+										<option selected>Choose Type</option>
+									</select>
+
+									<select id="sites_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
+										<option>Choose Site</option>
+									</select>
+
+									<span class="input-group-btn">
+										<button id="enterUrl"class="btn btn-default" type="button" onclick="abstractionSiteHasBeenChosenMavo(this)">Enter</button>
+									</span>
+								</div>
+							</div>
+
 							<!-- <div class="col-lg-6">
 								<h6 style="color:black">Choose the name of the website:</h6>
-								<select id="sites" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosen(this)">
-									<option selected>Choose site</option>
+								<select id="types_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="updateSelectSites(this)">
+									<option selected>Choose Type</option>
 								</select>
-							</div> -->
+							</div>
 
 
 							<div class="input-group mb-4">
-								<label style="padding-top:7px; font-size: 1em;">Choose the name of the website:</label>
+								<label style="padding-top:7px; font-size: 1.3em;">Choose the name of the website:</label>
 								<div class="input-group col-lg-4">
-									<select id="sites_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosenMavo(this)">
-										<option selected>Choose site</option>
+									<select id="sites_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosenMavo(this)" multiple>
+										<option selected>Choose Site</option>
 									</select>
 								</div>
 							</div>
+
+							<button id="enterUrl"class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button> -->
 
 
 							<div id="mavo_attributes" style="display:none">
@@ -320,136 +442,6 @@
 						</div>
 					</div><!--END get started-->
 
-
-
-					<div id="get" class="panel panel-inverse">
-						<div class="panel-heading">
-							<h4 class="panel-title">Get a specific object</h4>
-							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-							</div>
-						</div>
-						<div class="panel-body">
-							<!-- Content Here -->
-							<!-- <h4>Properties</h4> -->
-							<p>If you are ontersted in getting an onformation about a specific object on the web, for example an infomraiton about a channel on YouTube or an image on Unsplash, then you can use the following attributes in mv-app div<p>
-<ul>
-	<li>
-		<B>mv-source-service</B> ="the name of website here"
-	</li>
-	<li>
-		<B>mv-source-type</B> ="the type of object (e.g. ImageObject)"
-	</li>
-	<li>
-		<B>mv-source-id</B> ="the ID of the object"
-	</li>
-</ul>
-								<pre class="language-html"><code class="language-html">
-&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div>
-
-</code></pre>
-						</div><!--END-->
-					</div>
-					<!-- end panel -->
-
-
-					<div id="search" class="panel panel-inverse">
-						<div class="panel-heading">
-							<h4 class="panel-title">Search</h4>
-							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-							</div>
-						</div>
-						<div class="panel-body">
-							<!-- Content Here -->
-							<p>If you are ontersted in getting an onformation about a specific object on the web, for example an infomraiton about a channel on YouTube or an image on Unsplash, then you can use the following attributes in mv-app div<p>
-								<ul>
-									<li>
-										<B>mv-source-service</B> ="the name of website here"
-									</li>
-									<!-- <li>
-										<B>mv-source-type</B> ="the type of object (e.g. ImageObject)"
-									</li> -->
-									<li>
-										<B>mv-source-search</B> ="the search term or keywords"
-									</li>
-									<li>
-										<B>mv-source-PARAMETER</B> PARAMETER can be any parameter provided by the website. Please click on explor and choose the website to check the parameters its offereing. In the below example, I am searching Dailymotion for Taylor Swift music sorted by recent. <B>mv-source-sort</B> is one of Dailymotion parameters.
-									</li>
-								</ul>
-
-								<!-- <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div></code></pre> -->
-								<pre class="language-html"><code class="language-html">
-&lt;div mv-source="shapir" mv-source-service="dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent" >&lt;/div>
-
-</code></pre>
-
-
-						</div><!--END-->
-					</div>
-					<!-- end panel -->
-
-
-					<div id="search" class="panel panel-inverse">
-						<div class="panel-heading">
-							<h4 class="panel-title">Search Multiple Sites</h4>
-							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-							</div>
-						</div>
-						<div class="panel-body">
-							<!-- Content Here -->
-							<p>If you are ontersted in getting an onformation about a specific object on the web, for example an infomraiton about a channel on YouTube or an image on Unsplash, then you can use the following attributes in mv-app div<p>
-								<!-- <ul>
-									<li>
-										<B>mv-source-service</B> ="the name of website here"
-									</li>
-									<li>
-										<B>mv-source-search</B> ="the search term or keywords"
-									</li>
-									<li>
-										<B>mv-source-PARAMETER</B> PARAMETER can be any parameter provided by the website. Please click on explor and choose the website to check the parameters its offereing. In the below example, I am searching Dailymotion for Taylor Swift music sorted by recent. <B>mv-source-sort</B> is one of Dailymotion parameters.
-									</li>
-								</ul> -->
-
-								<!-- <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div></code></pre> -->
-								<pre class="language-html"><code class="language-html">
-&lt;div mv-source="shapir" mv-source-service="youtube, dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent"  mv-source-order="date" >&lt;/div>
-
-								</code></pre>
-
-
-						</div><!--END-->
-					</div>
-					<!-- end panel -->
-
-
-					<div id="properties" class="panel panel-inverse">
-						<div class="panel-heading">
-							<h4 class="panel-title">Explore</h4>
-							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-							</div>
-						</div>
-						<div class="panel-body">
-							<!-- Content Here -->
-							<h4>Properties</h4>
-
-						</div><!--END-->
-					</div>
-					<!-- end panel -->
 
 		</div>
 		<!-- end #content -->
