@@ -6,25 +6,39 @@
 
  <body>
 
-   <div mv-app="test" mv-source="dailymotion.json">
+   <!-- <div mv-app="test" mv-source="dailymotion.json">-->
 
-     <label>Playlits ID: </label>
-     <input property="id" value="x71myv"/>
+    <div mv-app="test" mv-source="shapir" mv-source-service="youtube" mv-source-search="[search]" mv-source-order="date" mv-source-type="video">
 
-     <h1 property="name"></h1>
+     <!-- <label>Playlits ID: </label>
+     <input property="search" value="elections"/> -->
 
-     <!-- <iframe property="video" width="640" height="450" src="[embedUrl]" frameborder="0" allowfullscreen></iframe> -->
+    <form mv-action="set(search, searchInput)">
+        <label>Search: <input property="searchInput"/></label>
+        <meta property="search" mv-default="Music">
+        <button>Submit</button>
+    </form>
 
-     <div property="video" mv-multiple>
+    <!-- <h1 property="name"></h1> -->
+
+    <iframe property="id" width="420" height="315" src="https://www.youtube.com/embed/[id]"> </iframe>
+
+     <!-- <iframe property="video1" width="640" height="450" src="https://www.youtube.com/embed/[video]" frameborder="0" allowfullscreen></iframe> -->
+
+     <div property="videos" mv-multiple>
        <p property="name"></p>
        <p property="description"></p>
-       <p property="duration"></p>
-       <p property="ratingValue"></p>
-       <img property="thumbnailUrl" width="200px"/></br>
+       <p property="genre"></p>
+       <p property="datePublished"></p>
+       <!-- <p property="ratingCount"></p>  -->
+       <!-- likeCount -->
+       <!-- <p property="reviewCount"></p>  -->
+       <!-- commentCount -->
+       <img property="thumbnailUrl" width="200px" /></br>
 
-       <!-- <button  mv-action="set(video, embedUrl)">Play</button> -->
+       <!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/[videoId]"> </iframe> -->
 
-       <iframe width="420" height="315" src="[embedUrl]"></iframe>
+       <button  mv-action="set(id, videoId)">Play</button>
 
        <hr>
      </div>

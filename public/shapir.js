@@ -1178,16 +1178,14 @@ export default async function shapir(){
 
 
                         window[site][funcName] = function(...mArgs) { return siteFunction(...mArgs) };
-                        var calledOnce=true
+
                         function siteFunction(...mArgs) {
-                            calledOnce=true
-                            if(calledOnce){
-                                calledOnce=false
 
                             return firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
                             obJSON = snapshot.val();
 
-                            let paramNames = []
+                            var paramNames = []
+                            var mParamList="";
                             for(let p in obJSON.parameters){
                                 paramNames.push(obJSON.parameters[p].name)
                             }
@@ -1226,7 +1224,7 @@ export default async function shapir(){
                                     }else{
                                         keyVal= key
                                     }
-                                    if(paramNames.indexOf(keyVal) != -1){//check if the param is correct
+                                    if(paramNames.indexOf(keyVal) != -1 && keyVal!=mSearchParam){//check if the param is correct
                                         console.log(`${keyVal}: ${value}`);
                                         mParamList+= keyVal
                                         mParamList+="="
@@ -1439,19 +1437,19 @@ export default async function shapir(){
 
                                             // console.log("other: ", await ob['other'])
                                             //Add the other fields in Get but not in Search to the Search
-                                            // if(onceAll){
-                                            //     onceAll=false;
-                                            //     for (let f in otherFields) {
+                                            if(onceAll){
+                                                onceAll=false;
+                                                for (let f in otherFields) {
 
-                                            //         Object.defineProperty(ob, otherFields[f], {
-                                            //             get:function() {
-                                            //                 return ob['other'].then(data=>{
-                                            //                     return data[otherFields[f]];
-                                            //                 })
-                                            //             }
-                                            //         });//end of getter
-                                            //     }
-                                            // }
+                                                    Object.defineProperty(ob, otherFields[f], {
+                                                        get:function() {
+                                                            return ob['other'].then(data=>{
+                                                                return data[otherFields[f]];
+                                                            })
+                                                        }
+                                                    });//end of getter
+                                                }
+                                            }
                                         }//for loop
 
 
@@ -1860,7 +1858,7 @@ export default async function shapir(){
 
                                 return o;
                             })
-                          }//once
+                          //}//once
                         }
 
 

@@ -1,0 +1,40 @@
+<head>
+   <link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
+   <script src="https://get.mavo.io/mavo.js"></script>
+   <script type="module" src="../mavo-shapir.js"></script>
+</head>
+
+<body>
+
+   <!-- <div mv-app="test" mv-source="dailymotion.json">-->
+
+    <div mv-app="test" mv-source="shapir" mv-source-service="youtube" mv-source-search="[search]" mv-source-order="date" mv-source-type="video"></div>
+
+    <form mv-action="set(search, searchInput)">
+        <label>Search: <input property="searchInput"/></label>
+        <meta property="search" mv-default="Music">
+        <button>Submit</button>
+    </form>
+
+    <iframe property="id" width="420" height="315" src="https://www.youtube.com/embed/[id]" allowfullscreen> </iframe>
+
+     <div property="videos" mv-multiple>
+        <p property="name"></p>
+        <p property="description"></p>
+        <p property="genre"></p>
+        <p property="datePublished"></p>
+        <!-- likeCount -->
+        <!-- <p property="ratingCount"></p>  -->
+        <!-- commentCount -->
+        <!-- <p property="reviewCount"></p>  -->
+        <img property="thumbnailUrl" width="200px" /></br>
+
+        <button  mv-action="set(id, videoId)">Play</button>
+
+        <hr>
+
+     </div>
+
+   </div>
+
+ </body>
