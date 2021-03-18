@@ -1,0 +1,38 @@
+{
+    "country": [
+      {
+        "name": "US",
+        "state": [
+          {
+            "name": "CA",
+            "data": {
+              "confirmed": 3628171,
+              "deaths": 56796,
+              "recovered": 0
+            }
+          },
+          {
+            "name": "MA ",
+            "data": {
+              "confirmed": 3628171,
+              "deaths": 56796,
+              "recovered": 0
+            }
+          }
+        ]
+      },
+      {
+        "name": "Canada",
+        "state": [
+          {
+            "name": "Quebec",
+            "data": {
+              "confirmed": 642762,
+              "deaths": 5345,
+              "recovered": 842344
+            }
+          }
+        ]
+      }
+    ]
+  }

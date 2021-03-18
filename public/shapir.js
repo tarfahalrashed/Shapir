@@ -1204,11 +1204,11 @@ export default async function shapir(){
 
                             //search keywords
                             if(hasKeywords){//if there is a
+                                if(site=='etsy'){
+                                    //mParamList+= "'"+keywords+"'";
+                                }else{
                                 mParamList+= mSearchParam;
                                 mParamList+="=";
-                                if(site=='etsy'){
-                                    mParamList+= "'"+keywords+"'";
-                                }else{
                                     mParamList+= keywords;
                                 }
                             }

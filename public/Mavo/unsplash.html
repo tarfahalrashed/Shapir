@@ -10,24 +10,24 @@
 
     <!-- <div mv-app="main" mv-source="https://github.com/tarfahalrashed/Shapir/blob/main/public/Mavo/etsy.json"> -->
 
-        <div mv-app="test" mv-source="shapir" mv-source-service="etsy" mv-source-search="[search]">
+        <div mv-app="test" mv-source="shapir" mv-source-service="unsplash" mv-source-search="[search]">
 
         <form mv-action="set(search, searchInput)">
             <label>Search: <input property="searchInput"/></label>
-            <meta property="search" mv-default="Denim Jacket">
+            <meta property="search" mv-default="sky">
             <button>Submit</button>
         </form>
 
-        <div property="products" mv-multiple hidden="[productionDate == '1990s']">
+        <div property="images" mv-multiple>
             <!-- David suggested to use mv-if instead of hidden, not sure which one is better-->
-            <h4 property="name"></h4>
+            <!-- <h4 property="name"></h4> -->
             <p property="description"></p>
-            <p property="weight"></p>
+            <img property="image" width="20%"></img>
             <p property="width"></p>
             <p property="height"></p>
-            <p property="productionDate"></p>
+            <!-- <p property="productionDate"></p> -->
             <a property="url">[url]</a>
-            <p property="aggregateRating"></p> <!-- num of favorers-->
+            <!-- <p property="aggregateRating"></p> num of favorers -->
             <hr>
         </div>
 
