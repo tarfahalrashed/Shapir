@@ -1206,7 +1206,11 @@ export default async function shapir(){
                             if(hasKeywords){//if there is a
                                 mParamList+= mSearchParam;
                                 mParamList+="=";
-                                mParamList+= keywords;
+                                if(site=='etsy'){
+                                    mParamList+= "'"+keywords+"'";
+                                }else{
+                                    mParamList+= keywords;
+                                }
                             }
                             //other parameters (e.g. sort)
                             if(otherArgs){

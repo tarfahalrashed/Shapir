@@ -6,43 +6,30 @@
 
  <body>
 
-   <!-- <div mv-app="test" mv-source="dailymotion.json">-->
+    <!--   <div mv-app="test" mv-source="shapir" mv-source-service="dailymotion" mv-source-type="MusicPlaylist" mv-source-id="[id]"> -->
+       <div mv-app="main" mv-source="https://github.com/tarfahalrashed/Shapir/blob/main/public/Mavo/dailymotion.json">
 
-    <div mv-app="test" mv-source="shapir" mv-source-service="youtube" mv-source-search="[search]" mv-source-order="date" mv-source-type="video">
+        <label>Playlits ID: </label>
+        <input property="id" value="x71myv"/>
 
-     <!-- <label>Playlits ID: </label>
-     <input property="search" value="elections"/> -->
+        <h1 property="name"></h1>
 
-    <form mv-action="set(search, searchInput)">
-        <label>Search: <input property="searchInput"/></label>
-        <meta property="search" mv-default="Music">
-        <button>Submit</button>
-    </form>
+        <!-- <iframe property="video" width="640" height="450" src="[embedUrl]" frameborder="0" allowfullscreen></iframe> -->
 
-    <!-- <h1 property="name"></h1> -->
+        <div property="video" mv-multiple>
+          <p property="name"></p>
+          <p property="description"></p>
+          <p property="duration"></p>
+          <p property="ratingValue"></p>
+          <img property="thumbnailUrl" width="200px"/></br>
 
-    <iframe property="id" width="420" height="315" src="https://www.youtube.com/embed/[id]"> </iframe>
+          <!-- <button  mv-action="set(video, embedUrl)">Play</button> -->
 
-     <!-- <iframe property="video1" width="640" height="450" src="https://www.youtube.com/embed/[video]" frameborder="0" allowfullscreen></iframe> -->
+          <iframe width="420" height="315" src="[embedUrl]"></iframe>
 
-     <div property="videos" mv-multiple>
-       <p property="name"></p>
-       <p property="description"></p>
-       <p property="genre"></p>
-       <p property="datePublished"></p>
-       <!-- <p property="ratingCount"></p>  -->
-       <!-- likeCount -->
-       <!-- <p property="reviewCount"></p>  -->
-       <!-- commentCount -->
-       <img property="thumbnailUrl" width="200px" /></br>
+          <hr>
+        </div>
 
-       <!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/[videoId]"> </iframe> -->
+      </div>
 
-       <button  mv-action="set(id, videoId)">Play</button>
-
-       <hr>
-     </div>
-
-   </div>
-
- </body>
+    </body>
