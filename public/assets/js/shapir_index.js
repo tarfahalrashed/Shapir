@@ -380,7 +380,6 @@ function abstractionSiteHasBeenChosenMavo(select){
         }
       }
 
-
       // finalCode+='&lt;/div>'
       // finalCode+= '&#10;'
 
@@ -428,13 +427,11 @@ function abstractionSiteHasBeenChosenMavo(select){
 
 
 
-function abstractionSiteHasBeenChosenMavo2(select){
+function abstractionSiteHasBeenChosenMavoSingle(select){
 
-  console.log("ALL SITES: ", $("#sites_mavo").val());
   var once=true;
   document.getElementById('mavoAtt').innerHTML=""
   document.getElementById('mavoAttGet').innerHTML=""
-  var allSites= $("#sites_mavo").val()
   // site = select.options[select.selectedIndex].getAttribute("id");
   // console.log("value: ", abstractObj[site]);
   functions= abstractObj[site].functions;
