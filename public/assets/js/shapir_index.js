@@ -417,7 +417,7 @@ function abstractionSiteHasBeenChosenMavo(select){
 
   }//end of objects
 
-}, 3000);
+}, 7000);
 
   $("#mavo_attributes_get").show();
   Prism.highlightElement($('#mavoAttGet')[0]);
