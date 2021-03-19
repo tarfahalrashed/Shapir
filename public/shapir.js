@@ -126,20 +126,33 @@ export default async function shapir(){
                                         client_auth= obJSON.oauth2[0].clientAuth;
 
                                         var win = window.open(auth_url+"?response_type="+JSON.parse(JSON.stringify(response_type))+"&scope="+JSON.parse(JSON.stringify(scope))+"&client_id="+JSON.parse(JSON.stringify(client_id))+"&redirect_uri="+JSON.parse(JSON.stringify(redirect_url))+"", "windowname1", 'width=800, height=600');
-                                        //while(acToken === undefined){
                                         var pollTimer = window.setInterval(function() {
                                             try {
                                                 console.log("url here: ", win.document.URL); //here url
-                                                if (win.document.URL.indexOf(redirect_url) != -1) {
+                                                var dummy=["https://shapir.org/callback"]
+                                                window.onmessage = (event) => {
+                                                    // console.log("ONMESSAGE")
+
+                                                if (event.data.indexOf(redirect_url) != -1) {
                                                     window.clearInterval(pollTimer);
-                                                    var url =   win.document.URL;
-                                                    acToken =   gup(url, 'code');
-                                                    resolve(acToken)
+                                                    // var url =   win.document.URL;
+                                                    // acToken =   gup(url, 'code');
                                                     // tokenType = gup(url, 'token_type');
                                                     // expiresIn = gup(url, 'expires_in');
-                                                    win.close();
-                                                    // return validateToken(acToken)
+                                                        // window.onmessage=function(e){
+                                                        //     if(e.data === 'replace location'){
+                                                        //         window.location.replace()
+                                                        //     }
+                                                        // }
+                                                    // window.onmessage = (event) => {
+                                                        // console.log(`Received message: ${event.data}`);
+                                                        var url1 = event.data
+                                                        // win.close();
+                                                        resolve(gup(url1, 'code'))
+                                                    // };
+
                                                 }
+                                              }//onmessage
                                             } catch(e) {
                                                 console.log("error in oauth")
                                             }
@@ -152,8 +165,11 @@ export default async function shapir(){
                                             var results = regex.exec( url );
                                             if ( results == null )
                                                 return "";
-                                            else
+                                            else{
+                                                localStorage.setItem('tempToken', results[1]);
+
                                                 return results[1];
+                                            }
                                         }//end of gup()
 
                                     })
@@ -263,16 +279,30 @@ export default async function shapir(){
                                                                 var pollTimer = window.setInterval(function() {
                                                                     try {
                                                                         console.log("url here: ", win.document.URL); //here url
-                                                                        if (win.document.URL.indexOf(redirect_url) != -1) {
+                                                                        var dummy=["https://shapir.org/callback"]
+                                                                        window.onmessage = (event) => {
+                                                                            // console.log("ONMESSAGE")
+
+                                                                        if (event.data.indexOf(redirect_url) != -1) {
                                                                             window.clearInterval(pollTimer);
-                                                                            var url =   win.document.URL;
-                                                                            acToken =   gup(url, 'code');
-                                                                            resolve(acToken)
+                                                                            // var url =   win.document.URL;
+                                                                            // acToken =   gup(url, 'code');
                                                                             // tokenType = gup(url, 'token_type');
                                                                             // expiresIn = gup(url, 'expires_in');
-                                                                            win.close();
-                                                                            // return validateToken(acToken)
+                                                                                // window.onmessage=function(e){
+                                                                                //     if(e.data === 'replace location'){
+                                                                                //         window.location.replace()
+                                                                                //     }
+                                                                                // }
+                                                                            // window.onmessage = (event) => {
+                                                                                // console.log(`Received message: ${event.data}`);
+                                                                                var url1 = event.data
+                                                                                // win.close();
+                                                                                resolve(gup(url1, 'code'))
+                                                                            // };
+
                                                                         }
+                                                                    }//onmessage
                                                                     } catch(e) {
                                                                         console.log("error in oauth")
                                                                     }
@@ -285,8 +315,11 @@ export default async function shapir(){
                                                                     var results = regex.exec( url );
                                                                     if ( results == null )
                                                                         return "";
-                                                                    else
+                                                                    else{
+                                                                        localStorage.setItem('tempToken', results[1]);
+
                                                                         return results[1];
+                                                                    }
                                                                 }//end of gup()
 
                                                             })
@@ -1241,6 +1274,9 @@ export default async function shapir(){
                                 if(mParamList.endsWith("&")){
                                     mParamList = mParamList.slice(0, -1);
                                 }
+
+
+
                             }
 
                             if (obJSON.oauth2){
@@ -1276,8 +1312,13 @@ export default async function shapir(){
 
                                                             localStorage.setItem('tokens', JSON.stringify(newArray));
                                                             console.log("NEW LOCAL STORGAE: ", localStorage.getItem('tokens'))
+                                                            var urlT='https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList
 
-                                                            resolve('https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tok+'&'+mParamList)
+                                                            if(urlT.endsWith("?")){
+                                                                urlT = urlT.slice(0, -1);
+                                                            }
+
+                                                            resolve(urlT)
                                                         },
                                                         error: function(response, jqXHR, textStatus, errorThrown) {
                                                             console.log("error: ",response);
@@ -1370,7 +1411,11 @@ export default async function shapir(){
                             }
                             else { //no oauth
                                 // console.log("!!!oauth2: ", mEndpoint)
+
                                 result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
+                                if(result.endsWith("?")){
+                                    result = result.slice(0, -1);
+                                }
                                 return result;
                             }
 

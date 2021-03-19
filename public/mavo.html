@@ -379,7 +379,7 @@
 
 					<div id="explore" class="panel panel-inverse">
 						<div class="panel-heading">
-							<h4 class="panel-title">Explore</h4>
+							<h4 class="panel-title">Explore single sites</h4>
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
@@ -389,12 +389,11 @@
 						</div>
 						<div class="panel-body">
 							<!-- Content Here -->
-							<h4>Mavo Attributes</h4>
-
+							<!-- <h4>Mavo Attributes</h4> -->
+							<!--
 							<div class="input-group mb-4">
 								<label style="padding-top:7px; font-size: 1em;">Get the Mavo code by choosing the type and or the site(s)</label>
 								<div class="input-group col-lg-4">
-									<!-- <input id="url-site" type="text" class="form-control"> -->
 									<select id="types_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="updateSelectSites(this)">
 										<option selected>Choose Type</option>
 									</select>
@@ -407,26 +406,26 @@
 										<button id="enterUrl"class="btn btn-default" type="button" onclick="abstractionSiteHasBeenChosenMavo(this)">Enter</button>
 									</span>
 								</div>
-							</div>
+							</div> -->
 
 							<!-- <div class="col-lg-6">
 								<h6 style="color:black">Choose the name of the website:</h6>
 								<select id="types_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="updateSelectSites(this)">
 									<option selected>Choose Type</option>
 								</select>
-							</div>
+							</div>-->
 
 
 							<div class="input-group mb-4">
 								<label style="padding-top:7px; font-size: 1.3em;">Choose the name of the website:</label>
 								<div class="input-group col-lg-4">
-									<select id="sites_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosenMavo(this)" multiple>
+									<select id="sites_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosenMavoSingle(this)">
 										<option selected>Choose Site</option>
 									</select>
 								</div>
 							</div>
 
-							<button id="enterUrl"class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button> -->
+							<!-- <button id="enterUrl"class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>  -->
 
 
 							<div id="mavo_attributes" style="display:none">
@@ -441,6 +440,74 @@
 
 						</div>
 					</div><!--END get started-->
+
+
+
+
+					<div id="explore" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">Explore multiple sites</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Content Here -->
+							<!-- <h4>Mavo Attributes</h4> -->
+
+							<div class="input-group mb-4">
+								<label style="padding-top:7px; font-size: 1em;">Get the Mavo code by choosing the type and or the site(s)</label>
+								<div class="input-group col-lg-4">
+									<select id="types_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="updateSelectSites(this)">
+										<option selected>Choose Type</option>
+									</select>
+
+									<select id="sites2_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
+										<option>Choose Site</option>
+									</select>
+
+									<span class="input-group-btn">
+										<button id="enterUrl"class="btn btn-default" type="button" onclick="abstractionSiteHasBeenChosenMavo(this)">Enter</button>
+									</span>
+								</div>
+							</div>
+
+							<!-- <div class="col-lg-6">
+								<h6 style="color:black">Choose the name of the website:</h6>
+								<select id="types_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="updateSelectSites(this)">
+									<option selected>Choose Type</option>
+								</select>
+							</div>-->
+
+
+							<!-- <div class="input-group mb-4">
+								<label style="padding-top:7px; font-size: 1.3em;">Choose the name of the website:</label>
+								<div class="input-group col-lg-4">
+									<select id="sites_mavo" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosenMavoSingle(this)">
+										<option selected>Choose Site</option>
+									</select>
+								</div>
+							</div> -->
+
+							<!-- <button id="enterUrl"class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>  -->
+
+
+							<div id="mavo_attributes_multi" style="display:none">
+								<h5>Search</h5>
+								<pre id="preMavo" style="display: inline;" class="language-html"><code id="mavoAttMulti" class="language-html"></code></pre>
+							</div>
+						<!-- </br> -->
+							<!-- <div id="mavo_attributes_get" style="display:none">
+								<h5>Get objects by their ID</h5>
+								<pre id="preMavo2" style="display: inline;" class="language-html"><code id="mavoAttGet" class="language-html"></code></pre>
+							</div> -->
+
+						</div>
+					</div><!--END get started-->
+
 
 
 		</div>

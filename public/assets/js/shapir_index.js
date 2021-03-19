@@ -67,6 +67,7 @@ function docOnLoad(){
           // console.log("site object: ", childSnapshot.key)
           $("#sites").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
           $("#sites_mavo").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
+          $("#sites2_mavo").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
           var key = childSnapshot.key;
           abstractObj[key] = childSnapshot.val();
         });
@@ -304,123 +305,117 @@ function abstractionSiteHasBeenChosen(select){
 }
 
 var oneSite = true
-var siteNames="", code ="", finalCode=""
+var siteNames="", code ="", finalCode="", s=0, allSites=[], cntt=0, siteParams={}
+
+
+
 
 function abstractionSiteHasBeenChosenMavo(select){
 
   console.log("ALL SITES: ", $("#sites_mavo").val());
   var once=true;
-  siteNames="", code ="", finalCode=""
+  siteNames="", code ="", codeP ="", inalCode=""
 
 
-  document.getElementById('mavoAtt').innerHTML=""
-  document.getElementById('mavoAttGet').innerHTML=""
-  var allSites= $("#sites_mavo").val();
+  document.getElementById('mavoAttMulti').innerHTML=""
+  // document.getElementById('mavoAttGet').innerHTML=""
+  allSites= $("#sites2_mavo").val();
+  var site =""
 
-// function getData(){
+  for(s=0; s<allSites.length; ++s){
 
-  for(var s=0; s<allSites.length; ++s){
     siteNames+= allSites[s];
-    var site = allSites[s];
+    if(s+1<allSites.length){
+      siteNames+= ", "
+    }
 
-  // site = select.options[select.selectedIndex].getAttribute("id");
-  // console.log("value: ", abstractObj[site]);
-  functions= abstractObj[site].functions;
-  objects= abstractObj[site].objects;
+    site=""
+    site = allSites[s];
 
-  for(var i=0; i<functions.length; ++i){
-    var endpoint = abstractObj[site].functions[i].endpoint
-    var name = abstractObj[site].functions[i].name
-    var object = abstractObj[site].functions[i].object
-    var arry = abstractObj[site].functions[i].array
-    var searchParam = abstractObj[site].functions[i].searchParam;
-    var type = abstractObj[site].functions[i].type;
+    console.log("allSites[s: ", allSites[s]);
+    functions= abstractObj[site].functions;
+    objects= abstractObj[site].objects;
 
-    // document.getElementById('mavoAtt').innerHTML += '<!-- Search for '+object+'-->';
+    for(var i=0; i<functions.length; ++i){
+      var endpoint = abstractObj[site].functions[i].endpoint
+      var name = abstractObj[site].functions[i].name
+      var object = abstractObj[site].functions[i].object
+      var arry = abstractObj[site].functions[i].array
+      var searchParam = abstractObj[site].functions[i].searchParam;
+      var type = abstractObj[site].functions[i].type;
 
-    var params=[]
-    firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
-      return snapshot.val().parameters;
-    }).then((params)=>{
-      for(var p=0; p< params.length; ++p){
-        if(params[p].displayed==true){
-          if(searchParam && params[p].name == searchParam){
-            code+='mv-source-search'
-          }else{
-            code+='mv-source-';
-            code+=params[p].name;
-          }
-          code+='=';
-          code+=JSON.stringify(params[p].value)+' '; // &#10;&#13;
-        }
-      }
-
-      //add the proeprties here
-      if(oneSite){
-        oneSite=false;
-        var funcProperties = abstractObj[site].objects[object].properties
-        console.log("funcProperties: ", funcProperties)
-        for(var i=0; i<funcProperties.length; ++i){
-          if(funcProperties[i].type){
-            code += '&#10;'
-            code +='&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
-            code += '&#10;'
-            var funcPropertiesInner = abstractObj[site].objects[funcProperties[i].type].properties;
-            for(var j=0; j<funcPropertiesInner.length; ++j){
-              code +='&nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
-              code += '&#10;'
+      // document.getElementById('mavoAtt').innerHTML += '<!-- Search for '+object+'-->';
+console.log("searchParam: ", searchParam)
+      var params=[]
+      firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
+        return snapshot.val().parameters;
+      }).then((params)=>{
+        for(var p=0; p< params.length; ++p){
+          if(params[p].displayed==true){
+            if(searchParam && params[p].name == searchParam){
+              code+='mv-source-search'
+            }else{
+              code+='mv-source-';
+              code+=params[p].name;
             }
-            code +='&nbsp; &lt;/div>'
-            code += '&#10;'
-            code += '&#10;'
-          }else{
-            code +='&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
-            code += '&#10;'
+            code+='=';
+            code+=JSON.stringify(params[p].value)+' ';
           }
         }
-      }
 
-      // finalCode+='&lt;/div>'
-      // finalCode+= '&#10;'
+        //add the proeprties here
+        if(oneSite){
+          oneSite=false;
+          var funcProperties = abstractObj[site].objects[object].properties
+          // console.log("funcProperties: ", funcProperties)
+          for(var i=0; i<funcProperties.length; ++i){
+            if(funcProperties[i].type){
+              codeP += '&#10;'
+              codeP +='&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
+              codeP += '&#10;'
+              var funcPropertiesInner = abstractObj[site].objects[funcProperties[i].type].properties;
+              for(var j=0; j<funcPropertiesInner.length; ++j){
+                codeP +='&nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
+                codeP += '&#10;'
+              }
+              codeP +='&nbsp; &lt;/div>'
+              codeP += '&#10;'
+              codeP += '&#10;'
+            }else{
+              codeP +='&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
+              codeP += '&#10;'
+            }
+          }
+        }
 
-    })
-  }//end of functions
-  }
+      }).then(()=>{
+        ++cntt
+        console.log("cntt: ", cntt)
+      })
 
-// }//getData
+    }//end of functions
 
+    if(s+1==allSites.length){
       setTimeout(function(){
-      finalCode = '&#10;' //new line in HTML
-      finalCode += '&lt;div mv-source="shapir" mv-source-service="'+siteNames+'" '// mv-source-type="'+object+'" mv-source-action="search" '
-      finalCode+=code
-      finalCode+='>';
-      finalCode += '&#10;'
+      console.log("last then", allSites.length + ' '+s)
+      if(s==allSites.length){
+        console.log("last then2")
 
-      $("#mavo_attributes").show();
-      document.getElementById('mavoAtt').innerHTML += finalCode;
-      Prism.highlightElement($('#mavoAtt')[0]);
+        finalCode = '&#10;'
+        finalCode += '&lt;div mv-source="shapir" mv-source-service="'+siteNames+'" '// mv-source-type="'+object+'" mv-source-action="search" '
+        finalCode+=code
+        finalCode+='&lt;div>';
+        finalCode += '&#10;'
 
-    // });
+        $("#mavo_attributes_multi").show();
+        document.getElementById('mavoAttMulti').innerHTML += finalCode;
+        Prism.highlightElement($('#mavoAttMulti')[0]);
+      }
+    }, 8000);
+    }
 
-  for(o in objects){
 
-    var code2 = '&#10;'
-    code2 += '&lt;!-- Get a specific '+o+' by its ID-->';
-    code2 += '&#10;' //new line in HTML
-    code2 += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ADD ID"'
-    code2 += '>';
-    code2 += '&lt;/div>'
-    code2 += '&#10;'
-
-    document.getElementById('mavoAttGet').innerHTML += code2;
-
-  }//end of objects
-
-}, 7000);
-
-  $("#mavo_attributes_get").show();
-  Prism.highlightElement($('#mavoAttGet')[0]);
-
+  }//end of allSites
 
 }
 
@@ -432,7 +427,7 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
   var once=true;
   document.getElementById('mavoAtt').innerHTML=""
   document.getElementById('mavoAttGet').innerHTML=""
-  // site = select.options[select.selectedIndex].getAttribute("id");
+  site = select.options[select.selectedIndex].getAttribute("id");
   // console.log("value: ", abstractObj[site]);
   functions= abstractObj[site].functions;
   objects= abstractObj[site].objects;
@@ -472,7 +467,7 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
 
       //add the proeprties here
       var funcProperties = abstractObj[site].objects[object].properties
-      console.log("funcProperties: ", funcProperties)
+      // console.log("funcProperties: ", funcProperties)
       for(var i=0; i<funcProperties.length; ++i){
         if(funcProperties[i].type){
           code += '&#10;'
@@ -510,6 +505,32 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
     code2 += '&#10;' //new line in HTML
     code2 += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ADD ID"'
     code2 += '>';
+    code2 += '&#10;'
+
+
+    //add the proeprties here
+    var funcProperties = abstractObj[site].objects[o].properties
+    // console.log("funcProperties: ", funcProperties)
+    for(var i=0; i<funcProperties.length; ++i){
+      if(funcProperties[i].type){
+        code2 += '&#10;'
+        code2 +='&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
+        code2 += '&#10;'
+        var funcPropertiesInner = abstractObj[site].objects[funcProperties[i].type].properties;
+        for(var j=0; j<funcPropertiesInner.length; ++j){
+          code2 +='&nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
+          code2 += '&#10;'
+        }
+        code2 +='&nbsp; &lt;/div>'
+        code2 += '&#10;'
+        code2 += '&#10;'
+      }else{
+        code2 +='&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
+        code2 += '&#10;'
+      }
+    }
+
+
     code2 += '&lt;/div>'
     code2 += '&#10;'
 
