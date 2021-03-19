@@ -3209,86 +3209,88 @@ function getPropFromschema(){
 
   // console.log("TTTTT", Object.keys(typeStudy['VideoObject']))
 
-  // var propsInfo={}, allTheTypeX={}
-  // var types = ['MusicVideoObject',
-  //   'VideoObject',
-  //   'VideoGallery',
-  //   'MediaObject',
-  //   'ImageGallery',
-  //   'ImageObject']
+  var propsInfo={}, allTheTypeX={}
+  var types = ['MusicVideoObject',
+    'VideoObject',
+    'VideoGallery',
+    'MediaObject',
+    'ImageGallery',
+    'ImageObject',
+    'MusicPlaylist',
+    'Comment']
 
-  // for(var t=0; t<types.length; ++t){
-  //   var type= types[t]
-  //   console.log("type: ", type)
-  //   $.ajax({
-  //     // url: '/schemaOrg/'+type,
-  //     url: 'https://schema.org/'+type,
-  //     type: 'GET',
-  //     crossDomain:true,
-  //     dataType: "html",
-  //     success: function(res) {
-  //       document.getElementById("schemaURL").href = 'http://schema.org/'+type;//childSnapshot.val().format;
-  //       document.getElementById("schemaURL").innerText = 'http://schema.org/'+type;//childSnapshot.val().format;
-  //       document.getElementById("schemaDesc").innerText = $(res).find('.description')[0].innerHTML;
+  for(var t=0; t<types.length; ++t){
+    var type= types[t]
+    console.log("type: ", type)
+    $.ajax({
+      // url: '/schemaOrg/'+type,
+      url: 'https://schema.org/'+type,
+      type: 'GET',
+      crossDomain:true,
+      dataType: "html",
+      success: function(res) {
+        document.getElementById("schemaURL").href = 'http://schema.org/'+type;//childSnapshot.val().format;
+        document.getElementById("schemaURL").innerText = 'http://schema.org/'+type;//childSnapshot.val().format;
+        document.getElementById("schemaDesc").innerText = $(res).find('.description')[0].innerHTML;
 
-  //       if($(res).find('.ds-tab-content').length > 0){
-  //         var str = $(res).find('.ds-tab-content')[3].innerHTML
-  //         var mySubString = str.split('&lt;script type=\"application/ld+json\"&gt;').pop().split('&lt;/script&gt;')[0]; // returns 'two'
-  //         document.getElementById('hereCode').innerHTML = mySubString
-  //         // Refresh Prism to apply the style
-  //         Prism.highlightElement($('#hereCode')[0]);
-  //         $("#jsonld-schema").show();
-  //         //console.log("mySubString: ", mySubString);
-  //       }else{
-  //         $("#jsonld-schema").hide()
-  //       }
+        if($(res).find('.ds-tab-content').length > 0){
+          var str = $(res).find('.ds-tab-content')[3].innerHTML
+          var mySubString = str.split('&lt;script type=\"application/ld+json\"&gt;').pop().split('&lt;/script&gt;')[0]; // returns 'two'
+          document.getElementById('hereCode').innerHTML = mySubString
+          // Refresh Prism to apply the style
+          Prism.highlightElement($('#hereCode')[0]);
+          $("#jsonld-schema").show();
+          //console.log("mySubString: ", mySubString);
+        }else{
+          $("#jsonld-schema").hide()
+        }
 
-  //       var propTbody = $(res).find('.definition-table')[0].getElementsByTagName("TBODY")[0];
-  //       var pTrs = propTbody.getElementsByTagName("TR")
+        var propTbody = $(res).find('.definition-table')[0].getElementsByTagName("TBODY")[0];
+        var pTrs = propTbody.getElementsByTagName("TR")
 
-  //       for(var i=0; i<pTrs.length; ++i){
-  //         let aTypes=[];
-  //         let obProp = {"types":[], "desc":""}
-  //         if(pTrs[i].classList.contains('supertype')){
-  //           continue;
-  //         }else{
-  //           let th = pTrs[i].getElementsByTagName("TH")[0];
-  //           let co = th.getElementsByTagName("CODE")[0];
-  //           let as = co.getElementsByTagName("A")[0].innerHTML;
+        for(var i=0; i<pTrs.length; ++i){
+          let aTypes=[];
+          let obProp = {"types":[], "desc":""}
+          if(pTrs[i].classList.contains('supertype')){
+            continue;
+          }else{
+            let th = pTrs[i].getElementsByTagName("TH")[0];
+            let co = th.getElementsByTagName("CODE")[0];
+            let as = co.getElementsByTagName("A")[0].innerHTML;
 
-  //           let tdDesc = pTrs[i].getElementsByTagName("TD")[1].innerHTML;
+            let tdDesc = pTrs[i].getElementsByTagName("TD")[1].innerHTML;
 
-  //           let tdTypes = pTrs[i].getElementsByTagName("TD")[0]
-  //           let tdAs = tdTypes.getElementsByTagName("A");
+            let tdTypes = pTrs[i].getElementsByTagName("TD")[0]
+            let tdAs = tdTypes.getElementsByTagName("A");
 
-  //           for(var j=0; j<tdAs.length; ++j){
-  //             aTypes.push(tdAs[j].innerHTML)
-  //           }
+            for(var j=0; j<tdAs.length; ++j){
+              aTypes.push(tdAs[j].innerHTML)
+            }
 
-  //           // obProp.desc= tdDesc;
-  //           obProp.types=aTypes;
-  //           propsInfo[as]= obProp
+            // obProp.desc= tdDesc;
+            obProp.types=aTypes;
+            propsInfo[as]= obProp
 
-  //           // console.log(propsInfo)
+            // console.log(propsInfo)
 
-  //           typePropertiesX.push(as);
-  //           // $("#"+type+"_property-select").append("<option value="+as+">"+as+"</option>");
+            typePropertiesX.push(as);
+            // $("#"+type+"_property-select").append("<option value="+as+">"+as+"</option>");
 
-  //         }
-  //       }
+          }
+        }
 
-  //       // console.log("allTheType: ", typePropertiesX);
+        // console.log("allTheType: ", typePropertiesX);
 
 
 
-  //       // $("#schema-desc").show()
+        // $("#schema-desc").show()
 
-  //     }
-  //   });
+      }
+    });
 
-  //   allTheTypeX[type]=propsInfo;
+    allTheTypeX[type]=propsInfo;
 
-  // }
+  }
 
 
   // setTimeout(function() {
@@ -3400,7 +3402,8 @@ function typeHasBeenChosen(select){
 
   //Access schema.org/{type} and gets its descreption and properties with their descreptions and types
   $.ajax({
-      url: '/schemaOrg/'+type,
+      // url: '/schemaOrg/'+type,
+      url: 'https://schema.org/'+type,
       type: 'GET',
       crossDomain:true,
       dataType: "html",
