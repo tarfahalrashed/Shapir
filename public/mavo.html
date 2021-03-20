@@ -157,12 +157,15 @@
 							<span>Mavo+Shapir</span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#get">Get Started</a></li>
+							<li><a href="#getStarted">Get Started</a></li>
+							<li><a href="#get">Get an Object/Type</a></li>
+							<li><a href="#search">Search a Single Site</a></li>
+							<li><a href="#searcgMulti">Search Multiple Site</a></li>
+							<li><a href="#params">Specify Parameters</a></li>
+							<li><a href="#numResults">Specify Number of Results</a></li>
 							<li><a href="#example">Example</a></li>
-							<li><a href="#explore">Explore</a></li>
-							<li><a href="#explore">Get a specfic object</a></li>
-							<li><a href="#explore">Search</a></li>
-							<li><a href="#explore">Properties</a></li>
+							<li><a href="#explore">Explore Sites</a></li>
+
 						</ul>
 					</li>
 
@@ -193,7 +196,7 @@
 				</div>
 				<div class="panel-body">
 					<!-- Content Here -->
-					<div id="get" class="panel panel-inverse">
+					<div id="getStarted" class="panel panel-inverse">
 						<div class="panel-heading">
 							<h4 class="panel-title">Get Started</h4>
 							<div class="panel-heading-btn">
@@ -219,7 +222,7 @@
 	...
 &lt;/head>
 &lt;body>
-	&lt;div mv-source="shapir" mv-source-service="websites names" >
+	&lt;div mv-app="main" mv-source="shapir" mv-source-service="websites names" >
 		&lt;!-- add your Mavo code here -->
 	&lt;/div>
 &lt;/body></code></pre>
@@ -244,7 +247,19 @@
 							<!-- Content Here -->
 							<!-- <h4>Properties</h4> -->
 							<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you are intersted in getting an information about a specific object on the web, for example an infomraiton about a video on YouTube or an image on Unsplash, then you can use the following attributes in mv-app div<p>
-<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">In addition to using <code>mv-source= "shapir"</code> and <code>mv-source-service</code>, you will need to use two additional attributes: <code>mv-source-type</code> to specify the type of data you want to get (e.g. VideoObject or an ImageObject), and (2) <code>mv-source-id</code> to specify the id of the object your are getting.</p></br>
+	<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">In addition to using <code>mv-source= "shapir"</code> and <code>mv-source-service</code>, you will need to use two additional attributes: <code>mv-source-type</code> to specify the type of data you want to get (e.g. VideoObject or an ImageObject), and (2) <code>mv-source-id</code> to specify the id of the object your are getting.</p></br>
+
+	<div class="input-group mb-4">
+		<label style="padding-top:4px; font-size: 1.3em;">Explore the types available in Shapir </label>
+		<div class="input-group col-lg-6">
+			<select id="shapirTypes" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="getMvSourceType(this)">
+				<option>Types</option>
+			</select>
+			<p id="mv_type" style="display:none; font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">&nbsp;&nbsp;<code>mv-source-type= "<span id="mv_source_type"></span>"</code></p>
+			<span></span>
+		</div>
+	</div>
+
 
 <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
 								<pre class="language-html"><code class="language-html">
@@ -283,8 +298,46 @@
 					</div>
 					<!-- end panel -->
 
+					<div id="params" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">Specify Parameters</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Content Here -->
+							<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">As mentioned in the previous section, whne you search a website, you can use a number of parameters specified by that website to filter the results. For example, you can search etsy using <code>mv-source-search</code>, and you can also filter the returned results by minimum price <code>mv-source-min_price</code> and <code>mv-source-max_price</code>. How did I know this? Go to <a href="#explore">Explore Sites</a> and choose <B>etsy</B>. You do the same whenever you want to know what sites accept as parameters.<p>
+						</div>
+					</div><!--END get started-->
 
-					<div id="search" class="panel panel-inverse">
+
+					<div id="numResults" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">Specify Number of Results</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+							<!-- Content Here -->
+							<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">To specify the number of results returned by a search, you add <code>mv-source-numResults</code> to the mv-app div.</p>
+						</br>
+							<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
+							<pre class="language-html"><code class="language-html">
+&lt;div mv-source="shapir" mv-source-service="dailymotion" mv-source-search="Taylor Swift" mv-source-numResults="50">&lt;/div>
+								</code></pre>						</div>
+					</div><!--END get started-->
+
+
+
+					<div id="searcgMulti" class="panel panel-inverse">
 						<div class="panel-heading">
 							<h4 class="panel-title">Search Multiple Sites</h4>
 							<div class="panel-heading-btn">
@@ -296,32 +349,17 @@
 						</div>
 						<div class="panel-body">
 							<!-- Content Here -->
-							<p>If you are ontersted in getting an onformation about a specific object on the web, for example an infomraiton about a channel on YouTube or an image on Unsplash, then you can use the following attributes in mv-app div<p>
-								<!-- <ul>
-									<li>
-										<B>mv-source-service</B> ="the name of website here"
-									</li>
-									<li>
-										<B>mv-source-search</B> ="the search term or keywords"
-									</li>
-									<li>
-										<B>mv-source-PARAMETER</B> PARAMETER can be any parameter provided by the website. Please click on explor and choose the website to check the parameters its offereing. In the below example, I am searching Dailymotion for Taylor Swift music sorted by recent. <B>mv-source-sort</B> is one of Dailymotion parameters.
-									</li>
-								</ul> -->
-
+							<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you would like to search multiple sites at the same time, you can add multiple sites seperated by comma in <code>mv-source-service</code> like the following example. Make sure to add sites that return similar data. Otherwise you will not be getting meaningful data.</p>
+						</br>
 								<!-- <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">&lt;/div></code></pre> -->
 								<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
-
 								<pre class="language-html"><code class="language-html">
-&lt;div mv-source="shapir" mv-source-service="youtube, dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent"  mv-source-order="date" >&lt;/div>
-
+&lt;div mv-app="main" mv-source="shapir" mv-source-service="youtube, dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent"  mv-source-order="date" >&lt;/div>
 								</code></pre>
-
 
 						</div><!--END-->
 					</div>
 					<!-- end panel -->
-
 
 
 					<div id="example" class="panel panel-inverse">
@@ -337,23 +375,47 @@
 						<div class="panel-body">
 							<!-- Content Here -->
 <h4>Get an image information from Unsplash</h4>
-<pre class="language-html"><code class="language-html">&lt;div mv-app="test" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">
+<pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">
 
-	&lt;h3 property="description"></h3>
-	&lt;p property="dateModified"></p>
-	&lt;p property="datePublished" ></p>
-	&lt;p property="contentRating" ></p>
-	&lt;p property="url"></p>
-	&lt;p property="width"></p>
-	&lt;p property="height"></p>
-	&lt;p property="contentUrl"></p>
+	&lt;h3 property="description">&lt;/h3>
+	&lt;p property="dateModified">&lt;/p>
+	&lt;p property="datePublished" >&lt;/p>
+	&lt;p property="contentRating" >&lt;/p>
+	&lt;p property="url">&lt;/p>
+	&lt;p property="width">&lt;/p>
+	&lt;p property="height">&lt;/p>
+	&lt;p property="contentUrl">&lt;/p>
 
 &lt;/div></code></pre>
 
 
+
+
+<h4>Search Etsy for products</h4>
+<pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="etsy" mv-source-search="[search]">
+
+	&lt;form mv-action="set(search, searchInput)">
+		&lt;label>Search: &lt;input property="searchInput" />&lt;/label>
+		&lt;meta property="search" mv-default="Jacket">
+		&lt;button>Submit&lt;/button>
+	&lt;/form>
+
+	&lt;p property="name">&lt;/p>
+	&lt;p property="description">&lt;/p>
+	&lt;p property="weight">&lt;/p>
+	&lt;p property="width">&lt;/p>
+	&lt;p property="height">&lt;/p>
+	&lt;p property="productionDate">&lt;/p>
+	&lt;p property="url">&lt;/p>
+	&lt;p property="aggregateRating">&lt;/p>
+
+&lt;/div></code></pre>
+
+
+
 							<h4>Search Yelp and Foursquare for seafood resturants and their reviews</h4>
 							<p>Only show the ones that has rating > 4</p>
-<pre class="language-html"><code class="language-html">&lt;div mv-app="test" mv-source="shapir" mv-source-service="yelp, foursquare" mv-source-search="seafood" mv-source-numResults="10">
+<pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="yelp, foursquare" mv-source-search="seafood">
 
 	&lt;div property="resturant" mv-multiple hidden="[aggregateRating > 4]">
 		&lt;h3 property="name">&lt;/h3>
@@ -377,9 +439,10 @@
 					</div><!--END get started-->
 
 
+
 					<div id="explore" class="panel panel-inverse">
 						<div class="panel-heading">
-							<h4 class="panel-title">Explore single sites</h4>
+							<h4 class="panel-title">Explore Sites</h4>
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
@@ -440,7 +503,6 @@
 
 						</div>
 					</div><!--END get started-->
-
 
 
 

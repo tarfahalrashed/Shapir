@@ -47,6 +47,7 @@ function docOnLoad(){
           // console.log("site object: ", childSnapshot.key)
           $("#sites").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
           $("#types_mavo").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
+          $("#shapirTypes").append("<option id="+childSnapshot.key+">"+childSnapshot.key+"</option>");
           var key = childSnapshot.key;
           typeObj[key] = childSnapshot.val();
         });
@@ -85,6 +86,14 @@ function docOnLoad(){
   }
 
 }
+
+
+function getMvSourceType(select){
+  var type = select.options[select.selectedIndex].getAttribute("id");
+  $("#mv_type").show()
+  document.getElementById('mv_source_type').innerHTML = type;
+}
+
 
 function updateSelectSites(select){
   var type = select.options[select.selectedIndex].getAttribute("id");
@@ -443,7 +452,7 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
     document.getElementById('mavoAtt').innerHTML += '<!-- Search for '+object+'-->';
 
     var code = '&#10;' //new line in HTML
-    code += '&lt;div mv-source="shapir" mv-source-service="'+site+'" '// mv-source-type="'+object+'" mv-source-action="search" '
+    code += '&lt;div mv-app="main" mv-source="shapir" mv-source-service="'+site+'" '// mv-source-type="'+object+'" mv-source-action="search" '
 
     var params=[]
     firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
@@ -463,32 +472,36 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
       }
 
       code+='>';
-      code += '&#10;'
+      code += '&#10;&#10;'
 
+      code += '&nbsp;&lt;div property="'+object.replace(/^.{1}/g, object[0].toLowerCase())+'" mv-multiple>'
+      code += '&#10;'
       //add the proeprties here
       var funcProperties = abstractObj[site].objects[object].properties
       // console.log("funcProperties: ", funcProperties)
       for(var i=0; i<funcProperties.length; ++i){
         if(funcProperties[i].type){
           code += '&#10;'
-          code +='&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
+          code +='&nbsp;&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
           code += '&#10;'
           var funcPropertiesInner = abstractObj[site].objects[funcProperties[i].type].properties;
           for(var j=0; j<funcPropertiesInner.length; ++j){
-            code +='&nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
+            code +='&nbsp; &nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
             code += '&#10;'
           }
-          code +='&nbsp; &lt;/div>'
+          code +='&nbsp;&nbsp; &lt;/div>'
           code += '&#10;'
           code += '&#10;'
         }else{
-          code +='&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
+          code +='&nbsp;&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
           code += '&#10;'
         }
       }
 
-      code+='&lt;/div>'
+      code+='&nbsp;&lt;/div>'
       code+= '&#10;'
+
+      code+='&lt;/div>'
 
 
       $("#mavo_attributes").show();
