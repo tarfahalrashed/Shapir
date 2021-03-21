@@ -467,7 +467,13 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
             code+=params[p].name;
           }
           code+='=';
-          code+=JSON.stringify(params[p].value)+' '; // &#10;&#13;
+          console.log(JSON.stringify(params[p].value))
+
+          if(params[p].listOfValues && JSON.stringify(params[p].listOfValues)!=""){
+            code+=JSON.stringify(params[p].listOfValues)+' ';
+          }else{
+            code+=JSON.stringify(params[p].value)+' ';
+          }
         }
       }
 
@@ -516,7 +522,7 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
     var code2 = '&#10;'
     code2 += '&lt;!-- Get a specific '+o+' by its ID-->';
     code2 += '&#10;' //new line in HTML
-    code2 += '&lt;div mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ADD ID"'
+    code2 += '&lt;div mv-app="main" mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ADD ID"'
     code2 += '>';
     code2 += '&#10;'
 
