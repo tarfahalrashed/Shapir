@@ -20,7 +20,7 @@
 
 	<script type="module">
 
-		import shapir, {include} from "../shapir.js";
+		import shapir, {include} from "./shapir.js";
 
 		const app = async () => {
 			// const site = window["dailymotion"]
@@ -45,15 +45,33 @@
 				// var videos = await vimeo.search("Adele")
 				// console.log("videos: ", videos)
 
-				var video = await vimeo.VideoObject("11673636")
-				console.log("video: ", video)
 
+				//Vimeo working functions
+
+
+				// var playlist = await vimeo.MusicPlaylist("7058699")
+				// console.log("playlist: ", playlist.name)
+				// console.log("playlist: ", await playlist.video)
+
+//   console.log(await vimeo.MusicPlaylist.create({"name":"new ALBUM", "description":"new"}) )
 
 				// await playslist.delete()
 				// playlist.name="NEW NameZZZ";
 				// var video = await dailymotion.VideoObject("x7w7dzr")
 				// console.log("playlist: ", playlist)
 				// console.log("videos: ", videos)
+
+				var playlist = await vimeo.MusicPlaylist("7058699")
+				// console.log(await playlist.video)
+				//   playlist.description = "NEW NAME HAH"
+				//   setTimeout
+				  console.log(playlist.name)
+				  console.log(playlist.description)
+
+  				// await playlist.delete()
+
+			// var videos = await vimeo.search("Adele")
+			// console.log("videos: ", videos)
 
 			//})
 

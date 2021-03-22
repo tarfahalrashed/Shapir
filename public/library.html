@@ -127,8 +127,9 @@
 						</a>
 						<ul class="sub-menu active">
 							<li><a href="#get">Get Started</a></li>
+							<li><a href="#functions">Type of Functions</a></li>
+							<li><a href="#explore">Explore Websites</a></li>
 							<li><a href="#example">Examples</a></li>
-							<li><a href="#explore">Explore</a></li>
 						</ul>
 					</li>
 
@@ -187,12 +188,12 @@
 			...
 		&lt;/head></code></pre> -->
 
-		<h4>JS</h4>
-
+		<h4>Add the following code snippet to your JS file</h4>
+		<!-- <p> </p> -->
 		<pre class="language-javascript"><code class="language-javascript">import shapir from "https://shapir.org/shapir.js";
 
 shapir().then(async () => {
-	//add your Shapir functions here
+	//add your functions here
 });</code></pre>
 
 		<!-- <h5>siteName.object/method(args)</h5> -->
@@ -258,10 +259,11 @@ shapir().then(async () => {
 					</div>
 					<!-- end panel -->
 
+
 					<!-- begin panel -->
-					<div id="example" class="panel panel-inverse">
+					<div id="functions" class="panel panel-inverse">
 						<div class="panel-heading">
-							<h4 class="panel-title">Examples</h4>
+							<h4 class="panel-title">Functions</h4>
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
@@ -270,42 +272,68 @@ shapir().then(async () => {
 							</div>
 						</div>
 						<div class="panel-body">
-							<!-- <h4 class="panel-title">JS Code Samples</h4> -->
+							<p>The following are the functions supported by the Shapir library</p>
 
-							<h5 class="panel-title">Get YouTube video comments</h5>
-							<p>This sample gets the list of comments that belongs to a YouTube video, specified by the videoId.</p>
+							<div style="padding-bottom:15px">
 
-	<pre class="language-javascript"><code class="language-javascript">shapir().then(async () => {
-	var video = await youtube.VideoObject("x7xf8kc"); // videoId= x7xf8kc
-	var comments = await video.comment //returns a list of comments for this specific
-});</code></pre>
+							<h4>Search a website</h4>
+							<p>To search a website, you will need to use the [site].search() function. The search function take one positional parameter whih is the search parameteter and all the other parameters should be specified as an object of keyword arguments</p>
+							<pre class="language-javascript"><code class="language-javascript">var videos = await youtube.search("Taylot Swift", {'order': 'date'});</code></pre>
+							</bre></bre>
+							</div>
+
+							<div style="padding-bottom:15px">
+
+							<h4>Get an object by its ID</h4>
+							<p>To get informaiton about a specific object on agiven website, you need to specify the site, type of the object, and pass its id [site].[type]("[id]")</p>
+							<pre class="language-javascript"><code class="language-javascript">var video = await youtube.VideoObject("x7xf8kc");
+// Get video properties
+video.name
+video.description
+...
+await video.comment //this returns a list of comments by calling another API endpoint (we need to prefix it with <I>await</I>)
+
+// Update video properties
+video.name = "New Name"
+...</code></pre>
+</bre></bre>
+							</div>
+
+<div style="padding-bottom:15px">
+<h4>Apply methods to objects</h4>
+<!-- <p>To search a website, you will need to use the [site].search() function. The search function take one positional parameter whih is the search parameteter and all the other parameters should be specified as an object of keyword arguments</p> -->
+<pre class="language-javascript"><code class="language-javascript">// Get the object first then apply the method on it
+var video = await youtube.VideoObject("x7xf8kc");
+await video.like()
+</code></pre>
+</div>
 
 
-	<h5 class="panel-title">Search YouTube for videos</h5>
-	<p>This sample searches YouTube for videos, specified by the videoId.</p>
+<div style="padding-bottom:15px">
+							<h4>Remove an object</h4>
+							<!-- <p>To get informaiton about a specific object on agiven website, you need to specify the site, type of the object, and pass its id</p> -->
+							<pre class="language-javascript"><code class="language-javascript">// Get the object first then delete it
+var video = await youtube.VideoObject("x7xf8kc");
+await video.delete();</code></pre>
+</bre></bre>
+</div>
 
-	<pre class="language-javascript"><code class="language-javascript">shapir().then(async () => {
+<div >
 
-});</code></pre>
+							<h4>Create a new object</h4>
+							<!-- <p>To get informaiton about a specific object on agiven website, you need to specify the site, type of the object, and pass its id</p> -->
+							<pre class="language-javascript"><code class="language-javascript">await youtube.MusicPlaylist.create({'name':'name playlits', 'description': 'yes it is new!'});</code></pre>
+						</div>
+</div>
 
+						</div>
 
-	<h5 class="panel-title">Search mutliple sites for music videos</h5>
-	<p>This sample gets the list of comments that belongs to a YouTube video, specified by the videoId.</p>
-
-	<pre class="language-javascript"><code class="language-javascript">shapir().then(async () => {
-
-});</code></pre>
-
-
-
-						</div><!--END-->
-					</div>
 					<!-- end panel -->
 
 					<!-- begin panel -->
 					<div id="explore" class="panel panel-inverse">
 						<div class="panel-heading">
-							<h4 class="panel-title">Explore Shapir JS Library</h4>
+							<h4 class="panel-title">Explore Websites</h4>
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
 								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
@@ -317,29 +345,88 @@ shapir().then(async () => {
 							<!-- Panel Content Here -->
 							<!-- a dropdown menue of all the sites intergrated (under abstraction) -->
 							<!-- when an option gets selected, read the functions, objects and create the lines -->
-
+							<p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">Choose a website to know what functions are supported by</p>
 							<div class="col-lg-6">
-								<h5 >Choose the name of the website that you would like to access:</h5>
+								<!-- <h5 >Choose the name of the website that you would like to access:</h5> -->
 								<select id="sites" class="form-control selectpicker col-lg-6" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="abstractionSiteHasBeenChosen(this)">
 									<option selected>Choose site</option>
 								</select>
 							</div>
 							</br>
 
-							<div id="functions" style="display:none">
+							<div id="functionsCode" style="display:none">
 								<h5>Search <span id="siteName"></span></h5>
-								<pre style="display: inline;" class="language-javascript"><code id="function" class="language-javascript"></code></pre>
+								<pre class="language-javascript"><code id="function" class="language-javascript"></code></pre>
 							</div>
 							</br>
 
 							<div id="objects" style="display:none">
 								<h5>Objects and their functions</h5>
-								<pre id="preObjects" style="display: inline;" class="language-javascript"><code id="object" class="language-javascript"></code></pre>
+								<pre  class="language-javascript"><code id="object" class="language-javascript"></code></pre>
 							</div>
 
 						</div>
 					</div>
 					<!-- end panel -->
+
+
+					<!-- begin panel -->
+					<div id="example" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">Examples</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+							</div>
+						</div>
+						<div class="panel-body">
+
+							<h5 class="panel-title">Get YouTube video comments</h5>
+							<p>This sample gets the list of comments that belongs to a YouTube video, specified by the videoId.</p>
+
+	<pre class="language-javascript"><code class="language-javascript">import shapir from "https://shapir.org/shapir.js";
+shapir().then(async () => {
+
+	var video = await youtube.VideoObject("x7xf8kc"); // videoId= x7xf8kc
+	var comments = await video.comment //returns a list of comments for this specific
+
+});</code></pre>
+
+
+	<h5 class="panel-title">Search Seatgeek for music venues</h5>
+	<p>This sample searches Seatgeek for music venues in Boston, USA and for each venue it will show the name, url, and the list of its events.</p>
+
+	<pre class="language-javascript"><code class="language-javascript">import shapir from "https://shapir.org/shapir.js";
+shapir().then(async () => {
+
+	var venues = await seatgeek.search("Music", {"city":"Boston", "country":"US"})
+
+	for(let v in venues){
+		console.log(venues[v].name)
+		console.log(venues[v].url)
+		console.log(venues[v].event) //returns a list of events for the venue
+	}
+
+});</code></pre>
+
+
+	<h5 class="panel-title">Update my collection of images in Unsplash</h5>
+	<p>Update the name and description of my image in Unsplash.</p>
+
+	<pre class="language-javascript"><code class="language-javascript">import shapir from "https://shapir.org/shapir.js";
+shapir().then(async () => {
+
+	var image = await unsplash.ImageObject("bXfQLglc81U"})
+	image.name= "New Name"
+	image.description= "New Description"
+
+});</code></pre>
+
+
+						</div>
+					</div>
+					<!-- end panel -->
+
 
 				</div>
 			</div>
