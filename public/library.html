@@ -404,7 +404,7 @@ shapir().then(async () => {
 	for(let v in venues){
 		console.log(venues[v].name)
 		console.log(venues[v].url)
-		console.log(venues[v].event) //returns a list of events for the venue
+		console.log(await venues[v].event) //returns a list of events for the venue
 	}
 
 });</code></pre>

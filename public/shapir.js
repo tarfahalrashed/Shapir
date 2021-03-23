@@ -26,13 +26,14 @@ export function include(...urls) {
 
 let firebaseLoaded = include(
     "https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js",
-    "https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"
+    "https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js",
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
 ).then(() => {
     firebase.initializeApp(config);
 });
 
 export default async function shapir(){
-    var result, obJSON, getparamList="", auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [];
+    var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [];
 
     await firebaseLoaded;
 
@@ -177,7 +178,7 @@ export default async function shapir(){
                                     })
                                     .then(token=>{
                                         return new Promise((resolve, reject) => {
-                                        console.log("Token: ",token)
+                                        // console.log("Token: ",token)
                                         // console.log("Token URL: ",token_url)
                                         $.ajax({
                                             url: token_url,
@@ -234,9 +235,18 @@ export default async function shapir(){
                                                 Object.defineProperty(ob, propType, {
                                                     get: function() {
                                                         let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
-                                                            console.log("typeOb4: ", snapshot.val())
+                                                            // console.log("typeOb45: ", snapshot.val())
+
+                                                            // console.log(ob[typeId])
+                                                            // console.log(typeId)
+                                                            if(ob[typeId].includes('/')){
+                                                                var lastIndex = ob[typeId].lastIndexOf("/")
+                                                                var idV = ob[typeId].substring(lastIndex + 1)
+                                                            }else{
+                                                                var idV = ob[typeId]
+                                                            }
                                                             // return self(snapshot.val(), type, propType, ob[typeId]);
-                                                            return self(snapshot.key, snapshot.val(), currentType, propType, ob[typeId]);
+                                                            return self(snapshot.key, snapshot.val(), currentType, propType, idV);
                                                         });
                                                         return promise;
                                                     }
@@ -549,12 +559,14 @@ export default async function shapir(){
 
 
                                     //remove the fields that are not in the class
-                                    var keys = Object.keys(o[0])
-                                    for (var k=0; k<keys.length; ++k){
-                                        if (!fields.includes(keys[k])){
-                                            o.forEach(function(ob) {
-                                                delete ob[keys[k]];
-                                            })
+                                    if(o[0]){
+                                        var keys = Object.keys(o[0])
+                                        for (var k=0; k<keys.length; ++k){
+                                            if (!fields.includes(keys[k])){
+                                                o.forEach(function(ob) {
+                                                    delete ob[keys[k]];
+                                                })
+                                            }
                                         }
                                     }
 
@@ -743,29 +755,27 @@ export default async function shapir(){
                                     if (setters){
                                         var currentGetter = {}
                                         var gettArr = []
-                                    for (var s=0; s<setters.length; ++s){
-                                        // console.log("setter: ", setters[s])
-                                        var field = setters[s].field; //API endpoint field to be set
-                                        var prop="";
-                                        var setEndpoint =  setters[s].endpoint;
-                                        // var setParams = setters[s].params;
-                                        var idd = setters[s].id;
+                                        for (var s=0; s<setters.length; ++s){
+                                            var field = setters[s].field; //API endpoint field to be set
+                                            var prop="";
+                                            var setEndpoint =  setters[s].endpoint;
+                                            var idd = setters[s].id;
 
-                                        //get the schema.org property mapped to this field
-                                        for (var f=0; f< properties.length; ++f){
-                                            if (properties[f].field == field){
-                                                prop = properties[f].property;
-                                                currentGetter[prop]=o[prop]
-                                                gettArr.push(prop)
-                                                break;
+                                            //get the schema.org property mapped to this field
+                                            for (var f=0; f< properties.length; ++f){
+                                                if (properties[f].field == field){
+                                                    prop = properties[f].property;
+                                                    currentGetter[prop]=o[prop]
+                                                    gettArr.push(prop)
+                                                    break;
+                                                }
                                             }
-                                        }
-                                        // currentGetter=o[prop]
-                                    }
-                                        //don't define properties that exists in the o
+                                        }//end of setters loop
+
+                                        //for each setter property create a getter and a setter
                                         gettArr.forEach(function(item) {
                                         Object.defineProperty(o, item, {
-                                            get: function() {console.log("val!: ", currentGetter[item]); return currentGetter[item]},
+                                            get: function() { return currentGetter[item]},
                                             set: function(newValue) {
                                                 // console.log("newValue: ", newValue)
                                                 this.pro = firebase.database().ref('/apis/'+setEndpoint).once('value').then(function(snapshot) {
@@ -872,11 +882,8 @@ export default async function shapir(){
 
                                             }
                                         });//end of define property
-                                    })
-
-
-
-                                    }
+                                        })
+                                    }//if setters
 
                                     //***************************** METHODS *********************************/
                                     if (methods){//return here
