@@ -203,6 +203,12 @@ async function abstractionSiteHasBeenChosen(select){
           func += ', ';
       }
 
+      for(var p=0; p< params.length; ++p){
+        if(params[p].displayed==true && params[p].listOfValues!=""){
+          func+= '\n\n// "'+params[p].name+ '" property can take the following values ('+params[p].listOfValues+')';
+        }
+      }
+
       $("#functionsCode").show();
       document.getElementById('function').innerHTML += func //+ '&nbsp; //return ' + objectStr;
       document.getElementById('function').innerHTML += '\n\n';
@@ -273,7 +279,7 @@ async function abstractionSiteHasBeenChosen(select){
     //Delete
     if(objects[o].remove){
       document.getElementById('object').innerHTML += '\n// Delete '+o+'\n';
-      document.getElementById('object').innerHTML += 'await '+oName+'.delete() \n';// &nbsp; //delete this ' + o + ' from '+ site+ '\n';
+      document.getElementById('object').innerHTML += oName+'.delete() \n';// &nbsp; //delete this ' + o + ' from '+ site+ '\n';
     }
 
     //methods
@@ -1841,10 +1847,11 @@ function siteHasBeenEntered(select){
   //   }
   // }
 
+  // //REMOVE THIS WHEN YOU UNCOMMENT ON klazify
+  // $("#step2-desc").show()
 
-  // setTimeout(() => {
+
   jQuery('.selectpicker').selectpicker('refresh');
-  // }, 100);
 
   // Go over all the site API endpoints and the paths and compare them to schema.org types
   for(var i=0; i<scrapirAPIs.length; ++i){

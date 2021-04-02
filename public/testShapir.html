@@ -77,8 +77,10 @@
 				// console.log("video comments: ", await videos[7].comment)
 
 
-				// var playlist = await vimeo.MusicPlaylist("7058699")
-				// playlist.name = "new test!!!"
+				// var playlist = await vimeo.MusicPlaylist("8279173")
+				// console.log(playlist)
+				// playlist.description = "new test!!!"
+				// console.log(playlist)
 
 
 				// var video = await vimeo.VideoObject("21503197")
@@ -88,14 +90,32 @@
 
   				// await playlist.delete()
 
-			var videos = await vimeo.search("Adele")
+			var videos = await youtube.search("Adele", {'numResults': 2})
 			console.log("videos: ", videos)
+
+			// var musicPlaylist = await vimeo.MusicPlaylist("8274189")
+			// // console.log(musicPlaylist.name)
+			// // console.log(musicPlaylist.description)
+			// var videos = await musicPlaylist.video
+			// // console.log(videos, videos[7])
+			// // console.log(videos[7].video_id)
+			// // var videoObject = await vimeo.VideoObject(videos[7].video_id)
+			// console.log(await videos[7].comment)
+
 
 			//})
 
 			// await video.addToWatchlater()
 			// console.log(await dailymotion.MusicPlaylist.create({'name': 'LOCAL STG55555'}))
 			//var videos = await youtube.searchVideoObject('Taylor Swift', {'order':'date', 'numResults': '100'});
+
+
+			// var musicPlaylist = await vimeo.MusicPlaylist("8274189")
+			// console.log(musicPlaylist.name)
+			// var videos = await musicPlaylist.video
+			// console.log(videos)
+			// var comments = await videos[7].comment
+			// console.log(comments)
 		};
 		app();
 

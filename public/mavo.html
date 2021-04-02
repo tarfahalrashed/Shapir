@@ -414,7 +414,27 @@
 
 							<h4>Search Yelp and Foursquare for seafood resturants and their reviews</h4>
 							<p>Only show the ones that has rating > 4</p>
-<pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="yelp, foursquare" mv-source-search="seafood">
+<pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="yelp" mv-source-search="[search]" mv-source-numResults="20">
+	&lt;label>Search: &lt;input property="searchInput" />&lt;/label>
+	&lt;div class="restaurants">
+	&lt;div property="business" mv-multiple">
+		&lt;a property="url">
+			&lt;img property="image" />
+			&lt;h2 property="name">&lt;/h2>
+
+			&lt;div class="info">
+				&lt;span property="review_count">&lt;/span> reviews
+				&lt;div class="rating" style="--rating: [aggregateRating]" title="[aggregateRating] stars">&lt;/div>
+				&lt;span property="priceRange">&lt;/span>
+				&lt;span class="location">
+					📍&lt;span property="latitude">&lt;/span>, &lt;span property="longitude">&lt;/span>
+				&lt;/span>
+			&lt;/div>
+		&lt;/a>
+	&lt;/div>
+	&lt;/div>
+&lt;/div>
+	<!-- &lt;div mv-app="main" mv-source="shapir" mv-source-service="yelp, foursquare" mv-source-search="seafood">
 
 	&lt;div property="resturant" mv-multiple hidden="[aggregateRating > 4]">
 		&lt;h3 property="name">&lt;/h3>
@@ -424,7 +444,7 @@
 		&lt;p property="latitude">&lt;/p>
 		&lt;p property="siteName">&lt;/p> &lt;!-- "siteName" property is added to all the site to show which data came from which site-->
 
-		&lt;div property="review" mv-multiple>
+		<!-- &lt;div property="review" mv-multiple>
 			&lt;p property="text">&lt;/p>
 			&lt;p property="dateCreated">&lt;/p>
 			&lt;p property="reviewRating" >&lt;/p>
@@ -432,7 +452,8 @@
 
 	&lt;/div>
 
-&lt;/div></code></pre>
+&lt;/div>  -->
+</code></pre>
 
 						</div>
 					</div><!--END get started-->

@@ -96,7 +96,13 @@ export default async function shapir(){
                                     Object.entries(params[p]).forEach(([key, value]) => {
                                         paramList+=`${key}`
                                         paramList+="="
-                                        paramList+=args[p]
+                                        if(args[p].includes('/')){
+                                            var lastIndex = args[p].lastIndexOf("/")
+                                            var idVArg = args[p].substring(lastIndex + 1)
+                                        }else{
+                                            var idVArg = args[p]
+                                        }
+                                        paramList+=idVArg
                                     });
                                     if (p+1<params.length){
                                         paramList+="&"
@@ -239,11 +245,21 @@ export default async function shapir(){
 
                                                             // console.log(ob[typeId])
                                                             // console.log(typeId)
-                                                            if(ob[typeId].includes('/')){
-                                                                var lastIndex = ob[typeId].lastIndexOf("/")
-                                                                var idV = ob[typeId].substring(lastIndex + 1)
+                                                            if(ob[typeId]){
+                                                                if(ob[typeId].includes('/')){
+                                                                    var lastIndex = ob[typeId].lastIndexOf("/")
+                                                                    var idV = ob[typeId].substring(lastIndex + 1)
+                                                                }else{
+                                                                    var idV = ob[typeId]
+                                                                }
                                                             }else{
-                                                                var idV = ob[typeId]
+                                                                if(args[0].includes('/')){
+                                                                    var lastIndex = args[0].lastIndexOf("/")
+                                                                    var idV = args[0].substring(lastIndex + 1)
+                                                                }else{
+                                                                    var idV = args[0];
+                                                                }
+
                                                             }
                                                             // return self(snapshot.val(), type, propType, ob[typeId]);
                                                             return self(snapshot.key, snapshot.val(), currentType, propType, idV);
@@ -1301,7 +1317,7 @@ export default async function shapir(){
                                         keyVal= key
                                     }
                                     if(paramNames.indexOf(keyVal) != -1 && keyVal!=mSearchParam){//check if the param is correct
-                                        console.log(`${keyVal}: ${value}`);
+                                        // console.log(`${keyVal}: ${value}`);
                                         mParamList+= keyVal
                                         mParamList+="="
                                         mParamList+= value
@@ -1313,8 +1329,6 @@ export default async function shapir(){
                                 if(mParamList.endsWith("&")){
                                     mParamList = mParamList.slice(0, -1);
                                 }
-
-
 
                             }
 
