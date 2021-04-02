@@ -529,6 +529,151 @@
           ]
         }
       },
+      "/users/{user_id}/albums": {
+        "post": {
+          "operationId": "create_album",
+          "parameters": [
+            {
+              "description": "The ID of the user.",
+              "in": "path",
+              "name": "user_id",
+              "required": true,
+              "schema": {
+                "example": 152184,
+                "type": "number"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/vnd.vimeo.album+json": {
+                "schema": {
+                  "properties": {
+                    "brand_color": {
+                      "description": "The hexadecimal code for the color of the player buttons.",
+                      "example": "ff66ee",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "The description of the album.",
+                      "example": "Vimeo holiday videos!",
+                      "type": "string"
+                    },
+                    "hide_nav": {
+                      "description": "Whether to hide Vimeo navigation when displaying the album.",
+                      "example": "true",
+                      "type": "boolean"
+                    },
+                    "layout": {
+                      "description": "The type of layout for presenting the album.",
+                      "enum": [
+                        "grid",
+                        "player"
+                      ],
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The name of the album.",
+                      "example": "Vimeo Holiday Videos!",
+                      "type": "string"
+                    },
+                    "password": {
+                      "description": "The album's password. Required only if **privacy** is `password`.",
+                      "example": "hunter1",
+                      "type": "string"
+                    },
+                    "privacy": {
+                      "description": "The privacy level of the album.",
+                      "enum": [
+                        "anybody",
+                        "embed_only",
+                        "password"
+                      ],
+                      "type": "string"
+                    },
+                    "review_mode": {
+                      "description": "Whether album videos should use the review mode URL.",
+                      "example": "true",
+                      "type": "boolean"
+                    },
+                    "sort": {
+                      "description": "The default sort order of the album's videos.",
+                      "enum": [
+                        "added_first",
+                        "added_last",
+                        "alphabetical",
+                        "arranged",
+                        "comments",
+                        "likes",
+                        "newest",
+                        "oldest",
+                        "plays"
+                      ],
+                      "type": "string"
+                    },
+                    "theme": {
+                      "description": "The color theme of the album.",
+                      "enum": [
+                        "dark",
+                        "standard"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "content": {
+                "application/vnd.vimeo.album+json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/album"
+                  }
+                }
+              },
+              "description": "The album was created."
+            },
+            "400": {
+              "content": {
+                "application/vnd.vimeo.album+json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/legacy-error"
+                  }
+                }
+              },
+              "description": "A parameter is invalid."
+            },
+            "403": {
+              "content": {
+                "application/vnd.vimeo.album+json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/legacy-error"
+                  }
+                }
+              },
+              "description": "The supplied token doesn't have the proper scopes, or the authenticated user can't create an album."
+            }
+          },
+          "security": [
+            {
+              "oauth2": [
+                "create"
+              ]
+            }
+          ],
+          "summary": "Create an album",
+          "tags": [
+            "Albums\\Essentials"
+          ]
+        }
+      },
       "/users/{user_id}/albums/{album_id}/videos": {
         "get": {
           "operationId": "get_album_videos",
