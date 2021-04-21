@@ -315,7 +315,6 @@
 											</div>
 										</div>
 										<!-- end panel -->
-
 									</div>
 									<!-- end scrollbar -->
 								</div>
@@ -327,9 +326,6 @@
 					</div>
 					<!-- end vertical-box -->
 				</div>
-				<!-- end vertical-box-column -->
-				<!-- begin vertical-box-column -->
-
 				<!-- end vertical-box-column -->
 			</div>
 			<!-- end vertical-box -->
@@ -431,6 +427,8 @@
           </div>
 		</div>
 
+
+		<!-- Veronica - When click on a type (Orange Node)  -->
 		<div id="mySidenavType" style="border-color:#919191; " class="sidenav">
 
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNavType()">&times;</a>
@@ -438,293 +436,201 @@
 			<h5 class = "panel-title">Object Configuration</h5>
 			<hr>
 
-
-			<!-- <h6>Map schema.org/<span id="typeN"></span> to one of <span id="siteN"></span> API endpoint.</h6>
-			</br> -->
+			<!-- *********** Begin Change *********** -->
+			<h2> Add your code here here</h2>
 
 			<div id="type-div">
+				<!-- begin tab -->
+				<ul class="nav nav-pills mb-2">
+					<li class="nav-item">
+						<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link active">
+							<span class="d-sm-block d-none">Update</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#nav-pills-tab-3" data-toggle="tab" class="nav-link">
+							<span class="d-sm-block d-none">Create</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#nav-pills-tab-4" data-toggle="tab" class="nav-link">
+							<span class="d-sm-block d-none">Remove</span>
+						</a>
+					</li>
 
-					<!-- begin nav-pills -->
-					<ul class="nav nav-pills mb-2">
-						<!-- <li class="nav-item">
-							<a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link active">
-								<span class="d-sm-none">Pills 1</span>
-								<span class="d-sm-block d-none">Get*</span>
-							</a>
-						</li> -->
-						<!-- <li class="nav-item">
-							<a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link active">
-								<span class="d-sm-block d-none">Search</span>
-							</a>
-						</li> -->
-						<li class="nav-item">
-							<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link active">
-								<span class="d-sm-block d-none">Update</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#nav-pills-tab-3" data-toggle="tab" class="nav-link">
-								<span class="d-sm-block d-none">Create</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#nav-pills-tab-4" data-toggle="tab" class="nav-link">
-								<span class="d-sm-block d-none">Remove</span>
-							</a>
-						</li>
+					<li class="nav-item">
+						<a href="#nav-pills-tab-5" data-toggle="tab" class="nav-link">
+							<span class="d-sm-block d-none">Methods</span>
+						</a>
+					</li>
+				</ul>
+				<!-- end tab -->
 
-						<li class="nav-item">
-							<a href="#nav-pills-tab-5" data-toggle="tab" class="nav-link">
-								<!-- <span class="d-sm-none">Pills 6</span> -->
-								<span class="d-sm-block d-none">Methods</span>
-							</a>
-						</li>
-					</ul>
-					<!-- end nav-pills -->
-					<!-- begin tab-content -->
-					<div class="tab-content p-15 rounded bg-white mb-4">
-						<!-- begin tab-pane -->
-						<div class="tab-pane fade" id="nav-pills-tab-7">
-							<h5 class="m-t-10">Get a specific <span id="sel_obTitle"></span> from <span id="sel_siteTitle"></span> by its ID</h5></br>
-							<p>1. Which of the following <span id="sel_site"></span> API endpoints returns a <span id="sel_ob"></span> object?
-								Click on each one to view their descreption.</p>
-
-							<!-- API Endpoint -->
-							<!-- <label class="col-form-label">API Endpoint</label> -->
-							<!-- <select id="apis-type" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll; max-width: 50px;" showSubtext="true" onchange="urlHasBeenChosen(this)">
-								<option selected>Choose API Endpoint</option>
-							</select> -->
-
-							<div style="overflow: scroll; height:260px" class="box">
-								<!-- begin #accordion -->
-								<div id="accordion" class="accordion">
-								</div>
-								<!-- end #accordion -->
+				<!-- begin tab-content -->
+				<div class="tab-content p-15 rounded bg-white mb-4">
+					<!-- begin tab-pane -->
+					<div class="tab-pane fade" id="nav-pills-tab-7">
+						<h5 class="m-t-10">Get a specific <span id="sel_obTitle"></span> from <span id="sel_siteTitle"></span> by its ID</h5></br>
+						<p>1. Which of the following <span id="sel_site"></span> API endpoints returns a <span id="sel_ob"></span> object?
+							Click on each one to view their descreption.</p>
+						<div style="overflow: scroll; height:260px" class="box">
+							<!-- begin #accordion -->
+							<div id="accordion" class="accordion">
 							</div>
-							</br>
-
-							<!-- <p style="display:inline"> </p> -->
-							<p style="display:inline;">If none of the above API endpoints returns a <B><span id="selected_type"></span></B> object, you can integrate it in
-							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
-
-							</br> </br>
-
-							<!-- ID (list of responses fields)-->
-							<div id="" style="display: none;">
-								<p>2. Choose the ID parameter of this API</p>
-								<!-- <label class="col-form-label ">Id</label></br> -->
-								<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed(this)">
-									<option selected>Choose the ID</option>
-								</select>
-							</div>
-							</br>
-
-							<!-- Matching Properties -->
-							<!-- <label class="col-form-label ">Match Response Fields to Type Properties</label></br> -->
-							<!-- <div id="mapLabel" style="display: none;">
-								<p>3. Map the API response fields to the <span id="sel_typeMap"></span> properties.</p>
-								<div id="redips-drag">
-									<table id="table1" class="table table-bordered">
-										<thead>
-											<tr>
-											<th>API Field</th>
-											<th>Type Property</th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-							</div> -->
-
-							</br></br>
-							<a href="javascript:;" class="btn btn-dark" id="" onclick="saveTypeConfig()">Save</a>
-
+							<!-- end #accordion -->
 						</div>
-						<!-- end tab-pane -->
+						</br>
 
-						<!-- begin tab-pane -->
-						<!-- <div class="tab-pane fade active show" id="nav-pills-tab-1">
-							<h4 class="m-t-10">Searching for object(s)</h4>
+						<p style="display:inline;">If none of the above API endpoints returns a <B><span id="selected_type"></span></B> object, you can integrate it in
+						<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+						</br> </br>
 
-								<p>1. Which of the following <span id="sel_site_meth"></span> API endpoints searches for <span id="sel_ob_meth"></span> object?
-									Click on each one to view their descreption</p>
-								<div style="overflow: scroll; height:260px" class="box">
-									<div id="accordion-method" class="accordion">
-									</div>
-								</div>
-
-								</br>
-
-								<div id="search-method" style="display: none;">
-								<p>2. Which of the follwoing parameters is the search term parameter?</p>
-								<select id="method-search-param" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
-									<option selected>Choose search parameter</option>
-								</select>
-								</br></br>
-
-								<p>3. Which of the following fields is the id of the object?</p>
-								<select id="method-result-type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="resultTypeHasBeenChosen(this)">
-									<option selected>Choose the ID</option>
-								</select>
-								</div>
-
-							</br></br>
-							<a href="javascript:;" class="btn btn-dark" id="" onclick="saveMethodConfig()">Save</a>
-
-						</div> -->
-						<!-- end tab-pane -->
-
-						<!-- begin tab-pane -->
-						<div class="tab-pane fade active show" id="nav-pills-tab-2">
-							<!-- <h4 class="m-t-10">Updating a specific object</h4> -->
-							<h5 class="m-t-10">Update a specific <span id="sel_obTitle_up"></span> from <span id="sel_siteTitle_up"></span></h5></br>
-							<p>1. Which of the following <span id="sel_site_up"></span> API endpoints updates a <span id="sel_ob_up"></span> object?
-								Click on each one to view their descreption.</p>
-
-							<div style="overflow: scroll; height:260px" class="box">
-								<div id="accordion-update" class="accordion">
-								</div>
-							</div>
-							</br>
-
-							<p style="display:inline;">If none of the above API endpoints updates a <B><span id="selected_type_up"></span></B> object, you can integrate it in
-							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
-							</br> </br>
-
-							<!-- ID (list of responses fields)-->
-							<div id="idLabel-update" style="display: none;">
-								<p>2. Choose the ID parameter of this API</p>
-								<select id="type-id-update" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
-									<option selected>Choose the ID</option>
-								</select>
-							</div>
-							</br></br>
-
-
-
-							<a href="javascript:;" class="btn btn-dark" id="" onclick="saveUpdateConfig()">Save</a>
-
+						<div id="" style="display: none;">
+							<p>2. Choose the ID parameter of this API</p>
+							<select id="type-id" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="idHasBeenChosed(this)">
+								<option selected>Choose the ID</option>
+							</select>
 						</div>
-						<!-- end tab-pane -->
-						<!-- begin tab-pane -->
-						<div class="tab-pane fade" id="nav-pills-tab-3">
-							<!-- <h4 class="m-t-10">Creating a new object</h4> -->
-							<h5 class="m-t-10">Create a new <span id="sel_obTitle_add"></span> in <span id="sel_siteTitle_add"></span></h5></br>
-							<p>Which of the following <span id="sel_site_add"></span> API endpoints creates a new <span id="sel_ob_add"></span> object?
-								Click on each one to view their descreption.</p>
-
-							<div style="overflow: scroll; height:260px" class="box">
-								<!-- begin #accordion -->
-								<div id="accordion-add" class="accordion">
-								</div>
-								<!-- end #accordion -->
-							</div>
-							</br>
-
-							<!-- <p style="display:inline"> </p> -->
-							<p style="display:inline;">If none of the above API endpoints creates a new <B><span id="selected_type_add"></span></B> object, you can integrate it in
-							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
-
-							</br> </br>
-
-							<!-- ID (list of responses fields)-->
-							<!-- <div id="idLabel-add" style="display: none;">
-								<p>Assign an ID to this object</p>
-								<select id="type-id-add" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
-									<option selected>Choose the ID</option>
-								</select>
-							</div>
-							</br></br> -->
-
-						<a href="javascript:;" class="btn btn-dark" id="" onclick="saveAddConfig()">Save</a>
-
-						</div>
-						<!-- end tab-pane -->
-						<!-- begin tab-pane -->
-						<div class="tab-pane fade" id="nav-pills-tab-4">
-							<!-- <h4 class="m-t-10">Removing a specific object</h4> -->
-							<h5 class="m-t-10">Remove a specific <span id="sel_obTitle_re"></span> from <span id="sel_siteTitle_re"></span> by its ID</h5></br>
-							<p>1. Which of the following <span id="sel_site_re"></span> API endpoints removes a <span id="sel_ob_re"></span> object?
-								Click on each one to view their descreption.</p>
-
-							<div style="overflow: scroll; height:260px" class="box">
-								<!-- begin #accordion -->
-								<div id="accordion-remove" class="accordion">
-								</div>
-								<!-- end #accordion -->
-							</div>
-							</br>
-
-							<!-- <p style="display:inline"> </p> -->
-							<p style="display:inline;">If none of the above API endpoints removes a <B><span id="selected_type_re"></span></B> object, you can integrate it in
-							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
-
-							</br> </br>
-
-							<!-- ID (list of responses fields)-->
-							<div id="idLabel-remove" style="display: none;">
-								<p>2. Choose the ID parameter of this API</p>
-								<!-- <label class="col-form-label ">Id</label></br> -->
-								<select id="type-id-remove" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
-									<option selected>Choose the ID</option>
-								</select>
-							</div>
-							</br></br>
-
-						<a href="javascript:;" class="btn btn-dark" id="" onclick="saveRemoveConfig()">Save</a>
-
-						</div>
-						<!-- end tab-pane -->
-
-						<div class="tab-pane fade" id="nav-pills-tab-5">
-							<!-- <h4 class="m-t-10">Removing a specific object</h4> -->
-							<h5 class="m-t-10">Add methods to <span id="sel_obTitle_re"></span> object</h5></br>
-							<p>1. Which of the following <span id="sel_site_re"></span> API endpoints correspond to a method that you would like to add <span id="sel_ob_re"></span> object?
-								Click on each one to view their descreption.</p>
-
-							<div style="overflow: scroll; height:260px" class="box">
-								<!-- begin #accordion -->
-								<div id="accordion-type-method" class="accordion">
-								</div>
-								<!-- end #accordion -->
-							</div>
-							</br>
-
-							<!-- <p style="display:inline"> </p> -->
-							<p style="display:inline;">If can't find the method you need, you can integrate it in
-							<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
-							</br> </br>
-
-							<!-- Add a select for the type of action this is -->
-							<!-- name optional -->
-
-							<div id="action_name" style="display: none;">
-								<p>2. Choose the type of action that applied to this function from schema.org</p>
-								<!-- <label class="col-form-label ">Id</label></br> -->
-								<select id="type-schema-method" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="chooseActionType(this)">
-									<option selected>Choose the Action</option>
-								</select>
-							</div>
-							</br></br>
-
-
-							<div id="method_name_div" style="display: none;">
-								<p>3. Name this method [optional]</p>
-								<!-- <label class="col-form-label ">Id</label></br> -->
-								<input id="method-name" class="form-control" type="text" placeholder="">
-							</div>
-
-							</br></br>
-							<a href="javascript:;" class="btn btn-dark" id="" onclick="addTypeMethodConfig()">Add</a>
-
-						</div>
-						<!-- end tab-pane -->
+						</br></br>
+						<a href="javascript:;" class="btn btn-dark" id="" onclick="saveTypeConfig()">Save</a>
 
 					</div>
-					<!-- end tab-content -->
+					<!-- end tab-pane -->
 
-		  </div>
+					<!-- begin tab-pane -->
+					<div class="tab-pane fade active show" id="nav-pills-tab-2">
+						<h5 class="m-t-10">Update a specific <span id="sel_obTitle_up"></span> from <span id="sel_siteTitle_up"></span></h5></br>
+						<p>1. Which of the following <span id="sel_site_up"></span> API endpoints updates a <span id="sel_ob_up"></span> object?
+							Click on each one to view their descreption.</p>
+
+						<div style="overflow: scroll; height:260px" class="box">
+							<div id="accordion-update" class="accordion">
+							</div>
+						</div>
+						</br>
+
+						<p style="display:inline;">If none of the above API endpoints updates a <B><span id="selected_type_up"></span></B> object, you can integrate it in
+						<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+						</br></br>
+
+						<div id="idLabel-update" style="display: none;">
+							<p>2. Choose the ID parameter of this API</p>
+							<select id="type-id-update" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
+								<option selected>Choose the ID</option>
+							</select>
+						</div>
+						</br></br>
+
+						<a href="javascript:;" class="btn btn-dark" id="" onclick="saveUpdateConfig()">Save</a>
+
+					</div>
+					<!-- end tab-pane -->
+
+					<!-- begin tab-pane -->
+					<div class="tab-pane fade" id="nav-pills-tab-3">
+						<h5 class="m-t-10">Create a new <span id="sel_obTitle_add"></span> in <span id="sel_siteTitle_add"></span></h5></br>
+						<p>Which of the following <span id="sel_site_add"></span> API endpoints creates a new <span id="sel_ob_add"></span> object?
+							Click on each one to view their descreption.</p>
+
+						<div style="overflow: scroll; height:260px" class="box">
+							<!-- begin #accordion -->
+							<div id="accordion-add" class="accordion">
+							</div>
+							<!-- end #accordion -->
+						</div>
+						</br>
+
+						<p style="display:inline;">If none of the above API endpoints creates a new <B><span id="selected_type_add"></span></B> object, you can integrate it in
+						<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+						</br></br>
+
+					<a href="javascript:;" class="btn btn-dark" id="" onclick="saveAddConfig()">Save</a>
+
+					</div>
+					<!-- end tab-pane -->
+
+					<!-- begin tab-pane -->
+					<div class="tab-pane fade" id="nav-pills-tab-4">
+						<h5 class="m-t-10">Remove a specific <span id="sel_obTitle_re"></span> from <span id="sel_siteTitle_re"></span> by its ID</h5></br>
+						<p>1. Which of the following <span id="sel_site_re"></span> API endpoints removes a <span id="sel_ob_re"></span> object?
+							Click on each one to view their descreption.</p>
+
+						<div style="overflow: scroll; height:260px" class="box">
+							<!-- begin #accordion -->
+							<div id="accordion-remove" class="accordion">
+							</div>
+							<!-- end #accordion -->
+						</div>
+						</br>
+
+						<p style="display:inline;">If none of the above API endpoints removes a <B><span id="selected_type_re"></span></B> object, you can integrate it in
+						<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+
+						</br> </br>
+
+						<div id="idLabel-remove" style="display: none;">
+							<p>2. Choose the ID parameter of this API</p>
+							<select id="type-id-remove" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="">
+								<option selected>Choose the ID</option>
+							</select>
+						</div>
+						</br></br>
+
+					<a href="javascript:;" class="btn btn-dark" id="" onclick="saveRemoveConfig()">Save</a>
+
+					</div>
+					<!-- end tab-pane -->
+
+					<div class="tab-pane fade" id="nav-pills-tab-5">
+						<h5 class="m-t-10">Add methods to <span id="sel_obTitle_re"></span> object</h5></br>
+						<p>1. Which of the following <span id="sel_site_re"></span> API endpoints correspond to a method that you would like to add <span id="sel_ob_re"></span> object?
+							Click on each one to view their descreption.</p>
+
+						<div style="overflow: scroll; height:260px" class="box">
+							<!-- begin #accordion -->
+							<div id="accordion-type-method" class="accordion">
+							</div>
+							<!-- end #accordion -->
+						</div>
+						</br>
+
+						<p style="display:inline;">If can't find the method you need, you can integrate it in
+						<a href="https://scrapir.org" target="_blank" style="display:inline; padding: 0px;">ScrAPIr</a>.</p>
+						</br> </br>
+
+						<div id="action_name" style="display: none;">
+							<p>2. Choose the type of action that applied to this function from schema.org</p>
+							<select id="type-schema-method" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="chooseActionType(this)">
+								<option selected>Choose the Action</option>
+							</select>
+						</div>
+						</br></br>
+
+						<div id="method_name_div" style="display: none;">
+							<p>3. Name this method [optional]</p>
+							<input id="method-name" class="form-control" type="text" placeholder="">
+						</div>
+
+						</br></br>
+						<a href="javascript:;" class="btn btn-dark" id="" onclick="addTypeMethodConfig()">Add</a>
+
+					</div>
+					<!-- end tab-pane -->
+
+				</div>
+				<!-- end tab-content -->
+			</div>
+			<!-- *********** Begin Change *********** -->
+
+			<script>
+				// If method was choesn show accordian
+
+				// Click on type
+				// Step#1 Choose Method: Create, Remove, Update, other method
+				// Once chosenShow the list of API endpoints (accordion)
+				// Step#2 Choose and API Endpoint
+				// [I will do this step] Depending on the method chosen, I will show different things
+			</script>
 
 		</div>
 
@@ -821,27 +727,11 @@
 
 
 		</div> -->
-	</div>
-
 		</div>
+
+    </div>
 	<!-- </div> -->
 	<!-- end page container -->
-
-
-	<script>
-
-
-		//OLD
-		function openRightMenu() {
-			document.getElementById("rightMenu").style.display = "block";
-		}
-		function closeRightMenu() {
-			document.getElementById("rightMenu").style.display = "none";
-		}
-
-		// $("#types-table").treetable();
-		// $("#example-basic").treetable();
-	</script>
 
 
 		<!-- ================== BEGIN PRISM JS ================== -->
@@ -849,23 +739,13 @@
 		<script src="assets/js/prism-json.js"></script>
 		<!-- ================== END PRISM JS ================== -->
 
-
-
 		<!-- ================== BEGIN BASE JS ================== -->
 		<script src="assets/js/app.min.js"></script>
-		<!-- <script src="assets/js/default.min.js"></script> -->
-
 		<script src="assets/js/shapir_index.js"></script>
-
 		<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-
-		<!-- <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase.js"></script> -->
 		<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
-		<!-- <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-auth.js"></script> -->
 		<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
-
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-
 		<!-- ================== END BASE JS ================== -->
 
 		<!-- ================== BEGIN PAGE LEVEL JS ================== -->
@@ -888,199 +768,158 @@
 		<script src="assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js"></script>
 		<script src="assets/plugins/clipboard/dist/clipboard.min.js"></script>
 		<!-- <script src="assets/js/demo/form-plugins.demo.js"></script> -->
-
 		<script src="assets/plugins/highlight.js/highlight.min.js"></script>
 		<!-- <script src="assets/js/demo/render.highlight.js"></script> -->
-
 		<script src="http://culmat.github.io/jsTreeTable/treeTable.js"></script>
 		<!-- ================== END PAGE LEVEL JS ================== -->
-
-
 		<link href="assets/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
 		<!-- <link href="jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" /> -->
 		<script src="assets/js/jquery.treetable.js"></script>
-
-			<script src="https://unpkg.com/ml5@0.1.1/dist/ml5.min.js"></script>
-
-
+		<script src="https://unpkg.com/ml5@0.1.1/dist/ml5.min.js"></script>
 		<!-- ================== DRAGULA ================== -->
 		<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/$VERSION/dragula.min.js'></script> -->
 
 		<style>
+			.tooltip-inner {font-size: 1.1em; text-align: left;}
+			.tooltip.right .tooltip-arrow {background-color:grey;}
 
-  /* Tooltip */
+			* {
+			transition: all .2s ease;
+			}
 
+			.extra-info {
+			display: none;
+			line-height: 30px;
+			font-size: 12px;
+			position: relative;
+			/* top: 0px; */
+			/* left: 330px; */
+			background-color: #f9f9f9;
+			border-radius: 15px;
+			padding:10px;
+			word-wrap: break-word;
+			/* text-indent: 10px; */
+			width:230px;
+			z-index: 1;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+			/* box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22); */
+			}
 
-.tooltip-inner {font-size: 1.1em; text-align: left;}
-.tooltip.right .tooltip-arrow {background-color:grey;}
+			.info:hover .extra-info {
+			display: block;
+			}
 
-* {
-  transition: all .2s ease;
-}
+			.info {
+			font-size: 20px;
+			padding-left: 5px;
+			width: 20px;
+			border-radius: 15px;
+			}
 
-.extra-info {
-  display: none;
-  line-height: 30px;
-  font-size: 12px;
-  position: relative;
-  /* top: 0px; */
-  /* left: 330px; */
-  background-color: #f9f9f9;
-  border-radius: 15px;
-  padding:10px;
-  word-wrap: break-word;
-  /* text-indent: 10px; */
-  width:230px;
-  z-index: 1;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  /* box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22); */
-}
+			.info:hover {
+			background-color:white;
+			padding: 0 0 0 5px;
+			width: 715px;
+			text-align: left !important;
+			}
 
-.info:hover .extra-info {
-  display: block;
-}
+			.item-hints{
+			/*   height: 500px;
+			width: 500px;
+			margin: 250px auto; */
+			position: relative;
+			display: flex;
+			}
+			.item-hints .hint {
+			/* width: 60px;
+			height: 60px; */
+			margin-top: 20px;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			}
 
-.info {
-  font-size: 20px;
-  padding-left: 5px;
-  width: 20px;
-  border-radius: 15px;
-}
+			.item-hints .hint::before{ /* //rotated squre */
+			background-color: black;
+			/*   width: 8px;
+			height: 8px; */
+			z-index: 2;
+			/*   -webkit-clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
+			clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%); */
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translate(-50%,-50%);
+			transform: translate(-50%,-50%);
+			}
 
-.info:hover {
-  background-color:white;
-  padding: 0 0 0 5px;
-  width: 715px;
-  text-align: left !important;
-}
+			.item-hints .hint-content {
+			color: black;
+			width: 400px; /*CHANGR THE SIZE OF TEXT WIDTH CONTAINER*/
+			position: absolute;
+			/* z-index: 5; */
+			z-index: 1;
+			background-color:white; /* to cover the buttons*/
+			/* padding-bottom: 12px 0; */
+			opacity: 1;
+			visibility: visible !important;
+			-webkit-transition: opacity .7s ease,visibility .7s ease;
+			transition: opacity .7s ease,visibility .7s ease;
+			pointer-events: none;
+			color: black;
+			visibility: hidden;
+			pointer-events: none;
+			/* height: 70px;  */
+			/* CHANGE THE HEIGHT OF THE TETX CONTAINER*/
+			}
 
+			.item-hints .hint-content::before {
+			width: 0px;
+			bottom: 10px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
+			left: 0;
+			content: '';
+			background-color: black;
+			height: 1px;
+			position: absolute;
+			transition: width 0.4s;
+			}
 
-/* .bootstrap-select .btn .filter-option {
-   text-align: center
-}
+			.item-hints .hint-content::before {
+			width: 300px;
+			transition: width 0.4s;
+			}
 
-.popover {
-	top: 120px !important;
-}
-
-#spopover405482 .popover .arrow {
-	top: 20px !important;
-	position: absolute;
-} */
-
-
-
-/* .popover .arrow{
-    top: 120px !important;
-} */
-
-
-/* HINTS */
-/* html,body{
-  height: 100%;
-  background: #212121;
-  font-family: 'Ubuntu', sans-serif;
-  line-height: 24px;
-  letter-spacing: 1px;
-} */
-.item-hints{
-/*   height: 500px;
-  width: 500px;
-  margin: 250px auto; */
-  position: relative;
-  display: flex;
-}
-.item-hints .hint {
-  /* width: 60px;
-  height: 60px; */
-  margin-top: 20px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.item-hints .hint::before{ /* //rotated squre */
-  background-color: black;
-/*   width: 8px;
-  height: 8px; */
-  z-index: 2;
-/*   -webkit-clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
-  clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%); */
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
-
-.item-hints .hint-content {
-  color: black;
-  width: 400px; /*CHANGR THE SIZE OF TEXT WIDTH CONTAINER*/
-  position: absolute;
-  /* z-index: 5; */
-  z-index: 1;
-  background-color:white; /* to cover the buttons*/
-  /* padding-bottom: 12px 0; */
-  opacity: 1;
-  visibility: visible !important;
-  -webkit-transition: opacity .7s ease,visibility .7s ease;
-  transition: opacity .7s ease,visibility .7s ease;
-  pointer-events: none;
-  color: black;
-  visibility: hidden;
-  pointer-events: none;
-  /* height: 70px;  */
-  /* CHANGE THE HEIGHT OF THE TETX CONTAINER*/
-}
-
-.item-hints .hint-content::before {
-  width: 0px;
-  bottom: 10px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
-  left: 0;
-  content: '';
-  background-color: black;
-  height: 1px;
-  position: absolute;
-  transition: width 0.4s;
-}
-
-.item-hints .hint-content::before {
-  width: 300px;
-  transition: width 0.4s;
-}
-
-.item-hints .hint-content::after {
-  -webkit-transform-origin: 0 50%;
-  transform-origin: 0 50%;
-  -webkit-transform: rotate(-225deg);
-  transform: rotate(-225deg);
-  bottom: 10px; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
-  left: 0px;
-  width: 15px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
-  content: '';
-  background-color: black;
-  height: 1px;
-  position: absolute;
-  opacity: 1;
-  -webkit-transition: opacity .5s ease;
-  transition: opacity .5s ease;
-  transition-delay: 0s;
-  -webkit-transition-delay: 0s;
-  transition-delay: 0s;
-}
-.item-hints .hint-content::after {
-  opacity: 1;
-  visibility: visible;
-}
-.item-hints .hint[data-position="4"] .hint-content {
-/*   bottom: 85px; */
-  bottom: 35px;
-  left: 100%; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
-  margin-left: 15px;
-}
+			.item-hints .hint-content::after {
+			-webkit-transform-origin: 0 50%;
+			transform-origin: 0 50%;
+			-webkit-transform: rotate(-225deg);
+			transform: rotate(-225deg);
+			bottom: 10px; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
+			left: 0px;
+			width: 15px;/*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
+			content: '';
+			background-color: black;
+			height: 1px;
+			position: absolute;
+			opacity: 1;
+			-webkit-transition: opacity .5s ease;
+			transition: opacity .5s ease;
+			transition-delay: 0s;
+			-webkit-transition-delay: 0s;
+			transition-delay: 0s;
+			}
+			.item-hints .hint-content::after {
+			opacity: 1;
+			visibility: visible;
+			}
+			.item-hints .hint[data-position="4"] .hint-content {
+			/*   bottom: 85px; */
+			bottom: 35px;
+			left: 100%; /*CHANGE THE POSITION OF THE TOOLTIP move to the right*/
+			margin-left: 15px;
+			}
 
 			.bootstrap-select .dropdown-menu { max-width: 100% !important; }
 
@@ -1109,10 +948,6 @@
 			transition: 0.3s;
 			}
 
-			/* .sidenav a:hover {
-				color: white;
-			} */
-
 			.sidenav .closebtn {
 			position: absolute;
 			top: 0;
@@ -1136,7 +971,6 @@
 				width: auto;
 			}
 
-
 			.code {
 				padding: 2px 4px;
 				font-size: 95%;
@@ -1147,17 +981,16 @@
 				font-size: 1em;
 			}
 
-
-			#butt-td
-			{
+			#butt-td{
 				table-layout: fixed;
 				width: 30%;
 			}
-			#type-td
-			{
+
+			#type-td{
 				table-layout: fixed;
 				width: 10%;
 			}
+
 			#jsoneditor {
 				width: 450px;
 				height: 400px;
@@ -1184,26 +1017,6 @@
 			transition: .20s;
 			}
 
-			/* .menu ul {
-			border-top: 1px solid #636366;
-			list-style: none;
-			margin: 0;
-			padding: 0;
-			}
-
-			.menu li {
-			border-bottom: 1px solid #636366;
-			font-family: 'Open Sans', sans-serif;
-			line-height: 45px;
-			padding-bottom: 3px;
-			padding-left: 20px;
-			padding-top: 3px;
-			}
-
-			.menu li a {
-			color: black;
-			} */
-
 			.bar {
 				left: 0px;
 				top:200px
@@ -1216,25 +1029,19 @@
 
 		</style>
 
-
 		<div class="modal fade bs-example-modal-lg" id="modal-without-animation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" >
 				<div class="modal-content">
 				<div class="modal-header">
-					<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
 					<h4 class="modal-title" id="myModalLabel">Step by step demo</h4>
 				</div>
 				<div class="modal-body">
 					<span>This demonstrates how to translate schema.org types and properties to Web APIs. As an example, we are showing how to tranlslate <a href="https://schema.org/VideoObject" target="_blank">VideoObject</a> and <a href="https://schema.org/Comment" target="_blank">Comment</a> to YouTube API's <a href="https://developers.google.com/youtube/v3/docs/videos/list" target="_blank">video</a> and <a href="https://developers.google.com/youtube/v3/docs/comments/list" target="_blank">comment</a> objects. We are also showing how support searching YouTube and applying methods to types.</span></br></br>
-					<!-- <p style="font-size:1.4em; margin:0px; padding:0px;">This demonstrates how to access and publish APIs. As an example, we are showing how to publish <a target="_blank" href="https://developers.google.com/youtube/v3/docs/search/list">YouTube Search API</a> to ScrAPIr.</p></br> -->
 					<video controls id="video1" style="width: 100%; height: auto; margin:0 auto; frameborder:0;">
 					<source src="assets/img/doc/Demo.mp4" type="video/mp4">
 					Your browser doesn't support HTML5 video tag.
 					</video>
 				</div>
-				<!-- <div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div> -->
 				</div>
 			</div>
 		</div>
