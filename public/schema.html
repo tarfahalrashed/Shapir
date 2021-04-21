@@ -31,9 +31,9 @@
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-
 	<link href="assets/css/prism.css" rel="stylesheet" />
 
+	<!-- ================== JSON EDITOR ================== -->
 	<link href="assets/css/jsoneditor.css" rel="stylesheet" type="text/css">
 	<script src="assets/js/jsoneditor.js"></script>
 
@@ -44,35 +44,24 @@
 
 	<!-- ================== redips-drag STYLE ================== -->
 	<link rel="stylesheet" href="assets/css/style.css" type="text/css" media="screen" />
-
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
 
 	<!-- ================== redips-drag JS ================== -->
 	<!-- <script type="text/javascript" src="assets/js/redips-drag-min.js"></script> -->
 	<!-- <script type="text/javascript" src="assets/js/script.js"></script> -->
 	<!-- ================== redips-drag JS ================== -->
-
 	<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script> -->
 
 
 </head>
 <body onload="fetchSchemaTypes()">
-	<!-- fetchSchemaTypes()"> -->
-
-	<!-- begin #page-loader -->
-	<!-- <div id="page-loader" class="fade show">
-		<span class="spinner"></span>
-	</div> -->
-	<!-- end #page-loader -->
 
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed page-content-full-height">
-		                           <!-- page-container fade page-sidebar-fixed page-header-fixe -->
+
 		<!-- begin #header -->
 		<div id="header" class="header navbar-default">
-			<!-- header navbar navbar-transparent navbar-fixed-top navbar-expand-lg -->
-
 			<a href="index.html" class="navbar-brand">
 				<img style="margin-left: 50px; margin-top: 5px;" src="assets/img/bg/logoP.svg" width="70px"/>
 			</a>
@@ -88,7 +77,6 @@
 		</div>
 		<!-- end #header -->
 
-
 		<!-- begin #content -->
 		<div id="content" class="content content-full-width">
 			<!-- begin vertical-box -->
@@ -97,12 +85,6 @@
 				<div class="vertical-box-column width-250">
 					<!-- begin vertical-box -->
 					<div class="vertical-box">
-						<!-- begin wrapper -->
-						<!-- <div class="wrapper bg-orange-transparent-5 text-white"> -->
-						<!-- bg-blue-darker text-white" -->
-							<!-- Left Column Top Box -->
-						<!-- </div> -->
-						<!-- end wrapper -->
 						<!-- begin vertical-box-row -->
 						<div class="vertical-box-row bg-orange-transparent-4 text-black">
 							<!-- begin vertical-box-cell -->
@@ -111,48 +93,24 @@
 								<div class="vertical-box-inner-cell"style="position: relative; overflow: hidden; width: auto; height: 100%;">
 									<!-- begin scrollbar -->
 									<div data-height="100%" class="wrapper">
-										<!-- <h4 style="color:black"><B>Follow these steps to ....?</B></h4>
-										</br> -->
 
-										<!-- <div id="type-list1" class="col-lg-14">
-											<h5><B>Step1.</B> Choose the name of the website</h5>
-											<p > (e.g. youtube)</p>
-											<select id="sites-name" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="siteHasBeenChosen(this)">
-												<option selected>Choose website name</option>
-											</select>
-											<hr>
-										</div>
-										</br> -->
-
-
-									<div id="step2" style="display: none;">
-
-											<!-- <div id="type-list" class="col-lg-14">
-												<h5 style=" color:black"><B>Step2.</B> Choose the types of data you want to retrieve/manage in this website. Check the <a href="https://schema.org/docs/full.html" target="_blank">list of types</a> in schema.org</h5>
-												<p style="color:black;">(e.g. Choose VideoObject to search for videos or get a specific video from youtube). </p>
-												<select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
-													<option value="" selected>Choose Type</option>
-												</select>
-											</div>
-											</br> -->
-
-											<div id="site-info" class="col-lg-14" style="padding-left:15px; padding-top:15px; display:none">
-											</div>
+										<div id="step2" style="display: none;">
+											<div id="site-info" class="col-lg-14" style="padding-left:15px; padding-top:15px; display:none"></div>
 											</br>
 											<hr>
-
-											<!-- type select -->
 											<div class="col-lg-14">
+												<h5>Check schema.org Types</h5>
 
 												<h6>You can find all schema.org types here: <a href="https://schema.org/docs/schemas.html" target="_blank">https://schema.org/docs/schemas.html</a></h6>
-												<h6>If you want to know more about a specific type, please choose it from here and read more about it.</h6>
+												<h6>Choose a specific type</h6>
+
 												<select id="type-menu" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-default" onchange="getDescription(this)">
 													<option selected>Choose Type</option>
 												</select>
 											</div>
 
 											<div id="schema-desc" class="col-lg-14" style="padding-top:15px; display:none">
-												<h5>Information about the chosen type</h5>
+
 												<div style="padding-bottom: 15px;">
 													<h6>Type Page:</h6>
 													<a id="schemaURL" target="_blank" style="font-weight: bold; font-style: unset; "></a>
@@ -166,54 +124,14 @@
 												<div id="jsonld-schema" style="display: none;">
 													<h6 style="display: inline;">Usage example encoded as JSON-LD</h6>
 													<a id="exampleLink" href="javascript:;" onclick="showOrHideExample()" style="font-weight: bold; font-style: unset; display: inline; padding-bottom: 10px;">(show)</a>
-
 													<pre id="json" style="font-size: 0.9em; padding-top: 0px; height: auto; max-height:500px; display: none;">
-														<code  id="hereCode" class="language-json load">
-														</code>
+														<code  id="hereCode" class="language-json load"></code>
 													</pre>
 												</div>
-
-
 												<hr>
 											</div>
-
-
 											</br>
-
-											<!-- <div id="prop-list" style="display:none" class="col-lg-14">
-												<h5 style=" color:black"><B>Step3.</B> Under each type in middle pane, choose the properties and methods.</h5>
-												<p >(e.g. For VideoObject type, you can choose the <I>name</I>, <I>description</I> and <I>url</I>)</p>
-												<hr>
-											</div> -->
-
-
-										<!-- <div id="connectDiv" style="display:none">
-											</br>
-											<h5 id="beforeDone"><B>Step4.</B> Connect to the API when you are done describing your data model. </h5>
-											<h5 id="afterDone" style="display:none">&nbsp;<B>Step4. </B> Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</h5>
-											<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a>
-										</div> -->
-
-
-											<!-- <div id="step3" style="">
-												<div id="method-list" class="col-lg-14">
-													<h5 style=" color:black"><B>Step4. [Optional]</B> Are you intertsed in performing an action on the site (e.g. Search for videos on YouTube "Search Action")?</h5>
-
-													<div id="method-site" >
-														<p style=" margin-bottom:5px; margin-top:15px"></p>
-														<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
-															<option value="" selected>Choose Action</option>
-														</select>
-													</div>
-													</br>
-												</div>
-											</div> -->
-
-
-
 										</div>
-
-										<!-- You got the bottom -->
 									</div>
 									<!-- end scrollbar -->
 								</div>
@@ -222,17 +140,11 @@
 							<!-- end vertical-box-cell -->
 						</div>
 						<!-- end vertical-box-row -->
-						<!-- begin wrapper -->
-						<!-- <div class="wrapper bg-orange-transparent-5 text-white"> -->
-						<div class="bg-orange-transparent-5 text-white">
-
-							<!-- Left Column Bottom Box -->
-						</div>
-						<!-- end wrapper -->
 					</div>
 					<!-- end vertical-box -->
 				</div>
 				<!-- end vertical-box-column -->
+
 				<!-- begin vertical-box-column -->
 				<div class="vertical-box-column ">
 					<!-- begin vertical-box -->
@@ -245,191 +157,134 @@
 								<div class="vertical-box-inner-cell ">
 									<!-- begin scrollbar -->
 									<div data-scrollbar="true" data-height="100%" class="wrapper ">
-
-									  <!-- <h1 class="page-header">Page with Wide Sidebar <small>header small text goes here...</small></h1> -->
-
 										<!-- begin panel -->
 										<div class="panel" style="height:auto; min-height: 880px;">
 											<div class="panel-heading">
-												<!-- <img src="main_assets/img/icon/number2.svg" width="30px" style="padding-bottom: 10px;"/></br> -->
-
-												<!-- <h4 class="panel-title">Data Model?? What should I call this middle pane?</h4> -->
-												<div class="panel-heading-btn">
+												<!-- <div class="panel-heading-btn"> -->
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> -->
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a> -->
 													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-												</div>
+												<!-- </div> -->
 											</div>
 											<div class="panel-body" style="padding-left:100px;">
-												<!-- <p>Follow the steps on the left to build your data model.</p> -->
-
 												<!-- begin panel-body -->
 												<div class="panel-body panel-form">
+													<h5 style="display: none;" id="desc-site">Describe the data model of <span id="siteN"></span> and connect it to its API</h5>
 
-													<!-- <div id="site-objects" style="display: none;"> </div>
-													</br></br> -->
-
-
-
-														<!-- <div id="listTypes" style="display: none;" style="width:150px; height: 30px;">
-															<select id="type-select" class="form-control selectpicker col-lg-14" data-size="10" data-live-search="true" data-style="btn-warning" onchange="typeHasBeenChosen(this)">
-																<option value="" selected>Choose Type</option>
-															</select>
-														</div>
-
-														<div id="listActions" style="display: none;" style="width:150px; height: 30px;">
-															<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
-																<option value="" selected>Choose Action</option>
-															</select>
-														</div> -->
-
-
-														<h5 style="display: none;" id="desc-site">Describe the data model of <span id="siteN"></span> and connect it to its API</h5>
-
-														<!-- <div class="form-group">
-															<label for="">Enter the URL of a Website</label>
-															<div class="col-4" style="display: inline-block;">
-																<input style="display: inline;" id="url-site" type="text" class="form-control" placeholder="" />
-																<button style="display: inline;" type="button" >Start</button>
-															</div>
-														</div> -->
-
-														<!-- <a href="#" id="tglr" class="popover-toggle" title="Popover Header">Toggle popover</a> -->
-
-
-														<div class="input-group mb-4" >
-														<!-- <div class="mb-5"> -->
-															<div class="input-group">
-																<label style="font-size: 1em; padding-top:5px"><B>Read the follwoing instructions and follw the steps below to connect schema.org to any Web API.</B>&nbsp;</label>
-																<!-- <a href="#modal-demo" class="btn btn-sm btn-outline-dark" style="border-radius:15px; height: 28px;" data-toggle="modal">Demo</a>&nbsp;
-																<a href="#modal-detail" class="btn btn-sm btn-outline-dark" style="border-radius:15px; height: 28px;"  data-toggle="modal">Details</a> -->
-																<a href="#modal-without-animation" class="btn btn-sm btn-outline-dark" style="border-radius:15px; height: 28px;" data-toggle="modal">Demo</a>
-															</div>
-
-
-
-
-															<ol style="font-size: 1em;">
-																<li>Enter the URL of a website that you would like to describe with schema.org vocabulary and connect that descreption to the Web API.</li>
-																<li>For the website you entered, choose the <B>types</B> of data in schema.org that matches the type of data in this website.
-																	<!-- </br><p style="font-size: 1em; color:grey">e.g. for https://www.youtube.com, you can choose VideoObject for YouTube video, MusicPlaylist for playlist, etc. Types will be represented as an orange node <span class="label label-orange">Type</span></p> -->
-																</li>
-																<li>For each type:
-																	 <!-- What is the website API endpoint that <B>get</B> you this type. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube video, the API endpoint would be https://www.googleapis.com/youtube/v3/videos">example</a>) -->
-																<!-- <li> When you click on the Type node <span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span>&nbsp; &nbsp;</span>, you can do the following:	</li> -->
-																	<ul>
-																		<li>What is the website API endpoint that <B>get</B> you this type. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube video, the API endpoint would be https://www.googleapis.com/youtube/v3/videos">example</a>)
-																			<!-- </br>e.g. For YouTube video the API endpoint would be https://www.googleapis.com/youtube/v3/videos. Get will be represnted as a purple node <span class="label label-purple">Get</span> -->
-																		</li>
-																		<li>Choose the <B>properties</B> from schema.org that matches the response fields of the API <span style="height: 1px;" class="label label-grey">Property/Field</span>. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube VideoObject, some properties would be the name, description, and publishedAt, the equivalent properties in the API would be title, description and datePublished.">example</a>)
-																		<!-- </br>e.g. For YouTube VideoObject, some properties would be the name, description, . Properties will be represnted as a grey node <span class="label label-grey">Property</span> -->
-																		<li>Click on the Type node <span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span> if you are intertsted in <B>searching</B> the site for this type, <B>updating</B> this type properties, <B>removing</B> an exsiting type and <B>creating</B> a new one.
-																		</li>
-																	</ul>
-																</li>
-																<li>If you are intersted in <B>searching</B> the website for this type, you will need to choose the search API endpoint, the search term parameter used to search the API and the id field. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="To search for YouTube videos, the API endpoint to use would be https://www.googleapis.com/youtube/v3/search">example</a>)
-																	<!-- </br>e.g. For YouTube video the API endpoint would be https://www.googleapis.com/youtube/v3/search. Search will be represnted as a purple node <span class="label label-purple">Search</span> -->
-																</li>
-																	<!-- <li><p> <span class="label label-purple">Get/Search</span><span class="label label-grey">Property</span></p></li> -->
-															</ol>
-
-
-
+													<div class="input-group mb-4" >
+													<!-- <div class="mb-5"> -->
+														<div class="input-group">
+															<label style="font-size: 1em; padding-top:5px"><B>Read the follwoing instructions and follw the steps below to connect schema.org to any Web API.</B>&nbsp;</label>
+															<!-- <a href="#modal-demo" class="btn btn-sm btn-outline-dark" style="border-radius:15px; height: 28px;" data-toggle="modal">Demo</a>&nbsp;
+															<a href="#modal-detail" class="btn btn-sm btn-outline-dark" style="border-radius:15px; height: 28px;"  data-toggle="modal">Details</a> -->
+															<a href="#modal-without-animation" class="btn btn-sm btn-outline-dark" style="border-radius:15px; height: 28px;" data-toggle="modal">Demo</a>
 														</div>
 
 
-														<div class="input-group mb-4">
-															<label style="padding-top:7px; font-size: 1em;"><B>Step1.</B> Enter the URL of a Website</label>
-															<div class="input-group col-lg-4">
-																<input id="url-site" type="text" class="form-control">
-																<span class="input-group-btn">
-																	<button id="enterUrl"class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>
 
-																</span>
-															</div>
+
+														<ol style="font-size: 1em;">
+															<li>Enter the URL of a website that you would like to describe with schema.org vocabulary and connect that descreption to the Web API.</li>
+															<li>For the website you entered, choose the <B>types</B> of data in schema.org that matches the type of data in this website.
+																<!-- </br><p style="font-size: 1em; color:grey">e.g. for https://www.youtube.com, you can choose VideoObject for YouTube video, MusicPlaylist for playlist, etc. Types will be represented as an orange node <span class="label label-orange">Type</span></p> -->
+															</li>
+															<li>For each type:
+																	<!-- What is the website API endpoint that <B>get</B> you this type. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube video, the API endpoint would be https://www.googleapis.com/youtube/v3/videos">example</a>) -->
+															<!-- <li> When you click on the Type node <span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span>&nbsp; &nbsp;</span>, you can do the following:	</li> -->
+																<ul>
+																	<li>What is the website API endpoint that <B>get</B> you this type. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube video, the API endpoint would be https://www.googleapis.com/youtube/v3/videos">example</a>)
+																		<!-- </br>e.g. For YouTube video the API endpoint would be https://www.googleapis.com/youtube/v3/videos. Get will be represnted as a purple node <span class="label label-purple">Get</span> -->
+																	</li>
+																	<li>Choose the <B>properties</B> from schema.org that matches the response fields of the API <span style="height: 1px;" class="label label-grey">Property/Field</span>. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="For YouTube VideoObject, some properties would be the name, description, and publishedAt, the equivalent properties in the API would be title, description and datePublished.">example</a>)
+																	<!-- </br>e.g. For YouTube VideoObject, some properties would be the name, description, . Properties will be represnted as a grey node <span class="label label-grey">Property</span> -->
+																	<li>Click on the Type node <span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span> if you are intertsted in <B>searching</B> the site for this type, <B>updating</B> this type properties, <B>removing</B> an exsiting type and <B>creating</B> a new one.
+																	</li>
+																</ul>
+															</li>
+															<li>If you are intersted in <B>searching</B> the website for this type, you will need to choose the search API endpoint, the search term parameter used to search the API and the id field. (<a class="test" href="#" data-toggle="tooltip" data-placement="right" title="To search for YouTube videos, the API endpoint to use would be https://www.googleapis.com/youtube/v3/search">example</a>)
+																<!-- </br>e.g. For YouTube video the API endpoint would be https://www.googleapis.com/youtube/v3/search. Search will be represnted as a purple node <span class="label label-purple">Search</span> -->
+															</li>
+																<!-- <li><p> <span class="label label-purple">Get/Search</span><span class="label label-grey">Property</span></p></li> -->
+														</ol>
+
+
+
+													</div>
+
+													<div class="input-group mb-4">
+														<label style="padding-top:7px; font-size: 1em;"><B>Step1.</B> Enter the URL of a Website</label>
+														<div class="input-group col-lg-4">
+															<input id="url-site" type="text" class="form-control">
+															<span class="input-group-btn">
+																<button id="enterUrl"class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>
+
+															</span>
+														</div>
+													</div>
+
+													<div id="step2-desc" style="display: none;" >
+														<div class="input-group mb-5" style="margin-bottom:-10px!important">
+															<label style="font-size: 1em;"><B>Step2.</B> Translate schema.org types to the Web API types/objects.
+															<button id="sugDblClick" class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Show suggested types</button>
+															<button class="btn btn-default" type="button" onclick="startFromScratch()">Start from scratch</button></label>
+																<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
 														</div>
 
-														<div id="step2-desc" style="display: none;" >
-															<div class="input-group mb-5" style="margin-bottom:-10px!important">
-																<label style="font-size: 1em;"><B>Step2.</B> Translate schema.org types to the Web API types/objects.
-																<button id="sugDblClick" class="btn btn-default" type="button" onclick="populateSuggestedSchema()">Show suggested types</button>
-																<button class="btn btn-default" type="button" onclick="startFromScratch()">Start from scratch</button></label>
-																	<!-- <h5>Step2. Describe what is in this website using schema.org vocuabury</h5> -->
-															</div>
+														<!-- <p style="padding-top:0px"><span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span>&nbsp; &nbsp;<span style="height: 1px;" class="label label-purple">Get/Search</span>&nbsp;&nbsp;<span style="height: 1px;" class="label label-grey">Property/Field</span></p> -->
+														<!-- <p style="padding-top:0px">Types will be represented by an orange node<span style="height: 1px;" class="label label-orange">Type</span>, get/search as <span style="height: 1px;" class="label label-purple">Get/Search</span> and properties as <span style="height: 1px;" class="label label-grey">Property</span></p> -->
+													</div>
+													</br>
 
-															<!-- <p style="padding-top:0px"><span style="height: 1px;" class="label label-orange">&nbsp;&nbsp;&nbsp;Type &nbsp;&nbsp;&nbsp;</span>&nbsp; &nbsp;<span style="height: 1px;" class="label label-purple">Get/Search</span>&nbsp;&nbsp;<span style="height: 1px;" class="label label-grey">Property/Field</span></p> -->
-															<!-- <p style="padding-top:0px">Types will be represented by an orange node<span style="height: 1px;" class="label label-orange">Type</span>, get/search as <span style="height: 1px;" class="label label-purple">Get/Search</span> and properties as <span style="height: 1px;" class="label label-grey">Property</span></p> -->
-														</div>
-														</br>
+													<div id="step2-header" style="display:none;"><h5 style="display: inline; margin-left: 100px; margin-right: 300px;">Schema.org</h5> <h5 style="display: inline;">Website API</h5></div>
 
-														<!-- <div class="col-md-9">
-															<div class="radio radio-css">
-																<input type="radio" name="radio_css_inline" id="inlineCssRadio1" value="option1" checked />
-																<label for="inlineCssRadio1">Radio option 1</label>
-															</div>
-															<div class="radio radio-css">
-																<input type="radio" name="radio_css_inline" id="inlineCssRadio2" value="option2" />
-																<label for="inlineCssRadio2">Radio option 2</label>
-															</div>
-														</div> -->
+													<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; padding-top: 10px;">
+														<table id="site-table" width="100%" class="table table-borderless">
+															<tbody>
+																<tr id="site-row1" style="display:none" >
+																	<!-- <td width="1%"></td> -->
+																	<td style="display:flex; flex-wrap:wrap;">
 
-
-														<div id="step2-header" style="display:none;"><h5 style="display: inline; margin-left: 100px; margin-right: 300px;">Schema.org</h5> <h5 style="display: inline;">Website API</h5></div>
-
-
-														<div id="tableSiteDiv" class="form-group row m-b-50" style="margin-bottom:-15px; padding-top: 10px;">
-															<table id="site-table" width="100%" class="table table-borderless">
-																<tbody>
-																	<tr id="site-row1" style="display:none" >
-																		<!-- <td width="1%"></td> -->
-																		<td style="display:flex; flex-wrap:wrap;">
-
-																			<!-- <div class="item-hints">
-																				<div class="hint" data-position="4"> -->
-																					<div style="width:240px; text-align:center; ">
-																						<a href="javascript:;" id="site-domain" class="btn btn-info" onclick="openNavMethod()" style="color:white; width:240px; height: 34px; text-align:center;"></a>
-																						<!-- <div id="site-domain-div" style="display: none"></div> -->
-																						<!-- <select id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-info" onchange="siteHasBeenChosen(this)">
-																							<option selected>Choose website</option>
-																						</select> -->
-																					</div>
-																					<!-- <div class="info" style="pointer-events: all; display: inline; ">
-																						<i class="ion ion-md-information-circle"></i>
-																						<span class="extra-info">
-																						  A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg
-																						</span>
-																					</div> -->
-																					<!-- <div id="step1_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children" >
-																						<p style="margin-bottom:0px">What types of information is available in this website?</p>
-																						<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="showSuggestedTypes()">Show Suggested Types</button>
-																						<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="showAddTypeButton()">Search for Types</button>
-																					</div>
+																		<!-- <div class="item-hints">
+																			<div class="hint" data-position="4"> -->
+																				<div style="width:240px; text-align:center; ">
+																					<a href="javascript:;" id="site-domain" class="btn btn-info" onclick="openNavMethod()" style="color:white; width:240px; height: 34px; text-align:center;"></a>
+																					<!-- <div id="site-domain-div" style="display: none"></div> -->
+																					<!-- <select id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-info" onchange="siteHasBeenChosen(this)">
+																						<option selected>Choose website</option>
+																					</select> -->
 																				</div>
-																			</div> -->
-																		</td>
+																				<!-- <div class="info" style="pointer-events: all; display: inline; ">
+																					<i class="ion ion-md-information-circle"></i>
+																					<span class="extra-info">
+																						A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg
+																					</span>
+																				</div> -->
+																				<!-- <div id="step1_hint" style="pointer-events:none; height:70px;" class="hint-content do--split-children" >
+																					<p style="margin-bottom:0px">What types of information is available in this website?</p>
+																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="showSuggestedTypes()">Show Suggested Types</button>
+																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="showAddTypeButton()">Search for Types</button>
+																				</div>
+																			</div>
+																		</div> -->
+																	</td>
 
-																	<!-- <td ><h5 style="margin-right:200px">Connect Schema.org to the Web API</h5></td> -->
+																<!-- <td ><h5 style="margin-right:200px">Connect Schema.org to the Web API</h5></td> -->
 
-																	</tr>
-																</tbody>
-															</table>
-														</div>
+																</tr>
+															</tbody>
+														</table>
+													</div>
 
 													<div id="tableDiv" class="form-group row m-b-50" style="margin-bottom:-15px">
-														<!-- <div  class="table">
-														</div> -->
 													</div>
 
 													<table id="get" class="table table-borderless" style="margin-top:15px;">
 														<tbody>
-
 															<tr id="site-row2" style="display:none" width="100%">
 																<td style="display:flex; flex-wrap:wrap;">
-
 																	<div class="item-hints"  style="margin-top:-20px">
 																		<div class="hint" data-position="4">
-
 																			<div style="display:flex;">
 																				<div>
 																					<img src="assets/img/new/arrow.png" width="15px"/>
@@ -440,1063 +295,26 @@
 																					</select>
 																				</div>
 																			</div>
-																			<!-- <div  id="step2_hint" style="pointer-events: none; height:50px;" class="hint-content do--split-children" >
-																				<p style="display: inline;">What types of information is available in this website?</p>
-																				<div class="info" style="pointer-events: all; display: inline; ">
-																					<i class="ion ion-md-information-circle"></i>
-																					<span class="extra-info">
-																					  A little column extra info. Aaand just a little bit moreksdbfhasgfsdfglasdjhdksgfksd sadgkfaksdjfgaksfgakdsjfgahdgfadfgasdfgakhsdgfaksjdhgafksdfgaksdfhagksdfhg
-																					</span>
-																				</div>
-																			</div> -->
 																		</div>
 																	</div>
-
 																</td>
 															</tr>
-
-															<!-- <tr  id="site-row3" style="display:none;" width="100%">
-																<td width="1%"></td>
-																<td style="display:flex; flex-wrap:wrap;">
-																	<div id="tar" class="item-hints">
-																		<div class="hint" data-position="4" style="margin-top:0px;">
-
-																			<div style="display:flex;">
-																				<div>
-																					&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>
-																				</div>
-																				<div id="method-select-div" style="width:240px; text-align:center; display:none">
-																					<select id="method-select" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-purple" onchange="siteMethodHasBeenChosen(this)">
-																						<option style="text-align:center; display:none" selected>Add Method</option>
-																					</select>
-																				</div>
-																				<div id="method-button-div" style="width:240px; text-align:center;">
-																					<a id="methodSite.Search" href="javascript:;" class="btn btn-purple" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" onclick="openNavMethod(this)">Search</a>
-																				</div>
-																				<div id="step4_hint" style="pointer-events:none; height:70px; " class="hint-content do--split-children" >
-																					<p style="margin-bottom:0px">Are you interested in searching the site?</p>
-																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="removeSearchHint()">Yes</button>
-																					<button class="btn btn-default" type="button" style="pointer-events: all;" onclick="removeSearchButton()">No</button>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</td>
-
-															</tr> -->
 														</tbody>
 													</table>
+													</br>
 
-
-												</br>
-													<!-- <div id="connectDiv" style="display:none"> -->
 													<div id="connectDiv" style="display:none">
 														<p style="font-size: 1.2em;" id=""><B>Step3.</B> Please click the save button to save this schema.org description of the website API when youre done &nbsp;
 															<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; width:100px" onclick="saveSchema()">Save</a>
 														</p>
 														<p style="font-size: 1.2em; color:red; display: none;" id="saveMsg"><B>Your description was successfully saved!</B></p>
-
-														<!-- <p style="font-size: 1.2em;" id="beforeDone"><B>Step3.</B> Connect to the API when you are done describing your data model. </p> -->
-														<!-- <p style="font-size: 1.2em; display:none" id="afterDone"><B>Step3.</B> Click on the <span style="color:#f90a69;">highlighted nodes</span> above to connect them to the Web API.</p> -->
-														<!-- <a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; " onclick="saveWoOSchema()">Connect to API</a> -->
 													</div>
 
-													<!-- <div style="display: none;">
-														<div id="fields_" style="width:240px; height:30px; text-align:center;">
-															<select id="fields-select" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-grey" onchange="">
-																<option selected>Choose field</option>
-															</select>
-														</div>
-													</div> -->
-
-													<!-- step4. was here -->
-
 												</div>
 												<!-- end panel-body -->
 											</div>
-
-
 										</div>
 										<!-- end panel -->
-
-
-										<!-- begin panel GETTERS-->
-										<div class="panel" style="display: none;">
-											<div class="panel-heading">
-												<h4 class="panel-title">How to use this?</h4>
-												<div class="panel-heading-btn">
-													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> -->
-													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-													<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-												</div>
-											</div>
-											<div class="panel-body">
-												<!-- <p>Panel Content Here</p>  -->
-												<!-- begin panel-body -->
-
-
-										<!-- begin nav-tabs -->
-										<ul class="nav nav-tabs">
-											<li class="nav-item">
-												<a href="#default-tab-1" data-toggle="tab" class="nav-link active">
-													<span class="d-sm-none">Tab 1</span>
-													<span class="d-sm-block d-none">Javascript</span>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="#default-tab-2" data-toggle="tab" class="nav-link">
-													<span class="d-sm-none">Tab 2</span>
-													<span class="d-sm-block d-none">Mavo</span>
-												</a>
-											</li>
-
-										</ul>
-										<!-- end nav-tabs -->
-										<!-- begin tab-content -->
-										<div class="tab-content">
-											<!-- begin tab-pane -->
-											<div class="tab-pane fade active show" id="default-tab-1">
-												<h3 class="m-t-10">Javascript</h3>
-
-											</div>
-											<!-- end tab-pane -->
-											<!-- begin tab-pane -->
-											<div class="tab-pane fade" id="default-tab-2">
-												<h3 class="m-t-10">Mavo</h3>
-											</div>
-											<!-- end tab-pane -->
-
-										</div>
-										<!-- end tab-content -->
-
-												<!-- <div class="panel-body panel-form"> -->
-													<!-- <form class="form-horizontal">
-
-														<div class="form-group row m-b-50">
-															<label class="col-form-label col-xs-1"><h5>Types</h5></label>
-															<div class="col-xs-4">
-																<select id="getters" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="curretGetterHasBeenSelected(this)">
-																	<option selected>Select a type</option>
-																</select>
-															</div>
-														</div>
-
-													</form>  -->
-												<!-- </div> -->
-
-											</div>
-											<!-- end panel-body -->
-										</div>
-										<!-- end panel -->
-
-
-										<!-- begin panel SETTERS -->
-										<div class="panel" style="display: none;">
-											<div class="panel-heading">
-												<h4 class="panel-title">Describe the Implementation of the Setters</h4>
-												<div class="panel-heading-btn">
-													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> -->
-													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-													<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-												</div>
-											</div>
-											<div class="panel-body">
-												<!-- <p>Panel Content Here</p>  -->
-												<!-- begin panel-body -->
-												<div class="panel-body panel-form">
-													<form class="form-horizontal">
-
-														<div class="form-group row m-b-50">
-															<!-- <label class="col-form-label col-xs-1"><h5>Method</h5></label> -->
-															<!-- <div class="col-xs-4">
-																<select id="methods" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="curretnMethodHasBeenSelected(this)">
-																	<option selected>Select a method</option>
-																</select>
-															</div> -->
-														</div>
-
-														<div id="methods-imp">
-
-															<div id="" class="panel panel-info" data-sortable-id="ui-widget-12" style="display: none;">
-																<div class="panel-heading">
-																	<h4 id="" class="panel-title"></h4>
-																	<div class="panel-heading-btn">
-																		<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i>
-																		</a>
-																	</div>
-																</div>
-																<div class="panel-body">
-																	<div class="form-group row m-b-50">
-																		<label class="col-form-label"><h5>Method Name</h5></label>
-																	</div>
-
-																	<div class="form-group row m-b-50">
-																		<label class="col-form-label col-xs-1"><h5>API Endpoint</h5></label>
-																		<div class="col-xs-4">
-																			<select id="method-api-endpoint" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="urlHasBeenChosen(this)">
-																				<option selected>Look for the API URL</option>
-																			</select>
-																		</div>
-																	</div>
-
-
-																	<div class="form-group row m-b-50">
-																		<label class="col-form-label col-xs-1"><h5>Parameters</h5></label>
-																		<div class="col-xs-4">
-																			<select id="method-api-params" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" multiple onchange="urlHasBeenChosen(this)">
-																				<option selected>Look for the API URL</option>
-																			</select>
-																		</div>
-																	</div>
-
-																	<a href="#modal-without-animation" data-toggle="modal" class="btn btn-default m-r-5" style="height:35px">Submit</a>
-
-																</div>
-															</div>
-
-														</div>
-													</form>
-												</div>
-
-											</div>
-											<!-- end panel-body -->
-										</div>
-										<!-- end panel -->
-
-
-										<!-- begin panel METHODS-->
-										<div class="panel" style="display: none;">
-											<div class="panel-heading">
-												<h4 class="panel-title">Describe the Implementation of the Methods</h4>
-												<div class="panel-heading-btn">
-													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> -->
-													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
-													<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-													<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
-												</div>
-											</div>
-											<div class="panel-body">
-												<!-- <p>Panel Content Here</p>  -->
-												<!-- begin panel-body -->
-												<div class="panel-body panel-form">
-													<!-- <form class="form-horizontal form-bordered"> -->
-
-														<form class="form-horizontal">
-
-															<div class="form-group row m-b-50">
-																<label class="col-form-label col-xs-1"><h5>Method</h5></label>
-																<div class="col-xs-4">
-																	<select id="methods" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="curretnMethodHasBeenSelected(this)">
-																		<option selected>Select a method</option>
-																	</select>
-																</div>
-															</div>
-
-															<div id="methods-imp">
-
-															<div id="duplicetor0" class="panel panel-info" data-sortable-id="ui-widget-12" style="display: none;">
-																<div class="panel-heading">
-																	<h4 id="panel-title0" class="panel-title"></h4>
-																	<div class="panel-heading-btn">
-																		<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i>
-																		</a>
-																	</div>
-																	</div>
-																		<div class="panel-body" id="'">
-
-																			<div class="form-group row m-b-50">
-																				<label class="col-form-label col-xs-1"><h5>Method Name</h5></label>
-																				<div class="col-xs-4">
-																					<input type="text" class="form-control" placeholder="" />
-																				</div>
-																			</div>
-
-																			<div class="form-group row m-b-50">
-																				<label class="col-form-label col-xs-1"><h5>API Endpoint</h5></label>
-																				<div class="col-xs-4">
-																					<select id="apis-url" showSubtext="true" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" showSubtext="true" onchange="urlHasBeenChosen(this)">
-																						<option selected>Look for the API URL</option>
-																					</select>
-																				</div>
-																			</div>
-
-
-																			<div class="form-group row m-b-50">
-																				<label class="col-form-label col-xs-1"><h5>Parameters</h5></label>
-																				<div class="col-xs-4">
-																					<select id="method-api-params" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" multiple onchange="urlHasBeenChosen(this)">
-																						<option selected>Look for the API URL</option>
-																					</select>
-																				</div>
-																			</div>
-
-																			<a href="#modal-without-animation" data-toggle="modal" class="btn btn-default m-r-5" style="height:35px">Submit</a>
-
-																		</div>
-															</div>
-														</div>
-
-
-												</div>
-
-															<!-- <div class="form-group row m-b-50" id="methodForm0" >
-																<label class="col-form-label ">Method Name</label>
-																<p>'+method+'</p>
-																<label class="col-form-label">API Endpoint</label>
-																<select id="apis-url" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="urlHasBeenChosen(this)">
-																	<option selected>Look for the API URL</option>
-																</select>
-															</div>
-														 -->
-
-
-															<!-- begin panel -->
-															<!-- <div class="panel panel-info" data-sortable-id="ui-widget-12">
-																<div class="panel-heading">
-																	<h4 class="panel-title">getVideosWithComments</h4>
-																	<div class="panel-heading-btn">
-																		<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-																		<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-																	</div>
-																</div>
-																<div class="panel-body">
-
-																	<div class="form-group row m-b-50">
-																		<label class="col-form-label col-xs-2"><h5>Website</h5></label>
-																		<div class="col-xs-4">
-																			<select id="sites-name" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="websiteHasBeenChosen(this)">
-																				<option selected>From what website</option>
-																			</select>
-																		</div>
-																	</div>
-
-																	<div class="form-group row m-b-50">
-																		<label class="col-form-label col-xs-2"><h5>API Endpoint</h5></label>
-																		<div class="col-xs-4">
-																			<select id="apis-url" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="urlHasBeenChosen(this)">
-																				<option selected>Look for the API URL</option>
-																			</select>
-																		</div>
-																	</div>
-
-
-																<div>
-																	<div id="request-parameters" class="form-group row m-b-50" style="display: none;">
-																		<label class="col-form-label .f-s-15 col-xs-2"><h5>Request Parameters</h5></label>
-																		<div class="col-xs-4">
-																			<select id="select-parameter" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="reqHasBeenChosen(this)">
-																				<option selected>Select a parameter</option>
-																			</select>
-																		</div>
-																	</div>
-																		<div class="col-xs-6">
-																			<table id="table-parameters" id="param-table" class="table table-borderless">
-																				<thead>
-																					<tr>
-																					<th>Parameter</th>
-																					<th>Method Input</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-
-																				</tbody>
-																			</table>
-																		</div>
-																</div>
-
-
-																<div>
-																	<div id="response-fields" class="form-group row m-b-50" style="display: none;">
-																		<label class="col-form-label .f-s-15 col-xs-2"><h5>Response Fields</h5></label>
-																		<div class="col-xs-4">
-																		<select id="select-response" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="resHasBeenChosen(this)">
-																			<option selected>Select a field</option>
-																		</select>
-																		</div>
-																	</div>
-																		<div class="col-xs-6">
-																			<table id="table-response" id="param-table" class="table table-borderless">
-																				<thead>
-																					<tr>
-																					<th>Field</th>
-																					<th>Property</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-
-																				</tbody>
-																			</table>
-																		</div>
-																	</div>
-
-
-
-
-																	<div class="col-xs-12">
-																	<div class="panel panel-default panel-with-tabs" data-sortable-id="ui-unlimited-tabs-2">
-																		<div class="panel-heading p-0">
-																			<div class="tab-overflow">
-																				<ul class="nav nav-tabs">
-																					<li class="nav-item"><a href="#nav-tab2-1" data-toggle="tab" class="nav-link active">/search</a></li>
-																					<li class="nav-item"><a href="#nav-tab2-2" data-toggle="tab" class="nav-link">/video</a></li>
-																					<li class="nav-item"><a href="#nav-tab2-3" data-toggle="tab" class="nav-link">/commentThread</a></li>
-																				</ul>
-																			</div>
-																			<div class="panel-heading-btn mr-2 ml-2 d-flex">
-																			</div>
-																		</div>
-																		<div class="row">
-																			<div class="col">
-																		<div class="panel-body tab-content">
-
-
-																			<div class="tab-pane fade" id="nav-tab2-1">
-																				<h3 class="m-t-10">YouTube Search API</h3></br>
-
-																					<div class="col">
-
-																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Parameters</h5></label>
-																					<div class="col-xs-4">
-																					<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
-																						<option selected>term</option>
-																						<option selected>key</option>
-																						<option>type</option>
-																						<option>order by</option>
-																						<option>safe search</option>
-																						<option>video caption</option>
-																						<option>video definition</option>
-																						<option>video duration</option>
-																					</select>
-																					</div>
-																				</div>
-
-																				<div class="form-group row m-b-50">
-																				<div class="col-xs-6">
-																				<table id="param-table" class="table table-borderless">
-																					<thead>
-																						<tr>
-																						<th>Parameter</th>
-																						<th>Value</th>
-																						</tr>
-																					</thead>
-																					<tbody>
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox1" value="" checked />
-																									<label for="cssCheckbox1">term</label>
-																								</div>
-																							</td>
-																							<td>
-																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
-																							</td>
-																						</tr>
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox2" value="" checked />
-																									<label for="cssCheckbox2">key</label>
-																								</div>
-																							</td>
-																							<td>
-																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																			</div>
-																				</div>
-
-																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Response</h5></label>
-																				</div>
-
-																				<div class="form-group row m-b-50">
-																				<div class="col-xs-6">
-																				<table id="param-table" class="table table-borderless">
-
-																					<tbody>
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox11" value="" checked />
-																									<label for="cssCheckbox11">videoId</label>
-																								</div>
-																							</td>
-																						</tr>
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox22" value="" checked />
-																									<label for="cssCheckbox22">name</label>
-																								</div>
-																							</td>
-																						</tr>
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox4" value="" checked />
-																									<label for="cssCheckbox4">publishedAt</label>
-																								</div>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																			</div>
-																				</div>
-
-
-																	</div>
-
-
-
-															 				</div>
-
-
-																			<div class="tab-pane fade" id="nav-tab2-2">
-																				<h3 class="m-t-10">YouTube Video API</h3>
-
-																					<div class="col">
-
-																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Parameters</h5></label>
-																					<div class="col-xs-4">
-																					<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
-																						<option selected>videoId</option>
-																						<option >key</option>
-																						<option>type</option>
-																						<option>order by</option>
-																						<option>safe search</option>
-																						<option>video caption</option>
-																						<option>video definition</option>
-																						<option>video duration</option>
-																					</select>
-																					</div>
-
-																				</div>
-
-																				<div class="form-group row m-b-50">
-																				<div class="col-xs-6">
-																				<table id="param-table" class="table table-borderless">
-																					<thead>
-																						<tr>
-																						<th>Parameter</th>
-																						<th>Value</th>
-																						</tr>
-																					</thead>
-																					<tbody>
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox1" value="" checked />
-																									<label for="cssCheckbox1">videoId</label>
-																								</div>
-																							</td>
-																							<td>
-																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
-																							</td>
-																						</tr>
-
-																					</tbody>
-																				</table>
-																			</div>
-																				</div>
-
-																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Response</h5></label>
-																				</div>
-
-																				<div class="form-group row m-b-50">
-																				<div class="col-xs-6">
-																				<table id="param-table" class="table table-borderless">
-
-																					<tbody>
-
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox33" value="" checked />
-																									<label for="cssCheckbox33">descreption</label>
-																								</div>
-																							</td>
-																						</tr>
-
-																					</tbody>
-																				</table>
-																			</div>
-																				</div>
-
-
-																	</div>
-
-																			</div>
-
-																			<div class="tab-pane fade" id="nav-tab2-3">
-																				<h3 class="m-t-10">YouTube Comment API</h3>
-
-																				<div class="row">
-																					<div class="col">
-
-																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Parameters</h5></label>
-																					<div class="col-xs-4">
-																					<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
-																						<option selected>videoId</option>
-																						<option >key</option>
-																						<option>type</option>
-																						<option>order by</option>
-																						<option>safe search</option>
-																						<option>video caption</option>
-																						<option>video definition</option>
-																						<option>video duration</option>
-																					</select>
-																					</div>
-
-																				</div>
-
-																				<div class="form-group row m-b-50">
-																				<div class="col-xs-6">
-																				<table id="param-table" class="table table-borderless">
-																					<thead>
-																						<tr>
-																						<th>Parameter</th>
-																						<th>Value</th>
-																						</tr>
-																					</thead>
-																					<tbody>
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox1" value="" checked />
-																									<label for="cssCheckbox1">videoId</label>
-																								</div>
-																							</td>
-																							<td>
-																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
-																							</td>
-																						</tr>
-
-																					</tbody>
-																				</table>
-																			</div>
-																				</div>
-
-																				<div class="form-group row m-b-50">
-																					<label class="col-form-label .f-s-15 col-xs-2"><h5>Response</h5></label>
-																				</div>
-
-																				<div class="form-group row m-b-50">
-																				<div class="col-xs-6">
-																				<table id="param-table" class="table table-borderless">
-
-																					<tbody>
-
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox33" value="" checked />
-																									<label for="cssCheckbox33">author</label>
-																								</div>
-																							</td>
-																						</tr>
-
-																						<tr>
-																							<td>
-																								<div class="checkbox checkbox-css">
-																									<input type="checkbox" id="cssCheckbox33" value="" checked />
-																									<label for="cssCheckbox33">text</label>
-																								</div>
-																							</td>
-																						</tr>
-
-																					</tbody>
-																				</table>
-																			</div>
-																				</div>
-
-
-																	</div>
-
-																	</div>
-																			</div>
-
-																			</div>
-
-
-																		</div>
-
-
-
-
-																		<div class="col">
-
-																			</br>
-																				<div id="jsoneditor2" class="jsoneditor22"></div>
-
-																			</div>
-
-																		</div>
-
-
-
-
-																		<div class="form-group row m-b-50">
-																			<label class="col-form-label .f-s-15"><h5>Final Response</h5></label>
-
-																		</div>
-																		<div class="form-group row m-b-50">
-																			<div class="col-xs-8">
-																				<table id="param-table" class="table table-borderless">
-																					<thead>
-																						<tr>
-																						<th>Field</th>
-																						<th>Property</th>
-																						<th>Name</th>
-																						</tr>
-																					</thead>
-																					<tbody>
-																						<tr>
-																							<td>name</td>
-																							<td>
-																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
-																									<option selected>name</option>
-																									<option>Title</option>
-																									<option>Description</option>
-																									<option>Published At</option>
-																									<option>Channel Title</option>
-																									<option>Channel ID</option>
-																									<option>Thumbnail URL</option>
-																								</select>
-																							</td>
-																							<td>
-																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
-																							</td>
-																						</tr>
-																						<tr>
-																							<td>description</td>
-																							<td>
-																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
-																									<option>name</option>
-																									<option>Title</option>
-																									<option selected>description</option>
-																									<option>Published At</option>
-																									<option>Channel Title</option>
-																									<option>Channel ID</option>
-																									<option>Thumbnail URL</option>
-																								</select>
-																							</td>
-																							<td>
-																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
-																							</td>
-																						</tr>
-																						<tr>
-																							<td>publishedAt</td>
-																							<td>
-																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
-																									<option selected>datePublished</option>
-																									<option>Title</option>
-																									<option>Description</option>
-																									<option>Published At</option>
-																									<option>Channel Title</option>
-																									<option>Channel ID</option>
-																									<option>Thumbnail URL</option>
-																								</select>
-																							</td>
-																							<td>
-																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
-																							</td>
-																						</tr>
-
-																						<tr>
-																							<td>author</td>
-																							<td>
-																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
-																									<option selected>author</option>
-																									<option>Title</option>
-																									<option>Description</option>
-																									<option>Published At</option>
-																									<option>Channel Title</option>
-																									<option>Channel ID</option>
-																									<option>Thumbnail URL</option>
-																								</select>
-																							</td>
-																							<td>
-																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
-																							</td>
-																						</tr>
-
-																						<tr>
-																							<td>text</td>
-																							<td>
-																								<select id="para" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="" multiple>
-																									<option selected>text</option>
-																									<option>Title</option>
-																									<option>Description</option>
-																									<option>Published At</option>
-																									<option>Channel Title</option>
-																									<option>Channel ID</option>
-																									<option>Thumbnail URL</option>
-																								</select>
-																							</td>
-																							<td>
-																								<input type="text" class="form-control" style="height:30px; width:200px" placeholder="" />
-																							</td>
-																						</tr>
-																						</tbody>
-																				</table>
-																			</div>
-																		</div>
-
-
-																	</div>
-
-																  </div>
-																</div>
-
-															</div> -->
-															<!-- end panel -->
-
-
-												<style>
-
-													/* .btn-info{
-														color:black;
-														background-color:black;
-													} */
-
-													.modal.fade .modal-dialog{transform:none !important;}
-													#methodDiv {
-														border-radius: 25px;
-														border: 2px solid lightgray;
-														padding: 20px;
-														width: 200px;
-														height: 150px;
-													}
-
-												</style>
-
-
-
-																				<!-- <pre id="json" style="height:500px; font-size: 1em;"> -->
-																					<!-- <code class="language-json load"> -->
-	<!-- {
-		"id": 0,
-		"videoId": "https://www.youtube.com/embed/YQHsXMglC9A",
-		"title": "Adele - Hello",
-		"description": "'Hello' is taken from the new album, 25, out November 20. http://adele.com Available now from iTunes http://smarturl.it/itunes25 Available now from Amazon"
-	} -->
-	<!-- </code> -->
-	<!-- </pre> -->
-																				<!-- <pre><code class="language-css">p { color: red }</code></pre> -->
-
-
-
-
-																	<!-- <div class="form-group row m-b-50">
-																		<label class="col-form-label col-xs-1">Method Name</label>
-																		<div class="col-xs-4">
-																			<input type="text" class="form-control " placeholder="Enter a name for the method" />
-																		</div>
-																	</div>
-
-
-																	<div class="form-group row m-b-50">
-																		<label class="col-form-label col-xs-1">API Endpoint</label>
-																		<div class="col-xs-4">
-																			<select id="apis-url" class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="urlHasBeenChosen(this)">
-																				<option selected>Look for the API URL</option>
-																			</select>
-																		</div>
-																	</div>
-																	 -->
-
-
-
-
-														</form>
-
-													<!-- begin panel -->
-													<!-- <div class="panel panel-warning">
-														<div class="panel-heading">
-															<h4 class="panel-title">/search</h4>
-															<div class="panel-heading-btn">
-																<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-																<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-															</div>
-														</div>
-														<div class="panel-body">
-
-															<div style="display:inline">
-																<div class="input-group divcenter">
-																	<div class="input-group-prepend">
-																	<select class="form-control" id="method" style="height:34px" onchange="">
-																			<option value="GET">GET</option>
-																			<option value="POST">POST</option>
-																			<option value="PUT">PUT</option>
-																			<option value="INSERT">INSERT</option>
-																			<option value="DELETE">DELETE</option>
-																		</select>
-																	</div>
-																	<input style="width:150px; display: inline-block" type="text" class="form-control" id="url" onchange="urlBlur(); urlChanged();" placeholder="e.g. 'https://www.googleapis.com/youtube/v3/search'" required>
-																</div>
-															</div>
-
-														</br></br>
-
-															<div class="panel panel-default panel-with-tabs" data-sortable-id="ui-unlimited-tabs-2">
-																<div class="panel-heading p-0">
-																	<div class="tab-overflow">
-																		<ul class="nav nav-tabs">
-																			<li class="nav-item prev-button"><a href="javascript:;" data-click="prev-tab" class="text-inverse nav-link"><i class="fa fa-arrow-left"></i></a></li>
-																			<li class="nav-item"><a href="#nav-tab2-1" data-toggle="tab" class="nav-link active">Parameters</a></li>
-																			<li class="nav-item"><a href="#nav-tab2-2" data-toggle="tab" class="nav-link">Authentication & Headers</a></li>
-																			<li class="nav-item"><a href="#nav-tab2-3" data-toggle="tab" class="nav-link">Response</a></li>
-																			<li class="nav-item"><a href="#nav-tab2-4" data-toggle="tab" class="nav-link">Pagination</a></li>
-																		</ul>
-																	</div>
-
-																</div>
-
-																<div class="panel-body tab-content">
-																	<div class="tab-pane fade active show" id="nav-tab2-1">
-																		<h3 class="m-t-10">Parameters</h3>
-																		<div class="col-6">
-																			<table id="requestTabel" class="table">
-																				<thead>
-																					<tr>
-																						<th>Parameter*</th>
-																						<th>Value*</th>
-																						<th>Displayed Name</th>
-																						<th></th>
-																						<th></th>
-																					</tr>
-																				</thead>
-																				<tbody style="text-align:center">
-																				<tr id="firstTR">
-																					<td>
-																						<input class="form-control" type="text" id="name" name="nameParam" style="" >
-																					</td>
-																					<td>
-																						<input class="form-control" type="text" id="value" style="">
-																					</td>
-
-																					<td>
-																						<div>
-																							<input id="displayedName" class="form-control" type="text" placeholder="">
-																						</div>
-																					</td>
-
-																					<td>
-																						<div class="checkbox checkbox-css">
-																							<input type="checkbox" id="cssCheckbox1" value="" checked />
-																							<label for="cssCheckbox1">Required</label>
-																						</div>
-																					</td>
-
-																					<td>
-																						<input type="image" src="delete.png" style="width:15px; padding-top: 6px;" onclick="deleteRow(this)" />
-																					</td>
-																				</tr>
-																				</tbody>
-																			</table>
-
-																			<div id="optionalP" style="display:inline-block;"></div>
-
-																			</br>
-																			<a class="btn btn-success"onclick="addRow()" style="width:150px; text-align:center; color:white" ><i class="glyphicon glyphicon-plus"></i>Add New Parameter</a>
-																			<a style="color:white; width:150px; text-align:center" class="btn btn-danger" onclick="clearTable()" ><i class="glyphicon glyphicon-trash"></i>Clear Table</a>
-																		</div>
-
-																	</div>
-
-																	<div class="tab-pane fade" id="nav-tab2-2">
-																		<h3 class="m-t-10">Nav Tab 2</h3>
-																		<p>
-																			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-																			Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor,
-																			est diam sagittis orci, a ornare nisi quam elementum tortor.
-																			Proin interdum ante porta est convallis dapibus dictum in nibh.
-																			Aenean quis massa congue metus mollis fermentum eget et tellus.
-																			Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien,
-																			nec eleifend orci eros id lectus.
-																		</p>
-																		<p>
-																			Aenean eget odio eu justo mollis consectetur non quis enim.
-																			Vivamus interdum quam tortor, et sollicitudin quam pulvinar sit amet.
-																			Donec facilisis auctor lorem, quis mollis metus dapibus nec. Donec interdum tellus vel mauris vehicula,
-																			at ultrices ex gravida. Maecenas at elit tincidunt, vulputate augue vitae, vulputate neque.
-																			Aenean vel quam ligula. Etiam faucibus aliquam odio eget condimentum.
-																			Cras lobortis, orci nec eleifend ultrices, orci elit pellentesque ex, eu sodales felis urna nec erat.
-																			Fusce lacus est, congue quis nisi quis, sodales volutpat lorem.
-																		</p>
-																	</div>
-
-																	<div class="tab-pane fade" id="nav-tab2-3">
-																		<h3 class="m-t-10">Nav Tab 3</h3>
-																		<p>
-																			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-																			Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor,
-																			est diam sagittis orci, a ornare nisi quam elementum tortor.
-																			Proin interdum ante porta est convallis dapibus dictum in nibh.
-																			Aenean quis massa congue metus mollis fermentum eget et tellus.
-																			Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien,
-																			nec eleifend orci eros id lectus.
-																		</p>
-																		<p>
-																			Aenean eget odio eu justo mollis consectetur non quis enim.
-																			Vivamus interdum quam tortor, et sollicitudin quam pulvinar sit amet.
-																			Donec facilisis auctor lorem, quis mollis metus dapibus nec. Donec interdum tellus vel mauris vehicula,
-																			at ultrices ex gravida. Maecenas at elit tincidunt, vulputate augue vitae, vulputate neque.
-																			Aenean vel quam ligula. Etiam faucibus aliquam odio eget condimentum.
-																			Cras lobortis, orci nec eleifend ultrices, orci elit pellentesque ex, eu sodales felis urna nec erat.
-																			Fusce lacus est, congue quis nisi quis, sodales volutpat lorem.
-																		</p>
-																	</div>
-
-																	<div class="tab-pane fade" id="nav-tab2-4">
-																		<h3 class="m-t-10">Connect response to type's properties</h3>
-																		<p>
-																			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-																			Integer ac dui eu felis hendrerit lobortis. Phasellus elementum, nibh eget adipiscing porttitor,
-																			est diam sagittis orci, a ornare nisi quam elementum tortor.
-																			Proin interdum ante porta est convallis dapibus dictum in nibh.
-																			Aenean quis massa congue metus mollis fermentum eget et tellus.
-																			Aenean tincidunt, mauris ut dignissim lacinia, nisi urna consectetur sapien,
-																			nec eleifend orci eros id lectus.
-																		</p>
-																		<p>
-																			Aenean eget odio eu justo mollis consectetur non quis enim.
-																			Vivamus interdum quam tortor, et sollicitudin quam pulvinar sit amet.
-																			Donec facilisis auctor lorem, quis mollis metus dapibus nec. Donec interdum tellus vel mauris vehicula,
-																			at ultrices ex gravida. Maecenas at elit tincidunt, vulputate augue vitae, vulputate neque.
-																			Aenean vel quam ligula. Etiam faucibus aliquam odio eget condimentum.
-																			Cras lobortis, orci nec eleifend ultrices, orci elit pellentesque ex, eu sodales felis urna nec erat.
-																			Fusce lacus est, congue quis nisi quis, sodales volutpat lorem.
-																		</p>
-																	</div>
-																</div>
-															</div>
-
-
-
-														</div>
-
-
-													</div> -->
-													<!-- end panel -->
-
-
-												</div>
-												<!-- end panel-body -->
-										</div>
-										<!-- </div> -->
-										<!-- end panel -->
-
-
-
 
 									</div>
 									<!-- end scrollbar -->

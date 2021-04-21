@@ -1754,7 +1754,9 @@ function siteHasBeenEntered(select){
       $("#site-info").append('</br><h6>Website categories</h6>');
       $("#site-info").append('<ul>');
       for(var c=0; c<categories.length; ++c){
-        $("#site-info").append('<li>'+categories[c].name+'</li>');
+        var cat = categories[c].name;
+        var childCategory = cat.split("/").pop();
+        $("#site-info").append('<li>'+childCategory+'</li>');
       }
       $("#site-info").append('</ul>');
 
@@ -3385,10 +3387,11 @@ function getDescription(select){
 
 
   var typeProperties2=[];
+  var propsInfo={}
 
   $.ajax({
-    url: '/schemaOrg/'+type,
-    // url: 'https://schema.org/'+type,
+    // url: '/schemaOrg/'+type,
+    url: 'https://schema.org/'+type,
     type: 'GET',
     crossDomain:true,
     dataType: "html",
@@ -4911,7 +4914,7 @@ function propertyHasBeenChosen(select){
                 +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
                 +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
                 +'</td>'
-                +'<td><code style="margin-left:-90px;">TEXT</code></td>'
+                +'<td><code style="margin-left:-90px;">'+typeOfProperty+'</code></td>'
                 +'<td><div style="width:240px; text-align:center;">'
                 // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
                 +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalField+'"  onclick="openNav(this.id)">'+globalField+'</a>'
@@ -5081,7 +5084,15 @@ function fieldHasBeenSelected(select){
 
   console.log("globalField: ", globalField)
 
+  if(allTheType[thisType][globalProperty].types){
+    var types = allTheType[thisType][globalProperty].types;
 
+    if(types=="Distance,QuantitativeValue"){
+      types="Number"
+    }
+  }else{
+    types="Text"
+  }
 
   var typeP, descP;
   console.log("field: ",property);
@@ -5101,7 +5112,7 @@ function fieldHasBeenSelected(select){
         +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/>'
         +'<a href="javascript:;" class="btn btn-grey" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;" id="'+thisType+'.'+globalProperty+'"  onclick="openNav(this.id)">'+globalProperty+'</a>'
         +'</td>'
-        +'<td><code style="margin-left:-90px;">Text</code></td>' //'+propsInfo[globalProperty].types.join()+'
+        +'<td><code style="margin-left:-90px;">'+types+'</code></td>' //'+propsInfo[globalProperty].types.join()+'
         +'<td>'
         +'<div style="width:240px; text-align:center;">'
         // +'<select id="fields_'+thisType+'" class="form-control selectpicker " data-size="10" data-live-search="true" data-style="btn-default" onchange="fieldHasBeenSelected(this)"><option selected>Choose field</option></select>'
