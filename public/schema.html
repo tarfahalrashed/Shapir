@@ -437,7 +437,9 @@
 			<hr>
 
 			<!-- *********** Begin Change *********** -->
-			<h2> Add your code here here</h2>
+			<h2> Add your code here</h2>
+
+			<!-- Radio button/ menue of (Create, remove, update, other methods)-->
 
 			<div id="type-div">
 				<!-- begin tab -->
@@ -503,7 +505,7 @@
 						<p>1. Which of the following <span id="sel_site_up"></span> API endpoints updates a <span id="sel_ob_up"></span> object?
 							Click on each one to view their descreption.</p>
 
-						<div style="overflow: scroll; height:260px" class="box">
+						<div id="acc_show" style="display:none; overflow: scroll; height:260px" class="box">
 							<div id="accordion-update" class="accordion">
 							</div>
 						</div>
@@ -624,6 +626,10 @@
 
 			<script>
 				// If method was choesn show accordian
+
+				function methoIsChosen(){
+					$("#acc_show").show();
+				}
 
 				// Click on type
 				// Step#1 Choose Method: Create, Remove, Update, other method
