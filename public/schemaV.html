@@ -213,12 +213,22 @@
 													</div>
 
 													<div class="input-group mb-4">
+														<label style="padding-top:7px; font-size: 1em;"><B>Step0.</B> Enter the OpenAPI spec URL</label>
+														<div class="input-group col-lg-4">
+															<input id="url-openApi" type="text" class="form-control">
+															<span class="input-group-btn">
+																<button id="openAPIUrl"class="btn btn-default" type="button" onclick="openAPIURLIsEntered()">Enter</button>
+															</span>
+														</div>
+													</div>
+
+
+													<div class="input-group mb-4">
 														<label style="padding-top:7px; font-size: 1em;"><B>Step1.</B> Enter the URL of a Website</label>
 														<div class="input-group col-lg-4">
 															<input id="url-site" type="text" class="form-control">
 															<span class="input-group-btn">
 																<button id="enterUrl"class="btn btn-default" type="button" onclick="siteHasBeenEntered()">Enter</button>
-
 															</span>
 														</div>
 													</div>
@@ -437,14 +447,20 @@
 			<hr>
 
 			<!-- *********** Begin Change *********** -->
-			<!-- <h2> Add your code here</h2> -->
+			<h5 class="m-t-10">Choose the type of action you want to apply to this object: </h5>
 
-			<!-- Radio button/ menue of (Create, remove, update, other methods)-->
-
+			<input type="radio" id="update" name="methodType" onclick="methodIsChosen(value)" value="update">
+            <label for="update">Update</label><br>
+			<input type="radio" id="create" name="methodType" onclick="methodIsChosen(value)" value="create">
+            <label for="create">Create</label><br>
+            <input type="radio" id="remove" name="methodType" onclick="methodIsChosen(value)" value="remove">
+            <label for="remove">Remove</label><br>
+            <input type="radio" id="other" name="methodType" onclick="methodIsChosen(value)" value="other">
+            <label for="other">Other</label>
 
 			<div id="type-div">
 				<!-- begin tab -->
-				<ul class="nav nav-pills mb-2">
+				<!--<ul class="nav nav-pills mb-2">
 					<li class="nav-item">
 						<a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link active">
 							<span class="d-sm-block d-none">Update</span>
@@ -466,7 +482,7 @@
 							<span class="d-sm-block d-none">Methods</span>
 						</a>
 					</li>
-				</ul>
+				</ul>-->
 				<!-- end tab -->
 
 				<!-- begin tab-content -->
@@ -475,7 +491,7 @@
 					<div class="tab-pane fade" id="nav-pills-tab-7">
 						<h5 class="m-t-10">Get a specific <span id="sel_obTitle"></span> from <span id="sel_siteTitle"></span> by its ID</h5></br>
 						<p>1. Which of the following <span id="sel_site"></span> API endpoints returns a <span id="sel_ob"></span> object?
-							Click on each one to view their descreption.</p>
+							Click on each one to view their description.</p>
 						<div style="overflow: scroll; height:260px" class="box">
 							<!-- begin #accordion -->
 							<div id="accordion" class="accordion">
@@ -501,12 +517,12 @@
 					<!-- end tab-pane -->
 
 					<!-- begin tab-pane -->
-					<div class="tab-pane fade active show" id="nav-pills-tab-2">
+					<div class="tab-pane fade show" id="nav-pills-tab-2" style="display: none;">
 						<h5 class="m-t-10">Update a specific <span id="sel_obTitle_up"></span> from <span id="sel_siteTitle_up"></span></h5></br>
 						<p>1. Which of the following <span id="sel_site_up"></span> API endpoints updates a <span id="sel_ob_up"></span> object?
 							Click on each one to view their descreption.</p>
 
-						<div style="overflow: scroll; height:260px" class="box">
+						<div id="acc_show" style="overflow: scroll; height:260px" class="box">
 							<div id="accordion-update" class="accordion">
 							</div>
 						</div>
@@ -530,7 +546,7 @@
 					<!-- end tab-pane -->
 
 					<!-- begin tab-pane -->
-					<div class="tab-pane fade" id="nav-pills-tab-3">
+					<div class="tab-pane fade show" id="nav-pills-tab-3"  style="display: none;">
 						<h5 class="m-t-10">Create a new <span id="sel_obTitle_add"></span> in <span id="sel_siteTitle_add"></span></h5></br>
 						<p>Which of the following <span id="sel_site_add"></span> API endpoints creates a new <span id="sel_ob_add"></span> object?
 							Click on each one to view their descreption.</p>
@@ -553,7 +569,7 @@
 					<!-- end tab-pane -->
 
 					<!-- begin tab-pane -->
-					<div class="tab-pane fade" id="nav-pills-tab-4">
+					<div class="tab-pane fade show" id="nav-pills-tab-4">
 						<h5 class="m-t-10">Remove a specific <span id="sel_obTitle_re"></span> from <span id="sel_siteTitle_re"></span> by its ID</h5></br>
 						<p>1. Which of the following <span id="sel_site_re"></span> API endpoints removes a <span id="sel_ob_re"></span> object?
 							Click on each one to view their descreption.</p>
@@ -584,7 +600,7 @@
 					</div>
 					<!-- end tab-pane -->
 
-					<div class="tab-pane fade" id="nav-pills-tab-5">
+					<div class="tab-pane fade show" id="nav-pills-tab-5">
 						<h5 class="m-t-10">Add methods to <span id="sel_obTitle_re"></span> object</h5></br>
 						<p>1. Which of the following <span id="sel_site_re"></span> API endpoints correspond to a method that you would like to add <span id="sel_ob_re"></span> object?
 							Click on each one to view their descreption.</p>
@@ -626,7 +642,35 @@
 			<!-- *********** Begin Change *********** -->
 
 			<script>
-				// If method was choesn show accordian
+				// If method was chosen show accordian
+
+				function openAPIURLIsEntered(){
+					//read the json description from the json url, which is the value of the input elenment with id="url-openApi", and print it console.log()
+					// an example of OpenAPI json url https://api.apis.guru/v2/specs/googleapis.com/youtube/v3/openapi.json
+				}
+
+				function methodIsChosen(val){
+					var tabID;
+
+					if (val == "update"){
+						tabID = 2; //x = "#nav-pills-tab-2"; //document.getElementById("nav-pills-tab-2");
+					} else if (val == "create") {
+						tabID = 3; //x = document.getElementById("nav-pills-tab-3");
+					} else if (val == "remove") {
+						tabID = 4; //x = document.getElementById("nav-pills-tab-4");
+					} else if (val == "other") {
+						tabID = 5; //x = document.getElementById("nav-pills-tab-5");
+					}
+
+					var i;
+					for (i = 2; i < 6; i++){  // 4 tabs, and indices start at 2
+						if (tabID != null && i == tabID){
+							$("#nav-pills-tab-" + i).show();
+						} else {
+							$("#nav-pills-tab-" + i).hide();
+						}
+					}
+				}
 
 				// Click on type
 				// Step#1 Choose Method: Create, Remove, Update, other method
@@ -735,7 +779,6 @@
     </div>
 	<!-- </div> -->
 	<!-- end page container -->
-
 
 		<!-- ================== BEGIN PRISM JS ================== -->
 		<script src="assets/js/prism.js"></script>
