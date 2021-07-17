@@ -63,7 +63,7 @@ export default async function shapir(){
                             // console.log("typeId: ", typeOb.id)
                             // console.log("args: ", args)
                             // console.log("prop: ", prop)
-                            currentType = typekey;
+                            currentType = typekey; // CHANGE THIS
 
                             if (prop == "none"){
                                 var endpoint = typeOb.construct[caller].endpoint;
@@ -595,10 +595,10 @@ export default async function shapir(){
                                                 Object.defineProperty(o, properties[p].property,Object.getOwnPropertyDescriptor(o, properties[p].field));
                                                 delete o[properties[p].field];
                                             }
-                                        }
-                                        else { //if the property is a type
-                                            var propType = properties[p].property;
-                                            var typeName = properties[p].type;
+                                        }else { //if the property is a type
+                                            let propType = properties[p].property;
+                                            let typeName = properties[p].type;
+                                            let parntType = properties[p].callerType;
                                             // console.log("typeId: ", typeId);
                                             // console.log("o[typeId]1: ", o[typeId])
                                             // var idVal = o[typeId];
@@ -608,16 +608,19 @@ export default async function shapir(){
                                                 get: function() {
                                                     let promise = firebase.database().ref('/abstractions/'+site+'/objects/'+typeName).once('value').then(function(snapshot) {
                                                         // console.log("typeOb1: ", snapshot.val())
-                                                        // console.log("typeId22: ", typeId) //param
+                                                        // console.log("propType: ", propType) //param
                                                         // console.log("o[typeId]22: ", o)
                                                         // console.log("o[typeId]: ", o[typeId]) //value
-                                                        if(o[typeId]){
-                                                            var idVal = o[typeId]
-                                                        }else{
-                                                            var idVal = args[0] //taking the id value of the parent type
-                                                        }
+                                                        let idVal;
 
-                                                        return self(snapshot.key, snapshot.val(), currentType, propType, idVal);
+                                                        if(o[typeId]){
+                                                            idVal = o[typeId]
+                                                        }else{
+                                                            idVal = args[0] //taking the id value of the parent type
+                                                        }
+                                                        // let parentType = snapshot.val().construct[0]
+                                                        // return self(snapshot.key, snapshot.val(), currentType, propType, idVal);
+                                                        return self(snapshot.key, snapshot.val(), parntType, propType, idVal);
                                                     });
                                                     return promise;
                                                 }

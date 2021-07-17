@@ -4595,9 +4595,9 @@ function saveSchema(){
 
     siteObj.objects= tempObj
   }
-  console.log("Final Object: ", siteObj);
+  // console.log("Final Object: ", siteObj);
   //Push to Firebase!
-  firebase.database().ref('/study/'+site).set(siteObj)
+  firebase.database().ref('/abstractions/'+site).set(siteObj)
 
 }
 

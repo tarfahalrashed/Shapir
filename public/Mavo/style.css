@@ -1,0 +1,45 @@
+@use postcss-nested;
+
+* {
+  margin: 0;
+}
+
+body {
+  width: fit-content;
+  margin: auto;
+  font: 100%/1.5 Helvetica Neue, Segoe UI, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.search {
+  display: block;
+  width: fit-content;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 300;
+  font-size: 300%;
+}
+
+iframe {
+  border: 0;
+}
+
+[property=video] {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1em;
+  margin: 1em 0;
+}
+
+footer {
+  font-size: smaller;
+  margin-top: 1em;
+  padding-top: .5em;
+  border-top: 1px solid silver;
+}

@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
-    <script src="https://get.mavo.io/mavo.js"></script>
-    <script type="module" src="../mavo-shapir.js"></script>
+        <link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
+        <script src="https://get.mavo.io/mavo.js"></script>
+        <script type="module" src="../mavo-shapir.js"></script>
+        <link rel="stylesheet" href="style.css"/>
     </head>
 
     <body>
+        <div mv-app="main" plugins="tinymce" mv-source="shapir"
+            mv-source-service="dailymotion" mv-source-type="MusicPlaylist" mv-source-id="x71myv">
 
-    <div mv-app="test" mv-source="shapir" mv-source-service="dailymotion" mv-source-type="MusicPlaylist" mv-source-id="x71myv">
-    <!--     <input property="id" value="x7xf8kc" /> -->
-        <h3 property="name"></h3>
-        <p property="creator"></p>
-    <!--     <p property="channel"></p> -->
-        <div property="video" mv-multiple>
-            <p property="name"></p>
+            <h1 property="name"></h1>
+
+            <section class="videos">
+                <article property="video" mv-multiple>
+                    <iframe width="420" height="315" src="[embedUrl]"></iframe>
+                    <div class="info">
+                        <a href="https://www.dailymotion.com/video/[id]"><h2 property="name"></h2></a>
+                        <div property="description" class="tinymce"></div>
+                        <footer>
+                            [duration(duration * 1000, 2)]
+                            &bull;
+                            [ratingValue] likes
+                        </footer>
+                    </div>
+                </article>
+            </section>
 
         </div>
-
-    </div>
-
     </body>
 </html>

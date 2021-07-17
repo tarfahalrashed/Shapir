@@ -11,26 +11,31 @@
 
         <!-- <div mv-app="test" mv-source="shapir" mv-source-service="dailymotion" mv-source-type="VideoObject" mv-source-id="[id]"> -->
 
-            <div mv-app="test" mv-source="shapir" mv-source-service="youtube" mv-source-search="adele">
+            <div mv-app="test" mv-source="shapir" >
+                <div property="searchSongkick" mv-value="youtube.search('adele')" mv-multiple>
+                    <h1 property="name"></h1>
+                </div>
+                <!-- [searchSongkick.name] -->
 
+                <!-- mv-source-service="youtube" mv-source-search="adele" -->
             <!-- <form mv-action="set(search, idInput)">
                 <label>Search Dailymotion: <input property="searchInput" mv-default="Adele"></label>
                 <meta property="search" mv-default="">
                 <button>Submit</button>
             </form> -->
 
-            <div property="video" mv-multiple>
+            <!-- <div property="video" mv-multiple>
                 <p property="name"></p>
                 <p property="description"></p>
                 <p property="duration"></p>
                 <p property="ratingValue"></p>
-                <img property="thumbnailUrl" width="200px"/></br>
+                <img property="thumbnailUrl" width="200px"/></br> -->
                 <!-- <button  mv-action="set(video, embedUrl)">Play</button> -->
 
-                <iframe src="http://www.youtube.com/embed/[videoId]" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+                <!-- <iframe src="http://www.youtube.com/embed/[videoId]" width="560" height="315" frameborder="0" allowfullscreen></iframe>
 
                 <hr>
-              </div>
+              </div> -->
 
         </div>
 
