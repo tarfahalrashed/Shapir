@@ -1,7 +1,7 @@
 # Shapir
 A tool that standardizes access to APIs and simplifies the work for users, even non-programmers, to create interactive web applications that operate on data accessible through arbitrary Web APIs.
 
-https://shapir.org
+**Tool:** https://shapir.org
 
 <!-- ![shapir](public/assets/img/new/shapir_structure.png) -->
 
