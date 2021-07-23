@@ -72,6 +72,7 @@ playlist.delete();
 ## HTML Library (Mavo-Shapir)
 - [Documentation](https://shapir.org/mavo)
 - [Explore Websites](https://shapir.org/mavo#/explore)
+- [Mavo Documentation](https://mavo.io/docs)
 
 
 ### How to use Mavo-Shapir
@@ -125,7 +126,7 @@ Read a playlist and its videos from Dailymotion
 </table>
 
 
-Search a Yelp and Foursquare for restaurants
+Search Yelp and Foursquare for restaurants
 
 
 <table>
