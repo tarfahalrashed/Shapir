@@ -3032,7 +3032,6 @@ function saveTypeConfig(){
 
 
 
-
 function saveAddConfig(){
   // var selector = document.getElementById("type-id-add");
   // var idValue = selector[selector.selectedIndex].value;
@@ -3044,7 +3043,9 @@ function saveAddConfig(){
 
   $("#"+clickedType+" tbody").append('<tr id="crud_'+clickedType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Create</a></td>'
   +'<td></td>'
-  +'<td><div style="width:240px"></div></td>'
+  +'<td><div style="width:240px">'
+  +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+currentURLGetter+'</a>'
+  +'</div></td>'
   +'<td><button id="crud_'+clickedType+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
   +'</tr>')    
 
@@ -3066,7 +3067,7 @@ function saveUpdateConfig(){
   // get haapi desc for currentURLGetter
   // then loop through the parameters
 
-  console.log("reqParam: ", reqParam);
+  // console.log("reqParam: ", reqParam);
   var j=0;
 
   if(reqParam){
@@ -3102,7 +3103,9 @@ function saveUpdateConfig(){
 
    $("#"+clickedType+" tbody").append('<tr id="crud_'+clickedType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Update</a></td>'
     +'<td></td>'
-    +'<td><div style="width:240px"></div></td>'
+    +'<td><div style="width:240px">'
+    +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+currentURLGetter+'</a>'
+    +'</div></td>'
     +'<td><button id="crud_'+clickedType+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
     +'</tr>')      
 
@@ -3117,11 +3120,14 @@ function saveRemoveConfig(){
   // temp.objects[clickedType].remove.id= idValue; //get the value of the chosen ID
 
   // console.log("temp after save", temp.objects[clickedType]);
+  console.log("URL:::: ", currentURLGetter)
 
 
-  $("#"+clickedType+" tbody").append('<tr id="crud_'+clickedType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Remove</a></td>'
+  $("#"+clickedType+" tbody").append('<tr id="crud_'+clickedType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Delete</a></td>'
   +'<td></td>'
-  +'<td><div style="width:240px"></div></td>'
+  +'<td><div style="width:240px">'
+  +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+currentURLGetter+'</a>'
+  +'</div></td>'
   +'<td><button id="crud_'+clickedType+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
   +'</tr>')    
 
@@ -3147,7 +3153,9 @@ function addMethodConfig(){
     });
     $("#site-table tbody").append('<tr id="search_site"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search</a></td>'
     +'<td></td>'
-    +'<td><div style="width:240px"></div></td>'
+    +'<td><div style="width:240px">'
+    +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+urlAPIMethod+'</a>'
+    +'</div></td>'
     +'<td><button id="search_site_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
     +'</tr>')
   }else{
@@ -3160,7 +3168,9 @@ function addMethodConfig(){
     });
     $("#site-table tbody").append('<tr id="search_site"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search for '+typeSearch+'</a></td>'
     +'<td></td>'
-    +'<td><div style="width:240px"></div></td>'
+    +'<td><div style="width:240px">'
+    +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+urlAPIMethod+'</a>'
+    +'</div></td>'
     +'<td><button id="search_site_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
     +'</tr>')
     // $("#"+typeSearch+" tbody").append('<tr id="search_'+typeSearch+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search for '+typeSearch+'</a></td>'
@@ -3193,7 +3203,9 @@ function addTypeMethodConfig(){
   //get the name of the method
   $("#"+clickedType+" tbody").append('<tr id="method_'+clickedType+'_'+methName+'_'+actionType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">'+methName+'</a></td>'
   +'<td></td>'
-  +'<td><div style="width:240px"></div></td>'
+  +'<td><div style="width:240px">'
+  +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+urlAPITypeMethod+'</a>'
+  +'</div></td>'
   +'<td><button id="method_'+clickedType+'_'+methName+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
   +'</tr>')      
 
