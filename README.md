@@ -27,7 +27,7 @@ https://shapir.org
 import shapir from "https://shapir.org/shapir.js";
 
 shapir().then(async () => {
-	//add your functions here
+    //add your functions here
 });
 ```
 
