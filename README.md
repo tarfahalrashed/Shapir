@@ -3,9 +3,9 @@ A tool that standardizes access to APIs and simplifies the work for users, even 
 
 https://shapir.org
 
-<!-- ![shapir](public/assets/img/new/shapir_structure.png) -->
+![shapir](public/assets/img/new/shapir_structure.png)
 
-<img src="public/assets/img/new/shapir_structure.png" width="80%" style= "display: block; margin-left: auto; margin-right: auto;"/>
+<!-- <img src="public/assets/img/new/shapir_structure.png" width="80%" style= "display: block; margin-left: auto; margin-right: auto;"/> -->
 
 <!-- - Tool: https://shapir.org/
 - Documentation: https://shapir.org/doc -->
