@@ -100,8 +100,10 @@ Read a playlist and its videos from Dailymotion
 <td width="62%">
 
 ```html
-<div mv-app mv-source="shapir" mv-source-service="dailymotion"
-   mv-source-type="MusicPlaylist" mv-source-id="[id]">
+<div mv-app mv-source="shapir"
+   mv-source-service="dailymotion"
+   mv-source-type="MusicPlaylist"
+   mv-source-id="[id]">
 
     <input property="id" />
 
@@ -135,7 +137,8 @@ Search a Yelp and Foursquare for restaurants
 <td width="62%">
 
 ```html
-<div mv-app mv-source="shapir" mv-source-service="yelp, foursquare"
+<div mv-app mv-source="shapir"
+   mv-source-service="yelp, foursquare"
    mv-source-search="[search]">
 
     <input property="search" />
