@@ -11,7 +11,7 @@ https://shapir.org
 - Documentation: https://shapir.org/doc -->
 
 ## Overview
-Shapir is an ecosystem that significantly simplifies the work for users, even non-programmers, to create interactive web applications that operate on standardized data accessible through arbitrary web APIs. It consists of three related components: **WoOPI**, **ShapirJS**, and **ShapirUI**. WoOPI is a novel standardized, machine-readable API ontology, which can be used to provide a description that wraps the API with objects conforming to the canonical type definitions provided by [Schema.org](https://schema.org). ShapirJS is a JavaScript library that uses a WoOPI description to present the API's data as typed objects in the local environment. And ShapirUI is a graphical tool that lets even non-programmers create the required WoOPI descriptions, using standard data types. These three components are connected. One uses ShapirUI to describe an API. ShapirUI then generates a corresponding WoOPI description that can be used by ShapirJS to generate a JavaScript client library for that API. We integrated ShapirJS with [Mavo](https://mavo.io), an interactive declarative HTML-based language, to empower a user to create applications interacting with APIs' data by writing only HTML, with no JavaScript programming required. Any API described once by WoOPI, can be used by all other users.
+<p style="text-align: justify;">Shapir is an ecosystem that significantly simplifies the work for users, even non-programmers, to create interactive web applications that operate on standardized data accessible through arbitrary web APIs. It consists of three related components: **WoOPI**, **ShapirJS**, and **ShapirUI**. WoOPI is a novel standardized, machine-readable API ontology, which can be used to provide a description that wraps the API with objects conforming to the canonical type definitions provided by [Schema.org](https://schema.org). ShapirJS is a JavaScript library that uses a WoOPI description to present the API's data as typed objects in the local environment. And ShapirUI is a graphical tool that lets even non-programmers create the required WoOPI descriptions, using standard data types. These three components are connected. One uses ShapirUI to describe an API. ShapirUI then generates a corresponding WoOPI description that can be used by ShapirJS to generate a JavaScript client library for that API. We integrated ShapirJS with [Mavo](https://mavo.io), an interactive declarative HTML-based language, to empower a user to create applications interacting with APIs' data by writing only HTML, with no JavaScript programming required. Any API described once by WoOPI, can be used by all other users.</p>
 
 
 ## JavaScript Library (ShapirJS)
@@ -80,11 +80,11 @@ playlist.delete();
 
 ```html
 <head>
-	...
-	<script rel="stylesheet" src="https://get.mavo.io/mavo.css"></script>
-	<script src="https://get.mavo.io/mavo.j"></script>
-	<script type="module" src="https://shapir.org/mavo-shapir.js"></script>
-	...
+    ...
+    <script rel="stylesheet" src="https://get.mavo.io/mavo.css"></script>
+    <script src="https://get.mavo.io/mavo.j"></script>
+    <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
+    ...
 </head>
 ```
 
@@ -97,21 +97,21 @@ Read a playlist and its videos from Dailymotion
 <!-- <th>Markdown</th> -->
 </tr>
 <tr width="100%">
-<td width="62%">
+<td width="75%">
 
 ```html
-<div mv-app mv-source="shapir"
-  mv-source-service="dailymotion"
-  mv-source-type="MusicPlaylist"
-  mv-source-id="[id]">
-  <input property="id" />
-  <h1 property="name"></h1>
-  <article property="video" mv-multiple>
-    <h2 property="name"></h2>
-    <p property="description"></p>
-    <img property="thumbnailUrl" />
-    <iframe src="[embedUrl]"></iframe>
-  </article>
+<div mv-app mv-source="shapir" mv-source-service="dailymotion" mv-source-type="MusicPlaylist" mv-source-id="[id]">
+
+    <input property="id" />
+
+    <h1 property="name"></h1>
+    <article property="video" mv-multiple>
+        <h2 property="name"></h2>
+        <p property="description"></p>
+        <img property="thumbnailUrl" />
+        <iframe src="[embedUrl]"></iframe>
+    </article>
+
 </div>
 ```
 </td>
@@ -131,22 +131,23 @@ Search a Yelp and Foursquare for restaurants
 <!-- <th>Markdown</th> -->
 </tr>
 <tr width="100%">
-<td width="62%">
+<td width="75%">
 
 ```html
-<div mv-app mv-source="shapir"
-  mv-source-search="[search]"
-  mv-source-service="yelp, foursquare">
-  <input property="search" />
-  <div property="businesses" mv-multiple>
-    <img property="image" />
-    <h2 property="name"></h2>
-    <span property="reviewCount"></span>
-    <span property="aggregateRating"></span>
-    <span property="priceRange"></span>
-    <span property="latitude"></span>,
-    <span property="longitude"></span>
-  </div>
+<div mv-app mv-source="shapir" mv-source-service="yelp, foursquare" mv-source-search="[search]">
+
+    <input property="search" />
+
+    <div property="businesses" mv-multiple>
+        <img property="image" />
+        <h2 property="name"></h2>
+        <span property="reviewCount"></span> reviews
+        <span property="aggregateRating"></span>
+        <span property="priceRange"></span>
+        <span property="latitude"></span>,
+        <span property="longitude"></span>
+    </div>
+
 </div>
 ```
 </td>
