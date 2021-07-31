@@ -305,9 +305,9 @@
 
 													<div id="connectDiv" style="display:none">
 														<p style="font-size: 1.2em;" id=""><B>Step3.</B> Please click the save button to save this schema.org description of the website API when youre done &nbsp;
-															<a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; width:100px" onclick="saveSchema()">Save</a>
+															<a href="#modal-save" id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; width:100px" onclick="saveSchema()">Save</a>
 														</p>
-														<p style="font-size: 1.2em; color:red; display: none;" id="saveMsg"><B>Your description was successfully saved!</B></p>
+														<!-- <p style="font-size: 1.2em; color:red; display: none;" id="saveMsg"><B>Your description was successfully saved!</B></p> -->
 													</div>
 
 												</div>
@@ -1048,6 +1048,86 @@
 				</div>
 			</div>
 		</div>
+
+
+		<div class="modal fade bs-example-modal-lg" id="modal-save" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" >
+				<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Your description was successfully saved!</h4>
+				</div>
+				<div class="modal-body">
+					<!-- <span>This demonstrates how to translate schema.org types and properties to Web APIs. As an example, we are showing how to tranlslate <a href="https://schema.org/VideoObject" target="_blank">VideoObject</a> and <a href="https://schema.org/Comment" target="_blank">Comment</a> to YouTube API's <a href="https://developers.google.com/youtube/v3/docs/videos/list" target="_blank">video</a> and <a href="https://developers.google.com/youtube/v3/docs/comments/list" target="_blank">comment</a> objects. We are also showing how support searching YouTube and applying methods to types.</span></br></br> -->
+
+					<h5>JavaScript Library</h5>
+
+					<div id="type-div">
+						<!-- begin tab -->
+						<ul class="nav nav-pills mb-2">
+							<li class="nav-item">
+								<a href="#jsLibrary" data-toggle="tab" class="nav-link active">
+									<span class="d-sm-block d-none">JS Library</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="#mavoLibrary" data-toggle="tab" class="nav-link">
+									<span class="d-sm-block d-none">Mavo</span>
+								</a>
+							</li>
+						</ul>
+						<!-- end tab -->
+
+						<!-- begin tab-content -->
+						<div class="tab-content p-15 rounded bg-white mb-4">
+
+							<!-- begin tab-pane -->
+							<div class="tab-pane fade" id="jsLibrary">
+								<h5>DESC JS</h5>
+								<p>WLALALALA</p>
+								<div id="functionsCodeS" style="display:none">
+									<h5>Search <span id="siteNameS"></span></h5>
+									<pre class="language-javascript"><code id="functionS" class="language-javascript"></code></pre>
+								</div>
+								</br>
+
+								<div id="objectsS" style="display:none">
+									<h5>Objects and their functions</h5>
+									<pre  class="language-javascript"><code id="objectS" class="language-javascript"></code></pre>
+								</div>
+							</div>
+							<!-- end tab-pane -->
+
+							<!-- begin tab-pane -->
+							<div class="tab-pane fade" id="mavoLibrary">
+								<h5>DESC MAVO</h5>
+								<p>LALALALAAL</p>
+
+								<h5>Mavo Plugin</h5>
+
+								<div id="mavo_attributesS" style="display:none">
+									<h5>Search</h5>
+									<pre class="language-html"><code id="mavoAttS" class="language-html"></code></pre>
+								</div>
+								</br>
+
+								<div id="mavo_attributes_getS" style="display:none">
+									<h5>Get objects by their ID</h5>
+									<pre class="language-html"><code id="mavoAttGetS" class="language-html"></code></pre>
+								</div>
+
+							</div>
+							<!-- end tab-pane -->
+
+						</div>
+						<!-- end tab-content -->
+					</div>
+
+
+				</div>
+				</div>
+			</div>
+		</div>
+
 
 </body>
 </html>

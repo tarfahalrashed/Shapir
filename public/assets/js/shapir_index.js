@@ -122,6 +122,377 @@ function updateSelectSites(select){
 var functions="", objects="", firstOtherParam=true, hasOtherParam=false;
 
 
+
+
+async function abstractionSiteHasBeenChosenSave(siteOB){
+  firstOtherParam=true, hasOtherParam=false;
+  //empty codes
+  document.getElementById('functionS').innerHTML=""
+  document.getElementById('objectS').innerHTML=""
+
+  // site = select.options[select.selectedIndex].getAttribute("id");
+  // console.log("value: ", siteOB);
+  functions= siteOB.functions;
+  objects= siteOB.objects;
+
+  // $("#siteName").text(site);
+
+  // for(var i=0; i<functions.length; ++i){
+    var endpoint = siteOB.functions[0].endpoint
+    var name = siteOB.functions[0].name
+    var object = siteOB.functions[0].object
+    var arry = siteOB.functions[0].array
+    var searchParam = siteOB.functions[0].searchParam;
+
+    var oName1= object[0].toLowerCase() + object.slice(1);
+
+
+    if(arry){
+      var objectStr = 'a list of '+siteOB.functions[i].object;
+    }else{
+      var objectStr = object
+    }
+    var func=""
+    var params=[]
+    firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
+      params = snapshot.val().parameters;
+      // console.log("params! ", params)
+    }).then(()=>{
+      func = 'var '+oName1+'s = await '+site+'.search(';
+      var term=""
+      var otherParam=""
+
+      // var func = site+'.'+ name+'({';
+      for(var p=0; p< params.length; ++p){
+        if(params[p].displayed==true){
+          // console.log(params[p].name)
+          // console.log(params[p].value)
+          if(searchParam && params[p].name == searchParam){
+            term=JSON.stringify(params[p].value);
+          }else{
+            if(firstOtherParam){
+              otherParam="{"
+              hasOtherParam= true
+              firstOtherParam= false
+            }
+            otherParam+=JSON.stringify(params[p].name)
+            otherParam+=':';
+            otherParam+=JSON.stringify(params[p].value);
+            if(p+1<params.length){
+              otherParam+=', ';
+            }
+          }
+        }//
+      }
+      var other = ""
+      if(hasOtherParam){
+        otherParam+='}'
+        other = ', '+otherParam
+      }
+      func+=term+other+')';
+    }).then(()=>{
+      var properties = siteOB.objects[object].properties;
+      func+= '\n// retunrs a list of '+object+'s with the following properties:\n';
+      func+= '// ';
+
+      //Getter properties
+      func += properties[0].property+', ';
+
+      for(var p=1; p<properties.length; ++p){
+        // func += oName1+'s[i].'+
+        func += properties[p].property;
+        if(p+1<properties.length)
+          func += ', ';
+      }
+
+      for(var p=0; p< params.length; ++p){
+        if(params[p].displayed==true && params[p].listOfValues!=""){
+          func+= '\n\n// "'+params[p].name+ '" property can take the following values ('+params[p].listOfValues+')';
+        }
+      }
+
+      $("#functionsCodeS").show();
+      document.getElementById('functionS').innerHTML += func //+ '&nbsp; //return ' + objectStr;
+      document.getElementById('functionS').innerHTML += '\n\n';
+      Prism.highlightElement($('#functionS')[0]);
+
+    })
+
+  //}//end of functions
+
+  $("#objectsS").show();
+
+  for(o in objects){
+
+    // var div = document.getElementById('object'),
+    // clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+    // clone.id = o;
+    // document.getElementById('preObjects').appendChild(clone);
+
+    // $("#objects").append('<pre style="display: inline;" class="language-javascript"><code id="'+o+'" class="language-javascript"></code></pre>')
+
+    // console.log(objects[o]);
+    document.getElementById('objectS').innerHTML += '\n';
+    document.getElementById('objectS').innerHTML += '// Get '+o;
+    document.getElementById('objectS').innerHTML += '\n';
+
+    var oName= o[0].toLowerCase() + o.slice(1);
+    //get
+    var func = site+'.'+ o +'("ADD ID")';
+    document.getElementById('objectS').innerHTML += 'var '+oName+' = await '+func; //+ '&nbsp; //return a specific ' + o + ' from '+ site;
+    document.getElementById('objectS').innerHTML += '\n';
+
+    var properties = objects[o].properties;
+    // document.getElementById('object').innerHTML += '\n/*** ' +o+' properties to get ***/\n//';
+    document.getElementById('objectS').innerHTML += '// returns a ' +o+' with the following properties: \n';
+    //Getter properties
+    for(var p=0; p<properties.length; ++p){
+      if(properties[p].type){
+        document.getElementById('objectS').innerHTML += '// await '+oName+'.'+properties[p].property +'\n';
+      }else{
+        document.getElementById('objectS').innerHTML += '// '+oName+'.'+properties[p].property +'\n';
+      }
+      // if(p+1<properties.length){
+      //   document.getElementById('object').innerHTML +=', '
+      // }
+    }
+
+      //Setter properties
+    if(objects[o].setters){
+      document.getElementById('objectS').innerHTML += '\n// you can only update these properties: ';
+      var setters = objects[o].setters;
+      for(var s=0; s< setters.length; ++s){
+        let obj = properties.find(o => o.property === setters[s].field);
+        document.getElementById('objectS').innerHTML += obj.property;
+        if(s+1<setters.length){
+          document.getElementById('objectS').innerHTML +=', '
+        }else{
+          document.getElementById('objectS').innerHTML +='\n'
+        }
+      }
+    }
+
+    //if methods or delete
+    if(objects[o].delete || objects[o].methods){
+      var methods = objects[o].methods;
+      // document.getElementById('object').innerHTML += '//'+o+' methods \n';
+    }
+
+    //Delete
+    if(objects[o].remove){
+      document.getElementById('objectS').innerHTML += '\n// Delete '+o+'\n';
+      document.getElementById('objectS').innerHTML += oName+'.delete() \n';// &nbsp; //delete this ' + o + ' from '+ site+ '\n';
+    }
+
+    //methods
+    if(objects[o].methods){
+      for(let m in methods){//for each method
+        var mEndpoint = methods[m].endpoint
+        var mParams=[];
+        firebase.database().ref('/apis/'+mEndpoint).once('value').then(function(snapshot) {
+          mParams = snapshot.val().parameters;
+        }).then(()=>{
+          if(mParams.length==1 && mParams[0].name==objects[o].id){// if the param passed is the id (need to chnage shapir code)
+            var args='()';
+          }else{
+            var args =''
+            args += '({';
+            for(var p=0; p< mParams.length; ++p){
+              if(mParams[p].displayed==true){
+                // console.log(mParams[p].name)
+                // console.log(mParams[p].value)
+                args+=JSON.stringify(mParams[p].name);
+                args+=':';
+                args+=JSON.stringify(mParams[p].value);
+                if(p+1<mParams.length){
+                  args+=', ';
+                }
+              }
+            }
+            args+='})';
+          }
+
+          document.getElementById('objectS').innerHTML += 'await '+oName+'.' + methods[m].name + args  +'\n';
+        })
+
+      }//loop methods
+    }
+
+    //Create
+    if(objects[o].add){
+      // console.log("add: ", objects[o].add)
+      var aEndpoint = objects[o].add.endpoint
+      var aParams=[];
+      await firebase.database().ref('/apis/'+aEndpoint).once('value').then(function(snapshot) {
+        aParams = snapshot.val().parameters;
+        // console.log("aParams! ", aParams)
+      }).then(()=>{
+          var args =''
+          args += '({';
+          for(var p=0; p< aParams.length; ++p){
+            if(aParams[p].displayed==true){
+              // console.log(aParams[p].name)
+              // console.log(aParams[p].value)
+              args+=JSON.stringify(aParams[p].name);
+              args+=':';
+              args+=JSON.stringify(aParams[p].value);
+              if(p+1<aParams.length){
+                args+=', ';
+              }
+            }
+        }
+        args+='})';
+
+        document.getElementById('objectS').innerHTML += '\n// Create a new '+o+' object\n';
+        document.getElementById('objectS').innerHTML += 'await '+site+'.'+o+'.create'+args +'\n';
+
+      })
+    }
+
+    //Search site for object(s)
+    // document.getElementById('object').innerHTML += '//Search '+site+' for '+o+ '\n';
+
+  }//end of objects
+  Prism.highlightElement($('#objectS')[0]);
+
+}
+
+
+function abstractionSiteHasBeenChosenMavoSingleSave(siteOB){
+
+  var once=true;
+  document.getElementById('mavoAttS').innerHTML=""
+  document.getElementById('mavoAttGetS').innerHTML=""
+  // site = select.options[select.selectedIndex].getAttribute("id");
+  // console.log("value: ", siteOB);
+  functions= siteOB.functions;
+  objects= siteOB.objects;
+
+  for(var i=0; i<functions.length; ++i){
+    var endpoint = siteOB.functions[i].endpoint
+    var name = siteOB.functions[i].name
+    var object = siteOB.functions[i].object
+    var arry = siteOB.functions[i].array
+    var searchParam = siteOB.functions[i].searchParam;
+    var type = siteOB.functions[i].type;
+
+    document.getElementById('mavoAttS').innerHTML += '<!-- Search for '+object+'-->';
+
+    var code = '&#10;' //new line in HTML
+    code += '&lt;div mv-app="main" mv-source="shapir" mv-source-service="'+site+'" '// mv-source-type="'+object+'" mv-source-action="search" '
+
+    var params=[]
+    firebase.database().ref('/apis/'+endpoint).once('value').then(function(snapshot) {
+      return snapshot.val().parameters;
+    }).then((params)=>{
+      for(var p=0; p< params.length; ++p){
+        if(params[p].displayed==true){
+          if(searchParam && params[p].name == searchParam){
+            code+='mv-source-search'
+          }else{
+            code+='mv-source-';
+            code+=params[p].name;
+          }
+          code+='=';
+          console.log(JSON.stringify(params[p].value))
+
+          if(params[p].listOfValues && JSON.stringify(params[p].listOfValues)!=""){
+            code+=JSON.stringify(params[p].listOfValues)+' ';
+          }else{
+            code+=JSON.stringify(params[p].value)+' ';
+          }
+        }
+      }
+
+      code+= 'mv-source-numResults="10"'
+
+      code+='>';
+      code += '&#10;&#10;'
+
+      code += '&nbsp;&lt;div property="'+object.replace(/^.{1}/g, object[0].toLowerCase())+'" mv-multiple>'
+      code += '&#10;'
+      //add the proeprties here
+      var funcProperties = siteOB.objects[object].properties
+      // console.log("funcProperties: ", funcProperties)
+      for(var i=0; i<funcProperties.length; ++i){
+        if(funcProperties[i].type){
+          code += '&#10;'
+          code +='&nbsp;&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
+          code += '&#10;'
+          var funcPropertiesInner = siteOB.objects[funcProperties[i].type].properties;
+          for(var j=0; j<funcPropertiesInner.length; ++j){
+            code +='&nbsp; &nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
+            code += '&#10;'
+          }
+          code +='&nbsp;&nbsp; &lt;/div>'
+          code += '&#10;'
+          code += '&#10;'
+        }else{
+          code +='&nbsp;&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
+          code += '&#10;'
+        }
+      }
+
+      code+='&nbsp;&lt;/div>'
+      code+= '&#10;'
+
+      code+='&lt;/div>'
+
+
+      $("#mavo_attributesS").show();
+      document.getElementById('mavoAttS').innerHTML += code;
+      Prism.highlightElement($('#mavoAttS')[0]);
+    })
+
+  }//end of functions
+
+  for(o in objects){
+
+    var code2 = '&#10;'
+    code2 += '&lt;!-- Get a specific '+o+' by its ID-->';
+    code2 += '&#10;' //new line in HTML
+    code2 += '&lt;div mv-app="main" mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ADD ID"'
+    code2 += '>';
+    code2 += '&#10;'
+
+    //add the proeprties here
+    var funcProperties = siteOB.objects[o].properties
+    // console.log("funcProperties: ", funcProperties)
+    for(var i=0; i<funcProperties.length; ++i){
+      if(funcProperties[i].type){
+        code2 += '&#10;'
+        code2 +='&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
+        code2 += '&#10;'
+        var funcPropertiesInner = siteOB.objects[funcProperties[i].type].properties;
+        for(var j=0; j<funcPropertiesInner.length; ++j){
+          code2 +='&nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
+          code2 += '&#10;'
+        }
+        code2 +='&nbsp; &lt;/div>'
+        code2 += '&#10;'
+        code2 += '&#10;'
+      }else{
+        code2 +='&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
+        code2 += '&#10;'
+      }
+    }
+
+
+    code2 += '&lt;/div>'
+    code2 += '&#10;'
+
+    document.getElementById('mavoAttGetS').innerHTML += code2;
+
+  }//end of objects
+
+
+  $("#mavo_attributes_getS").show();
+  Prism.highlightElement($('#mavoAttGetS')[0]);
+
+
+}
+
+
 async function abstractionSiteHasBeenChosen(select){
   firstOtherParam=true, hasOtherParam=false;
   //empty codes
@@ -552,8 +923,6 @@ var oneSite = true
 var siteNames="", code ="", finalCode="", s=0, allSites=[], cntt=0, siteParams={}
 
 
-
-
 function abstractionSiteHasBeenChosenMavo(select){
 
   console.log("ALL SITES: ", $("#sites_mavo").val());
@@ -665,7 +1034,6 @@ console.log("searchParam: ", searchParam)
 
 
 
-
 function abstractionSiteHasBeenChosenMavoSingle(select){
 
   var once=true;
@@ -701,6 +1069,7 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
             code+='mv-source-';
             code+=params[p].name;
           }
+
           code+='=';
           console.log(JSON.stringify(params[p].value))
 
@@ -712,13 +1081,13 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
         }
       }
 
-      code+= 'mv-source-numResults="10"'
-
-      code+='>';
+      code += 'mv-source-numResults="10"';
+      code += '>';
       code += '&#10;&#10;'
+      code += '&nbsp;&lt;div property="'+object.replace(/^.{1}/g, object[0].toLowerCase())+'" mv-multiple>';
+      code += '&#10;';
 
-      code += '&nbsp;&lt;div property="'+object.replace(/^.{1}/g, object[0].toLowerCase())+'" mv-multiple>'
-      code += '&#10;'
+      var propsS = "Properties: ";
       //add the proeprties here
       var funcProperties = abstractObj[site].objects[object].properties
       // console.log("funcProperties: ", funcProperties)
@@ -727,17 +1096,29 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
           code += '&#10;'
           code +='&nbsp;&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
           code += '&#10;'
+          propsS += funcProperties[i].property;
+          propsS += " ("
           var funcPropertiesInner = abstractObj[site].objects[funcProperties[i].type].properties;
           for(var j=0; j<funcPropertiesInner.length; ++j){
             code +='&nbsp; &nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
             code += '&#10;'
+            propsS += funcPropertiesInner[j].property;
+            if(funcPropertiesInner.length > j+1){
+              propsS += ", "
+            }
           }
           code +='&nbsp;&nbsp; &lt;/div>'
           code += '&#10;'
           code += '&#10;'
+          propsS += ") "
         }else{
           code +='&nbsp;&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
           code += '&#10;'
+
+          propsS += funcProperties[i].property;
+          if(funcProperties.length > i+1){
+            propsS += ", "
+          }
         }
       }
 
@@ -745,7 +1126,8 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
       code+= '&#10;'
 
       code+='&lt;/div>'
-
+      code += '&#10;';
+      code += '&lt;!-- ' + propsS + ' --> &#10;';
 
       $("#mavo_attributes").show();
       document.getElementById('mavoAtt').innerHTML += code;
@@ -759,10 +1141,11 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
     var code2 = '&#10;'
     code2 += '&lt;!-- Get a specific '+o+' by its ID-->';
     code2 += '&#10;' //new line in HTML
-    code2 += '&lt;div mv-app="main" mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ADD ID"'
+    code2 += '&lt;div mv-app="main" mv-source="shapir" mv-source-service="'+site+'" mv-source-type="'+o+'" mv-source-id="ID"'
     code2 += '>';
     code2 += '&#10;'
 
+    var props = o+" Properties: ";
 
     //add the proeprties here
     var funcProperties = abstractObj[site].objects[o].properties
@@ -772,32 +1155,43 @@ function abstractionSiteHasBeenChosenMavoSingle(select){
         code2 += '&#10;'
         code2 +='&nbsp; &lt;div property="'+funcProperties[i].property+'" mv-multiple>'
         code2 += '&#10;'
+        props += funcProperties[i].property;
+        props += " ("
         var funcPropertiesInner = abstractObj[site].objects[funcProperties[i].type].properties;
         for(var j=0; j<funcPropertiesInner.length; ++j){
           code2 +='&nbsp; &nbsp;  &nbsp; &lt;p property="'+funcPropertiesInner[j].property+'">&lt;/p>'
           code2 += '&#10;'
+          props += funcPropertiesInner[j].property
+          if(funcPropertiesInner.length > j+1){
+            props += ", ";
+          }
         }
         code2 +='&nbsp; &lt;/div>'
         code2 += '&#10;'
         code2 += '&#10;'
+        props += ") "
       }else{
         code2 +='&nbsp; &lt;p property="'+funcProperties[i].property+'">&lt;/p>'
         code2 += '&#10;'
+
+        props += funcProperties[i].property;
+        if(funcProperties.length > i+1){
+          props += ", ";
+        }
+
       }
     }
 
-
-    code2 += '&lt;/div>'
-    code2 += '&#10;'
+    code2 += '&lt;/div>';
+    code2 += '&#10;';
+    code2 += '&lt;!-- ' + props + ' --> &#10;';
 
     document.getElementById('mavoAttGet').innerHTML += code2;
 
   }//end of objects
 
-
   $("#mavo_attributes_get").show();
   Prism.highlightElement($('#mavoAttGet')[0]);
-
 
 }
 
@@ -3151,6 +3545,7 @@ function addMethodConfig(){
       id: document.getElementById('method-result-type-id').value,
       searchParam: document.getElementById("method-search-param").value
     });
+
     $("#site-table tbody").append('<tr id="search_site"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search</a></td>'
     +'<td></td>'
     +'<td><div style="width:240px">'
@@ -3204,7 +3599,7 @@ function addTypeMethodConfig(){
   $("#"+clickedType+" tbody").append('<tr id="method_'+clickedType+'_'+methName+'_'+actionType+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">'+methName+'</a></td>'
   +'<td></td>'
   +'<td><div style="width:240px">'
-  +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+urlAPITypeMethod+'</a>'
+  +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+urlAPIMethod+'</a>'
   +'</div></td>'
   +'<td><button id="method_'+clickedType+'_'+methName+'_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
   +'</tr>')      
@@ -4440,7 +4835,7 @@ var schemaType ="", schemaCallerType="", arrOfTypeProp=[]
 
 function saveSchema(){
 
-  $("#saveMsg").show();
+  // $("#saveMsg").show();
 
   var siteObj={};
   let temp={}
@@ -4471,7 +4866,7 @@ function saveSchema(){
       //object construct self "construct":{"self":{"endpoint":"", "id":""}}
       var tempGetSelf= {"endpoint":"", "id":""}
       var selectUrl = document.getElementById("url_get_"+typeName);
-      tempGetSelf.endpoint= selectUrl[selectUrl.selectedIndex].value;
+      tempGetSelf.endpoint= selectUrl[selectUrl.selectedIndex].text;
       tempGetSelf.id= selId;
       tempObj[typeName].construct['self']=tempGetSelf
 
@@ -4480,7 +4875,7 @@ function saveSchema(){
       if(typeIndex != -1){
         console.log("NO property of this type")
         console.log("type: ",arrOfTypeProp[typeIndex].type)
-        console.log("constrcut: ",arrOfTypeProp[typeIndex].construct)
+        console.log("constrcut: ", arrOfTypeProp[typeIndex].construct)
         tempObj[typeName].construct[arrOfTypeProp[typeIndex].callerType]= arrOfTypeProp[typeIndex].construct;
       }else{
         console.log("NO property of this type")
@@ -4501,7 +4896,7 @@ function saveSchema(){
               callerType: schemaProObj[index].callerType
             })
 
-            var propertyAPIUrl = document.getElementById('property_api_'+schemaProObj[index].callerType).value;
+            var propertyAPIUrl = document.getElementById('property_api_'+schemaProObj[index].callerType).text;
             var key = schemaProObj[index].callerType
             var tempPropAPI = {"endpoint":"", "id":"", "property":""}
             tempPropAPI.endpoint = propertyAPIUrl;
@@ -4610,6 +5005,12 @@ function saveSchema(){
   // console.log("Final Object: ", siteObj);
   //Push to Firebase!
   firebase.database().ref('/abstractions/'+site).set(siteObj)
+  .then(()=>{
+
+    abstractionSiteHasBeenChosenSave(siteObj);
+    abstractionSiteHasBeenChosenMavoSingleSave(siteObj);
+  });
+
 
 }
 

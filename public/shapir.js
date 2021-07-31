@@ -57,12 +57,12 @@ export default async function shapir(){
                         window[site][type] = function(...args) { return self(type, val, "self", "none", ...args) };
 
                         function self (typekey, typeOb, caller, prop, ...args) {
-                            // console.log("typeOb:", typeOb)
-                            // console.log("caller:", caller)
-                            // console.log("callerTYPE:", typekey)
+                            console.log("typeOb:", typeOb)
+                            console.log("caller:", caller)
+                            console.log("callerTYPE:", typekey)
                             // console.log("typeId: ", typeOb.id)
-                            // console.log("args: ", args)
-                            // console.log("prop: ", prop)
+                            console.log("args: ", args)
+                            console.log("prop: ", prop)
                             currentType = typekey; // CHANGE THIS
 
                             if (prop == "none"){

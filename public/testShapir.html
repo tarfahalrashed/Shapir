@@ -38,8 +38,14 @@
 				// var videos2 = MusicPlaylist();//await dailymotion.searchVideoObject("Swift")
 
 				// var video = await youtube.VideoObject("x7xf8kc")
-				// var playlist = await dailymotion.MusicPlaylist("x71myv")
+				// var playlist = await dailymotion.MusicPlaylist("x71yjl")
 				// console.log("playlist: ", playlist)
+
+				//   // await playlist.delete()
+				// playlist.name = "NEWX"
+
+				var artist = await songkick.MusicGroup("974908")
+				console.log("events: ", await artist.event)
 
 				//Vimeo
 				// var videos = await vimeo.search("Adele")
@@ -98,8 +104,8 @@
   			// console.log(artist)
 			  // console.log(await artist.album)
 
-			var artist = await vimeo.MusicPlaylist("8274189")//await imdb.Movie("tt0120094")
-  			console.log(artist)
+			// var artist = await vimeo.MusicPlaylist("8274189")//await imdb.Movie("tt0120094")
+  			// console.log(artist)
 
 			// var musicPlaylist = await vimeo.MusicPlaylist("8274189")
 			// // console.log(musicPlaylist.name)
