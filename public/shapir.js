@@ -33,7 +33,8 @@ let firebaseLoaded = include(
 });
 
 export default async function shapir(){
-    var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [];
+
+    var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [],apiKeyProvided = "", configObjAdded = {};
 
     await firebaseLoaded;
 
@@ -1405,7 +1406,10 @@ export default async function shapir(){
                                 result =  'https://scrapir.org/api/'+mEndpoint+'?tokenAPI='+tempToken+'&'+mParamList
                                 return result;
                             }else { //no oauth
-
+                                if(configObjAdded[site]){
+                                    mParamList+="&apiKey="+apiKeyProvided;
+                                    // console.log("PARAMS: ", mParamList);
+                                }
                                 result =  'https://scrapir.org/api/'+mEndpoint+'?'+mParamList
                                 if(result.endsWith("?")){
                                     result = result.slice(0, -1);
@@ -2728,6 +2732,14 @@ export default async function shapir(){
 
                     }
                 }//if functions
+
+                configObjAdded[site] = false;
+                //add the init fucntion to the site
+                window[site]['init'] = function(configObj) {
+                    configObjAdded[site] = true;
+                    apiKeyProvided = configObj.apiKey;
+                    console.log(apiKeyProvided)
+                };
 
             });//end of snapshot
 

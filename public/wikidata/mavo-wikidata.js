@@ -1,4 +1,4 @@
-import {wikidata} from "./wikidata.js";
+import {wikidata, lookUpWikidata} from "./wikidata.js";
 
 // Mavo.dependencies.push(wiki());
 var firstTime = true;
@@ -18,7 +18,16 @@ Mavo.Backend.register($.Class({
     },
 
     get: async function(url) {
-        return await wikidata(this.item, this.language);
+        if(this.service){
+            //look for the item that contains this ID (it can be a wikidata id OR any ID)
+            return lookUpWikidata(this.service, this.id, "en")
+            // .then(itemQ => {
+            //     console.log("itemQ: ", itemQ);
+            //     return await module.exports.wikidata(itemQ, "en");
+            // });
+        }else{ //get a specific item from wikidata
+            return await wikidata(this.item, this.language);
+        }
     },
 
     static: {

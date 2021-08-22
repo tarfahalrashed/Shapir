@@ -2,8 +2,8 @@
 <html class="snarly bagon_song_page--enabled song_stories_public_launch--enabled react_forums--disabled report_abuse--disabled" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en" xml:lang="en">
     <head>
 
-        <link rel="stylesheet" href="https://get.mavo.io/mavo.css"/>
-        <script src="https://get.mavo.io/mavo.js"></script>
+        <script src="https://get.mavo.io/stable/mavo.js"></script>
+        <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
         <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
         <script type="module" src="mavo-wikidata.js"></script>
 
@@ -231,9 +231,9 @@
             <div class="header-expand_nav_menu" ng-click="toggle_mobile_subnav_menu()"><div class="header-expand_nav_menu-contents"></div></div>
 
 
-            <div class="logo_container">
+            <!-- <div class="logo_container">
                 <a href="https://shapir.org" class="logo_link"></a>
-            </div>
+            </div> -->
 
 
         </div>
@@ -360,10 +360,9 @@
                                 <div class="rich_text_formatting">
                                     <p property="description"></p>
 
-                                    <!-- <meta property="uniImages" mv-value="[unique(image)]" /> -->
-                                    <!-- [uniImages] -->
+                                    <meta property="uniImages" mv-value="unique(image)" />
 
-                                    <img style="display: inline; max-width:120px !important; max-height:120px !important" property="image"  mv-multiple/>
+                                    <img style="display: inline; max-width:120px !important; max-height:120px !important" property="uniImages"  mv-multiple/>
 
                                     <div style="padding-bottom: -7px;">
                                         <p><strong><em>Birth Name:</em></strong><span property="birthName"></span></p>
@@ -579,21 +578,14 @@
             <div class="row" style="margin-left: 17%">
 
                 <style>
-                    [property=video] {
-                        display: grid;
-                        grid-template-columns: auto 1fr 1fr;
-                        grid-gap: 0.5em;
-                        margin: 1em 0;
+                    .grid-container {
+                        display: grid; grid-template-columns: auto 1fr 1fr; grid-gap: 0.5em; margin: 1em 0;
                     }
                 </style>
 
                 <div  class="col-6" mv-app="test" mv-bar="none" mv-source="shapir" mv-source-service="youtube" mv-source-type="VideoGallery" mv-source-id="UCNL1ZadSjHpjm4q9j2sVtOA">
 
                     <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">YouTube Channel</div>
-                    <!--
-                    <h6 property="name"></h6>
-                    <p property="description"></p>
-                    -->
 
                     <p><strong>Name:</strong> <span property="name"></span> </p>
                     <p><strong>Description:</strong> <span property="description"></span> </p>
@@ -601,15 +593,8 @@
                     <div class="grid-container">
 
                         <div class="grid-item" property="video" mv-multiple>
-                            <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-                            <iframe property="videoId" width="270" height="150" src="https://www.youtube.com/embed/[videoId]" referrerpolicy="no-referrer-when-downgrade" allowfullscreen> </iframe>
-
-                            </br>
-
-                            <!-- <h5 property="name"></h5>
-                            </br>
-                            <p property="description"></p> -->
+                            <iframe property="videoId" width="270" height="150" src="https://www.youtube.com/embed/[videoId]"  allowfullscreen> </iframe>
 
                         </div>
                     </div>
@@ -638,15 +623,21 @@
                                             <div class="mini_card-subtitle" style="color:gray" property="additionalType"></div>
                                             <div class="mini_card-subtitle" style=" margin:1px !important">
                                                 <div style="overflow: hidden;" style=" margin:1px !important">
-                                                    <p style="float: left; margin:1px !important"><strong><em>Number of tracks:&nbsp;</em></strong></p>
-                                                    <p style="float: left; margin:1px !important" property="numTracks"></p>
+                                                    <p style="float: left; margin:1px !important"><strong><em>Location:&nbsp;</em></strong></p>
+                                                    <p style="float: left; margin:1px !important" property="location"></p>
 
                                                 </div>
                                             </div>
                                             <div class="mini_card-subtitle" style="margin:1px !important">
                                                 <div style="overflow: hidden;" style=" margin:1px !important">
-                                                    <p style="float: left; margin:1px !important"><strong><em>Release Date:&nbsp;</em></strong></p>
-                                                    <p style="float: left; margin:1px !important" property="datePublished"></p>
+                                                    <p style="float: left; margin:1px !important"><strong><em>Start Date:&nbsp;</em></strong></p>
+                                                    <p style="float: left; margin:1px !important" property="startDate"></p>
+                                                </div>
+                                            </div>
+                                            <div class="mini_card-subtitle" style="margin:1px !important">
+                                                <div style="overflow: hidden;" style=" margin:1px !important">
+                                                    <p style="float: left; margin:1px !important"><strong><em>Rating:&nbsp;</em></strong></p>
+                                                    <p style="float: left; margin:1px !important" property="aggregateRating"></p>
                                                 </div>
                                             </div>
 

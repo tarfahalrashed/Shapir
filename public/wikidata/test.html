@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+
+    <script src="https://get.mavo.io/stable/mavo.js"></script>
+    <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
+    <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
+    <script type="module" src="mavo-wikidata.js"></script>
+</head>
+
+<body onload="populateMenu()">
+
+    <div mv-app="tmdb" mv-bar="none" mv-source="wikidata" mv-source-service="YouTube channel ID" mv-source-id="UCNL1ZadSjHpjm4q9j2sVtOA">
+        <!-- <meta property="movie"/>
+        <meta mv-multiple property="images" mv-value="movie.image">
+        [images] -->
+
+
+        <div id="container"></div>
+        <br>
+        <div>
+        <button id="generate">Generate</button>
+        </div>
+
+<script>
+    function populateMenu() {
+        var values = ["dog", "cat", "parrot", "rabbit"];
+
+        var select = document.createElement("select");
+        select.name = "pets";
+        select.id = "pets"
+
+        for (const val of values)
+        {
+            var option = document.createElement("option");
+            option.value = val;
+            option.text = val.charAt(0).toUpperCase() + val.slice(1);
+            select.appendChild(option);
+        }
+
+        var label = document.createElement("label");
+        label.innerHTML = "Choose your pets: "
+        label.htmlFor = "pets";
+
+        document.getElementById("container").appendChild(label).appendChild(select);
+    }
+</script>
+
+        <!-- <div mv-app="main"> -->
+            <!-- <div property="venue" mv-value="tmdb.movie"> -->
+
+            <!-- </div> -->
+        <!-- </div> -->
+
+    </div>
+
+    <!-- <div  mv-app="test" mv-bar="none" mv-source="wikidata" mv-source-item="Q3286391" mv-source-language="en" >
+        <meta mv-multiple property="results"/>
+    </div> -->
+
+
+    <!-- <div property="image" mv-multiple>
+        <img
+            alt=""
+            class="ipc-image" loading="lazy"
+            property="name"
+            src="https://image.tmdb.org/t/p/original[url]"
+            sizes="25vw, (min-width: 480px) 17vw, (min-width: 600px) 13vw, (min-width: 1024px) 8vw, (min-width: 1280px) 8vw"
+            width="140" />
+        </div> -->
+
+
+<!--
+        <div mv-bar="none" mv-app="searchSongkick" mv-source="shapir" mv-source-service="songkick" mv-source-search="[main.searchTerm]">
+           <meta mv-multiple property="results">
+           <meta mv-multiple property="events" mv-value="results.event">
+        </div>
+
+        <div mv-bar="none" mv-app="searchSeatgeek" mv-source="shapir" mv-source-service="seatgeek"  mv-source-search="[main.searchTerm]">
+           <meta mv-multiple property="results">
+           <meta mv-multiple property="events" mv-value="results.event">
+        </div>
+
+        <div mv-bar="none" mv-app="searchTicketmaster" mv-source="shapir" mv-source-service="ticketmaster" mv-source-search="[main.searchTerm]">
+           <meta mv-multiple property="results">
+           <meta mv-multiple property="events" mv-value="results.event">
+        </div>
+
+        <div mv-app="main">
+           <label>Search:</label>
+           <input property="searchTerm" mv-value="Music"/>
+
+           <h1>Music Venues</h1>
+           <div property="venue" mv-multiple mv-value="list(searchSongkick.results, searchSeatgeek.results, searchTicketmaster.results)">
+               <h1 property="name"></h1>
+               <a property="url">[url]</a>
+               <p property="maximumAttendeeCapacity"></p>
+                <p property="longitude"></p>
+                <p property="latitude"></p>
+
+                <h2>Upcoming Events</h2>
+                <div property="event" mv-multiple mv-value="list(searchSongkick.events, searchSeatgeek.events, searchTicketmaster.events)">
+                   <ul>
+                       <li><h3 property="name"></h3></li>
+                       <a property="url">[url]</a>
+                       <p property="startDate"></p>
+                   </ul>
+                </div>
+           </div>
+        </div> -->
+
+
+
+</body>
+</html>

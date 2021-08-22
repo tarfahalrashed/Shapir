@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Doc</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="../assets/css/default/app.min.css" rel="stylesheet" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+
+	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+	<link href="assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+	<link href="assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" />
+	<link href="assets/plugins/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet" />
+	<link href="assets/plugins/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet" />
+	<link href="assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+	<link href="assets/plugins/@danielfarrell/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet" />
+	<link href="assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+	<link href="assets/plugins/tag-it/css/jquery.tagit.css" rel="stylesheet" />
+	<link href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+	<link href="assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+	<link href="assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+	<link href="assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css" rel="stylesheet" />
+	<link href="assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet" />
+	<link href="assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet" />
+	<link href="assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet" />
+	<!-- ================== END PAGE LEVEL STYLE ================== -->
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+	<link href="assets/css/jsoneditor.css" rel="stylesheet" type="text/css">
+	<script src="assets/js/jsoneditor.js"></script>
+
+
+	<!-- <link href="assets/css/prism-default.css" rel="stylesheet" /> -->
+	<link href="assets/js/prism-coy.css" rel="stylesheet" />
+	<!-- <link href="assets/css/prism-dark.css" rel="stylesheet" /> -->
+
+
+	<style>
+		body {
+		  font-family: "Lato", sans-serif;
+		}
+
+		.sidenav {
+		  height: 100%;
+		  width: 240px;
+		  position: fixed;
+		  z-index: 1;
+		  bottom: 0;
+		  left: 0;
+		  background-color: #2d353c;
+		  overflow-x: hidden;
+		  padding-top: 20px;
+		}
+
+		.sidenav a {
+		  padding: 6px 8px 6px 16px;
+		  text-decoration: none;
+		  font-size: 25px;
+		  color: #818181;
+		  display: block;
+		}
+
+		.sidenav a:hover {
+		  color: #f1f1f1;
+		}
+
+		.main {
+		  margin-left: 160px; /* Same as the width of the sidenav */
+		  font-size: 28px; /* Increased text to enable scrolling */
+		  padding: 0px 10px;
+		}
+
+		@media screen and (max-height: 450px) {
+		  .sidenav {padding-top: 15px;}
+		  .sidenav a {font-size: 18px;}
+		}
+    </style>
+
+    <script src="https://get.mavo.io/stable/mavo.js"></script>
+    <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
+    <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
+    <script type="module" src="wikidata/mavo-wikidata.js"></script>
+
+
+</head>
+<body onload="populateMenu()" data-prismjs-copy-timeout="500">
+
+	<!-- begin #page-loader -->
+	<div id="page-loader" class="fade show">
+		<span class="spinner"></span>
+	</div>
+	<!-- end #page-loader -->
+
+	<!-- begin #page-container -->
+	<div id="page-container" class="page-container fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar">
+		<!-- begin #header -->
+		<div id="header" class="header navbar-default">
+			<!-- header navbar navbar-transparent navbar-fixed-top navbar-expand-lg -->
+			<!-- begin navbar-header -->
+			<!-- <div class="navbar-header"> -->
+				<!-- <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>Color</b> Admin</a>
+				<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button> -->
+
+			<!-- </div> -->
+			<a href="index.html" class="navbar-brand">
+				<!-- <span class="brand-logo"></span> -->
+				<img style="margin-left: 50px; margin-top: 5px;" src="assets/img/bg/logoP.svg" width="70px"/>
+			</a>
+			<!-- end navbar-header --><!-- begin header-nav -->
+			<ul class="navbar-nav navbar-right">
+				<li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target" data-scroll-target="#home">HOME</a></li>
+				<li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT</a></li>
+				<li class="nav-item"><a class="nav-link" href="schema.html" >CREATE</a></li>
+				<li class="nav-item"><a class="nav-link" href="doc.html" >DOC</a></li>
+				<!-- <li class="nav-item"><a class="nav-link" href="#explore" >EXPLORE</a></li>
+				<li class="nav-item"><a class="nav-link" href="#doc" >DOC</a></li> -->
+				<li class="nav-item"><a class="nav-link active" href="library.html" >LIBRARY</a></li>
+				<li class="nav-item" style="margin-right:50px"><a class="nav-link" href="mavo.html" >MAVO</a></li>
+				<!-- <li class="nav-item"><a class="nav-link" href="#team" data-click="scroll-to-target">TEAM</a></li> -->
+			</ul>
+			<!-- end header-nav -->
+		</div>
+		<!-- end #header -->
+		<div id="sidebar" class="sidebar">
+			<!-- begin sidebar scrollbar -->
+			<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div data-scrollbar="true" data-height="100%" data-init="true" style="overflow: hidden; width: auto; height: 100%;">
+				<!-- begin sidebar user -->
+				<ul class="nav" style="font-size: 1.4em; margin-top: 40px;">
+
+					<!-- <li class="has-sub active">
+						<a href="javascript:;">
+
+							<span>Mavo+Shapir</span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#getStarted">Get Started</a></li>
+							<li><a href="#get">Get an Object/Type</a></li>
+							<li><a href="#search">Search a Single Site</a></li>
+							<li><a href="#searcgMulti">Search Multiple Site</a></li>
+							<li><a href="#params">Specify Parameters</a></li>
+							<li><a href="#numResults">Specify Number of Results</a></li>
+							<li><a href="#example">Example</a></li>
+							<li><a href="#explore">Explore Sites</a></li>
+
+						</ul>
+					</li> -->
+
+				</ul>
+				<!-- end sidebar nav -->
+			</div><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 117.202px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+			<!-- end sidebar scrollbar -->
+		</div>
+
+		<!-- begin #content -->
+		<div id="content" class="content">
+
+			<!-- JS Library begin panel -->
+
+			<!-- JS Library end panel -->
+
+
+            <!-- begin panel -->
+			<div id="mavo" class="panel">
+				<div class="panel-heading">
+					<h1 class="panel-title"></h1>
+					<div class="panel-heading-btn">
+						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> -->
+						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a> -->
+						<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+					</div>
+				</div>
+				<div class="panel-body">
+					<!-- Content Here -->
+					<div id="getStarted" class="panel panel-inverse">
+						<div class="panel-heading">
+							<h4 class="panel-title">Build your Mavo-Shapir Application</h4>
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+							</div>
+						</div>
+						<div class="panel-body">
+
+                            <div class="input-group">
+								<label style="padding-top:7px; font-size: 1.3em;">1. Choose the Site:</label>
+								<div class="input-group col-md-2" style="font-size: 1.3em !important">
+									<select id="container"  class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="">
+										<option selected>Choose Site</option>
+									</select>
+                                </div>
+
+                                <label style="padding-top:7px; font-size: 1.3em;">2. Enter URL or ID</label>
+								<div class="input-group col-md-2">
+                                    <input id="url" type="text" style="font-size: 1.3em;" class="form-control"/>
+                                </div>
+
+                                <a id="connectAPIBut" href="javascript:;" data-toggle="modal" class="btn btn-dark m-r-5" style="height:35px; width:100px" onclick="getShapirFunctions()">Get</a>
+
+                            </div>
+
+
+                            <p id="what" style="padding-top:7px; font-size: 1.3em; display:none">This <span id="idName"></span> is for <span id="itemLabel"></span> </p>
+                            <p id="itemDesc" style="padding-top:7px; font-size: 1.3em;"></p>
+                            <img id="image" src="" width="10%" />
+
+                            <div id="idSites">
+                                <p id="idSitesP" style="padding-top:7px; font-size: 1.3em; display:none">Sites that offer same/different types of data for <span id="idSitesLabel"></span></p>
+
+                            </div>
+
+                            <div id="siteTypes">
+
+                            </div>
+
+                            <div id="searchSites">
+                                <p id="searchSitesP" style="padding-top:7px; font-size: 1.3em; display:none">Search these sites for <span id="searchSitesLabel"></span></p>
+
+                            </div>
+
+                            <div id="similarSites">
+                                <p id="similarSitesP" style="padding-top:7px; font-size: 1.3em; display:none">Sites that offer similar types of data to the ones you've already picked <span id="similarSitesLabel"></span></p>
+
+                            </div>
+
+
+                        </div>
+                    </div><!--END get started-->
+                </div>
+            </div>
+
+		</div>
+		<!-- end #content -->
+
+		<!-- begin theme-panel -->
+		<div class="theme-panel theme-panel-lg">
+			<!-- <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a> -->
+			<div class="theme-panel-content">
+				<h5>App Settings</h5><ul class="theme-list clearfix">
+					<li><a href="javascript:;" class="bg-red" data-theme="red" data-theme-file="../assets/css/default/theme/red.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-pink" data-theme="pink" data-theme-file="../assets/css/default/theme/pink.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Pink">&nbsp;</a></li>
+					<li class="active"><a href="javascript:;" class="bg-orange" data-theme="orange" data-theme-file="../assets/css/default/theme/orange.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Orange">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-yellow" data-theme="yellow" data-theme-file="../assets/css/default/theme/yellow.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Yellow">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-lime" data-theme="lime" data-theme-file="../assets/css/default/theme/lime.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Lime">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-green" data-theme="green" data-theme-file="../assets/css/default/theme/green.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Green">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-teal" data-theme="default" data-theme-file="" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Default">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-aqua" data-theme="aqua" data-theme-file="../assets/css/default/theme/aqua.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Aqua">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-blue" data-theme="blue" data-theme-file="../assets/css/default/theme/blue.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Blue">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-purple" data-theme="purple" data-theme-file="../assets/css/default/theme/purple.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Purple">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-indigo" data-theme="indigo" data-theme-file="../assets/css/default/theme/indigo.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Indigo">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-black" data-theme="black" data-theme-file="../assets/css/default/theme/black.min.css" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- end theme-panel -->
+
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+
+
+    </div>
+	<!-- end page container -->
+
+    <script>
+        function populateMenu() {
+            var select = document.getElementById("container");
+
+            fetch("/s2v")//change this to github url of the json file
+            .then(response => {return response.json()})
+            .then(data => {
+                console.log("data: ", data)
+                Object.keys(data).forEach(key => {
+                    var option = document.createElement("option");
+                    option.value = data[key]["pLabel"];
+                    p = data[key]["p"]
+                    option.id= p.substring(p.lastIndexOf("/") + 1, p.length);
+                    option.text = data[key]["pLabel"].replace(' ID','')
+                    select.appendChild(option);
+                })
+                jQuery('.selectpicker').selectpicker('refresh');
+
+            })
+        }
+
+
+        function getShapirFunctions(){
+            var sites = [];
+
+            fetch('https://superapi-52bc2.firebaseio.com/abstractions.json')
+            .then(response => {return response.json()})
+            .then(data => {
+                sites = Object.keys(data)
+            })
+
+            var lang ="en"
+            var p = document.getElementById("container").options[document.getElementById("container").selectedIndex].getAttribute("id");
+            var pLabel = document.getElementById("container").options[document.getElementById("container").selectedIndex].text;
+            console.log(pLabel)
+
+            document.getElementById("idName").innerHTML = pLabel
+
+            function validURL(str) {
+                var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+                    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+                    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+                    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+                    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+                    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+                return !!pattern.test(str);
+            }
+            var id = document.getElementById("url").value;
+
+            if(validURL(id)){
+                id = id.substring(id.lastIndexOf("/") + 1, id.length);
+            }
+
+            console.log(p)
+            console.log(id)
+
+            fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?item%20%3FitemLabel%20WHERE%20%7B%20%3Fitem%20wdt%3A"+p+"%20%22"+id+"%22.%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D,en%22.%20%7D%20%7D#/")
+            .then(response => {return response.json()})
+            .then(data => {
+                console.log("data2: ", data)
+                let results = data.results.bindings
+                var itemUrl= results[0].item.value;
+                var itemID = itemUrl.substring(itemUrl.lastIndexOf("/") + 1, itemUrl.length);
+                // return await wikidata(itemID, "en");
+                let obj ={}, objItem={};
+                return fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:"+itemID+")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22"+lang+"%22%20}}")
+                .then(response => {return response.json()})
+                .then(data => {
+                    let results = data.results.bindings
+                    if(results[0].itemLabel){
+                        objItem["label"]= results[0].itemLabel.value;
+                    }
+                    if(results[0].itemDescription){
+                        objItem["description"]= results[0].itemDescription.value;
+                    }
+                    if(results[0].itemAltLabel){
+                        objItem["aliases"]= results[0].itemAltLabel.value;
+                    }
+                    objItem["itemID"]= itemID;
+                    objItem["itemURL"]= "https://www.wikidata.org/wiki/"+itemID;
+
+                    return objItem;
+                }).then((objItem)=>{
+                    return fetch("https://query.wikidata.org/sparql?format=json&query=select%20?wdLabel%20?ps_Label%20?ps_%20?wdpqLabel%20?pq_Label%20{VALUES%20(?company)%20{(wd:"+itemID+")}?company%20?p%20?statement%20.?statement%20?ps%20?ps_%20.?wd%20wikibase:claim%20?p.?wd%20wikibase:statementProperty%20?ps.OPTIONAL%20{?statement%20?pq%20?pq_%20.?wdpq%20wikibase:qualifier?pq%20.}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22"+lang+"%22%20}}%20ORDER%20BY%20?wd%20?statement%20?ps_")
+                    .then(response => {return response.json()})
+                    .then(data => {
+                        let results = data.results.bindings;
+                        // console.log("results: ", results);
+                        for(let i=0; i<results.length; ++i){
+                            var input = results[i].wdLabel.value;
+                            // console.log("input: ", input)
+                            var firstWord = true;
+                            var output = input
+                            // .replace(/(\w+)(?:\s+|$)/g, function(_, word) {
+                            //     if(firstWord){
+                            //         firstWord = false;
+                            //         return word;
+                            //     }else{
+                            //         return word.charAt(0).toUpperCase() + word.substr(1);
+                            //     }
+                            // });
+                            // console.log("output: ", output)
+
+                            if(output in obj){
+                                obj[output].push({
+                                    id: results[i].ps_.value,
+                                    value: results[i].ps_Label.value
+                                });
+                            }else{
+                                obj[output]= [];
+                                obj[output].push({
+                                    id: results[i].ps_.value,
+                                    value: results[i].ps_Label.value
+                                });
+                            }
+                        }
+
+                        for (const [key, value] of Object.entries(obj)) {
+                            if(value.length == 1){
+                                let idQ = value[0].id;
+                                if(idQ.includes("http://www.wikidata.org/entity/Q")){
+                                    let id = idQ.split("/").reverse()[0];
+                                    Object.defineProperty(objItem, key, {
+                                        configurable: true,
+                                        get: async function(){
+                                            return await wikidata(id, lang);
+                                        }
+                                    });
+                                }else{
+                                    objItem[key]= value[0].value;
+                                }
+                            }else{
+                                let idQ = value[0].id;
+                                if(idQ.includes("http://www.wikidata.org/entity/Q")){
+                                    let arrPromises = []
+                                    Object.defineProperty(objItem, key, {
+                                        configurable: true,
+                                        get: function(){
+                                            for(let i=0; i<value.length; ++i){
+                                                idQ = value[i].id;
+                                                let id = idQ.split("/").reverse()[0];
+                                                arrPromises.push(wikidata(id, lang))
+                                            }
+                                            return arrPromises;
+                                            // return Promise.all(arrPromises);
+                                        }
+                                    });
+                                }else{
+                                    objItem[key]= [];
+                                    for(let i=0; i<value.length; ++i){
+                                        objItem[key].push(value[i].value);
+                                    }
+                                }
+                                // console.log(objItem)
+                            }
+                        }
+                        return objItem;
+                    })
+                }).then((properties)=>{
+                    // console.log("OBJ: ", properties)
+                    // return result;
+                    // Go over the properties and get the one that includes one of the site names
+
+                    document.getElementById("itemLabel").innerHTML = properties['label'];
+                    document.getElementById("itemDesc").innerHTML = properties['description'];
+                    // var im = properties['image']
+                    document.getElementById("image").src = properties['image'][0]
+                    // }else{
+                    //     document.getElementById("image").src = properties['image'];
+                    // }
+
+                    $("#what").show()
+
+                    Object.keys(properties).forEach(key => {
+
+                        for(var i=0; i<sites.length; ++i){
+                            // console.log("key1: ", key)
+                            // console.log("site1: ", sites[i])
+                            var pLabel = key.toLowerCase();
+                            if(pLabel.includes(sites[i])){
+                                console.log("key: ", key)
+                                console.log("site: ", sites[i])
+                                $("#idSitesP").show()
+                                $("#idSites").append('<a id="'+sites[i]+'" href="javascript:;" class="btn btn-pink btn-s" onclick="getTypes('+sites[i]+')">'+key.replace(' ID','')+'</a>&nbsp;&nbsp;');
+
+
+                                //THESE ARE THE SITES
+                                //When they pick a site
+                                //THESE ARE THE STITES WITH SIMILAR TYPES
+                                //THESE ARE THE SITES THAT YOU CAN SEARCH
+                            }
+                        }
+                    });
+                    //add wikidata
+                    // $("#idSites").append('<a id="" href="javascript:;" class="btn btn-pink btn-s" onclick="">wikidata</a>&nbsp;&nbsp;');
+
+                });
+
+            });
+        }
+
+        function getTypes(site){
+            $("#siteTypes").empty()
+            $("#siteTypes").append('<p style="padding-top:7px; font-size: 1.3em;">What type of data you want to add your application?</p>');
+
+            var types = Object.keys(site);
+            for(var i=0; i<types.length; ++i){
+                $("#siteTypes").append('<a id="'+types[i]+'" href="javascript:;" class="btn btn-primary btn-s" onclick="">'+types[i]+'</a>&nbsp;&nbsp;');
+            }
+        }
+
+    </script>
+	<!-- ================== BEGIN PRISM JS ================== -->
+	<!-- <script src="assets/js/prism.js"></script> -->
+	<script src="assets/js/prism-coy.js"></script>
+	<script src="assets/js/prism-json.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+
+	<!-- ================== END PRISM JS ================== -->
+
+
+
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="/assets/js/app.min.js"></script>
+	<!-- <script src="/assets/js/default.min.js" type="application/javascript"></script> -->
+
+	<!-- ================== END BASE JS ================== -->
+
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="assets/plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
+	<script src="assets/plugins/moment/min/moment.min.js"></script>
+	<script src="assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+	<script src="assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+	<script src="assets/plugins/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+	<script src="assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js"></script>
+	<script src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+	<script src="assets/plugins/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
+	<script src="assets/plugins/@danielfarrell/bootstrap-combobox/js/bootstrap-combobox.js"></script>
+	<script src="assets/plugins/tag-it/js/tag-it.min.js"></script>
+	<script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<script src="assets/plugins/select2/dist/js/select2.min.js"></script>
+	<script src="assets/plugins/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="assets/plugins/bootstrap-show-password/dist/bootstrap-show-password.js"></script>
+	<script src="assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
+	<script src="assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js"></script>
+    <script src="assets/plugins/clipboard/dist/clipboard.min.js"></script>
+    <script src="assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<!-- <script src="assets/js/demo/form-plugins.demo.js"></script> -->
+
+	<script src="assets/plugins/highlight.js/highlight.min.js"></script>
+	<!-- <script src="assets/js/demo/render.highlight.js"></script> -->
+
+	<script src="http://culmat.github.io/jsTreeTable/treeTable.js"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+
+
+	<link href="assets/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+	<!-- <link href="jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" /> -->
+	<script src="assets/js/jquery.treetable.js"></script>
+
+	<!-- ================== END BASE JS ================== -->
+
+	<script src="assets/js/shapir_index.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+
+	<!-- <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase.js"></script> -->
+	<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+
+	<!-- <script src="assets/js/shapir.js"></script> -->
+
+</body>
+</html>

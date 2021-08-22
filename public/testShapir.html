@@ -44,8 +44,8 @@
 				//   // await playlist.delete()
 				// playlist.name = "NEWX"
 
-				var artist = await songkick.MusicGroup("974908")
-				console.log("events: ", await artist.event)
+				// var artist = await songkick.MusicGroup("974908")
+				// console.log("events: ", await artist.event)
 
 				//Vimeo
 				// var videos = await vimeo.search("Adele")
@@ -116,13 +116,11 @@
 			// // var videoObject = await vimeo.VideoObject(videos[7].video_id)
 			// console.log(await videos[7].comment)
 
-
 			//})
 
 			// await video.addToWatchlater()
 			// console.log(await dailymotion.MusicPlaylist.create({'name': 'LOCAL STG55555'}))
 			//var videos = await youtube.searchVideoObject('Taylor Swift', {'order':'date', 'numResults': '100'});
-
 
 			// var musicPlaylist = await vimeo.MusicPlaylist("8274189")
 			// console.log(musicPlaylist.name)
@@ -130,6 +128,29 @@
 			// console.log(videos)
 			// var comments = await videos[7].comment
 			// console.log(comments)
+
+			// youtube.init({"apiKey": "AIzaSyDU-1unabDFBSL89m1yi3ebmTbRl3wbDDw"});
+			// let videos = await youtube.search("Adele")
+			// console.log(videos)
+
+			// unsplash.init({"apiKey": "c27b385721adeda6633b003df4417672f305d3033426b891bfaffed1a73b033c"})
+			// let images = await unsplash.search("coffee")
+			// console.log(images)
+
+
+			// var articles = await nytimes.search('A Start is Born')
+			// console.log(articles)
+
+
+			// var movie = await themoviedb.Movie("332562-a-star-is-born");
+			// var movieImages = await movie.image;
+			// var movie = await imdb.Movie('tt11388580')
+
+			var movie = await songkick.MusicGroup("974908")
+
+			console.log(await movie.event)
+
+
 		};
 		app();
 

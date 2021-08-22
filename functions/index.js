@@ -2435,4 +2435,24 @@ async function shapir(){
 }
 
 
+
+app.get("/s2v", (req, res, next) => {
+
+    const config = require('./data.json')
+
+    const fs = require('fs')
+    fs.readFile('./data.json', 'utf8', (err, data) => {
+        if (err) {
+            console.log("File read failed:", err)
+            return
+        }
+
+        res.send(data)
+
+
+    })
+})
+
+
+
 exports.app = functions.https.onRequest(app);
