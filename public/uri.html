@@ -82,14 +82,14 @@
 		}
     </style>
 
-    <script src="https://get.mavo.io/stable/mavo.js"></script>
+    <!-- <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
     <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
-    <script type="module" src="wikidata/mavo-wikidata.js"></script>
+    <script type="module" src="wikidata/mavo-wikidata.js"></script> -->
 
 
 </head>
-<body onload="populateMenu()" data-prismjs-copy-timeout="500">
+<body onload="" data-prismjs-copy-timeout="500">
 
 	<!-- begin #page-loader -->
 	<div id="page-loader" class="fade show">
@@ -195,15 +195,15 @@
 						<div class="panel-body">
 
                             <div class="input-group">
-								<label style="padding-top:7px; font-size: 1.3em;">1. Choose the Site:</label>
+								<!-- <label style="padding-top:7px; font-size: 1.3em;">1. Choose the Site:</label>
 								<div class="input-group col-md-2" style="font-size: 1.3em !important">
 									<select id="container"  class="form-control selectpicker" data-size="10" data-live-search="true" data-style="btn-white" style="overflow:scroll;" onchange="">
 										<option selected>Choose Site</option>
 									</select>
-                                </div>
+                                </div> -->
 
-                                <label style="padding-top:7px; font-size: 1.3em;">2. Enter URL or ID</label>
-								<div class="input-group col-md-2">
+                                <label style="padding-top:7px; font-size: 1.3em;">Enter URL or ID</label>
+								<div class="input-group col-md-4">
                                     <input id="url" type="text" style="font-size: 1.3em;" class="form-control"/>
                                 </div>
 
@@ -275,25 +275,25 @@
 	<!-- end page container -->
 
     <script>
-        function populateMenu() {
-            var select = document.getElementById("container");
+        // function populateMenu() {
+        //     var select = document.getElementById("container");
 
-            fetch("/s2v")//change this to github url of the json file
-            .then(response => {return response.json()})
-            .then(data => {
-                console.log("data: ", data)
-                Object.keys(data).forEach(key => {
-                    var option = document.createElement("option");
-                    option.value = data[key]["pLabel"];
-                    p = data[key]["p"]
-                    option.id= p.substring(p.lastIndexOf("/") + 1, p.length);
-                    option.text = data[key]["pLabel"].replace(' ID','')
-                    select.appendChild(option);
-                })
-                jQuery('.selectpicker').selectpicker('refresh');
+        //     fetch("/s2v")//change this to github url of the json file
+        //     .then(response => {return response.json()})
+        //     .then(data => {
+        //         console.log("data: ", data)
+        //         Object.keys(data).forEach(key => {
+        //             var option = document.createElement("option");
+        //             option.value = data[key]["pLabel"];
+        //             p = data[key]["p"]
+        //             option.id= p.substring(p.lastIndexOf("/") + 1, p.length);
+        //             option.text = data[key]["pLabel"].replace(' ID','')
+        //             select.appendChild(option);
+        //         })
+        //         jQuery('.selectpicker').selectpicker('refresh');
 
-            })
-        }
+        //     })
+        // }
 
 
         function getShapirFunctions(){
@@ -306,11 +306,9 @@
             })
 
             var lang ="en"
-            var p = document.getElementById("container").options[document.getElementById("container").selectedIndex].getAttribute("id");
-            var pLabel = document.getElementById("container").options[document.getElementById("container").selectedIndex].text;
-            console.log(pLabel)
-
-            document.getElementById("idName").innerHTML = pLabel
+            // var p = document.getElementById("container").options[document.getElementById("container").selectedIndex].getAttribute("id");
+             //document.getElementById("container").options[document.getElementById("container").selectedIndex].text;
+            // console.log(pLabel)
 
             function validURL(str) {
                 var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -327,25 +325,28 @@
                 id = id.substring(id.lastIndexOf("/") + 1, id.length);
             }
 
-            console.log(p)
-            console.log(id)
+            // console.log(p)
+            // console.log(id)
 
-            fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?item%20%3FitemLabel%20WHERE%20%7B%20%3Fitem%20wdt%3A"+p+"%20%22"+id+"%22.%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D,en%22.%20%7D%20%7D#/")
-            .then(response => {return response.json()})
+            fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20%3Fproperty%20%3FpropertyLabel%20WHERE%7B%20%20%20%0A%20%20%20%20%20%3Fitem%20%3Fpredicate%20%22"+id+"%22%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3AdirectClaim%20%3Fpredicate%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3ApropertyType%20wikibase%3AExternalId.%0A%20%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%0A%20%20%20%7D%20%0A%7D")
+			.then(response => {return response.json()})
             .then(data => {
-                console.log("data2: ", data)
+                // console.log("data: ", data)
                 let results = data.results.bindings
                 var itemUrl= results[0].item.value;
-                var itemID = itemUrl.substring(itemUrl.lastIndexOf("/") + 1, itemUrl.length);
-                // return await wikidata(itemID, "en");
-                let obj ={}, objItem={};
+				var itemID = itemUrl.substring(itemUrl.lastIndexOf("/") + 1, itemUrl.length);
+				var pLabel = results[0].propertyLabel.value;
+				document.getElementById("idName").innerHTML = pLabel;
+
+				let obj ={}, objItem={};
                 return fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:"+itemID+")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22"+lang+"%22%20}}")
                 .then(response => {return response.json()})
                 .then(data => {
                     let results = data.results.bindings
                     if(results[0].itemLabel){
-                        objItem["label"]= results[0].itemLabel.value;
-                    }
+						objItem["label"]= results[0].itemLabel.value;
+					}
+
                     if(results[0].itemDescription){
                         objItem["description"]= results[0].itemDescription.value;
                     }
@@ -361,21 +362,10 @@
                     .then(response => {return response.json()})
                     .then(data => {
                         let results = data.results.bindings;
-                        // console.log("results: ", results);
                         for(let i=0; i<results.length; ++i){
                             var input = results[i].wdLabel.value;
-                            // console.log("input: ", input)
                             var firstWord = true;
                             var output = input
-                            // .replace(/(\w+)(?:\s+|$)/g, function(_, word) {
-                            //     if(firstWord){
-                            //         firstWord = false;
-                            //         return word;
-                            //     }else{
-                            //         return word.charAt(0).toUpperCase() + word.substr(1);
-                            //     }
-                            // });
-                            // console.log("output: ", output)
 
                             if(output in obj){
                                 obj[output].push({
@@ -418,7 +408,6 @@
                                                 arrPromises.push(wikidata(id, lang))
                                             }
                                             return arrPromises;
-                                            // return Promise.all(arrPromises);
                                         }
                                     });
                                 }else{
@@ -436,7 +425,6 @@
                     // console.log("OBJ: ", properties)
                     // return result;
                     // Go over the properties and get the one that includes one of the site names
-
                     document.getElementById("itemLabel").innerHTML = properties['label'];
                     document.getElementById("itemDesc").innerHTML = properties['description'];
                     // var im = properties['image']
@@ -450,15 +438,12 @@
                     Object.keys(properties).forEach(key => {
 
                         for(var i=0; i<sites.length; ++i){
-                            // console.log("key1: ", key)
-                            // console.log("site1: ", sites[i])
                             var pLabel = key.toLowerCase();
                             if(pLabel.includes(sites[i])){
-                                console.log("key: ", key)
-                                console.log("site: ", sites[i])
+                                // console.log("key: ", key)
+                                // console.log("site: ", sites[i])
                                 $("#idSitesP").show()
                                 $("#idSites").append('<a id="'+sites[i]+'" href="javascript:;" class="btn btn-pink btn-s" onclick="getTypes('+sites[i]+')">'+key.replace(' ID','')+'</a>&nbsp;&nbsp;');
-
 
                                 //THESE ARE THE SITES
                                 //When they pick a site
@@ -476,13 +461,20 @@
         }
 
         function getTypes(site){
+			// console.log(site.id)
             $("#siteTypes").empty()
             $("#siteTypes").append('<p style="padding-top:7px; font-size: 1.3em;">What type of data you want to add your application?</p>');
 
-            var types = Object.keys(site);
-            for(var i=0; i<types.length; ++i){
-                $("#siteTypes").append('<a id="'+types[i]+'" href="javascript:;" class="btn btn-primary btn-s" onclick="">'+types[i]+'</a>&nbsp;&nbsp;');
-            }
+			fetch('https://superapi-52bc2.firebaseio.com/abstractions/'+site.id+'.json')
+            .then(response => {return response.json()})
+            .then(data => {
+				var types = Object.keys(data.objects);
+				for(var i=0; i<types.length; ++i){
+					$("#siteTypes").append('<a id="'+types[i]+'" href="javascript:;" class="btn btn-primary btn-s" onclick="">'+types[i]+'</a>&nbsp;&nbsp;');
+				}
+			})
+
+
         }
 
     </script>

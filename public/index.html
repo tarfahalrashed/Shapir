@@ -43,12 +43,20 @@
 				<!-- begin navbar-collapse -->
 				<div class="collapse navbar-collapse" id="header-navbar">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target" data-scroll-target="#home">HOME</a></li>
-						<li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">ABOUT</a></li>
-						<li class="nav-item"><a class="nav-link" href="schema.html" >CREATE</a></li>
-						<li class="nav-item"><a class="nav-link" href="doc.html" >DOC</a></li>
-						<li class="nav-item"><a class="nav-link" href="library.html" >LIBRARY</a></li>
-						<li class="nav-item"><a class="nav-link" href="mavo.html" >MAVO</a></li>
+						<!-- <li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target" data-scroll-target="#home">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">About</a></li>
+						<li class="nav-item"><a class="nav-link" href="schema.html" >ShapirUI</a></li>
+						<li class="nav-item"><a class="nav-link" href="library.html" >ShapirJS</a></li>
+						<li class="nav-item"><a class="nav-link" href="mavo.html" >Mavo-Shapir</a></li> -->
+
+						<li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target" data-scroll-target="#home">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="index.html#about" data-click="scroll-to-target">About</a></li>
+						<li class="nav-item"><a class="nav-link" href="shapirui.html" >ShapirUI</a></li>
+						<!-- <li class="nav-item"><a class="nav-link" href="doc.html" >Doc</a></li> -->
+						<li class="nav-item"><a class="nav-link" href="shapirjs.html" >ShapirJS</a></li>
+						<li class="nav-item"><a class="nav-link" href="mavo-shapir.html" >Mavo-Shapir</a></li>
+						<!-- <li class="nav-item" style="margin-right:50px"><a class="nav-link" href="index.html#contact" >Contact</a></li> -->
+
 						<!-- <li class="nav-item"><a class="nav-link" href="#team" data-click="scroll-to-target">TEAM</a></li> -->
 					</ul>
 				</div>
@@ -73,9 +81,9 @@
 				<h1><img src="assets/img/bg/logoSb.svg" width="330px"/></h1>
 				<h3>Shape the way we access data on the Web.</h3>
 				<p style="font-size: 1.15em;">
-					Standardize access to Web APIs by connecting them to schema.org vocabulary.
+					Standardizing and Democratizing Access to Web APIs
 				</p>
-				<a href="schema.html" class="btn btn-theme btn-primary">Create</a> <a href="library.html" class="btn btn-theme btn-outline-white">Explore</a><br />
+				<a href="shapirui.html" class="btn btn-theme btn-primary">Describe APIs</a> <a href="shapirjs.html" class="btn btn-theme btn-outline-white">Explore APIs</a><br />
 
 			</div>
 			<!-- end container -->
@@ -83,10 +91,25 @@
 		<!-- end #home -->
 
 		<!-- begin #about -->
-		<!-- <div id="about" class="content" data-scrollview="true">
-			<div class="container" data-animation="true" data-animation-type="">
+		<div id="about" class="content" data-scrollview="true" >
+			<div class="container">
+			<div class="row ">
+			<div class="col-6 text-center">
+				<img src="assets/img/doc/shapir_.pdf" width="100%" />
+			</div>
 
-				<div class="row">
+			</br>
+
+			<div class="col-6">
+				<ul style="text-align: justify !important; font-size: 1.05em;">
+					<li><B>ShapirUI</B>: A graphical UI that allows you to describe arbitrary Web APIs.</li>
+					<li><B>ShapirJS</B>: A JavaScript library that wraps an API's data as typed objects in the local programming environment. You can read and write properties of those objects, and invoke methods on them or on the site, as if they were local, and the library takes care of making the necessary API calls to provide or modify the relevant data.</li>
+					<li><B>Mavo-Shapir</B>: An integration of ShapirJS with <a href="https://mavo.io" target="_blank">Mavo</a>, an HTML declarative language, which allows a user to create applications interacting with API's data by writing only HTML, with no JavaScript programming required.</li>
+				</ul>
+			</div>
+			</div>
+
+				<!-- <div class="row">
 					<div class="col-md-2 col-sm-12">
 					</div>
 
@@ -110,21 +133,72 @@
 
 					</div>
 
-				</div>
+				</div> -->
 			</div>
-		</div> -->
+		</div>
 		<!-- end #about -->
 
-		<!-- begin #contact -->
 
+
+		<!-- begin #contact -->
+		<div  class="content" data-scrollview="true">
+			<div class="container text-center">
+				<div class="heading-block topmargin-lg center">
+					<h2 >Our Research Team</h2>
+					<span class="">Shapir is a research project built by the <a href="http://haystack.csail.mit.edu" target="_blank">Haystack Group</a> at <a href="https://www.csail.mit.edu" target="_blank">MIT CSAIL</a>.
+					</br>
+					Visit our <a href="https://github.com/tarfahalrashed/Shapir" target="_blank">GitHub repo</a> to see the code and collaborate with us.</span>
+					<!-- To help us understand your experience with repurposing web data, feel free to fill out this <a href="https://mit.co1.qualtrics.com/jfe/form/SV_6YkdlXKjzFmEfhr" target="_blank">survey</a>.</span> -->
+				</div>
+
+				</br>
+
+				<div class="row" style="margin-left:180px; margin-right:180px ">
+					<div class="col">
+						<img src="assets/img/doc/tarfah.png" width="140px" height="140px" alt="Image" /></br></br>
+						<h5 style="font-size: 1.3em; margin-bottom: 5px;">Tarfah Alrashed</h5>
+						<a  href="mailto:tarfah@mit.edu">tarfah@mit.edu</a>
+					</div>
+
+					<div class="col">
+						<img src="assets/img/doc/lea.png" width="140px" height="140px" alt="Image" /></br></br>
+						<h5 style="font-size: 1.3em; margin-bottom: 5px;">Lea Verou</h5>
+						<a  href="mailto:leaverou@mit.edu">leaverou@mit.edu</a>
+					</div>
+
+					<div class="col-sm">
+						<img src="assets/img/doc/karger.png" width="140px" height="140px"  alt="Image"/></br></br>
+						<h5 style="font-size: 1.3em; margin-bottom: 5px;">David R. Karger</h5>
+						<a href="mailto:karger@mit.edu">karger@mit.edu</a>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
 		<!-- end #contact -->
 
 		<!-- begin #footer -->
-		<div id="footer" class="footer">
+		<div id="contact" class="footer">
 			<div class="container">
-				<!-- <p>This project is based on the work of two tools</p> -->
-				<!-- <img src="main_assets/img/bg/sc.png"  width="130px" />
-				<img src="main_assets/img/bg/mavo.png" width="120px" /> -->
+				<!--  -->
+				<!-- <div style="float: left;"> -->
+					<!-- >
+					<img style="float: left;"src="assets/img/bg/mavo.png" width="10%" /> -->
+				<!-- </div> -->
+				<div class="row">
+					<div class="col">
+						<p style="margin-bottom: 0px; margin-top: 0px;">This project is based on the work of these two tools</p>
+						<a href="https://scrapir.org" target="_blank"><img src="assets/img/bg/sc.png"  width="20%" /></a>
+						&nbsp;&nbsp;<a href="https://mavo.io" target="_blank"><img src="assets/img/bg/mavo.png" width="20%" /></a>
+					</div>
+					<div class="col">
+						<img  src="assets/img/doc/mit.png" width="50%" />
+					</div>
+
+				</div>
+
 				<!-- <div class="footer-brand">
 					<div class="footer-brand-logo"></div>
 					Color Admin
