@@ -227,6 +227,7 @@ async function abstractionSiteHasBeenChosenSave(siteOB){
   //}//end of functions
 
   $("#objectsS").show();
+  // $("#jsLibrary").click()
 
   //cler old code
   document.getElementById('objectS').innerHTML = ""
@@ -377,13 +378,13 @@ function abstractionSiteHasBeenChosenMavoSingleSave(siteOB){
   functions= siteOB.functions;
   objects= siteOB.objects;
 
-  for(var i=0; i<functions.length; ++i){
-    var endpoint = siteOB.functions[i].endpoint
-    var name = siteOB.functions[i].name
-    var object = siteOB.functions[i].object
-    var arry = siteOB.functions[i].array
-    var searchParam = siteOB.functions[i].searchParam;
-    var type = siteOB.functions[i].type;
+  // for(var i=0; i<functions.length; ++i){
+    var endpoint = siteOB.functions[0].endpoint
+    var name = siteOB.functions[0].name
+    var object = siteOB.functions[0].object
+    var arry = siteOB.functions[0].array
+    var searchParam = siteOB.functions[0].searchParam;
+    var type = siteOB.functions[0].type;
 
     document.getElementById('mavoAttS').innerHTML += '<!-- Search for '+object+'-->';
 
@@ -453,7 +454,7 @@ function abstractionSiteHasBeenChosenMavoSingleSave(siteOB){
       Prism.highlightElement($('#mavoAttS')[0]);
     })
 
-  }//end of functions
+  // }//end of functions
 
   for(o in objects){
 
@@ -2179,6 +2180,7 @@ function siteHasBeenEntered(select){
       // $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
       // $("#site-info").append('<ul>');
 
+      // suggestedTypes.push("MusicPlaylist")
       for(var c=0; c<categoryWords.length; ++c){
         for(var j=0; j<allTypes.length; ++j){
           var similar = checkSimilarity(categoryWords[c], allTypes[j]);
@@ -3558,7 +3560,7 @@ function addMethodConfig(){
     $("#site-table tbody").append('<tr id="search_site"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search</a></td>'
     +'<td></td>'
     +'<td><div style="width:240px">'
-    +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+urlAPIMethod+'</a>'
+    +'<a href="javascript:;" class="btn btn-default" style="margin-left:-47px; width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+urlAPIMethod+'</a>'
     +'</div></td>'
     +'<td><button id="search_site_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
     +'</tr>')
@@ -3572,9 +3574,9 @@ function addMethodConfig(){
     });
     $("#site-table tbody").append('<tr id="search_site"><td >&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search for '+typeSearch+'</a></td>'
     +'<td></td>'
-    +'<td><div style="width:240px">'
-    +'<a href="javascript:;" class="btn btn-default" style="width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+urlAPIMethod+'</a>'
-    +'</div></td>'
+    +'<td>'
+    +'<a href="javascript:;" class="btn btn-default" style="margin-left:-47px; width:240px; height: 34px; text-align:left; padding: 4px 12px;" id="" onclick="">'+urlAPIMethod+'</a>'
+    +'</td>'
     +'<td><button id="search_site_close" style="float:left" type="button" class="close" aria-label="Close" onclick="deleteRow(this)" ><span aria-hidden="true">&times;</span></button></td>'
     +'</tr>')
     // $("#"+typeSearch+" tbody").append('<tr id="search_'+typeSearch+'"><td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/new/arrow.png" width="15px"/><a id="methodSite.search" value="testVal" href="javascript:;" class="btn btn-purple disabled" style="width:240px; height: 34px;text-align:center; padding: 4px 1px;">Search for '+typeSearch+'</a></td>'
@@ -4844,6 +4846,7 @@ var schemaType ="", schemaCallerType="", arrOfTypeProp=[]
 
 function saveSchema(){
 
+  // $("#objectsS").show();
   // $("#saveMsg").show();
 
   var siteObj={};
@@ -5448,7 +5451,6 @@ function propertyHasBeenChosen(select){
 //   firebase.initializeApp(config);
 //   let ob = {};
 //   let obArray = {}
-
 //   var arr = [];
 //   firebase.database().ref('/types').once('value').then(function(snapshot) {
 //     snapshot.forEach(function(childSnapshot) {
@@ -5471,7 +5473,7 @@ function propertyHasBeenChosen(select){
 //     // obArray = ob
 //     console.log(ob);
 
-//     // firebase.database().ref('/types/').set(obArray);
+// //     // firebase.database().ref('/types/').set(obArray);
 // }
 
 function fieldHasBeenSelected(select){

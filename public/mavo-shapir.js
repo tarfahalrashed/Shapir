@@ -1,3 +1,4 @@
+import {wikidata, uri} from "./wikidata/wikidata.js";
 import shapir, {include} from "./shapir.js";
 
 Mavo.dependencies.push(shapir());
@@ -24,6 +25,8 @@ Mavo.Backend.register($.Class({
             if(this.id !="Shapir"){ //Get an object by ID (for search ignore this.id="Shapir")
                 let ret = await window[this.service][this.type](this.id);
                 return ret;
+            }else if(this.service=="wikidata"){
+                return await wikidata(this.item, this.language);
             }else{ //Search one or multiple sites
                 if(this.service.includes(",")){//more than one site
                     let services = this.service.split(",").map(function (value) { return value.trim(); });
@@ -47,6 +50,13 @@ Mavo.Backend.register($.Class({
                     return ret;
                 }
             }
+        }else{//if uri is provided
+            if(this.language){
+                var lang = this.language;
+            }else{
+                var lang = "en";
+            }
+            return await uri(this.uri, lang);
         }
     },
 

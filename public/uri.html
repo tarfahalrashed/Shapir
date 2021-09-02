@@ -368,10 +368,12 @@
                             var output = input
 
                             if(output in obj){
-                                obj[output].push({
-                                    id: results[i].ps_.value,
-                                    value: results[i].ps_Label.value
-                                });
+								if(Object.values(obj).indexOf(results[i].ps_Label.value)== -1) {//make sure that values are unique
+									obj[output].push({
+										id: results[i].ps_.value,
+										value: results[i].ps_Label.value
+									});
+								}
                             }else{
                                 obj[output]= [];
                                 obj[output].push({
