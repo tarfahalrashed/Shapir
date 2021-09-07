@@ -1,4 +1,4 @@
-import {wikidata, uri} from "./wikidata/wikidata.js";
+import {wikidata, uri, queryWikidata} from "./wikidata/wikidata.js";
 import shapir, {include} from "./shapir.js";
 
 Mavo.dependencies.push(shapir());
@@ -26,7 +26,12 @@ Mavo.Backend.register($.Class({
                 let ret = await window[this.service][this.type](this.id);
                 return ret;
             }else if(this.service=="wikidata"){
-                return await wikidata(this.item, this.language);
+                if(this.item){
+                    return await wikidata(this.item, this.language);
+                }else{
+                    // search wikidata with parameters
+                    return await queryWikidata(this);
+                }
             }else{ //Search one or multiple sites
                 if(this.service.includes(",")){//more than one site
                     let services = this.service.split(",").map(function (value) { return value.trim(); });

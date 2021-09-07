@@ -1,5 +1,3 @@
-// "use strict";
-// Default Language
 let lang = "en", externalIds = {}, sites = [], apis;
 
 export async function wikidata(itemID, lang) {
@@ -198,7 +196,7 @@ export async function wikidata(itemID, lang) {
             return objItem;
         })
         .then((result) => {
-            console.log("OBJ: ", result)
+            // console.log("WikirResult: ", result)
             return result;
         });
 
@@ -230,6 +228,70 @@ export function uri(id, lang) {
             '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
         return !!pattern.test(str);
     }
+}
+
+export async function queryWikidata(e) {
+    let items = [], properties = [], searchTerm, lang,
+        optionsLen = Object.keys(e.options).length;
+
+    for (const [key, value] of Object.entries(e.options)) {
+        --optionsLen;
+        if (key != "service" && key != "format" && key != "mavo") {
+            let property = key.split("-").join(" ");
+            if (key == "search") {
+                searchTerm = value;
+            } else if (key == "language") {
+                lang = value;
+            } else {
+                fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property")
+                    .then(response => { return response.json() })
+                    .then(props => {
+                        var listProps = props.search
+                        for (var i = 0; i < listProps.length; ++i) {
+                            if (listProps[i].match.text == property) {
+                                properties.push({
+                                    id: listProps[i].id,
+                                    value: value
+                                });
+                            }
+                        }
+                    });
+
+            }
+        }
+
+        if (optionsLen-1 == 0) {
+            // setTimeout(function() {
+
+            var query = 'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%3Fitem%20rdfs%3Alabel%22'+searchTerm+'%22%40en.'
+            // for(var i=0; i<properties.length; ++i){
+                query +='%3Fitem%20wdt%3AP31%2Frdfs%3Alabel%22film%22%40en.'
+                // if(i+1 == properties.length){
+                    query +='SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%7D%7Dlimit%2020';
+                // }
+            // }
+
+            return fetch(query)
+                .then(response => { return response.json() })
+                .then(data => {
+                    let itemsIds = data.results.bindings;
+                    for (var i = 0; i < itemsIds.length; ++i) {
+                        var url = itemsIds[i].item.value;
+                        let id = url.split("/").reverse()[0];
+                        items.push(wikidata(id, lang));
+
+                        if (i + 1 == itemsIds.length) {
+
+                            console.log(Promise.all(items))
+                            return Promise.all(items);
+                        }
+
+                    }
+                });
+                    // }, 1000);
+        }
+    }
+
 }
 
 // Below are cosine similarity functions

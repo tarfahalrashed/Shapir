@@ -20,11 +20,11 @@
 
 	<script type="module">
 
-		import shapir, {include, uri} from "./shapir.js";
+		import shapir from "https://shapir.org/shapir.js";
 
 		shapir().then(async () => {
 
-			uri("1HY2Jd0NmPuamShAr6KMms")
+			// uri("1HY2Jd0NmPuamShAr6KMms")
 			//add your functions here
 
 				// var photos = await unsplash.search('sky')
@@ -149,7 +149,8 @@
 			// var movie = await imdb.Movie('tt11388580')
 
 			// var artist = await spotify.MusicGroup()
-			var artist2 = await spotify.MusicGroup();//await spotify.MusicGroup("1HY2Jd0NmPuamShAr6KMms")
+			var site = "spotify"
+			var artist2 = await window[site].MusicGroup("1HY2Jd0NmPuamShAr6KMms");//await spotify.MusicGroup("1HY2Jd0NmPuamShAr6KMms")
 
 			console.log(artist2)
 

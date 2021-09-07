@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Artist Page</title>
+
+    <script src="https://get.mavo.io/stable/mavo.js"></script>
+    <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
+    <script type="module" src="../mavo-shapir.js"></script>
+    <link rel="stylesheet" href="artist-style.css">
+</head>
+
+<body class="act-show cont-artists snarly" style="background-color: #f7f7f7 !important">
+
+    <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-item="Q19848"
+        mv-source-language="en">
+
+
+        <div class="header" ng-controller="HeaderCtrl as header_ctrl" click-outside="close_mobile_subnav_menu()">
+            <!-- <global-message ng-if="header_ctrl.cloudflare_error" ng-cloak>
+            {{:: 'cloud_flare_always_on_short_message' | i18n }}
+            <br>Check <a href="https://twitter.com/genius" target="_blank">@genius</a> for updates. We'll have things fixed soon.
+        </global-message> -->
+            <div class="header-primary active">
+                <div class="header-expand_nav_menu" ng-click="toggle_mobile_subnav_menu()">
+                    <div class="header-expand_nav_menu-contents"></div>
+                </div>
+            </div>
+
+
+            <!-- header social media buttons -->
+            <ul class="header-nav_menu" ng-class="{'header-nav_menu--visible': mobile_subnav_menu_open}">
+                <div ng-cloak>
+                    <!-- <header-menu-item class="header-nav_menu--hide_when_expand_menu_is_not_available" name="Home" url="https://genius.com/"></header-menu-item> -->
+
+                    <li class="nav_menu-item">
+                        <a href="https://www.facebook.com/[FacebookID]" class="nav_menu-link nav_menu-link--facebook"
+                            target="_blank">
+                            <svg src="facebook.svg" class="inline_icon"></svg>
+                            <span class="nav_menu-link-social_text">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="nav_menu-item">
+                        <a href="https://twitter.com/[TwitterUsername]" class="nav_menu-link" target="_blank">
+                            <svg src="twitter.svg" class="inline_icon"></svg>
+                            <span class="nav_menu-link-social_text">Twitter</span>
+                        </a>
+                    </li>
+                    <li class="nav_menu-item">
+                        <a href="https://www.instagram.com/[InstagramUsername]" class="nav_menu-link" target="_blank">
+                            <svg src="instagram.svg" class="inline_icon"></svg>
+                            <span class="nav_menu-link-social_text">Instagram</span>
+                        </a>
+                    </li>
+                    <li class="nav_menu-item">
+                        <a href="https://www.youtube.com/channel/[YouTubeChannelID]"
+                            class="nav_menu-link nav_menu-link--no_right_padding" target="_blank">
+                            <svg src="youtube.svg" class="inline_icon nav_menu-link-youtube_icon"></svg>
+                            <span class="nav_menu-link-social_text">Youtube</span>
+                        </a>
+                    </li>
+
+                </div>
+
+
+            </ul>
+
+        </div>
+
+
+        <!-- image and logo image -->
+        <div class="profile_header">
+            <div class="banner_image banner_image--more_transparent_gradient" style="background-color: lightgray;">
+                <img property="logoImage" class="banner_image-blurred_image clipped_background_image" />
+            </div>
+            <div class="column_layout">
+                <div class="column_layout-column_span column_layout-column_span--secondary">
+                    <img property="image"
+                        class="user_avatar profile_header-avatar clipped_background_image clipped_background_image--background_fill profile_header-avatar--verified"
+                        property="image" />
+                </div>
+            </div>
+        </div>
+
+
+        <!-- content -->
+        <div class="container-fluid">
+
+            <div class="row" style="margin-left: 17%; ">
+                <div class="col-5" id="wikidata">
+                    <!-- Wikidata data -->
+                    <div class="profile_identity_and_description">
+                        <div class="profile_identity u-bottom_margin">
+                            <div class="profile_identity-text">
+                                <h1 class="profile_identity-name_iq_and_role_icon u-hair_bottom_margin"
+                                    property="label">
+                                </h1>
+                                <div class="profile_identity-alternate_names">
+                                    AKA: <span property="aliases"></span>
+                                </div>
+                                @<span class="profile_identity-subhead" property="GeniusArtistID"></span>
+                            </div>
+                        </div>
+
+                        <div class="white_container u-top_margin">
+
+                            <span class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">
+                                <h5 class="u-inline">About</h5>
+                            </span>
+
+                            <div class="rich_text_formatting">
+                                <p property="description"></p>
+
+                                <meta property="uniImages" mv-value="unique(image)" />
+
+                                <img style="display: inline; max-width:120px !important; max-height:120px !important"
+                                    property="uniImages" mv-multiple />
+
+                                <div style="padding-bottom: -7px;">
+                                    <p><strong><em>Birth Name:</em></strong><span property="birthName"></span></p>
+                                </div>
+
+                                <div style="padding-bottom: -7px !important;">
+                                    <p><strong><em>Nickname:</em></strong> <span class="commaSplit" property="nickname"
+                                            mv-multiple></span></p>
+                                </div>
+
+                                <div style="padding-bottom: -7px;">
+                                    <p style="display: inline;"><strong><em>Gender:</em></strong> </p>
+                                    <span property="sexOrGender">
+                                        <p style="display: inline;" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: -7px;">
+                                    <p><strong><em>Date of Birth:</em></strong> <span property="dateOfBirth"></span>
+                                    </p>
+                                </div>
+
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Place of Birth:</em></strong> </p>
+                                    <span property="placeOfBirth">
+                                        <p class="commaSplit" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Country of Citizenship:</em></strong> </p>
+                                    <span property="countryOfCitizenship">
+                                        <p style="display: inline;" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Residence:</em></strong> </p>
+                                    <span property="residence" mv-multiple>
+                                        <p class="commaSplit" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Father:</em></strong> </p>
+                                    <span property="father">
+                                        <p style="display: inline;" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Mother:</em></strong> </p>
+                                    <span property="mother">
+                                        <p style="display: inline;" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Sibling:</em></strong> </p>
+                                    <span property="sibling" mv-multiple>
+                                        <p class="commaSplit" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline; "><strong><em>Unmarried Partner:</em></strong> </p>
+                                    <span property="unmarriedPartner" mv-multiple>
+                                        <p class="commaSplit" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Employer:</em></strong> </p>
+                                    <span property="employer" mv-multiple>
+                                        <p class="commaSplit" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Occupation:</em></strong></p>
+                                    <span property="occupation" mv-multiple>
+                                        <p class="commaSplit" property="label"></p>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-7" style="padding-top: 22px; " property="spotifyArtist">
+                    <!-- Spotify Albums -->
+                    <div style="float:left !important">
+                        <div class="profile_body">
+                            <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">Spotify
+                                Albums</div>
+                            <div property="album" mv-multiple>
+
+                                <div class="mini_card_grid">
+                                    <div class="mini_card_grid-song">
+                                        <div>
+                                            <a href="[contentUrl]" target="_blank" class="mini_card">
+
+                                                <div
+                                                    class="mini_card-thumbnail clipped_background_image--background_fill clipped_background_image">
+                                                    <img property="image" />
+                                                </div>
+
+                                                <div class="mini_card-info">
+                                                    <div class="mini_card-title_and_subtitle">
+                                                        <div class="mini_card-title" property="name"></div>
+                                                        <div class="mini_card-subtitle" style="color:gray"
+                                                            property="additionalType"></div>
+                                                        <div class="mini_card-subtitle" style=" margin:1px !important">
+                                                            <div style="overflow: hidden;"
+                                                                style=" margin:1px !important">
+                                                                <p style="float: left; margin:1px !important">
+                                                                    <strong><em>Number of tracks:&nbsp;</em></strong>
+                                                                </p>
+                                                                <p style="float: left; margin:1px !important"
+                                                                    property="numTracks"></p>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="mini_card-subtitle" style="margin:1px !important">
+                                                            <div style="overflow: hidden;"
+                                                                style=" margin:1px !important">
+                                                                <p style="float: left; margin:1px !important">
+                                                                    <strong><em>Release Date:&nbsp;</em></strong></p>
+                                                                <p style="float: left; margin:1px !important"
+                                                                    property="datePublished"></p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spotify Tracks -->
+                    <div style="float:left !important;">
+                        <div class="profile_body">
+                            <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin"
+                                style="padding-right:10px !important">Spotify Popular Tracks</div>
+                            <div property="track" mv-multiple>
+                                <div class="mini_card_grid">
+                                    <div class="mini_card_grid-song">
+                                        <div
+                                            class="mini_card-thumbnail clipped_background_image--background_fill clipped_background_image">
+                                            <iframe property="identifier"
+                                                src="https://open.spotify.com/embed/track/[identifier]" width="260"
+                                                height="80" frameborder="0" allowtransparency="true"
+                                                allow="encrypted-media"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row" style="margin-left: 17%">
+                <!-- YouTube Channel -->
+                <div class="col-6" property="youTubeChannel">
+                    <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">YouTube Channel
+                    </div>
+                    <p><strong>Name:</strong> <span property="name"></span> </p>
+                    <p><strong>Description:</strong> <span property="description"></span> </p>
+                    <div class="grid-container">
+                        <div class="grid-item" property="video" mv-multiple>
+                            <iframe property="videoId" width="270" height="150"
+                                src="https://www.youtube.com/embed/[videoId]" allowfullscreen> </iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Songkick ARTIST -->
+                <div class="col-6" property="songkickArtist">
+                    <div class="profile_body">
+                        <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">Upcoming
+                            Events</div>
+                        <div property="event" mv-multiple>
+                            <div class="mini_card_grid">
+                                <div class="mini_card_grid-song">
+                                    <a href="[url]" target="_blank" class="mini_card">
+                                        <div class="mini_card-info">
+                                            <div class="mini_card-title_and_subtitle">
+                                                <div class="mini_card-title" property="name"></div>
+                                                <div class="mini_card-subtitle" style="color:gray"
+                                                    property="additionalType"></div>
+                                                <div class="mini_card-subtitle" style=" margin:1px !important">
+                                                    <div style="overflow: hidden;" style=" margin:1px !important">
+                                                        <p style="float: left; margin:1px !important">
+                                                            <strong><em>Location:&nbsp;</em></strong></p>
+                                                        <p style="float: left; margin:1px !important"
+                                                            property="location"></p>
+
+                                                    </div>
+                                                </div>
+                                                <div class="mini_card-subtitle" style="margin:1px !important">
+                                                    <div style="overflow: hidden;" style=" margin:1px !important">
+                                                        <p style="float: left; margin:1px !important"><strong><em>Start
+                                                                    Date:&nbsp;</em></strong></p>
+                                                        <p style="float: left; margin:1px !important"
+                                                            property="startDate"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="mini_card-subtitle" style="margin:1px !important">
+                                                    <div style="overflow: hidden;" style=" margin:1px !important">
+                                                        <p style="float: left; margin:1px !important">
+                                                            <strong><em>Rating:&nbsp;</em></strong></p>
+                                                        <p style="float: left; margin:1px !important"
+                                                            property="aggregateRating"></p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    </routable-page>
+
+
+    <ul class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li class="breadcrumb" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+            <a href="/artists" itemprop="item">
+                <span itemprop="name">⇽ Back to List of Artists</span>
+                <meta itemprop="position" content="1" />
+            </a>
+        </li>
+    </ul>
+
+
+    <div class="page_footer">
+        <div class="footer"></div>
+    </div>
+
+    </div>
+    <!-- End of Wikidata -->
+
+</body>
+
+</html>
