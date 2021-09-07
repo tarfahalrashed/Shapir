@@ -1,4 +1,5 @@
-let lang = "en", externalIds = {}, sites = [], apis;
+let lang = "en", externalIds = {}, sites = [], apis, items = [], searchTerm = "", query = "";
+
 
 export async function wikidata(itemID, lang) {
 
@@ -230,9 +231,8 @@ export function uri(id, lang) {
     }
 }
 
-export async function queryWikidata(e) {
-    let items = [], properties = [], searchTerm, lang,
-        optionsLen = Object.keys(e.options).length;
+async function getProperties(e) {
+    let optionsLen = Object.keys(e.options).length, properties = [], propertyObj = {};
 
     for (const [key, value] of Object.entries(e.options)) {
         --optionsLen;
@@ -243,55 +243,67 @@ export async function queryWikidata(e) {
             } else if (key == "language") {
                 lang = value;
             } else {
-                fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property")
+                // if (key != "search" && key != "language") {
+                var prom = fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property")
                     .then(response => { return response.json() })
                     .then(props => {
                         var listProps = props.search
                         for (var i = 0; i < listProps.length; ++i) {
                             if (listProps[i].match.text == property) {
-                                properties.push({
+                                propertyObj = {
                                     id: listProps[i].id,
                                     value: value
-                                });
+                                };
+                                return propertyObj
                             }
                         }
                     });
-
+                properties.push(prom);
             }
         }
 
-        if (optionsLen-1 == 0) {
-            // setTimeout(function() {
-
-            var query = 'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%3Fitem%20rdfs%3Alabel%22'+searchTerm+'%22%40en.'
-            // for(var i=0; i<properties.length; ++i){
-                query +='%3Fitem%20wdt%3AP31%2Frdfs%3Alabel%22film%22%40en.'
-                // if(i+1 == properties.length){
-                    query +='SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%7D%7Dlimit%2020';
-                // }
-            // }
-
-            return fetch(query)
-                .then(response => { return response.json() })
-                .then(data => {
-                    let itemsIds = data.results.bindings;
-                    for (var i = 0; i < itemsIds.length; ++i) {
-                        var url = itemsIds[i].item.value;
-                        let id = url.split("/").reverse()[0];
-                        items.push(wikidata(id, lang));
-
-                        if (i + 1 == itemsIds.length) {
-
-                            console.log(Promise.all(items))
-                            return Promise.all(items);
-                        }
-
-                    }
-                });
-                    // }, 1000);
+        if (optionsLen - 1 == 0) {
+            return Promise.all(properties);
         }
+
     }
 
+}
+
+
+export async function queryWikidata(e) {
+
+    return getProperties(e)
+        .then(props => {
+            // console.log("properties: ", props)
+            query += 'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';
+            // //if search property exists, add the below line to the query
+            if (searchTerm != "") {
+                query += '%3Fitem%20rdfs%3Alabel"' + searchTerm + '"%40en.%0A';
+            }
+            for (var i = 0; i < props.length; ++i) {
+                query += '%3Fitem%20wdt%3A' + props[i].id + '%2Frdfs%3Alabel"' + props[i].value + '"%40en.%0A';
+
+                if (i + 1 == props.length) {
+                    query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2Cen".%7D%0A%7D%0Alimit%205';
+                    // console.log("query: ", query)
+                    return fetch(query)
+                        .then(response => { return response.json() })
+                        .then(data => {
+                            let itemsIds = data.results.bindings;
+                            for (var i = 0; i < itemsIds.length; ++i) {
+                                var url = itemsIds[i].item.value;
+                                let id = url.split("/").reverse()[0];
+                                items.push(wikidata(id, lang));
+
+                                if (i + 1 == itemsIds.length) {
+                                    return Promise.all(items);
+                                }
+                            }
+                        });
+                }
+            }
+        });
 }
 
 // Below are cosine similarity functions
