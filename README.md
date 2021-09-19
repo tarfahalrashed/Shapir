@@ -1,7 +1,7 @@
 # Shapir
 A tool that standardizes access to APIs and simplifies the work for users, even non-programmers, to create interactive web applications that operate on data accessible through arbitrary Web APIs.
 
-**Tool:** https://shapir.org
+**Tool:**  <a href="https://shapir.org" target="_blank">https://shapir.org</a>
 
 
 <img src="public/assets/img/new/shapir_structure.png" width="90%" style= "display: block; margin-left: auto; margin-right: auto;"/>
@@ -11,8 +11,8 @@ Shapir is an ecosystem that significantly simplifies the work for users, even no
 
 
 ## JavaScript Library (ShapirJS)
-- [Documentation](https://shapir.org/shapirjs)
-- [Explore Websites](https://shapir.org/shapirjs#explore)
+- <a href="https://shapir.org/shapirjs" target="_blank">Documentation</a>
+- <a href="https://shapir.org/shapirjs#explore" target="_blank">Explore Websites</a>
 
 
 ### How to use ShapirJS
@@ -66,9 +66,9 @@ playlist.delete();
 
 
 ## HTML Library (Mavo-Shapir)
-- [Documentation](https://shapir.org/mavo-shapir)
-- [Explore Websites](https://shapir.org/mavo-shapir#explore)
-- [Mavo Documentation](https://mavo.io/docs)
+- <a href="https://shapir.org/mavo-shapir" target="_blank">Documentation</a>
+- <a href="https://shapir.org/mavo-shapir#explore" target="_blank">Explore Websites</a>
+- <a href="https://mavo.io/docs" target="_blank">Mavo Documentation</a>
 
 
 ### How to use Mavo-Shapir
