@@ -2436,6 +2436,21 @@ async function shapir(){
 
 
 
+app.get("/tt", (req, res, next) => {
+
+const fetch1 = require('@rdfjs/fetch')
+
+    fetch1('https://github.com/yago-naga/yago4/blob/master/src/data/shapes.ttl')
+    .then(data=>{ return data.dataset()})
+    .then(dataset=>{
+        console.log(dataset)
+        // for (const quad of dataset) {
+        //     console.log(`${quad.subject.value} ${quad.predicate.value} ${quad.object.value}`)
+        // }
+    })
+
+});
+
 app.get("/s2v", (req, res, next) => {
 
     const config = require('./data.json')

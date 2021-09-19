@@ -16,6 +16,7 @@
   "dependencies": {
     "@ardatan/graphql-tools": "^4.1.0",
     "@google-cloud/storage": "^5.4.0",
+    "@rdfjs/fetch": "^2.1.0",
     "apac": "^3.0.2",
     "apollo-server": "^2.18.0",
     "apollo-server-express": "^2.18.0",

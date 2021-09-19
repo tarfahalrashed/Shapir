@@ -17,7 +17,7 @@ export async function wikidata(itemID, lang) {
             sites = Object.keys(data);
         })
 
-    //fetch all apis from Shapir
+    //fetch all apis from ScrAPIr
     fetch('https://superapi-52bc2.firebaseio.com/apis.json')
         .then(response => { return response.json() })
         .then(scrapirApis => { apis = scrapirApis; });
@@ -155,7 +155,8 @@ export async function wikidata(itemID, lang) {
                                             fetch('https://superapi-52bc2.firebaseio.com/abstractions/' + currentSite + '/objects.json')
                                                 .then(response => { return response.json() })
                                                 .then(objects => {
-                                                    if (value.length > 0) {
+                                                    // console.log("VALUE: ", value)
+                                                    if (Array.isArray(value)) {
                                                         curValue = value[0];
                                                     } else {
                                                         curValue = value;
