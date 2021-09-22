@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Shapir</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="assets/css/home/app.min.css" rel="stylesheet" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+
+	<link href="assets/js/prism-okaidia.css" rel="stylesheet" />
+	<script src="assets/js/prism-okaidia.js"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<style>
+		.home {
+			height: 350px !important;
+		}
+
+		.box-shadow-hover:hover {
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+		}
+
+		.pointer {
+			cursor: pointer;
+		}
+
+		img {
+			width: auto;
+			max-height: auto;
+		}
+
+		/* body {
+		font-family: "Lato", sans-serif;
+		} */
+
+		.sidenav {
+			height: 100%;
+			width: 140px;
+			position: fixed;
+			z-index: 1;
+			bottom: 0;
+			left: 0;
+			background-color: #2d353c;
+			overflow-x: hidden;
+			padding-top: 20px;
+		}
+
+		.sidenav a {
+			padding: 6px 8px 6px 16px;
+			text-decoration: none;
+			font-size: 25px;
+			color: #818181;
+			display: block;
+		}
+
+		.sidenav a:hover {
+			color: #f1f1f1;
+		}
+
+		.main {
+			margin-left: 160px;
+			/* Same as the width of the sidenav */
+			font-size: 28px;
+			/* Increased text to enable scrolling */
+			padding: 0px 10px;
+		}
+
+		@media screen and (max-height: 450px) {
+			.sidenav {
+				padding-top: 15px;
+			}
+
+			.sidenav a {
+				font-size: 18px;
+			}
+		}
+
+		.btn-xs {
+			padding: 0 3px !important
+		}
+
+		.btn-primary2 {
+			background-color: #6a91c4;
+			border-color: #6a91c4;
+		}
+
+		.btn-primary2:hover {
+			color: #fff;
+			background-color: #76a2da;
+			border-color: #76a2da;
+		}
+
+
+		.btn-primary:hover {
+			color: #fff;
+			background-color: #f7af47;
+			border-color: #f7af47;
+		}
+
+		.content {
+			background-color: white;
+		}
+	</style>
+</head>
+
+
+<body data-spy="scroll" data-target="#header" data-offset="51" onload="">
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade">
+		<!-- begin #header -->
+		<div id="header" class="header navbar navbar-default navbar-fixed-top navbar-expand-lg">
+
+			<!-- <div id="header" class="header navbar navbar-transparent navbar-fixed-top navbar-expand-lg"> -->
+			<!-- begin container -->
+			<div class="container">
+				<!-- begin navbar-brand -->
+				<a href="index.html" class="navbar-brand">
+					<!-- <span class="brand-logo"></span> -->
+					<!-- <img src="main_assets/img/bg/logo.svg" width="100px"/> -->
+					<span class="brand-text">sh<span class="text-primary">api</span>r</span>
+				</a>
+				<!-- end navbar-brand -->
+				<!-- begin navbar-toggle -->
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#header-navbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- end navbar-header -->
+				<!-- begin navbar-collapse -->
+				<div class="collapse navbar-collapse" id="header-navbar" style="color:black !important">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target"
+								data-scroll-target="#home">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">About</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="shapirui.html">ShapirUI</a></li>
+						<!-- <li class="nav-item"><a class="nav-link" href="doc.html" >Doc</a></li> -->
+						<li class="nav-item"><a class="nav-link" href="shapirjs.html">ShapirJS</a></li>
+						<li class="nav-item"><a class="nav-link" href="mavo-shapir.html">Mavo-Shapir</a></li>
+						<!-- <li class="nav-item" style="margin-right:50px"><a class="nav-link" href="index.html#contact" >Contact</a></li> -->
+
+					</ul>
+				</div>
+				<!-- end navbar-collapse -->
+			</div>
+			<!-- end container -->
+		</div>
+		<!-- end #header -->
+
+		<!-- begin #home -->
+
+
+
+		<div id="home" class="content has-bg home" style="height: 350px !important">
+			<!-- begin content-bg -->
+			<!-- <div class="content-bg" style="background-image: url(assets/img/bg/net.jpeg);" -->
+			<div class="" style="background-color: white;" data-paroller="true" data-paroller-factor="0.5"
+				data-paroller-factor-xs="0.25">
+			</div>
+			<!-- end content-bg -->
+			<!-- begin container -->
+			<div class="container home-content">
+				<h1>WikAPI</h1>
+				<!-- <h1><img src="assets/img/bg/logoSb.svg" width="130px"/></h1> -->
+				<h3 style="color:black">Shape the way we access data on the Web.</h3>
+				<!--
+				<p style="font-size: 1.15em;">
+					Standardizing and Democratizing Access to Web APIs
+				</p>
+			    -->
+				<a href="shapirui.html" class="btn btn-theme btn-primary">How to use</a>
+				<a href="shapirjs.html" class="btn btn-theme btn-outline-dark">Build apps</a><br />
+
+			</div>
+
+		</div>
+		<!-- end #home -->
+
+		<!-- begin #demos -->
+		<div id="demos" class="content" data-scrollview="true">
+			<div class="container">
+
+				<h2 class="content-title">Demos</h2>
+
+				<div class="row">
+					<div class="col-md-4 col-sm-6 col-xl-4 my-3">
+						<div class="card d-block  box-shadow-hover pointer">
+
+							<div class="h-75p align-items-center d-flex justify-content-center">
+								<a href="wikidata/movie_?item=Q3286391" target="_blank">
+									<img class="img-fluid w-xs-120p" src="assets/img/bg/movie.png" alt="">
+								</a>
+							</div>
+							<div class="card-body p-4">
+								<h3 class="h4"><strong>Movie app</strong></h3>
+								<p style="margin-bottom: 0.5rem;">Movie page that works with any movie on Wikidata</p>
+								<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
+									class="btn btn-default btn-xs">Wikidata</a>
+								<a href="https://www.imdb.com/title/tt1517451/" target="_blank"
+									class="btn btn-default btn-xs">IMDb</a>
+								<a href="https://www.themoviedb.org/movie/332562-a-star-is-born" target="_blank"
+									class="btn btn-default btn-xs">TMDb</a>
+								<a href="https://www.youtube.com/results?search_query=a+star+is+born+2018"
+									target="_blank" class="btn btn-default btn-xs">YouTube</a>
+								<a href="https://www.nytimes.com/search?query=a+star+is+born+movie" target="_blank"
+									class="btn btn-default btn-xs">NY Times</a>
+
+								<div>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-info"><i class="fa fa-download"></i> Download</button>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-pink"><i class="fa fa-code" aria-hidden="true"></i>HTML</button>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-md-4 col-sm-6 col-xl-4 my-3">
+						<div class="card d-block  box-shadow-hover pointer">
+							<div class="h-75p align-items-center d-flex justify-content-center">
+								<img class="img-fluid w-xs-120p" src="assets/img/bg/artist.png" alt="talon ship image">
+							</div>
+
+							<div class="card-body p-4">
+								<h3 class="h4"><strong>Artist app</strong></h3>
+								<p style="margin-bottom: 0.5rem;"> gmlsdmgldmfg</p>
+
+								<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
+									class="btn btn-default btn-xs">Wikidata</a>
+								<a href="https://www.imdb.com/title/tt1517451/" target="_blank"
+									class="btn btn-default btn-xs">Spotify</a>
+								<a href="https://www.youtube.com/results?search_query=a+star+is+born+2018"
+									target="_blank" class="btn btn-default btn-xs">YouTube</a>
+								<a href="https://www.nytimes.com/search?query=a+star+is+born+movie" target="_blank"
+									class="btn btn-default btn-xs">Songkick</a>
+
+								<div>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-info"><i class="fa fa-download"></i> Download</button>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-pink"><i class="fa fa-code" aria-hidden="true"></i>HTML</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 col-sm-6 col-xl-4 my-3">
+						<div class="card d-block  box-shadow-hover pointer">
+							<div class="h-75p align-items-center d-flex justify-content-center">
+								<img class="img-fluid w-xs-120p" src="assets/img/bg/artist.png" alt="talon ship image">
+							</div>
+
+							<div class="card-body p-4">
+								<h3 class="h4"><strong>Book app</strong></h3>
+								<p style="margin-bottom: 0.5rem;"> gmlsdmgldmfg</p>
+
+								<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
+									class="btn btn-default btn-xs">Wikidata</a>
+								<a href="https://www.imdb.com/title/tt1517451/" target="_blank"
+									class="btn btn-default btn-xs">Spotify</a>
+								<a href="https://www.youtube.com/results?search_query=a+star+is+born+2018"
+									target="_blank" class="btn btn-default btn-xs">YouTube</a>
+								<a href="https://www.nytimes.com/search?query=a+star+is+born+movie" target="_blank"
+									class="btn btn-default btn-xs">Songkick</a>
+
+								<div>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-info"><i class="fa fa-download"></i> Download</button>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-pink"><i class="fa fa-code" aria-hidden="true"></i>HTML</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<!-- end #demos -->
+
+		<!-- begin #example -->
+		<div id="example" class="content" data-scrollview="true">
+			<div class="container">
+				<!-- style="max-width: 1300px" -->
+				<h2 class="content-title">How it works</h2>
+
+				<div class="row">
+
+					<!-- Simple app with its code -->
+					<!-- code -->
+
+					<div class="col-6">
+
+						<h2>HTML</h2>
+						<pre class="language-html"><code class="language-html" style="font-size:0.85em !important">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata"
+  mv-source-id="Q2808" mv-source-language="en">
+	&lt;h1 property="label">&lt;/h1>
+	&lt;p property="description">&lt;/p>
+	&lt;img property="image">&lt;/>
+	&lt;div property="youtubeChannel">
+	  &lt;article property="video" mv-multiple>
+	    &lt;h2 property="name">&lt;/h2>
+	    &lt;p property="description">&lt;/p>
+	    &lt;iframe src="https://www.youtube.com/embed/[videoId]">&lt;/iframe>
+	  &lt;/article>
+	&lt;/div>
+&lt;/div></code></pre>
+					</div>
+					<!-- application -->
+					<div class="col-6">
+						<!-- <img src="assets/img/bg/wikapi.png" style="width:30%"/> -->
+						<h2>App</h2>
+						<img src="assets/img/bg/videos.png" style="width:100%" />
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- end #example -->
+
+		<!-- begin #example -->
+		<div id="example" class="content" data-scrollview="true">
+			<div class="container">
+				<!-- style="max-width: 1300px" -->
+				<h2 class="content-title">About</h2>
+
+				<div class="row">
+
+					<!-- Simple app with its code -->
+					<!-- code -->
+
+					<div class="col-6">
+
+						<p style="font-size: 1.2em;">
+							Wikidata is a free and open knowledge base that can be read and edited by both humans and
+							machines.
+							Wikidata acts as central storage for the structured data of its Wikimedia sister projects
+							including Wikipedia, Wikivoyage, Wiktionary, Wikisource, and others.
+
+							Wikidata also provides support to many other sites and services beyond just Wikimedia
+							projects! The content of Wikidata is available under a free license, exported using standard
+							formats, and can be interlinked to other open data sets on the linked data web.
+						</p>
+					</div>
+					<!-- application -->
+					<div class="col-6">
+						<img src="assets/img/bg/wikapi.png" style="width:inherit" />
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- end #example -->
+
+		<!-- begin #contact -->
+		<div class="content" data-scrollview="true">
+			<div class="container text-center">
+				<div class="heading-block topmargin-lg center">
+					<h2>Our Research Team</h2>
+					<span class="">Shapir is a research project built by the <a href="http://haystack.csail.mit.edu"
+							target="_blank">Haystack Group</a> at <a href="https://www.csail.mit.edu"
+							target="_blank">MIT CSAIL</a>.
+						</br>
+						Visit our <a href="https://github.com/tarfahalrashed/Shapir" target="_blank">GitHub repo</a> to
+						see the code and collaborate with us.</span>
+				</div>
+
+				</br>
+
+
+				<div class="row" style="margin-left:180px; margin-right:180px ">
+					<div class="col">
+						<img src="assets/img/doc/tarfah.png" width="140px" height="140px" alt="Image" /></br></br>
+						<h5 style="font-size: 1.3em; margin-bottom: 5px;">Tarfah Alrashed</h5>
+						<a href="mailto:tarfah@mit.edu">tarfah@mit.edu</a>
+					</div>
+
+					<div class="col">
+						<img src="assets/img/doc/lea.png" width="140px" height="140px" alt="Image" /></br></br>
+						<h5 style="font-size: 1.3em; margin-bottom: 5px;">Lea Verou</h5>
+						<a href="mailto:leaverou@mit.edu">leaverou@mit.edu</a>
+					</div>
+
+					<div class="col-sm">
+						<img src="assets/img/doc/david.png" width="140px" height="140px" alt="Image" /></br></br>
+						<h5 style="font-size: 1.3em; margin-bottom: 5px;">David R. Karger</h5>
+						<a href="mailto:karger@mit.edu">karger@mit.edu</a>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<!-- end #contact -->
+
+		<!-- begin #footer -->
+		<div id="contact" class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p style="margin-bottom: 0px; margin-top: 0px;">This project is based on the work of these two
+							tools</p>
+						<a href="https://scrapir.org" target="_blank"><img src="assets/img/bg/sc.png"
+								style="width:20%" /></a>
+						&nbsp;&nbsp;<a href="https://mavo.io" target="_blank"><img src="assets/img/bg/mavo.png"
+								style="width:20%" /></a>
+					</div>
+					<div class="col">
+						<img src="assets/img/doc/mit.png" style="width:50%" />
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<!-- end #footer -->
+
+		<!-- begin theme-panel -->
+		<div class="theme-panel">
+			<div class="theme-panel-content">
+				<ul class="theme-list clearfix">
+					<li><a href="javascript:;" class="bg-red" data-theme="red"
+							data-theme-file="assets/css/default/theme/red.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a>
+					</li>
+					<li><a href="javascript:;" class="bg-pink" data-theme="pink"
+							data-theme-file="assets/css/default/theme/pink.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Pink">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-orange" data-theme="orange"
+							data-theme-file="assets/css/default/theme/orange.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Orange">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-yellow" data-theme="yellow"
+							data-theme-file="assets/css/default/theme/yellow.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Yellow">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-lime" data-theme="lime"
+							data-theme-file="assets/css/default/theme/lime.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Lime">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-green" data-theme="green"
+							data-theme-file="assets/css/default/theme/green.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Green">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-teal" data-theme="default" data-theme-file=""
+							data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Default">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-aqua" data-theme="aqua"
+							data-theme-file="assets/css/default/theme/aqua.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Aqua">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-blue" data-theme="blue"
+							data-theme-file="assets/css/default/theme/blue.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Blue">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-purple" data-theme="purple"
+							data-theme-file="assets/css/default/theme/purple.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Purple">&nbsp;</a></li>
+					<li><a href="javascript:;" class="bg-indigo" data-theme="indigo"
+							data-theme-file="assets/css/default/theme/indigo.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Indigo">&nbsp;</a></li>
+					<li class="active"><a href="javascript:;" class="bg-black" data-theme="black"
+							data-theme-file="assets/css/default/theme/black.min.css" data-click="theme-selector"
+							data-toggle="tooltip" data-trigger="hover" data-container="body"
+							data-title="Black">&nbsp;</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- end theme-panel -->
+	</div>
+	<!-- end #page-container -->
+
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="assets/js/home/app.min.js"></script>
+	<script src="https://unpkg.com/ml5@0.1.1/dist/ml5.min.js"></script>
+	<!-- ================== END BASE JS ================== -->
+</body>
+
+</html>

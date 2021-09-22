@@ -60,7 +60,7 @@ export async function wikidata(itemID, lang) {
                         });
 
                         if (output in obj) {
-                            // console.log(results[i].ps_Label.value)
+                            // console.log("VVV: ",results[i].ps_Label.value)
                             if (Object.values(obj).indexOf(results[i].ps_Label.value) == -1) {//make sure that values are unique
                                 obj[output].push({
                                     id: results[i].ps_.value,
@@ -109,7 +109,9 @@ export async function wikidata(itemID, lang) {
                             } else {
                                 objItem[key] = [];
                                 for (let i = 0; i < value.length; ++i) {
-                                    objItem[key].push(value[i].value);
+                                    if (Object.values(objItem).indexOf(value[i].value) == -1) {//make sure that values are unique
+                                        objItem[key].push(value[i].value);
+                                    }
                                 }
                             }
                         }
@@ -147,10 +149,7 @@ export async function wikidata(itemID, lang) {
 
                                         let similarity = 0, tempSimialrity, apiEndpoint, mainType, button, code, url, title, curValue;
 
-
-
                                         //get the type in this with this endpoint
-
                                         return new Promise((resolve, reject) => {
                                             fetch('https://superapi-52bc2.firebaseio.com/abstractions/' + currentSite + '/objects.json')
                                                 .then(response => { return response.json() })
@@ -198,7 +197,7 @@ export async function wikidata(itemID, lang) {
             return objItem;
         })
         .then((result) => {
-            // console.log("WikirResult: ", result)
+            console.log("WikirResult: ", result)
             return result;
         });
 

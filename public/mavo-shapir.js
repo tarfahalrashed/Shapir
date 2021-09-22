@@ -22,12 +22,12 @@ Mavo.Backend.register($.Class({
     get: async function(url) {
         if (this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
 
-            if(this.id !="Shapir"){ //Get an object by ID (for search ignore this.id="Shapir")
+            if(this.id !="Shapir" && this.service!="wikidata"){ //Get an object by ID (for search ignore this.id="Shapir")
                 let ret = await window[this.service][this.type](this.id);
                 return ret;
             }else if(this.service=="wikidata"){
-                if(this.item){
-                    return await wikidata(this.item, this.language);
+                if(this.id){
+                    return await wikidata(this.id, this.language);
                 }else{
                     // search wikidata with parameters
                     return await queryWikidata(this);
