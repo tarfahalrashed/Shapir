@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Shapir</title>
+	<title>Wikidata</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -19,13 +19,24 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<style>
-		.home {
-			height: 350px !important;
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			transition: 0.3s;
+			/* width: 40%; */
 		}
 
-		.box-shadow-hover:hover {
-			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+		.card:hover {
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 		}
+
+
+		.home {
+			height: 450px !important;
+		}
+
+		/* .box-shadow-hover:hover {
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+		} */
 
 		.pointer {
 			cursor: pointer;
@@ -104,14 +115,42 @@
 			border-color: #f7af47;
 		}
 
-		.content {
-			background-color: white;
+		.content.has-bg .content-bg:before{
+			content:'';
+			background:none !important;
+			position:absolute;left:0;right:0;top:0;bottom:0}
+
+
+		.btn-main:hover {
+			color: #fff;
+			background-color: #5583aa;
+			border-color: #5583aa;
 		}
+
+
+		.btn-main {
+			color:white;
+			background-color: #2b6495;
+			border-color: #2b6495;
+		}
+
+
+
+		/* .contentMid {
+			background-color: white;
+			background-image: url(assets/img/bg/bg2.png);
+			max-width: 1140px;
+			padding-right: 15px;
+			padding-left: 15px;
+			margin-right: auto;
+			margin-left: auto;
+			width: 100%;
+		} */
+
 	</style>
 </head>
 
-
-<body data-spy="scroll" data-target="#header" data-offset="51" onload="">
+<body data-spy="scroll" data-target="#header" data-offset="51" onload="" >
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade">
 		<!-- begin #header -->
@@ -157,46 +196,81 @@
 		<!-- end #header -->
 
 		<!-- begin #home -->
-
-
-
-		<div id="home" class="content has-bg home" style="height: 350px !important">
+		<div id="home" class="content has-bg home" style="height: 560px;">
 			<!-- begin content-bg -->
-			<!-- <div class="content-bg" style="background-image: url(assets/img/bg/net.jpeg);" -->
-			<div class="" style="background-color: white;" data-paroller="true" data-paroller-factor="0.5"
+			<div class="content-bg" style="background-image: url(assets/img/bg/bg_2.png); background-size:1300px; margin-top: -80px;"
+				data-paroller="true"
+				data-paroller-factor="0.5"
 				data-paroller-factor-xs="0.25">
 			</div>
 			<!-- end content-bg -->
+
 			<!-- begin container -->
-			<div class="container home-content">
-				<h1>WikAPI</h1>
-				<!-- <h1><img src="assets/img/bg/logoSb.svg" width="130px"/></h1> -->
-				<h3 style="color:black">Shape the way we access data on the Web.</h3>
-				<!--
-				<p style="font-size: 1.15em;">
-					Standardizing and Democratizing Access to Web APIs
-				</p>
-			    -->
-				<a href="shapirui.html" class="btn btn-theme btn-primary">How to use</a>
-				<a href="shapirjs.html" class="btn btn-theme btn-outline-dark">Build apps</a><br />
+			<div class="container home-content" style="text-align:left">
+
+					<!-- <h1><img src="assets/img/bg/logoSb.svg" style="width:330px"/></h1> -->
+					<h1 style="color:black">WikAPI</h1>
+					<h3 style="color:black">Shape the way we access data on the Web.</h3>
+					<p style="font-size: 1.15em; color:black">
+						Standardizing and Democratizing Access to Web APIs
+					</p>
+					<a href="shapirui.html" class="btn btn-theme btn-main">Documentation</a> <a href="shapirjs.html" class="btn btn-theme btn-outline-dark">Build apps</a><br />
+
 
 			</div>
 
+			<!-- <div style="text-align:right">
+				<img src="assets/img/bg/wikapi.png" style="width:30%;"/>
+			</div> -->
+
+			<!-- end container -->
 		</div>
 		<!-- end #home -->
+
+		<div class="contentMid">
+			<!-- <div style="text-align:right">
+				<img src="assets/img/bg/wikapi.png" style="width:30%;"/>
+			</div> -->
 
 		<!-- begin #demos -->
 		<div id="demos" class="content" data-scrollview="true">
 			<div class="container">
 
-				<h2 class="content-title">Demos</h2>
+				<h2>Demos</h2>
 
 				<div class="row">
+
 					<div class="col-md-4 col-sm-6 col-xl-4 my-3">
 						<div class="card d-block  box-shadow-hover pointer">
 
 							<div class="h-75p align-items-center d-flex justify-content-center">
-								<a href="wikidata/movie_?item=Q3286391" target="_blank">
+								<a href="wikidata/memorial" target="_blank">
+									<img class="img-fluid w-xs-120p" src="assets/img/bg/memorials.png" alt="">
+								</a>
+							</div>
+							<div class="card-body p-4">
+								<h3 class="h4"><strong>National Memorials</strong></h3>
+								<p style="margin-bottom: 0.5rem;">List of national memorials of the United States</p>
+								<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
+									class="btn btn-default btn-xs">Wikidata</a>
+								<div>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-info"><i class="fa fa-download"></i> Download</button>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-pink"><i class="fa fa-code" aria-hidden="true"></i>HTML</button>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+
+					<div class="col-md-4 col-sm-6 col-xl-4 my-3">
+						<div class="card d-block  box-shadow-hover pointer">
+
+							<div class="h-75p align-items-center d-flex justify-content-center">
+								<a href="movie_?item=Q3286391" target="_blank">
 									<img class="img-fluid w-xs-120p" src="assets/img/bg/movie.png" alt="">
 								</a>
 							</div>
@@ -229,7 +303,9 @@
 					<div class="col-md-4 col-sm-6 col-xl-4 my-3">
 						<div class="card d-block  box-shadow-hover pointer">
 							<div class="h-75p align-items-center d-flex justify-content-center">
-								<img class="img-fluid w-xs-120p" src="assets/img/bg/artist.png" alt="talon ship image">
+								<a href="wikidata/artist_?item=Q3286391" target="_blank">
+									<img class="img-fluid w-xs-120p" src="assets/img/bg/artist.png" alt="talon ship image">
+								</a>
 							</div>
 
 							<div class="card-body p-4">
@@ -256,10 +332,37 @@
 						</div>
 					</div>
 
+
+					<div class="col-md-4 col-sm-6 col-xl-4 my-3">
+						<div class="card d-block  box-shadow-hover pointer">
+
+							<div class="h-75p align-items-center d-flex justify-content-center">
+								<a href="wikidata/paintings" target="_blank">
+									<img class="img-fluid w-xs-120p" src="assets/img/bg/paintings.png" alt="">
+								</a>
+							</div>
+							<div class="card-body p-4">
+								<h3 class="h4"><strong>Paintings</strong></h3>
+								<p style="margin-bottom: 0.5rem;">List of painter's paintings</p>
+								<a href="https://query.wikidata.org/#%23Paintings%20by%20Gustav%20Klimt%0A%23defaultView%3AImageGrid%0ASELECT%20%2a%0AWHERE%0A%7B%0A%20%20%3Fitem%20wdt%3AP31%20wd%3AQ3305213%20.%0A%20%20%3Fitem%20wdt%3AP170%20wd%3AQ34661%20.%0A%20%20%3Fitem%20wdt%3AP18%20%3Fpic%20.%0A%7D" target="_blank"
+									class="btn btn-default btn-xs">Wikidata</a>
+								<div>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-info"><i class="fa fa-download"></i> Download</button>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-pink"><i class="fa fa-code" aria-hidden="true"></i>HTML</button>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+
 					<div class="col-md-4 col-sm-6 col-xl-4 my-3">
 						<div class="card d-block  box-shadow-hover pointer">
 							<div class="h-75p align-items-center d-flex justify-content-center">
-								<img class="img-fluid w-xs-120p" src="assets/img/bg/artist.png" alt="talon ship image">
+								<img class="img-fluid w-xs-120p" src="assets/img/bg/books.png" alt="talon ship image">
 							</div>
 
 							<div class="card-body p-4">
@@ -268,12 +371,12 @@
 
 								<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
 									class="btn btn-default btn-xs">Wikidata</a>
-								<a href="https://www.imdb.com/title/tt1517451/" target="_blank"
+								<!-- <a href="https://www.imdb.com/title/tt1517451/" target="_blank"
 									class="btn btn-default btn-xs">Spotify</a>
 								<a href="https://www.youtube.com/results?search_query=a+star+is+born+2018"
 									target="_blank" class="btn btn-default btn-xs">YouTube</a>
 								<a href="https://www.nytimes.com/search?query=a+star+is+born+movie" target="_blank"
-									class="btn btn-default btn-xs">Songkick</a>
+									class="btn btn-default btn-xs">Songkick</a> -->
 
 								<div>
 									<button style="margin-top: 8px; padding: 3px 3px" type="button"
@@ -285,6 +388,38 @@
 							</div>
 						</div>
 					</div>
+
+
+					<div class="col-md-4 col-sm-6 col-xl-4 my-3">
+						<div class="card d-block  box-shadow-hover pointer">
+							<div class="h-75p align-items-center d-flex justify-content-center">
+								<img class="img-fluid w-xs-120p" src="assets/img/bg/books.png" alt="talon ship image">
+							</div>
+
+							<div class="card-body p-4">
+								<h3 class="h4"><strong>Book app</strong></h3>
+								<p style="margin-bottom: 0.5rem;"> gmlsdmgldmfg</p>
+
+								<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
+									class="btn btn-default btn-xs">Wikidata</a>
+								<!-- <a href="https://www.imdb.com/title/tt1517451/" target="_blank"
+									class="btn btn-default btn-xs">Spotify</a>
+								<a href="https://www.youtube.com/results?search_query=a+star+is+born+2018"
+									target="_blank" class="btn btn-default btn-xs">YouTube</a>
+								<a href="https://www.nytimes.com/search?query=a+star+is+born+movie" target="_blank"
+									class="btn btn-default btn-xs">Songkick</a> -->
+
+								<div>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-info"><i class="fa fa-download"></i> Download</button>
+									<button style="margin-top: 8px; padding: 3px 3px" type="button"
+										class="btn btn-pink"><i class="fa fa-code" aria-hidden="true"></i>HTML</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
 
 				</div>
 
@@ -333,15 +468,15 @@
 		<!-- end #example -->
 
 		<!-- begin #example -->
-		<div id="example" class="content" data-scrollview="true">
+		<!-- <div id="example" class="content" data-scrollview="true">
 			<div class="container">
-				<!-- style="max-width: 1300px" -->
 				<h2 class="content-title">About</h2>
 
 				<div class="row">
 
-					<!-- Simple app with its code -->
-					<!-- code -->
+					<div class="col-6">
+						<img src="assets/img/bg/wikapi.png" style="width:inherit" />
+					</div>
 
 					<div class="col-6">
 
@@ -356,14 +491,10 @@
 							formats, and can be interlinked to other open data sets on the linked data web.
 						</p>
 					</div>
-					<!-- application -->
-					<div class="col-6">
-						<img src="assets/img/bg/wikapi.png" style="width:inherit" />
-					</div>
 
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- end #example -->
 
 		<!-- begin #contact -->
@@ -408,28 +539,31 @@
 		</div>
 		<!-- end #contact -->
 
-		<!-- begin #footer -->
-		<div id="contact" class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<p style="margin-bottom: 0px; margin-top: 0px;">This project is based on the work of these two
-							tools</p>
-						<a href="https://scrapir.org" target="_blank"><img src="assets/img/bg/sc.png"
-								style="width:20%" /></a>
-						&nbsp;&nbsp;<a href="https://mavo.io" target="_blank"><img src="assets/img/bg/mavo.png"
-								style="width:20%" /></a>
-					</div>
-					<div class="col">
-						<img src="assets/img/doc/mit.png" style="width:50%" />
+
+
+	</div>
+
+			<!-- begin #footer -->
+			<div id="contact" class="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<p style="margin-bottom: 0px; margin-top: 0px;">This project is based on the work of these two
+								tools</p>
+							<a href="https://scrapir.org" target="_blank"><img src="assets/img/bg/sc.png"
+									style="width:20%" /></a>
+							&nbsp;&nbsp;<a href="https://mavo.io" target="_blank"><img src="assets/img/bg/mavo.png"
+									style="width:20%" /></a>
+						</div>
+						<div class="col">
+							<img src="assets/img/doc/mit.png" style="width:50%" />
+						</div>
+
 					</div>
 
 				</div>
-
 			</div>
-		</div>
-		<!-- end #footer -->
-
+			<!-- end #footer -->
 		<!-- begin theme-panel -->
 		<div class="theme-panel">
 			<div class="theme-panel-content">

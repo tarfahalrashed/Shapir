@@ -8,41 +8,28 @@
     <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
     <script type="module" src="../mavo-shapir.js"></script>
-    <link rel="stylesheet" href="artist-style.css">
+    <!-- <link rel="stylesheet" href="artist-style.css"> -->
 </head>
 
-<body class="act-show cont-artists snarly" style="background-color: #f7f7f7 !important" onload="test()">
+<body class="act-show cont-artists snarly" style="background-color: #f7f7f7 !important" onload="">
 
-    <!-- <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-item="[url('item')]"
-        mv-source-language="en">
+    <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
+        mv-source-instance-of="technology company" mv-source-numberOfItems=5>
+
+        <div property="items" mv-multiple>
             <p property="label"></p>
-    </div> -->
-    <pre><code id="codeHere"></code></pre>
+            <p property="description"></p>
+            <img property="image" width="100px" height="100px"/>
+            <!-- <p>[date(inception)]</p>
+            <p property="officialWebsite"></p> -->
+        </div>
 
+    </div>
+
+    <!-- <pre><code id="codeHere"></code></pre> -->
 
     <script>
-
-                //async request to the url -> print the result
-        //         function httpGetAsync(theUrl) {
-        //     $.ajax({
-        //         url: theUrl,
-        //         data: {
-        //             format: 'json'
-        //         },
-        //         error: function() {
-        //             document.write("error");
-        //         },
-        //         dataType: 'json',
-        //         success: function(data) {
-        //             document.write(JSON.stringify(data));
-        //         },
-        //         type: 'GET'
-        //     });
-        // }
-
-        let mappings = {"types":[], "properties":[]}, tt = 0, pp =0
-
-
+        let mappings = {"types":[], "properties":[]}, tt = 0, pp = 0;
         function test(){
 
             fetch('yago.json')
@@ -139,5 +126,7 @@
                     }, 10000);
         }
     </script>
+
 </body>
+
 </html>

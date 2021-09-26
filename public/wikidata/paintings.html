@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Paintings</title>
+    <script src="https://get.mavo.io/stable/mavo.js"></script>
+    <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
+    <script type="module" src="../mavo-shapir.js"></script>
+    <link rel="stylesheet" href="paintings-style.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <h1>A List of Paintings</h1>
+
+        <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
+            mv-source-instance-of="painting" mv-source-creator="[term]" mv-source-numberOfItems="15">
+
+            <form mv-action="set(term, searchInput)">
+                <label>Search for a painter <input property="searchInput" value="Gustav Klimt"/></label>
+                <meta property="term" mv-default="Gustav Klimt">
+                <button>Submit</button>
+            </form>
+
+            <section id="paintings">
+                <div property="items" mv-multiple>
+                    <a href="[itemURL]" target="_blank">
+                        <div class="painting">
+                            <div property="label"></div>
+                            <img property="image" />
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>

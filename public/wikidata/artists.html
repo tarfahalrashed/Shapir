@@ -14,99 +14,21 @@
 
     <body >
         <!-- <div mv-app="tmdb" mv-bar="none" mv-source="wikidata" mv-source-service="YouTube channel ID" mv-source-id="UCNL1ZadSjHpjm4q9j2sVtOA"> -->
-
-        <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-search="Lady Gaga" mv-source-service="wikidata" mv-source-occupation="singer" mv-source-place-of-birth="New York City" mv-source-sex-or-gender="female" mv-source-language="en">
+        <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-author="Jane Austen"  mv-source-genre="romance novel" mv-source-instance-of="literary work" mv-source-language="en" mv-source-numberOfItems=10>
+        <!-- <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-search="Lady Gaga" mv-source-service="wikidata" mv-source-occupation="singer" mv-source-place-of-birth="New York City" mv-source-sex-or-gender="female" mv-source-language="en"> -->
         <!-- <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-search="Star" mv-source-instance-of="cattle" mv-source-language="en"> -->
         <!-- <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-uri="UCNL1ZadSjHpjm4q9j2sVtOA" mv-source-language="en">-->
 
-            <!-- mv-source-sex-or-gender -->
-            <!-- mv-source-country-of-citizenship -->
-            <!-- mv-source-place-of-birth -->
-
-            <!-- SELECT ?item ?itemLabel WHERE{
-                ?item wdt:P106/rdfs:label"singer"@en.
-                ?item wdt:P21/rdfs:label"female"@en.
-                #?item wdt:P27/rdfs:label"United States of America"@en.
-                ?item wdt:P19/rdfs:label"New York City"@en.
-
-                SERVICE wikibase:label {bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
-                }
-                limit 20
-            -->
-
-            <div property="items" mv-multiple>
-                <a href="artist_?item=[itemID]" target="_blank"><p property="label"></p></a>
+            <!-- hidden="[image = '']" -->
+            <div property="items" mv-multiple >
+                <a href="[itemURL]" target="_blank">
+                    <h2 property="label"></h2>
+                    <p property="description"></p>
+                    <img property="image" width="20%"/>
+                </a>
             </div>
-
-            <!-- <h1 property="label"></h1>
-
-            <div property="sibling">
-                <h1 property="label"></h1>
-            </div> -->
 
         </div>
-
-        <!--
-            <div property="songkickArtist">
-                <h5 property="name"></h5>
-            </div>
-
-            <div property="youTubeChannel">
-                <p property="name"></p>
-                <div property="video" mv-multiple>
-                    <p property="name"></p>
-                </div>
-            </div>
-
-        </div> -->
-
-        <!-- <div mv-app mv-bar="none" mv-source="shapir" mv-source-uri="https://open.spotify.com/artist/1HY2Jd0NmPuamShAr6KMms" >
-
-            <div property="videos" mv-multiple>
-            </div>
-
-            <div property="albums" mv-multiple>
-            </div>
-
-            <div property="tracks" mv-multiple>
-            </div>
-
-            <div property="events" mv-multiple>
-            </div>
-
-
-        </div> -->
-
-        <!-- <script>
-
-
-            function loadData(){
-
-                var url = "https://yago-knowledge.org/sparql/query";
-
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", url);
-
-                xhr.setRequestHeader("Accept", "application/sparql-results+json,*/*;q=0.9");
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-                xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    console.log(xhr.status);
-                    console.log(xhr.responseText);
-                }};
-
-                var data = "query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E+%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E+%0APREFIX+yago%3A+%3Chttp%3A%2F%2Fyago-knowledge.org%2Fresource%2F%3E+%0APREFIX+schema%3A+%3Chttp%3A%2F%2Fschema.org%2F%3E+%0ASELECT+*+WHERE+%7B+yago%3AElvis_Presley+rdf%3Atype+%3Fs.+%7D++LIMIT+100%0A";
-
-                xhr.send(data);
-
-
-                return fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20%3Fproperty%20%3FpropertyLabel%20WHERE%7B%20%20%20%0A%20%20%20%20%20%3Fitem%20%3Fpredicate%20%22" + id + "%22%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3AdirectClaim%20%3Fpredicate%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3ApropertyType%20wikibase%3AExternalId.%0A%20%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%0A%20%20%20%7D%20%0A%7D")
-
-
-            }
-
-        </script> -->
 
     </body>
 </html>

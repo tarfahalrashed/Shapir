@@ -26,7 +26,7 @@ Mavo.Backend.register($.Class({
                 let ret = await window[this.service][this.type](this.id);
                 return ret;
             }else if(this.service=="wikidata"){
-                if(this.id){
+                if(this.id !="Shapir"){
                     return await wikidata(this.id, this.language);
                 }else{
                     // search wikidata with parameters

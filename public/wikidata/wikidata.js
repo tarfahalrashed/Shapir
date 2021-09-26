@@ -1,4 +1,4 @@
-let lang = "en", externalIds = {}, sites = [], apis, items = [], searchTerm = "", query = "";
+let lang = "en", externalIds = {}, sites = [], apis, items = [], searchTerm = "", query = "", numItems=50;
 
 
 export async function wikidata(itemID, lang) {
@@ -197,7 +197,7 @@ export async function wikidata(itemID, lang) {
             return objItem;
         })
         .then((result) => {
-            console.log("WikirResult: ", result)
+            // console.log("WikirResult: ", result)
             return result;
         });
 
@@ -240,6 +240,8 @@ async function getProperties(e) {
             let property = key.split("-").join(" ");
             if (key == "search") {
                 searchTerm = value;
+            } else if (key == "numberofitems") {
+                numItems = value;
             } else if (key == "language") {
                 lang = value;
             } else {
@@ -249,7 +251,8 @@ async function getProperties(e) {
                     .then(props => {
                         var listProps = props.search
                         for (var i = 0; i < listProps.length; ++i) {
-                            if (listProps[i].match.text == property) {
+                            if (listProps[i].label == property) {
+                            // if (listProps[i].match.text == property) {
                                 propertyObj = {
                                     id: listProps[i].id,
                                     value: value
@@ -275,17 +278,18 @@ export async function queryWikidata(e) {
 
     return getProperties(e)
         .then(props => {
-            // console.log("properties: ", props)
+            console.log("properties: ", props)
             query += 'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';
             // //if search property exists, add the below line to the query
             if (searchTerm != "") {
                 query += '%3Fitem%20rdfs%3Alabel"' + searchTerm + '"%40en.%0A';
             }
             for (var i = 0; i < props.length; ++i) {
+                // console.log(props[i].id)
                 query += '%3Fitem%20wdt%3A' + props[i].id + '%2Frdfs%3Alabel"' + props[i].value + '"%40en.%0A';
 
                 if (i + 1 == props.length) {
-                    query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2Cen".%7D%0A%7D%0Alimit%205';
+                    query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2Cen".%7D%0A%7D%0Alimit%20'+numItems;
                     // console.log("query: ", query)
                     return fetch(query)
                         .then(response => { return response.json() })
