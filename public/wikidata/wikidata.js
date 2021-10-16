@@ -1,4 +1,4 @@
-let lang = "en", externalIds = {}, sites = [], apis, items = [], searchTerm = "", query = "", numItems=50;
+let lang = "en", externalIds = {}, sites = [], apis, items = [], searchTerm = "", query = "", numItems = 50, tempObjects = {}, firstGetObject = true;
 
 
 export async function wikidata(itemID, lang) {
@@ -60,7 +60,6 @@ export async function wikidata(itemID, lang) {
                         });
 
                         if (output in obj) {
-                            // console.log("VVV: ",results[i].ps_Label.value)
                             if (Object.values(obj).indexOf(results[i].ps_Label.value) == -1) {//make sure that values are unique
                                 obj[output].push({
                                     id: results[i].ps_.value,
@@ -81,15 +80,55 @@ export async function wikidata(itemID, lang) {
                             let idQ = value[0].id;
                             if (idQ.includes("http://www.wikidata.org/entity/Q")) {
                                 let id = idQ.split("/").reverse()[0];
-                                Object.defineProperty(objItem, key, {
-                                    configurable: true,
+                                //********** OLD CODE
+                                //     let id = idQ.split("/").reverse()[0];
+                                //     Object.defineProperty(objItem, key, {
+                                //         configurable: true,
+                                //         get: async function () {
+                                //             return await wikidata(id, lang);
+                                //         }
+                                //     });
+                                // } else {
+                                //     objItem[key] = value[0].value;
+                                // }
+                                //********** OLD CODE
+
+
+                                /// START
+
+                                var objTemp = {}
+                                objTemp["label"] = value[0].value;
+
+                                Object.defineProperty(objTemp, "properties", {
                                     get: async function () {
                                         return await wikidata(id, lang);
                                     }
                                 });
+
+                                let proxy = new Proxy(objTemp, {
+                                    get: function (objTemp, property) {
+                                        if (property in objTemp) {
+                                            return objTemp[property];
+                                        } else {
+                                            if (typeof property != 'symbol') {
+                                                return Promise.resolve(objTemp["properties"])
+                                                    .then(function (value) {
+                                                        return value[property];
+                                                    })
+                                            }
+                                        }
+                                    }
+                                });
+
+                                objItem[key] = proxy;
+
+                                /// END
+
                             } else {
                                 objItem[key] = value[0].value;
                             }
+
+
                         } else {
                             let idQ = value[0].id;
                             if (idQ.includes("http://www.wikidata.org/entity/Q")) {
@@ -252,7 +291,7 @@ async function getProperties(e) {
                         var listProps = props.search
                         for (var i = 0; i < listProps.length; ++i) {
                             if (listProps[i].label == property) {
-                            // if (listProps[i].match.text == property) {
+                                // if (listProps[i].match.text == property) {
                                 propertyObj = {
                                     id: listProps[i].id,
                                     value: value
@@ -278,7 +317,7 @@ export async function queryWikidata(e) {
 
     return getProperties(e)
         .then(props => {
-            console.log("properties: ", props)
+            // console.log("properties: ", props)
             query += 'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';
             // //if search property exists, add the below line to the query
             if (searchTerm != "") {
@@ -289,7 +328,7 @@ export async function queryWikidata(e) {
                 query += '%3Fitem%20wdt%3A' + props[i].id + '%2Frdfs%3Alabel"' + props[i].value + '"%40en.%0A';
 
                 if (i + 1 == props.length) {
-                    query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2Cen".%7D%0A%7D%0Alimit%20'+numItems;
+                    query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2Cen".%7D%0A%7D%0Alimit%20' + numItems;
                     // console.log("query: ", query)
                     return fetch(query)
                         .then(response => { return response.json() })

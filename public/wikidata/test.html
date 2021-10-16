@@ -8,123 +8,154 @@
     <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
     <script type="module" src="../mavo-shapir.js"></script>
-    <!-- <link rel="stylesheet" href="artist-style.css"> -->
+    <!-- <script src="jszip.js"></script> -->
+    <!-- <script src="jszip.min.js"></script> -->
+    <!-- <script src="FileSaver.js"></script> -->
 </head>
 
-<body class="act-show cont-artists snarly" style="background-color: #f7f7f7 !important" onload="">
+<body class="act-show cont-artists snarly" style="background-color: #f7f7f7 !important" >
+
+    <!-- <a href="" download>download</a> -->
 
     <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-        mv-source-instance-of="technology company" mv-source-numberOfItems=5>
+    mv-source-id="Q142686">
+    <h3 property="label"></h3>
+    <p property="description"></p>
 
-        <div property="items" mv-multiple>
-            <p property="label"></p>
-            <p property="description"></p>
-            <img property="image" width="100px" height="100px"/>
-            <!-- <p>[date(inception)]</p>
-            <p property="officialWebsite"></p> -->
-        </div>
-
+    <div property="country">
+        <p property="label"></p>
+        <p property="description"></p>
+        <p property="NALTID"></p>
     </div>
 
-    <!-- <pre><code id="codeHere"></code></pre> -->
+</div>
+
 
     <script>
-        let mappings = {"types":[], "properties":[]}, tt = 0, pp = 0;
-        function test(){
-
-            fetch('yago.json')
-            .then(response => { return response.json() })
-            .then(data => {
-                let list = data['@graph'];
-
-                for(var i=0; i<list.length; ++i){
-                    if("http://yago-knowledge.org/schema#fromClass" in list[i]){
-                        ++tt;
-
-                        let wdClass = list[i]['http://yago-knowledge.org/schema#fromClass'];
-                        let schemaId = list[i]['@id'];
-                        // console.log("sc: " + list[i]['@id'] + "wd: ",  wd['@id'] )
-
-                        mappings['types'].push({
-                            schema: list[i]['@id'],
-                            wikidata: wdClass['@id']
-                        })
-
-                        // wdClass = wdClass['@id'];
-                        // let itemID = wdClass.substring(wdClass.lastIndexOf("/") + 1, wdClass.length);
-
-                        // fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:" + itemID + ")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22en%22%20}}")
-                        // .then(response => { return response.json() })
-                        // .then(data => {
-                        //     let results = data.results.bindings
-                        //     if (results[0].itemLabel) {
-                        //         mappings['types'].push({
-                        //             schema: schemaId,
-                        //             wikidata: results[0].itemLabel.value //wdClass['@id']
-                        //         })
-                        //     }
-                        // })
-
-                    }
 
 
-                    if("http://yago-knowledge.org/schema#fromProperty" in list[i]){
-                        pp++;
+        function init(){
 
-                        let wdProperty = list[i]['http://yago-knowledge.org/schema#fromProperty'];
-                        let scProperty = list[i]['http://www.w3.org/ns/shacl#path'];
+      var zip = new JSZip();
+      var a = document.querySelector("a");
+      var urls = ["memorial/index.html", "memorial/style.css"];
 
-                        mappings['properties'].push({
-                            schema: scProperty['@id'],
-                            wikidata: wdProperty['@id']
-                        })
+      function request(url) {
+        return new Promise(function(resolve) {
+          var httpRequest = new XMLHttpRequest();
+          httpRequest.open("GET", url);
+          httpRequest.onload = function() {
+            zip.file(url, this.responseText);
+            resolve()
+          }
+          httpRequest.send()
+        })
+      }
 
-                        // wdProperty = wdProperty['@id'];
-                        // let itemID = wdProperty.substring(wdProperty.lastIndexOf("/") + 1, wdProperty.length);
-
-                        // fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:" + itemID + ")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22en%22%20}}")
-                        // .then(response => { return response.json() })
-                        // .then(data => {
-                        //     let results = data.results.bindings
-                        //     if (results[0].itemLabel) {
-                        //         mappings['properties'].push({
-                        //             schema: scProperty['@id'],
-                        //             wikidata: results[0].itemLabel.value //wdProperty['@id']
-                        //         })
-                        //     }
-                        // })
-
-                    }
-
-
-
-                }
-
-
+      Promise.all(urls.map(function(url) {
+          return request(url)
+        }))
+        .then(function() {
+        //   console.log(zip);
+          zip.generateAsync({
+              type: "blob"
+            })
+            .then(function(content) {
+              a.download = "download";
+              a.href = URL.createObjectURL(content);
+              a.innerHTML = "download";
             });
+        })
 
-         //sparql query
-        // var query =
-        //     "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX yago: <http://yago-knowledge.org/resource/> PREFIX schema: <http://schema.org/> SELECT * WHERE { yago:Elvis_Presley rdf:type ?s. }  LIMIT 100";
-        // //     "SELECT ?album ?artist WHERE {",
-        // //     "?album dbo:artist ?artist .",
-        // //     "} LIMIT 10"
-        // // ].join(" ");
-        // //url for the query
-        // var url = "https://yago-knowledge.org/sparql/query";
-        // var queryUrl = url + "?query=" + encodeURIComponent(query);
-        // //query call
-        // httpGetAsync(queryUrl);
+    }
 
-        setTimeout(function() {
-                        console.log(mappings)
-                        document.getElementById("codeHere").innerHTML= JSON.stringify(mappings);
 
-                        console.log("Num of types: ", tt)
-                        console.log("Num of prpos: ", pp)
 
-                    }, 10000);
-        }
+        // let mappings = {"types":[], "properties":[]}, tt = 0, pp = 0;
+        // function test(){
+
+        //     fetch('yago.json')
+        //     .then(response => { return response.json() })
+        //     .then(data => {
+        //         let list = data['@graph'];
+
+        //         for(var i=0; i<list.length; ++i){
+        //             if("http://yago-knowledge.org/schema#fromClass" in list[i]){
+        //                 ++tt;
+
+        //                 let wdClass = list[i]['http://yago-knowledge.org/schema#fromClass'];
+        //                 let schemaId = list[i]['@id'];
+        //                 // console.log("sc: " + list[i]['@id'] + "wd: ",  wd['@id'] )
+
+        //                 mappings['types'].push({
+        //                     schema: list[i]['@id'],
+        //                     wikidata: wdClass['@id']
+        //                 })
+
+        //                 // wdClass = wdClass['@id'];
+        //                 // let itemID = wdClass.substring(wdClass.lastIndexOf("/") + 1, wdClass.length);
+
+        //                 // fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:" + itemID + ")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22en%22%20}}")
+        //                 // .then(response => { return response.json() })
+        //                 // .then(data => {
+        //                 //     let results = data.results.bindings
+        //                 //     if (results[0].itemLabel) {
+        //                 //         mappings['types'].push({
+        //                 //             schema: schemaId,
+        //                 //             wikidata: results[0].itemLabel.value //wdClass['@id']
+        //                 //         })
+        //                 //     }
+        //                 // })
+
+        //             }
+
+
+        //             if("http://yago-knowledge.org/schema#fromProperty" in list[i]){
+        //                 pp++;
+
+        //                 let wdProperty = list[i]['http://yago-knowledge.org/schema#fromProperty'];
+        //                 let scProperty = list[i]['http://www.w3.org/ns/shacl#path'];
+
+        //                 mappings['properties'].push({
+        //                     schema: scProperty['@id'],
+        //                     wikidata: wdProperty['@id']
+        //                 })
+
+        //                 // wdProperty = wdProperty['@id'];
+        //                 // let itemID = wdProperty.substring(wdProperty.lastIndexOf("/") + 1, wdProperty.length);
+
+        //                 // fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:" + itemID + ")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22en%22%20}}")
+        //                 // .then(response => { return response.json() })
+        //                 // .then(data => {
+        //                 //     let results = data.results.bindings
+        //                 //     if (results[0].itemLabel) {
+        //                 //         mappings['properties'].push({
+        //                 //             schema: scProperty['@id'],
+        //                 //             wikidata: results[0].itemLabel.value //wdProperty['@id']
+        //                 //         })
+        //                 //     }
+        //                 // })
+
+        //             }
+
+
+
+        //         }
+
+
+        //     });
+
+
+
+        // setTimeout(function() {
+        //                 console.log(mappings)
+        //                 document.getElementById("codeHere").innerHTML= JSON.stringify(mappings);
+
+        //                 console.log("Num of types: ", tt)
+        //                 console.log("Num of prpos: ", pp)
+
+        //             }, 10000);
+        // }
     </script>
 
 </body>

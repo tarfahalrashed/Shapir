@@ -2180,7 +2180,7 @@ function siteHasBeenEntered(select){
       // $("#site-info").append('</br><h5>Suggested schema.org types</h5>');
       // $("#site-info").append('<ul>');
 
-      suggestedTypes.push("MusicPlaylist")
+      // suggestedTypes.push("MusicPlaylist")
       for(var c=0; c<categoryWords.length; ++c){
         for(var j=0; j<allTypes.length; ++j){
           var similar = checkSimilarity(categoryWords[c], allTypes[j]);

@@ -3,31 +3,43 @@
 
 <head>
     <meta charset="utf-8">
-    <title>National Memorials</title>
+    <title>Countries</title>
     <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
     <script type="module" src="../mavo-shapir.js"></script>
-    <link href="books-style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
     <main class="container">
-        <h1>Presidents of the United States</h1>
+        <h1>List of Countries</h1>
         <!-- <p>List of national memorials of the United States</p> -->
         <hr>
 
         <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-            mv-source-position-held="President of the United States" mv-source-numberOfItems="46">
+            mv-source-instance-of="country" mv-source-part-of="North America" mv-source-numberOfItems="3">
 
-            <div >
+            <form mv-action="set(term, continent)">
+                <label>Part of
+                    <!-- <input property="searchInput" value="Gustav Klimt"/> -->
+                    <select property="continent">
+                        <option selected="selected" value="North America">North America</option>
+                        <option value="South America">South America</option>
+                        <option value="Central America">Central America</option>
+                    </select>
+                </label>
+                <meta property="term" mv-default="North America">
+                <button>Submit</button>
+            </form>
+
+            <div>
                 <div property="items" mv-multiple>
 
-                    <a href="[itemURL]" target="_blank" class="list-group-item list-group-item-action d-flex gap-3 py-3"
-                        aria-current="true">
-                        <img property="image" width="20%">
+                    <a href="[itemURL]" target="_blank" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                        <img src="[first(flagImage)]" width="20%">
                         <div class="info">
                             <h3 property="label"></h3>
-                            <p property="description"></p>
+                            <!-- <p property="description"></p> -->
                             <!-- <p property="officialWebsite"></p>
                             <label for="date">Inception:
                                 <p name="date" style="display: inline-block;">[date(inception)]</p>

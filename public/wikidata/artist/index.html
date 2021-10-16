@@ -8,22 +8,16 @@
     <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
     <script type="module" src="../mavo-shapir.js"></script>
-    <link rel="stylesheet" href="artist-style.css">
+    <link rel="stylesheet" href="artist/style.css">
 </head>
 
 <body class="act-show cont-artists snarly" style="background-color: #f7f7f7 !important">
 
-
-    <!-- <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="[url('item')]"
-        mv-source-language="en"> -->
         <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q29564107"
         mv-source-language="en">
 
         <div class="header" ng-controller="HeaderCtrl as header_ctrl" click-outside="close_mobile_subnav_menu()">
-            <!-- <global-message ng-if="header_ctrl.cloudflare_error" ng-cloak>
-            {{:: 'cloud_flare_always_on_short_message' | i18n }}
-            <br>Check <a href="https://twitter.com/genius" target="_blank">@genius</a> for updates. We'll have things fixed soon.
-        </global-message> -->
+
             <div class="header-primary active">
                 <div class="header-expand_nav_menu" ng-click="toggle_mobile_subnav_menu()">
                     <div class="header-expand_nav_menu-contents"></div>
@@ -212,7 +206,7 @@
 
                 </div>
 
-                <div class="col-7" style="padding-top: 22px; " property="SpotifyArtist">
+                <div class="col-7" style="padding-top: 22px; " property="spotifyArtist">
                     <!-- Spotify Albums -->
                     <div style="float:left !important">
                         <div class="profile_body">
@@ -295,7 +289,7 @@
 
             <div class="row" style="margin-left: 17%">
                 <!-- YouTube Channel -->
-                <div class="col-6" property="YouTubeChannel">
+                <div class="col-6" property="youTubeChannel">
                     <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">YouTube Channel
                     </div>
                     <p><strong>Name:</strong> <span property="name"></span> </p>
@@ -309,7 +303,7 @@
                 </div>
 
                 <!-- Songkick ARTIST -->
-                <div class="col-6" property="SongkickArtist">
+                <div class="col-6" property="songkickArtist">
                     <div class="profile_body">
                         <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">Upcoming
                             Events</div>
