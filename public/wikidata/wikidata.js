@@ -23,6 +23,55 @@ export async function wikidata(itemID, lang) {
         .then(scrapirApis => { apis = scrapirApis; });
 
 
+    let cache = new Map();
+
+    async function fetchWithCache(id) {
+        if (cache.has(id)) {
+            return cache.get(id);
+        }
+
+        const promise = wikidata(id, lang)
+        cache.set(id, promise);
+        return promise;
+    }
+
+    function getProxy(v){
+        let basicId = v.id;
+        let id = basicId.split("/").reverse()[0];
+
+        let objTemp= {}
+        objTemp["label"] = v.value;
+
+        Object.defineProperty(objTemp, "properties", {
+            get: async function () {
+                return await fetchWithCache(id);
+            }
+        });
+
+        let proxy = new Proxy(objTemp, {
+            get: function (objTemp, property) {
+                if (property in objTemp || typeof property === "symbol") {
+                    return objTemp[property];
+                } else {
+                    if (typeof property != 'symbol') {
+                        return Promise.resolve(objTemp["properties"])
+                            .then(function (value) {
+                                if(value[property] == "SyntaxError: The string did not match the expected pattern."){
+                                    return "";
+                                }
+                                else{
+                                    return value[property];
+                                }
+                            })
+                    }
+                }
+            }
+        });
+
+        return proxy;
+    }
+
+
     let obj = {}, objItem = {};
     return fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:" + itemID + ")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22" + lang + "%22%20}}")
         .then(response => { return response.json() })
@@ -79,76 +128,24 @@ export async function wikidata(itemID, lang) {
                         if (value.length == 1) {
                             let idQ = value[0].id;
                             if (idQ.includes("http://www.wikidata.org/entity/Q")) {
-                                let id = idQ.split("/").reverse()[0];
-                                //********** OLD CODE
-                                //     let id = idQ.split("/").reverse()[0];
-                                //     Object.defineProperty(objItem, key, {
-                                //         configurable: true,
-                                //         get: async function () {
-                                //             return await wikidata(id, lang);
-                                //         }
-                                //     });
-                                // } else {
-                                //     objItem[key] = value[0].value;
-                                // }
-                                //********** OLD CODE
-
-
-                                /// START
-
-                                var objTemp = {}
-                                objTemp["label"] = value[0].value;
-
-                                Object.defineProperty(objTemp, "properties", {
-                                    get: async function () {
-                                        return await wikidata(id, lang);
-                                    }
-                                });
-
-                                let proxy = new Proxy(objTemp, {
-                                    get: function (objTemp, property) {
-                                        if (property in objTemp) {
-                                            return objTemp[property];
-                                        } else {
-                                            if (typeof property != 'symbol') {
-                                                return Promise.resolve(objTemp["properties"])
-                                                    .then(function (value) {
-                                                        return value[property];
-                                                    })
-                                            }
-                                        }
-                                    }
-                                });
-
-                                objItem[key] = proxy;
-
-                                /// END
+                                objItem[key] = getProxy(value[0]);
 
                             } else {
                                 objItem[key] = value[0].value;
                             }
-
-
                         } else {
                             let idQ = value[0].id;
                             if (idQ.includes("http://www.wikidata.org/entity/Q")) {
-                                let arrPromises = []
-                                Object.defineProperty(objItem, key, {
-                                    configurable: true,
-                                    get: function () {
-                                        for (let i = 0; i < value.length; ++i) {
-                                            idQ = value[i].id;
-                                            let id = idQ.split("/").reverse()[0];
-                                            arrPromises.push(wikidata(id, lang))
-                                        }
-                                        return arrPromises;
-                                        // return Promise.all(arrPromises);
-                                    }
-                                });
+                                objItem[key] = [];
+                                for (let i = 0; i < value.length; ++i){
+                                    objItem[key].push(getProxy(value[i]));
+                                }
+
                             } else {
                                 objItem[key] = [];
                                 for (let i = 0; i < value.length; ++i) {
-                                    if (Object.values(objItem).indexOf(value[i].value) == -1) {//make sure that values are unique
+                                    //make sure that values are unique
+                                    if (Object.values(objItem).indexOf(value[i].value) == -1) {
                                         objItem[key].push(value[i].value);
                                     }
                                 }
@@ -271,7 +268,9 @@ export function uri(id, lang) {
 }
 
 async function getProperties(e) {
-    let optionsLen = Object.keys(e.options).length, properties = [], propertyObj = {};
+    let properties = [], propertyObj = {};
+    if(e.options){
+    let optionsLen = Object.keys(e.options).length;
 
     for (const [key, value] of Object.entries(e.options)) {
         --optionsLen;
@@ -310,6 +309,11 @@ async function getProperties(e) {
 
     }
 
+}else{
+    numItems=1;
+    return e;
+}
+
 }
 
 
@@ -317,7 +321,7 @@ export async function queryWikidata(e) {
 
     return getProperties(e)
         .then(props => {
-            // console.log("properties: ", props)
+            console.log("properties: ", props)
             query += 'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';
             // //if search property exists, add the below line to the query
             if (searchTerm != "") {
