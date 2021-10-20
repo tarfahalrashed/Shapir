@@ -281,7 +281,7 @@ async function getProperties(e) {
                     lang = value;
                 } else {
                     // if (key != "search" && key != "language") {
-                    var prom = fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property")
+                    var prom = fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property&origin=*")
                         .then(response => { return response.json() })
                         .then(props => {
                             var listProps = props.search
