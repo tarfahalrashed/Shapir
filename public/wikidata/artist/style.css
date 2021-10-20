@@ -20,9 +20,8 @@
     grid-template-columns: auto 1fr 1fr;
     grid-gap: 0.5em;
     margin: 1em 0;
-    max-height: 520px;
+    max-height: 620px;
     overflow:scroll;
-
 }
 
 /* https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css */
@@ -20942,3 +20941,9 @@ del, del>* {
 .atwho-view .cur {
     background: #99a7ee
 }
+
+body{
+    background-color: #f7f7f7 !important;
+}
+
+

@@ -10,8 +10,6 @@ Mavo.Backend.register($.Class({
         this.permissions.on(["read"]);
         this.update(url, o);
         this.ready = shapir();
-        // this.id //Add mv-source-id
-        // this.search //Add mv-source-search
     },
 
     update: function(url, o) {

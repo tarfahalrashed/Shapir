@@ -11,12 +11,60 @@
     <link rel="stylesheet" href="artist/style.css">
 </head>
 
-<body class="act-show cont-artists snarly">
+<body class="act-show cont-artists snarly" style="background-color: #f7f7f7 !important">
 
-    <!-- https://www.wikidata.org/wiki/Q19848 -->
-    <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q19848"
+    <!-- https://www.wikidata.org/wiki/Q29564107 -->
+    <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q29564107"
         mv-source-language="en">
 
+        <!-- <div class="header" ng-controller="HeaderCtrl as header_ctrl" click-outside="close_mobile_subnav_menu()">
+
+            <div class="header-primary active">
+                <div class="header-expand_nav_menu" ng-click="toggle_mobile_subnav_menu()">
+                    <div class="header-expand_nav_menu-contents"></div>
+                </div>
+            </div>
+
+            <ul class="header-nav_menu">
+                <div ng-cloak>
+                    <header-menu-item class="" name="Home" url="https://genius.com/"></header-menu-item>
+
+                    <li class="nav_menu-item">
+                        <a href="https://www.facebook.com/[FacebookID]" class="nav_menu-link nav_menu-link--facebook"
+                            target="_blank">
+                            <svg src="facebook.svg" class="inline_icon"></svg>
+                            <span class="nav_menu-link-social_text">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="nav_menu-item">
+                        <a href="https://twitter.com/[TwitterUsername]" class="nav_menu-link" target="_blank">
+                            <svg src="twitter.svg" class="inline_icon"></svg>
+                            <span class="nav_menu-link-social_text">Twitter</span>
+                        </a>
+                    </li>
+                    <li class="nav_menu-item">
+                        <a href="https://www.instagram.com/[InstagramUsername]" class="nav_menu-link" target="_blank">
+                            <svg src="instagram.svg" class="inline_icon"></svg>
+                            <span class="nav_menu-link-social_text">Instagram</span>
+                        </a>
+                    </li>
+                    <li class="nav_menu-item">
+                        <a href="https://www.youtube.com/channel/[YouTubeChannelID]"
+                            class="nav_menu-link nav_menu-link--no_right_padding" target="_blank">
+                            <svg src="youtube.svg" class="inline_icon nav_menu-link-youtube_icon"></svg>
+                            <span class="nav_menu-link-social_text">Youtube</span>
+                        </a>
+                    </li>
+
+                </div>
+
+
+            </ul>
+
+        </div> -->
+
+
+        <!-- image and logo image -->
         <div class="profile_header">
             <div class="banner_image banner_image--more_transparent_gradient" style="background-color: lightgray;">
                 <img property="logoImage" class="banner_image-blurred_image clipped_background_image" />
@@ -31,9 +79,10 @@
         </div>
 
 
+        <!-- content -->
         <div class="container-fluid">
 
-            <div class="row" style="margin-left: 17%;">
+            <div class="row" style="margin-left: 17%; ">
                 <div class="col-5" id="wikidata">
                     <!-- Wikidata data -->
                     <div class="profile_identity_and_description">
@@ -58,58 +107,72 @@
                             <div class="rich_text_formatting">
                                 <p property="description"></p>
 
-                                <p><strong><em>Birth Name:</em></strong>
-                                    <span property="birthName"></span>
-                                </p>
+                                <meta property="uniImages" mv-value="unique(image)" />
 
-                                <p><strong><em>Nickname:</em></strong>
-                                    <span class="commaSplit" property="nickname"mv-multiple></span>
-                                </p>
+                                <img style="display: inline; max-width:120px !important; max-height:120px !important"
+                                    property="uniImages" mv-multiple />
 
-                                <div property="sexOrGender">
-                                    <p><strong><em>Gender:</em></strong>
-                                        <span property="label"></span>
+                                <div style="padding-bottom: -7px;">
+                                    <p><strong><em>Birth Name:</em></strong><span property="birthName"></span></p>
+                                </div>
+
+                                <div style="padding-bottom: -7px !important;">
+                                    <p><strong><em>Nickname:</em></strong> <span class="commaSplit" property="nickname"
+                                            mv-multiple></span></p>
+                                </div>
+
+                                <div style="padding-bottom: -7px;">
+                                    <p style="display: inline;"><strong><em>Gender:</em></strong> </p>
+                                    <span property="sexOrGender">
+                                        <p style="display: inline;" property="label"></p>
+                                    </span>
+                                </div>
+
+                                <div style="padding-bottom: -7px;">
+                                    <p><strong><em>Date of Birth:</em></strong> <span property="dateOfBirth"></span>
                                     </p>
                                 </div>
 
-                                <p><strong><em>Date of Birth:</em></strong>
-                                    <span property="dateOfBirth"></span>
-                                </p>
-
-                                <div property="placeOfBirth">
-                                    <p><strong><em>Place of Birth:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Place of Birth:</em></strong> </p>
+                                    <span property="placeOfBirth">
+                                        <p class="commaSplit" property="label"></p>
+                                    </span>
                                 </div>
 
-                                <div property="countryOfCitizenship">
-                                    <p><strong><em>Country of Citizenship:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Country of Citizenship:</em></strong> </p>
+                                    <span property="countryOfCitizenship">
+                                        <p style="display: inline;" property="label"></p>
+                                    </span>
                                 </div>
 
-                                <div property="residence">
-                                    <p><strong><em>Residence:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Residence:</em></strong> </p>
+                                    <span property="residence" mv-multiple>
+                                        <p class="commaSplit" property="label"></p>
+                                    </span>
                                 </div>
 
-                                <div property="father">
-                                    <p><strong><em>Father:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Father:</em></strong> </p>
+                                    <span property="father">
+                                        <p style="display: inline;" property="label"></p>
+                                    </span>
                                 </div>
 
-                                <div property="mother">
-                                    <p><strong><em>Mother:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Mother:</em></strong> </p>
+                                    <span property="mother">
+                                        <p style="display: inline;" property="label"></p>
+                                    </span>
                                 </div>
 
-                                <div property="sibling">
-                                    <p><strong><em>Sibling:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div style="padding-bottom: 10px;">
+                                    <p style="display: inline;"><strong><em>Sibling:</em></strong> </p>
+                                    <span property="sibling" mv-multiple>
+                                        <p class="commaSplit" property="label"></p>
+                                    </span>
                                 </div>
 
                                 <div style="padding-bottom: 10px;">
@@ -133,16 +196,17 @@
                                     </span>
                                 </div>
 
-
                             </div>
 
                         </div>
 
                     </div>
 
+
                 </div>
 
-                <div class="col-7" style="padding-top: 22px; " property="SpotifyArtist">
+                <div class="col-7" style="padding-top: 22px; " property="spotifyArtist">
+                    <!-- Spotify Albums -->
                     <div style="float:left !important">
                         <div class="profile_body">
                             <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">Spotify
@@ -197,6 +261,7 @@
                         </div>
                     </div>
 
+                    <!-- Spotify Tracks -->
                     <div style="float:left !important;">
                         <div class="profile_body">
                             <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin"
@@ -222,7 +287,8 @@
             </div>
 
             <div class="row" style="margin-left: 17%">
-                <div class="col-6" property="YouTubeChannel">
+                <!-- YouTube Channel -->
+                <div class="col-6" property="youTubeChannel">
                     <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">YouTube Channel
                     </div>
                     <p><strong>Name:</strong> <span property="name"></span> </p>
@@ -235,11 +301,12 @@
                     </div>
                 </div>
 
-                <div class="col-6" property="SongkickArtist">
+                <!-- Songkick ARTIST -->
+                <div class="col-6" property="songkickArtist">
                     <div class="profile_body">
                         <div class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">Upcoming
                             Events</div>
-                        <div property="event"  mv-multiple>
+                        <div property="event" mv-multiple>
                             <div class="mini_card_grid">
                                 <div class="mini_card_grid-song">
                                     <a href="[url]" target="_blank" class="mini_card">
@@ -291,11 +358,26 @@
 
         </div>
 
+
     </div>
 
-    <!-- <div class="page_footer">
+
+    </routable-page>
+
+
+    <ul class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li class="breadcrumb" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+            <a href="/wikidata/artists" itemprop="item">
+                <span itemprop="name">⇽ Back to List of Artists</span>
+                <meta itemprop="position" content="1" />
+            </a>
+        </li>
+    </ul>
+
+
+    <div class="page_footer">
         <div class="footer"></div>
-    </div> -->
+    </div>
 
     </div>
     <!-- End of Wikidata -->

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Doc</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="https://shapir.org/assets/css/default/app.min.css" rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/@danielfarrell/bootstrap-combobox/css/bootstrap-combobox.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/tag-it/css/jquery.tagit.css" rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css"
+        rel="stylesheet" />
+    <link href="https://shapir.org/assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+    <link href="https://shapir.org/assets/css/jsoneditor.css" rel="stylesheet" type="text/css">
+    <script src="https://shapir.org/assets/js/jsoneditor.js"></script>
+    <link href="https://shapir.org/assets/js/prism-coy.css" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            font-size: 15px !important;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 240px;
+            position: fixed;
+            z-index: 1;
+            bottom: 0;
+            left: 0;
+            background-color: #2d353c;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .main {
+            margin-left: 160px;
+            font-size: 28px;
+            padding: 0px 10px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<!--
+    How to use Wikidata properties: instanceOf no space, capitalized the next letter
+    How to use Wikidata external property getters: YouTubeChannel without the ID
+ -->
+<body onload="docOnLoad()" data-prismjs-copy-timeout="500">
+
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade show">
+        <span class="spinner"></span>
+    </div>
+    <!-- end #page-loader -->
+
+    <!-- begin #page-container -->
+    <div id="page-container" class="page-container fade page-sidebar-fixed page-header-fixed page-with-wide-sidebar">
+        <!-- begin #header -->
+        <div id="header" class="header navbar-default">
+            <a href="index.html" class="navbar-brand">
+                <img style="margin-left: 50px; margin-top: 5px;" src="https://shapir.org/assets/img/bg/logoP.svg"
+                    width="70px" />
+            </a>
+            <!-- end navbar-header -->
+            <!-- begin header-nav -->
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item"><a class="nav-link" href="index.html" data-click="scroll-to-target"
+                        data-scroll-target="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="shapirui.html">ShapirUI</a></li>
+                <li class="nav-item"><a class="nav-link" href="shapirjs.html">ShapirJS</a></li>
+                <li class="nav-item" style="margin-right:50px"><a class="nav-link active" href="mavo-shapir.html">Mavo-Shapir</a></li>
+            </ul>
+            <!-- end header-nav -->
+        </div>
+        <!-- end #header -->
+        <div id="sidebar" class="sidebar">
+            <!-- begin sidebar scrollbar -->
+            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+                <div data-scrollbar="true" data-height="100%" data-init="true"
+                    style="overflow: hidden; width: auto; height: 100%;">
+                    <!-- begin sidebar user -->
+                    <ul class="nav" style="font-size: 1.4em; margin-top: 40px;">
+                        <li class="has-sub active">
+                            <a href="javascript:;">
+                                <span>Mavo+Shapir</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="#getStarted">Get Started</a></li>
+                                <li><a href="#get">Get an Object/Type</a></li>
+                                <li><a href="#search">Search a Single Site</a></li>
+                                <li><a href="#searcgMulti">Search Multiple Site</a></li>
+                                <li><a href="#params">Specify Parameters</a></li>
+                                <li><a href="#numResults">Specify Number of Results</a></li>
+                                <li><a href="#example">Example</a></li>
+                                <li><a href="#explore">Explore Sites</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- end sidebar nav -->
+                </div>
+                <div class="slimScrollBar"
+                    style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 117.202px;">
+                </div>
+                <div class="slimScrollRail"
+                    style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+                </div>
+            </div>
+            <!-- end sidebar scrollbar -->
+        </div>
+
+        <!-- begin #content -->
+        <div id="content" class="content">
+
+            <!-- begin panel -->
+            <div id="mavo" class="panel">
+                <div class="panel-heading">
+                    <h1 class="panel-title">Mavo + Shapir</h1>
+                    <div class="panel-heading-btn">
+                        <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a> -->
+                        <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+                        <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a> -->
+                        <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <!-- Content Here -->
+                    <div id="getStarted" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Get Started</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Content Here -->
+
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">To be ble to create applications using Wikidata,
+                                we connected Wikidata with <a href="https://mavo.io/" target="_blank">Mavo</a>, an HTML templating langauge
+                                that allows users to author applications using HTML only, without writing any JavaScript code.
+                                In addition, we connected to <a href="https://shapir.org" target="_blank">Shapir</a>, a library that allows users to build Mavo applications that connects Wikidata with other websites (e.g. YouTube, NY Times, etc).
+
+                                In order to use Mavo, you first need to download or link to its JS and CSS files and include them in your page.
+                                If you have never done this before, you could put both in the <code>&lt;head></code> section. In addition, in the <code>&lt;body></code>
+                                you will need to define the Mavo application, like this:
+
+                                <!-- you will need to add the following attributes to the
+                                <code>mv-app</code> div: </br>
+                                (1) Mavo uses <code>mv-source</code> to specify the source of the data. So the First
+                                thing you need to specify is <code>mv-source="shapir"</code>. </br>
+                                (2) You will also need to specify the websites ot services that you are retrieving the
+                                data from, by using <code>mv-source-service</code></p> -->
+                            </br>
+
+                            <pre class="language-html"><code class="language-html">&lt;head>
+	&lt;script rel="stylesheet" src="https://get.mavo.io/mavo.css">&lt;/script>
+	&lt;script src="https://get.mavo.io/mavo.j">&lt;/script>
+	&lt;script type="module" src="https://shapir.org/mavo-shapir.js">&lt;/script>
+&lt;/head>
+&lt;body>
+	&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en">
+		&lt;!-- add your HTML code here -->
+	&lt;/div>
+&lt;/body></code></pre>
+
+
+                        </div>
+                    </div>
+                    <!--END get started-->
+
+                    <div id="get" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Read a Wikidata item</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Content Here -->
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you are intersted in
+                                getting an information about a specific Wikidata item (e.g. United States of America (Q30)), then you can specify that using
+                                <code>mv-source-id= "Q30"</code><p>
+
+                                    <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en" mv-source-id="Q30">
+    &lt;!-- add your HTML code here -->
+&lt;/div>
+</code></pre>
+                        </div>
+                        <!--END-->
+                    </div>
+                    <!-- end panel -->
+
+                    <div id="get" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Read a list of Wikidata items</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Content Here -->
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you are intersted in
+                                reading information about a list of Wikidata items (e.g. List of national memorials of the United States), then you can specify that using
+                                <code>mv-source-instance-of="National Memorial of the United States"</code>.<p>
+
+                                    <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
+    mv-source-instance-of="National Memorial of the United States">
+    &lt;!-- add your HTML code here -->
+&lt;/div>
+</code></pre>
+
+
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">You can actually use any Wikidata properties to query Wikidata.
+                                In the above example we queried Wikidata using the <a href="https://www.wikidata.org/wiki/Property:P31" target="_blank">instance of</a> property.
+                                You can use any Wikidata property using the <code>mv-source-*</code> attribute. For example, if you want to get a list of writers who were born in New York City,
+                                you can use <a href="https://www.wikidata.org/wiki/Property:P31" target="_blank">occupation</a>
+                                and <a href="https://www.wikidata.org/wiki/Property:P31" target="_blank">place of birth</a> in the following way:
+                                <code>mv-source-occupation= "writer"</code> and <code>mv-source-place-of-birth="New York City"</code>.<p>
+
+                                    <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
+    mv-source-occupation="writer" mv-source-place-of-birth="New York City">
+    &lt;!-- add your HTML code here -->
+&lt;/div>
+</code></pre>
+                        </div>
+                        <!--END-->
+                    </div>
+                    <!-- end panel -->
+
+
+                    <div id="search" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Search</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Content Here -->
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you are interested in
+                                searching a website, for example searching YouTube for videos, then you can use the
+                                following attributes<code>mv-app</code> div<p>
+                                    <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">In addition to
+                                        using <code>mv-source= "shapir"</code> and <code>mv-source-service</code>, you
+                                        will need to use <code>mv-source-search="keywords..."</code> to specify the term
+                                        or keywords you are searching for. <code>search</code> is not the only filter or
+                                        parameter you can use, some Web APIs offer more parameters (e.g. sort, location,
+                                        etc). These parameters are specified by each website, please go to the Explore
+                                        section and choose the website you are intersted in to know more about what
+                                        other parameters a given website supports.</p></br>
+
+                                    <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
+                                    <pre class="language-html"><code class="language-html">
+&lt;div mv-app="main" mv-source="shapir" mv-source-service="dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent" >&lt;/div>
+
+</code></pre>
+
+
+                        </div>
+                        <!--END-->
+                    </div>
+                    <!-- end panel -->
+
+                    <div id="params" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Specify Parameters</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Content Here -->
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">As mentioned in the
+                                previous section, whne you search a website, you can use a number of parameters
+                                specified by that website to filter the results. For example, you can search etsy using
+                                <code>mv-source-search</code>, and you can also filter the returned results by minimum
+                                price <code>mv-source-min_price</code> and <code>mv-source-max_price</code>. How did I
+                                know this? Go to <a href="#explore">Explore Sites</a> and choose <B>etsy</B>. You do the
+                                same whenever you want to know what sites accept as parameters.<p>
+                        </div>
+                    </div>
+                    <!--END get started-->
+
+                    <div id="numResults" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Specify Number of Results</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Content Here -->
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">To specify the number of
+                                results returned by a search, you add <code>mv-source-numResults</code> to the mv-app
+                                div.</p>
+                            </br>
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
+                            <pre class="language-html"><code class="language-html">
+&lt;div mv-app="main" mv-source="shapir" mv-source-service="dailymotion" mv-source-search="Taylor Swift" mv-source-numResults="50">&lt;/div>
+								</code></pre>
+                        </div>
+                    </div>
+                    <!--END get started-->
+
+                    <div id="searcgMulti" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Search Multiple Sites</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Content Here -->
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you would like to
+                                search multiple sites at the same time, you can add multiple sites seperated by comma in
+                                <code>mv-source-service</code> like the following example. Make sure to add sites that
+                                return similar data. Otherwise you will not be getting meaningful data.</p>
+                            </br>
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
+                            <pre class="language-html"><code class="language-html">
+&lt;div mv-app="main" mv-source="shapir" mv-source-service="youtube, dailymotion" mv-source-search="Taylor Swift" mv-source-sort="recent"  mv-source-order="date" >&lt;/div>
+								</code></pre>
+
+                        </div>
+                        <!--END-->
+                    </div>
+                    <!-- end panel -->
+
+                    <div id="example" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Examples</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Content Here -->
+                            <h4>Get an image information from Unsplash</h4>
+                            <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="unsplash" mv-source-type="ImageObject" mv-source-id="DmXLY8TK3OU">
+
+	&lt;h3 property="description">&lt;/h3>
+	&lt;p property="dateModified">&lt;/p>
+	&lt;p property="datePublished" >&lt;/p>
+	&lt;p property="contentRating" >&lt;/p>
+	&lt;p property="url">&lt;/p>
+	&lt;p property="width">&lt;/p>
+	&lt;p property="height">&lt;/p>
+	&lt;p property="contentUrl">&lt;/p>
+
+&lt;/div></code></pre>
+
+
+                            <h4>Search Etsy for products</h4>
+                            <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="etsy" mv-source-search="[search]">
+
+	&lt;form mv-action="set(search, searchInput)">
+		&lt;label>Search: &lt;input property="searchInput" />&lt;/label>
+		&lt;meta property="search" mv-default="Jacket">
+		&lt;button>Submit&lt;/button>
+	&lt;/form>
+
+	&lt;p property="name">&lt;/p>
+	&lt;p property="description">&lt;/p>
+	&lt;p property="weight">&lt;/p>
+	&lt;p property="width">&lt;/p>
+	&lt;p property="height">&lt;/p>
+	&lt;p property="productionDate">&lt;/p>
+	&lt;p property="url">&lt;/p>
+	&lt;p property="aggregateRating">&lt;/p>
+
+&lt;/div></code></pre>
+
+
+
+                            <h4>Search Yelp and Foursquare for seafood resturants and their reviews</h4>
+                            <p>Only show the ones that has rating > 4</p>
+                            <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="yelp, foursquare" mv-source-search="seafood">
+
+	&lt;div property="resturant" mv-multiple hidden="[aggregateRating > 4]">
+		&lt;h3 property="name">&lt;/h3>
+		&lt;p property="aggregateRating">&lt;/p>
+		&lt;p property="priceRange" >&lt;/p>
+		&lt;p property="longitude" >&lt;/p>
+		&lt;p property="latitude">&lt;/p>
+		&lt;p property="siteName">&lt;/p> &lt;!-- "siteName" property is added to all the site to show which data came from which site -->
+
+		&lt;div property="review" mv-multiple>
+			&lt;p property="text">&lt;/p>
+			&lt;p property="dateCreated">&lt;/p>
+			&lt;p property="reviewRating" >&lt;/p>
+		&lt;/div>
+	&lt;/div>
+
+&lt;/div>
+</code></pre>
+
+
+                        </div>
+                    </div>
+                    <!--END get started-->
+
+                    <div id="explore" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Explore Sites</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="input-group mb-4">
+                                <label style="padding-top:7px; font-size: 1.3em;">Choose the name of the
+                                    website:</label>
+                                <div class="input-group col-lg-4">
+                                    <select id="sites_mavo" class="form-control selectpicker col-lg-6" data-size="10"
+                                        data-live-search="true" data-style="btn-white" style="overflow:scroll;"
+                                        onchange="abstractionSiteHasBeenChosenMavoSingle(this)">
+                                        <option selected>Choose Site</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="mavo_attributes" style="display:none">
+                                <h5>Search</h5>
+                                <pre id="preMavo" style="display: inline;"
+                                    class="language-html"><code id="mavoAtt" class="language-html"></code></pre>
+                            </div>
+                            </br>
+                            <div id="mavo_attributes_get" style="display:none">
+                                <h5>Get objects by their ID</h5>
+                                <pre id="preMavo2" style="display: inline;"
+                                    class="language-html"><code id="mavoAttGet" class="language-html"></code></pre>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--END get started-->
+                </div>
+                <!-- end #content -->
+
+                <!-- begin theme-panel -->
+                <div class="theme-panel theme-panel-lg">
+                    <div class="theme-panel-content">
+                        <h5>App Settings</h5>
+                        <ul class="theme-list clearfix">
+                            <li><a href="javascript:;" class="bg-red" data-theme="red"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/red.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Red">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-pink" data-theme="pink"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/pink.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Pink">&nbsp;</a></li>
+                            <li class="active"><a href="javascript:;" class="bg-orange" data-theme="orange"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/orange.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Orange">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-yellow" data-theme="yellow"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/yellow.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Yellow">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-lime" data-theme="lime"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/lime.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Lime">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-green" data-theme="green"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/green.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Green">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-teal" data-theme="default" data-theme-file=""
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Default">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-aqua" data-theme="aqua"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/aqua.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Aqua">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-blue" data-theme="blue"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/blue.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Blue">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-purple" data-theme="purple"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/purple.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Purple">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-indigo" data-theme="indigo"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/indigo.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Indigo">&nbsp;</a></li>
+                            <li><a href="javascript:;" class="bg-black" data-theme="black"
+                                    data-theme-file="https://shapir.org/assets/css/default/theme/black.min.css"
+                                    data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
+                                    data-container="body" data-title="Black">&nbsp;</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end theme-panel -->
+
+                <!-- begin scroll to top btn -->
+                <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade"
+                    data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+                <!-- end scroll to top btn -->
+            </div>
+            <!-- end page container -->
+
+            <script src="https://shapir.org/assets/js/prism-coy.js"></script>
+            <script src="https://shapir.org/assets/js/prism-json.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+            <script src="/assets/js/app.min.js"></script>
+            <script src="https://shapir.org/assets/plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
+            <script src="https://shapir.org/assets/plugins/moment/min/moment.min.js"></script>
+            <script
+                src="https://shapir.org/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+            <script src="https://shapir.org/assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+            <script
+                src="https://shapir.org/assets/plugins/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+            <script src="https://shapir.org/assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js"></script>
+            <script
+                src="https://shapir.org/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+            <script
+                src="https://shapir.org/assets/plugins/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
+            <script
+                src="https://shapir.org/assets/plugins/@danielfarrell/bootstrap-combobox/js/bootstrap-combobox.js"></script>
+            <script src="https://shapir.org/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+            <script src="https://shapir.org/assets/plugins/tag-it/js/tag-it.min.js"></script>
+            <script src="https://shapir.org/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+            <script src="https://shapir.org/assets/plugins/select2/dist/js/select2.min.js"></script>
+            <script
+                src="https://shapir.org/assets/plugins/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+            <script
+                src="https://shapir.org/assets/plugins/bootstrap-show-password/dist/bootstrap-show-password.js"></script>
+            <script
+                src="https://shapir.org/assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
+            <script
+                src="https://shapir.org/assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js"></script>
+            <script src="https://shapir.org/assets/plugins/clipboard/dist/clipboard.min.js"></script>
+            <script src="https://shapir.org/assets/plugins/highlight.js/highlight.min.js"></script>
+            <script src="http://culmat.github.io/jsTreeTable/treeTable.js"></script>
+            <link href="https://shapir.org/assets/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+            <script src="https://shapir.org/assets/js/jquery.treetable.js"></script>
+            <script src="https://shapir.org/assets/js/shapir_index.js"></script>
+            <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
+
+</body>
+
+</html>

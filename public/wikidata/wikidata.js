@@ -1,4 +1,4 @@
-let lang = "en", externalIds = {}, sites = [], apis, items = [], searchTerm = "", query = "", numItems = 50, tempObjects = {}, firstGetObject = true;
+let lang = "en", externalIds = {}, sites = [], apis, searchTerm = "", numItems = 50, tempObjects = {}, firstGetObject = true;
 
 
 export async function wikidata(itemID, lang) {
@@ -35,11 +35,11 @@ export async function wikidata(itemID, lang) {
         return promise;
     }
 
-    function getProxy(v){
+    function getProxy(v) {
         let basicId = v.id;
         let id = basicId.split("/").reverse()[0];
 
-        let objTemp= {}
+        let objTemp = {}
         objTemp["label"] = v.value;
 
         Object.defineProperty(objTemp, "properties", {
@@ -56,10 +56,10 @@ export async function wikidata(itemID, lang) {
                     if (typeof property != 'symbol') {
                         return Promise.resolve(objTemp["properties"])
                             .then(function (value) {
-                                if(value[property] == "SyntaxError: The string did not match the expected pattern."){
+                                if (value[property] == "SyntaxError: The string did not match the expected pattern.") {
                                     return "";
                                 }
-                                else{
+                                else {
                                     return value[property];
                                 }
                             })
@@ -137,7 +137,7 @@ export async function wikidata(itemID, lang) {
                             let idQ = value[0].id;
                             if (idQ.includes("http://www.wikidata.org/entity/Q")) {
                                 objItem[key] = [];
-                                for (let i = 0; i < value.length; ++i){
+                                for (let i = 0; i < value.length; ++i) {
                                     objItem[key].push(getProxy(value[i]));
                                 }
 
@@ -177,20 +177,17 @@ export async function wikidata(itemID, lang) {
                             let pLabel = label.toLowerCase();
                             if (pLabel.includes(currentSite)) {
                                 let pr = modifiedLabel.split('ID').join('');
-                                pr = pr.charAt(0).toLowerCase() + pr.slice(1);
+                                // pr = pr.charAt(0).toLowerCase() + pr.slice(1);
 
                                 Object.defineProperty(objItem, pr, {
                                     configurable: true,
                                     get: function () {
-
                                         let similarity = 0, tempSimialrity, apiEndpoint, mainType, button, code, url, title, curValue;
-
                                         //get the type in this with this endpoint
                                         return new Promise((resolve, reject) => {
                                             fetch('https://superapi-52bc2.firebaseio.com/abstractions/' + currentSite + '/objects.json')
                                                 .then(response => { return response.json() })
                                                 .then(objects => {
-                                                    // console.log("VALUE: ", value)
                                                     if (Array.isArray(value)) {
                                                         curValue = value[0];
                                                     } else {
@@ -257,71 +254,70 @@ export function uri(id, lang) {
         })
 
     function validURL(str) {
-        var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-            '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-            '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-            '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+        var pattern = new RegExp('^(https?:\\/\\/)?' +
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
+            '((\\d{1,3}\\.){3}\\d{1,3}))' +
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
+            '(\\?[;&a-z\\d%_.~+=-]*)?' +
+            '(\\#[-a-z\\d_]*)?$', 'i');
         return !!pattern.test(str);
     }
 }
 
 async function getProperties(e) {
     let properties = [], propertyObj = {};
-    if(e.options){
-    let optionsLen = Object.keys(e.options).length;
+    if (e.options) {
+        let optionsLen = Object.keys(e.options).length;
 
-    for (const [key, value] of Object.entries(e.options)) {
-        --optionsLen;
-        if (key != "service" && key != "format" && key != "mavo") {
-            let property = key.split("-").join(" ");
-            if (key == "search") {
-                searchTerm = value;
-            } else if (key == "numberofitems") {
-                numItems = value;
-            } else if (key == "language") {
-                lang = value;
-            } else {
-                // if (key != "search" && key != "language") {
-                var prom = fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property")
-                    .then(response => { return response.json() })
-                    .then(props => {
-                        var listProps = props.search
-                        for (var i = 0; i < listProps.length; ++i) {
-                            if (listProps[i].label == property) {
-                                // if (listProps[i].match.text == property) {
-                                propertyObj = {
-                                    id: listProps[i].id,
-                                    value: value
-                                };
-                                return propertyObj
+        for (const [key, value] of Object.entries(e.options)) {
+            --optionsLen;
+            if (key != "service" && key != "format" && key != "mavo") {
+                let property = key.split("-").join(" "); //key.replace(/([a-z])([A-Z])/g, '$1 $2');
+                if (key == "search") {
+                    searchTerm = value;
+                } else if (key == "numberofitems") {
+                    numItems = value;
+                } else if (key == "language") {
+                    lang = value;
+                } else {
+                    // if (key != "search" && key != "language") {
+                    var prom = fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property")
+                        .then(response => { return response.json() })
+                        .then(props => {
+                            var listProps = props.search
+                            for (var i = 0; i < listProps.length; ++i) {
+                                if (listProps[i].label == property) {
+                                    // if (listProps[i].match.text == property) {
+                                    propertyObj = {
+                                        id: listProps[i].id,
+                                        value: value
+                                    };
+                                    return propertyObj
+                                }
                             }
-                        }
-                    });
-                properties.push(prom);
+                        });
+                    properties.push(prom);
+                }
             }
+
+            if (optionsLen - 1 == 0) {
+                return Promise.all(properties);
+            }
+
         }
 
-        if (optionsLen - 1 == 0) {
-            return Promise.all(properties);
-        }
-
+    } else {
+        numItems = 1;
+        return e;
     }
-
-}else{
-    numItems=1;
-    return e;
-}
 
 }
 
 
 export async function queryWikidata(e) {
-
+    let query = "", items=[];
     return getProperties(e)
         .then(props => {
-            console.log("properties: ", props)
             query += 'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';
             // //if search property exists, add the below line to the query
             if (searchTerm != "") {
