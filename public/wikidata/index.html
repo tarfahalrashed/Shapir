@@ -10,22 +10,25 @@
 	<link href="../assets/js/prism-okaidia.css" rel="stylesheet" />
 	<link href="../assets/css/wixibit-style.css" rel="stylesheet" />
 	<link href="../assets/js/prism-coy.css" rel="stylesheet" />
-	<script src="../assets/js/prism-coy.js"></script>
 
 	<style>
 		pre[class*="language-"]>code {
 			border-left: 0px !important;
 		}
-		.container{
-			max-width: 1500px !important;
+
+		.container {
+			max-width: 1300px !important;
 		}
-		body{
+
+		body {
 			font-size: 18px !important;
 		}
-		.btn{
+
+		.btn {
 			font-size: 18px !important;
 		}
-		.code{
+
+		.code {
 			font-size: 12px !important;
 		}
 	</style>
@@ -34,43 +37,6 @@
 <body data-spy="scroll" data-target="#header" data-offset="51" onload="init()">
 	<!-- begin #page-container -->
 	<div id="page-container" class="fade">
-		<!-- begin #header -->
-		<!-- <div id="header" class="header navbar navbar-default navbar-fixed-top navbar-expand-lg"> -->
-
-			<!-- <div id="header" class="header navbar navbar-transparent navbar-fixed-top navbar-expand-lg"> -->
-			<!-- begin container -->
-			<!-- <div class="container"> -->
-				<!-- begin navbar-brand -->
-				<!-- <a href="index.html" class="navbar-brand">
-					<span class="brand-text">sh<span class="text-primary">api</span>r</span>
-				</a> -->
-				<!-- end navbar-brand -->
-				<!-- begin navbar-toggle -->
-				<!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#header-navbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button> -->
-				<!-- end navbar-header -->
-				<!-- begin navbar-collapse -->
-				<!-- <div class="collapse navbar-collapse" id="header-navbar" style="color:black !important">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target"
-								data-scroll-target="#home">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">About</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="shapirui.html">ShapirUI</a></li>
-						<li class="nav-item"><a class="nav-link" href="shapirjs.html">ShapirJS</a></li>
-						<li class="nav-item"><a class="nav-link" href="mavo-shapir.html">Mavo-Shapir</a></li>
-
-					</ul>
-				</div> -->
-				<!-- end navbar-collapse -->
-			<!-- </div> -->
-			<!-- end container -->
-		<!-- </div> -->
-		<!-- end #header -->
 
 		<!-- begin #home -->
 		<div id="home" class="content has-bg home" style="height: 560px;">
@@ -84,32 +50,22 @@
 			<!-- begin container -->
 			<div class="container home-content" style="text-align:left">
 
-				<h1><img src="../assets/img/bg/wik2.png" style="width:310px"/></h1>
-				<!-- <h1 style="color:black">Wikxhibit</h1> -->
+				<h1><img src="../assets/img/bg/wik2.png" style="width:310px" /></h1>
 				<h3 style="color:black">
 					Create Interactive Presentations
 				</h3>
 				<p style="font-size: 1.15em; color:black">
 					Author interactive applications of Wikidata and other sources of data on the web
-					<!-- Standardizing and Democratizing Access to Web APIs -->
 				</p>
-				<a href="wikidoc.html" class="btn btn-theme btn-main">How to use</a>
+				<a href="wikidoc.html" target="_blank" class="btn btn-theme btn-main">How to use</a>
 				<a href="wikbuild.html" target="_blank" class="btn btn-theme btn-outline-dark">Create</a><br />
 
 			</div>
-
-			<!-- <div style="text-align:right">
-				<img src="../assets/img/bg/wikapi.png" style="width:30%;"/>
-			</div> -->
-
 			<!-- end container -->
 		</div>
 		<!-- end #home -->
 
 		<div class="contentMid">
-			<!-- <div style="text-align:right">
-				<img src="../assets/img/bg/wikapi.png" style="width:30%;"/>
-			</div> -->
 
 			<!-- begin #demos -->
 			<div id="demos" class="content" data-scrollview="true">
@@ -129,8 +85,7 @@
 								</div>
 								<div class="card-body p-4">
 									<h3 class="h4"><strong>National Memorials</strong></h3>
-									<!-- <p style="margin-bottom: 0.5rem;">List of national memorials of the United States</p> -->
-									<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
+									<a href="https://w.wiki/4FeD" target="_blank"
 										class="btn btn-default btn-xs">Wikidata</a>
 									<div>
 										<a href="" id="memorials" class="btn btn-info"
@@ -155,7 +110,6 @@
 
 								<div class="card-body p-4">
 									<h3 class="h4"><strong>Movie Page</strong></h3>
-									<!-- <p style="margin-bottom: 0.5rem;">Movie page that works with any movie on Wikidata</p> -->
 									<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
 										class="btn btn-default btn-xs">Wikidata</a>
 									<a href="https://www.imdb.com/title/tt1517451/" target="_blank"
@@ -185,15 +139,13 @@
 							<div class="card d-block  box-shadow-hover pointer">
 								<div class="h-75p align-items-center d-flex justify-content-center">
 									<a href="artist" target="_blank">
-										<img class="img-fluid w-xs-120p" src="../assets/img/bg/artist.png"
-											>
+										<img class="img-fluid w-xs-120p" src="../assets/img/bg/artist.png">
 									</a>
 								</div>
 
 								<div class="card-body p-4">
 									<h3 class="h4"><strong>Artist Page</strong></h3>
 									<!-- <p style="margin-bottom: 0.5rem;"></p> -->
-
 									<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
 										class="btn btn-default btn-xs">Wikidata</a>
 									<a href="https://www.imdb.com/title/tt1517451/" target="_blank"
@@ -227,9 +179,8 @@
 								</div>
 								<div class="card-body p-4">
 									<h3 class="h4"><strong>Paintings</strong></h3>
-									<!-- <p style="margin-bottom: 0.5rem;">List of painter's paintings</p> -->
-									<a href="https://query.wikidata.org/#%23Paintings%20by%20Gustav%20Klimt%0A%23defaultView%3AImageGrid%0ASELECT%20%2a%0AWHERE%0A%7B%0A%20%20%3Fitem%20wdt%3AP31%20wd%3AQ3305213%20.%0A%20%20%3Fitem%20wdt%3AP170%20wd%3AQ34661%20.%0A%20%20%3Fitem%20wdt%3AP18%20%3Fpic%20.%0A%7D"
-										target="_blank" class="btn btn-default btn-xs">Wikidata</a>
+									<a href="https://w.wiki/4FeA" target="_blank"
+										class="btn btn-default btn-xs">Wikidata</a>
 									<div>
 										<a href="" id="paintings" class="btn btn-info"
 											style="margin-top: 8px; padding: 3px 3px" download><i
@@ -249,15 +200,13 @@
 							<div class="card d-block  box-shadow-hover pointer">
 								<div class="h-75p align-items-center d-flex justify-content-center">
 									<a href="books" target="_blank">
-										<img class="img-fluid w-xs-120p" src="../assets/img/bg/books.png" >
+										<img class="img-fluid w-xs-120p" src="../assets/img/bg/books.png">
 									</a>
 								</div>
 
 								<div class="card-body p-4">
 									<h3 class="h4"><strong>Books</strong></h3>
-									<!-- <p style="margin-bottom: 0.5rem;"></p> -->
-
-									<a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
+									<a href="https://w.wiki/4FeA" target="_blank"
 										class="btn btn-default btn-xs">Wikidata</a>
 									<div>
 										<a href="" id="books" class="btn btn-info"
@@ -283,16 +232,15 @@
 
 								<div class="card-body p-4">
 									<h3 class="h4"><strong>List of countries by continent</strong></h3>
-									<!-- <p style="margin-bottom: 0.5rem;"></p> -->
-									<!-- <a href="https://www.wikidata.org/wiki/Q3286391" target="_blank"
-										class="btn btn-default btn-xs">Wikidata</a> -->
+									<a href="https://w.wiki/4Fdg" target="_blank"
+										class="btn btn-default btn-xs">Wikidata</a>
 									<div>
 										<a href="" id="countries" class="btn btn-info"
 											style="margin-top: 8px; padding: 3px 3px" download><i
 												class="fa fa-download"></i> Download</a>
-										<a href="#modal-html" id="countries_html" href="javascript:;" data-toggle="modal"
-											style="margin-top: 8px; padding: 3px 3px" class="btn btn-pink"><i
-												class="fa fa-code"></i>HTML</a>
+										<a href="#modal-html" id="countries_html" href="javascript:;"
+											data-toggle="modal" style="margin-top: 8px; padding: 3px 3px"
+											class="btn btn-pink"><i class="fa fa-code"></i>HTML</a>
 									</div>
 								</div>
 							</div>
@@ -307,7 +255,6 @@
 			<!-- begin #example -->
 			<div id="example" class="content" data-scrollview="true">
 				<div class="container">
-					<!-- style="max-width: 1300px" -->
 					<h2 class="content-title">How it works</h2>
 
 					<div class="row">
@@ -323,36 +270,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- end #example -->
-
-			<!-- begin #example -->
-			<!-- <div id="example" class="content" data-scrollview="true">
-			<div class="container">
-				<h2 class="content-title">About</h2>
-
-				<div class="row">
-
-					<div class="col-6">
-						<img src="../assets/img/bg/wikapi.png" style="width:inherit" />
-					</div>
-
-					<div class="col-6">
-
-						<p style="font-size: 1.2em;">
-							Wikidata is a free and open knowledge base that can be read and edited by both humans and
-							machines.
-							Wikidata acts as central storage for the structured data of its Wikimedia sister projects
-							including Wikipedia, Wikivoyage, Wiktionary, Wikisource, and others.
-
-							Wikidata also provides support to many other sites and services beyond just Wikimedia
-							projects! The content of Wikidata is available under a free license, exported using standard
-							formats, and can be interlinked to other open data sets on the linked data web.
-						</p>
-					</div>
-
-				</div>
-			</div>
-		</div> -->
 			<!-- end #example -->
 
 			<!-- begin #contact -->
@@ -374,7 +291,8 @@
 
 					<div class="row" style="margin-left:180px; margin-right:180px ">
 						<div class="col">
-							<img src="../assets/img/doc/tarfah.png" width="140px" height="140px" alt="Image" /></br></br>
+							<img src="../assets/img/doc/tarfah.png" width="140px" height="140px"
+								alt="Image" /></br></br>
 							<h5 style="font-size: 1.3em; margin-bottom: 5px;">Tarfah Alrashed</h5>
 							<a href="mailto:tarfah@mit.edu">tarfah@mit.edu</a>
 						</div>
@@ -397,8 +315,6 @@
 
 			</div>
 			<!-- end #contact -->
-
-
 
 		</div>
 
@@ -486,10 +402,7 @@
 		aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content" style="width:1000px; font-size: 12px;">
-				<!-- <div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel"></h4>
-				</div> -->
-				<div class="modal-body" >
+				<div class="modal-body">
 					<pre class="language-html"><code id="mavo" class="language-html"></code></pre>
 				</div>
 			</div>
@@ -501,6 +414,7 @@
 	<script src="../assets/js/prism-okaidia.js"></script>
 	<script src="../assets/js/jszip.js"></script>
 	<script src="../assets/js/FileSaver.js"></script>
+	<script src="../assets/js/prism-coy.js"></script>
 
 	<script>
 
@@ -545,7 +459,7 @@
 		document.getElementById("movie").addEventListener("click", function () { download("movie") }, false);
 		document.getElementById("artist").addEventListener("click", function () { download("artist") }, false);
 		document.getElementById("paintings").addEventListener("click", function () { download("paintings") }, false);
-		document.getElementById("countries").addEventListener("click", function() { download("countries") }, false);
+		document.getElementById("countries").addEventListener("click", function () { download("countries") }, false);
 
 		function init() {
 			download("memorials");
@@ -569,12 +483,12 @@
 				})
 		}
 
-		document.getElementById("memorials_html").addEventListener("click", function () {readHTMLFile("memorials")}, false);
-		document.getElementById("books_html").addEventListener("click", function () {readHTMLFile("books")}, false);
-		document.getElementById("movie_html").addEventListener("click", function () {readHTMLFile("movie")}, false);
-		document.getElementById("artist_html").addEventListener("click", function () {readHTMLFile("artist")}, false);
-		document.getElementById("paintings_html").addEventListener("click", function () {readHTMLFile("paintings")}, false);
-		document.getElementById("countries_html").addEventListener("click", function () {readHTMLFile("countries")}, false);
+		document.getElementById("memorials_html").addEventListener("click", function () { readHTMLFile("memorials") }, false);
+		document.getElementById("books_html").addEventListener("click", function () { readHTMLFile("books") }, false);
+		document.getElementById("movie_html").addEventListener("click", function () { readHTMLFile("movie") }, false);
+		document.getElementById("artist_html").addEventListener("click", function () { readHTMLFile("artist") }, false);
+		document.getElementById("paintings_html").addEventListener("click", function () { readHTMLFile("paintings") }, false);
+		document.getElementById("countries_html").addEventListener("click", function () { readHTMLFile("countries") }, false);
 
 	</script>
 

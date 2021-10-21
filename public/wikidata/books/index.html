@@ -15,9 +15,9 @@
       <p>Romance novels by Jane Austen including genres and date of publication</p>
       <hr>
 
-      <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-author="Jane Austen" mv-source-genre="romance novel" mv-source-instance-of="literary work" mv-source-language="en" mv-source-numberOfItems=10>
+      <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-author="Jane Austen"
+         mv-source-genre="romance novel" mv-source-instance-of="literary work" mv-source-language="en" mv-source-numberOfItems=10>
 
-        <!-- hidden="[image = '']" -->
         <div property="items" mv-multiple>
           <a href="[itemURL]" target="_blank" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
             <img property="image" width="10%">
@@ -25,19 +25,9 @@
                 <h3 property="label"></h3>
                 <p property="description"></p>
                 <small><label class="form-label">Publication date: <span class="text-muted">[date(publicationDate)]</span></label></small>
-                <!-- </br>
-                <small><label for="gen" class="form-label">Genre:
-                  <div value="gen" property="genre" mv-multiple>
-                    <span property="label"></span>
-                  </div>
-                </label></small> -->
                 </br>
                 <small><label class="form-label">First line: <span property="firstLine"></span></label></small>
                 <small><label class="form-label">Last line: <span property="lastLine"></span></label></small>
-
-                <!-- <small><label class="form-label">Follows: <span class="text-muted" property="follows"></span></label></small>
-                <small><label class="form-label">Followed by: <span class="text-muted" property="followedBy"></span></label></small> -->
-
             </div>
           </a>
         </div>
