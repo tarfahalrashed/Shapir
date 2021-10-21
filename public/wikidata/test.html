@@ -13,40 +13,22 @@
     <!-- <script src="FileSaver.js"></script> -->
 </head>
 
-<body class="act-show cont-artists snarly" style="background-color: #f7f7f7 !important" >
+<body>
 
     <!-- <a href="" download>download</a> -->
+    <!-- <div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q4985" mv-source-language="en"> -->
+    <div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
+      mv-source-occupation="writer" mv-source-place-of-birth="New York City" mv-source-numberOfItems="10">
 
-    <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-    mv-source-id="Q3286391">
-
-    <h3 property="label"></h3>
-    <p property="description"></p>
-
-    <!-- <div property="filmEditor">
-        <p property="label"></p>
-        <p property="description"></p>
-        <div property="occupation">
-            <p property="label"></p>
-        </div>
-    </div> -->
-
-    <div property="director">
-        <p property="label"></p>
-        <p property="description"></p>
-    </div>
-    <hr>
-
-
-
-
-    <div property="castMember" mv-multiple>
+      <div proeprty="items" mv-multiple>
+        <img property="image" width="5%"/>
         <h1 property="label"></h1>
         <p property="description"></p>
+        <time property="dateOfBirth"></time>
+        <hr>
+      </div>
+
     </div>
-
-</div>
-
 
     <script>
 
