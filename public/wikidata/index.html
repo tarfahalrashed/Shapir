@@ -31,6 +31,7 @@
 		.code {
 			font-size: 12px !important;
 		}
+
 	</style>
 </head>
 
@@ -57,8 +58,8 @@
 				<p style="font-size: 1.15em; color:black">
 					Author interactive applications of Wikidata and other sources of data on the web
 				</p>
-				<a href="wikidoc.html" target="_blank" class="btn btn-theme btn-main">How to use</a>
-				<a href="wikbuild.html" target="_blank" class="btn btn-theme btn-outline-dark">Create</a><br />
+				<a href="doc.html" target="_blank" class="btn btn-theme btn-main">How to use</a>
+				<a href="create.html" target="_blank" class="btn btn-theme btn-outline-dark">Create</a><br />
 
 			</div>
 			<!-- end container -->
@@ -392,22 +393,26 @@
 							data-title="Black">&nbsp;</a></li>
 				</ul>
 			</div>
+
 		</div>
 		<!-- end theme-panel -->
+
+
+		<div class="modal fade bs-example-modal-lg" id="modal-html">
+			<div class="modal-dialog">
+				<div class="modal-content" style="width:1000px; font-size: 12px;">
+					<div class="modal-body">
+						<pre class="language-html"><code id="mavo" class="language-html"></code></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<!-- end #page-container -->
 
 
-	<div class="modal fade bs-example-modal-lg" id="modal-html" tabindex="-1" role="dialog"
-		aria-labelledby="myLargeModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content" style="width:1000px; font-size: 12px;">
-				<div class="modal-body">
-					<pre class="language-html"><code id="mavo" class="language-html"></code></pre>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 	<script src="../assets/js/home/app.min.js"></script>
 	<script src="https://unpkg.com/ml5@0.1.1/dist/ml5.min.js"></script>
