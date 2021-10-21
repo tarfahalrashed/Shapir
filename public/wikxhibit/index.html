@@ -80,7 +80,7 @@
 							<div class="card d-block  box-shadow-hover pointer">
 
 								<div class="h-75p align-items-center d-flex justify-content-center">
-									<a href="wikidata/memorials" target="_blank">
+									<a href="wikxhibit/memorials" target="_blank">
 										<img class="img-fluid w-xs-120p" src="../assets/img/bg/memorials.png" alt="">
 									</a>
 								</div>
@@ -104,7 +104,7 @@
 							<div class="card d-block  box-shadow-hover pointer">
 
 								<div class="h-75p align-items-center d-flex justify-content-center">
-									<a href="wikidata/movie" target="_blank">
+									<a href="wikxhibit/movie" target="_blank">
 										<img class="img-fluid w-xs-120p" src="../assets/img/bg/movie.png" alt="">
 									</a>
 								</div>
@@ -139,7 +139,7 @@
 						<div class="col-md-4 col-sm-6 col-xl-4 my-3">
 							<div class="card d-block  box-shadow-hover pointer">
 								<div class="h-75p align-items-center d-flex justify-content-center">
-									<a href="wikidata/artist" target="_blank">
+									<a href="wikxhibit/artist" target="_blank">
 										<img class="img-fluid w-xs-120p" src="../assets/img/bg/artist.png">
 									</a>
 								</div>
@@ -174,7 +174,7 @@
 							<div class="card d-block  box-shadow-hover pointer">
 
 								<div class="h-75p align-items-center d-flex justify-content-center">
-									<a href="wikidata/paintings" target="_blank">
+									<a href="wikxhibit/paintings" target="_blank">
 										<img class="img-fluid w-xs-120p" src="../assets/img/bg/paintings.png" alt="">
 									</a>
 								</div>
@@ -200,7 +200,7 @@
 						<div class="col-md-4 col-sm-6 col-xl-4 my-3">
 							<div class="card d-block  box-shadow-hover pointer">
 								<div class="h-75p align-items-center d-flex justify-content-center">
-									<a href="wikidata/books" target="_blank">
+									<a href="wikxhibit/books" target="_blank">
 										<img class="img-fluid w-xs-120p" src="../assets/img/bg/books.png">
 									</a>
 								</div>
@@ -226,7 +226,7 @@
 						<div class="col-md-4 col-sm-6 col-xl-4 my-3">
 							<div class="card d-block  box-shadow-hover pointer">
 								<div class="h-75p align-items-center d-flex justify-content-center">
-									<a href="wikidata/countries" target="_blank">
+									<a href="wikxhibit/countries" target="_blank">
 										<img class="img-fluid w-xs-120p" src="../assets/img/bg/countries.png">
 									</a>
 								</div>
@@ -428,7 +428,7 @@
 			var zip = new JSZip();
 			// var a = document.querySelector("a");
 			var a = document.getElementById(id);
-			var urls = ["wikidata/" + id + "/index.html", "wikidata/" + id + "/style.css"];
+			var urls = ["wikxhibit/" + id + "/index.html", "wikxhibit/" + id + "/style.css"];
 
 			function request(url) {
 				return new Promise(function (resolve) {
@@ -476,7 +476,7 @@
 
 
 		function readHTMLFile(id) {
-			fetch("wikidata/" + id + "/index.html")
+			fetch("wikxhibit/" + id + "/index.html")
 				.then(function (response) {
 					return response.text();
 				})

@@ -2,27 +2,50 @@
   "database": {
     "rules": "database.rules.json"
   },
-  "hosting": {
-    "target":"shapir",
-    "public": "public",
-    "rewrites": [{
-      "source": "**",
-      "function": "app"
-    }],
-    "cleanUrls": true,
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "headers": [{
-      "source" : "**",
-      "headers" : [ {
-        "key" : "Access-Control-Allow-Origin",
-        "value" : "*"
+  "hosting": [
+    {
+      "target":"wikxhibit",
+      "public": "public/wikxhibit",
+      "rewrites": [{
+        "source": "**",
+        "destination":"/index.html"
+      }],
+      "cleanUrls": true,
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "headers": [{
+        "source" : "**",
+        "headers" : [ {
+          "key" : "Access-Control-Allow-Origin",
+          "value" : "*"
+        }]
       }]
-    }]
-  },
+    },{
+      "target":"shapir",
+      "public": "public",
+      "rewrites": [{
+        "source": "**",
+        "function": "app"
+      }],
+      "cleanUrls": true,
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "headers": [{
+        "source" : "**",
+        "headers" : [ {
+          "key" : "Access-Control-Allow-Origin",
+          "value" : "*"
+        }]
+      }]
+    }
+  ]
+ ,
   "emulators": {
     "functions": {
       "port": 5001
