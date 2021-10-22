@@ -24,6 +24,7 @@ body {
     margin-top: 8px;
     padding: 3px 3px;
     color: white;
+    font-weight: bold;
 }
 
 .btn-b:hover {
@@ -36,6 +37,7 @@ body {
     margin-top: 8px;
     padding: 3px 3px;
     color: white;
+    font-weight: bold;
 }
 
 .btn-r:hover {
