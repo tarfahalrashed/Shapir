@@ -242,21 +242,12 @@
                                     </div>
                                 </div>
 
-                                <!-- property="movie" mv-value="themoviedb.Movie('332562-a-star-is-born')" -->
-                                <div class="grid-container"
-                                    style="display: grid; grid-template-columns: auto auto auto; grid-gap: 0.5em; margin: 1em 0;">
-                                    <img src="https://image.tmdb.org/t/p/original/jiegCknD99KbzQujazRN0muSipM.jpg"
-                                        width="300" />
-                                    <img src="https://image.tmdb.org/t/p/original/19XM1EQ5HAwH7aeLuVNRKbYBBae.jpg"
-                                        width="300" />
-                                    <img src="https://image.tmdb.org/t/p/original/1JAqDVizrLHJSldxtykIRL5LD1p.jpg"
-                                        width="300" />
-                                    <img src="https://image.tmdb.org/t/p/original/vZDCSXwcKPWcrhXDia8thmaJD1X.jpg"
-                                        width="300" />
-                                    <img src="https://image.tmdb.org/t/p/original/eb0CDneQPZiAVFdujnIhc6tjmSe.jpg"
-                                        width="300" />
-                                    <img src="https://image.tmdb.org/t/p/original/oGUdhZXxATuZOIKksIp6LN3pCYv.jpg"
-                                        width="300" />
+                                <div property="movie" mv-value="themoviedb.Movie([TMDbMovieID])">
+                                    <div class="grid-container" style="display: grid; grid-template-columns: auto auto auto; grid-gap: 0.5em; margin: 1em 0;">
+                                        <div class="grid-item" property="image" mv-multiple>
+                                          <img property="url" src="https://image.tmdb.org/t/p/original/[url]" width="300"/>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </section>
