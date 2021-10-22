@@ -2,9 +2,30 @@
   "database": {
     "rules": "database.rules.json"
   },
-  "hosting":{
+  "hosting": [
+    {
+      "target":"wikxhibit",
+      "public": "wikxhibit",
+      "rewrites": [{
+        "source": "**",
+        "destination":"/index.html"
+      }],
+      "cleanUrls": true,
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "headers": [{
+        "source" : "**",
+        "headers" : [ {
+          "key" : "Access-Control-Allow-Origin",
+          "value" : "*"
+        }]
+      }]
+    },{
       "target":"shapir",
-      "public": "public",
+      "public": "shapir",
       "rewrites": [{
         "source": "**",
         "function": "app"
@@ -22,7 +43,9 @@
           "value" : "*"
         }]
       }]
-    },
+    }
+  ]
+ ,
   "emulators": {
     "functions": {
       "port": 5001

@@ -1,14 +1,17 @@
 {
+  "projects": {
+    "default": "superapi-52bc2"
+  },
   "targets": {
     "superapi-52bc2": {
       "hosting": {
         "shapir": [
           "shapir-domain"
+        ],
+        "wikxhibit": [
+          "wikxhibit"
         ]
       }
     }
-  },
-  "projects": {
-    "default": "superapi-52bc2"
   }
 }

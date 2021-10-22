@@ -1,0 +1,52 @@
+{
+  "_from": "@danielfarrell/bootstrap-combobox@^1.1.8",
+  "_id": "@danielfarrell/bootstrap-combobox@1.1.8",
+  "_inBundle": false,
+  "_integrity": "sha1-SJ0KnttaL8nGWXHUQiKU56uTIOw=",
+  "_location": "/@danielfarrell/bootstrap-combobox",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@danielfarrell/bootstrap-combobox@^1.1.8",
+    "name": "@danielfarrell/bootstrap-combobox",
+    "escapedName": "@danielfarrell%2fbootstrap-combobox",
+    "scope": "@danielfarrell",
+    "rawSpec": "^1.1.8",
+    "saveSpec": null,
+    "fetchSpec": "^1.1.8"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@danielfarrell/bootstrap-combobox/-/bootstrap-combobox-1.1.8.tgz",
+  "_shasum": "489d0a9edb5a2fc9c65971d4422294e7ab9320ec",
+  "_spec": "@danielfarrell/bootstrap-combobox@^1.1.8",
+  "_where": "/Users/ngunguoksiong/color-admin/admin/src",
+  "author": {
+    "name": "Daniel Farrell"
+  },
+  "bugs": {
+    "url": "https://github.com/danielfarrell/bootstrap-combobox/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A combobox plugin that works with twitter bootstrap",
+  "homepage": "https://github.com/danielfarrell/bootstrap-combobox#readme",
+  "keywords": [
+    "bootstrap",
+    "combobox",
+    "dropdown"
+  ],
+  "license": "Apache-2.0",
+  "main": "js/bootstrap-combobox.js",
+  "name": "@danielfarrell/bootstrap-combobox",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielfarrell/bootstrap-combobox.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.1.8"
+}

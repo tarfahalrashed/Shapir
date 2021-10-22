@@ -1,0 +1,49 @@
+{
+  "_from": "jquery-simplecolorpicker@^0.3.1",
+  "_id": "jquery-simplecolorpicker@0.3.1",
+  "_inBundle": false,
+  "_integrity": "sha1-T2vv04CrBUcPWF1UguUYBVbkYOs=",
+  "_location": "/jquery-simplecolorpicker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "jquery-simplecolorpicker@^0.3.1",
+    "name": "jquery-simplecolorpicker",
+    "escapedName": "jquery-simplecolorpicker",
+    "rawSpec": "^0.3.1",
+    "saveSpec": null,
+    "fetchSpec": "^0.3.1"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-simplecolorpicker/-/jquery-simplecolorpicker-0.3.1.tgz",
+  "_shasum": "4f6befd380ab05470f585d5482e5180556e460eb",
+  "_spec": "jquery-simplecolorpicker@^0.3.1",
+  "_where": "/Users/ngunguoksiong/color-admin/admin/src",
+  "author": {
+    "name": "Tanguy Krotoff"
+  },
+  "bugs": {
+    "url": "https://github.com/tkrotoff/jquery-simplecolorpicker/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Very simple jQuery color picker",
+  "homepage": "https://github.com/tkrotoff/jquery-simplecolorpicker",
+  "keywords": [
+    "jQuery",
+    "color",
+    "picker",
+    "colorpicker"
+  ],
+  "license": "MIT",
+  "main": "jquery.simplecolorpicker.js",
+  "name": "jquery-simplecolorpicker",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tkrotoff/jquery-simplecolorpicker.git"
+  },
+  "version": "0.3.1"
+}
