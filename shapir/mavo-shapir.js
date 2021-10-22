@@ -1,4 +1,4 @@
-import {wikidata, uri, queryWikidata} from "./wikidata/wikidata.js";
+import {wikidata, uri, queryWikidata} from "https://wikxhibit.org/wikidata.js" //../wikxhibit/wikidata.js";
 import shapir, {include} from "./shapir.js";
 
 Mavo.dependencies.push(shapir());

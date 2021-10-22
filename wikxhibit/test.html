@@ -3,14 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Artist Page</title>
-
     <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
-    <script type="module" src="../mavo-shapir.js"></script>
-    <!-- <script src="jszip.js"></script> -->
-    <!-- <script src="jszip.min.js"></script> -->
-    <!-- <script src="FileSaver.js"></script> -->
+    <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
 </head>
 
 <body>
@@ -18,15 +13,30 @@
     <!-- <a href="" download>download</a> -->
     <!-- <div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q4985" mv-source-language="en"> -->
     <div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-      mv-source-occupation="writer" mv-source-place-of-birth="New York City" mv-source-numberOfItems="10">
+      mv-source-id="Q4985">
 
-      <div proeprty="items" mv-multiple>
+      <!-- <div proeprty="items" mv-multiple>
         <img property="image" width="5%"/>
         <h1 property="label"></h1>
         <p property="description"></p>
         <time property="dateOfBirth"></time>
         <hr>
-      </div>
+      </div> -->
+      <h1 property="label"></h1>
+
+
+      <!-- property="movie" mv-value="themoviedb.Movie('332562-a-star-is-born')" -->
+
+      <!-- <div property="movie" mv-value="youtube.search('A Star is Born')">
+        [movie] -->
+        <!-- <div class="grid-container">
+            <div class="grid-item" property="image" mv-multiple>
+              <img property="image" width="300" />
+            </div>
+        </div> -->
+    <!-- </div> -->
+
+
 
     </div>
 
