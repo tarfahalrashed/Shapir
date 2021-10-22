@@ -119,14 +119,49 @@
     }
 
 
+    pre[class*="language-"]>code {
+        border-left: 0px !important;
+    }
 
-    /* .contentMid {
-        background-color: white;
-        background-image: url(assets/img/bg/bg2.png);
-        max-width: 1140px;
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
-        margin-left: auto;
-        width: 100%;
-    } */
+    .container {
+        max-width: 1300px !important;
+    }
+
+    body {
+        font-size: 18px !important;
+    }
+
+    .btn {
+        font-size: 18px !important;
+    }
+
+    .code {
+        font-size: 12px !important;
+    }
+
+
+    .btn-b{
+        background-color: #2b6495;
+        margin-top: 8px;
+        padding: 3px 3px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .btn-b:hover {
+        background-color: #5583aa;
+        color: white;
+    }
+
+    .btn-r{
+        background-color: #8C1911;
+        margin-top: 8px;
+        padding: 3px 3px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .btn-r:hover {
+        background-color: #a34640;
+        color: white;
+    }
