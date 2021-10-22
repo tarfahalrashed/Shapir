@@ -4,7 +4,7 @@ A tool that standardizes access to APIs and simplifies the work for users, even 
 **Tool:**  <a href="https://shapir.org" target="_blank">https://shapir.org</a>
 
 
-<img src="public/assets/img/new/shapir_structure.png" width="90%" style= "display: block; margin-left: auto; margin-right: auto;"/>
+<img src="../assets/img/new/shapir_structure.png" width="90%" style= "display: block; margin-left: auto; margin-right: auto;"/>
 
 ## Overview
 Shapir is an ecosystem that significantly simplifies the work for users, even non-programmers, to create interactive web applications that operate on standardized data accessible through arbitrary web APIs. It consists of three related components: **WoOPI**, **ShapirJS**, and **ShapirUI**. WoOPI is a novel standardized, machine-readable API ontology, which can be used to provide a description that wraps the API with objects conforming to the canonical type definitions provided by [Schema.org](https://schema.org). ShapirJS is a JavaScript library that uses a WoOPI description to present the API's data as typed objects in the local environment. And ShapirUI is a graphical tool that lets even non-programmers create the required WoOPI descriptions, using standard data types. These three components are connected. One uses ShapirUI to describe an API. ShapirUI then generates a corresponding WoOPI description that can be used by ShapirJS to generate a JavaScript client library for that API. We integrated ShapirJS with [Mavo](https://mavo.io), an interactive declarative HTML-based language, to empower a user to create applications interacting with APIs' data by writing only HTML, with no JavaScript programming required. Any API described once by WoOPI, can be used by all other users.
@@ -116,7 +116,7 @@ Read a playlist and its videos from Dailymotion
 ```
 </td>
 <td>
-<img src="public/assets/img/new/dailymotion.png" />
+<img src="../assets/img/new/dailymotion.png" />
 </td>
 </tr>
 </table>
@@ -154,7 +154,7 @@ Search Yelp and Foursquare for restaurants
 ```
 </td>
 <td>
-<img src="public/assets/img/new/yelp.png" />
+<img src="../assets/img/new/yelp.png" />
 </td>
 </tr>
 </table>
