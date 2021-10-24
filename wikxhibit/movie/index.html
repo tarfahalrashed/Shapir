@@ -26,6 +26,8 @@
                         <div class="jxsVNt">
                             <h1 class="dxSWFG" property="label"></h1>
 
+                            <meta property="movieLabel" mv-default="[label]">
+
                             <div class="hWHMKr">
                                 <ul class="dxizHm">
                                     <li class="ipc-inline-list__item">[first(year(publicationDate))]</li> <span>R
@@ -37,7 +39,7 @@
                     </div>
 
                     <!-- rating -->
-                    <div class="hNqCJh bhTVMj" property="imdbMovie" mv-value="imdb.Movie([IMDbID])">
+                    <div property="imdbMovie" mv-value="imdb.Movie([IMDbID])">
 
                         <div class="jQXoLQ">
                             <div class="bufoWn">IMDb RATING</div>
@@ -58,8 +60,9 @@
                                 <div class="dGdktI">
                                     <img property="image" />
                                 </div>
+                                <!-- <div class="hQJhqT" property="movieVideos" mv-value="youtube.search([movieLabel])"> -->
                                 <div class="hQJhqT">
-                                    <iframe width="800" height="450" src="https://www.youtube.com/embed/nSbzyEJ8X9E"
+                                    <iframe width="800" height="450" property="videoId" src="https://www.youtube.com/embed/nSbzyEJ8X9E"
                                         allowfullscreen>
                                     </iframe>
                                 </div>
@@ -224,7 +227,7 @@
 
                                 <div class="grid-container"
                                     style="display: grid; grid-template-columns: auto auto auto; grid-gap: 0.5em; margin: 1em 0;">
-                                    <div property="movieVideos" mv-value="youtube.search('A Star is Born')" mv-multiple
+                                    <div property="movieVideos" mv-value="youtube.search([movieLabel])" mv-multiple
                                         class="grid-item ipc-sub-grid ipc-sub-grid--page-span-2 ipc-sub-grid--nowrap ipc-shoveler__grid">
                                         <iframe property="videoId" width="270" height="150"
                                             src="https://www.youtube.com/embed/[videoId]" allowfullscreen>
@@ -244,7 +247,7 @@
 
                                 <div property="movie" mv-value="themoviedb.Movie([TMDbMovieID])">
                                     <div class="grid-container" style="display: grid; grid-template-columns: auto auto auto; grid-gap: 0.5em; margin: 1em 0;">
-                                        <div class="grid-item" property="image" >
+                                        <div class="grid-item" property="image" mv-multiple mv-if="$index < 10">
                                           <img property="url" src="https://image.tmdb.org/t/p/original/[url]" width="300"/>
                                         </div>
                                     </div>
@@ -253,7 +256,7 @@
                             </section>
 
                             <!-- cast members -->
-                            <section class="ipc-page-section ipc-page-section--base celwidget">
+                            <!-- <section class="ipc-page-section ipc-page-section--base celwidget">
                                 <div
                                     class="ipc-title ipc-title--section-title ipc-title--base ipc-title--on-textPrimary ipc-title-link-wrapper">
                                     <h3 class="ipc-title__text">Cast</h3>
@@ -291,7 +294,7 @@
                                     </div>
                                 </div>
 
-                            </section>
+                            </section> -->
 
                             <!-- storyline -->
                             <section class="ipc-page-section ipc-page-section--base celwidget">
