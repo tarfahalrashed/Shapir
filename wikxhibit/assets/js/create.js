@@ -12,18 +12,18 @@ function createHTML(){
         code += '&#10;'
 
         code += '&lt;head>'
-        code += '&nbsp;&nbsp;&lt;meta charset="utf-8">'
-        code += '&nbsp;&nbsp;&lt;title>National Memorials&lt;/title>'
-        code += '&nbsp;&nbsp;&lt;script src="https://get.mavo.io/stable/mavo.js">&lt;/script>'
-        code += '&nbsp;&nbsp;&lt;link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">'
-        code += '&nbsp;&nbsp;&lt;script type="module" src="https://shapir.org/mavo-shapir.js">&lt;/script>'
-        code += '&nbsp;&nbsp;&lt;link href="memorials/style.css" rel="stylesheet">'
+        code += '&nbsp;&nbsp; &lt;meta charset="utf-8">'
+        code += '&nbsp;&nbsp; &lt;title>National Memorials&lt;/title>'
+        code += '&nbsp;&nbsp; &lt;script src="https://get.mavo.io/stable/mavo.js">&lt;/script>'
+        code += '&nbsp;&nbsp; &lt;link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">'
+        code += '&nbsp;&nbsp; &lt;script type="module" src="https://shapir.org/mavo-shapir.js">&lt;/script>'
+        code += '&nbsp;&nbsp; &lt;link href="memorials/style.css" rel="stylesheet">'
         code += '&lt;/head>'
 
         code += '&lt;body>'
-        code += '&nbsp;&nbsp;&lt;main class="container">'
+        code += '&nbsp;&nbsp; &lt;main class="container">'
 
-        code += '&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-id="'+itemID+'" mv-source-language="'+lang+'">'
+        code += '&nbsp;&nbsp; &lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-id="'+itemID+'" mv-source-language="'+lang+'">'
         code += '&#10;'
 
         for(var p=0; p<chosenProperties.length; ++p){
@@ -74,10 +74,10 @@ function createHTML(){
 
         code += '&lt;body>'
         code += '&#10;'
-        code += '&nbsp;&nbsp;&lt;main class="container">'
+        code += '&nbsp;&nbsp; &lt;main class="container">'
         code += '&#10;'
 
-        code += '&nbsp;&nbsp;&nbsp;&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-language="'+lang+'" '
+        code += '&nbsp;&nbsp;&nbsp;&nbsp; &lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-language="'+lang+'" '
         for(var p=0; p<propsValues.length; ++p){
             code += 'mv-source-'+propsValues[p].property;
             code += '="'+propsValues[p].value +'"';
@@ -87,19 +87,19 @@ function createHTML(){
                 code += '>'
                 code += '&#10;'
 
-                code += '&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="grid-container">'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="grid-container">'
                 code += '&#10;'
-                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div property="items" mv-multiple class=" grid-item">'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div property="items" mv-multiple class=" grid-item">'
                 code += '&#10;'
-                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;a href="[itemURL]" target="_blank" class="list-group-item list-group-item-action d-flex gap-3 py-3">'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;a href="[itemURL]" target="_blank" class="list-group-item list-group-item-action d-flex gap-3 py-3">'
                 code += '&#10;'
 
                 for(var p=0; p<chosenProperties.length; ++p){
                     if(chosenProperties[p].property == "image")
-                        code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img property="image" width="20%">  &#10;'
+                        code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img property="image" width="20%">  &#10;'
                 }
 
-                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="info">'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="info">'
                 code += '&#10;'
 
                 //other properties not image
@@ -108,34 +108,34 @@ function createHTML(){
                         if(chosenProperties[p].type == "notObject"){
                             //if label
                             if(chosenProperties[p].property=="label")
-                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h3 property="'+chosenProperties[p].property+'">&lt;/h3>'
+                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h3 property="'+chosenProperties[p].property+'">&lt;/h3>'
                             else
-                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;p property="'+chosenProperties[p].property+'">&lt;/p>'
+                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;p property="'+chosenProperties[p].property+'">&lt;/p>'
                             code += '&#10;'
                         }else{
-                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div property="'+chosenProperties[p].property+'">'
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div property="'+chosenProperties[p].property+'">'
                             code += '&#10;'
-                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;span property="label">&lt;/span>'
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;span property="label">&lt;/span>'
                             code += '&#10;'
-                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- you can add other '+chosenProperties[p].property+' properties -->'
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- you can add other '+chosenProperties[p].property+' properties -->'
                             code += '&#10;'
-                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
                             code += '&#10;'
                         }
                     }
                 }
-                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
                 code += '&#10;'
-                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/a>'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/a>'
                 code += '&#10;'
-                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
                 code += '&#10;'
-                code += '&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
                 code += '&#10;'
 
-                code += '&nbsp;&nbsp;&nbsp;&lt;/div>'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
                 code += '&#10;'
-                code += '&nbsp;&nbsp;&lt;/main>'
+                code += '&nbsp;&nbsp; &lt;/main>'
                 code += '&#10;'
                 code += '&lt;/body>'
                 code += '&#10;'
