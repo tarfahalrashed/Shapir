@@ -1,0 +1,94 @@
+body{
+    font-size: 16px !important;
+}
+
+/* table{
+    font-size: 16px !important;
+} */
+
+.b{
+    font-size: 16px !important;
+}
+
+/* label{
+    font-size: 20px !important;
+} */
+
+.sidenav {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    background-color: #2d353c;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 160px;
+    /* Same as the width of the sidenav */
+    font-size: 28px;
+    /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.content {
+    margin-left: 70px;
+    margin-right: 70px;
+}
+
+
+.btn-g{
+    background-color: #52976A;
+    color: white;
+}
+
+.btn-g:hover {
+    background-color: #74ab87;
+    color: white;
+}
+
+
+.btn-b{
+    background-color: #2b6495;
+    color: white;
+}
+
+.btn-b:hover {
+    background-color: #5583aa;
+    color: white;
+}
+
+.btn-r{
+    background-color: #8C1911;
+    color: white;
+}
+
+.btn-r:hover {
+    background-color: #a34640;
+    color: white;
+}
