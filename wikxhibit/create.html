@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +7,6 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<link href="../assets/css/default/app.min.css" rel="stylesheet" />
 	<link href="./assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -21,7 +19,8 @@
 	<link href="./assets/plugins/tag-it/css/jquery.tagit.css" rel="stylesheet" />
 	<link href="./assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
 	<link href="./assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
-	<link href="./assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+	<link href="./assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+		rel="stylesheet" />
 	<link href="./assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css" rel="stylesheet" />
 	<link href="./assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet" />
 	<link href="./assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet" />
@@ -77,15 +76,6 @@
 				<div class="panel-body">
 					<!-- Content Here -->
 					<div class="panel">
-						<!-- <div class="panel-heading"> -->
-							<!-- <h4 class="panel-title">Create your Wikidata application</h4> -->
-							<!-- <div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
-									data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
-									data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-							</div> -->
-						<!-- </div> -->
 						<div class="panel-body">
 
 							<h2>Create your Wikidata application</h2>
@@ -114,45 +104,50 @@
 											</tr>
 										</table>
 									</div>
-									<a href="javascript:;" class="btn btn-outline-dark" onclick="addPropertyRow()"><i class="fa fa-plus"></i> Add a property</a>
+									<a href="javascript:;" class="btn btn-outline-dark" onclick="addPropertyRow()"><i
+											class="fa fa-plus"></i> Add a property</a>
 
 									<hr>
 
-									<table  width="100%">
+									<table width="100%">
 										<tr>
 											<td>
 												<label class="title">Step 2. Number of results (default is 10)</label>
 											</td>
 											<td>
-												<input id="numResults" type="text"
-												class="form-control"
-												placeholder="10" />
+												<input id="numResults" type="text" class="form-control"
+													placeholder="10" />
 											</td>
 										</tr>
 										<tr>
-											<td><hr></td>
-											<td><hr></td>
+											<td>
+												<hr>
+											</td>
+											<td>
+												<hr>
+											</td>
 										</tr>
 										<tr>
 											<td>
-												<label class="title">Step 3. Language (default is "en")</label
-											></td>
-											<td><input id="language" type="text"
-												class="form-control"
-												placeholder="en" />
+												<label class="title">Step 3. Language (default is "en")</label></td>
+											<td><input id="language" type="text" class="form-control"
+													placeholder="en" />
 											</td>
 										</tr>
 									</table>
 
 									<hr>
 
-									<a href="javascript:;" class="btn btn-dark" onclick="buildApp()">Show items properties</a>
+									<a href="javascript:;" class="btn btn-dark" onclick="buildApp()">Show items
+										properties</a>
 
-									<div id="options" style="margin-top: 10px; margin-bottom: 10px; display:none; overflow-y: scroll; height:500px;">
+									<div id="options"
+										style="margin-top: 10px; margin-bottom: 10px; display:none; overflow-y: scroll; height:500px;">
 									</div>
 
 									<div id="create-btn" style="display:none">
-										<label class="title">Step 5. Click on the create button to generate your HTML code</label></br>
+										<label class="title">Step 5. Click on the create button to generate your HTML
+											code</label></br>
 										<a href="javascript:;" class="btn btn-dark" onclick="createHTML()">Create</a>
 									</div>
 								</div>
@@ -162,7 +157,8 @@
 										<a href="javascript:;" id="download_html" class="btn btn-b">
 											<i class="fa fa-download"></i> Download
 										</a>
-										<pre class="language-html"><code class="language-html" id="singleItemCode"></code></pre>
+										<pre
+											class="language-html"><code class="language-html" id="singleItemCode"></code></pre>
 										<!-- <a href="example.html" id="paintings_html" href="javascript:;"
 											data-toggle="modal"
 											class="btn btn-r b">View</a> -->
@@ -281,53 +277,31 @@
 
 	<script>
 
-function saveTextAsFile()
-        {
-            var textToWrite = document.getElementById('singleItemCode').innerText;
-            var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
-            var fileNameToSaveAs = "example.html";
+		function saveTextAsFile() {
+			var textToWrite = document.getElementById('singleItemCode').innerText;
+			var textFileAsBlob = new Blob([textToWrite], { type: 'text/plain' });
+			var fileNameToSaveAs = "example.html";
 
-            var downloadLink = document.createElement("a");
-            downloadLink.download = fileNameToSaveAs;
-            downloadLink.innerHTML = "Download File";
-            if (window.webkitURL != null)
-            {
-                // Chrome allows the link to be clicked
-                // without actually adding it to the DOM.
-                downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-            }
-            else
-            {
-                // Firefox requires the link to be added to the DOM
-                // before it can be clicked.
-                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-                downloadLink.onclick = function(){
-                	document.body.removeChild(downloadLink);
-                };
-                downloadLink.style.display = "none";
-                document.body.appendChild(downloadLink);
-            }
+			var downloadLink = document.createElement("a");
+			downloadLink.download = fileNameToSaveAs;
+			downloadLink.innerHTML = "Download File";
+			if (window.webkitURL != null) {
+				downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+			}
+			else {
+				downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+				downloadLink.onclick = function () {
+					document.body.removeChild(downloadLink);
+				};
+				downloadLink.style.display = "none";
+				document.body.appendChild(downloadLink);
+			}
+			downloadLink.click();
+		}
 
-            downloadLink.click();
-        }
+		var button = document.getElementById('download_html');
+		button.addEventListener('click', saveTextAsFile);
 
-        var button = document.getElementById('download_html');
-        button.addEventListener('click', saveTextAsFile);
-		// Start file download.
-
-
-
-		// window.addEventListener("load", downloadInit, true); function downloadInit(){
-		// 	initAutocomplete()
-		// };
-
-
-
-		// document.getElementById("download_html").addEventListener("click", function () { console.log($("#singleItemCode").textContent); download("download.html", $("#singleItemCode").textContent) }, false);
-
-		// function init() {
-
-		// }
 	</script>
 
 </body>
