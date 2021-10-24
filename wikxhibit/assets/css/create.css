@@ -2,17 +2,19 @@ body{
     font-size: 16px !important;
 }
 
-/* table{
-    font-size: 16px !important;
-} */
+.title{
+    /* font-size: 16px !important; */
+    color: #8C1911;
+    /* font-weight: bold; */
+}
 
-.b{
+input{
     font-size: 16px !important;
 }
 
-/* label{
-    font-size: 20px !important;
-} */
+.btn{
+    font-size: 16px !important;
+}
 
 .sidenav {
     height: 100%;
@@ -91,4 +93,8 @@ body{
 .btn-r:hover {
     background-color: #a34640;
     color: white;
+}
+
+.btn-outline-dark{
+    margin-top: 10px;;
 }

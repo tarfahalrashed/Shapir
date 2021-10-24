@@ -1,11 +1,14 @@
 
 function download(id) {
+    if(id=="download_html"){
+        id = ""
+    }
 
     var zip = new JSZip();
     // var a = document.querySelector("a");
     var a = document.getElementById(id);
     var urls = [id + "/index.html", id + "/style.css"];
-
+    console.log(urls)
     function request(url) {
         return new Promise(function (resolve) {
             var httpRequest = new XMLHttpRequest();
@@ -35,12 +38,6 @@ function download(id) {
 
 }
 
-document.getElementById("memorials").addEventListener("click", function () { download("memorials") }, false);
-document.getElementById("books").addEventListener("click", function () { download("books") }, false);
-document.getElementById("movie").addEventListener("click", function () { download("movie") }, false);
-document.getElementById("artist").addEventListener("click", function () { download("artist") }, false);
-document.getElementById("paintings").addEventListener("click", function () { download("paintings") }, false);
-document.getElementById("countries").addEventListener("click", function () { download("countries") }, false);
 
 function init() {
     download("memorials");
@@ -48,6 +45,20 @@ function init() {
     download("movie");
     download("artist");
     download("paintings");
+
+    document.getElementById("memorials").addEventListener("click", function () { download("memorials") }, false);
+    document.getElementById("books").addEventListener("click", function () { download("books") }, false);
+    document.getElementById("movie").addEventListener("click", function () { download("movie") }, false);
+    document.getElementById("artist").addEventListener("click", function () { download("artist") }, false);
+    document.getElementById("paintings").addEventListener("click", function () { download("paintings") }, false);
+    document.getElementById("countries").addEventListener("click", function () { download("countries") }, false);
+
+    document.getElementById("memorials_html").addEventListener("click", function () { readHTMLFile("memorials") }, false);
+    document.getElementById("books_html").addEventListener("click", function () { readHTMLFile("books") }, false);
+    document.getElementById("movie_html").addEventListener("click", function () { readHTMLFile("movie") }, false);
+    document.getElementById("artist_html").addEventListener("click", function () { readHTMLFile("artist") }, false);
+    document.getElementById("paintings_html").addEventListener("click", function () { readHTMLFile("paintings") }, false);
+    document.getElementById("countries_html").addEventListener("click", function () { readHTMLFile("countries") }, false);
 }
 
 
@@ -64,9 +75,4 @@ function readHTMLFile(id) {
         })
 }
 
-document.getElementById("memorials_html").addEventListener("click", function () { readHTMLFile("memorials") }, false);
-document.getElementById("books_html").addEventListener("click", function () { readHTMLFile("books") }, false);
-document.getElementById("movie_html").addEventListener("click", function () { readHTMLFile("movie") }, false);
-document.getElementById("artist_html").addEventListener("click", function () { readHTMLFile("artist") }, false);
-document.getElementById("paintings_html").addEventListener("click", function () { readHTMLFile("paintings") }, false);
-document.getElementById("countries_html").addEventListener("click", function () { readHTMLFile("countries") }, false);
+

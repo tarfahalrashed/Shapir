@@ -1,8 +1,28 @@
 let allProperties, properties = [], propertiesIds = [], values = [], propsValues = [], chosenProperties = [], itemID="", lang = "en", type;
 
 function createHTML(){
+
+    $("#htmlCode").show();
+
     if(itemID!=""){//single item app
         var code = ''
+
+        code += '&lt;!doctype html>'
+        code += '&lt;html lang="en">'
+        code += '&#10;'
+
+        code += '&lt;head>'
+        code += '&nbsp;&nbsp;&lt;meta charset="utf-8">'
+        code += '&nbsp;&nbsp;&lt;title>National Memorials&lt;/title>'
+        code += '&nbsp;&nbsp;&lt;script src="https://get.mavo.io/stable/mavo.js">&lt;/script>'
+        code += '&nbsp;&nbsp;&lt;link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">'
+        code += '&nbsp;&nbsp;&lt;script type="module" src="https://shapir.org/mavo-shapir.js">&lt;/script>'
+        code += '&nbsp;&nbsp;&lt;link href="memorials/style.css" rel="stylesheet">'
+        code += '&lt;/head>'
+
+        code += '&lt;body>'
+        code += '&nbsp;&nbsp;&lt;main class="container">'
+
         code += '&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-id="'+itemID+'" mv-source-language="'+lang+'">'
         code += '&#10;'
 
@@ -29,34 +49,97 @@ function createHTML(){
 
     }else{//list of items app
 
-        var code = ''; //new line in HTML
-        code += '&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-language="'+lang+'" '
+        var code = '', imageCode=''; //new line in HTML
+        code += '&lt;!doctype html>'
+         code += '&#10;'
+        code += '&lt;html lang="en">'
+        code += '&#10;'
+
+        code += '&lt;head>'
+        code += '&#10;'
+        code += '&nbsp;&nbsp;&lt;meta charset="utf-8">'
+        code += '&#10;'
+        code += '&nbsp;&nbsp;&lt;script src="https://get.mavo.io/stable/mavo.js">&lt;/script>'
+        code += '&#10;'
+        code += '&nbsp;&nbsp;&lt;link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">'
+        code += '&#10;'
+        code += '&nbsp;&nbsp;&lt;script type="module" src="https://shapir.org/mavo-shapir.js">&lt;/script>'
+        code += '&#10;'
+        // code += '&nbsp;&nbsp;&lt;link href="style.css" rel="stylesheet">'
+        code += '&nbsp;&nbsp;&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">'
+        code += '&#10;'
+        code += '&lt;/head>'
+        code += '&#10;'
+        code += '&#10;'
+
+        code += '&lt;body>'
+        code += '&#10;'
+        code += '&nbsp;&nbsp;&lt;main class="container">'
+        code += '&#10;'
+
+        code += '&nbsp;&nbsp;&nbsp;&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-language="'+lang+'" '
         for(var p=0; p<propsValues.length; ++p){
             code += 'mv-source-'+propsValues[p].property;
-            code += '= "'+propsValues[p].value +'"';
+            code += '="'+propsValues[p].value +'"';
             code += '&nbsp;'
 
             if(p+1==propsValues.length){
                 code += '>'
                 code += '&#10;'
 
+                code += '&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="grid-container">'
+                code += '&#10;'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div property="items" mv-multiple class=" grid-item">'
+                code += '&#10;'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;a href="[itemURL]" target="_blank" class="list-group-item list-group-item-action d-flex gap-3 py-3">'
+                code += '&#10;'
+
                 for(var p=0; p<chosenProperties.length; ++p){
-                    if(chosenProperties[p].type == "notObject"){
-                        code += '&nbsp;&nbsp;&lt;p property="'+chosenProperties[p].property+'">&lt;/p>'
-                        code += '&#10;'
-                    }else{
-                        code += '&nbsp;&nbsp;&lt;div property="'+chosenProperties[p].property+'">'
-                        code += '&#10;'
-                        code += '&nbsp;&nbsp;&nbsp;&nbsp;&lt;p property="label">&lt;/p>'
-                        code += '&#10;'
-                        code += '&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- you can add other '+chosenProperties[p].property+' properties -->'
-                        code += '&#10;'
-                        code += '&nbsp;&nbsp;&lt;/div>'
-                        code += '&#10;'
-                    }
+                    if(chosenProperties[p].property == "image")
+                        code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img property="image" width="20%">  &#10;'
                 }
 
-                code += '&lt;/div>'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="info">'
+                code += '&#10;'
+
+                //other properties not image
+                for(var p=0; p<chosenProperties.length; ++p){
+                    if(chosenProperties[p].property != "image"){
+                        if(chosenProperties[p].type == "notObject"){
+                            //if label
+                            if(chosenProperties[p].property=="label")
+                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h3 property="'+chosenProperties[p].property+'">&lt;/h3>'
+                            else
+                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;p property="'+chosenProperties[p].property+'">&lt;/p>'
+                            code += '&#10;'
+                        }else{
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div property="'+chosenProperties[p].property+'">'
+                            code += '&#10;'
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;span property="label">&lt;/span>'
+                            code += '&#10;'
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- you can add other '+chosenProperties[p].property+' properties -->'
+                            code += '&#10;'
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
+                            code += '&#10;'
+                        }
+                    }
+                }
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
+                code += '&#10;'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/a>'
+                code += '&#10;'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
+                code += '&#10;'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
+                code += '&#10;'
+
+                code += '&nbsp;&nbsp;&nbsp;&lt;/div>'
+                code += '&#10;'
+                code += '&nbsp;&nbsp;&lt;/main>'
+                code += '&#10;'
+                code += '&lt;/body>'
+                code += '&#10;'
+                code += '&lt;/html>'
 
                 document.getElementById("singleItemCode").innerHTML = code;
                 Prism.highlightElement($('#singleItemCode')[0]);
@@ -115,8 +198,12 @@ function getPropertiesFromObj(data){
     $('#options').show();
 
     $('#options').before(
-        '</br><input id="search" type="text" style="font-size: 1.3em;  width:200px; display: inline;"class="form-control" placeholder="search properties"/>'
-        +'&nbsp;<span><a href="" onclick="return false;" id="search-clear">X</a></span>'
+        '</br>'
+        +'</br>'
+        +'<label class="title">Step 4. Choose the properties you want to show in your application</label>'
+        +'</br>'
+        +'<input id="search" type="text" style="font-size: 1.3em;  width:200px; display: inline;"class="form-control" placeholder="search properties"/>'
+        +'&nbsp;<span><a href="" onclick="return false;" id="search-clear"><i class="fa fa-times"></a></span>'
     );
 
     $('#search').keyup(function(){
@@ -149,6 +236,8 @@ function getPropertiesFromObj(data){
         });
         // console.log(chosenProperties)
     });
+
+    $("#create-btn").show();
 
 }
 

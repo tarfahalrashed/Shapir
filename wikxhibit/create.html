@@ -76,107 +76,97 @@
 				</div>
 				<div class="panel-body">
 					<!-- Content Here -->
-					<div id="getStarted" class="panel">
-						<div class="panel-heading">
-							<h4 class="panel-title">Build your Wikidata Application</h4>
+					<div class="panel">
+						<!-- <div class="panel-heading"> -->
+							<!-- <h4 class="panel-title">Create your Wikidata application</h4> -->
 							<!-- <div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
 									data-click="panel-expand"><i class="fa fa-expand"></i></a>
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
 									data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 							</div> -->
-						</div>
+						<!-- </div> -->
 						<div class="panel-body">
+
+							<h2>Create your Wikidata application</h2>
+							<p>Follow these steps to create your first wikidata application</p>
+							</br>
 
 							<div class="row">
 								<div class="col-6">
 
-									<!-- <label style="padding-top:7px; font-size: 1.5em;">[1] Choose the type of
-										application</label></br>
-
-									<label style="padding-top:7px; font-size: 1.3em;">Want to build an application for a
-										specific item?</label>
-
+									<label class="title">Step 1. Choose Properties</label>
 									<div class="input-group">
-										<div class="col-md-4">
-											<input id="idQ" type="text" style="font-size: 1.3em;" class="form-control"
-												placeholder="Enter the item ID (e.g. Q30)" />
-										</div>
+										<table id="propertiesTable" width="100%">
+											<!-- <thead>
+												<th>Property</th>
+												<th>Value</th>
+											</thead> -->
+											<tr>
+												<td>
+													<input class="property form-control" type="text"
+														placeholder="Enter a property">
+												</td>
+												<td>
+													<input class="value form-control" type="text"
+														placeholder="Enter a value">
+												</td>
+											</tr>
+										</table>
 									</div>
-									<hr> -->
+									<a href="javascript:;" class="btn btn-outline-dark" onclick="addPropertyRow()"><i class="fa fa-plus"></i> Add a property</a>
 
-									<!-- <label style="padding-top:7px; font-size: 1.3em;">OR a list of items</label> -->
-
-									<div class="input-group">
-
-										<div class="col-md-12">
-											<table id="propertiesTable" width="90%">
-												<thead>
-													<th>Property</th>
-													<th>Value</th>
-												</thead>
-												<tr>
-													<td>
-														<input class="property form-control" type="text"
-															style="font-size: 1.3em;" placeholder="Enter a property">
-													</td>
-													<td>
-														<input class="value form-control" type="text"
-															style="font-size: 1.3em;" placeholder="Enter a value">
-													</td>
-												</tr>
-											</table>
-											</br>
-											<a id="" href="javascript:;" class="btn btn-dark m-r-5 b"
-												onclick="addPropertyRow()">Add a property</a>
-
-
-											</br>
-
-											<div class="input-group">
-												<label style="padding-top:7px; font-size: 1.5em;">Number of
-													results</label>
-												<div class="col-md-4">
-													<input id="numResults" type="text" style="font-size: 1.3em;"
-														class="form-control"
-														placeholder="(e.g. 10)" />
-												</div>
-											</div>
-										</div>
-									</div>
 									<hr>
 
-									<label style="padding-top:7px; font-size: 1.5em;">[2] Choose the language
-										(optional)</label>
+									<table  width="100%">
+										<tr>
+											<td>
+												<label class="title">Step 2. Number of results (default is 10)</label>
+											</td>
+											<td>
+												<input id="numResults" type="text"
+												class="form-control"
+												placeholder="10" />
+											</td>
+										</tr>
+										<tr>
+											<td><hr></td>
+											<td><hr></td>
+										</tr>
+										<tr>
+											<td>
+												<label class="title">Step 3. Language (default is "en")</label
+											></td>
+											<td><input id="language" type="text"
+												class="form-control"
+												placeholder="en" />
+											</td>
+										</tr>
+									</table>
 
-									<div class="input-group">
-										<div class="col-md-4">
-											<input id="language" type="text" style="font-size: 1.3em;"
-												class="form-control" placeholder="Enter the language (e.g. en)" />
-										</div>
+									<hr>
+
+									<a href="javascript:;" class="btn btn-dark" onclick="buildApp()">Show items properties</a>
+
+									<div id="options" style="margin-top: 10px; margin-bottom: 10px; display:none; overflow-y: scroll; height:500px;">
 									</div>
 
-
-									<a href="javascript:;" class="btn btn-dark m-r-5 b" onclick="buildApp()">Get Properties</a>
-
-									<div id="options" style="display:none; overflow-y: scroll; height:500px;">
+									<div id="create-btn" style="display:none">
+										<label class="title">Step 5. Click on the create button to generate your HTML code</label></br>
+										<a href="javascript:;" class="btn btn-dark" onclick="createHTML()">Create</a>
 									</div>
-
-									<a href="javascript:;" class="btn btn-dark m-r-5 b" onclick="createHTML()">Build</a>
-
 								</div>
 
-								<div class="col-6">
-									<pre class="language-html"><code class="language-html" id="singleItemCode"></code></pre>
-
-									<div>
-										<a href="" id="paintings" class="btn btn-b b"
-											 download>Download</a>
-										<a href="#modal-html" id="paintings_html" href="javascript:;"
+								<div class="col-6" style="height:1000px; overflow: scroll; ">
+									<div id="htmlCode" style="display: none;">
+										<a href="javascript:;" id="download_html" class="btn btn-b">
+											<i class="fa fa-download"></i> Download
+										</a>
+										<pre class="language-html"><code class="language-html" id="singleItemCode"></code></pre>
+										<!-- <a href="example.html" id="paintings_html" href="javascript:;"
 											data-toggle="modal"
-											class="btn btn-r b">View</a>
+											class="btn btn-r b">View</a> -->
 									</div>
-
 								</div>
 							</div>
 
@@ -285,6 +275,60 @@
 	<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
 	<script src="./assets/js/jsoneditor.js"></script>
 	<script type="module" src="wikidata.js"></script>
+	<script src="../assets/js/jszip.js"></script>
+	<script src="../assets/js/FileSaver.js"></script>
+	<script src="./assets/js/wikjs.js"></script>
+
+	<script>
+
+function saveTextAsFile()
+        {
+            var textToWrite = document.getElementById('singleItemCode').innerText;
+            var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+            var fileNameToSaveAs = "example.html";
+
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            if (window.webkitURL != null)
+            {
+                // Chrome allows the link to be clicked
+                // without actually adding it to the DOM.
+                downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+            }
+            else
+            {
+                // Firefox requires the link to be added to the DOM
+                // before it can be clicked.
+                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                downloadLink.onclick = function(){
+                	document.body.removeChild(downloadLink);
+                };
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
+            }
+
+            downloadLink.click();
+        }
+
+        var button = document.getElementById('download_html');
+        button.addEventListener('click', saveTextAsFile);
+		// Start file download.
+
+
+
+		// window.addEventListener("load", downloadInit, true); function downloadInit(){
+		// 	initAutocomplete()
+		// };
+
+
+
+		// document.getElementById("download_html").addEventListener("click", function () { console.log($("#singleItemCode").textContent); download("download.html", $("#singleItemCode").textContent) }, false);
+
+		// function init() {
+
+		// }
+	</script>
 
 </body>
 
