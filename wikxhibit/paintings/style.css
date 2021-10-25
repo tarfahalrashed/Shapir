@@ -6,7 +6,7 @@
     margin-left: auto;
     /* two lines below added from my-5 */
     padding-top: 3rem!important;
-    padding-bottom: 3rem!important
+    padding-bottom: 3rem!important;
 }
 
 @media (min-width:576px) {
@@ -106,10 +106,6 @@ column-count:         1;
     color: #FFFFFF;
     font-weight: bold;
 }
-
-/* #photos img:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-} */
 
 form {
     margin-bottom: 15px;
