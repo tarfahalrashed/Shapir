@@ -49,94 +49,88 @@
                             </div>
                         </div>
 
-                        <div class="white_container u-top_margin">
+                        <section class="main-info">
+                            <h5 class="text_label text_label--gray">About</h5>
 
-                            <span class="text_label text_label--gray u-xx_large_top_margin u-half_bottom_margin">
-                                <h5 class="u-inline">About</h5>
-                            </span>
+                            <p property class="description"></p>
 
-                            <div class="rich_text_formatting">
-                                <p property="description"></p>
-
-                                <p><strong><em>Birth Name:</em></strong>
-                                    <span property="birthName"></span>
-                                </p>
-
-                                <p><strong><em>Nickname:</em></strong>
-                                    <span class="commaSplit" property="nickname"mv-multiple></span>
-                                </p>
-
-                                <div property="sexOrGender">
-                                    <p><strong><em>Gender:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                            <dl>
+                                <div>
+                                    <dt>Birth Name</dt>
+                                    <dd property="birthName"></dd>
                                 </div>
 
-                                <p><strong><em>Date of Birth:</em></strong>
-                                    <span property="dateOfBirth"></span>
-                                </p>
-
-                                <div property="placeOfBirth">
-                                    <p><strong><em>Place of Birth:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div>
+                                    <dt>Nickname</dt>
+                                    <dd>
+                                        <span class="commaSplit" property="nickname"mv-multiple></span>
+                                    </dd>
                                 </div>
 
-                                <div property="countryOfCitizenship">
-                                    <p><strong><em>Country of Citizenship:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div>
+                                    <dt>Gender</dt>
+                                    <dd property="sexOrGender" mv-path="label"></dd>
                                 </div>
 
-                                <div property="residence">
-                                    <p><strong><em>Residence:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div>
+                                    <dt>Date of Birth</dt>
+                                    <dd>
+                                        <time property="dateOfBirth"></time>
+                                    </dd>
                                 </div>
 
-                                <div property="father">
-                                    <p><strong><em>Father:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div>
+                                    <dt>Place of Birth</dt>
+                                    <dd  property="placeOfBirth" mv-path="label"></dd>
                                 </div>
 
-                                <div property="mother">
-                                    <p><strong><em>Mother:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div>
+                                    <dt>Country of Citizenship</dt>
+                                    <dd  property="countryOfCitizenship" mv-path="label"></dd>
                                 </div>
 
-                                <div property="sibling">
-                                    <p><strong><em>Sibling:</em></strong>
-                                        <span property="label"></span>
-                                    </p>
+                                <div>
+                                    <dt>Residence</dt>
+                                    <dd property="residence" mv-path="label"></dd>
                                 </div>
 
-                                <div style="padding-bottom: 10px;">
-                                    <p style="display: inline; "><strong><em>Unmarried Partner:</em></strong> </p>
-                                    <span property="unmarriedPartner" mv-multiple>
-                                        <p class="commaSplit" property="label"></p>
-                                    </span>
+                                <div>
+                                    <dt>Father</dt>
+                                    <dd property="father" mv-path="label"></dd>
                                 </div>
 
-                                <div style="padding-bottom: 10px;">
-                                    <p style="display: inline;"><strong><em>Employer:</em></strong> </p>
-                                    <span property="employer" mv-multiple>
-                                        <p class="commaSplit" property="label"></p>
-                                    </span>
+                                <div>
+                                    <dt>Mother</dt>
+                                    <dd property="mother" mv-path="label"></dd>
                                 </div>
 
-                                <div style="padding-bottom: 10px;">
-                                    <p style="display: inline;"><strong><em>Occupation:</em></strong></p>
-                                    <span property="occupation" mv-multiple>
-                                        <p class="commaSplit" property="label"></p>
-                                    </span>
+                                <div>
+                                    <dt>Sibling</dt>
+                                    <dd property="sibling" mv-path="label"></dd>
                                 </div>
 
+                                <div>
+                                    <dt>Unmarried Partner(s)</dt>
+                                    <dd>
+                                        <span class="commaSplit" property="unmarriedPartner" mv-multiple mv-path="label"></span>
+                                    </dd>
+                                </div>
 
-                            </div>
+                                <div>
+                                    <dt>Employer(s)</dt>
+                                    <dd>
+                                        <span class="commaSplit" property="employer" mv-multiple mv-path="label"></span>
+                                    </dd>
+                                </div>
 
-                        </div>
+                                <div>
+                                    <dt>Occupation(s)</dt>
+                                    <dd>
+                                        <span class="commaSplit" property="occupation" mv-multiple mv-path="label"></span>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </section>
 
                     </div>
 

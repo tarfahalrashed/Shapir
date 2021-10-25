@@ -37,12 +37,8 @@
     min-width: 300px !important;
 }
 
-.commaSplit {
-    display: inline;
-}
-
-.commaSplit::after {
-    content: ","
+.commaSplit:not(:last-of-type)::after {
+    content: ", "
 }
 
 .grid-container {
@@ -206,12 +202,6 @@ img {
     -ms-flex: 0 0 58.333333%;
     flex: 0 0 58.333333%;
     max-width: 58.333333%
-}
-
-.col-8 {
-    -ms-flex: 0 0 66.666667%;
-    flex: 0 0 66.666667%;
-    max-width: 66.666667%
 }
 
 .banner_image {
@@ -413,150 +403,41 @@ a img {
     padding-bottom: 1rem
 }
 
-.rich_text_formatting {
+.main-info {
+    font-weight: 100;
+    background-color: #fff;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.main-info .description {
+    margin-top: 1rem;
+}
+
+.main-info dl {
     word-wrap: break-word;
     word-break: break-word;
     font: 100 1em/1.45 Programme, Arial, sans-serif
 }
 
-@media screen and (max-width:349px) {
-    .rich_text_formatting {
-        font-size: 15px
+    .main-info dl > div {
+        margin: 1rem 0;
     }
-}
 
-.rich_text_formatting h1 {
-    font-size: 1.5em
-}
+    .main-info dl dt {
+        display: inline;
+        font-style: italic;
+        font-weight: bolder;
+    }
 
-.rich_text_formatting h2 {
-    font-size: 1.313em
-}
+        .main-info dl dt::after {
+            content: ': ';
+        }
 
-.rich_text_formatting h3 {
-    font-size: 1.125em
-}
-
-.rich_text_formatting h4, .rich_text_formatting h5, .rich_text_formatting h6 {
-    font-size: 1em
-}
-
-.rich_text_formatting h1, .rich_text_formatting h2, .rich_text_formatting h3, .rich_text_formatting h4, .rich_text_formatting h5, .rich_text_formatting h6 {
-    font-family: Programme, Arial, sans-serif;
-    font-weight: 600;
-    margin: 1rem 0 0
-}
-
-.rich_text_formatting a:hover {
-    color: #a8b4f0
-}
-
-.rich_text_formatting a:hover .inline_icon {
-    fill: #a8b4f0
-}
-
-.rich_text_formatting p {
-    margin: 1rem 0
-}
-
-.rich_text_formatting p:empty {
-    display: none
-}
-
-.rich_text_formatting small {
-    font-size: .875em
-}
-
-.rich_text_formatting img {
-    display: block;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 325px;
-    width: auto
-}
-
-.rich_text_formatting blockquote {
-    margin: 1rem 0 0 .5rem;
-    padding-left: 1em;
-    position: relative;
-    display: block
-}
-
-.rich_text_formatting blockquote:before {
-    content: "\201C";
-    position: absolute;
-    top: -.1em;
-    left: -.3em;
-    font: bold 2.25em/1 "Times New Roman";
-    color: inherit;
-    opacity: .75
-}
-
-.rich_text_formatting pre {
-    font-family: inherit;
-    margin: 1rem 0
-}
-
-.rich_text_formatting code {
-    font-family: Consolas, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
-    font-size: .875em
-}
-
-.rich_text_formatting table {
-    margin: 1rem 0;
-    width: 100%
-}
-
-.rich_text_formatting td, .rich_text_formatting th {
-    padding: .5rem .5rem 0
-}
-
-.rich_text_formatting th {
-    border-bottom: 1px solid #ccc;
-    font-weight: 700;
-    text-align: left
-}
-
-.rich_text_formatting ol, .rich_text_formatting ul {
-    list-style-type: none;
-    margin: 1rem 0;
-    padding: 0
-}
-
-.rich_text_formatting ol ol, .rich_text_formatting ol ul, .rich_text_formatting ul ol, .rich_text_formatting ul ul {
-    margin: 0;
-    padding: 0 0 0 1rem
-}
-
-.rich_text_formatting ol li, .rich_text_formatting ul li {
-    padding-left: 1.6em;
-    position: relative
-}
-
-.rich_text_formatting ul li:before {
-    content: '\2022';
-    left: .64em;
-    position: absolute
-}
-
-.rich_text_formatting ol {
-    counter-reset: ordered_list_counter
-}
-
-.rich_text_formatting ol li:before {
-    font-feature-settings: "tnum";
-    content: counter(ordered_list_counter) ". ";
-    counter-increment: ordered_list_counter;
-    left: -.5rem;
-    position: absolute;
-    text-align: right;
-    width: 1.6em
-}
-
-.rich_text_formatting dd {
-    margin: 0 0 0 1rem
-}
+    .main-info dl dd {
+        display: inline;
+        margin: 0;
+    }
 
 .text_label {
     -webkit-touch-callout: none;
@@ -590,10 +471,6 @@ a img {
     display: inline
 }
 
-.u-top_margin {
-    margin-top: 1rem
-}
-
 .u-xx_large_top_margin {
     margin-top: 2.25rem
 }
@@ -616,11 +493,6 @@ a img {
 
 .u-hair_bottom_margin {
     margin-bottom: .125rem
-}
-
-.white_container {
-    background-color: #fff;
-    padding: 1rem
 }
 
 .column_layout {
