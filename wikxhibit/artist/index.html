@@ -18,272 +18,192 @@
 
         <div class="profile_header" style="--image: url('[image]')">
             <div class="banner_image"></div>
-            <div class="column_layout">
-                <div class="column_layout-column_span column_layout-column_span--secondary">
-                    <img property="image" />
-                </div>
+            <div class="main-grid">
+                <img property="image" />
             </div>
         </div>
 
 
-        <div class="container-fluid">
+        <main>
+            <!-- Wikidata data -->
+            <div id="wikidata" class="profile_identity_and_description">
+                <div class="profile_identity">
+                    <div class="profile_identity-text">
+                        <h1>
+                            <!-- TODO: Why does GeniusArtistID return an array? It should be just one id -->
+                            <span property="label"></span><a href="https://genius.com/artists/[first(GeniusArtistID)]" class="verified"></a>
+                        </h1>
 
-            <div class="row" style="margin-left: 17%;">
-                <div class="col-5" id="wikidata">
-                    <!-- Wikidata data -->
-                    <div class="profile_identity_and_description">
-                        <div class="profile_identity">
-                            <div class="profile_identity-text">
-                                <h1>
-                                    <!-- TODO: Why does GeniusArtistID return an array? It should be just one id -->
-                                    <span property="label"></span><a href="https://genius.com/artists/[first(GeniusArtistID)]" class="verified"></a>
-                                </h1>
-
-                                <div class="profile_identity-alternate_names">
-                                    AKA: <span property="aliases"></span>
-                                </div>
-                            </div>
+                        <div class="profile_identity-alternate_names">
+                            AKA: <span property="aliases"></span>
                         </div>
-
-                        <section class="main-info">
-                            <h2>About</h2>
-
-                            <p property class="description"></p>
-
-                            <dl>
-                                <div>
-                                    <dt>Birth Name</dt>
-                                    <dd property="birthName"></dd>
-                                </div>
-
-                                <div>
-                                    <dt>Nickname</dt>
-                                    <dd>
-                                        <span class="commaSplit" property="nickname"mv-multiple></span>
-                                    </dd>
-                                </div>
-
-                                <div>
-                                    <dt>Gender</dt>
-                                    <dd property="sexOrGender" mv-path="label"></dd>
-                                </div>
-
-                                <div>
-                                    <dt>Date of Birth</dt>
-                                    <dd>
-                                        <time property="dateOfBirth"></time>
-                                    </dd>
-                                </div>
-
-                                <div>
-                                    <dt>Place of Birth</dt>
-                                    <dd  property="placeOfBirth" mv-path="label"></dd>
-                                </div>
-
-                                <div>
-                                    <dt>Country of Citizenship</dt>
-                                    <dd  property="countryOfCitizenship" mv-path="label"></dd>
-                                </div>
-
-                                <div>
-                                    <dt>Residence</dt>
-                                    <dd property="residence" mv-path="label"></dd>
-                                </div>
-
-                                <div>
-                                    <dt>Father</dt>
-                                    <dd property="father" mv-path="label"></dd>
-                                </div>
-
-                                <div>
-                                    <dt>Mother</dt>
-                                    <dd property="mother" mv-path="label"></dd>
-                                </div>
-
-                                <div>
-                                    <dt>Sibling</dt>
-                                    <dd property="sibling" mv-path="label"></dd>
-                                </div>
-
-                                <div>
-                                    <dt>Unmarried Partner(s)</dt>
-                                    <dd>
-                                        <span class="commaSplit" property="unmarriedPartner" mv-multiple mv-path="label"></span>
-                                    </dd>
-                                </div>
-
-                                <div>
-                                    <dt>Employer(s)</dt>
-                                    <dd>
-                                        <span class="commaSplit" property="employer" mv-multiple mv-path="label"></span>
-                                    </dd>
-                                </div>
-
-                                <div>
-                                    <dt>Occupation(s)</dt>
-                                    <dd>
-                                        <span class="commaSplit" property="occupation" mv-multiple mv-path="label"></span>
-                                    </dd>
-                                </div>
-                            </dl>
-                        </section>
-
                     </div>
-
                 </div>
 
-                <div class="col-7" style="padding-top: 22px; " property="SpotifyArtist">
-                    <div style="float:left !important">
-                        <div class="profile_body">
-                            <h2>Spotify Albums</h2>
-                            <div property="album" mv-multiple>
+                <section class="main-info">
+                    <h2>About</h2>
 
-                                <div class="mini_card_grid">
-                                    <div class="mini_card_grid-song">
-                                        <div>
-                                            <a href="[contentUrl]" target="_blank" class="mini_card">
+                    <p property class="description"></p>
 
-                                                <div
-                                                    class="mini_card-thumbnail clipped_background_image--background_fill clipped_background_image">
-                                                    <img property="image" />
-                                                </div>
-
-                                                <div class="mini_card-info">
-                                                    <div class="mini_card-title_and_subtitle">
-                                                        <div class="mini_card-title" property="name"></div>
-                                                        <div class="mini_card-subtitle" style="color:gray"
-                                                            property="additionalType"></div>
-                                                        <div class="mini_card-subtitle" style=" margin:1px !important">
-                                                            <div style="overflow: hidden;"
-                                                                style=" margin:1px !important">
-                                                                <p style="float: left; margin:1px !important">
-                                                                    <strong><em>Number of tracks:&nbsp;</em></strong>
-                                                                </p>
-                                                                <p style="float: left; margin:1px !important"
-                                                                    property="numTracks"></p>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="mini_card-subtitle" style="margin:1px !important">
-                                                            <div style="overflow: hidden;"
-                                                                style=" margin:1px !important">
-                                                                <p style="float: left; margin:1px !important">
-                                                                    <strong><em>Release Date:&nbsp;</em></strong></p>
-                                                                <p style="float: left; margin:1px !important"
-                                                                    property="datePublished"></p>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
+                    <dl>
+                        <div>
+                            <dt>Birth Name</dt>
+                            <dd property="birthName"></dd>
                         </div>
-                    </div>
 
-                    <div style="float:left !important;">
-                        <div class="profile_body">
-                            <h2>Spotify Popular Tracks</h2>
-                            <div property="track" mv-multiple>
-                                <div class="mini_card_grid">
-                                    <div class="mini_card_grid-song">
-                                        <div
-                                            class="mini_card-thumbnail clipped_background_image--background_fill clipped_background_image">
-                                            <iframe property="identifier"
-                                                src="https://open.spotify.com/embed/track/[identifier]" width="260"
-                                                height="80" frameborder="0" allowtransparency="true"
-                                                allow="encrypted-media"></iframe>
-                                        </div>
+                        <div>
+                            <dt>Nickname</dt>
+                            <dd>
+                                <span class="commaSplit" property="nickname"mv-multiple></span>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>Gender</dt>
+                            <dd property="sexOrGender" mv-path="label"></dd>
+                        </div>
+
+                        <div>
+                            <dt>Date of Birth</dt>
+                            <dd>
+                                <time property="dateOfBirth"></time>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>Place of Birth</dt>
+                            <dd  property="placeOfBirth" mv-path="label"></dd>
+                        </div>
+
+                        <div>
+                            <dt>Country of Citizenship</dt>
+                            <dd  property="countryOfCitizenship" mv-path="label"></dd>
+                        </div>
+
+                        <div>
+                            <dt>Residence</dt>
+                            <dd property="residence" mv-path="label"></dd>
+                        </div>
+
+                        <div>
+                            <dt>Father</dt>
+                            <dd property="father" mv-path="label"></dd>
+                        </div>
+
+                        <div>
+                            <dt>Mother</dt>
+                            <dd property="mother" mv-path="label"></dd>
+                        </div>
+
+                        <div>
+                            <dt>Sibling</dt>
+                            <dd property="sibling" mv-path="label"></dd>
+                        </div>
+
+                        <div>
+                            <dt>Unmarried Partner(s)</dt>
+                            <dd>
+                                <span class="commaSplit" property="unmarriedPartner" mv-multiple mv-path="label"></span>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>Employer(s)</dt>
+                            <dd>
+                                <span class="commaSplit" property="employer" mv-multiple mv-path="label"></span>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>Occupation(s)</dt>
+                            <dd>
+                                <span class="commaSplit" property="occupation" mv-multiple mv-path="label"></span>
+                            </dd>
+                        </div>
+                    </dl>
+                </section>
+            </div>
+
+            <div class="mv-container" property="SpotifyArtist" id="spotify">
+                <section id="spotify-albums">
+                    <h2>Spotify Albums</h2>
+
+                    <article property="album" mv-multiple class="mini_card">
+                        <a href="[contentUrl]" target="_blank" class="mv-container">
+                            <div class="mini_card-thumbnail clipped_background_image--background_fill clipped_background_image">
+                                <img property="image" />
+                            </div>
+
+                            <div class="mini_card-info">
+                                <h3>
+                                    <span class="type type-[additionalType]" property="additionalType"></span>
+                                    <span property="name"></span>
+                                </h3>
+
+                                <div class="metadata">
+                                    <div class="tracks">
+                                        <span property="numTracks"></span> tracks
+                                    </div>
+                                    <div class="released">
+                                        Released on <time property="datePublished"></time>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
+                    </article>
+                </section>
+
+                <section>
+                    <h2>Spotify Popular Tracks</h2>
+
+                    <div property="track" mv-multiple>
+                        <iframe property="identifier" src="https://open.spotify.com/embed/track/[identifier]" frameborder="0" allowtransparency="true" allow="encrypted-media" loading="lazy"></iframe>
                     </div>
-
-                </div>
-
+                </section>
             </div>
 
-            <div class="row" style="margin-left: 17%">
-                <div class="col-6" property="YouTubeChannel">
-                    <h2>YouTube Channel</h2>
+            <section property="YouTubeChannel" id="youtube">
+                <h2>YouTube Channel</h2>
 
-                    <p><strong>Name:</strong> <span property="name"></span> </p>
-                    <p><strong>Description:</strong> <span property="description"></span> </p>
-                    <div class="grid-container">
-                        <div class="grid-item" property="video" mv-multiple>
-                            <iframe property="videoId" width="270" height="150"
-                                src="https://www.youtube.com/embed/[videoId]" allowfullscreen> </iframe>
-                        </div>
+                <p>
+                    <a href="https://www.youtube.com/user/[name]"><strong property="name"></strong></a>:
+                    <span property="description"></span>
+                </p>
+
+                <div class="video-grid">
+                    <div property="video" mv-multiple>
+                        <iframe property="videoId" width="270" height="150" src="https://www.youtube.com/embed/[videoId]" allowfullscreen loading="lazy"></iframe>
                     </div>
                 </div>
+            </section>
 
-                <div class="col-6" property="SongkickArtist">
-                    <div class="profile_body">
-                        <h2>Upcoming Events</h2>
-                        <div property="event"  mv-multiple>
-                            <div class="mini_card_grid">
-                                <div class="mini_card_grid-song">
-                                    <a href="[url]" target="_blank" class="mini_card">
-                                        <div class="mini_card-info">
-                                            <div class="mini_card-title_and_subtitle">
-                                                <div class="mini_card-title" property="name"></div>
-                                                <div class="mini_card-subtitle" style="color:gray"
-                                                    property="additionalType"></div>
-                                                <div class="mini_card-subtitle" style=" margin:1px !important">
-                                                    <div style="overflow: hidden;" style=" margin:1px !important">
-                                                        <p style="float: left; margin:1px !important">
-                                                            <strong><em>Location:&nbsp;</em></strong>
-                                                        </p>
-                                                        <p style="float: left; margin:1px !important" property="location"></p>
+            <section id="events"property="SongkickArtist">
+                <h2>Upcoming Events</h2>
 
-                                                    </div>
-                                                </div>
-                                                <div class="mini_card-subtitle" style="margin:1px !important">
-                                                    <div style="overflow: hidden;" style=" margin:1px !important">
-                                                        <p style="float: left; margin:1px !important">
-                                                            <strong><em>Start Date:&nbsp;</em></strong>
-                                                        </p>
-                                                        <p style="float: left; margin:1px !important" property="startDate"></p>
-                                                    </div>
-                                                </div>
-                                                <div class="mini_card-subtitle" style="margin:1px !important">
-                                                    <div style="overflow: hidden;" style=" margin:1px !important">
-                                                        <p style="float: left; margin:1px !important">
-                                                            <strong><em>Rating:&nbsp;</em></strong></p>
-                                                        <p style="float: left; margin:1px !important"
-                                                            property="aggregateRating"></p>
-                                                    </div>
-                                                </div>
+                <article property="event" mv-multiple class="mini_card">
+                    <a href="[url]" target="_blank" class="mv-container">
 
-                                            </div>
-                                        </div>
-                                    </a>
+                        <div class="mini_card-info">
+                            <h3>
+                                <span class="type" property="additionalType" ></span>
+                                <span property="name"></span>
+                                <meter property="aggregateRating" min="0" max="1" title="Popularity"></meter>
+                            </h3>
+
+                            <div class="metadata">
+                                <div>
+                                    In <span property="location"></span>
+                                </div>
+                                <div>
+                                    On <time property="startDate"></time>
                                 </div>
 
                             </div>
-
                         </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- <div class="page_footer">
-        <div class="footer"></div>
-    </div> -->
-
+                    </a>
+                </article>
+            </section>
+        </main>
     </div>
     <!-- End of Wikidata -->
 
