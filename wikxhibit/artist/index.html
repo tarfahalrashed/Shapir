@@ -11,21 +11,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="act-show cont-artists snarly">
-
+<body>
     <!-- https://www.wikidata.org/wiki/Q19848 -->
     <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q19848"
         mv-source-language="en">
 
-        <div class="profile_header">
-            <div class="banner_image banner_image--more_transparent_gradient" style="background-color: lightgray;">
-                <img property="logoImage" class="banner_image-blurred_image clipped_background_image" />
-            </div>
+        <div class="profile_header" style="--image: url('[image]')">
+            <div class="banner_image"></div>
             <div class="column_layout">
                 <div class="column_layout-column_span column_layout-column_span--secondary">
-                    <img property="image"
-                        class="user_avatar profile_header-avatar clipped_background_image clipped_background_image--background_fill profile_header-avatar--verified"
-                        property="image" />
+                    <img property="image" />
                 </div>
             </div>
         </div>
@@ -241,18 +236,18 @@
                                                 <div class="mini_card-subtitle" style=" margin:1px !important">
                                                     <div style="overflow: hidden;" style=" margin:1px !important">
                                                         <p style="float: left; margin:1px !important">
-                                                            <strong><em>Location:&nbsp;</em></strong></p>
-                                                        <p style="float: left; margin:1px !important"
-                                                            property="location"></p>
+                                                            <strong><em>Location:&nbsp;</em></strong>
+                                                        </p>
+                                                        <p style="float: left; margin:1px !important" property="location"></p>
 
                                                     </div>
                                                 </div>
                                                 <div class="mini_card-subtitle" style="margin:1px !important">
                                                     <div style="overflow: hidden;" style=" margin:1px !important">
-                                                        <p style="float: left; margin:1px !important"><strong><em>Start
-                                                                    Date:&nbsp;</em></strong></p>
-                                                        <p style="float: left; margin:1px !important"
-                                                            property="startDate"></p>
+                                                        <p style="float: left; margin:1px !important">
+                                                            <strong><em>Start Date:&nbsp;</em></strong>
+                                                        </p>
+                                                        <p style="float: left; margin:1px !important" property="startDate"></p>
                                                     </div>
                                                 </div>
                                                 <div class="mini_card-subtitle" style="margin:1px !important">
