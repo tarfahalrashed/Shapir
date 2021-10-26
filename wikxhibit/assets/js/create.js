@@ -95,8 +95,9 @@ function createHTML(){
                 code += '&#10;'
 
                 for(var p=0; p<chosenProperties.length; ++p){
-                    if(chosenProperties[p].property == "image")
-                        code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img property="image" width="20%">  &#10;'
+                    if(chosenProperties[p].property == "image" || chosenProperties[p].property == "flagImage"){
+                        code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img property="'+chosenProperties[p].property +'" width="20%">  &#10;'
+                    }
                 }
 
                 code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="info">'
@@ -104,7 +105,7 @@ function createHTML(){
 
                 //other properties not image
                 for(var p=0; p<chosenProperties.length; ++p){
-                    if(chosenProperties[p].property != "image"){
+                    if(chosenProperties[p].property != "image" || chosenProperties[p].property != "flagImage"){
                         if(chosenProperties[p].type == "notObject"){
                             //if label
                             if(chosenProperties[p].property=="label")
