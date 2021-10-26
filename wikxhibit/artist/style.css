@@ -342,3 +342,16 @@ iframe[property="identifier"] {
     text-align: center
 }
 
+#events meter {
+    width: 3em;
+    height: .5em;
+    vertical-align: middle;
+}
+
+    #events meter::-webkit-meter-inner-element {
+        display: flex;
+    }
+
+    #events meter::-webkit-meter-optimum-value {
+        background: var(--accent-color, var(--yellow));
+    }
