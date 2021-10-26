@@ -34,12 +34,14 @@
                     <div class="profile_identity_and_description">
                         <div class="profile_identity">
                             <div class="profile_identity-text">
-                                <h1 property="label"></h1>
+                                <h1>
+                                    <!-- TODO: Why does GeniusArtistID return an array? It should be just one id -->
+                                    <span property="label"></span><a href="https://genius.com/artists/[first(GeniusArtistID)]" class="verified"></a>
+                                </h1>
 
                                 <div class="profile_identity-alternate_names">
                                     AKA: <span property="aliases"></span>
                                 </div>
-                                @<span class="profile_identity-subhead" property="GeniusArtistID"></span>
                             </div>
                         </div>
 

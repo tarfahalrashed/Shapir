@@ -1,6 +1,33 @@
 @import url("bootstrap.css");
 @import url("fonts.css");
 
+:root {
+    --svg-white-checkmark: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 70"><path d="m 10 30 l 20 20 l 40 -40" fill="none" stroke="white" stroke-width="20"/></svg>');
+
+    /* Bootstrap colors */
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: var(--blue);
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+}
+
 body {
     color: #222;
     font-family: Programme, Arial, sans-serif;
@@ -43,12 +70,57 @@ h2 {
 }
 
 img {
-    max-width: 100%
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none
 }
 
     a img {
         border: none;
     }
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px
+}
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px
+}
+
+.col-5 {
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%
+}
+
+.col-6 {
+    flex: 0 0 50%;
+    max-width: 50%
+}
+
+.col-7 {
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%
+}
 
 .mini_card {
     min-width: 300px !important;
@@ -71,13 +143,10 @@ img {
     height: 28vw;
     min-height: 4em;
     max-height: 8em;
-    background-color: black;
-    position: relative
-}
-
-.profile_header {
+    position: relative;
     max-height: 18em;
     color: white;
+    background-color: var(--cyan);
 }
 
     .banner_image {
@@ -111,6 +180,21 @@ img {
         background-position: center;
         background-size: cover;
         background-color: #e9e9e9;
+    }
+
+.verified {
+    display: inline-block;
+    vertical-align: super;
+    width: .6em;
+    height: .6em;
+    background: var(--svg-white-checkmark) 52% 52% / 50% auto no-repeat var(--green);
+    color: white;
+    border-radius: 50%;
+    box-shadow: 1px 2px 1px hsl(220 10% 50% / .2);
+}
+
+    .verified:hover {
+        background-color: var(--blue);
     }
 
 .clipped_background_image {
@@ -171,7 +255,6 @@ img {
 }
 
 .profile_identity {
-    font-family: Programme, Arial, sans-serif;
     line-height: 1
 }
 
@@ -186,13 +269,8 @@ img {
     margin: .5rem auto
 }
 
-.profile_identity-subhead {
-    color: #9a9a9a;
-    font-size: .875em
-}
-
 .profile_identity_and_description {
-    padding-top: 5vw;
+    padding-top: 4vw;
     padding-bottom: 1rem
 }
 
