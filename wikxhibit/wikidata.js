@@ -73,7 +73,7 @@ export async function wikidata(itemID, lang) {
 
 
     let obj = {}, objItem = {};
-    return fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:" + itemID + ")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22" + lang + "%22%20}}")
+    return fetch("https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:" + itemID + ")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22" + lang + "%22%20}}")
         .then(response => { return response.json() })
         .then(data => {
             let results = data.results.bindings
@@ -92,7 +92,7 @@ export async function wikidata(itemID, lang) {
             return objItem;
 
         }).then((objItem) => {
-            return fetch("https://query.wikidata.org/sparql?format=json&query=select%20?wdLabel%20?ps_Label%20?ps_%20?wdpqLabel%20?pq_Label%20{VALUES%20(?company)%20{(wd:" + itemID + ")}?company%20?p%20?statement%20.?statement%20?ps%20?ps_%20.?wd%20wikibase:claim%20?p.?wd%20wikibase:statementProperty%20?ps.OPTIONAL%20{?statement%20?pq%20?pq_%20.?wdpq%20wikibase:qualifier?pq%20.}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22" + lang + "%22%20}}%20ORDER%20BY%20?wd%20?statement%20?ps_")
+            return fetch("https://query.wikidata.org/sparql?format=json&origin=*&query=select%20?wdLabel%20?ps_Label%20?ps_%20?wdpqLabel%20?pq_Label%20{VALUES%20(?company)%20{(wd:" + itemID + ")}?company%20?p%20?statement%20.?statement%20?ps%20?ps_%20.?wd%20wikibase:claim%20?p.?wd%20wikibase:statementProperty%20?ps.OPTIONAL%20{?statement%20?pq%20?pq_%20.?wdpq%20wikibase:qualifier?pq%20.}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22" + lang + "%22%20}}%20ORDER%20BY%20?wd%20?statement%20?ps_")
                 .then(response => { return response.json() })
                 .then(data => {
                     let results = data.results.bindings;
@@ -243,7 +243,7 @@ export function uri(id, lang) {
         id = id.substring(id.lastIndexOf("/") + 1, id.length);
     }
 
-    return fetch("https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20%3Fproperty%20%3FpropertyLabel%20WHERE%7B%20%20%20%0A%20%20%20%20%20%3Fitem%20%3Fpredicate%20%22" + id + "%22%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3AdirectClaim%20%3Fpredicate%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3ApropertyType%20wikibase%3AExternalId.%0A%20%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%0A%20%20%20%7D%20%0A%7D")
+    return fetch("https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FitemLabel%20%3Fproperty%20%3FpropertyLabel%20WHERE%7B%20%20%20%0A%20%20%20%20%20%3Fitem%20%3Fpredicate%20%22" + id + "%22%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3AdirectClaim%20%3Fpredicate%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3ApropertyType%20wikibase%3AExternalId.%0A%20%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%0A%20%20%20%7D%20%0A%7D")
         .then(response => { return response.json() })
         .then(data => {
             let results = data.results.bindings
@@ -318,7 +318,7 @@ export async function queryWikidata(e) {
     let query = "", items=[];
     return getProperties(e)
         .then(props => {
-            query += 'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';
+            query += 'https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';
             // //if search property exists, add the below line to the query
             if (searchTerm != "") {
                 query += '%3Fitem%20rdfs%3Alabel"' + searchTerm + '"%40en.%0A';
