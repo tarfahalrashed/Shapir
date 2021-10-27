@@ -3,40 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Paintings</title>
+    <title>Art Gallery</title>
     <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
     <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">'
-    <link rel="stylesheet" href="paintings/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
+      mv-source-instance-of="painting" mv-source-creator="[term]" mv-source-numberOfItems="15">
 
-    <main class="container">
-        <h1>A List of Paintings</h1>
+    <header>
+        <h1>Art Gallery</h1>
 
-        <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-            mv-source-instance-of="painting" mv-source-creator="[term]" mv-source-numberOfItems="15">
-
-            <form mv-action="set(term, searchInput)">
-                <label>Search for a painter <input class="form-control rounded" property="searchInput" value="Gustav Klimt" /></label>
-                <meta property="term" mv-default="Gustav Klimt">
-                <button class="btn btn-outline-dark">Submit</button>
-            </form>
-
-            <section id="paintings">
-                <div property="items" mv-multiple>
-                    <a href="[itemURL]" target="_blank">
-                        <div class="painting">
-                            <div property="label"></div>
-                            <img property="image" />
-                        </div>
-                    </a>
+        <form class="search" mv-action="set(term, searchInput)">
+            <label>Painter: <input type="search" class="form-control rounded" property="searchInput" value="Gustav Klimt" /></label>
+            <meta property="term" mv-default="Gustav Klimt">
+            <button class="btn btn-outline-dark">Search</button>
+        </form>
+    </header>
+    <main id="paintings">
+        <article class="painting" property="items" mv-multiple style="--width: [width]; --height: [height];" mv-if="image">
+            <a href="[itemURL]" target="_blank">
+                <img property="image" loading="lazy" />
+                <div class="overlay">
+                    <div class="info">
+                        <meta property="collection" mv-alias="location" />
+                        <meta property="width" />
+                        <meta property="height" />
+                        <meta property="title" />
+                        <meta property="label" />
+                        <h2>
+                            <span property="name">[title or label]</span>
+                            <span property="nameInNativeLanguage" mv-if="nameInNativeLanguage and nameInNativeLanguage != title"></span>
+                        </h2>
+                        <p class="description">
+                            <span mv-if="count(madeFromMaterial) = 2">
+                                [join(madeFromMaterial.label, " on ")],
+                            </span>
+                            <span>[year(first(inception))]</span>
+                        </p>
+                        <p class="location" mv-if="collection.label != label">[first(collection.label)]</p>
+                    </div>
                 </div>
-            </section>
-
-        </div>
+            </a>
+        </article>
     </main>
 
 </body>
