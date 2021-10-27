@@ -17,7 +17,7 @@
         <hr>
 
         <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-            mv-source-instance-of="country" mv-source-part-of="[continent]" mv-source-numberOfItems="10">
+            mv-source-instance-of="country" mv-source-continent="[continent]" mv-source-numberOfItems="10">
 
             <form mv-action="set(continentValue, continent)">
                 <label>Continent:
@@ -26,6 +26,13 @@
                         <option>South America</option>
                         <option>North America</option>
                         <option>Central America</option>
+                        <option>Asia</option>
+                        <option>Africa</option>
+                        <!-- <option>Australia</option>
+                        <option>Antarctica</option>
+                        <option>Caribbean</option>
+                        <option>Oceania</option>
+                        <option>West Africa</option> -->
                     </select>
                 </label>
             </form>
