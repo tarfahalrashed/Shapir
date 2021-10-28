@@ -1,35 +1,215 @@
-
-
-  a{
-      padding-bottom: 10px;
-  }
-
-
-.info{
-    width: 100%!important;
-    gap: .5rem!important;
-    justify-content: space-between!important;
-    display: block;
+:root {
+    --color-green: hsl(80 80% 40%);
+    --color-red: hsl(0 80% 45%);
+    --gray-hs: 200 10%;
+    --page-width: clamp(80rem, 70vw, 120rem);
+    --font-ui: system-ui, -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    --font-serif: Baskerville, Palatino Linotype, serif;
 }
 
-
-p{
-    margin-bottom: 0!important;
-    opacity: .75!important
+body {
+    margin: 0;
+    font: 100%/1.4 var(--font-ui);
 }
 
-span{
-    margin-bottom: 0!important;
-    opacity: .75!important
+a {
+    color: hsl(220 15% 40%);
 }
 
-h3{
-    margin-bottom: 0!important
+    a:not(:hover) {
+        text-decoration: none;
+    }
+
+select, input, button {
+    font: inherit;
+    box-sizing: border-box;
+    line-height: 1;
+    border-radius: .3rem;
+    border: none;
+    padding: .3rem .5rem;
 }
 
-.grid-container {
+select {
+    padding: .2em;
+    background: hsl(0 0% 100% / .8);
+}
+
+input {
+    border: 2px solid hsl(var(--gray-hs) 90%);
+}
+
+button {
+    background: hsl(var(--gray-hs) 92%);
+    padding: .5em .6em;
+    cursor: pointer;
+}
+
+button:hover {
+    background: hsl(var(--gray-hs) 85%);
+}
+
+body > header,
+main,
+body > footer {
+    padding: 0 max(1rem, 50vw - var(--page-width) / 2);
+}
+
+body > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    background: hsl(var(--gray-hs) 90%);
+}
+
+    body > header > h1 {
+
+    }
+
+    body > header > h1::before {
+        content: "🗺 ";
+    }
+
+    @keyframes nope {
+        20% {
+            transform: translate(2em);
+        }
+        40% {
+            transform: translate(-2em);
+        }
+        60% {
+            transform: translate(1em);
+        }
+        80% {
+            transform: translate(-1em);
+        }
+    }
+
+.country {
     display: grid;
-    grid-template-columns: auto auto;
-    grid-auto-rows: 1fr 1fr
+    grid-template-columns: 12rem 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    border: 3px solid var(--color, hsl(var(--gray-hs) 90%));
+    border-radius: .3em;
+    margin-bottom: .5em;
 }
 
+.country.status-:is(.tries-1, .tries-3) {
+    animation: nope calc(.5s + var(--tries) * .01s);
+}
+
+.country.status-correct {
+    --color: var(--color-green);
+}
+
+.country.status-wrong,
+.country.status-gaveup {
+    --color: var(--color-red);
+}
+
+    .country::before {
+        position: absolute;
+        top: -.5em;
+        right: -.5em;
+        font-size: 200%;
+        padding: .5em;
+        width: 1em;
+        line-height: 1;
+        border-radius: 50%;
+        background: radial-gradient(hsl(0 0% 100% / .6), hsl(0 0% 100% / .1)) var(--color);
+        transform: rotate(10deg);
+    }
+
+    .country.status-correct::before {
+        content: "🎉";
+    }
+
+    .country.status-wrong::before {
+        content: "👎🏼";
+    }
+
+    .country.status-gaveup::before {
+        content: "💔";
+    }
+
+    .country img {
+        width: 100%;
+        height: auto;
+        box-shadow: 1px 1px 4px hsl(var(--gray-hs) 50% / .5);
+    }
+
+    .country footer {
+        margin-top: 1em;
+    }
+
+    .status {
+        font-weight: bold;
+        color: var(--color);
+    }
+
+.hint {
+
+}
+
+    .hint > span {
+        font-weight: bolder;
+    }
+
+.guess {
+
+}
+
+    .guess input {
+        display: block;
+    }
+
+    .guess .answer {
+        display: flex;
+        gap: .4em;
+        font-size: 150%;
+    }
+
+    .give-up {
+        --color: var(--color-red);
+    }
+
+    .check-answer {
+        --color: var(--color-green);
+    }
+
+    .guess button {
+        padding: .3rem .8rem;
+        border: 1px solid var(--color);
+        color: var(--color);
+        --background-white: .9;
+        background: linear-gradient(to bottom, hsl(0 0% 100% / var(--background-white)), hsl(0 0% 100% / var(--background-white))) var(--color);
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .guess button:hover {
+        --background-white: .8;
+    }
+
+#results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    margin-top: 1rem;
+}
+
+details summary {
+    font-size: 150%;
+    font-weight: bold;;
+}
+
+details .country {
+    grid-template-columns: 6rem 1fr;
+    font-size: 87.5%;
+}
+
+    details .country h3 {
+        margin: 0;
+        font-size: 150%;
+    }

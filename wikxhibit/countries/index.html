@@ -3,76 +3,117 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Countries</title>
+    <title>Guess the country!</title>
     <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
-    <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">'
+    <!-- <script type="module" src="https://shapir.org/mavo-shapir.js"></script> -->
+    <script type="module" src="http://localhost:8002/Shapir/shapir/mavo-shapir.js"></script>
     <link href="style.css" rel="stylesheet">
 </head>
 
-<body>
-    <main class="container">
-        <h1>List of Countries</h1>
-        <hr>
+<!-- Using local data for development, we need to remove this before wide deployment -->
+<body mv-app="countries" mv-bar="none" mv-source="local-data.json"
+      mv-source="shapir" mv-source-service="wikidata" mv-init-language="en"
+      mv-source-instance-of="country" mv-source-continent="[continent]" mv-source-numberOfItems="10">
+    <header>
+        <h1>Guess the country!</h1>
 
-        <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-            mv-source-instance-of="country" mv-source-continent="[continent]" mv-source-numberOfItems="10">
+        <label>
+            Continent:
+            <select class="form-select" property="continent">
+                <option selected>Europe</option>
+                <option>South America</option>
+                <option>North America</option>
+                <option>Central America</option>
+                <option>Asia</option>
+                <option>Africa</option>
+                <!-- <option>Australia</option>
+                <option>Antarctica</option>
+                <option>Caribbean</option>
+                <option>Oceania</option>
+                <option>West Africa</option> -->
+            </select>
+        </label>
+    </header>
+    <main>
+        <header>
+            <h2>Current score: [sum(score)] </h2>
+        </header>
+        <section id="upcoming">
+            <article property="items" mv-multiple class="country status-[status] tries-[tries]" style="--tries: [tries]" mv-if="$index = 0">
+                <img property="flag" src="[last(flagImage)]" width="30%">
+                <div class="info">
+                    <form mv-action="set(tries, tries + 1), setif(guess = label, status, 'correct'), setif(guess != label and tries = 3, status, 'wrong')">
+                        <label class="guess">
+                            Can you guess which country this is?
+                            <span class="answer">
+                                <input property="guess" autofocus>
+                                <button class="check-answer" mv-if="!status">✅ Check answer</button>
+                                <button class="next" mv-if="status" mv-action="move($item, if(status = 'correct', win, loss))">Next ▸</button>
+                                <button type="button" class="give-up" mv-if="!status" mv-action="set(status, 'gaveup'), set(guess, label)">💔 Give up</button>
+                            </span>
+                        </label>
+                    </form>
+                    <p class="status" mv-if="status or tries > 0" property="statusText">
+                        [if(status = 'correct', "Yes! Guessed it correctly") ]
+                        [if(status = 'wrong', "Could not guess it correctly") ]
+                        [if(status = 'gaveup', "Gave up") ]
+                        [if(!status, "Nope. Still guessing") ]
+                        after [tries + 0] tries and [hintsDisplayed + 0] hints
+                    </p>
 
-            <form mv-action="set(continentValue, continent)">
-                <label>Continent:
-                    <select class="form-select" property="continent">
-                        <option selected>Europe</option>
-                        <option>South America</option>
-                        <option>North America</option>
-                        <option>Central America</option>
-                        <option>Asia</option>
-                        <option>Africa</option>
-                        <!-- <option>Australia</option>
-                        <option>Antarctica</option>
-                        <option>Caribbean</option>
-                        <option>Oceania</option>
-                        <option>West Africa</option> -->
-                    </select>
-                </label>
-            </form>
+                    <meta property="status" />
+                    <meta property="hintsDisplayed" />
+                    <meta property="tries" />
+                    <meta property="score" content="[if (status = 'correct', 20 - hintsDisplayed - tries * 3, 0)]" />
 
-            <div class="grid-container">
-                <div property="items" mv-multiple class=" grid-item">
+                    <p class="hint" property="highestPoint" mv-if="hintsDisplayed > 0">
+                        Its highest Point is <span property="label"></span>.
+                    </p>
 
-                    <a href="[itemURL]" target="_blank"
-                        class="list-group-item list-group-item-action d-flex gap-3 py-3">
-                        <img src="[first(flagImage)]" width="30%">
-                        <div class="info">
-                            <h3 property="label"></h3>
-                            <p property="description"></p>
+                    <p class="hint" property="lowestPoint" mv-if="hintsDisplayed > 1">
+                        Its lowest point is <span property="label"></span>.
+                    </p>
 
-                            <div property="capital">
-                                <p><strong><em>Capital:</em></strong>
-                                    <span property="label"></span>
-                                </p>
-                            </div>
+                    <p class="hint" mv-if="hintsDisplayed > 2">
+                        It’s a <span property="description"></span>.
+                    </p>
 
-                            <div property="highestPoint">
-                                <p><strong><em>Highest Point:</em></strong>
-                                    <span property="label"></span>
-                                </p>
-                            </div>
+                    <p class="hint" property="capital" mv-if="hintsDisplayed > 3">
+                        Its capital is <span property="label"></span>.
+                    </p>
 
-                            <div property="lowestPoint">
-                                <p><strong><em>Lowest Point:</em></strong>
-                                    <span property="label"></span>
-                                </p>
-                            </div>
+                    <a href="[itemURL]" target="_blank" mv-if="status">Read more about [label] on Wikidata</a>
 
-                        </div>
-                    </a>
+                    <footer>
+                        <button class="show-hint" mv-action="set(hintsDisplayed, hintsDisplayed + 1)" mv-if="!status">Show hint</button>
 
+                    </footer>
                 </div>
-            </div>
-
-        </div>
-
+            </article>
+        </section>
+        <section id="results">
+            <details id="correct-guesses" open>
+                <summary>Guessed [count(win)] countries correctly</summary>
+                <article property="win" mv-multiple class="country status-[status]" mv-initial-items="0">
+                    <img property="flag">
+                    <div class="info">
+                        <h3 property="label"></h3>
+                        <p class="status" mv-if="status" property="statusText"></p>
+                    </div>
+                </article>
+            </details>
+            <details id="wrong-guesses" open>
+                <summary>Could not guess [count(loss)] countries </summary>
+                <article property="loss" mv-multiple class="country status-[status]" mv-initial-items="0">
+                    <img property="flag">
+                    <div class="info">
+                        <h3 property="label"></h3>
+                        <p class="status" mv-if="status" property="statusText"></p>
+                    </div>
+                </article>
+            </details>
+        </section>
     </main>
 </body>
 
