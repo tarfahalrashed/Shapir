@@ -3,21 +3,24 @@ import shapir, {include} from "./shapir.js";
 
 Mavo.dependencies.push(shapir());
 
-Mavo.Backend.register($.Class({
-    extends: Mavo.Backend,
-    id: "Shapir",
-    constructor: function(url, o) {
+Mavo.Backend.register(class Shapir extends Mavo.Backend {
+    id = "Shapir"
+
+
+    constructor (url, o) {
+        super(url, o);
+
         this.permissions.on(["read"]);
         this.update(url, o);
         this.ready = shapir();
-    },
+    }
 
-    update: function(url, o) {
-        this.super.update.call(this, url, o);
+    update (url, o) {
+        super.update(url, o);
         Object.assign(this, o);
-    },
+    }
 
-    get: async function(url) {
+    async get (url) {
         if (this.service){// I added this silly if to avoid returning anything if I used mv-value. Not the best way to handle this case
 
             if(this.id !="Shapir" && this.service!="wikidata"){ //Get an object by ID (for search ignore this.id="Shapir")
@@ -60,13 +63,12 @@ Mavo.Backend.register($.Class({
             }
             return await uri(this.uri, lang);
         }
-    },
-
-    static: {
-        // Mandatory and very important! This determines when your backend is used.
-        // value: The mv-storage/mv-source/mv-init value
-        test: function(value) {
-            return value.startsWith("shapir");
-        }
     }
-}));
+
+    // Mandatory and very important! This determines when your backend is used.
+    // value: The mv-storage/mv-source/mv-init value
+    static test (value) {
+        return value.startsWith("shapir");
+    }
+
+});
