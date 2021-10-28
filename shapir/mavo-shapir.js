@@ -1,4 +1,4 @@
-import {wikidata, uri, queryWikidata} from "https://wikxhibit.org/wikidata.js" //../wikxhibit/wikidata.js";
+import {initWikidata, wikidata, uri, queryWikidata} from "https://wikxhibit.org/wikidata.js" //../wikxhibit/wikidata.js";
 import shapir, {include} from "./shapir.js";
 
 Mavo.dependencies.push(shapir());
@@ -25,9 +25,12 @@ Mavo.Backend.register($.Class({
                 return ret;
             }else if(this.service=="wikidata"){
                 if(this.id !="Shapir"){
+                    initWikidata();
                     return await wikidata(this.id, this.language);
+
                 }else{
-                    // search wikidata with parameters
+                    // query wikidata with parameters
+                    initWikidata();
                     return await queryWikidata(this);
                 }
             }else{ //Search one or multiple sites
@@ -37,10 +40,6 @@ Mavo.Backend.register($.Class({
 
                     services.map((service) => {
                         promises.push(window[service]['search'](this.search, this));
-                        // I know that "this" includes "this.search" but my global function expects a positional argument for search and an object
-                        // e.g. seatgeek.search('Music', {'city': 'New York', 'country': 'US'})
-                        // My global function already checks if the passed parameters are correct (can be used with the API endpoint).
-                        // So sending "this" is fine because the function will only take the relevant parameters and ignore the rest
                     })
 
                     return Promise.all(promises).then(response => {return response})

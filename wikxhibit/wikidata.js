@@ -1,8 +1,7 @@
 let lang = "en", externalIds = {}, sites = [], apis, searchTerm = "", numItems = 50, tempObjects = {}, firstGetObject = true;
 
 
-export async function wikidata(itemID, lang) {
-
+export async function initWikidata() {
     //fetch external identifiers
     fetch("https://raw.githubusercontent.com/tarfahalrashed/Shapir/main/functions/data.json")
         .then(response => { return response.json() })
@@ -20,11 +19,14 @@ export async function wikidata(itemID, lang) {
     //fetch all apis from ScrAPIr
     fetch('https://superapi-52bc2.firebaseio.com/apis.json')
         .then(response => { return response.json() })
-        .then(scrapirApis => { apis = scrapirApis; });
+        .then(scrapirApis => {
+            apis = scrapirApis;
+        })
+}
 
+export async function wikidata(itemID, lang) {
 
     let cache = new Map();
-
     async function fetchWithCache(id) {
         if (cache.has(id)) {
             return cache.get(id);
