@@ -293,7 +293,7 @@ async function getProperties(e) {
                             var listProps = props.search
                             for (var i = 0; i < listProps.length; ++i) {
                                 if (listProps[i].label == property) {
-                                    // if (listProps[i].match.text == property) {
+                                    console.log("value: ", value)
                                     propertyObj = {
                                         id: listProps[i].id,
                                         value: value
