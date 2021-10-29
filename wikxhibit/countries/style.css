@@ -348,13 +348,13 @@ details .country {
     color: white;
     text-align: center;
     line-height: 1;
-
 }
 
     #total-score > svg {
         position: absolute;
         inset: 1em;
         font-size: 50%;
+        overflow: visible;
     }
 
     #total-score path {
