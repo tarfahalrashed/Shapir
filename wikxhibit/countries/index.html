@@ -9,6 +9,7 @@
     <!-- <script type="module" src="https://shapir.org/mavo-shapir.js"></script> -->
     <script type="module" src="http://localhost:8002/Shapir/shapir/mavo-shapir.js"></script>
     <link href="style.css" rel="stylesheet">
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🗺</text></svg>'>
 </head>
 
 <!-- Using local data for development, we need to remove this before wide deployment -->
@@ -37,10 +38,16 @@
     </header>
     <main>
         <header>
-            <h2>Current score: [sum(score)] </h2>
+            <h2 id="total-score">
+                <svg viewBox="0 0 100 100">
+                    <path d="M 0,50 a 50,50 0 1,1 0,.001" id="textpath"></path>
+                    <text transform="rotate(-90,50,50)"><textPath startOffset="50%" href="#textpath">Total Score</textPath></text>
+                </svg>
+                <strong>[sum(score)]</strong>
+            </h2>
         </header>
-        <section id="upcoming">
-            <article property="items" mv-multiple class="country status-[status] tries-[tries]" style="--tries: [tries]" mv-if="$index = 0">
+        <section id="current">
+            <article property="items" mv-multiple class="country status-[status or 'playing'] tries-[tries]" style="--tries: [tries]" mv-if="$index = 0">
                 <img property="flag" src="[last(flagImage)]" width="30%">
                 <div class="info">
                     <form mv-action="set(tries, tries + 1), setif(guess = label, status, 'correct'), setif(guess != label and tries = 3, status, 'wrong')">
@@ -48,9 +55,9 @@
                             Can you guess which country this is?
                             <span class="answer">
                                 <input property="guess" autofocus>
-                                <button class="check-answer" mv-if="!status">✅ Check answer</button>
-                                <button class="next" mv-if="status" mv-action="move($item, if(status = 'correct', win, loss))">Next ▸</button>
-                                <button type="button" class="give-up" mv-if="!status" mv-action="set(status, 'gaveup'), set(guess, label)">💔 Give up</button>
+                                <button class="outlined-button check-answer" mv-if="!status">Check answer</button>
+                                <button class="outlined-button next" mv-if="status" mv-action="move($item, if(status = 'correct', win, loss))">Next</button>
+                                <button type="button" class="outlined-button give-up" mv-if="!status" mv-action="set(status, 'gaveup'), set(guess, label)">Give up</button>
                             </span>
                         </label>
                     </form>
@@ -65,7 +72,6 @@
                     <meta property="status" />
                     <meta property="hintsDisplayed" />
                     <meta property="tries" />
-                    <meta property="score" content="[if (status = 'correct', 20 - hintsDisplayed - tries * 3, 0)]" />
 
                     <p class="hint" property="highestPoint" mv-if="hintsDisplayed > 0">
                         Its highest Point is <span property="label"></span>.
@@ -83,11 +89,11 @@
                         Its capital is <span property="label"></span>.
                     </p>
 
-                    <a href="[itemURL]" target="_blank" mv-if="status">Read more about [label] on Wikidata</a>
+                    <div class="score" property="score">[if (status = 'correct', 20 - hintsDisplayed - (tries - 1) * 3)]</div>
 
                     <footer>
-                        <button class="show-hint" mv-action="set(hintsDisplayed, hintsDisplayed + 1)" mv-if="!status">Show hint</button>
-
+                        <button class="show-hint" mv-action="set(hintsDisplayed, hintsDisplayed + 1)" mv-if="!status and hintsDisplayed < 4">Show hint</button>
+                        <a class="read-more" href="[itemURL]" target="_blank" mv-if="status">Read more about [label] on Wikidata</a>
                     </footer>
                 </div>
             </article>
@@ -100,6 +106,7 @@
                     <div class="info">
                         <h3 property="label"></h3>
                         <p class="status" mv-if="status" property="statusText"></p>
+                        <div class="score" property="score"></div>
                     </div>
                 </article>
             </details>
@@ -110,6 +117,7 @@
                     <div class="info">
                         <h3 property="label"></h3>
                         <p class="status" mv-if="status" property="statusText"></p>
+                        <div class="score" property="score"></div>
                     </div>
                 </article>
             </details>

@@ -1,10 +1,19 @@
 :root {
-    --color-green: hsl(80 80% 40%);
-    --color-red: hsl(0 80% 45%);
+    /* Both green and red below chosen to have exactly the same OKLCH lightness (0.67) */
+    --color-green: hsl(80 90% 35%);
+    --color-red: hsl(0 70% 65%);
     --gray-hs: 200 10%;
     --page-width: clamp(80rem, 70vw, 120rem);
     --font-ui: system-ui, -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     --font-serif: Baskerville, Palatino Linotype, serif;
+
+    --white-overlay-30: linear-gradient(hsl(0 0% 100% / .3), hsl(0 0% 100% / .3));
+    --white-overlay-40: linear-gradient(hsl(0 0% 100% / .4), hsl(0 0% 100% / .4));
+    --white-overlay-50: linear-gradient(hsl(0 0% 100% / .5), hsl(0 0% 100% / .5));
+    --white-overlay-60: linear-gradient(hsl(0 0% 100% / .6), hsl(0 0% 100% / .6));
+    --white-overlay-75: linear-gradient(hsl(0 0% 100% / .75), hsl(0 0% 100% / .75));
+    --white-overlay-80: linear-gradient(hsl(0 0% 100% / .8), hsl(0 0% 100% / .8));
+    --white-overlay-90: linear-gradient(hsl(0 0% 100% / .9), hsl(0 0% 100% / .9));
 }
 
 body {
@@ -14,6 +23,8 @@ body {
 
 a {
     color: hsl(220 15% 40%);
+    font-weight: bolder;
+    mix-blend-mode: multiply;
 }
 
     a:not(:hover) {
@@ -24,7 +35,7 @@ select, input, button {
     font: inherit;
     box-sizing: border-box;
     line-height: 1;
-    border-radius: .3rem;
+    border-radius: .3em;
     border: none;
     padding: .3rem .5rem;
 }
@@ -39,13 +50,18 @@ input {
 }
 
 button {
-    background: hsl(var(--gray-hs) 92%);
-    padding: .5em .6em;
+    background: hsl(var(--gray-hs) 50% / .2);
+    padding: .6em .8em;
     cursor: pointer;
+    font-size: 87.5%;
 }
 
 button:hover {
-    background: hsl(var(--gray-hs) 85%);
+    background: hsl(var(--gray-hs) 50% / .35);
+}
+
+button:active {
+    transform: scale(.95);
 }
 
 body > header,
@@ -70,33 +86,52 @@ body > header {
         content: "🗺 ";
     }
 
-    @keyframes nope {
-        20% {
-            transform: translate(2em);
-        }
-        40% {
-            transform: translate(-2em);
-        }
-        60% {
-            transform: translate(1em);
-        }
-        80% {
-            transform: translate(-1em);
-        }
+@keyframes nope {
+    20% {
+        transform: translate(2em);
     }
+    40% {
+        transform: translate(-2em);
+    }
+    60% {
+        transform: translate(1em);
+    }
+    80% {
+        transform: translate(-1em);
+    }
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+    }
+}
 
 .country {
     display: grid;
     grid-template-columns: 12rem 1fr;
     gap: 1rem;
     padding: 1rem;
-    border: 3px solid var(--color, hsl(var(--gray-hs) 90%));
-    border-radius: .3em;
-    margin-bottom: .5em;
+    --color: hsl(var(--gray-hs) 70%);
+    background: var(--white-overlay-80), var(--color);
+    border-radius: .5em;
+    margin: 1em 0;
+    transition: .3s;
 }
 
-.country.status-:is(.tries-1, .tries-3) {
-    animation: nope calc(.5s + var(--tries) * .01s);
+.country:where(.tries-1, .tries-2, .tries-3):where(.status-playing, .status-wrong) {
+    animation: nope .6s;
+}
+
+/* We add a new animation each time, to trigger it without removing the class
+   See https://drafts.csswg.org/css-animations/#:~:text=to%20become%20the%20second%20animation%20in%20the%20list
+ */
+.country.tries-2 {
+    animation-name: nope, nope;
+}
+
+.country.tries-3 {
+    animation-name: nope, nope, nope;
 }
 
 .country.status-correct {
@@ -108,29 +143,71 @@ body > header {
     --color: var(--color-red);
 }
 
-    .country::before {
-        position: absolute;
-        top: -.5em;
-        right: -.5em;
-        font-size: 200%;
-        padding: .5em;
-        width: 1em;
-        line-height: 1;
-        border-radius: 50%;
-        background: radial-gradient(hsl(0 0% 100% / .6), hsl(0 0% 100% / .1)) var(--color);
-        transform: rotate(10deg);
-    }
 
-    .country.status-correct::before {
+
+    #current .country:where(.status-playing, .status-correct)::before {
         content: "🎉";
+        position: absolute;
+        top: 1rem;
+        right: 50%;
+        z-index: 1;
+        text-align: center;
+        font-size: 500%;
+        transform: scale(0);
+        transition: .5s cubic-bezier(.2,.2,.7,2);
     }
 
-    .country.status-wrong::before {
-        content: "👎🏼";
+    #current .country.status-correct::before {
+        transform: scale(1.5);
+        animation: fade-out .4s .5s both;
     }
 
-    .country.status-gaveup::before {
+    .country .score {
+        position: absolute;
+        top: -.7em;
+        right: -.7em;
+        display: flex !important; /* Override Mavo's display: none when this is empty */
+        align-items: center;
+        justify-content: center;
+        --size: calc(4rem);
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        background: var(--color);
+        transform: rotate(10deg);
+        color: white;
+        font-size: 150%;
+        letter-spacing: -.04em;
+        font-weight: bold;
+        transition: .4s transform;
+    }
+
+    .country.status-wrong .score,
+    .country.status-gaveup .score {
+        font-size: 200%;
+        background-image: var(--white-overlay-30);
+        text-shadow: 0 0 .3em white;
+    }
+
+    .country.status-correct .score::before {
+        content: "+";
+        text-indent: -.2em;
+    }
+
+    .country.status-wrong .score::before {
+        content: "👎🏾";
+    }
+
+    .country.status-gaveup .score::before {
         content: "💔";
+    }
+
+    .country.status-playing .score {
+        transform: scale(0.01);
+    }
+
+    .country p {
+        margin-top: .875em;
     }
 
     .country img {
@@ -146,6 +223,11 @@ body > header {
     .status {
         font-weight: bold;
         color: var(--color);
+        filter: brightness(90%);
+    }
+
+    .country.status-correct .status {
+        text-shadow: 0 0 .1em white;
     }
 
 .hint {
@@ -171,35 +253,69 @@ body > header {
     }
 
     .give-up {
+        --icon: '💔';
         --color: var(--color-red);
     }
 
     .check-answer {
+        --icon: '✅';
+        --icon-filter: hue-rotate(-30deg);
         --color: var(--color-green);
     }
 
-    .guess button {
-        padding: .3rem .8rem;
-        border: 1px solid var(--color);
-        color: var(--color);
-        --background-white: .9;
-        background: linear-gradient(to bottom, hsl(0 0% 100% / var(--background-white)), hsl(0 0% 100% / var(--background-white))) var(--color);
-        font-size: 1rem;
-        font-weight: bold;
+    .next {
+        --icon-after: '▸'
     }
 
-    .guess button:hover {
-        --background-white: .8;
-    }
+.outlined-button {
+    padding: .3rem .8rem;
+    color: var(--color);
+    border-radius: .3rem;
+    background: var(--white-overlay-90) var(--color);
+    font-size: 1rem;
+    font-weight: bold;
+    transition: box-shadow, color;
+    transition-duration: .1s;
+    transition-timing-function: ease-in;
+    box-shadow: 0 0 0 2px var(--color) inset;
+}
+
+.outlined-button::before {
+    content: var(--icon) " ";
+    filter: var(--icon-filter);
+}
+
+.outlined-button::after {
+    content: " " var(--icon-after);
+}
+
+.outlined-button:hover {
+    box-shadow: 0 0 0 2em var(--color) inset;
+    color: white;
+}
+
+.outlined-button:hover::before {
+    filter: var(--icon-filter, ) grayscale() invert() brightness(120%);
+    mix-blend-mode: screen;
+}
 
 #results {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: .5rem;
+    gap: 1rem;
     margin-top: 1rem;
 }
 
+#correct-guesses {
+    --color: var(--color-green);
+}
+
+#wrong-guesses {
+    --color: var(--color-red);
+}
+
 details summary {
+    color: var(--color);
     font-size: 150%;
     font-weight: bold;;
 }
@@ -212,4 +328,52 @@ details .country {
     details .country h3 {
         margin: 0;
         font-size: 150%;
+    }
+
+.read-more::after {
+    content: " ↗️";
+}
+
+#total-score {
+    position: relative;
+    width: 8em;
+    height: 8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: .3em solid white;
+    border-radius: 50%;
+    margin: -4em auto 0;
+    background: hsl(var(--gray-hs) 20%);
+    color: white;
+    text-align: center;
+    line-height: 1;
+
+}
+
+    #total-score > svg {
+        position: absolute;
+        inset: 1em;
+        font-size: 50%;
+    }
+
+    #total-score path {
+        fill: none;
+    }
+
+    #total-score textPath {
+        baseline-shift: -.7em;
+    }
+
+    #total-score text {
+        fill: currentColor;
+        text-anchor: middle;
+        text-transform: uppercase;
+        font-weight: 400;
+    }
+
+    #total-score strong {
+        display: block;
+        font-size: 400%;
+        font-weight: 100;
     }
