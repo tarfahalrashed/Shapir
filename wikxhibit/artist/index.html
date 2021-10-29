@@ -7,7 +7,7 @@
     <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
     <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
-    <link rel="stylesheet" href="/artist/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -28,8 +28,7 @@
                 <div class="profile_identity">
                     <div class="profile_identity-text">
                         <h1>
-                            <!-- TODO: Why does GeniusArtistID return an array? It should be just one id -->
-                            <span property="label"></span><a href="https://genius.com/artists/[first(GeniusArtistID)]" class="verified"></a>
+                            <span property="label"></span><a href="https://genius.com/artists/[GeniusArtistID]" class="verified"></a>
                         </h1>
 
                         <div class="profile_identity-alternate_names">

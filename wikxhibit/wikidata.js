@@ -147,9 +147,13 @@ export async function wikidata(itemID, lang) {
                                 objItem[key] = [];
                                 for (let i = 0; i < value.length; ++i) {
                                     //make sure that values are unique
-                                    if (Object.values(objItem).indexOf(value[i].value) == -1) {
+                                    if(!objItem[key].includes(value[i].value)){
                                         objItem[key].push(value[i].value);
                                     }
+                                }
+                                if(objItem[key].length==1){
+                                    let changeValueToString = value[0].value;
+                                    objItem[key] = changeValueToString.toString();
                                 }
                             }
                         }
