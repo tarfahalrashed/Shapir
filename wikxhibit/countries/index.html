@@ -6,14 +6,14 @@
     <title>Guess the country!</title>
     <script src="https://get.mavo.io/stable/mavo.js"></script>
     <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
-    <!-- <script type="module" src="https://shapir.org/mavo-shapir.js"></script> -->
-    <script type="module" src="http://localhost:8002/Shapir/shapir/mavo-shapir.js"></script>
+    <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
+    <!-- <script type="module" src="http://localhost:8002/Shapir/shapir/mavo-shapir.js"></script> -->
     <link href="style.css" rel="stylesheet">
     <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🗺</text></svg>'>
 </head>
 
 <!-- Using local data for development, we need to remove this before wide deployment -->
-<body mv-app="countries" mv-bar="none" xmv-source="local-data.json"
+<body mv-app="countries" mv-bar="none" mv-source="local-data.json"
       mv-source="shapir" mv-source-service="wikidata" mv-init-language="en"
       mv-source-instance-of="country" mv-source-continent="[continent]" mv-source-numberOfItems="10">
     <header>
