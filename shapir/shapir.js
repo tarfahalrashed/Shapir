@@ -249,7 +249,7 @@ export default async function shapir(){
                                 }
                             })//firebase
                             .then(url => {
-                                console.log("url: ", url);
+                                ////console.log("url: ", url);
                                 return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                             .then(o => {
                                 // console.log("result: ", o)
@@ -419,7 +419,7 @@ export default async function shapir(){
 
                                                 })//firebase
                                                 .then(url => {
-                                                    console.log("url: ", url);
+                                                    //console.log("url: ", url);
                                                     return new Promise(function(resolve, reject) {resolve(fetch(url)) })   })
 
                                                 }
@@ -597,7 +597,7 @@ export default async function shapir(){
 
                                                 })//firebase
                                                 .then(url => {
-                                                    console.log("url: ", url);
+                                                    //console.log("url: ", url);
                                                     return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                             }
                                             });
@@ -797,7 +797,7 @@ export default async function shapir(){
 
                                                 })//firebase
                                                 .then(url => {
-                                                    console.log("url: ", url);
+                                                    //console.log("url: ", url);
                                                     return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                             }
                                             });
@@ -934,7 +934,7 @@ export default async function shapir(){
 
                                             })//firebase
                                             .then(url => {
-                                                console.log("url: ", url);
+                                                //console.log("url: ", url);
                                                 return new Promise(function(resolve, reject) {resolve(fetch(url)) })   })
 
                                             }
@@ -1073,7 +1073,7 @@ export default async function shapir(){
 
                                                 })//firebase
                                                 .then(url => {
-                                                    console.log("url: ", url);
+                                                    //console.log("url: ", url);
                                                     return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
 
                                             }////////////
@@ -1269,7 +1269,7 @@ export default async function shapir(){
                             })//firebase
 
                             .then(url => {
-                                console.log("url: ", url);
+                                //console.log("url: ", url);
                                 return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                         }//add
 
@@ -1462,7 +1462,7 @@ export default async function shapir(){
 
                             })//firebase
                             .then(url => {
-                                console.log("url: ", url);
+                                //console.log("url: ", url);
                                 return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                             .then(o => {
                                 let otherFields = []
@@ -1721,7 +1721,7 @@ export default async function shapir(){
 
                                                 })//firebase
                                                 .then(url => {
-                                                    console.log("url: ", url);
+                                                    //console.log("url: ", url);
                                                     return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                             }
                                             });
@@ -1935,7 +1935,7 @@ export default async function shapir(){
 
                                                 })//firebase
                                                 .then(url => {
-                                                    console.log("url: ", url);
+                                                    //console.log("url: ", url);
                                                     return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                             }
                                             });
@@ -2234,7 +2234,7 @@ export default async function shapir(){
 
                                                 })//firebase
                                                 .then(url => {
-                                                    console.log("url: ", url);
+                                                    //console.log("url: ", url);
                                                     return new Promise(function(resolve, reject) {resolve(fetch(url)) })
                                                     })
 
@@ -2414,7 +2414,7 @@ export default async function shapir(){
 
                                                 })//firebase
                                                 .then(url => {
-                                                    console.log("url: ", url);
+                                                    //console.log("url: ", url);
                                                     return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                             }
                                             });
@@ -2578,7 +2578,7 @@ export default async function shapir(){
 
                                             })//firebase
                                             .then(url => {
-                                                console.log("url: ", url);
+                                                //console.log("url: ", url);
                                                 return new Promise(function(resolve, reject) {resolve(fetch(url)) })   })
 
                                             }
@@ -2758,7 +2758,7 @@ export default async function shapir(){
 
                                             })//firebase
                                             .then(url => {
-                                                console.log("url: ", url);
+                                                //console.log("url: ", url);
                                                 return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                                         }
                                         });
