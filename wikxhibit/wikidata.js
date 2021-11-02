@@ -111,7 +111,8 @@ export async function wikidata(itemID, lang) {
                         });
 
                         if (output in obj) {
-                            if (Object.values(obj).indexOf(results[i].ps_Label.value) == -1) {//make sure that values are unique
+                            // if (Object.values(obj).indexOf(results[i].ps_Label.value) == -1) {
+                            if (obj[output].map(a => a.id).indexOf(results[i].ps_.value)) {//make sure that values are unique
                                 obj[output].push({
                                     id: results[i].ps_.value,
                                     value: results[i].ps_Label.value
