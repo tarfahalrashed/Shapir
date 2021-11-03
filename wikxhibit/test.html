@@ -1,34 +1,19 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
 
 <head>
-  <meta charset="UTF-8">
   <script src="https://get.mavo.io/stable/mavo.js"></script>
   <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
   <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
 </head>
 
-<body>
-
-  <div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-    mv-source-instance-of="country" mv-source-continent="South America" mv-source-numberOfItems="10">
-
-    <select class="form-select" property="continent">
-      <option selected>Europe</option>
-      <option>South America</option>
-      <option>North America</option>
-      <option>Central America</option>
-      <option>Asia</option>
-      <option>Africa</option>
-    </select>
-
-    <div proeprty="items" mv-multiple>
-      <h1 property="label"></h1>
-      <p property="description"></p>
-      <img property="flag" src="[last(flagImage)]" width="10%">
-    </div>
-
-  </div>
+<body mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
+  mv-source-instance-of="painting" mv-source-creator="[term]" mv-source-numberOfItems="15">
+    <input property="term" mv-default="Gustav Klimt"/>
+    <article property="items" mv-multiple>
+      <img property="image" />
+      <h5 property="label"></h5>
+    </article>
 
 </body>
 
