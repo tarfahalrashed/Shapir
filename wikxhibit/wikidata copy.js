@@ -24,239 +24,6 @@ export async function initWikidata() {
         })
 }
 
-
-async function wikidataItems(items, itemsQuery, lang) {
-
-    let cache = new Map();
-    async function fetchWithCache(id) {
-        if (cache.has(id)) {
-            return cache.get(id);
-        }
-
-        const promise = wikidata(id, lang)
-        cache.set(id, promise);
-        return promise;
-    }
-
-    function getProxy(v) {
-        let basicId = v.id;
-        let id = basicId.split("/").reverse()[0];
-
-        let objTemp = {}
-        objTemp["label"] = v.value;
-
-        Object.defineProperty(objTemp, "properties", {
-            get: async function () {
-                return await fetchWithCache(id);
-            }
-        });
-
-        let proxy = new Proxy(objTemp, {
-            get: function (objTemp, property) {
-                if (property in objTemp || typeof property === "symbol") {
-                    return objTemp[property];
-                } else {
-                    if (typeof property != 'symbol') {
-                        return Promise.resolve(objTemp["properties"])
-                            .then(function (value) {
-                                if (value[property] == "SyntaxError: The string did not match the expected pattern.") {
-                                    return "";
-                                }
-                                else {
-                                    return value[property];
-                                }
-                            })
-                    }
-                }
-            }
-        });
-
-        return proxy;
-    }
-
-    let obj = {}, objItem = {},objItems=[];
-    return fetch('https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FwdLabel%20%3Fps_Label%20%3Fps_%20%3FwdpqLabel%20%3Fpq_Label%20%3FitemLabel%20%3FitemDescription%20%3FitemAltLabel%20WHERE%20%7B%0A%20%20VALUES%20%3Fitem%20%7B'+itemsQuery+'%7D%0A%20%20%3Fitem%20%3Fp%20%3Fstatement.%0A%20%20%3Fstatement%20%3Fps%20%3Fps_.%0A%20%20%3Fwd%20wikibase%3Aclaim%20%3Fp%3B%0A%20%20%20%20wikibase%3AstatementProperty%20%3Fps.%0A%20%20OPTIONAL%20%7B%0A%20%20%20%20%3Fstatement%20%3Fpq%20%3Fpq_.%0A%20%20%20%20%3Fwdpq%20wikibase%3Aqualifier%20%3Fpq.%0A%20%20%7D%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20"'+lang+'".%20%7D%0A%7D%0AORDER%20BY%20%28%3Fitem%29%20%28%3Fwd%29%20%28%3Fstatement%29%20%28%3Fps%29')
-        .then(response => { return response.json() })
-        .then(data => {//group properties by item
-            let results = data.results.bindings;
-            let result = results.reduce(function (r, a) {
-                r[a.item.value] = r[a.item.value] || [];
-                r[a.item.value].push(a);
-                return r;
-            }, Object.create(null));
-
-            return result;
-        })
-        .then(items => {
-            for (const [key, item] of Object.entries(items)) {
-                obj = {}, objItem = {};
-                for (let i = 0; i < item.length; ++i) {
-                    let input = item[i].wdLabel.value;
-                    let firstWord = true;
-                    let output = input.replace(/(\w+)(?:\s+|$)/g, function (_, word) {
-                        if (firstWord) {
-                            firstWord = false;
-                            return word;
-                        } else {
-                            return word.charAt(0).toUpperCase() + word.substr(1);
-                        }
-                    });
-
-                    if (output in obj) {
-                        if (obj[output].map(a => a.value).indexOf(item[i].ps_Label.value) == -1) {//make sure that values are unique
-                            obj[output].push({
-                                id: item[i].ps_.value,
-                                value: item[i].ps_Label.value
-                            });
-                        }
-                    } else {
-                        obj[output] = [];
-                        obj[output].push({
-                            id: item[i].ps_.value,
-                            value: item[i].ps_Label.value
-                        });
-                    }
-
-                    if (item[i].itemLabel) {
-                        objItem["label"] = item[i].itemLabel.value
-                    }
-                    if (item[i].itemDescription) {
-                        objItem["description"] = item[i].itemDescription.value;
-                    }
-                    if (item[i].itemAltLabel) {
-                        objItem["aliases"] = item[i].itemAltLabel.value;
-                    }
-                    var url = item[i].item.value;
-                    objItem["itemID"] = url.split("/").reverse()[0];
-                    objItem["itemURL"] = item[i].item.value;
-                }
-
-                for (const [key, value] of Object.entries(obj)) {
-                    if (value.length == 1) {
-                        let idQ = value[0].id;
-                        if (idQ.includes("http://www.wikidata.org/entity/Q")) {
-                            objItem[key] = getProxy(value[0]);
-
-                        } else {
-                            objItem[key] = value[0].value;
-                        }
-                    } else {
-                        let idQ = value[0].id;
-                        if (idQ.includes("http://www.wikidata.org/entity/Q")) {
-                            objItem[key] = [];
-                            for (let i = 0; i < value.length; ++i) {
-                                objItem[key].push(getProxy(value[i]));
-                            }
-
-                        } else {
-                            objItem[key] = [];
-                            for (let i = 0; i < value.length; ++i) {
-                                //make sure that values are unique
-                                if(!objItem[key].includes(value[i].value)){
-                                    objItem[key].push(value[i].value);
-                                }
-                            }
-                            if(objItem[key].length==1){
-                                let changeValueToString = value[0].value;
-                                objItem[key] = changeValueToString.toString();
-                            }
-                        }
-                    }
-                }
-                objItems.push(objItem);
-            }
-
-            return objItems;
-        })
-        // .then(itemsProperties => {
-        //     //go over properties
-        //     for(var i=0; i<itemsProperties.length; ++i){
-        //         getShapirProperties(itemsProperties[i], properties);
-
-        //         if(i+1==itemsProperties.length)
-        //             return objItem;
-        //     }
-        // })
-        .then((result) => {
-            // console.log("WikirResult: ", result)
-            return result;
-        });
-}
-
-
-function getShapirProperties(objItem, properties){
-    for (const [key, value] of Object.entries(properties)) {
-        let property = key;
-        for (const [key1, value1] of Object.entries(externalIds)) {
-            let label = externalIds[key1].pLabel;
-            let firstWord = true;
-            let modifiedLabel = label.replace(/(\w+)(?:\s+|$)/g, function (_, word) {
-                if (firstWord) {
-                    firstWord = false;
-                    return word;
-                } else {
-                    return word.charAt(0).toUpperCase() + word.substr(1);
-                }
-            });
-
-            if (property == modifiedLabel) {
-                for (var i = 0; i < sites.length; ++i) {
-                    let currentSite = sites[i]
-                    let pLabel = label.toLowerCase();
-                    if (pLabel.includes(currentSite)) {
-                        let pr = modifiedLabel.split('ID').join('');
-                        // pr = pr.charAt(0).toLowerCase() + pr.slice(1);
-
-                        Object.defineProperty(objItem, pr, {
-                            configurable: true,
-                            get: function () {
-                                let similarity = 0, tempSimialrity, apiEndpoint, mainType, button, code, url, title, curValue;
-                                //get the type in this with this endpoint
-                                return new Promise((resolve, reject) => {
-                                    fetch('https://superapi-52bc2.firebaseio.com/abstractions/' + currentSite + '/objects.json')
-                                        .then(response => { return response.json() })
-                                        .then(objects => {
-                                            if (Array.isArray(value)) {
-                                                curValue = value[0];
-                                            } else {
-                                                curValue = value;
-                                            }
-
-                                            Object.keys(apis).forEach((key, index, arr) => {
-                                                url = apis[key].url;
-                                                title = apis[key].title;
-
-                                                if (url.includes(currentSite)) {
-                                                    //get the descriptiosn of these API endpoints
-                                                    tempSimialrity = checkSimilarity(label.toLowerCase(), title.toLowerCase())
-                                                    if (similarity < tempSimialrity) {
-                                                        similarity = tempSimialrity;
-                                                        apiEndpoint = title;
-                                                    }
-                                                }
-
-                                                if (!arr[index + 1]) {
-                                                    Object.keys(objects).forEach(object => {
-                                                        if (objects[object].construct.self) {
-                                                            if (objects[object].construct.self.endpoint == apiEndpoint) {
-                                                                mainType = object;
-                                                                resolve(window[currentSite][mainType](curValue));
-                                                            }
-                                                        }
-                                                    })
-                                                }
-                                            });
-                                        })
-                                });
-                            }
-                        });
-                    }
-                }
-            }
-        }
-    }
-}
-
 export async function wikidata(itemID, lang) {
 
     let cache = new Map();
@@ -473,6 +240,7 @@ export async function wikidata(itemID, lang) {
             // console.log("WikirResult: ", result)
             return result;
         });
+
 }
 
 
@@ -519,8 +287,9 @@ async function getProperties(e) {
                 } else if (key == "language") {
                     lang = value;
                 } else {
+                    // if (key != "search" && key != "language") {
                     var prom = fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property&origin=*")
-                        .then(response => { return response.json(); })
+                        .then(response => { return response.json() })
                         .then(props => {
                             let listProps = props.search;
                             for (var i = 0; i < listProps.length; ++i) {
@@ -529,7 +298,7 @@ async function getProperties(e) {
                                         id: listProps[i].id,
                                         value: value
                                     };
-                                    return propertyObj;
+                                    return propertyObj
                                 }
                             }
                         });
@@ -552,7 +321,7 @@ async function getProperties(e) {
 
 
 export async function queryWikidata(e) {
-    let query = "", items=[], itemsI=[], itemsQuery='';
+    let query = "", items=[];
     return getProperties(e)
         .then(props => {
             query += 'https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';
@@ -565,7 +334,7 @@ export async function queryWikidata(e) {
                 query += '%3Fitem%20wdt%3A' + props[i].id + '%2Frdfs%3Alabel"' + props[i].value + '"%40en.%0A';
 
                 if (i + 1 == props.length) {
-                    query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2C'+lang+'".%7D%0A%7D%0Alimit%20' + numItems;
+                    query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2Cen".%7D%0A%7D%0Alimit%20' + numItems;
                     // console.log("query: ", query)
                     return fetch(query)
                         .then(response => { return response.json() })
@@ -574,12 +343,10 @@ export async function queryWikidata(e) {
                             for (var i = 0; i < itemsIds.length; ++i) {
                                 var url = itemsIds[i].item.value;
                                 let id = url.split("/").reverse()[0];
-                                // items.push(wikidata(id, lang));
-                                itemsQuery+='wd%3A'+id+'%20';
-                                itemsI.push(id);
+                                items.push(wikidata(id, lang));
+
                                 if (i + 1 == itemsIds.length) {
-                                    // return Promise.all(items);
-                                    return wikidataItems(itemsI, itemsQuery, lang);
+                                    return Promise.all(items);
                                 }
                             }
                         });
