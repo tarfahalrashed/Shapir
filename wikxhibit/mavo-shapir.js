@@ -1,4 +1,4 @@
-import {initWikidata, wikidata, uri, queryWikidata} from "./wikidata.js";
+import {initWikidata, wikidata, queryWikidata} from "./wikidata.js";
 import shapir, {include} from "./shapir.js";
 
 Mavo.dependencies.push(shapir());
@@ -52,9 +52,9 @@ export default class Shapir extends Mavo.Backend {
                 }
             }
         }
-        else { // if uri is provided
-            return await uri(this.uri, this.language || "en");
-        }
+        // else { // if uri is provided
+        //     return await uri(this.uri, this.language || "en");
+        // }
     }
 
     // Mandatory and very important! This determines when your backend is used.

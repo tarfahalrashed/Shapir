@@ -8,7 +8,7 @@ function download(id) {
     // var a = document.querySelector("a");
     var a = document.getElementById(id);
     var urls = [id + "/index.html", id + "/style.css"];
-    console.log(urls)
+    // console.log(urls)
     function request(url) {
         return new Promise(function (resolve) {
             var httpRequest = new XMLHttpRequest();
