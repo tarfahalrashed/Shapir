@@ -61,7 +61,7 @@
     "path-parse": "^1.0.7",
     "puppeteer": "^7.1.0",
     "python-shell": "^2.0.3",
-    "remote": "^0.0.7",
+    "remote": "^0.2.6",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "sentence-similarity": "^3.0.2",
