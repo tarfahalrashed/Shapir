@@ -1,7 +1,6 @@
 let lang = "en", externalIds = {}, sites = [], apis, searchTerm = "", numItems = 50, tempObjects = {}, firstGetObject = true;
 
 
-
 export async function wikxhibit() {
     //fetch external identifiers
     fetch("https://raw.githubusercontent.com/tarfahalrashed/Shapir/main/functions/data.json")
@@ -23,7 +22,6 @@ export async function wikxhibit() {
         .then(scrapirApis => {
             apis = scrapirApis;
         });
-
 
 }
 

@@ -4,9 +4,11 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Create</title>
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
+	<link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="./assets/favicon/site.webmanifest">
+
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<link href="../assets/css/default/app.min.css" rel="stylesheet" />
 	<link href="./assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -16,33 +18,41 @@
 	<link href="./assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
 	<link href="./assets/plugins/@danielfarrell/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet" />
 	<link href="./assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />
-	<link href="./assets/plugins/tag-it/css/jquery.tagit.css" rel="stylesheet" />
+	<!-- <link href="./assets/plugins/tag-it/css/jquery.tagit.css" rel="stylesheet" /> -->
 	<link href="./assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
 	<link href="./assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
 	<link href="./assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
 		rel="stylesheet" />
 	<link href="./assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css" rel="stylesheet" />
-	<link href="./assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet" />
+	<!-- <link href="./assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet" />
 	<link href="./assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet" />
-	<link href="./assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet" />
+	<link href="./assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet" /> -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" rel="stylesheet" />
 	<link href="./assets/css/jsoneditor.css" rel="stylesheet" type="text/css">
 	<link href="./assets/css/prism-dark.css" rel="stylesheet" />
 	<link href="./assets/css/create.css" rel="stylesheet" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> -->
 	<link href="./assets/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
-	<script src="./assets/js/create.js"></script>
+
+	<!-- <script src="./assets/js/create.js"></script> -->
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="./assets/js/autocompleteProp.js"></script>
+	<script src="./assets/js/autocompleteItem.js"></script>
 
 </head>
 
-<body onload="initAutocomplete()">
+<body onload="initAuto(), initAutoItem()">
+<!-- <body> -->
 
 	<!-- begin #page-loader -->
-	<div id="page-loader" class="fade show">
+	<!-- <div id="page-loader" class="fade show">
 		<span class="spinner"></span>
-	</div>
+	</div> -->
 	<!-- end #page-loader -->
 
 	<!-- begin #page-container -->
@@ -81,24 +91,19 @@
 							<h2>Create your Wikidata application</h2>
 							<p>Follow these steps to create your first wikidata application</p>
 							</br>
-
 							<div class="row">
 								<div class="col-6">
 
 									<label class="title">Step 1. Choose Properties</label>
 									<div class="input-group">
 										<table id="propertiesTable" width="100%">
-											<!-- <thead>
-												<th>Property</th>
-												<th>Value</th>
-											</thead> -->
 											<tr>
 												<td>
 													<input class="property form-control" type="text"
 														placeholder="Enter a property">
 												</td>
 												<td>
-													<input class="value form-control" type="text"
+													<input id="itemTags" class="value form-control" type="text"
 														placeholder="Enter a value">
 												</td>
 											</tr>
@@ -241,7 +246,7 @@
 	<script src="./assets/js/prism-json.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
 	<script src="/assets/js/app.min.js"></script>
-	<script src="./assets/plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
+	<!-- <script src="./assets/plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
 	<script src="./assets/plugins/moment/min/moment.min.js"></script>
 	<script src="./assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 	<script src="./assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
@@ -262,7 +267,6 @@
 	<script src="./assets/plugins/highlight.js/highlight.min.js"></script>
 	<script src="http://culmat.github.io/jsTreeTable/treeTable.js"></script>
 	<script src="./assets/js/jquery.treetable.js"></script>
-	<script src="./assets/js/shapir_index.js"></script>
 	<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
@@ -270,7 +274,7 @@
 	<script type="module" src="wikidata.js"></script>
 	<script src="../assets/js/jszip.js"></script>
 	<script src="../assets/js/FileSaver.js"></script>
-	<script src="./assets/js/wikjs.js"></script>
+	<script src="./assets/js/wikjs.js"></script> -->
 
 	<script>
 

@@ -248,6 +248,7 @@ function getPropertiesValues() {
     //get property name
     $('input[type="text"].property').each(function () {
         properties.push($(this).val())
+        propertiesIds.push($(this.name))
     });
     //get property value
     $('input[type="text"].value').each(function () {
@@ -275,12 +276,12 @@ function getPropertiesValues() {
         })
     }
 
-    console.log(propsValues);
+    console.log("propsValues: ", propsValues);
 }
 
 function addPropertyRow() {
-    $("#propertiesTable").append('<tr><td><input class="property form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a property"></td><td><input class="value form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a value"></td></tr>');
-    initAutocomplete();
+    $("#propertiesTable").append('<tr><td><input id="tags" class="property form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a property"></td><td><input class="value form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a value"></td></tr>');
+    // initAutocomplete();
 }
 
 function initAutocomplete() {

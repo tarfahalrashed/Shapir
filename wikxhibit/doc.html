@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <title>Documentation</title>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="./assets/favicon/site.webmanifest">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="https://shapir.org/assets/css/default/app.min.css" rel="stylesheet" />
@@ -124,7 +125,7 @@
             <!-- end header-nav -->
         </div>
         <!-- end #header -->
-        <div id="sidebar" class="sidebar" >
+        <div id="sidebar" class="sidebar" style="width:350px">
             <!-- begin sidebar scrollbar -->
             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
                 <div data-scrollbar="true" data-height="100%" data-init="true"
@@ -137,12 +138,27 @@
                             </a>
                             <ul class="sub-menu">
                                 <li><a href="#getStarted">Get started</a></li>
-                                <li><a href="#readItem">Read an item</a></li>
-                                <li><a href="#readItems">Read a list of items</a></li>
-                                <li><a href="#numResults">Number of results</a></li>
-                                <li><a href="#prop">Simple properties</a></li>
-                                <li><a href="#propItem">Properties with values as items</a></li>
+                                <li><a href="#readItem">Display an item</a></li>
+                                <li><a href="#readItems">Display a list of items</a></li>
+                                <li><a href="#numResults">Specify number of items</a></li>
+                                <li class="has-sub active">
+                                    <a href="javascript:;">
+                                        <span>Wikidata Properties</span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#prop">Display simple properties</a></li>
+                                        <li><a href="#propItem">Display properties with values as items</a></li>
+                                    </ul>
+                                </li>
 
+                                <li class="has-sub active">
+                                    <a href="javascript:;">
+                                        <span>Non-Wikidata Properties</span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#apiProp">Display properties that hold other website's data</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -159,7 +175,7 @@
         </div>
 
         <!-- begin #content -->
-        <div id="content" class="content" >
+        <div id="content" class="content" style="padding-left:100px">
 
             <!-- begin panel -->
             <div id="mavo" class="panel" >
@@ -264,14 +280,26 @@
 </code></pre>
 
 
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">You can actually use any Wikidata properties to query Wikidata.
-                                In the above example we queried Wikidata using the <a href="https://www.wikidata.org/wiki/Property:P31" target="_blank">instance of</a> property.
-                                You can use any Wikidata property using the <code>mv-source-*</code> attribute. For example, if you want to get a list of writers who were born in New York City,
-                                you can use <a href="https://www.wikidata.org/wiki/Property:P106" target="_blank">occupation</a>
-                                and <a href="https://www.wikidata.org/wiki/Property:P19" target="_blank">place of birth</a> in the following way:
-                                <code>mv-source-occupation= "writer"</code> and <code>mv-source-place-of-birth="New York City"</code>.<p>
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">
+                                <ul>
+                                    <li>You can actually use any Wikidata properties to query Wikidata.
+                                    In the above example we queried Wikidata using the <a href="https://www.wikidata.org/wiki/Property:P31" target="_blank">instance of</a> property.
+                                    You can use any Wikidata property using the <code>mv-source-*</code> attribute. For example, if you want to get a list of writers who were born in New York City,
+                                    you can use <a href="https://www.wikidata.org/wiki/Property:P106" target="_blank">occupation</a>
+                                    and <a href="https://www.wikidata.org/wiki/Property:P19" target="_blank">place of birth</a> in the following way:
+                                    <code>mv-source-occupation= "writer"</code> and <code>mv-source-place-of-birth="New York City"</code>.
+                                    </li>
 
-                                    <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">Spaces in properties need to be replaced with</p>
+                                    <li>
+                                        You should also add
+                                        <code>property="items" mv-multiple></code>
+                                    </li>
+
+                                </ul>
+
+                                <p>
+
+                                    <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">Spaces in properties need to be replaced with a hyphen - For example, instance of will be instance-of </p>
 
                                     <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
     mv-source-occupation="writer" mv-source-place-of-birth="New York City">
@@ -371,10 +399,16 @@
 
                                     </div>
                                     <!-- application -->
-                                    <div class="col-4">
+                                    <div class="col-2">
                                         <h2>Application</h2>
-                                        <img src="../assets/img/bg/writer_example.png" style="width:30%" />
+                                        <img src="../assets/img/bg/writer_example.png" style="width:100%" />
                                     </div>
+                                      <!-- wikidata page -->
+                                      <div class="col-2">
+                                        <h2>Wikidata</h2>
+                                        <img src="../assets/img/bg/wikpage.png" style="width:100%" />
+                                    </div>
+
                                 </div>
 
 
@@ -392,7 +426,7 @@
                                 <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-langugae="en"
   mv-source-occupation="writer" mv-source-place-of-birth="New York City" mv-source-numberOfItems="10">
 
-    &lt;div property="items" mv-multiple/>
+    &lt;div property="items" mv-multiple>
         &lt;img property="image" />
         &lt;h1 property="label">&lt;h1>
         &lt;p property="description">&lt;p>
@@ -451,6 +485,65 @@
     ....
 &lt;/div>
 </code></pre>
+                        </div>
+                    </div>
+
+
+                    <div id="apiProp" class="panel panel-inverse">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Propertie created to hold other website's data</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+                                    data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                                    data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Content Here -->
+                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">Using Wikxhibit you display information or data about Wikidata items from other websites.
+                                For example, if you want to build a web page about <a href="https://www.wikidata.org/wiki/Q19848" target="_blank">Lady Gaga</a>
+                                that shows information about her from Wikidata but also display and play her tracks from <a href="https://open.spotify.com/artist/1HY2Jd0NmPuamShAr6KMms" target="_blank">Spotify</a>, then you can use the <B> Spotify artist ID</B> from Wikidata.
+                                The way you use it in Wikxhibit is by removing the word <b>ID</b>, capetilize the first letter of the word <b>Artist</b> and remoe the space between them <b>SpotifyArtist</b> and use it as a property <code>property="SpotifyArtist"</code>.
+                                This property will contains an object of different information about Lady Gaga from Spotify (e.g. <b>album</b> and <b>track</b>).
+
+                            </p>
+                            </br>
+
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2>HTML</h2>
+
+                            <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q19848">
+
+    &lt;img property="image" />
+    &lt;h1 property="label">&lt;/h1>
+    &lt;p property="description">&lt;/p>
+    ...
+    &lt;div property="SpotifyArtist">
+        &lt;div property="albums" mv-multiple>
+            &lt;img property="image" />
+            &lt;h5 property="name">&lt;/h5>
+            &lt;p property="numTracks">&lt;/p>
+            &lt;p property="datePublished">&lt;/p>
+        &lt;/div>
+
+        &lt;div property="tracks" mv-multiple>
+            &lt;iframe src="[embedUrl]">&lt;/iframe>
+        &lt;/div>
+    &lt;/div>
+
+&lt;/div>
+</code></pre>
+                            </div>
+                            <!-- application -->
+                            <div class="col-5">
+                                <h2>Application</h2>
+                                <img src="../assets/img/bg/doc_artist.png" style="width:100%" />
+                            </div>
+
+                        </div>
+
                         </div>
                     </div>
                     <!--END get started-->

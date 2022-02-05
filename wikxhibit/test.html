@@ -2,21 +2,108 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Art Gallery</title>
-    <script src="https://get.mavo.io/stable/mavo.js"></script>
-    <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
-    <script type="module" src="mavo-shapir.js"></script>
-    <!-- <link rel="stylesheet" href="style.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js">
+</script>
+
+  <style>
+    body {
+      width: 100%;
+      background: #e9e9e9;
+      margin: 0 auto;
+      padding: 0;
+      color: #7faf7f;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+    }
+
+    #searchID input {
+      width: 350px;
+      height: 20px;
+      margin: 0;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid black;
+      color: #727272;
+      float: left;
+      font: 12px "Lucida Sans Unicode", sans-serif;
+      transition: background 0.4s ease-in-out 0s;
+    }
+
+    #searchID button {
+      width: 45px;
+      height: 45px;
+      text-indent: -9999em;
+      background: url("searchIcon.jpg") #4eac10;
+      transition: background 0.3s ease-in-out 0s;
+      border: 1px solid #fff;
+    }
+
+    #containerID {
+      width: 50%;
+      margin: 0 auto;
+    }
+
+    h2 {
+      color: green;
+      text-align: left;
+    }
+  </style>
 </head>
 
 <body>
+  <div id="containerID">
+    <div>
+      <h2>GeeksforGeeks</h2>
+      <b>
+        Autocomplete Search using jQuery
+        and Wikipedia Opensearch API
+      </b>
 
-  <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="https://open.spotify.com/artist/6vWDO969PvNqNYHIOW5v0m"
-  mv-source-language="en">
-  <h1 property="label"></h1>
-  <img property="image"/>
+      <p></p>
+
+      <form method="get" id="searchID">
+        <input type="text" class="searchClass" id="searchInputID" value="" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
   </div>
+
+  <script type="text/javascript">
+    $(".searchClass").autocomplete({
+      source: function (request, response) {
+        console.log(request.term);
+        $.ajax({
+
+          // Wikipedia API url link
+          url:
+            // "http://en.wikipedia.org/w/api.php",
+            "https://www.wikidata.org/w/api.php",
+            // ?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property&origin=*",
+          dataType: "jsonp",
+          data: {
+            action: "wbsearchentities",
+            // Output format
+            format: "json",
+            search: request.term,
+            // namespace: 0,
+            // modules:"opensearch",
+            language:"en",
+            type:"item",
+            // origin= "*",
+            // Maximum number of result
+            // to be shown
+            continue:0,
+            limit: 8,
+          },
+          success: function (data) {
+            response(data[1]);
+          },
+        });
+      },
+    });
+  </script>
 </body>
 
 </html>
