@@ -935,7 +935,7 @@ var siteNames="", code ="", finalCode="", s=0, allSites=[], cntt=0, siteParams={
 
 function abstractionSiteHasBeenChosenMavo(select){
 
-  console.log("ALL SITES: ", $("#sites_mavo").val());
+  // console.log("ALL SITES: ", $("#sites_mavo").val());
   var once=true;
   siteNames="", code ="", codeP ="", inalCode=""
 

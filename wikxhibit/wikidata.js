@@ -679,3 +679,5 @@ function checkSimilarity(sentence1, sentence2) {
     return similarity;
 }
 
+
+
