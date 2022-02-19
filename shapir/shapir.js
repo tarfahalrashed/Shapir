@@ -1,4 +1,5 @@
 import {config} from "./firebase-config.js";
+import {initWikidata, wikidata} from "https://wikxhibit.org/wikidata.js";
 
 export function include(...urls) {
     let loaded = urls.map(src => {
@@ -46,8 +47,8 @@ export function uri(id){
 
 export default async function shapir(){
 
-    var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [],apiKeyProvided = "", configObjAdded = {};
-    var uriValue = "";
+    initWikidata();
+    var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [],apiKeyProvided = "", configObjAdded = {}, firstWikidata=true;
 
     await firebaseLoaded;
 
@@ -253,6 +254,8 @@ export default async function shapir(){
                                 return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                             .then(o => {
                                 // console.log("result: ", o)
+                                //convert array of one element to an object
+                                if(o.length==1) o = o[0];
                                 //map response to class properties
                                 if (o.constructor === Array){
                                     // console.log("ARRAY");
@@ -1095,7 +1098,21 @@ export default async function shapir(){
                                 }//end of else of no array
 
                                 return o;
-                            })
+                            }).then(wO => {
+
+                                if(firstWikidata){
+                                    firstWikidata=false;
+                                    return wikidata(args[0], "en").then(data=>{
+                                        return Object.defineProperties({}, {
+                                            ...Object.getOwnPropertyDescriptors(wO),
+                                            ...Object.getOwnPropertyDescriptors(data),
+                                        });
+                                    });
+                                }else{
+                                    return wO;
+                                }
+
+                            });
                             // return obj;
                         //}, 1000);
 

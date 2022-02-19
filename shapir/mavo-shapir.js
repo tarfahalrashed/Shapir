@@ -1,4 +1,4 @@
-import {initWikidata, wikidata, uri, queryWikidata} from "https://wikxhibit.org/wikidata.js";
+import {initWikidata, wikidata, queryWikidata} from "https://wikxhibit.org/wikidata.js";
 import shapir, {include} from "./shapir.js";
 
 Mavo.dependencies.push(shapir());
@@ -26,7 +26,10 @@ export default class Shapir extends Mavo.Backend {
                 initWikidata();
 
                 if (this.id != "Shapir") {
-                    return await wikidata(this.id, this.language);
+                    if(this.language)
+                        return await wikidata(this.id, this.language);
+                    else
+                        return await wikidata(this.id, "en");
                 }
                 else {
                     // query wikidata with parameters

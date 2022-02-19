@@ -117,15 +117,12 @@
             </a>
             <!-- end navbar-header -->
             <!-- begin header-nav -->
-            <!-- <ul class="navbar-nav navbar-right">
-                <li class="nav-item"><a class="nav-link" href="index.html" data-click="scroll-to-target"
-                        data-scroll-target="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about" data-click="scroll-to-target">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="shapirui.html">ShapirUI</a></li>
-                <li class="nav-item"><a class="nav-link" href="shapirjs.html">ShapirJS</a></li>
-                <li class="nav-item" style="margin-right:50px"><a class="nav-link active" href="mavo-shapir.html">Mavo-Shapir</a></li>
-            </ul> -->
-            <!-- end header-nav -->
+			<ul class="navbar-nav navbar-right" style="margin-right: 100px; margin-top: 5px;">
+				<li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target"
+						data-scroll-target="#home">HOME</a></li>
+				<li class="nav-item"><a class="nav-link" href="generator.html">CODE GENERATOR</a></li>
+			</ul>
+			<!-- end header-nav -->
         </div>
         <!-- end #header -->
         <div id="sidebar" class="sidebar" style="width:350px">
@@ -136,7 +133,7 @@
                     <!-- begin sidebar user -->
                     <ul class="nav" style="font-size: 1.4em; margin-top: 40px;">
                         <li class="has-sub active">
-                            <a href="javascript:;">
+                            <a href="documentation.html">
                                 <span>Documentation</span>
                             </a>
                             <ul class="sub-menu">
@@ -229,7 +226,7 @@
                                 </br>
 
                                 <pre class="language-html"><code class="language-html">&lt;head>
-	&lt;script rel="stylesheet" src="https://get.mavo.io/mavo.css">&lt;/script>
+	&lt;link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
 	&lt;script src="https://get.mavo.io/mavo.j">&lt;/script>
 	&lt;script type="module" src="https://shapir.org/mavo-shapir.js">&lt;/script>
 &lt;/head>
@@ -297,7 +294,8 @@
 
                                     <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">
                                         <ul>
-                                            <li>You can actually use any Wikidata properties to query Wikidata.
+                                            <li>
+                                                <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">You can actually use any Wikidata properties to query Wikidata.
                                                 In the above example we queried Wikidata using the <a
                                                     href="https://www.wikidata.org/wiki/Property:P31"
                                                     target="_blank">instance of</a> property.
@@ -309,12 +307,12 @@
                                                 and <a href="https://www.wikidata.org/wiki/Property:P19"
                                                     target="_blank">place of birth</a> in the following way:
                                                 <code>mv-source-occupation= "writer"</code> and
-                                                <code>mv-source-place-of-birth="New York City"</code>.
+                                                <code>mv-source-place-of-birth="New York City"</code>.</p>
                                             </li>
 
                                             <li>
-                                                You should also add
-                                                <code>property="items" mv-multiple></code>
+                                                <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">You should also add
+                                                <code>&lt;div property="items" mv-multiple>...&lt;/div></code>.</p>
                                             </li>
 
                                         </ul>
@@ -322,12 +320,16 @@
                                         <p>
 
                                             <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">Spaces in
-                                                properties need to be replaced with a hyphen - For example, instance of
-                                                will be instance-of </p>
+                                                properties need to be replaced with a hyphen, for example, <b>instance of</b>
+                                                will be <b>instance-of</b> </p>
 
                                             <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
     mv-source-occupation="writer" mv-source-place-of-birth="New York City">
-    &lt;!-- add your HTML code here -->
+
+    &lt;div property="items" mv-multiple>
+        &lt;!-- add the properties you want to display -->
+    &lt;/div>
+
 &lt;/div>
 </code></pre>
                         </div>
@@ -470,7 +472,7 @@
                                     <!-- application -->
                                     <div class="col-4">
                                         <h2>Application</h2>
-                                        <img src="../assets/img/bg/writers_example.png" style="width:30%" />
+                                        <img src="../assets/img/bg/writers_example.png" style="width:40%" />
                                     </div>
 
                                 </div>

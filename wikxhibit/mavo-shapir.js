@@ -26,7 +26,10 @@ export default class Shapir extends Mavo.Backend {
                 initWikidata();
 
                 if (this.id != "Shapir") {
-                    return await wikidata(this.id, this.language);
+                    if(this.language)
+                        return await wikidata(this.id, this.language);
+                    else
+                        return await wikidata(this.id, "en");
                 }
                 else {
                     // query wikidata with parameters

@@ -28,7 +28,8 @@ function initAuto(){
   window.lang = "";
 
   $(function() {
-    $('.property').autocomplete({
+    $('body').on('focus', '.property', function(){
+    $(this).autocomplete({
       source: availableTags,
       select: function(event, ui) {
         $("#item").val(ui.item.label);
@@ -53,7 +54,8 @@ function initAuto(){
         return window.lastQueried = window.lastQuery;
       }
     });
-  });
+});
+  });//auto complete
 
   window.timeout = null;
 
@@ -112,9 +114,7 @@ function initAuto(){
 
 function propSelected(e){
   console.log(e.id);
-  // document.getElementsByClassName('property').value = e.id;
   document.getElementsByClassName("property")[0].value = e.id;
-  // document.getElementsByClassName('property').name = e.val;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -401,5 +401,5 @@ function getPropertiesValues() {
 
 function addPropertyRow() {
     $("#propertiesTable").append('<tr><td><input class="property form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a property"></td><td><input class="value form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a value"></td></tr>');
-    initAuto();
+    // initAuto();
 }

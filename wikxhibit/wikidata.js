@@ -123,6 +123,16 @@ export async function wikidata(itemID, lang) {
                 return wikidata(itemID, lang);
             });
 
+    } else if(!itemID.startsWith('Q')){ //if ID is not a URL and not Wikidata ID
+        return fetch("https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FitemLabel%20%3Fproperty%20%3FpropertyLabel%20WHERE%7B%20%20%20%0A%20%20%20%20%20%3Fitem%20%3Fpredicate%20%22" + itemID + "%22%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3AdirectClaim%20%3Fpredicate%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3ApropertyType%20wikibase%3AExternalId.%0A%20%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%0A%20%20%20%7D%20%0A%7D")
+            .then(response => { return response.json() })
+            .then(data => {
+                let results = data.results.bindings
+                var itemUrl = results[0].item.value;
+                var itemID = itemUrl.substring(itemUrl.lastIndexOf("/") + 1, itemUrl.length);
+
+                return wikidata(itemID, lang);
+            });
     } else { //If id is a Wikidata ID
 
         let obj = {}, objItem = {};
@@ -285,6 +295,7 @@ export async function wikidata(itemID, lang) {
                         }
                     }
                 }
+
                 return objItem;
             })
             .then((result) => {
