@@ -1,5 +1,5 @@
 import {config} from "./firebase-config.js";
-import {initWikidata, wikidata, queryWikidata} from "./wikidata.js";
+import {initWikidata, wikidata} from "https://wikxhibit.org/wikidata.js";
 
 export function include(...urls) {
     let loaded = urls.map(src => {
@@ -48,9 +48,7 @@ export function uri(id){
 export default async function shapir(){
 
     initWikidata();
-
-    var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [],apiKeyProvided = "", configObjAdded = {};
-    var uriValue = "", firstWikidata=true;
+    var result, obJSON, auth_url, token_url, redirect_url, client_id, client_secret, response_type, scope, grant_type, client_auth, tok, expires_in, properties = [], methods = [], sitesToken=[], currentType="", results = [],apiKeyProvided = "", configObjAdded = {}, firstWikidata=true;
 
     await firebaseLoaded;
 
@@ -255,11 +253,12 @@ export default async function shapir(){
                                 ////console.log("url: ", url);
                                 return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                             .then(o => {
-                                // console.log("resultZZ: ", o)
-                                if(o.length==1) o=o[0];
+                                // console.log("result: ", o)
+                                //convert array of one element to an object
+                                if(o.length==1) o = o[0];
                                 //map response to class properties
                                 if (o.constructor === Array){
-                                    console.log("ARRAY");
+                                    // console.log("ARRAY");
                                     o.forEach(function(ob) {
                                         for (var p=0; p<properties.length; ++p){
                                             if (properties[p].field){// it won't check type properties (e.g. comment for VideoObject)
@@ -626,7 +625,7 @@ export default async function shapir(){
 
                                 }
                                 else {
-                                    console.log("NOT ARRAY")
+                                    // console.log("NOT ARRAY")
                                     for (var p=0; p< properties.length; ++p){
                                         if (properties[p].field){// it won't check type properties (e.g. comment for VideoObject)
                                             if (properties[p].property != properties[p].field && o[properties[p].field]) {
@@ -677,10 +676,6 @@ export default async function shapir(){
                                         }
                                     }//end of for loop properties
 
-                                    //Wikidata - Get properties from other websites!
-                                    // console.log(wikidata(args[0], "en"))
-                                    // var wikidataObj = Object.assign(o, wikidata(args[0], "en"));
-                                    // o={...o, ...wikidata(args[0], "en")}
                                     if(remove){
 
                                         //for (var m=0;  m<methods.length; ++m){

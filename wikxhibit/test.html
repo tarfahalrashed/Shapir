@@ -1,73 +1,31 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Art Gallery</title>
-    <script src="https://get.mavo.io/stable/mavo.js"></script>
-    <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
-    <script type="module" src="mavo-shapir.js"></script>
-    <!-- <link rel="stylesheet" href="style.css"> -->
+<head>
+  <meta charset="UTF-8">
+  <title>Art Gallery</title>
+  <script src="https://get.mavo.io/stable/mavo.js"></script>
+  <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
+  <script type="module" src="mavo-shapir.js"></script>
 </head>
 
 <body>
-<!-- <body mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"  mv-source-id="1HY2Jd0NmPuamShAr6KMms">-->
 
-      <!-- <h1 property="label"></h1>
-      <div property="YouTubeChannel">
-        <p property="name"></p>
-        <p property="description"></p>
-      </div> -->
+  <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q19848">
 
-      <script type="module">
-        import shapir from "./shapir.js";
+    <h1 property="label"></h1>
+    <img property="image" width="10%" />
 
-        shapir().then(async () => {
-          let artistID = "1HY2Jd0NmPuamShAr6KMms";
-          let artist = await spotify.MusicGroup(artistID);
-          // let track = await artist.track
-          console.log(artist.name);
-          console.log(artist.description);
-          // console.log(track[0].url);
-          let channel = await artist.YouTubeChannel;
-          console.log("artist: ", await channel.name);
-        });
-      </script>
+    <p property="father"></p>
 
-  <!-- <script type="text/javascript">
-    $(".searchClass").autocomplete({
-      source: function (request, response) {
-        console.log(request.term);
-        $.ajax({
+    <div property="mother">
+      <p property="description"></p>
+    </div>
 
-          // Wikipedia API url link
-          url:
-            // "http://en.wikipedia.org/w/api.php",
-            "https://www.wikidata.org/w/api.php",
-            // ?action=wbsearchentities&format=json&search=" + property + "&language=en&type=property&origin=*",
-          dataType: "jsonp",
-          data: {
-            action: "wbsearchentities",
-            // Output format
-            format: "json",
-            search: request.term,
-            // namespace: 0,
-            // modules:"opensearch",
-            language:"en",
-            type:"item",
-            // origin= "*",
-            // Maximum number of result
-            // to be shown
-            continue:0,
-            limit: 8,
-          },
-          success: function (data) {
-            response(data[1]);
-          },
-        });
-      },
-    });
-  </script> -->
+  </div>
+
+  </div>
+
 </body>
 
 </html>

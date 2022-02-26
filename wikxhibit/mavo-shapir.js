@@ -55,9 +55,9 @@ export default class Shapir extends Mavo.Backend {
                 }
             }
         }
-        // else { // if uri is provided
-        //     return await uri(this.uri, this.language || "en");
-        // }
+        else { // if uri is provided
+            return await uri(this.uri, this.language || "en");
+        }
     }
 
     // Mandatory and very important! This determines when your backend is used.
