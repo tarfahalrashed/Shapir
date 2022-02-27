@@ -225,6 +225,7 @@ export async function wikidata(itemID, lang) {
                                 let currentSite = sites[i]
                                 let pLabel = label.toLowerCase();
                                 if (pLabel.includes(currentSite)) {
+
                                     let pr = modifiedLabel.split('ID').join('');
                                     // pr = pr.charAt(0).toLowerCase() + pr.slice(1);
 
@@ -271,6 +272,7 @@ export async function wikidata(itemID, lang) {
                                             });
                                         }
                                     });
+
                                 }
                             }
                         }

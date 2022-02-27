@@ -6,12 +6,51 @@
   <title>Art Gallery</title>
   <script src="https://get.mavo.io/stable/mavo.js"></script>
   <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
-  <script type="module" src="mavo-shapir.js"></script>
+  <script type="module" src="mavo-shapir.js#/"></script>
 </head>
 
 <body>
+  <div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en" mv-source-id="Q76">
+      <h1 property="label"></h1>
 
-  <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q19848">
+    <div property="YouTubeChannel" mv-multiple>
+      <p property="channelId"></p>
+      <p property="name"></p>
+      <p property="description"></p>
+
+      <!-- <div property="video" mv-multiple>
+           <p property="reviewCount"></p>
+           <p property="contentRating"></p>
+           <p property="name"></p>
+           <p property="description"></p>
+           <p property="genre"></p>
+           <p property="datePublished"></p>
+           <p property="thumbnailUrl"></p>
+           <p property="ratingCount"></p>
+           <p property="comment"></p>
+           <p property="videoId"></p>
+      </div> -->
+
+      <p property="datePublished"></p>
+    </div>
+
+
+      <!-- <div property="subreddit" mv-multiple>
+        <p property="author"></p>
+        <p property="name"></p>
+        <p property="image"></p>
+        <p property="description"></p>
+      </div> -->
+
+
+      <div property="RedditUsername" mv-multiple>
+        <p property="author"></p>
+        <p property="score"></p>
+      </div>
+
+
+
+  <!-- <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q19848">
 
     <h1 property="label"></h1>
     <img property="image" width="10%" />
@@ -22,7 +61,7 @@
       <p property="description"></p>
     </div>
 
-  </div>
+  </div> -->
 
   </div>
 

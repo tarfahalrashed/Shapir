@@ -1,5 +1,5 @@
 import {config} from "./firebase-config.js";
-import {initWikidata, wikidata} from "https://wikxhibit.org/wikidata.js";
+import {initWikidata, wikidata} from "./wikidata.js";
 
 export function include(...urls) {
     let loaded = urls.map(src => {
@@ -250,7 +250,7 @@ export default async function shapir(){
                                 }
                             })//firebase
                             .then(url => {
-                                ////console.log("url: ", url);
+                                // console.log("url: ", url);
                                 return new Promise(function(resolve, reject) {resolve(fetch(url).then(response => response.json() )) })   })
                             .then(o => {
                                 // console.log("result: ", o)
