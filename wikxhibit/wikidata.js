@@ -348,12 +348,10 @@ export async function queryWikidata(e) {
                 query += '%3Fitem%20rdfs%3Alabel"' + searchTerm + '"%40en.%0A';
             }
             for (var i = 0; i < props.length; ++i) {
-                // console.log(props[i].id)
                 query += '%3Fitem%20wdt%3A' + props[i].id + '%2Frdfs%3Alabel"' + props[i].value + '"%40en.%0A';
 
                 if (i + 1 == props.length) {
                     query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2Cen".%7D%0A%7D%0Alimit%20' + numItems;
-                    // console.log("query: ", query)
                     return fetch(query)
                         .then(response => { return response.json() })
                         .then(data => {
@@ -365,8 +363,6 @@ export async function queryWikidata(e) {
 
                                 if (i + 1 == itemsIds.length) {
                                     var prom = Promise.all(items);
-                                    console.log("WikirResult2: ", prom)
-
                                     return prom;
                                 }
                             }
@@ -386,12 +382,10 @@ export async function queryWikidata(e) {
 //                 query += '%3Fitem%20rdfs%3Alabel"' + searchTerm + '"%40en.%0A';
 //             }
 //             for (var i = 0; i < props.length; ++i) {
-//                 // console.log(props[i].id)
 //                 query += '%3Fitem%20wdt%3A' + props[i].id + '%2Frdfs%3Alabel"' + props[i].value + '"%40en.%0A';
 
 //                 if (i + 1 == props.length) {
 //                     query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2C' + lang + '".%7D%0A%7D%0Alimit%20' + numItems;
-//                     // console.log("query: ", query)
 //                     return fetch(query)
 //                         .then(response => { return response.json() })
 //                         .then(data => {
