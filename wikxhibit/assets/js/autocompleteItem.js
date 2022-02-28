@@ -96,7 +96,8 @@ function initAutoItem(){
             };
 
             availableTags.push(formatedResult);
-            return queries[query][result.id] = result;
+            // queries[query][result.id] = result;
+            return result;
           }
         });
       }
@@ -108,6 +109,5 @@ function initAutoItem(){
 // }).call(this);
 
 function itemSelected(e){
-  console.log(e.id);
   document.getElementById('itemTags').value = e.id;
 }

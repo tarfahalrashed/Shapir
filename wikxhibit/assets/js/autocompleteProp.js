@@ -34,11 +34,11 @@ function initAuto(){
         $("#item").val(ui.item.label);
         $("#item-id").val(ui.item.id);
         $("#item-description").html(ui.item.desc);
-        $("#item-icon").attr("src", "images/" + ui.item.icon);
+        // $("#item-icon").attr("src", "images/" + ui.item.icon);
         return false;
       }
     }).data("ui-autocomplete")._renderItem = function(ul, item) {
-      console.log("item: ", item.value)
+    //   console.log("item: ", item.value)
       propertiesIds.push(item.value)
       return $("<li>").append("<a id='"+item.label+"' href='javascript:;' onclick='propSelected(this)'>" + item.label + "<br>" + item.desc + "</a>").appendTo(ul);
     };
@@ -99,7 +99,8 @@ function initAuto(){
             };
 
             availableTags.push(formatedResult);
-            return queries[query][result.id] = result;
+            // queries[query][result.id] = result;
+            return result;
           }
         });
       }
@@ -112,7 +113,6 @@ function initAuto(){
 // }).call(this);
 
 function propSelected(e){
-  console.log(e.id);
   document.getElementsByClassName("property")[0].value = e.id;
 }
 
@@ -307,7 +307,7 @@ function buildAppListItem(props){
 
 function getPropertiesFromObj(data){
     for (const [key, value] of Object.entries(data)) {
-        console.log(key)
+        // console.log(key)
         if(typeof value === 'object'  && !Array.isArray(value) && value !== null){
             type = "object"
         }else{
