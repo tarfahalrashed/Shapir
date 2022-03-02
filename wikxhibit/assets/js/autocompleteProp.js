@@ -1,128 +1,134 @@
-// https://github.com/ouisharelabs/wikidata-autocomplete
+// I used the Wikidata autocomplete from https://github.com/ouisharelabs/wikidata-autocomplete
 
-let allProperties, properties = [], propertiesIds = [], values = [], propsValues = [], chosenProperties = [], itemID="", lang = "en", type, numItems=10;
+let allProperties, properties = [], propertiesIds = [], values = [], propsValues = [], chosenProperties = [], itemID = "", lang = "en", type, numItems = 10;
 
-function initAuto(){
-  var CORS_PROXY, getJSONWikidataSearchResults, timeoutSetter, wikidataSearch;
-
-  CORS_PROXY = "";
-
-  window.availableTags = [];
-
-  window.taglist = function() {
-    var arr;
-    arr = [];
-    availableTags.forEach(function(item) {
-      return arr.push([item.label, item.desc, item.value]);
-    });
-    return arr;
-  };
-
-  window.queries = {};
-
-  window.lastQuery = "";
-
-  window.lastQueried = "";
-
-  window.lang = "";
-
-  $(function() {
-    $('body').on('focus', '.property', function(){
-    $(this).autocomplete({
-      source: availableTags,
-      select: function(event, ui) {
-        $("#item").val(ui.item.label);
-        $("#item-id").val(ui.item.id);
-        $("#item-description").html(ui.item.desc);
-        // $("#item-icon").attr("src", "images/" + ui.item.icon);
-        return false;
-      }
-    }).data("ui-autocomplete")._renderItem = function(ul, item) {
-    //   console.log("item: ", item.value)
-      propertiesIds.push(item.value)
-      return $("<li>").append("<a id='"+item.label+"' href='javascript:;' onclick='propSelected(this)'>" + item.label + "<br>" + item.desc + "</a>").appendTo(ul);
-    };
-    return $('.property').on('keyup', function() {
-      var lang;
-      window.lastQuery = $('.property').val();
-      if (!(window.lastQuery.length < 2 || (queries[window.lastQuery] != null) || /^Q[0-9]*$/.test(window.lastQuery) || window.timeout !== null)) {
-        lang = "en";//$('#language').val();
-        getJSONWikidataSearchResults(window.lastQuery, lang);
-        queries[window.lastQuery] = {};
-        timeoutSetter();
-        return window.lastQueried = window.lastQuery;
-      }
-    });
-});
-  });//auto complete
-
-  window.timeout = null;
-
-  timeoutSetter = function() {
-    var f;
-    window.timeout = "not null";
-    f = function() {
-      // console.log(new Date());
-      window.timeout = null;
-      if (window.lastQueried !== window.lastQuery) {
-        window.lastQueried = window.lastQuery;
-        // console.log("QUERY SAVER!");
-        // console.log(queries[window.lastQuery]);
-        getJSONWikidataSearchResults(window.lastQuery, lang);
-        return timeoutSetter();
-      }
-    };
-    return setTimeout(f, 500);
-  };
-
-  wikidataSearch = function(query, language, format) {
-    if (language == null) {
-      language = "en";
-    }
-    if (format == null) {
-      format = "json";
-    }
-    return "https://www.wikidata.org/w/api.php?action=wbsearchentities&type=property&language=" + language + "&format=" + format + "&search=" + query;
-  };
-
-  getJSONWikidataSearchResults = function(query, language) {
-
-    return $.getJSON(CORS_PROXY + wikidataSearch(query, "en", "json"), function(data) {
-      if (data.search != null) {
-        return data.search.forEach(function(result) {
-          var formatedResult;
-          if (result.label != null) {
-            formatedResult = {
-              value: result.id,
-              label: result.label,
-              desc: result.description
-            };
-
-            availableTags.push(formatedResult);
-            // queries[query][result.id] = result;
-            return result;
-          }
+function initAuto() {
+    var CORS_PROXY, getJSONWikidataSearchResults, timeoutSetter, wikidataSearch, propertyId;
+    CORS_PROXY = "";
+    window.availableTags = [];
+    window.taglist = function () {
+        var arr;
+        arr = [];
+        availableTags.forEach(function (item) {
+            return arr.push([item.label, item.desc, item.value]);
         });
-      }
-    });
-  };
+        return arr;
+    };
+
+    window.queries = {};
+    window.lastQuery = "";
+    window.lastQueried = "";
+    window.lang = "";
+
+    $('.property').on("focus", function () {
+        $(this).autocomplete({
+            autoFocus: true,
+            source: availableTags,
+            select: function (event, ui) {
+                $("#item").val(ui.item.label);
+                $("#item-id").val(ui.item.id);
+                $("#item-description").html(ui.item.desc);
+                // $("#item-icon").attr("src", "images/" + ui.item.icon);
+                return false;
+            }
+        }).data("ui-autocomplete")._renderItem = function (ul, item) {
+            // console.log("prop: ", item.label);
+            propertyId = item.value;
+            propertiesIds.push(item.value);
+            return $("<li>").append("<a id='" + item.label + "' href='javascript:;' onclick='propSelected(this)'>" + item.label + "<br>" + item.desc + "</a>").appendTo(ul);
+        };
+        return $('.property').on('keyup', function () {
+            var lang;
+            window.lastQuery = $(this).val();
+            if (!(window.lastQuery.length < 2 || (queries[window.lastQuery] != null) || /^Q[0-9]*$/.test(window.lastQuery) || window.timeout !== null)) {
+                lang = "en"; //$('#language').val();
+                getJSONWikidataSearchResults(window.lastQuery, lang);
+                queries[window.lastQuery] = {};
+                timeoutSetter();
+                return window.lastQueried = window.lastQuery;
+            }
+        });
+
+    });//auto complete
 
 
+    window.timeout = null;
+
+    timeoutSetter = function () {
+        var f;
+        window.timeout = "not null";
+        f = function () {
+            window.timeout = null;
+            if (window.lastQueried !== window.lastQuery) {
+                window.lastQueried = window.lastQuery;
+                getJSONWikidataSearchResults(window.lastQuery, lang);
+                return timeoutSetter();
+            }
+        };
+        return setTimeout(f, 500);
+    };
+
+    wikidataSearch = function (query, language, format) {
+        if (language == null) {
+            language = "en";
+        }
+        if (format == null) {
+            format = "json";
+        }
+        return "https://www.wikidata.org/w/api.php?action=wbsearchentities&type=property&language=" + language + "&format=" + format + "&search=" + query;
+    };
+
+    getJSONWikidataSearchResults = function (query, language) {
+
+        return $.getJSON(CORS_PROXY + wikidataSearch(query, "en", "json"), function (data) {
+            if (data.search != null) {
+                return data.search.forEach(function (result) {
+                    var formatedResult;
+                    if (result.label != null) {
+                        formatedResult = {
+                            value: result.id,
+                            label: result.label,
+                            desc: result.description
+                        };
+
+                        availableTags.push(formatedResult);
+                        // queries[query][result.id] = result;
+                        return result;
+                    }
+                });
+            }
+        });
+    };
 
 }
-// }).call(this);
 
-function propSelected(e){
-  document.getElementsByClassName("property")[0].value = e.id;
+function propSelected(e) {
+    document.activeElement.value = e.id;
+    // document.getElementsByClassName("property")[0].value= e.id;
+}
+
+
+function deleteRow(row) {
+    var i = row.parentNode.parentNode.rowIndex;
+    document.getElementById('propertiesTable').deleteRow(i);
+
+    var deletedProperty = row.parentNode.parentNode.childNodes[0].lastChild.value;
+    deletedProperty = deletedProperty.split(" ").join("-")
+    for (var i = propsValues.length - 1; i >= 0; --i) {
+        if (propsValues[i].property == deletedProperty) {
+            propsValues.splice(i,1);
+        }
+    }
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 
-function createHTML(){
+function createHTML() {
     $("#htmlCode").show();
 
-    if(itemID!=""){//single item app
+    if (itemID != "") {//single item app
         var code = ''
 
         code += '&lt;!doctype html>'
@@ -141,19 +147,19 @@ function createHTML(){
         code += '&lt;body>'
         code += '&nbsp;&nbsp; &lt;main class="container">'
 
-        code += '&nbsp;&nbsp; &lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-id="'+itemID+'" mv-source-language="'+lang+'">'
+        code += '&nbsp;&nbsp; &lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-id="' + itemID + '" mv-source-language="' + lang + '">'
         code += '&#10;'
 
-        for(var p=0; p<chosenProperties.length; ++p){
-            if(chosenProperties[p].type == "notObject"){
-                code += '&nbsp;&nbsp;&lt;p property="'+chosenProperties[p].property+'">&lt;/p>'
+        for (var p = 0; p < chosenProperties.length; ++p) {
+            if (chosenProperties[p].type == "notObject") {
+                code += '&nbsp;&nbsp;&lt;p property="' + chosenProperties[p].property + '">&lt;/p>'
                 code += '&#10;'
-            }else{
-                code += '&nbsp;&nbsp;&lt;div property="'+chosenProperties[p].property+'">'
+            } else {
+                code += '&nbsp;&nbsp;&lt;div property="' + chosenProperties[p].property + '">'
                 code += '&#10;'
                 code += '&nbsp;&nbsp;&nbsp;&nbsp;&lt;p property="label">&lt;/p>'
                 code += '&#10;'
-                code += '&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- you can add other '+chosenProperties[p].property+' properties -->'
+                code += '&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- you can add other ' + chosenProperties[p].property + ' properties -->'
                 code += '&#10;'
                 code += '&nbsp;&nbsp;&lt;/div>'
                 code += '&#10;'
@@ -165,11 +171,11 @@ function createHTML(){
         document.getElementById("singleItemCode").innerHTML = code;
         Prism.highlightElement($('#singleItemCode')[0]);
 
-    }else{//list of items app
+    } else {//list of items app
 
-        var code = '', imageCode=''; //new line in HTML
+        var code = '', imageCode = ''; //new line in HTML
         code += '&lt;!doctype html>'
-         code += '&#10;'
+        code += '&#10;'
         code += '&lt;html lang="en">'
         code += '&#10;'
 
@@ -195,13 +201,13 @@ function createHTML(){
         code += '&nbsp;&nbsp; &lt;main class="container">'
         code += '&#10;'
 
-        code += '&nbsp;&nbsp;&nbsp;&nbsp; &lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-language="'+lang+'" mv-source-numberOfItems="'+numItems+'" '
-        for(var p=0; p<propsValues.length; ++p){
-            code += 'mv-source-'+propsValues[p].property;
-            code += '="'+propsValues[p].value +'"';
+        code += '&nbsp;&nbsp;&nbsp;&nbsp; &lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-language="' + lang + '" mv-source-numberOfItems="' + numItems + '" '
+        for (var p = 0; p < propsValues.length; ++p) {
+            code += 'mv-source-' + propsValues[p].property;
+            code += '="' + propsValues[p].value + '"';
             code += '&nbsp;'
 
-            if(p+1==propsValues.length){
+            if (p + 1 == propsValues.length) {
                 code += '>'
                 code += '&#10;'
 
@@ -212,9 +218,9 @@ function createHTML(){
                 code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;a href="[itemURL]" target="_blank" class="list-group-item list-group-item-action d-flex gap-3 py-3">'
                 code += '&#10;'
 
-                for(var p=0; p<chosenProperties.length; ++p){
-                    if(chosenProperties[p].property == "image" || chosenProperties[p].property == "flagImage"){
-                        code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img property="'+chosenProperties[p].property +'" width="20%">  &#10;'
+                for (var p = 0; p < chosenProperties.length; ++p) {
+                    if (chosenProperties[p].property == "image" || chosenProperties[p].property == "flagImage") {
+                        code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img property="' + chosenProperties[p].property + '" width="20%">  &#10;'
                     }
                 }
 
@@ -222,21 +228,21 @@ function createHTML(){
                 code += '&#10;'
 
                 //other properties not image
-                for(var p=0; p<chosenProperties.length; ++p){
-                    if(chosenProperties[p].property != "image" || chosenProperties[p].property != "flagImage"){
-                        if(chosenProperties[p].type == "notObject"){
+                for (var p = 0; p < chosenProperties.length; ++p) {
+                    if (chosenProperties[p].property != "image" || chosenProperties[p].property != "flagImage") {
+                        if (chosenProperties[p].type == "notObject") {
                             //if label
-                            if(chosenProperties[p].property=="label")
-                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h3 property="'+chosenProperties[p].property+'">&lt;/h3>'
+                            if (chosenProperties[p].property == "label")
+                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h3 property="' + chosenProperties[p].property + '">&lt;/h3>'
                             else
-                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;p property="'+chosenProperties[p].property+'">&lt;/p>'
+                                code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;p property="' + chosenProperties[p].property + '">&lt;/p>'
                             code += '&#10;'
-                        }else{
-                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div property="'+chosenProperties[p].property+'">'
+                        } else {
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div property="' + chosenProperties[p].property + '">'
                             code += '&#10;'
                             code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;span property="label">&lt;/span>'
                             code += '&#10;'
-                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- you can add other '+chosenProperties[p].property+' properties -->'
+                            code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- you can add other ' + chosenProperties[p].property + ' properties -->'
                             code += '&#10;'
                             code += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div>'
                             code += '&#10;'
@@ -269,85 +275,85 @@ function createHTML(){
 }
 
 
-function buildApp(){
-    if($('#language').val()){
+function buildApp() {
+    if ($('#language').val()) {
         lang = $('#idQ').val();
     }
 
-    if($('#idQ').val()){//specific item
+    if ($('#idQ').val()) {//specific item
         itemID = $('#idQ').val();
         buildAppSingleItem(itemID, lang)
-    }else{//list of items
+    } else {//list of items
         propsValues = [];
         getPropertiesValues();
         buildAppListItem(propsValues)
     }
 }
 
-function buildAppSingleItem(id, lang){
+function buildAppSingleItem(id, lang) {
     import('https://wikxhibit.org/wikidata.js')
         .then((module) => {
-            module.wikidata(id, lang).then(data=>{
+            module.wikidata(id, lang).then(data => {
                 console.log(data)
                 getPropertiesFromObj(data);
             })//wikidata
         });
 }
 
-function buildAppListItem(props){
+function buildAppListItem(props) {
     import('../../wikidata.js')
         .then((module) => {
             module.initWikidata();
-            module.queryWikidata(propsValues).then(data=>{
+            module.queryWikidata(propsValues).then(data => {
                 getPropertiesFromObj(data[0])
             })
         });
 
 }
 
-function getPropertiesFromObj(data){
+function getPropertiesFromObj(data) {
     for (const [key, value] of Object.entries(data)) {
         // console.log(key)
-        if(typeof value === 'object'  && !Array.isArray(value) && value !== null){
+        if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
             type = "object"
-        }else{
+        } else {
             type = "notObject"
         }
-        $("#options").append('<div id="option-'+key+'"><input type="checkbox" id="'+key+'" name="'+key+'_'+type+'" value="'+value+'" class="option">&nbsp;<label for="'+key+'">'+key+'</label></div>');
+        $("#options").append('<div id="option-' + key + '"><input type="checkbox" id="' + key + '" name="' + key + '_' + type + '" value="' + value + '" class="option">&nbsp;<label for="' + key + '">' + key + '</label></div>');
     }
 
     $('#options').show();
 
     $('#options').before(
         '</br>'
-        +'</br>'
-        +'<label class="title">Step 4. Choose the properties you want to show in your application</label>'
-        +'</br>'
-        +'<input id="search" type="text" style="font-size: 1.3em;  width:200px; display: inline;"class="form-control" placeholder="search properties"/>'
-        +'&nbsp;<span><a href="" onclick="return false;" id="search-clear"><i class="fa fa-times"></a></span>'
+        + '</br>'
+        + '<label class="title">Step 4. Choose the properties you want to show in your application</label>'
+        + '</br>'
+        + '<input id="search" type="text" style="font-size: 1.3em;  width:200px; display: inline;"class="form-control" placeholder="search properties"/>'
+        + '&nbsp;<span><a href="" onclick="return false;" id="search-clear"><i class="fa fa-times"></a></span>'
     );
 
-    $('#search').keyup(function(){
+    $('#search').keyup(function () {
         var valThis = $(this).val().toLowerCase();
-        $('input[type=checkbox]').each(function(){
-            var text = $('label[for="'+$(this).attr('id')+'"]').text().toLowerCase();
+        $('input[type=checkbox]').each(function () {
+            var text = $('label[for="' + $(this).attr('id') + '"]').text().toLowerCase();
             (text.indexOf(valThis) == 0) ? $(this).parent().show() : $(this).parent().hide();
         });
     });
 
     // Search clear button
-    $("#search-clear").click(function(){
+    $("#search-clear").click(function () {
         $("#search").val("");
-        $('input[type=checkbox]').each(function(){
+        $('input[type=checkbox]').each(function () {
             $(this).parent().show();
         });
     });
 
     //Chosen properties
-    $(".option").change(function(){
+    $(".option").change(function () {
         chosenProperties = new Array(); //clear array
-        $(".option").each(function(){
-            if( $(this).is(':checked')){
+        $(".option").each(function () {
+            if ($(this).is(':checked')) {
                 chosenProperties.push({
                     property: $(this).attr("name").split("_")[0],
                     type: $(this).attr("name").split("_")[1],
@@ -355,7 +361,6 @@ function getPropertiesFromObj(data){
                 });
             }
         });
-        // console.log(chosenProperties)
     });
 
     $("#create-btn").show();
@@ -363,7 +368,7 @@ function getPropertiesFromObj(data){
 }
 
 function getPropertiesValues() {
-    propsValues= [];
+    propsValues = [];
 
     //get property name
     $('input[type="text"].property').each(function () {
@@ -394,11 +399,12 @@ function getPropertiesValues() {
             value: values[i]
         })
     }
-
     console.log("propsValues: ", propsValues);
 }
 
 function addPropertyRow() {
-    $("#propertiesTable").append('<tr><td><input class="property form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a property"></td><td><input class="value form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a value"></td></tr>');
-    // initAuto();
+    $("#propertiesTable").append('<tr><td><input class="property form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a property"></td><td><input class="value form-control" type="text" style="font-size: 1.3em;" placeholder="Enter a value"></td><td><input type="image" src="./assets/img/icon/delete.png" style="width:18px" onclick="deleteRow(this)"></td></tr>');
+    // <button onclick="deleteRow(this)">Delete</button></td></tr>');
+    initAuto();
+    initAutoItem();
 }

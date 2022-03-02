@@ -71,11 +71,13 @@ export async function wikidata(itemID, lang) {
             }
         });
 
-        //I think this does not work because of the proxy is a getter
         // let o = new String(proxy.label);
-        // Object.assign(o, proxy);
-        // return o;
+        // async function assign(target, sources) {
+        //     sources = await sources;
+        //     return Object.assign(target, sources);
+        // }
 
+        // return assign(o, proxy);
         return proxy;
     }
 
