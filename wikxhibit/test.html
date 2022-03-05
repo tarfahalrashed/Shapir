@@ -10,67 +10,39 @@
 </head>
 
 <body>
-  <!-- <div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en" mv-source-id="Q76"> -->
-      <!-- <h1 property="label"></h1> -->
+  <!-- <div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
+  mv-source-occupation="writer"
+  mv-source-country-of-citizenship="United Kingdom"
+  mv-source-numberOfItems="3">
 
-    <!-- <div property="YouTubeChannel" mv-multiple>
-      <p property="name"></p>
-      <p property="description"></p>
+  <div property="items" mv-multiple>
+      <img property="image" width="10%"/>
+      <h1 property="label"></h1>
+      <p property="description"><p>
+      <time property="dateOfBirth"><time>
+      <div property="countryOfCitizenship">
+        <label>Capital City: <p property="label"></p></label>
+        <div property="capital">
+          <label>Capital City: <p property="label"></p></label>
+        <div>
+      <div>
+      <hr>
+  </div> -->
 
-      <div property="video" mv-multiple>
-        <iframe property="videoId" width="270" height="150"
-        src="https://www.youtube.com/embed/[videoId]" allowfullscreen>
-        </iframe>
-      </div>
-    </div> -->
-
-
-      <!-- <div property="subreddit" mv-multiple>
-        <p property="author"></p>
-        <p property="name"></p>
-        <p property="image"></p>
-        <p property="description"></p>
-      </div> -->
-
-
-      <!-- <div property="RedditUsername" mv-multiple>
-        <p property="text"></p>
-        <p property="score"></p>
-      </div> -->
-
-
-
-   <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="[companies-names]">
-
-    <!-- <h1 property="label"></h1>
-
-    <p property="father"></p>
-    [mother]
-    <div property="mother">
-      <p property="description"></p>
-    </div> -->
-
-    <!-- <label for="company">Choose a flavor:</label>
-    <input list="companies-names" id="company"/>
- -->
-
-    <form class="search" mv-action="set(companies-names, searchInput)">
-      <label>Painter: <input list="companies-names" type="search" class="form-control rounded" property="searchInput" value="Q95" /></label>
-      <!-- <meta property="term" mv-default="Gustav Klimt"> -->
-
-      <datalist id="companies-names">
-        <option value="Q95">Google</option>
-        <option value="Q2283">Microsoft</option>
-      </datalist>
-
-      <button class="btn btn-outline-dark">Search</button>
-    </form>
-
+  <div mv-app mv-source="shapir" mv-source-service="wikidata"
+    mv-source-language="en" mv-source-id="Q318429">
+    <img property="image" width="10%"/>
     <h1 property="label"></h1>
-
+    <p property="description"></p>
+    <time property="dateOfBirth"></time>
+    <div property="countryOfCitizenship">
+      <B>Country of Citizenship: </B><p property="label"></p>
+      <div property="capital">
+        <B>Capital City:</B> <p property="label"></p>
+      <div>
+    <div>
+    <hr>
   </div>
-
-
 
 </body>
 

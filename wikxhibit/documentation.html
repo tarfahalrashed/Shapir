@@ -10,42 +10,37 @@
     <link rel="manifest" href="./assets/favicon/site.webmanifest">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <link href="https://shapir.org/assets/css/default/app.min.css" rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css"
+    <link href="../assets/css/default/app.min.css" rel="stylesheet" />
+    <link href="../assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="../assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="../assets/plugins/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet" />
+    <link href="../assets/plugins/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet" />
+    <link href="../assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <link href="../assets/plugins/@danielfarrell/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet" />
+    <link href="../assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="../assets/plugins/tag-it/css/jquery.tagit.css" rel="stylesheet" />
+    <link href="../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="../assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
         rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css"
-        rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"
-        rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css"
-        rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/@danielfarrell/bootstrap-combobox/css/bootstrap-combobox.css"
-        rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css"
-        rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/tag-it/css/jquery.tagit.css" rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
-    <link
-        href="https://shapir.org/assets/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
-        rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css"
-        rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css"
-        rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css"
-        rel="stylesheet" />
-    <link href="https://shapir.org/assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css"
-        rel="stylesheet" />
+    <link href="../assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css" rel="stylesheet" />
+    <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet" />
+    <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet" />
+    <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
-    <link href="https://shapir.org/assets/css/jsoneditor.css" rel="stylesheet" type="text/css">
-    <script src="https://shapir.org/assets/js/jsoneditor.js"></script>
-    <link href="https://shapir.org/assets/js/prism-coy.css" rel="stylesheet" />
+    <link href="../assets/css/jsoneditor.css" rel="stylesheet" type="text/css">
+    <script src="../assets/js/jsoneditor.js"></script>
+    <link href="../assets/css/prism_.css" rel="stylesheet" />
     <script src="wikidata.js"></script>
 
     <style>
+        p {
+            font-size: 1.2em;
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
         body {
             font-family: "Lato", sans-serif;
             font-size: 15px !important;
@@ -93,11 +88,6 @@
     </style>
 </head>
 
-<!--
-    How to use Wikidata properties: instanceOf no space, capitalized the next letter
-    How to use Wikidata external property getters: YouTubeChannel without the ID
- -->
-
 <body onload="docOnLoad(),getSites()" data-prismjs-copy-timeout="500">
 
     <!-- begin #page-loader -->
@@ -111,18 +101,16 @@
         <!-- begin #header -->
         <div id="header" class="header navbar-default">
             <a href="wikxhibit.html" class="navbar-brand">
-                <!-- <img style="margin-left: 50px; margin-top: 5px;" src="https://shapir.org/assets/img/bg/logoP.svg"
-                    width="70px" /> -->
                 <img style="margin-left: 70px; margin-top: 5px;" src="../assets/img/bg/wik2.png" width="100px" />
             </a>
             <!-- end navbar-header -->
             <!-- begin header-nav -->
-			<ul class="navbar-nav navbar-right" style="margin-right: 100px; margin-top: 5px;">
-				<li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target"
-						data-scroll-target="#home">HOME</a></li>
-				<li class="nav-item"><a class="nav-link" href="generator.html">CODE GENERATOR</a></li>
-			</ul>
-			<!-- end header-nav -->
+            <ul class="navbar-nav navbar-right" style="margin-right: 100px; margin-top: 5px;">
+                <li class="nav-item"><a class="nav-link active" href="index.html" data-click="scroll-to-target"
+                        data-scroll-target="#home">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="generator.html">CODE GENERATOR</a></li>
+            </ul>
+            <!-- end header-nav -->
         </div>
         <!-- end #header -->
         <div id="sidebar" class="sidebar" style="width:350px">
@@ -138,8 +126,8 @@
                             </a>
                             <ul class="sub-menu">
                                 <li><a href="#getStarted">Get started</a></li>
-                                <li><a href="#readItem">Display an item</a></li>
-                                <li><a href="#readItems">Display a list of items</a></li>
+                                <li><a href="#readItem">Read a Wikidata item</a></li>
+                                <li><a href="#readItems">Read a list of items</a></li>
                                 <li><a href="#numResults">Specify number of items</a></li>
                                 <li class="has-sub active">
                                     <a href="javascript:;">
@@ -181,9 +169,6 @@
 
             <!-- begin panel -->
             <div id="mavo" class="panel">
-                <!-- <div class="panel-heading">
-                    <h1 class="panel-title">Mavo + Shapir</h1>
-                </div> -->
                 <div class="panel-body">
                     <!-- Content Here -->
                     <div id="getStarted" class="panel panel-inverse">
@@ -192,16 +177,12 @@
                             <div class="panel-heading-btn">
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
                                     data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a> -->
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
                                     data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                                <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a> -->
                             </div>
                         </div>
                         <div class="panel-body">
-                            <!-- Content Here -->
-
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">To be ble to create
+                            <p>To be ble to create
                                 applications using Wikidata,
                                 we connected Wikidata with <a href="https://mavo.io/" target="_blank">Mavo</a>, an HTML
                                 templating langauge
@@ -216,26 +197,18 @@
                                 If you have never done this before, you could put both in the <code>&lt;head></code>
                                 section. In addition, in the <code>&lt;body></code>
                                 you will need to define the Mavo application, like this:
+                            </p>
 
-                                <!-- you will need to add the following attributes to the
-                                <code>mv-app</code> div: </br>
-                                (1) Mavo uses <code>mv-source</code> to specify the source of the data. So the First
-                                thing you need to specify is <code>mv-source="shapir"</code>. </br>
-                                (2) You will also need to specify the websites ot services that you are retrieving the
-                                data from, by using <code>mv-source-service</code></p> -->
-                                </br>
-
-                                <pre class="language-html"><code class="language-html">&lt;head>
+                            <pre class="language-html"><code class="language-html">&lt;head>
 	&lt;link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
-	&lt;script src="https://get.mavo.io/mavo.j">&lt;/script>
+	&lt;script src="https://get.mavo.io/stable/mavo.js">&lt;/script>
 	&lt;script type="module" src="https://shapir.org/mavo-shapir.js">&lt;/script>
 &lt;/head>
 &lt;body>
-	&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en">
+	&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en" ... >
 		&lt;!-- add your HTML code here -->
 	&lt;/div>
 &lt;/body></code></pre>
-
 
                         </div>
                     </div>
@@ -252,17 +225,40 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <!-- Content Here -->
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you are intersted in
-                                getting an information about a specific Wikidata item (e.g. United States of America
-                                (Q30)), then you can specify that using
-                                <code>mv-source-id= "Q30"</code>
-                                <p>
+                            <p class="text-style">If you are intersted in
+                                getting information about a specific Wikidata item (e.g. <a
+                                    href="https://www.wikidata.org/wiki/Q318429" target="_blank">Malcolm Gladwell</a>
+                                (Q318429)), then you can specify that using
+                                <code>mv-source-id= "Q318429"</code>
+                            <p>
 
-                                    <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en" mv-source-id="Q30">
-    &lt;!-- add your HTML code here -->
+                            <div class="row">
+                                <div class="col-8">
+                                    <h2>HTML</h2>
+                                    <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata"
+    mv-source-language="en" <mark>mv-source-id="Q318429"</mark>>
+
+    <mark>&lt;img property="image" /></mark>
+    <mark>&lt;h1 property="label">&lt;/h1></mark>
+    <mark>&lt;p property="description">&lt;/p></mark>
+    <mark>&lt;time property="dateOfBirth">&lt;/time></mark>
+    ....
 &lt;/div>
-</code></pre>
+                                            </code></pre>
+
+                                </div>
+                                <!-- application -->
+                                <div class="col-2">
+                                    <h2>Application</h2>
+                                    <img src="../assets/img/bg/writer.png" style="width:90%" />
+                                </div>
+                                <!-- wikidata page -->
+                                <div class="col-2">
+                                    <h2>Wikidata</h2>
+                                    <img src="../assets/img/bg/wikidataPage.png" style="width:100%" />
+                                </div>
+
+                            </div>
                         </div>
                         <!--END-->
                     </div>
@@ -270,7 +266,7 @@
 
                     <div id="readItems" class="panel panel-inverse">
                         <div class="panel-heading">
-                            <h4 class="panel-title">Read a list of Wikidata items</h4>
+                            <h4 class="panel-title">Read a list of items</h4>
                             <div class="panel-heading-btn">
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
                                     data-click="panel-expand"><i class="fa fa-expand"></i></a>
@@ -279,59 +275,95 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <!-- Content Here -->
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">If you are intersted in
-                                reading information about a list of Wikidata items (e.g. List of national memorials of
-                                the United States), then you can specify that using
-                                <code>mv-source-instance-of="National Memorial of the United States"</code>.<p>
+                            <p>If you are intersted in reading information about a list of Wikidata items
+                                (e.g. List of writers who are from United Kingdom), then you can specify that using
+                                the properties <a href="https://www.wikidata.org/wiki/Property:P106"
+                                    target="_blank">occupation</a>
+                                and <a href="https://www.wikidata.org/wiki/Property:P27" target="_blank">
+                                    country of citizenship</a> Wikidata properties as follow:
+                            </p>
 
-                                    <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-    mv-source-instance-of="National Memorial of the United States">
-    &lt;!-- add your HTML code here -->
+                            <div class="row">
+                                <div class="col-9">
+                                    <h2>HTML</h2>
+
+                                    <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
+  <mark>mv-source-occupation="writer"</mark>
+  <mark>mv-source-country-of-citizenship="United Kingdom"</mark>
+  mv-source-numberOfItems="3">
+
+  <mark>&lt;div property="items" mv-multiple></mark>
+    &lt;img property="image" />
+    &lt;h1 property="label">&lt;/h1>
+    &lt;p property="description">&lt;/p>
+    &lt;time property="dateOfBirth">&lt;/time>
+  <mark>&lt;/div></mark>
+
 &lt;/div>
 </code></pre>
+                                </div>
+                                <!-- application -->
+                                <div class="col-3">
+                                    <h2>Application</h2>
+                                    <img src="../assets/img/bg/writers.png" style="width:50%" />
+                                </div>
 
+                            </div>
 
-                                    <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">
-                                        <ul>
-                                            <li>
-                                                <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">You can actually use any Wikidata properties to query Wikidata.
-                                                In the above example we queried Wikidata using the <a
-                                                    href="https://www.wikidata.org/wiki/Property:P31"
-                                                    target="_blank">instance of</a> property.
-                                                You can use any Wikidata property using the <code>mv-source-*</code>
-                                                attribute. For example, if you want to get a list of writers who were
-                                                born in New York City,
-                                                you can use <a href="https://www.wikidata.org/wiki/Property:P106"
-                                                    target="_blank">occupation</a>
-                                                and <a href="https://www.wikidata.org/wiki/Property:P19"
-                                                    target="_blank">place of birth</a> in the following way:
-                                                <code>mv-source-occupation= "writer"</code> and
-                                                <code>mv-source-place-of-birth="New York City"</code>.</p>
-                                            </li>
+                            <p>
+                            <ul>
+                                <li>
+                                    <p>You can use any Wikidata property to query Wikidata, by using
+                                        the <code>mv-source-*</code> attribute. For example,
+                                        if you want to get a list of writers who were
+                                        born in New York City,
+                                        you will have to use <code>mv-source-occupation= "writer"</code> and
+                                        <code>mv-source-place-of-birth="New York City"</code>.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>You should also add
+                                        <code>&lt;div property="items" mv-multiple>...&lt;/div></code>.
+                                        Feel free to check the <a href="https://mavo.io/docs/collections"
+                                            target="_blank">Mavo documnetation</a> to know more about
+                                        <code>mv-multiple</code>
+                                    </p>
+                                </li>
+                            </ul>
 
-                                            <li>
-                                                <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">You should also add
-                                                <code>&lt;div property="items" mv-multiple>...&lt;/div></code>.</p>
-                                            </li>
+                            <p><em>To use the properties to query Wikidata, you need to replace spaces in properties with a hyphen and proceed them with mv-source-. For example, <b>instance of</b>
+                                will be <b>mv-source-instance-of</b>. BUT, if you want to display the properties in the page, then remove the space and capitalized the first letters after the space,
+                                like this <b>instanceOf</b></em>.</p>
 
-                                        </ul>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <h2>HTML</h2>
 
-                                        <p>
-
-                                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">Spaces in
-                                                properties need to be replaced with a hyphen, for example, <b>instance of</b>
-                                                will be <b>instance-of</b> </p>
-
-                                            <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-    mv-source-occupation="writer" mv-source-place-of-birth="New York City">
+                            <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
+    mv-source-occupation="writer"
+    <mark>mv-source-country-of-citizenship="United Kingdom"</mark>
+    mv-source-numberOfItems="3">
 
     &lt;div property="items" mv-multiple>
-        &lt;!-- add the properties you want to display -->
+        &lt;img property="image" />
+        &lt;h1 property="label">&lt;/h1>
+        &lt;p property="description">&lt;/p>
+        &lt;time property="dateOfBirth">&lt;/time>
+        <mark>&lt;div property="countryOfCitizenship"></mark>
+            &lt;p property="label">&lt;/p>
+        &lt;div>
     &lt;/div>
 
 &lt;/div>
 </code></pre>
+</div>
+
+                            <div class="col-3">
+                                <h2>Application</h2>
+                                <img src="../assets/img/bg/writers_country.png" style="width:50%" />
+                            </div>
+
+                            </div>
                         </div>
                         <!--END-->
                     </div>
@@ -350,17 +382,41 @@
                         </div>
                         <div class="panel-body">
                             <!-- Content Here -->
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">To specify the number of
+                            <p>To specify the number of
                                 results returned by a search, you add <code>mv-source-numberOfItems</code> to the mv-app
                                 div. For example, if you want to show only 10 writers from New York City, then you can
                                 do it this way.</p>
                             </br>
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;"><B>Example</B></p>
-                            <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-    mv-source-occupation="writer" mv-source-place-of-birth="New York City" mv-source-numberOfItems="10">
-    &lt;!-- add your HTML code here -->
+
+                            <div class="row">
+                                <div class="col-9">
+                                    <h2>HTML</h2>
+                            <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
+    mv-source-occupation="writer"
+    mv-source-place-of-birth="New York City"
+    <mark>mv-source-numberOfItems="3"></mark>
+
+    &lt;div property="items" mv-multiple>
+        &lt;img property="image" />
+        &lt;h1 property="label">&lt;/h1>
+        &lt;p property="description">&lt;/p>
+        &lt;time property="dateOfBirth">&lt;/time>
+        &lt;div property="placeOfBirth">
+            &lt;p property="label">&lt;/p>
+        &lt;div>
+    &lt;/div>
+
 &lt;/div>
 </code></pre>
+</div>
+       <!-- application -->
+       <div class="col-2">
+        <h2>Application</h2>
+        <img src="../assets/img/bg/writers.png" style="width:90%" />
+    </div>
+
+</div>
+
                         </div>
                     </div>
                     <!--END get started-->
@@ -378,111 +434,69 @@
                         </div>
                         <div class="panel-body">
                             <!-- Content Here -->
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">
+                            <p>
                                 You can display and show Wikidata properties in your application by using the
-                                <code>property=""</code> attribute from Mavo.</p></br>
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">
+                                <code>property=""</code> attribute from Mavo.
+                            </p></br>
+                            <p>
                                 For every item, we offer the follwing common properties:
-                                <ul style="font-size: 1.3em;">
-                                    <li>
-                                        <code>label</code>: the label of the item
-                                    </li>
-                                    <li>
-                                        <code>description</code>: the description of the item
-                                    </li>
-                                    <li>
-                                        <code>aliases</code>: aliseas of the item
-                                    </li>
-                                    <li>
-                                        <code>itemID</code>: the ID of the item (e.g. Q30)
-                                    </li>
-                                    <li>
-                                        <code>itemURL</code>: the URL of the item page on Wikidata (e.g.
-                                        https://www.wikidata.org/wiki/Q30)
-                                    </li>
-                                    <li>
-                                        <B>Other properties</B>: all other properties provided by the item, you can
-                                        using it by remove the space between words and capitlize the words after the
-                                        space. For example <B>instace of</B> will become
-                                        <code>property="instanceOf"</code>
-                                    </li>
-                                </ul>
+                            <ul style="font-size: 1.3em;">
+                                <li>
+                                    <code>label</code>: the label of the item
+                                </li>
+                                <li>
+                                    <code>description</code>: the description of the item
+                                </li>
+                                <li>
+                                    <code>aliases</code>: aliseas of the item
+                                </li>
+                                <li>
+                                    <code>itemID</code>: the ID of the item (e.g. Q30)
+                                </li>
+                                <li>
+                                    <code>itemURL</code>: the URL of the item page on Wikidata (e.g.
+                                    https://www.wikidata.org/wiki/Q30)
+                                </li>
+                                <li>
+                                    <B>Other properties</B>: all other properties provided by the item, you can
+                                    using it by remove the space between words and capitlize the words after the
+                                    space. For example <B>instace of</B> will become
+                                    <code>property="instanceOf"</code>
+                                </li>
+                            </ul>
 
-                                <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">
-                                    The follwing is a simple example that displays information about <a
-                                        href="https://www.wikidata.org/wiki/Q4985" target="_blank">Herman Melville</a>.
-                                </p>
+                            <div class="row">
+                                <div class="col-8">
+                                    <h2>HTML</h2>
 
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h2>HTML</h2>
+                                    <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata"
+    mv-source-language="en" mv-source-id="Q318429">
 
-                                        <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en" mv-source-id="Q4985">
-
-    &lt;img property="image" />
-    &lt;h1 property="label">&lt;h1>
-    &lt;p property="description">&lt;p>
-    &lt;time property="dateOfBirth">&lt;time>
-    ....
+    <mark>&lt;img property="image" /></mark>
+    <mark>&lt;h1 property="label">&lt;/h1></mark>
+    <mark>&lt;p property="description">&lt;/p></mark>
+    <mark>&lt;time property="dateOfBirth">&lt;/time></mark>
 &lt;/div>
-                                        </code></pre>
+                                            </code></pre>
+
+                                        </div>
+                                        <!-- application -->
+                                        <div class="col-2">
+                                            <h2>Application</h2>
+                                            <img src="../assets/img/bg/writer.png" style="width:90%" />
+                                        </div>
+                                        <!-- wikidata page -->
+                                        <div class="col-2">
+                                            <h2>Wikidata</h2>
+                                            <img src="../assets/img/bg/wikidataPage.png" style="width:100%" />
+                                        </div>
 
                                     </div>
-                                    <!-- application -->
-                                    <div class="col-2">
-                                        <h2>Application</h2>
-                                        <img src="../assets/img/bg/writer_example.png" style="width:100%" />
-                                    </div>
-                                    <!-- wikidata page -->
-                                    <div class="col-2">
-                                        <h2>Wikidata</h2>
-                                        <img src="../assets/img/bg/wikpage.png" style="width:100%" />
-                                    </div>
-
-                                </div>
-
-
-                                <p style="font-size: 1.3em; margin-bottom: 10px; margin-top: 10px;">
-                                    You can also use the same code above to show a list of writers from New York City.
-                                    The only thing that you will need to add is
-                                    <code>property="items" mv-multiple</code>, like the below example.
-                                    Feel free to check the <a href="https://mavo.io/docs/collections"
-                                        target="_blank">Mavo documnetation</a> to know more about
-                                    <code>mv-multiple</code>
-
-                                </p>
-
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h2>HTML</h2>
-
-                                        <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata" mv-source-langugae="en"
-  mv-source-occupation="writer" mv-source-place-of-birth="New York City" mv-source-numberOfItems="10">
-
-    &lt;div property="items" mv-multiple>
-        &lt;img property="image" />
-        &lt;h1 property="label">&lt;h1>
-        &lt;p property="description">&lt;p>
-        &lt;time property="dateOfBirth">&lt;time>
-    &lt;/div>
-
-&lt;/div>
-</code></pre>
-                                    </div>
-                                    <!-- application -->
-                                    <div class="col-4">
-                                        <h2>Application</h2>
-                                        <img src="../assets/img/bg/writers_example.png" style="width:40%" />
-                                    </div>
-
-                                </div>
 
                         </div>
                         <!--END-->
                     </div>
                     <!-- end panel -->
-
-
 
                     <div id="propItem" class="panel panel-inverse">
                         <div class="panel-heading">
@@ -496,32 +510,50 @@
                         </div>
                         <div class="panel-body">
                             <!-- Content Here -->
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">To show a property with an
+                            <p>To show a property with an
                                 item as its value,
                                 for example, if we want to also display the <B>country of citizenship</B> for <a
-                                    href="https://www.wikidata.org/wiki/Q4985" target="_blank">Herman Melville</a> in
+                                    href="https://www.wikidata.org/wiki/Q318429" target="_blank">Malcolm Gladwell</a> in
                                 the application above,
                                 <code>property="countryOfCitizenship"</code> and then use <code>property="label"</code>
                                 to read the label of the property's value, like this:
                             </p>
                             </br>
 
-                            <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en" mv-source-id="Q4985">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h2>HTML</h2>
+
+                                    <pre class="language-html"><code class="language-html">&lt;div mv-app mv-source="shapir" mv-source-service="wikidata"
+    mv-source-language="en" mv-source-id="Q318429">
+
     &lt;img property="image" />
-    &lt;h1 property="label">&lt;h1>
-    &lt;p property="description">&lt;p>
-    &lt;time property="dateOfBirth">&lt;time>
-    &lt;div property="countryOfCitizenship">
-        &lt;!-- the value of this is United States of America (Q30), you can use any of its properties-->
-        &lt;p property="label">&lt;p>
-        &lt;p property="description">&lt;p>
-        &lt;div property="capital">
-            &lt;p property="label">&lt;p>
-        &lt;/div>
-    &lt;div>
-    ....
+    &lt;h1 property="label">&lt;/h1>
+    &lt;p property="description">&lt;/p>
+    &lt;time property="dateOfBirth">&lt;/time>
+    <mark>&lt;div property="countryOfCitizenship"></mark>
+        <mark>&lt;p property="label">&lt;/p></mark>
+        <mark>&lt;div property="capital"></mark>
+            <mark>&lt;p property="label">&lt;/p></mark>
+        <mark>&lt;div></mark>
+    <mark>&lt;div></mark>
 &lt;/div>
-</code></pre>
+                                            </code></pre>
+
+                                </div>
+                                <!-- application -->
+                                <div class="col-2">
+                                    <h2>Application</h2>
+                                    <img src="../assets/img/bg/writerItem.png" style="width:100%" />
+                                </div>
+                                <!-- wikidata page -->
+                                <div class="col-2">
+                                    <h2>Wikidata</h2>
+                                    <img src="../assets/img/bg/wikidataPageItem.png" style="width:100%" />
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
 
@@ -538,7 +570,7 @@
                         </div>
                         <div class="panel-body">
                             <!-- Content Here -->
-                            <p style="font-size: 1.3em; margin-bottom: 0px; margin-top: 0px;">Using Wikxhibit you
+                            <p>Using Wikxhibit you
                                 display information or data about Wikidata items from other websites.
                                 For example, if you want to build a web page about <a
                                     href="https://www.wikidata.org/wiki/Q19848" target="_blank">Lady Gaga</a>
@@ -547,7 +579,7 @@
                                     target="_blank">Spotify</a>, then you can use the <B> Spotify artist ID</B> from
                                 Wikidata.
                                 The way you use it in Wikxhibit is by removing the word <b>ID</b>, capetilize the first
-                                letter of the word <b>Artist</b> and remoe the space between them <b>SpotifyArtist</b>
+                                letter of the word <b>Artist</b> and remove the space between them <b>SpotifyArtist</b>
                                 and use it as a property <code>property="SpotifyArtist"</code>.
                                 This property will contains an object of different information about Lady Gaga from
                                 Spotify (e.g. <b>album</b> and <b>track</b>).
@@ -596,7 +628,7 @@
 
                     <div id="apiPropGen" class="panel panel-inverse">
                         <div class="panel-heading">
-                            <h4 class="panel-title">Discover the properties</h4>
+                            <h4 class="panel-title">Discover the properties of external data</h4>
                             <div class="panel-heading-btn">
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
                                     data-click="panel-expand"><i class="fa fa-expand"></i></a>
@@ -610,7 +642,7 @@
                                 <label style="padding-top:7px; font-size: 1.3em;">Type an external identifier
                                     property:</label>
                                 <div class="input-group col-lg-4">
-                                    <input id="apiIdProp" class="form-control" placeholder="e.g. SpotifyArtist" />
+                                    <input id="apiIdProp" class="form-control" placeholder="e.g. Spotify artist ID" />
                                     <button class="btn btn-default" onclick="getTypesProp()">Get</button>
                                 </div>
 
@@ -772,50 +804,50 @@
                         <h5>App Settings</h5>
                         <ul class="theme-list clearfix">
                             <li><a href="javascript:;" class="bg-red" data-theme="red"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/red.min.css"
+                                    data-theme-file="../assets/css/default/theme/red.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Red">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-pink" data-theme="pink"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/pink.min.css"
+                                    data-theme-file="../assets/css/default/theme/pink.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Pink">&nbsp;</a></li>
                             <li class="active"><a href="javascript:;" class="bg-orange" data-theme="orange"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/orange.min.css"
+                                    data-theme-file="../assets/css/default/theme/orange.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Orange">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-yellow" data-theme="yellow"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/yellow.min.css"
+                                    data-theme-file="../assets/css/default/theme/yellow.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Yellow">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-lime" data-theme="lime"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/lime.min.css"
+                                    data-theme-file="../assets/css/default/theme/lime.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Lime">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-green" data-theme="green"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/green.min.css"
+                                    data-theme-file="../assets/css/default/theme/green.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Green">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-teal" data-theme="default" data-theme-file=""
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Default">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-aqua" data-theme="aqua"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/aqua.min.css"
+                                    data-theme-file="../assets/css/default/theme/aqua.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Aqua">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-blue" data-theme="blue"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/blue.min.css"
+                                    data-theme-file="../assets/css/default/theme/blue.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Blue">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-purple" data-theme="purple"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/purple.min.css"
+                                    data-theme-file="../assets/css/default/theme/purple.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Purple">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-indigo" data-theme="indigo"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/indigo.min.css"
+                                    data-theme-file="../assets/css/default/theme/indigo.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Indigo">&nbsp;</a></li>
                             <li><a href="javascript:;" class="bg-black" data-theme="black"
-                                    data-theme-file="https://shapir.org/assets/css/default/theme/black.min.css"
+                                    data-theme-file="../assets/css/default/theme/black.min.css"
                                     data-click="theme-selector" data-toggle="tooltip" data-trigger="hover"
                                     data-container="body" data-title="Black">&nbsp;</a></li>
                         </ul>
@@ -831,42 +863,33 @@
                 <!-- end scroll to top btn -->
             </div>
             <!-- end page container -->
-            <script src="https://shapir.org/assets/js/prism-coy.js"></script>
-            <script src="https://shapir.org/assets/js/prism-json.js"></script>
+            <script src="../assets/js/prism_.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
             <script src="/assets/js/app.min.js"></script>
-            <script src="https://shapir.org/assets/plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
-            <script src="https://shapir.org/assets/plugins/moment/min/moment.min.js"></script>
+            <script src="../assets/plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
+            <script src="../assets/plugins/moment/min/moment.min.js"></script>
+            <script src="../assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+            <script src="../assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+            <script src="../assets/plugins/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+            <script src="../assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js"></script>
+            <script src="../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+            <script src="../assets/plugins/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
+            <script src="../assets/plugins/@danielfarrell/bootstrap-combobox/js/bootstrap-combobox.js"></script>
+            <script src="../assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+            <script src="../assets/plugins/tag-it/js/tag-it.min.js"></script>
+            <script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+            <script src="../assets/plugins/select2/dist/js/select2.min.js"></script>
             <script
-                src="https://shapir.org/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-            <script src="https://shapir.org/assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
-            <script
-                src="https://shapir.org/assets/plugins/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-            <script src="https://shapir.org/assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js"></script>
-            <script
-                src="https://shapir.org/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-            <script
-                src="https://shapir.org/assets/plugins/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js"></script>
-            <script
-                src="https://shapir.org/assets/plugins/@danielfarrell/bootstrap-combobox/js/bootstrap-combobox.js"></script>
-            <script src="https://shapir.org/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-            <script src="https://shapir.org/assets/plugins/tag-it/js/tag-it.min.js"></script>
-            <script src="https://shapir.org/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-            <script src="https://shapir.org/assets/plugins/select2/dist/js/select2.min.js"></script>
-            <script
-                src="https://shapir.org/assets/plugins/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-            <script
-                src="https://shapir.org/assets/plugins/bootstrap-show-password/dist/bootstrap-show-password.js"></script>
-            <script
-                src="https://shapir.org/assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
-            <script
-                src="https://shapir.org/assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js"></script>
-            <script src="https://shapir.org/assets/plugins/clipboard/dist/clipboard.min.js"></script>
-            <script src="https://shapir.org/assets/plugins/highlight.js/highlight.min.js"></script>
+                src="../assets/plugins/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+            <script src="../assets/plugins/bootstrap-show-password/dist/bootstrap-show-password.js"></script>
+            <script src="../assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js"></script>
+            <script src="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js"></script>
+            <script src="../assets/plugins/clipboard/dist/clipboard.min.js"></script>
+            <script src="../assets/plugins/highlight.js/highlight.min.js"></script>
             <script src="http://culmat.github.io/jsTreeTable/treeTable.js"></script>
-            <link href="https://shapir.org/assets/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
-            <script src="https://shapir.org/assets/js/jquery.treetable.js"></script>
-            <script src="https://shapir.org/assets/js/shapir_index.js"></script>
+            <link href="../assets/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+            <script src="../assets/js/jquery.treetable.js"></script>
+            <script src="../assets/js/shapir_index.js"></script>
             <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
             <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
             <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js"></script>
