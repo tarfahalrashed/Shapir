@@ -315,10 +315,9 @@
                                 <li>
                                     <p>You can use any Wikidata property to query Wikidata, by using
                                         the <code>mv-source-*</code> attribute. For example,
-                                        if you want to get a list of writers who were
-                                        born in New York City,
+                                        if you want to get a list of writers who are from United Kingdom,
                                         you will have to use <code>mv-source-occupation= "writer"</code> and
-                                        <code>mv-source-place-of-birth="New York City"</code>.
+                                        <code>mv-source-country-of-citizenship="United Kingdom"</code>.
                                     </p>
                                 </li>
                                 <li>
@@ -331,15 +330,17 @@
                                 </li>
                             </ul>
 
-                            <p><em>To use the properties to query Wikidata, you need to replace spaces in properties with a hyphen and proceed them with mv-source-. For example, <b>instance of</b>
-                                will be <b>mv-source-instance-of</b>. BUT, if you want to display the properties in the page, then remove the space and capitalized the first letters after the space,
-                                like this <b>instanceOf</b></em>.</p>
+                            <p><em>To use the properties to query Wikidata, you need to replace spaces in properties
+                                    with a hyphen and proceed them with mv-source-. For example, <b>instance of</b>
+                                    will be <b>mv-source-instance-of</b>. BUT, if you want to display the properties in
+                                    the page, then remove the space and capitalized the first letters after the space,
+                                    like this <b>instanceOf</b></em>.</p>
 
-                                <div class="row">
-                                    <div class="col-9">
-                                        <h2>HTML</h2>
+                            <div class="row">
+                                <div class="col-9">
+                                    <h2>HTML</h2>
 
-                            <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
+                                    <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
     mv-source-occupation="writer"
     <mark>mv-source-country-of-citizenship="United Kingdom"</mark>
     mv-source-numberOfItems="3">
@@ -356,12 +357,12 @@
 
 &lt;/div>
 </code></pre>
-</div>
+                                </div>
 
-                            <div class="col-3">
-                                <h2>Application</h2>
-                                <img src="../assets/img/bg/writers_country.png" style="width:50%" />
-                            </div>
+                                <div class="col-3">
+                                    <h2>Application</h2>
+                                    <img src="../assets/img/bg/writers_country.png" style="width:50%" />
+                                </div>
 
                             </div>
                         </div>
@@ -381,19 +382,18 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <!-- Content Here -->
                             <p>To specify the number of
                                 results returned by a search, you add <code>mv-source-numberOfItems</code> to the mv-app
-                                div. For example, if you want to show only 10 writers from New York City, then you can
+                                div. For example, if you want to show only 10 writers from United Kingdom, then you can
                                 do it this way.</p>
                             </br>
 
                             <div class="row">
                                 <div class="col-9">
                                     <h2>HTML</h2>
-                            <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
+                                    <pre class="language-html"><code class="language-html">&lt;div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
     mv-source-occupation="writer"
-    mv-source-place-of-birth="New York City"
+    mv-source-country-of-citizenship="United Kingdom"
     <mark>mv-source-numberOfItems="3"></mark>
 
     &lt;div property="items" mv-multiple>
@@ -408,14 +408,14 @@
 
 &lt;/div>
 </code></pre>
-</div>
-       <!-- application -->
-       <div class="col-2">
-        <h2>Application</h2>
-        <img src="../assets/img/bg/writers.png" style="width:90%" />
-    </div>
+                                </div>
+                                <!-- application -->
+                                <div class="col-2">
+                                    <h2>Application</h2>
+                                    <img src="../assets/img/bg/writers.png" style="width:90%" />
+                                </div>
 
-</div>
+                            </div>
 
                         </div>
                     </div>
@@ -433,7 +433,6 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <!-- Content Here -->
                             <p>
                                 You can display and show Wikidata properties in your application by using the
                                 <code>property=""</code> attribute from Mavo.
@@ -476,22 +475,23 @@
     <mark>&lt;h1 property="label">&lt;/h1></mark>
     <mark>&lt;p property="description">&lt;/p></mark>
     <mark>&lt;time property="dateOfBirth">&lt;/time></mark>
+
 &lt;/div>
                                             </code></pre>
 
-                                        </div>
-                                        <!-- application -->
-                                        <div class="col-2">
-                                            <h2>Application</h2>
-                                            <img src="../assets/img/bg/writer.png" style="width:90%" />
-                                        </div>
-                                        <!-- wikidata page -->
-                                        <div class="col-2">
-                                            <h2>Wikidata</h2>
-                                            <img src="../assets/img/bg/wikidataPage.png" style="width:100%" />
-                                        </div>
+                                </div>
+                                <!-- application -->
+                                <div class="col-2">
+                                    <h2>Application</h2>
+                                    <img src="../assets/img/bg/writer.png" style="width:90%" />
+                                </div>
+                                <!-- wikidata page -->
+                                <div class="col-2">
+                                    <h2>Wikidata</h2>
+                                    <img src="../assets/img/bg/wikidataPage.png" style="width:100%" />
+                                </div>
 
-                                    </div>
+                            </div>
 
                         </div>
                         <!--END-->
@@ -536,6 +536,7 @@
             <mark>&lt;p property="label">&lt;/p></mark>
         <mark>&lt;div></mark>
     <mark>&lt;div></mark>
+
 &lt;/div>
 </code></pre>
 
@@ -568,7 +569,6 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <!-- Content Here -->
                             <p>Using Wikxhibit you
                                 display information or data about Wikidata items from other websites.
                                 For example, if you want to build a web page about <a
@@ -636,18 +636,17 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <!-- Content Here -->
                             <div class="input-group mb-4">
                                 <label style="padding-top:7px; font-size: 1.3em;">Type an external identifier
-                                    property:</label>
+                                    property</label>
                                 <div class="input-group col-lg-4">
                                     <input id="apiIdProp" class="form-control" placeholder="e.g. Spotify artist ID" />
-                                    <button class="btn btn-default" onclick="getTypesProp()">Get</button>
+                                    <button class="btn btn-default" onclick="getTypesProp()" style="height:35px">Generate</button>
                                 </div>
 
-                                <div id="mavo_attributes_get" style="display:none">
+                                <div id="mavo_attributes_get" style="display:none; width:100%">
                                     <h5>Get objects by their ID</h5>
-                                    <pre id="preMavo2" style="display: inline;"
+                                    <pre id="preMavo2" style="display: inline; "
                                         class="language-html"><code id="mavoAttGet" class="language-html"></code></pre>
                                 </div>
 
