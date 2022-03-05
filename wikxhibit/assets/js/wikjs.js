@@ -1,14 +1,18 @@
 
 function download(id) {
-    if(id=="download_html"){
-        id = ""
+    if (id == "download_html") {
+        id = "";
+    }
+    console.log("ID: ", id)
+    var zip = new JSZip();
+    var a = document.getElementById(id);
+
+    if (id == "countries") {
+        var urls = [id + "/index.html", id + "/style.css", id + "/local-data.json"];
+    } else {
+        var urls = [id + "/index.html", id + "/style.css"];
     }
 
-    var zip = new JSZip();
-    // var a = document.querySelector("a");
-    var a = document.getElementById(id);
-    var urls = [id + "/index.html", id + "/style.css"];
-    // console.log(urls)
     function request(url) {
         return new Promise(function (resolve) {
             var httpRequest = new XMLHttpRequest();
@@ -45,6 +49,7 @@ function init() {
     download("movie");
     download("artist");
     download("paintings");
+    download("countries");
 
     document.getElementById("memorials").addEventListener("click", function () { download("memorials") }, false);
     document.getElementById("books").addEventListener("click", function () { download("books") }, false);
