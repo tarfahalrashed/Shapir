@@ -1,6 +1,7 @@
-let lang = "en", externalIds = {}, sites = [], apis, searchTerm = "", numItems = 50, tempObjects = {}, firstGetObject = true;
+let lang = "en", externalIds = {}, sites = [], apis, searchTerm = "", numItems = 20, tempObjects = {}, firstGetObject = true;
 
 export async function initWikidata() {
+    numItems = 20;
     //fetch external identifiers
     fetch("https://raw.githubusercontent.com/tarfahalrashed/Shapir/main/functions/data.json")
         .then(response => { return response.json() })
@@ -105,7 +106,7 @@ export async function wikidata(itemID, lang) {
                 return wikidata(itemID, lang);
             });
 
-    } else if(!itemID.startsWith('Q')){ //if ID is not a URL and not Wikidata ID
+    } else if(!itemID.startsWith('Q') && itemID!=""){ //if ID is not a URL and not Wikidata ID
         return fetch("https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FitemLabel%20%3Fproperty%20%3FpropertyLabel%20WHERE%7B%20%20%20%0A%20%20%20%20%20%3Fitem%20%3Fpredicate%20%22" + itemID + "%22%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3AdirectClaim%20%3Fpredicate%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3ApropertyType%20wikibase%3AExternalId.%0A%20%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%0A%20%20%20%7D%20%0A%7D")
             .then(response => { return response.json() })
             .then(data => {
@@ -115,7 +116,7 @@ export async function wikidata(itemID, lang) {
 
                 return wikidata(itemID, lang);
             });
-    } else { //If id is a Wikidata ID
+    } else if(itemID.startsWith('Q')){ //If id is a Wikidata ID
 
         let obj = {}, objItem = {};
         return fetch("https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:" + itemID + ")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22" + lang + "%22%20}}")
@@ -288,6 +289,8 @@ export async function wikidata(itemID, lang) {
                 return result;
             });
 
+    } else {
+        return {};
     }
 }
 
@@ -361,7 +364,8 @@ export async function queryWikidata(e) {
                             for (var i = 0; i < itemsIds.length; ++i) {
                                 var url = itemsIds[i].item.value;
                                 let id = url.split("/").reverse()[0];
-                                items.push(wikidata(id, lang));
+
+                                items.push(wikidata(id, lang))
 
                                 if (i + 1 == itemsIds.length) {
                                     var prom = Promise.all(items);

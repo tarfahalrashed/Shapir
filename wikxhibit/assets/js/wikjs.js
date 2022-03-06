@@ -1,4 +1,3 @@
-
 function download(id) {
     if (id == "download_html") {
         id = "";
@@ -79,5 +78,3 @@ function readHTMLFile(id) {
             Prism.highlightElement($('#mavo')[0]);
         })
 }
-
-
