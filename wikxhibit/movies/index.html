@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Page</title>
+    <script src="https://get.mavo.io/stable/mavo.js"></script>
+    <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
+    <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
+    <link rel="stylesheet" href="movie/style.css">
+</head>
+
+<body>
+
+    <div mv-app mv-bar="none" mv-source="shapir" mv-source-service="wikidata"
+        mv-source-instance-of="film"
+        mv-source-nominated-for="['Academy Award for Best Picture' and 'Academy Award for Best Director']"
+        mv-source-cast-member="Leonardo DiCaprio">
+
+        <div property="items" mv-multiple>
+        <section class="dDUGgO">
+
+            <section
+                class="ipc-page-background ipc-page-background--baseAlt TitleMainHeroGroup__StyledPageBackground-w70azj-0 hEHQFC">
+                <div class="ipc-page-content-container ipc-page-content-container--center">
+                    <!-- title-->
+                    <div class="hglRHk">
+                        <div class="jxsVNt">
+                            <h1 class="dxSWFG" property="label"></h1>
+
+                            <div class="hWHMKr">
+                                <ul class="dxizHm">
+                                    <li class="ipc-inline-list__item">[first(year(publicationDate))]</li> <span>R
+                                        .</span>
+                                    <li class="ipc-inline-list__item" property="duration"></li> <span>Min</span>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- info -->
+                    <div class="kmTkgc">
+                        <div class="eaUohq">
+                            <div class="kNqsIK">
+                                <div class="twqaW">
+                                    <div class="ipc-chip-list GenresAndPlot__GenresChipList-cum89p-4 gtBDBL"
+                                        data-testid="genres" property="genre" mv-multiple hidden="[label = '']">
+                                        <a href="[itemURL]" property="itemURL" target="_blank"
+                                            class="GenresAndPlot__GenreChip-cum89p-3 fzmeux ipc-chip ipc-chip--on-baseAlt">
+                                            <span class="ipc-chip__text" property="label"></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="iGxbgr">
+                                    <ul
+                                        class="ipc-metadata-list ipc-metadata-list--dividers-all title-pc-list ipc-metadata-list--baseAlt">
+
+                                        <li class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Director</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt">
+                                                    <li class="ipc-inline-list__item" property="director" mv-multiple>
+                                                        <a class="ipc-metadata-list-item__list-content-item ipc-metadata-list-item__list-content-item--link"
+                                                            href="[itemURL]" property="itemURL" target="_blank">
+                                                            <span property="label"></span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Writers</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt">
+                                                    <li class="ipc-inline-list__item" property="screenwriter"
+                                                        mv-multiple hidden="[itemURL = '']">
+                                                        <meta property="label" />
+                                                        <a class="ipc-metadata-list-item__list-content-item ipc-metadata-list-item__list-content-item--link"
+                                                            href="[itemURL]" property="itemURL"
+                                                            target="_blank">[label]</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="ipc-metadata-list__item ">
+                                            <span class="ipc-metadata-list-item__label">Director of Photography</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt">
+                                                    <li class="ipc-inline-list__item" property="directorOfPhotography"
+                                                        mv-multiple>
+                                                        <meta property="label" />
+                                                        <a class="ipc-metadata-list-item__list-content-item ipc-metadata-list-item__list-content-item--link"
+                                                            href="[itemURL]" property="itemURL"
+                                                            target="_blank">[label]</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="ipc-metadata-list__item ">
+                                            <span class="ipc-metadata-list-item__label">Film Editor</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt">
+                                                    <li class="ipc-inline-list__item" property="filmEditor" mv-multiple>
+                                                        <meta property="label" />
+                                                        <a class="ipc-metadata-list-item__list-content-item ipc-metadata-list-item__list-content-item--link"
+                                                            href="[itemURL]" property="itemURL"
+                                                            target="_blank">[label]</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Make-up Artist</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt">
+                                                    <li class="ipc-inline-list__item" property="make-upArtist"
+                                                        mv-multiple>
+                                                        <meta property="label" />
+                                                        <a class="ipc-metadata-list-item__list-content-item ipc-metadata-list-item__list-content-item--link"
+                                                            href="[itemURL]" property="itemURL"
+                                                            target="_blank">[label]</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Producer</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt">
+                                                    <li class="ipc-inline-list__item" property="producer" mv-multiple>
+                                                        <meta property="label" />
+                                                        <a class="ipc-metadata-list-item__list-content-item ipc-metadata-list-item__list-content-item--link"
+                                                            href="[itemURL]" property="itemURL"
+                                                            target="_blank">[label]</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Production Company</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul style="list-style: none !important"
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt">
+                                                    <li role="presentation" class="ipc-inline-list__item"
+                                                        property="productionCompany" mv-multiple>
+                                                        <meta property="label" />
+                                                        <a class="ipc-metadata-list-item__list-content-item ipc-metadata-list-item__list-content-item--link"
+                                                            href="[itemURL]" property="itemURL"
+                                                            target="_blank">[label]</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="ipc-page-content-container ipc-page-content-container--center">
+                <section
+                    class="ipc-page-background ipc-page-background--base TitleMainBelowTheFoldGroup__RelativePageBackground-sc-1vpywau-0 kcYXNj">
+                    <div class="ipc-page-grid ipc-page-grid--bias-left">
+                        <div
+                            class="TitleMainBelowTheFoldGroup__TitleMainPrimaryGroup-sc-1vpywau-1 btXiqv ipc-page-grid__item ipc-page-grid__item--span-2">
+
+                            <!-- cast members -->
+                            <section class="ipc-page-section ipc-page-section--base celwidget">
+                                <div
+                                    class="ipc-title ipc-title--section-title ipc-title--base ipc-title--on-textPrimary ipc-title-link-wrapper">
+                                    <h3 class="ipc-title__text">Cast</h3>
+                                </div>
+
+                                <div class="grid-container"
+                                    style="display: grid; grid-template-columns: auto auto auto; grid-gap: 0.5em; margin: 1em 0;">
+                                    <div property="castMember" mv-multiple hidden="[image = '']"
+                                        class="ipc-sub-grid ipc-sub-grid--page-span-2 ipc-sub-grid--wraps-at-above-l title-cast__grid">
+                                        <a class="hTEaNu" target="_blank" href="[itemURL]" property="itemURL">
+                                            <div class="kINeVb">
+                                                <div class="ipc-avatar ipc-avatar--base ipc-avatar--dynamic-width">
+                                                    <div class="ipc-media ipc-media--avatar ipc-image-media-ratio--avatar ipc-media--base ipc-media--avatar-m ipc-media--avatar-circle ipc-avatar__avatar-image ipc-media__img"
+                                                        style="width:100%">
+                                                        <img alt="" class="ipc-image" loading="lazy" property="image"
+                                                            sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw"
+                                                            width="140" /></div>
+                                                </div>
+                                            </div>
+                                            <div class=" fBAofn">
+
+                                                <p class="eyqFnv" property="label"> </p>
+                                                <div class="title-cast-item__characters-list">
+                                                    <ul
+                                                        class="ipc-inline-list ipc-inline-list--no-wrap ipc-inline-list--inline base">
+                                                        <li>
+                                                            <span class="boDDsy gNEvzo" property="description"></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </a>
+
+
+                                    </div>
+                                </div>
+
+                            </section>
+
+                            <!-- storyline -->
+                            <!-- <section class="ipc-page-section ipc-page-section--base celwidget">
+                                <div
+                                    class="ipc-title ipc-title--section-title ipc-title--base ipc-title--on-textPrimary ipc-title-link-wrapper">
+                                    <h3 class="ipc-title__text">Storyline</h3>
+                                </div>
+
+                                <div class="iywpty">
+                                    <div
+                                        class="ipc-overflowText ipc-overflowText--pageSection ipc-overflowText--height-long ipc-overflowText--long ipc-overflowText--base">
+                                        <div class="ipc-html-content ipc-html-content--base">
+                                            <div property="description"></div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="ipc-chip-list Keywords__PlotKeywords-ke3vmf-0 bHzejW"
+                                        data-testid="storyline-plot-keywords" property="distributedBy" mv-multiple
+                                        hidden="[itemURL = '']">
+                                        <div style="display: inline;">
+                                            <a class="ipc-chip ipc-chip--on-base" href="[itemURL]" property="itemURL">
+                                                <span class="ipc-chip__text" property="label"></span>
+                                            </a>
+                                            &nbsp;
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </section> -->
+
+                             <!-- details -->
+                            <!-- <section class="ipc-page-section ipc-page-section--base celwidget">
+                                <div
+                                    class="ipc-title ipc-title--section-title ipc-title--base ipc-title--on-textPrimary ipc-title-link-wrapper">
+                                    <h3 class="ipc-title__text">Details</h3>
+                                </div>
+
+                                <div class="cgqHBf">
+                                    <ul
+                                        class="ipc-metadata-list ipc-metadata-list--dividers-all ipc-metadata-list--base">
+
+                                        <li role="presentation" class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Release date:</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content base">
+                                                    <li property="publicationDate"></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li role="presentation" class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Country of origin:</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content base">
+                                                    <li property="countryOfOrigin">
+                                                        <span property="label"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li role="presentation" class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Official sites:</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content base">
+                                                    <li>
+                                                        <a class="ipc-metadata-list-item__list-content-item ipc-metadata-list-item__list-content-item--link"
+                                                            property="officialWebsite" src="[officialWebsite]"
+                                                            target="_blank">[officialWebsite]</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li role="presentation" class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Language:</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content base">
+                                                    <li property="originalLanguageOfFilmOrTVShow">
+                                                        <span property="label"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li role="presentation" class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Narrative Location:</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content base">
+                                                    <li property="narrativeLocation">
+                                                        <span property="label"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+                            </section> -->
+
+                            <!-- box office -->
+                            <!-- <section class="ipc-page-section ipc-page-section--base celwidget">
+                                <div
+                                    class="ipc-title ipc-title--section-title ipc-title--base ipc-title--on-textPrimary ipc-title-link-wrapper">
+                                    <h3 class="ipc-title__text">Box office</h3>
+                                </div>
+
+                                <div class="cgqHBf">
+                                    <ul
+                                        class="ipc-metadata-list ipc-metadata-list--dividers-all ipc-metadata-list--base">
+
+                                        <li role="presentation" class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Cost:</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content base">
+                                                    <li>
+                                                        $<span property="cost"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li role="presentation" class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Country of origin:</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content base">
+                                                    <li>
+                                                        $<span property="boxOffice"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            </section> -->
+
+                            <!-- technical specs -->
+                            <!-- <section class="ipc-page-section ipc-page-section--base celwidget">
+                                <div
+                                    class="ipc-title ipc-title--section-title ipc-title--base ipc-title--on-textPrimary ipc-title-link-wrapper">
+                                    <h3 class="ipc-title__text">Technical specs</h3>
+                                </div>
+
+                                <div class="cgqHBf">
+                                    <ul
+                                        class="ipc-metadata-list ipc-metadata-list--dividers-all ipc-metadata-list--base">
+
+                                        <li role="presentation" class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Color:</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content base">
+                                                    <li property="cost">
+                                                        <span property="label"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li role="presentation" class="ipc-metadata-list__item">
+                                            <span class="ipc-metadata-list-item__label">Distribution format:</span>
+                                            <div class="ipc-metadata-list-item__content-container">
+                                                <ul
+                                                    class="ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content base">
+                                                    <li property="distributionFormat">
+                                                        <span property="label"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </section> -->
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

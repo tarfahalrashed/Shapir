@@ -10,6 +10,18 @@
 </head>
 
 <body>
+
+  <div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
+  mv-source-instance-of="film"
+  mv-source-nominated-for="['Academy Award for Best Picture' and 'Academy Award for Best Director']"
+  mv-source-cast-member="Leonardo DiCaprio">
+
+  <div property="items" mv-multiple>
+    <!-- <img property="image" width="10%"/> -->
+    <h1 property="label"></h1>
+  </div>
+
+  </div>
   <!-- <div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
   mv-source-occupation="writer"
   mv-source-country-of-citizenship="United Kingdom"
