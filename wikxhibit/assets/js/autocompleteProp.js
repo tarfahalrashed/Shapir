@@ -32,7 +32,7 @@ function initAuto() {
                 return false;
             }
         }).data("ui-autocomplete")._renderItem = function (ul, item) {
-            // console.log("prop: ", item.label);
+            console.log("propID: ", item.value);
             propertyId = item.value;
             propertiesIds.push(item.value);
             return $("<li>").append("<a id='" + item.label + "' href='javascript:;' onclick='propSelected(this)'>" + item.label + "<br>" + item.desc + "</a>").appendTo(ul);

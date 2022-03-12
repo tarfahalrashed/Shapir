@@ -63,7 +63,7 @@ export default class Shapir extends Mavo.Backend {
     // Mandatory and very important! This determines when your backend is used.
     // value: The mv-storage/mv-source/mv-init value
     static test (value) {
-        return value.startsWith("shapir");
+        return value.startsWith("wikxhibit");
     }
 };
 
