@@ -106,7 +106,7 @@ export async function wikidata(itemID, lang) {
                 return wikidata(itemID, lang);
             });
 
-    } else if(!itemID.startsWith('Q') && itemID!=""){ //if ID is not a URL and not Wikidata ID
+    } else if (!itemID.startsWith('Q') && itemID != "") { //if ID is not a URL and not Wikidata ID
         return fetch("https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FitemLabel%20%3Fproperty%20%3FpropertyLabel%20WHERE%7B%20%20%20%0A%20%20%20%20%20%3Fitem%20%3Fpredicate%20%22" + itemID + "%22%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3AdirectClaim%20%3Fpredicate%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3ApropertyType%20wikibase%3AExternalId.%0A%20%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%0A%20%20%20%7D%20%0A%7D")
             .then(response => { return response.json() })
             .then(data => {
@@ -116,7 +116,7 @@ export async function wikidata(itemID, lang) {
 
                 return wikidata(itemID, lang);
             });
-    } else if(itemID.startsWith('Q')){ //If id is a Wikidata ID
+    } else if (itemID.startsWith('Q')) { //If id is a Wikidata ID
 
         let obj = {}, objItem = {};
         return fetch("https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20?itemLabel%20?itemDescription%20?itemAltLabel{VALUES%20(?item)%20{(wd:" + itemID + ")}SERVICE%20wikibase:label%20{%20bd:serviceParam%20wikibase:language%20%22" + lang + "%22%20}}")
@@ -237,42 +237,44 @@ export async function wikidata(itemID, lang) {
                                         get: function () {
                                             let similarity = 0, tempSimialrity, apiEndpoint, mainType, button, code, url, title, curValue;
                                             //get the type in this with this endpoint
-                                            return new Promise((resolve, reject) => {
-                                                fetch('https://superapi-52bc2.firebaseio.com/abstractions/' + currentSite + '/objects.json')
-                                                    .then(response => { return response.json() })
-                                                    .then(objects => {
-                                                        if (Array.isArray(value)) {
-                                                            curValue = value[0];
-                                                        } else {
-                                                            curValue = value;
-                                                        }
-
-                                                        Object.keys(apis).forEach((key, index, arr) => {
-                                                            url = apis[key].url;
-                                                            title = apis[key].title;
-
-                                                            if (url.includes(currentSite)) {
-                                                                //get the descriptiosn of these API endpoints
-                                                                tempSimialrity = checkSimilarity(label.toLowerCase(), title.toLowerCase())
-                                                                if (similarity < tempSimialrity) {
-                                                                    similarity = tempSimialrity;
-                                                                    apiEndpoint = title;
-                                                                }
+                                            if (currentSite != "vimeo") {
+                                                return new Promise((resolve, reject) => {
+                                                    fetch('https://superapi-52bc2.firebaseio.com/abstractions/' + currentSite + '/objects.json')
+                                                        .then(response => { return response.json() })
+                                                        .then(objects => {
+                                                            if (Array.isArray(value)) {
+                                                                curValue = value[0];
+                                                            } else {
+                                                                curValue = value;
                                                             }
 
-                                                            if (!arr[index + 1]) {
-                                                                Object.keys(objects).forEach(object => {
-                                                                    if (objects[object].construct.self) {
-                                                                        if (objects[object].construct.self.endpoint == apiEndpoint) {
-                                                                            mainType = object;
-                                                                            resolve(window[currentSite][mainType](curValue));
-                                                                        }
+                                                            Object.keys(apis).forEach((key, index, arr) => {
+                                                                url = apis[key].url;
+                                                                title = apis[key].title;
+
+                                                                if (url.includes(currentSite)) {
+                                                                    //get the descriptiosn of these API endpoints
+                                                                    tempSimialrity = checkSimilarity(label.toLowerCase(), title.toLowerCase())
+                                                                    if (similarity < tempSimialrity) {
+                                                                        similarity = tempSimialrity;
+                                                                        apiEndpoint = title;
                                                                     }
-                                                                })
-                                                            }
-                                                        });
-                                                    })
-                                            });
+                                                                }
+
+                                                                if (!arr[index + 1]) {
+                                                                    Object.keys(objects).forEach(object => {
+                                                                        if (objects[object].construct.self) {
+                                                                            if (objects[object].construct.self.endpoint == apiEndpoint) {
+                                                                                mainType = object;
+                                                                                resolve(window[currentSite][mainType](curValue));
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                }
+                                                            });
+                                                        })
+                                                });
+                                            }
                                         }
                                     });
 
@@ -344,7 +346,7 @@ async function getProperties(e) {
 
 
 export async function queryWikidata(e) {
-    let query = "", items=[];
+    let query = "", items = [];
     return getProperties(e)
         .then(props => {
             query += 'https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';

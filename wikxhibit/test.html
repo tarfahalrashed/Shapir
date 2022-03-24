@@ -11,126 +11,15 @@
 
 <body>
 
-  <div mv-app mv-source="wikxhibit" mv-source-service="wikidata" mv-source-language="en"
-    mv-source-part-of="Big Tech" mv-source-country="United States of America"
-    mv-source-numberOfItems="5">
+  <div mv-bar="none" mv-app
+    mv-source="wikxhibit"
+    mv-source-service="spotify"
+    mv-source-id="https://open.spotify.com/artist/1HY2Jd0NmPuamShAr6KMms">
 
-    <div property="items" mv-multiple>
-
-      <img property="logoImage" width="10%" />
-      <!--  "smallLogoOrIcon" is better than "logoImage" but not all companies has it-->
-      <img property="image" width="10%" />
-      <h1 property="officialName"></h1>
-      <!-- Task#1: Display the description-->
-      <!-- <p property="description"></p>  -->
-
-      <p property="mottoText"></p>
-      <!-- Task#2: Display the inception or the date of establishment-->
-      <!-- <p property="inception"></p>  -->
-
-      <p property="dataSize"></p>
-      <a href="[officialBlog]" target="_blank">[officialBlog]</a>
-      <p property="socialMediaFollowers"></p>
-      <p property="reviewScore"></p>
-
-      <div property="locationOfFormation" mv-multiple>
-        <p property="label"></p>
-      </div>
-
-      <div property="productOrMaterialProduced" mv-multiple>
-        <p property="label"></p>
-      </div>
-
-      <!-- Task#3: Display the the names of industry in which the company is part of-->
-      <!-- <div property="industry" mv-multiple>
-        <p property="label"></p>
-      </div> -->
-
-      <!-- Task#4: Display the names and images of the co-founders of the company -->
-      <!-- <div property="foundedBy" mv-multiple>
-      <p property="label"></p>
-        <img property="image" width="10%"/>
-      </div> -->
-
-      <div property="parentOrganization">
-        <p property="label"></p>
-        <div property="subsidiary" mv-multiple>
-          <p property="label"></p>
-        </div>
-        <!--  Task#5: Display the total equity -->
-        <!-- <p property="totalEquity"></p> -->
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- Task#6 Change the app to display a list of 10 technology companies in the United States of America -->
-  <!--  Solution: They will need to change the mv-app div to the following:
-
-<div mv-app mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
-  mv-source-instance-of="technology company"
-  mv-source-country="United States of America"
-  mv-source-numberOfItems="15">
-
-  <div property="items" mv-multiple>
-      [code under main div here]
-  </div>
-
--->
-
-
-
-
-
-  <!-- <div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
-  mv-source-instance-of="film"
-  mv-source-award-received="Academy Award for Best Picture"
-  mv-source-numberOfItems="10">
-
-    <div property="items" mv-multiple mv-if="first(year(publicationDate)) in range(1950, 1999)">
-      <meta property="publicationDate">
-      <p>[first(year(publicationDate))]</p>
-      <img property="image" width="10%"/>
-      <h1 property="label"></h1>
-    </div>
-
-  </div> -->
-
-
-  <!-- <div mv-app="main" mv-source="shapir" mv-source-service="wikidata"
-  mv-source-occupation="writer"
-  mv-source-country-of-citizenship="United Kingdom"
-  mv-source-numberOfItems="3">
-
-  <div property="items" mv-multiple>
-      <img property="image" width="10%"/>
-      <h1 property="label"></h1>
-      <p property="description"><p>
-      <time property="dateOfBirth"><time>
-      <div property="countryOfCitizenship">
-        <label>Capital City: <p property="label"></p></label>
-        <div property="capital">
-          <label>Capital City: <p property="label"></p></label>
-        <div>
-      <div>
-      <hr>
-  </div> -->
-
-  <!-- <div mv-app mv-source="shapir" mv-source-service="wikidata"
-    mv-source-language="en" mv-source-id="Q318429">
-    <img property="image" width="10%"/>
     <h1 property="label"></h1>
     <p property="description"></p>
-    <time property="dateOfBirth"></time>
-    <div property="countryOfCitizenship">
-      <B>Country of Citizenship: </B><p property="label"></p>
-      <div property="capital">
-        <B>Capital City:</B> <p property="label"></p>
-      <div>
-    <div>
-    <hr>
-  </div> -->
+
+  </div>
 
 </body>
 

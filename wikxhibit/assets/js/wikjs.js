@@ -2,7 +2,7 @@ function download(id) {
     if (id == "download_html") {
         id = "";
     }
-    console.log("ID: ", id)
+
     var zip = new JSZip();
     var a = document.getElementById(id);
 
@@ -49,6 +49,9 @@ function init() {
     download("artist");
     download("paintings");
     download("countries");
+    download("company");
+    download("president");
+    download("presidents");
 
     document.getElementById("memorials").addEventListener("click", function () { download("memorials") }, false);
     document.getElementById("books").addEventListener("click", function () { download("books") }, false);
@@ -56,6 +59,9 @@ function init() {
     document.getElementById("artist").addEventListener("click", function () { download("artist") }, false);
     document.getElementById("paintings").addEventListener("click", function () { download("paintings") }, false);
     document.getElementById("countries").addEventListener("click", function () { download("countries") }, false);
+    document.getElementById("company").addEventListener("click", function () { download("company") }, false);
+    document.getElementById("president").addEventListener("click", function () { download("president") }, false);
+    document.getElementById("presidents").addEventListener("click", function () { download("presidents") }, false);
 
     document.getElementById("memorials_html").addEventListener("click", function () { readHTMLFile("memorials") }, false);
     document.getElementById("books_html").addEventListener("click", function () { readHTMLFile("books") }, false);
@@ -63,6 +69,10 @@ function init() {
     document.getElementById("artist_html").addEventListener("click", function () { readHTMLFile("artist") }, false);
     document.getElementById("paintings_html").addEventListener("click", function () { readHTMLFile("paintings") }, false);
     document.getElementById("countries_html").addEventListener("click", function () { readHTMLFile("countries") }, false);
+    document.getElementById("company_html").addEventListener("click", function () { readHTMLFile("company") }, false);
+    document.getElementById("president_html").addEventListener("click", function () { readHTMLFile("president") }, false);
+    document.getElementById("presidents_html").addEventListener("click", function () { readHTMLFile("presidents") }, false);
+
 }
 
 

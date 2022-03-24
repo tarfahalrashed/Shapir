@@ -1,0 +1,145 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	padding: 1em;
+	font: 100%/1.5 system-ui, Helvetica Neue, sans-serif;
+	background: hsl(220 10% 96%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1;
+}
+
+button, input, textarea, select {
+	font: inherit;
+}
+
+input,
+button {
+	padding: 0em .3em;
+}
+
+
+a {
+	mix-blend-mode: multiply;
+}
+
+a:not(:hover, :focus) {
+	text-decoration: none;
+	color: inherit;
+}
+
+main {
+	position: relative;
+	display: grid;
+	grid-template-areas: "head head"
+	                     "misc corp";
+	grid-template-columns: 1fr auto;
+	grid-template-rows: auto 1fr;
+	align-items: start;
+	max-width: 1200px;
+	margin: auto;
+	background: white;
+	padding: 1em;
+}
+
+form.search {
+	display: flex;
+	gap: .2em;
+	margin-bottom: 1em;
+	font-size: 200%;
+}
+
+	form.search input {
+		flex: 1;
+	}
+
+header {
+	position: relative;
+	grid-area: head;
+	text-align: center;
+	margin: -1em;
+	margin-bottom: 3em;
+}
+
+	header img[property=image] {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 30em;
+		margin-bottom: 2em;
+		object-fit: cover;
+	}
+
+	header .info {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: -2em;
+		max-width: 20em;
+		padding: 1.5em 2em;
+		border-radius: .5em;
+		background: white;
+		box-shadow: 0 -.2em .5em rgb(0 0 0 / .5);
+		clip-path: polygon(-1em -1em, calc(100% + 1em) -1em, calc(100% + 1em) calc(100% - 8em), calc(100% - 1em) 100%, 1em 100%, -1em calc(100% - 8em));
+	}
+
+	.logo {
+		display: block;
+		max-width: 100%;
+	}
+
+h1[property="label"] {
+	margin-top: .3rem;
+}
+
+[property=description] {
+	font-style: italic;
+	margin-top: .3rem;
+}
+
+dt {
+	text-transform: uppercase;
+	color: hsl(220 10% 50%);
+	font-size: 80%;
+	font-weight: bold;
+	margin-top: 1rem;
+}
+
+dd span[mv-multiple]:not(:last-of-type)::after {
+	content: ", "
+}
+
+dd[mv-multiple] span + span {
+
+}
+
+#corporate-structure {
+	background: hsl(220 10% 95%);
+	padding: 1em;
+	max-width: 40em;
+	border-radius: .2em;
+	--parts-background: hsl(220 10% 85%);
+}
+
+	#corporate-structure dl {
+		/* Draw line */
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+		gap: 1em;
+		background: linear-gradient(var(--parts-background), var(--parts-background)) center / .5em 100% no-repeat;
+	}
+
+	#corporate-structure div {
+		background: var(--parts-background);
+		border-radius: .3em;
+		padding: 1em;
+	}
+
+		#corporate-structure div dt {
+			margin-top: 0;
+		}

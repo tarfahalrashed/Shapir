@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" mv-app="president" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
+	mv-source-id="Q76">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>[label] info</title>
+	<link rel="shortcut icon" href="[image]">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://get.mavo.io/mavo.js"></script>
+	<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+	<script type="module" src="https://shapir.org/mavo-shapir.js"></script>
+</head>
+
+<body>
+
+	<header style="--signature: url('[signature]')">
+		<img property="image" />
+		<div class="info">
+			<h1>
+				<span property="label"></span>
+				<div class="popup-audio">
+					<button title="Pronunciation">🔈 listen</button>
+					<div class="popup">
+						<audio controls property="pronunciationAudio"></audio>
+					</div>
+				</div>
+			</h1>
+			<div class="born">
+				<i class="bi bi-balloon"></i>
+				Born
+				<strong property="birthName"></strong>
+				on
+				<time property="dateOfBirth"></time>
+			</div>
+			<div class="secondary-info">
+				<p property="description"></p>
+				<div class="social">
+					<i class="bi bi-link-45deg"></i>
+					<a property="officialWebsite" target="_blank">[officialWebsite]</a>
+
+					<i class="bi bi-twitter"></i>
+					<a href="https://twitter.com/[last(TwitterUsername)]">[last(TwitterUsername)]</a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<main>
+		<dl id="general">
+			<div mv-if="count(partOf.label) > 0">
+				<dt>Part of</dt>
+				<dd>
+					<span property="partOf" mv-multiple>
+						<span property="label"></span>
+					</span>
+				</dd>
+			</div>
+
+			<dt>[pluralize(count(positionHeld), 'Position', 'Positions')] held</dt>
+			<dd>
+				<ul>
+					<li property="positionHeld" mv-multiple>
+						<span property="label"></span>
+					</li>
+				</ul>
+			</dd>
+
+			<dt>Educated at [pluralize(count(educatedAt), 'school', 'schools')]</dt>
+			<dd>
+				<ul>
+					<li property="educatedAt" mv-multiple>
+						<span property="label"></span>
+					</li>
+				</ul>
+			</dd>
+
+			<dt>Candidate in [pluralize(count(candidacyInElection), 'election', 'elections')]</dt>
+			<dd>
+				<ul>
+					<li property="candidacyInElection" mv-multiple>
+						<span property="label"></span>
+					</li>
+				</ul>
+			</dd>
+
+		</dl>
+
+		<section id="family">
+			<h2><i class="bi bi-diagram-3-fill"></i> Family</h2>
+
+			<dl>
+				<dt>Spouse</dt>
+				<dd property="spouse" mv-multiple>
+					<span property="label"></span>
+					(<span property="occupation" mv-multiple>
+						<span property="label"></span>
+					</span>)
+				</dd>
+
+				<dt>Children</dt>
+				<dd property="child" mv-multiple>
+					<span property="label"></span>
+				</dd>
+
+				<dt>Father</dt>
+				<dd property="father" mv-multiple>
+					<span property="label"></span>
+				</dd>
+
+				<dt>Mother</dt>
+				<dd property="mother" mv-multiple>
+					<span property="label"></span>
+				</dd>
+			</dl>
+		</section>
+
+	</main>
+
+</html>

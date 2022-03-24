@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" mv-app="company_info" mv-source="shapir" mv-source-service="wikidata" mv-source-language="en"
+	mv-source-id="[item]" mv-source="#data" mv-bar="none">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>[officialName] Company info</title>
+	<link rel="shortcut icon" href="[logoImage]">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://get.mavo.io/mavo.js"></script>
+	<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
+	<script type="module" src="https://shapir.org/mavo-shapir.js"></script>
+
+</head>
+
+<body>
+
+	<form class="search"
+		mv-action="clear(parentOrganization, subsidiary, productOrMaterialProduced), set(item, selectedItem)">
+		<input type="search" property="selectedItem" list="item-suggestions" placeholder="Search with company id">
+		<meta property="item" mv-default="Q95">
+		<button>Go</button>
+	</form>
+
+	<datalist id="item-suggestions">
+		<option value="Q95">Google
+		<option value="Q2283">Microsoft
+		<option value="Q312">Apple
+		<option value="Q3884">Amazon
+		<option value="Q380">Meta (Facebook)
+		<option value="Q689141">Spotify
+	</datalist>
+
+	<main>
+		<header>
+			<img property="image" />
+
+			<div class="info">
+				<img property="logoImage" class="logo" />
+				<h1 property="label"></h1>
+				<p property="description"></p>
+			</div>
+		</header>
+
+		<dl>
+
+			<dt>Official Blog:</dt>
+			<dd><a property="officialBlog" target="_blank">[officialBlog]</a></dd>
+
+			<dt>Formed in</dt>
+			<dd>
+				<span property="locationOfFormation" mv-multiple>
+					<span property="label"></span>
+				</span>
+			</dd>
+
+			<div mv-if="count(productOrMaterialProduced.label) > 0">
+				<dt>Product(s)</dt>
+				<dd>
+					<span property="productOrMaterialProduced" mv-multiple>
+						<span property="label"></span>
+					</span>
+				</dd>
+			</div>
+
+		</dl>
+
+		<section id="corporate-structure" mv-if="parentOrganization.label or count(subsidiary.label) > 0">
+			<h2>Corporate Structure</h2>
+
+			<dl>
+				<div mv-if="parentOrganization.label">
+					<dt>Parent organization</dt>
+					<dd property="parentOrganization">
+						<span property="label"></span>
+					</dd>
+				</div>
+
+				<div>
+					<dt>This company</dt>
+					<dd>[label]</dd>
+				</div>
+
+				<div mv-if="count(subsidiary.label) > 0">
+					<dt>[pluralize(count(subsidiary.label), 'subsidiary', 'subsidiaries')]</dt>
+					<dd>
+						<span property="subsidiary" mv-multiple>
+							<span property="label"></span>
+						</span>
+					</dd>
+				</div>
+			</dl>
+		</section>
+
+	</main>
+
+</body>
+
+</html>
