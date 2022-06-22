@@ -135,12 +135,17 @@ export async function wikidata(itemID, lang) {
                 objItem["itemID"] = itemID;
                 objItem["itemURL"] = "https://www.wikidata.org/wiki/" + itemID;
 
-                Object.defineProperty(objItem, "Wikipedia-Article", {
+                Object.defineProperty(objItem, "Wikipedia", {
                     get: async function () {
                         return await getWikipediaArticle(itemID, lang);
                     }
                 });
 
+                Object.defineProperty(objItem, "Wikisource", {
+                    get: async function () {
+                        return await getWikisourceText(itemID, lang);
+                    }
+                });
 
                 return objItem;
 
@@ -227,7 +232,7 @@ export async function wikidata(itemID, lang) {
                                 }
                             }
                         }
-                        console.log("OBJ: ", objItem)
+                        // console.log("OBJ: ", objItem)
                         return objItem;
                     })
             })
@@ -375,7 +380,7 @@ async function getWikipediaArticle(itemID, lang) {
     return fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&props=sitelinks/urls&ids=' + itemID + '&format=json')
         .then(response => { return response.json() })
         .then(entity => {
-            // console.log("LINKS: ", data.entities[itemID].sitelinks);
+            // console.log("LINKS: ", entity.entities[itemID].sitelinks);
             var sitelinks = entity.entities[itemID].sitelinks;
             var wikipediaLinkObj = sitelinks[lang + 'wiki'];
             wikipediaLinkObj = wikipediaLinkObj.title.split(' ').join('_');
@@ -388,7 +393,32 @@ async function getWikipediaArticle(itemID, lang) {
             })
                 .then(response => { return response.json() })
                 .then(dataJSON => {
-                    // console.log("JSON: ", dataJSON)
+                    console.log("JSON: ", dataJSON)
+                    return dataJSON;
+                })
+
+        });
+}
+
+
+async function getWikisourceText(itemID, lang) {
+    return fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&props=sitelinks/urls&ids=' + itemID + '&format=json')
+        .then(response => { return response.json() })
+        .then(entity => {
+            // console.log("LINKS: ", entity.entities[itemID].sitelinks);
+            var sitelinks = entity.entities[itemID].sitelinks;
+            var wikipediaLinkObj = sitelinks[lang + 'wikisource'];
+            wikipediaLinkObj = wikipediaLinkObj.title.split(' ').join('_');
+            return wikipediaLinkObj;
+        })
+        // return fetch('https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles='+wikipediaLinkObj+'&rvslots=*&rvprop=content&formatversion=2&format=json')
+        .then(wikipediaLinkObj => {
+            return wtf.fetch(wikipediaLinkObj, { 'Api-User-Agent': 'Wikisource' }, function (err, doc) {
+                return doc.json();
+            })
+                .then(response => { return response.json() })
+                .then(dataJSON => {
+                    console.log("WS JSON: ", dataJSON)
                     return dataJSON;
                 })
 

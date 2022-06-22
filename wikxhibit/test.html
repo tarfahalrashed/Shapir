@@ -7,55 +7,27 @@
   <script src="https://get.mavo.io/stable/mavo.js"></script>
   <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
   <script type="module" src="mavo-shapir.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
-  <script src="https://unpkg.com/wtf_wikipedia"></script>
-
 </head>
 
-<body onload="func()">
-
+<body>
   <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q170583"
-  mv-source-language="en">
+    mv-source-language="en">
 
-  <!-- <h1 property="label"></h1> -->
-
-  <div property="Wikipedia-Article">
-    <h1 property="title"></h1>
-    <div property="sections" mv-multiple>
-      <h4 property="title"></h4>
-      <div property="paragraphs" mv-if="[title]='Features'" mv-multiple>
-        <div property="sentences" mv-multiple>
-        <p property="text"></p>
+    <div property="Wikipedia">
+      <h1 property="title"></h1>
+      <div property="sections" mv-multiple>
+        <h4 property="title"></h4>
+        <div property="paragraphs" mv-multiple>
+          <div property="sentences" mv-multiple>
+            <p property="text"></p>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
-    </div>
-  </div>
-
 
   </div>
 
-  <script>
-
-    function func(){
-
-      // fetch('https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Pet_door&rvslots=*&rvprop=content&formatversion=2&format=json')
-      // .then(response => response.json())
-      // .then(data => {console.log(data.query.pages[0].revisions[0].slots.main.content)
-      //   wtf.fetch('Pet_door', {'Api-User-Agent': 'Name your script here'}, function (err, doc) {
-      //     var sections = doc._sections;
-      //     for(var i=0; i<sections.length; ++i){
-      //       console.log("Title: ",sections[i]._title)
-      //       console.log("Wiki: ",sections[i]._wiki)
-      //     }
-      //   })
-
-      // });
-    }
-  </script>
-
+  </div>
 </body>
-
-
 
 </html>
