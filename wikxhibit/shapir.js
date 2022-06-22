@@ -28,9 +28,8 @@ export function include(...urls) {
 let firebaseLoaded = include(
     "https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js",
     "https://www.gstatic.com/firebasejs/7.1.0/firebase-database.js",
-    "https://code.jquery.com/jquery-3.6.0.min.js"
-    // "../wikiapi.js"
-    // "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    "https://code.jquery.com/jquery-3.6.0.min.js",
+    "https://unpkg.com/wtf_wikipedia"
 ).then(() => {
     firebase.initializeApp(config);
 });

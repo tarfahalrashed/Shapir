@@ -12,10 +12,19 @@
 </head>
 
 <body>
+  <header>
+    <h1>Art Gallery</h1>
+
+    <form class="search" mv-action="set(term, searchInput)">
+        <label>Painter: <input type="search" class="form-control rounded" property="searchInput" value="Jane Austen" /></label>
+        <meta property="term" mv-default="Jane Austen">
+        <button class="btn btn-outline-dark">Search</button>
+    </form>
+</header>
 
   <main class="container">
-    <h1>Jane Austen Books</h1>
-    <p>Romance novels by Jane Austen including genres and date of publication</p>
+    <h1>[term] Books</h1>
+    <p>Romance novels by XX including genres and date of publication</p>
     <hr>
 
     <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-author="Jane Austen"

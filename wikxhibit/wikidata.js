@@ -99,7 +99,7 @@ export async function wikidata(itemID, lang) {
         return fetch("https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FitemLabel%20%3Fproperty%20%3FpropertyLabel%20WHERE%7B%20%20%20%0A%20%20%20%20%20%3Fitem%20%3Fpredicate%20%22" + itemID + "%22%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3AdirectClaim%20%3Fpredicate%20.%0A%20%20%20%20%20%3Fproperty%20wikibase%3ApropertyType%20wikibase%3AExternalId.%0A%20%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%0A%20%20%20%7D%20%0A%7D")
             .then(response => { return response.json() })
             .then(data => {
-                let results = data.results.bindings
+                let results = data.results.bindings;
                 var itemUrl = results[0].item.value;
                 var itemID = itemUrl.substring(itemUrl.lastIndexOf("/") + 1, itemUrl.length);
 
@@ -135,6 +135,13 @@ export async function wikidata(itemID, lang) {
                 objItem["itemID"] = itemID;
                 objItem["itemURL"] = "https://www.wikidata.org/wiki/" + itemID;
 
+                Object.defineProperty(objItem, "Wikipedia-Article", {
+                    get: async function () {
+                        return await getWikipediaArticle(itemID, lang);
+                    }
+                });
+
+
                 return objItem;
 
             }).then((objItem) => {
@@ -154,6 +161,8 @@ export async function wikidata(itemID, lang) {
                                 }
                             });
 
+                            let output_ = input.split(" ").join("-");
+
                             if (output in obj) {
                                 // if (Object.values(obj).indexOf(results[i].ps_Label.value) == -1) {
                                 if (obj[output].map(a => a.value).indexOf(results[i].ps_Label.value) == -1) {//make sure that values are unique
@@ -165,6 +174,22 @@ export async function wikidata(itemID, lang) {
                             } else {
                                 obj[output] = [];
                                 obj[output].push({
+                                    id: results[i].ps_.value,
+                                    value: results[i].ps_Label.value
+                                });
+                            }
+
+                            if (output_ in obj) {
+                                // if (Object.values(obj).indexOf(results[i].ps_Label.value) == -1) {
+                                if (obj[output_].map(a => a.value).indexOf(results[i].ps_Label.value) == -1) {//make sure that values are unique
+                                    obj[output_].push({
+                                        id: results[i].ps_.value,
+                                        value: results[i].ps_Label.value
+                                    });
+                                }
+                            } else {
+                                obj[output_] = [];
+                                obj[output_].push({
                                     id: results[i].ps_.value,
                                     value: results[i].ps_Label.value
                                 });
@@ -202,6 +227,7 @@ export async function wikidata(itemID, lang) {
                                 }
                             }
                         }
+                        console.log("OBJ: ", objItem)
                         return objItem;
                     })
             })
@@ -345,6 +371,31 @@ async function getProperties(e) {
 }
 
 
+async function getWikipediaArticle(itemID, lang) {
+    return fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&props=sitelinks/urls&ids=' + itemID + '&format=json')
+        .then(response => { return response.json() })
+        .then(entity => {
+            // console.log("LINKS: ", data.entities[itemID].sitelinks);
+            var sitelinks = entity.entities[itemID].sitelinks;
+            var wikipediaLinkObj = sitelinks[lang + 'wiki'];
+            wikipediaLinkObj = wikipediaLinkObj.title.split(' ').join('_');
+            return wikipediaLinkObj;
+        })
+        // return fetch('https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles='+wikipediaLinkObj+'&rvslots=*&rvprop=content&formatversion=2&format=json')
+        .then(wikipediaLinkObj => {
+            return wtf.fetch(wikipediaLinkObj, { 'Api-User-Agent': 'Wikipedia' }, function (err, doc) {
+                return doc.json();
+            })
+                .then(response => { return response.json() })
+                .then(dataJSON => {
+                    // console.log("JSON: ", dataJSON)
+                    return dataJSON;
+                })
+
+        });
+}
+
+
 export async function queryWikidata(e) {
     let query = "", items = [];
     return getProperties(e)
@@ -379,43 +430,6 @@ export async function queryWikidata(e) {
             }
         });
 }
-
-// export async function queryWikidata(e) {
-//     let query = "", items = [], itemsI = [], itemsQuery = '';
-//     return getProperties(e)
-//         .then(props => {
-//             query += 'https://query.wikidata.org/sparql?format=json&origin=*&query=SELECT%20%3Fitem%20%3FitemLabel%20WHERE%7B%0A%20%20';
-//             // //if search property exists, add the below line to the query
-//             if (searchTerm != "") {
-//                 query += '%3Fitem%20rdfs%3Alabel"' + searchTerm + '"%40en.%0A';
-//             }
-//             for (var i = 0; i < props.length; ++i) {
-//                 query += '%3Fitem%20wdt%3A' + props[i].id + '%2Frdfs%3Alabel"' + props[i].value + '"%40en.%0A';
-
-//                 if (i + 1 == props.length) {
-//                     query += '%20%20SERVICE%20wikibase%3Alabel%20%7Bbd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2C' + lang + '".%7D%0A%7D%0Alimit%20' + numItems;
-//                     return fetch(query)
-//                         .then(response => { return response.json() })
-//                         .then(data => {
-//                             let itemsIds = data.results.bindings;
-//                             for (var i = 0; i < itemsIds.length; ++i) {
-//                                 var url = itemsIds[i].item.value;
-//                                 let id = url.split("/").reverse()[0];
-//                                 // items.push(wikidata(id, lang));
-//                                 itemsQuery += 'wd%3A' + id + '%20';
-//                                 itemsI.push(id);
-//                                 if (i + 1 == itemsIds.length) {
-//                                     // return Promise.all(items);
-//                                     return wikidataItems(itemsI, itemsQuery, lang);
-//                                 }
-//                             }
-//                         });
-//                 }
-//             }
-//         });
-// }
-
-
 
 
 // Below are cosine similarity functions
