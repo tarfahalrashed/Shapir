@@ -11,21 +11,25 @@
   <link href="authorBooks/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-author="[term]"
+mv-source-language="en" mv-source-numberOfItems=10>
+
   <header>
     <h1>Books</h1>
-    <p>Novels by Jane Austen including genres and date of publication</p>
+    <p>Novels by [term] including genres and date of publication</p>
     <form class="search" mv-action="set(term, searchInput)">
-        <label>Author: <input type="search" class="form-control rounded" property="searchInput" value="Jane Austen" /></label>
-        <meta property="term" mv-default="Jane Austen">
+        <label>Author: <input type="search" class="form-control rounded" property="searchInput" value="Miguel de Cervantes" /></label>
+        <meta property="term" mv-default="Miguel de Cervantes">
         <button class="btn btn-outline-dark">Search</button>
     </form>
 
   </header>
 
   <main class="container">
-    <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-author="Jane Austen"
-      mv-source-language="en" mv-source-numberOfItems=10>
+    <!-- <div> -->
+
+
+      <!-- info about the author -->
 
       <div property="items" mv-multiple>
         <!-- <a href="[itemURL]" target="_blank" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true"> -->
@@ -42,9 +46,10 @@
         <!-- </a> -->
       </div>
 
-    </div>
+    <!-- </div> -->
 
   </main>
+
 </body>
 
 </html>
