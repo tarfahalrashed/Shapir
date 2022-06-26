@@ -377,7 +377,7 @@ async function getProperties(e) {
 
 
 async function getWikipediaArticle(itemID, lang) {
-    return fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&props=sitelinks/urls&ids=' + itemID + '&format=json')
+    return fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&props=sitelinks/urls&ids=' + itemID + '&format=json')
         .then(response => { return response.json() })
         .then(entity => {
             // console.log("LINKS: ", entity.entities[itemID].sitelinks);
@@ -393,7 +393,31 @@ async function getWikipediaArticle(itemID, lang) {
             })
                 .then(response => { return response.json() })
                 .then(dataJSON => {
-                    console.log("JSON: ", dataJSON)
+                    console.log("JSON: ", dataJSON);
+
+                    // var allSections=dataJSON.sections;
+                    // var sections_= [];
+
+                    // foo.map(foo.text).join(" ")
+
+                    // for(var i=0; i<allSections.length; ++i){
+                    //     for(var j=0; j<allSections[i].length; ++j){
+                    //         var paragraphs = allSections[i].paragraphs;
+                    //         for(var c=0; c<paragraphs.length; ++c){
+                    //             paragraphs[c]
+
+
+                    //     sections_.push({
+                    //         title:allSections[i].title,
+                    //         paragraph:
+                    //     })
+                    // }
+
+                    // var article={
+                    //     title:dataJSON.title,
+                    //     sections:sections_
+                    // }
+
                     return dataJSON;
                 })
 
@@ -402,29 +426,85 @@ async function getWikipediaArticle(itemID, lang) {
 
 
 async function getWikisourceText(itemID, lang) {
-    return fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&props=sitelinks/urls&ids=' + itemID + '&format=json')
+
+    return fetch('https://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&props=sitelinks/urls&ids=' + itemID + '&format=json')
         .then(response => { return response.json() })
         .then(entity => {
-            // console.log("LINKS: ", entity.entities[itemID].sitelinks);
+            // console.log("LINKS: ", entity);
             var sitelinks = entity.entities[itemID].sitelinks;
             var wikipediaLinkObj = sitelinks[lang + 'wikisource'];
-            wikipediaLinkObj = wikipediaLinkObj.title.split(' ').join('_');
+            //IF WIKISOURCE LINK EXISTS do X
+            wikipediaLinkObj = wikipediaLinkObj.title;
+            wikipediaLinkObj = wikipediaLinkObj.split(' ').join('_');
+            // console.log(wikipediaLinkObj)
             return wikipediaLinkObj;
         })
-        // return fetch('https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles='+wikipediaLinkObj+'&rvslots=*&rvprop=content&formatversion=2&format=json')
         .then(wikipediaLinkObj => {
-            return wtf.fetch(wikipediaLinkObj, { 'Api-User-Agent': 'Wikisource' }, function (err, doc) {
-                return doc.json();
-            })
+            return fetch('https://' + lang + '.wikisource.org/w/api.php?action=query&format=json&prop=links&titles=' + wikipediaLinkObj + '&pllimit=max')
                 .then(response => { return response.json() })
-                .then(dataJSON => {
-                    console.log("WS JSON: ", dataJSON)
-                    return dataJSON;
-                })
+                .then(data => {
+                    // console.log("D: ",data)
+                    var chapters = data.query.pages;
+                    var obC = Object.keys(chapters)[0];
+                    chapters = chapters[obC].title;
+                    return getWikisourceChapter(chapters, lang);
+
+                    //***************** MULTIPLE CHAPTERS
+                    // console.log("D: ",data)
+                    // var chapters = data.query.pages;
+                    // var obC = Object.keys(chapters)[0];
+                    // chapters = chapters[obC].links;
+                    // // console.log("CHAP", chapters);
+                    // var wikisourceObj = {};
+                    // console.log("chapters: ", chapters);
+                    // for (var i = 0; i < chapters.length; ++i) {
+                    //     var chapter = chapters[i].title;
+                    //     chapter = chapter.split(' ').join('_');
+                    //     // console.log("chapter: ", chapter)
+                    //     Object.defineProperty(wikisourceObj, chapter, {
+                    //         get: async function () {
+                    //             return await getWikisourceChapter(chapter, lang);
+                    //         }
+                    //     });
+                    // }
+
+                    // return wikisourceObj;
+                });
+
+            // return wtf.fetch(wikipediaLinkObj, { 'Api-User-Agent': 'Wikisource' }, function (err, doc) {
+            //     return doc.json();
+            // })
+            //     .then(response => { return response.json() })
+            //     .then(dataJSON => {
+            //         console.log("WS JSON: ", dataJSON)
+            //         return dataJSON;
+            //     })
 
         });
 }
 
+
+async function getWikisourceChapter(chapter, lang) {
+
+    return fetch('https://' + lang + '.wikisource.org/w/api.php?action=query&prop=revisions&titles=' + chapter + '&rvslots=*&rvprop=content&formatversion=2&format=json')
+        // 'https://'+lang+'.wikisource.org/w/api.php?action=query&prop=revisions&titles='+chapter+'&rvslots=*&rvprop=content&formatversion=2&format=json')
+        .then(response => { return response.json() })
+        .then(data => {
+            // console.log("TEXT: ",data)
+            const htmlStr = data.query.pages[0].revisions[0].slots.main.content;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlStr, "text/html");
+            var originalString = doc.getElementsByTagName('div')[0].firstChild.data;
+
+            // var chapterObj ={
+            //     title: chapter.split('_').join(' '),
+            //     text:originalString
+            // }
+            //  console.log(originalString)
+            return originalString;
+
+        })
+}
 
 export async function queryWikidata(e) {
     let query = "", items = [];

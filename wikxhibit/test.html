@@ -6,28 +6,59 @@
   <title>TEST</title>
   <script src="https://get.mavo.io/stable/mavo.js"></script>
   <link rel="stylesheet" href="https://get.mavo.io/stable/mavo.css">
-  <script type="module" src="https://shapir.org/mavo-shapir.js"></script>
+  <script type="module" src="mavo-shapir.js"></script>
 </head>
 
-<body>
-  <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q170583"
-    mv-source-language="en">
+<body onload="fun()">
 
-    <div property="Wikipedia">
+  <div mv-app="main" mv-bar="none" mv-source="shapir" mv-source-service="wikidata" mv-source-id="Q555967"
+    mv-source-language="es">
+
+    <!-- <div property="Wikipedia">
       <h1 property="title"></h1>
       <div property="sections" mv-multiple>
         <h4 property="title"></h4>
         <div property="paragraphs" mv-multiple>
-          <div property="sentences" mv-multiple>
-            <p property="text"></p>
+          <div property="sentences" mv-group>
+            <p>[join(text, " ")]</p>
           </div>
         </div>
       </div>
+    </div> -->
+
+    <div property="Wikisource">
+      <!-- <p property="Novelas_ejemplares"></p> -->
+      <!-- <p property="La_española_inglesa"></p> -->
     </div>
 
-  </div>
+    <div id="jh"></div>
 
   </div>
+
+
+  <script>
+    function fun() {
+
+      // fetch('https://es.wikisource.org/w/api.php?action=query&prop=revisions&titles=El_celoso_extreme%C3%B1o&rvslots=*&rvprop=content&formatversion=2&format=json')
+      //   .then(response => { return response.json() })
+      //   .then(data => {
+      //     // console.log(data)
+      //     // console.log(data.query.pages[0].revisions[0].slots.main.content)
+      //     const htmlStr = data.query.pages[0].revisions[0].slots.main.content;
+      //     const parser = new DOMParser();
+      //     const doc = parser.parseFromString(htmlStr, "text/html");
+
+      //     // console.log(doc)
+      //     var originalString= doc.getElementsByClassName('Parrafo')[0].firstChild.data;
+      //     // originalString = originalString.getElementsByClassName('prose')[0].firstChild;
+      //     // originalString= doc.getElementsByClassName('prose')[0].firstChild.data;
+      //     // var strippedString = originalString.replace(/(<([^>]+)>)/gi, "");
+
+      //     console.log(originalString)
+      //   })
+    }
+
+  </script>
 </body>
 
 </html>
